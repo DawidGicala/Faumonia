@@ -50,7 +50,7 @@ class GameKeyHandler implements KeyListener {
 	public void setButtonChat(JButton buttonChat) {
 	    this.buttonChat = buttonChat;
 	}
-	   /**
+	 /**
      * Zmienna przechowująca stan, czy użytkownik może się poruszać (false = pisanie, true = poruszanie).
      */
     private boolean canMove = true;
@@ -58,7 +58,7 @@ class GameKeyHandler implements KeyListener {
     
     
     /**
-     * Funkcja przełączająca tryb poruszania/pisania po naciśnięciu tyldy (~).
+     * Funkcja przełączająca tryb poruszania/pisania po naciśnięciu przycisku albo tyldy (~).
      */
     public void toggleMovementMode() {
         System.out.println("toggleMovementMode wywołane, canMove: " + !canMove);
@@ -90,11 +90,6 @@ class GameKeyHandler implements KeyListener {
             return; // Jeśli tylda to nie przechodzimy do dalszej logiki
         }
 
-        if (!canMove) {
-            // Jeżeli użytkownik nie może się poruszać, ignorujemy ruchy
-            return;
-        }
-
         // Jeżeli Shift jest wciśnięty, ignorujemy ruchy
 		if (e.isShiftDown()) {
 			/*
@@ -104,25 +99,37 @@ class GameKeyHandler implements KeyListener {
 			return;
 		}
 
-		switch (e.getKeyCode()) {
-		case KeyEvent.VK_R:
-			if (e.isControlDown()) {
-				/*
-				 * Ctrl+R Remove text bubbles
-				 */
-				screen.clearTexts();
-			}
+	    // Ignorujemy WSAD, gdy canMove jest false
+	    switch (e.getKeyCode()) {
+	        case KeyEvent.VK_W:
+	        case KeyEvent.VK_A:
+	        case KeyEvent.VK_S:
+	        case KeyEvent.VK_D:
+	            if (!canMove) {
+	                return; // Ignorujemy klawisze WSAD
+	            }
+	            break;
+	    }
 
-			break;
+	    // Przetwarzanie klawiszy
+	    switch (e.getKeyCode()) {
+	        case KeyEvent.VK_R:
+	            if (e.isControlDown()) {
+	                /*
+	                 * Ctrl+R Remove text bubbles
+	                 */
+	                screen.clearTexts();
+	            }
+	            break;
 
-		case KeyEvent.VK_LEFT:
-		case KeyEvent.VK_RIGHT:
-		case KeyEvent.VK_UP:
-		case KeyEvent.VK_DOWN:
-        case KeyEvent.VK_W:
-        case KeyEvent.VK_A:
-        case KeyEvent.VK_S:
-        case KeyEvent.VK_D:
+	        case KeyEvent.VK_LEFT:
+	        case KeyEvent.VK_RIGHT:
+	        case KeyEvent.VK_UP:
+	        case KeyEvent.VK_DOWN:
+	        case KeyEvent.VK_W:
+	        case KeyEvent.VK_A:
+	        case KeyEvent.VK_S:
+	        case KeyEvent.VK_D:
         	
 			/*
 			 * Ctrl means face, otherwise move

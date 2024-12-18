@@ -92,8 +92,6 @@ import marauroa.common.game.RPObject;
 import org.apache.log4j.Logger;
 
 import javax.swing.JButton;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener; 
 
 /** The main class that create the screen and starts the arianne client. */
 public class j2DClient implements UserInterface {
@@ -167,7 +165,6 @@ public class j2DClient implements UserInterface {
 
 	/** Key handling */
 	private GameKeyHandler gameKeyHandler;
-	
 	
 	/**
 	 * Get the default UI.
