@@ -35,6 +35,10 @@ import marauroa.common.game.RPObject.ID;
 
 import org.apache.log4j.Logger;
 
+import java.util.Map;
+import java.util.HashMap;
+import java.util.Collection;
+import java.util.LinkedList;
 /**
  * This class is a link between client graphical objects and server attributes
  * objects.<br>
@@ -1287,24 +1291,58 @@ public abstract class RPEntity extends ActiveEntity {
 			}
 		}
 	}
+	// --- Zliczanie zabitych potworków ---
+	private static Map<String, Integer> mobKillCount = new HashMap<>(); // Licznik zabójstw
 
+	// --- Metoda pomocnicza ---
+	private void incrementKillCount(String mobName) {
+	    mobKillCount.put(mobName, mobKillCount.getOrDefault(mobName, 0) + 1);
+	    String playerName = User.getCharacterName(); // Pobranie nicku gracza
+	    if (playerName == null) {
+	        playerName = "Nieznany gracz"; // Zabezpieczenie, jeśli nick jest niedostępny
+	    }
+	    System.out.println("Gracz " + playerName + " zabił " + mobName + ". Liczba zabójstw: " + mobKillCount.get(mobName));
+	}
+
+	// --- Metoda wywoływana przy śmierci ---
 	private void onDeath(final Collection<Entity> attackers) {
-		if (!attackers.isEmpty()) {
-			Collection<String> attackerNames = new LinkedList<String>();
-			for(Entity attacker : attackers) {
-					attackerNames.add(attacker.getTitle());
-			}
-			if (getGender() == null) {
-				ClientSingletonRepository.getUserInterface().addEventLine(new StandardEventLine(
-						getTitle() + " został zabity przez " + Grammar.enumerateCollection(attackerNames)));
-			} else if (getGender().equals("F")) {
-				ClientSingletonRepository.getUserInterface().addEventLine(new StandardEventLine(
-						getTitle() + " została zabita przez " + Grammar.enumerateCollection(attackerNames)));
-			} else {
-				ClientSingletonRepository.getUserInterface().addEventLine(new StandardEventLine(
-						getTitle() + " został zabity przez " + Grammar.enumerateCollection(attackerNames)));
-			}
-		}
+	    if (!attackers.isEmpty()) {
+	        String mobName = getTitle();
+	        String playerName = User.getCharacterName(); // Pobranie nazwy gracza
+
+	        // Sprawdzenie, czy gracz jest na liście atakujących
+	        boolean isPlayerAttacker = false;
+	        Collection<String> attackerNames = new LinkedList<>();
+	        for (Entity attacker : attackers) {
+	            String attackerName = attacker.getTitle();
+	            attackerNames.add(attackerName);
+	            if (attackerName.equals(playerName)) {
+	                isPlayerAttacker = true;
+	            }
+	        }
+
+	        // Jeśli gracz jest atakującym, zwiększamy licznik zabójstw
+	        if (isPlayerAttacker) {
+	            incrementKillCount(mobName); // Zliczanie zabójstwa
+	        }
+
+	        // Pobranie liczby zabójstw dla danego potwora
+	        int killCount = mobKillCount.getOrDefault(mobName, 0);
+
+	        // Generowanie komunikatu z liczbą zabójstw
+	        String message = mobName + " został zabity przez ";
+	        if ("F".equals(getGender())) {
+	            message = mobName + " została zabita przez ";
+	        }
+	        message += Grammar.enumerateCollection(attackerNames);
+
+	        if (isPlayerAttacker) {
+	            message += ". Liczba zabójstw tego potwora: " + killCount;
+	        }
+
+	        // Wyświetlenie komunikatu
+	        ClientSingletonRepository.getUserInterface().addEventLine(new StandardEventLine(message));
+	    }
 	}
 
 	/**
