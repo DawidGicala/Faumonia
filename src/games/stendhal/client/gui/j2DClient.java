@@ -91,6 +91,10 @@ import marauroa.common.game.RPObject;
 
 import org.apache.log4j.Logger;
 
+import javax.swing.JButton;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener; 
+
 /** The main class that create the screen and starts the arianne client. */
 public class j2DClient implements UserInterface {
 	static {
@@ -351,10 +355,28 @@ public class j2DClient implements UserInterface {
 		final JComponent chatBox = new JPanel();
 		chatBox.setBorder(null);
 		chatBox.setLayout(new SBoxLayout(SBoxLayout.VERTICAL));
+		
+		
+		// Tworzenie przycisku z napisem "Chat On"
+		JButton myButton = new JButton("Chat On");
+		myButton.setPreferredSize(new Dimension(100, 30));  // Dopasowanie rozmiaru przycisku
+
+		// Tworzenie panelu wejściowego
+		final JComponent inputPanel = new JPanel();
+		inputPanel.setLayout(new SBoxLayout(SBoxLayout.HORIZONTAL));
+		inputPanel.add(myButton, SBoxLayout.constraint(SLayout.EXPAND_Y)); // Przycisk po lewej
+		inputPanel.add(chatText.getPlayerChatText(), SBoxLayout.constraint(SLayout.EXPAND_X)); // Pole tekstowe
+
+		// Dodanie panelu wejściowego i logu do głównego panelu
+		chatBox.add(inputPanel, SBoxLayout.constraint(SLayout.EXPAND_X)); // Panel wejściowy
+		chatBox.add(chatLogArea, SBoxLayout.constraint(SLayout.EXPAND_X, SLayout.EXPAND_Y)); // Log poniżej
+	
+		
+		
 		// Set maximum size to prevent the entry requesting massive widths, but
 		// force expand if there's extra space anyway
-		chatText.getPlayerChatText().setMaximumSize(new Dimension(screenSize.width, Integer.MAX_VALUE));
-		chatBox.add(chatText.getPlayerChatText(), SBoxLayout.constraint(SLayout.EXPAND_X));
+		chatText.getPlayerChatText().setPreferredSize(new Dimension(screenSize.width - 150, 30)); // Szerokość - 150px
+		inputPanel.add(chatText.getPlayerChatText(), SBoxLayout.constraint(SLayout.EXPAND_X)); // Pole tekstowe
 
 		chatBox.add(chatLogArea, SBoxLayout.constraint(SLayout.EXPAND_X, SLayout.EXPAND_Y));
 
