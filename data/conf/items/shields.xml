@@ -1,0 +1,691 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<items xmlns="stendhal" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="stendhal ../items.xsd ">
+	
+	 <!-- Tarcze -->	
+	 <!-- Przedmioty zostały posegregowane kolejno według: minimalnego poziomu, obrony -->
+	 <!-- Dodając nowy ekwipunek postaraj się utrzymać porządek w kodzie, według podanego schematu! -->
+	 <!-- Ostatnia znacząca aktualizacja: FaumoniaOnline 2019 /davvids -->
+
+	 <!-- Shields -->
+	 <!-- This items was segregated by: min lvl, def -->
+	 <!-- While adding new items try to follow this! -->
+	 <!-- Last significant update: FaumoniaOnline 2019 /davvids -->
+	
+	<item name="puklerz">
+		<type class="shield" subclass="buckler" tileid="-1"/>
+		<description>Puklerz to najprostsza tarcza. Może ochronić cię przed mieczami i maczugami, ale na silniejszą broń lepiej jej nie wystawiać.</description>
+		<implementation class-name="games.stendhal.server.entity.item.Item"/>
+		<attributes>
+			<def value="6"/>
+		</attributes>
+		<weight value="12.0"/>
+		<value value="1512"/>
+		<equipable>
+			<slot name="ground"/>
+			<slot name="content"/>
+			<slot name="lhand"/>
+			<slot name="rhand"/>
+			<slot name="bag"/>
+			<slot name="trade"/>
+		</equipable>
+	</item>
+	
+	<item name="drewniana tarcza">
+		<type class="shield" subclass="wooden_shield" tileid="-1"/>
+		<description>Drewniana tarcza zrobiona jest z drogiego i ciężkiego drewna, ale wciąż może cię chronić.</description>
+		<implementation class-name="games.stendhal.server.entity.item.Item"/>
+		<attributes>
+			<def value="7"/>
+		</attributes>
+		<weight value="12.0"/>
+		<value value="7000"/>
+		<equipable>
+			<slot name="ground"/>
+			<slot name="content"/>
+			<slot name="lhand"/>
+			<slot name="rhand"/>
+			<slot name="bag"/>
+			<slot name="trade"/>
+		</equipable>
+	</item>
+	
+	<item name="tarcza płytowa">
+		<type class="shield" subclass="plate_shield" tileid="-1"/>
+		<description>Oto tarcza płytowa. Jest w dobrym stanie i może być trochę warta.</description>
+		<implementation class-name="games.stendhal.server.entity.item.Item"/>
+		<attributes>
+			<def value="8"/>
+		</attributes>
+		<weight value="24.0"/>
+		<value value="19208"/>
+		<equipable>
+			<slot name="ground"/>
+			<slot name="content"/>
+			<slot name="lhand"/>
+			<slot name="rhand"/>
+			<slot name="bag"/>
+			<slot name="trade"/>
+		</equipable>
+	</item>
+	
+	<item name="tarcza ćwiekowa">
+		<type class="shield" subclass="studded_shield" tileid="-1"/>
+		<description>Oto tarcza ćwiekowa. Jest mała, ale dobra.</description>
+		<implementation class-name="games.stendhal.server.entity.item.Item"/>
+		<attributes>
+			<def value="9"/>
+		</attributes>
+		<weight value="15.0"/>
+		<value value="12096"/>
+		<equipable>
+			<slot name="ground"/>
+			<slot name="content"/>
+			<slot name="lhand"/>
+			<slot name="rhand"/>
+			<slot name="bag"/>
+			<slot name="trade"/>
+		</equipable>
+	</item>
+	
+	<item name="lwia tarcza">
+		<type class="shield" subclass="lion_shield" tileid="-1"/>
+		<description>Oto lwia tarcza. Wystarczająco ciężka, aby bronić cię przed silniejszymi obrażeniami.</description>
+		<implementation class-name="games.stendhal.server.entity.item.Item"/>
+		<attributes>
+			<def value="10"/>
+		</attributes>
+		<weight value="24.0"/>
+		<value value="28672"/>
+		<equipable>
+			<slot name="ground"/>
+			<slot name="content"/>
+			<slot name="lhand"/>
+			<slot name="rhand"/>
+			<slot name="bag"/>
+			<slot name="trade"/>
+		</equipable>
+	</item>
+	
+	<item name="wzmocniona lwia tarcza">
+		<type class="shield" subclass="enhanced_lion_shield" tileid="-1"/>
+		<description>Oto wzmocniona lwia tarcza. Będzie cię dobrze chronić.</description>
+		<implementation class-name="games.stendhal.server.entity.item.Item"/>
+		<attributes>
+			<def value="11"/>
+		</attributes>
+		<weight value="24.0"/>
+		<value value="56000"/>
+		<equipable>
+			<slot name="ground"/>
+			<slot name="content"/>
+			<slot name="lhand"/>
+			<slot name="rhand"/>
+			<slot name="bag"/>
+			<slot name="trade"/>
+		</equipable>
+	</item>
+	
+	<item name="tarcza z czaszką">
+		<type class="shield" subclass="skull_shield" tileid="-1"/>
+		<description>Oto tarcza z czaszką. Troszkę straszna, nieprawdaż?</description>
+		<implementation class-name="games.stendhal.server.entity.item.Item"/>
+		<attributes>
+			<def value="12"/>
+			<minlevel value="10"/>
+		</attributes>
+		<weight value="24.0"/>
+		<value value="74536"/>
+		<equipable>
+			<slot name="ground"/>
+			<slot name="content"/>
+			<slot name="lhand"/>
+			<slot name="rhand"/>
+			<slot name="bag"/>
+			<slot name="trade"/>
+		</equipable>
+	</item>
+	
+	<item name="tarcza królewska">
+		<type class="shield" subclass="crown_shield" tileid="-1"/>
+		<description>Widzisz tarczę królewską. Jest w świetnym stanie.</description>
+		<implementation class-name="games.stendhal.server.entity.item.Item"/>
+		<attributes>
+			<def value="13"/>
+			<minlevel value="10"/>
+		</attributes>
+		<weight value="24.0"/>
+		<value value="96768"/>
+		<equipable>
+			<slot name="ground"/>
+			<slot name="content"/>
+			<slot name="lhand"/>
+			<slot name="rhand"/>
+			<slot name="bag"/>
+			<slot name="trade"/>
+		</equipable>
+	</item>
+	
+	<item name="karmazynowa tarcza">
+		<type class="shield" subclass="red_shield" tileid="-1"/>
+		<description>Oto karmazynowa tarcza. Jest na niej sporo krwi po bestiach.</description>
+		<implementation class-name="games.stendhal.server.entity.item.Item"/>
+		<attributes>
+			<def value="15"/>
+			<minlevel value="15"/>
+		</attributes>
+		<weight value="24.0"/>
+		<value value="136768"/>
+		<equipable>
+			<slot name="ground"/>
+			<slot name="content"/>
+			<slot name="lhand"/>
+			<slot name="rhand"/>
+			<slot name="bag"/>
+			<slot name="trade"/>
+		</equipable>
+	</item>
+	
+	<item name="lazurowa tarcza">
+		<type class="shield" subclass="blue_shield" tileid="-1"/>
+		<description>Oto lazurowa tarcza. Czujesz jakby jej nie było, ale broni bardzo dobrze.</description>
+		<implementation class-name="games.stendhal.server.entity.item.Item"/>
+		<attributes>
+			<def value="16"/>
+			<minlevel value="15"/>
+		</attributes>
+		<weight value="24.0"/>
+		<value value="186768"/>
+		<equipable>
+			<slot name="ground"/>
+			<slot name="content"/>
+			<slot name="lhand"/>
+			<slot name="rhand"/>
+			<slot name="bag"/>
+			<slot name="trade"/>
+		</equipable>
+	</item>
+	
+	<item name="orcza tarcza">
+		<type class="shield" subclass="orc_shield" tileid="-1"/>
+		<description>Oto orcza tarcza. Nie wyróżnia się niczym ciekawym.</description>
+		<implementation class-name="games.stendhal.server.entity.item.Item"/>
+		<attributes>
+			<def value="21"/>
+			<minlevel value="40"/>
+		</attributes>
+		<weight value="24.0"/>
+		<value value="186768"/>
+		<equipable>
+			<slot name="ground"/>
+			<slot name="content"/>
+			<slot name="lhand"/>
+			<slot name="rhand"/>
+			<slot name="bag"/>
+			<slot name="trade"/>
+		</equipable>
+	</item>
+	
+	<item name="tarcza jednorożca">
+		<type class="shield" subclass="unicorn_shield" tileid="-1"/>
+		<description>Oto tarcza jednorożca Jest przepiękna i daje wspaniałą obronę.</description>
+		<implementation class-name="games.stendhal.server.entity.item.Item"/>
+		<attributes>
+			<def value="22"/>
+		</attributes>
+		<weight value="24.0"/>
+		<value value="40824"/>
+		<equipable>
+			<slot name="ground"/>
+			<slot name="content"/>
+			<slot name="lhand"/>
+			<slot name="rhand"/>
+			<slot name="bag"/>
+			<slot name="trade"/>
+		</equipable>
+	</item>
+	
+	<item name="tarcza licha">
+		<type class="shield" subclass="lich_shield" tileid="-1"/>
+		<description>Oto tarcza licha. Wstrętny stwór upuścił ją.</description>
+		<implementation class-name="games.stendhal.server.entity.item.Item"/>
+		<attributes>
+			<def value="22"/>
+			<minlevel value="40"/>
+		</attributes>
+		<weight value="12.0"/>
+		<value value="1512"/>
+		<equipable>
+			<slot name="ground"/>
+			<slot name="content"/>
+			<slot name="lhand"/>
+			<slot name="rhand"/>
+			<slot name="bag"/>
+			<slot name="trade"/>
+		</equipable>
+	</item>
+	
+	<item name="szmaragdowa tarcza smocza">
+		<type class="shield" subclass="green_dragon_shield" tileid="-1"/>
+		<description>Oto szmaragdowa tarcza smocza, przerażająca i silna.</description>
+		<implementation class-name="games.stendhal.server.entity.item.Item"/>
+		<attributes>
+			<def value="22"/>
+			<minlevel value="50"/>
+		</attributes>
+		<weight value="14.0"/>
+		<value value="300000"/>
+		<equipable>
+			<slot name="ground"/>
+			<slot name="content"/>
+			<slot name="lhand"/>
+			<slot name="rhand"/>
+			<slot name="bag"/>
+			<slot name="trade"/>
+		</equipable>
+	</item>
+	
+	<item name="tarcza elficka">
+		<type class="shield" subclass="elvish_shield" tileid="-1"/>
+		<description>Oto tarcza elficka. Wygląda jak jeden wielki liść, ale ma niezwykłe właściwości.</description>
+		<implementation class-name="games.stendhal.server.entity.item.Item"/>
+		<attributes>
+			<def value="24"/>
+			<minlevel value="60"/>
+		</attributes>
+		<weight value="34.0"/>
+		<value value="275128"/>
+		<equipable>
+			<slot name="ground"/>
+			<slot name="content"/>
+			<slot name="lhand"/>
+			<slot name="rhand"/>
+			<slot name="bag"/>
+			<slot name="trade"/>
+		</equipable>
+	</item>
+	
+	<item name="złota tarcza">
+		<type class="shield" subclass="golden_shield" tileid="-1"/>
+		<description>Oto złota tarcza, czy może być obroną ostateczną?</description>
+		<implementation class-name="games.stendhal.server.entity.item.Item"/>
+		<attributes>
+			<def value="25"/>
+			<minlevel value="75"/>
+		</attributes>
+		<weight value="34.0"/>
+		<value value="275128"/>
+		<equipable>
+			<slot name="ground"/>
+			<slot name="content"/>
+			<slot name="lhand"/>
+			<slot name="rhand"/>
+			<slot name="bag"/>
+			<slot name="trade"/>
+		</equipable>
+	</item>
+	
+	<item name="tarcza cieni">
+		<type class="shield" subclass="shadow_shield" tileid="-1"/>
+		<description>Oto tarcza cieni. Wygląda na to że absorbuje światło.</description>
+		<implementation class-name="games.stendhal.server.entity.item.Item"/>
+		<attributes>
+			<def value="27"/>
+			<minlevel value="90"/>
+		</attributes>
+		<weight value="34.0"/>
+		<value value="326592"/>
+		<equipable>
+			<slot name="ground"/>
+			<slot name="content"/>
+			<slot name="lhand"/>
+			<slot name="rhand"/>
+			<slot name="bag"/>
+			<slot name="trade"/>
+		</equipable>
+	</item>
+	
+	<item name="tarcza z białego złota">
+		<type class="shield" subclass="whitegold_shield" tileid="-1"/>
+		<description>Oto tarcza z białego złota. Zrobiona jest z drogocennego minerału.</description>
+		<implementation class-name="games.stendhal.server.entity.item.Item"/>
+		<attributes>
+			<def value="29"/>
+			<minlevel value="110"/>
+		</attributes>
+		<weight value="24.0"/>
+		<value value="186768"/>
+		<equipable>
+			<slot name="ground"/>
+			<slot name="content"/>
+			<slot name="lhand"/>
+			<slot name="rhand"/>
+			<slot name="bag"/>
+			<slot name="trade"/>
+		</equipable>
+	</item>
+	
+	<item name="tarcza ciemności">
+		<type class="shield" subclass="dark_shield" tileid="-1"/>
+		<description>Oto tarcza ciemności, jest ponura ale wytrzymała.</description>
+		<implementation class-name="games.stendhal.server.entity.item.Item"/>
+		<attributes>
+			<def value="31"/>
+			<minlevel value="130"/>
+		</attributes>
+		<weight value="34.0"/>
+		<value value="518616"/>
+		<equipable>
+			<slot name="ground"/>
+			<slot name="content"/>
+			<slot name="bag"/>
+			<slot name="trade"/>
+			<slot name="lhand"/>
+			<slot name="rhand"/>
+		</equipable>
+	</item>
+	
+	<item name="kamienna tarcza">
+		<type class="shield" subclass="stone_shield" tileid="-1"/>
+		<description>Oto ciężka, kamienna tarcza. Stępi niemal każdy miecz.</description>
+		<implementation class-name="games.stendhal.server.entity.item.Item"/>
+		<attributes>
+			<def value="32"/>
+			<minlevel value="140"/>
+		</attributes>
+		<weight value="24.0"/>
+		<value value="96768"/>
+		<equipable>
+			<slot name="ground"/>
+			<slot name="content"/>
+			<slot name="lhand"/>
+			<slot name="rhand"/>
+			<slot name="bag"/>
+			<slot name="trade"/>
+		</equipable>
+	</item>
+	
+	<item name="tarcza barbarzyńcy">
+		<type class="shield" subclass="barbarian_shield" tileid="-1"/>
+		<description>Oto tarcza barbarzyńcy. Można się nią bronić i atakować!</description>
+		<implementation class-name="games.stendhal.server.entity.item.Item"/>
+		<attributes>
+			<def value="33"/>
+			<minlevel value="150"/>
+		</attributes>
+		<weight value="15.0"/>
+		<value value="12096"/>
+		<equipable>
+			<slot name="ground"/>
+			<slot name="content"/>
+			<slot name="lhand"/>
+			<slot name="rhand"/>
+			<slot name="bag"/>
+			<slot name="trade"/>
+		</equipable>
+	</item>
+	
+	<item name="tarcza piaskowa">
+		<type class="shield" subclass="desert_shield" tileid="-1"/>
+		<description>Oto tarcza piaskowa. Zapewne bogowie zesłali pioruna, który uderzył w piach, a pustynni jeźdźcy zrobili tarczę z tego co znaleźli w tym miejscu.</description>
+		<implementation class-name="games.stendhal.server.entity.item.Item"/>
+		<attributes>
+			<def value="34"/>
+			<minlevel value="160"/>
+		</attributes>
+		<weight value="12.0"/>
+		<value value="1512"/>
+		<equipable>
+			<slot name="ground"/>
+			<slot name="content"/>
+			<slot name="lhand"/>
+			<slot name="rhand"/>
+			<slot name="bag"/>
+			<slot name="trade"/>
+		</equipable>
+	</item>
+	
+	<item name="lodowa tarcza">
+		<type class="shield" subclass="ice_shield" tileid="-1"/>
+		<description>Oto lodowa tarcza. Nie wystawiaj jej na słońce.</description>
+		<implementation class-name="games.stendhal.server.entity.item.Item"/>
+		<attributes>
+			<def value="35"/>
+			<minlevel value="170"/>
+		</attributes>
+		<weight value="12.0"/>
+		<value value="1512"/>
+		<equipable>
+			<slot name="ground"/>
+			<slot name="content"/>
+			<slot name="lhand"/>
+			<slot name="rhand"/>
+			<slot name="bag"/>
+			<slot name="trade"/>
+		</equipable>
+	</item>
+
+	<item name="tarcza chaosu">
+		<type class="shield" subclass="chaos_shield" tileid="-1"/>
+		<description>Oto tarcza chaosu. Jej czarujący wygląd ogłupia twoich przeciwników.</description>
+		<implementation class-name="games.stendhal.server.entity.item.Item"/>
+		<attributes>
+			<def value="43"/>
+			<minlevel value="200"/>
+		</attributes>
+		<weight value="34.0"/>
+		<value value="415233"/>
+		<equipable>
+			<slot name="ground"/>
+			<slot name="content"/>
+			<slot name="bag"/>
+			<slot name="trade"/>
+			<slot name="lhand"/>
+			<slot name="rhand"/>
+		</equipable>
+	</item>
+	
+	<item name="tarcza mainiocyjska">
+		<type class="shield" subclass="mainio_shield" tileid="-1"/>
+		<description>Oto tarcza mainiocyjska. Nie masz pojęcia z czego jest zrobiona, ale będzie cię dobrze chronić.</description>
+		<implementation class-name="games.stendhal.server.entity.item.Item"/>
+		<attributes>
+			<def value="45"/>
+			<minlevel value="230"/>
+		</attributes>
+		<weight value="34.0"/>
+		<value value="365233"/>
+		<equipable>
+			<slot name="ground"/>
+			<slot name="content"/>
+			<slot name="lhand"/>
+			<slot name="rhand"/>
+			<slot name="bag"/>
+			<slot name="trade"/>
+		</equipable>
+	</item>
+
+	<item name="tarcza xenocyjska">
+		<type class="shield" subclass="xeno_shield" tileid="-1"/>
+		<description>Oto tarcza xenocyjska, w kolorach potwora z którego wypadła.</description>
+		<implementation class-name="games.stendhal.server.entity.item.Item"/>
+		<attributes>
+			<def value="46"/>
+			<minlevel value="240"/>
+		</attributes>
+		<weight value="22.0"/>
+		<value value="488000"/>
+		<equipable>
+			<slot name="ground"/>
+			<slot name="content"/>
+			<slot name="bag"/>
+			<slot name="trade"/>
+			<slot name="lhand"/>
+			<slot name="rhand"/>
+		</equipable>
+	</item>
+
+	<item name="magiczna tarcza płytowa">
+		<type class="shield" subclass="lion_clan_shield" tileid="-1"/>
+		<description>Oto magiczna tarcza płytowa. Ma magiczną jakość i jest piękna.</description>
+		<implementation class-name="games.stendhal.server.entity.item.Item"/>
+		<attributes>
+			<def value="51"/>
+			<minlevel value="260"/>
+		</attributes>
+		<weight value="24.0"/>
+		<value value="448000"/>
+		<equipable>
+			<slot name="ground"/>
+			<slot name="content"/>
+			<slot name="bag"/>
+			<slot name="trade"/>
+			<slot name="lhand"/>
+			<slot name="rhand"/>
+		</equipable>
+	</item>
+	
+	<item name="czarna tarcza">
+		<type class="shield" subclass="black_shield" tileid="-1"/>
+		<description>Oto czarna tarcza. Jej ciemność na pewno cię obroni.</description>
+		<implementation class-name="games.stendhal.server.entity.item.Item"/>
+		<attributes>
+			<def value="54"/>
+			<minlevel value="300"/>
+		</attributes>
+		<weight value="34.0"/>
+		<value value="518616"/>
+		<equipable>
+			<slot name="ground"/>
+			<slot name="content"/>
+			<slot name="bag"/>
+			<slot name="trade"/>
+			<slot name="lhand"/>
+			<slot name="rhand"/>
+		</equipable>
+	</item>
+	
+	<item name="ognista tarcza">
+		<type class="shield" subclass="fire_shield" tileid="-1"/>
+		<description>Oto ognista tarcza. Niech jej płomień ogarnie twoich wrogów.</description>
+		<implementation class-name="games.stendhal.server.entity.item.Item"/>
+		<attributes>
+			<def value="53"/>
+			<minlevel value="300"/>
+		</attributes>
+		<weight value="12.0"/>
+		<value value="1512"/>
+		<equipable>
+			<slot name="ground"/>
+			<slot name="content"/>
+			<slot name="lhand"/>
+			<slot name="rhand"/>
+			<slot name="bag"/>
+			<slot name="trade"/>
+		</equipable>
+	</item>
+	
+	<item name="tarcza z mithrilu">
+		<type class="shield" subclass="mithril_shield" tileid="-1"/>
+		<description>Oto tarcza z mithrilu. Możesz być pewny, że będzie dla ciebie dobrą ochroną.</description>
+		<implementation class-name="games.stendhal.server.entity.item.Item"/>
+		<attributes>
+			<def value="60"/>
+			<minlevel value="400"/>
+		</attributes>
+		<weight value="30.0"/>
+		<value value="718616"/>
+		<equipable>
+			<slot name="ground"/>
+			<slot name="content"/>
+			<slot name="bag"/>
+			<slot name="trade"/>
+			<slot name="lhand"/>
+			<slot name="rhand"/>
+		</equipable>
+	</item>
+	
+	<item name="Tarcza Smoka Wawelskiego">
+		<type class="shield" subclass="edragons_clan_shield" tileid="-1"/>
+		<description>Oto Tarcza Smoka Wawelskiego. Jeśli wierzyć pogłoskom jest ona najsilniejszą wykutą do tej pory tarczą. Ognie które pokrywają jej zewnętrzną stronę pieką przeciwnika żywcem.</description>
+		<implementation class-name="games.stendhal.server.entity.item.Item"/>
+		<attributes>
+			<def value="60"/>
+			<minlevel value="400"/>
+		</attributes>
+		<weight value="24.0"/>
+		<value value="186768"/>
+		<equipable>
+			<slot name="ground"/>
+			<slot name="content"/>
+			<slot name="lhand"/>
+			<slot name="rhand"/>
+			<slot name="bag"/>
+			<slot name="trade"/>
+		</equipable>
+	</item>
+	
+	<item name="świąteczna tarcza 2023">
+		<type class="shield" subclass="swiateczna_tarcza_2023" tileid="-1"/>
+		<description>Oto świąteczna tarcza. Ta tarcza zdobiona motywem choinki i świątecznych światełek jest nie tylko praktyczna, ale także przyciąga wzrok, dodając bojowego ducha świątecznej magii #zima #2023 Przedmiot utracił swą zimową moc. </description>
+		<implementation class-name="games.stendhal.server.entity.item.Item"/>
+		<attributes>
+			<def value="1"/>
+			<minlevel value="200"/>
+			<autobind value=""/>
+		</attributes>
+		<weight value="34.0"/>
+		<value value="518616"/>
+		<equipable>
+			<slot name="ground"/>
+			<slot name="content"/>
+			<slot name="bag"/>
+			<slot name="trade"/>
+			<slot name="lhand"/>
+			<slot name="rhand"/>
+		</equipable>
+	</item>
+	
+	<item name="tarcza zimowa 2023">
+		<type class="shield" subclass="zimowa_tarcza_2023" tileid="-1"/>
+		<description>Oto zimowa tarcza. Twarda jak lód, lekka jak płatek śniegu, idealna do obrony w zimowych bitwach, a jej wzór przypomina mroźne noce #zima #2023 Przedmiot utracił swą zimową moc.</description>
+		<implementation class-name="games.stendhal.server.entity.item.Item"/>
+		<attributes>
+			<def value="1"/>
+			<minlevel value="80"/>
+			<autobind value=""/>
+		</attributes>
+		<weight value="34.0"/>
+		<value value="518616"/>
+		<equipable>
+			<slot name="ground"/>
+			<slot name="content"/>
+			<slot name="bag"/>
+			<slot name="trade"/>
+			<slot name="lhand"/>
+			<slot name="rhand"/>
+		</equipable>
+	</item>
+	
+	<item name="tarcza pustynna 2024">
+		<type class="shield" subclass="tarcza_pustynna_2024" tileid="-1"/>
+		<description>Oto tarcza pustynna. Stworzona, aby odbijać promienie słońca i chronić przed atakami, jest niezastąpiona w bitwach toczonych w pełnym świetle dnia #lato #2024</description>
+		<implementation class-name="games.stendhal.server.entity.item.Item"/>
+		<attributes>
+			<def value="1"/>
+			<minlevel value="40"/>
+			<autobind value=""/>
+		</attributes>
+		<weight value="34.0"/>
+		<value value="518616"/>
+		<equipable>
+			<slot name="ground"/>
+			<slot name="content"/>
+			<slot name="bag"/>
+			<slot name="trade"/>
+			<slot name="lhand"/>
+			<slot name="rhand"/>
+		</equipable>
+	</item>
+	
+</items>

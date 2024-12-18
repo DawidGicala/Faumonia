@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<creatures xmlns="stendhal" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="stendhal ../creatures.xsd ">
+
+	<creature name="gołąbek">
+		<type class="pol/ptaki" subclass="golabek" tileid="pol_ptaki.png:0"/>
+		<description>Oto gołąbek co ma ostry dziobek. Pewnie domaga się okruszków!</description>
+		<attributes>
+			<atk value="3"/>
+			<def value="9"/>
+			<hp value="12"/>
+			<speed value="0.4"/>
+			<size value="1,1"/>
+		</attributes>
+		<level value="1"/>
+		<experience value="8"/>
+		<respawn value="350"/>
+		<corpse name="corpse"/>
+		<drops>
+			<item value="udko" quantity="[1,1]" probability="80.0"/>
+			<item value="piórko" quantity="[1,1]" probability="90.0"/>
+			<item value="wisienka" quantity="[1,1]" probability="5.0"/>
+		</drops>
+		<equips/>
+		<ai>
+			<profile name="coward"/>
+			<profile name="animal"/>
+			<profile name="offensive"/>
+			<profile name="patrolling"/>
+		</ai>
+	</creature>
+
+	<creature name="jastrząb">
+		<type class="pol/ptaki" subclass="jastrzab" tileid="pol_ptaki.png:3"/>
+		<attributes>
+			<atk value="33"/>
+			<def value="49"/>
+			<hp value="127"/>
+			<speed value="0.8"/>
+			<size value="1,1"/>
+		</attributes>
+		<level value="21"/>
+		<experience value="302"/>
+		<respawn value="499"/>
+		<corpse name="corpse"/>
+		<drops>
+			<item value="udko" quantity="[1,1]" probability="80.0"/>
+			<item value="spinka" quantity="[1,1]" probability="0.0001"/>
+			<item value="wisienka" quantity="[1,1]" probability="40.0"/>
+		</drops>
+		<equips/>
+		<ai>
+			<profile name="brave"/>
+			<profile name="offensive"/>
+			<profile name="patrolling"/>
+		</ai>
+	</creature>
+</creatures>

@@ -1,0 +1,143 @@
+FaumoniaOnline
+0.45
+- zaktualizowano do wersji Stendhal 1.06
+- poprawiono dzialanie biletu turystycznego (po przekroczeniu czasu lub wylogowaniu siê gracz jest automatycznie odsy³any)
+- npc Cieciurad pilnuje smokow w ich krainie i wpuszcza raz na 3 dni na 2 godziny po uiszczeniu odpowiedniej oplaty
+
+0.44
+- zaktualizowano do wersji Stendhal 1.05
+
+0.43
+- zaktualizowano do wersji Stendhal 1.04 z pominieciem Mine Town Revival Week i Halloween
+
+0.42
+- poprawiono tlo przewodnika
+- poprawiono sprawdzanie wersji
+
+0.41
+- poprawiono wiezienie
+- poprawiono tlo wyskakujacego okienka nad chatem
+- poprawiono bledy na mapkach
+- przetlumaczono kwestie Io Flotto
+
+0.40
+- zaktualizowano kod do wersji Stendhala 1.03
+- poprawiono i dostosowano komunikaty w grze
+
+0.30.1
+- wszystkie elementy uzbrojenia moga posiadac atrybut ataku
+- poprawiono komunikat o miejscu smierci
+
+0.30
+- zaktualizowano kod do wersji Stendhala 0.99
+- dodano podzial na plec
+- graczom z czaszka spada szybkosc poslugiwania sie bronia
+- dodano mozliwosc uzycia baloniku na mapie 0_zakopane_ne
+- zlikwidowano klany
+- zmieniono przeznaczenie map klanow
+- poprawiono zadania i tlumaczenie
+
+0.29.2
+- poprawiono noc
+
+0.29.1
+- poprawiono grafike swiatla
+- dodano ciemnosc w jaskniach
+- naprawiono przedmioty
+
+0.29
+- zaktualizowano kod do wersji Stendhala 0.98
+- poprawiono reakcje NPC-ow na slowa kluczowe
+- poprawiono nazwy przydmietow u NPC-ow, potworkow i w zadaniach
+- poprawiono literowki w wypowiedziach NPC-ow
+- dodadno przedmiot do zlotego smoka
+- poprawiono portale w Wieliczce
+
+0.28.4
+- zaktualizowano kod do wersji Stendhala 0.95
+
+0.28.3
+- zaktualizowano kod do wersji Stendhala 0.93
+- poprawiono porady w grze
+- przywrocono poprzedni czas na zalogowanie sie do gry
+
+0.28.2
+- poprawiono dzialanie NPC-ow i zadan
+- wydluzono czas zalogowania
+- zmienino kolor kolorowego tekstu
+
+0.28.1
+- poprawiono zadanie w wiezy magow
+- usunieto blad grafiki kwiatow podczas rosniecia
+- poprawiono literowki w wypowiedziach NPC-ow
+- poprawiono nazwy zwojow klanowych
+- poprawiono dzialanie pierscieni klanowych
+- dodano wyglad Old Mother Helena
+- dodano brakujace tytuly i opisy zadan
+- poprawiono dzialanie zadan
+
+0.28
+- zaktualizowano kod do wersji Stendhala 0.92
+- poprawiono zadania
+- dodano jedzenie dla zwierzat w domkach w Zakopanem
+- naprawiono kupowanie domkow
+- dodano mape 0_tatry_dolina_strazyska_n
+
+0.27.2
+- zaktualizowano kod do wersji Stendhala 0.90.1
+- dodano mapy dolina_koscielisko_c oraz dolina_koscielisko_s
+- poprawiono kolory i zmieniono kolor okienka powiadamiania
+- dodano mapy klanu Zion
+- poprawiono zadanie na vampire sword
+
+0.27.1
+- poprawiono handel i pare bledow z poprzedniej wersji
+- dodano mapy wieliczki
+
+0.27
+- poprawiono handel i pare bledow z poprzedniej wersji
+- dodano siarke i sol do kopalni w wieliczce
+- pojawil sie nowy potwor dajacy potezna bron
+
+0.26.1
+- silnik gry marauroa 3.8.5
+- poprawki ktore pojawil sie w wersji Stendhala 0.88
+- po przejciu w stan oddalony postac staje sie pol przezroczysta
+- po wykonaniu ruchu postac sama wychodzi ze stanu oddalonego
+- usunieto przywolywanie niesmiertelnych potworow z summon scroll
+- dodano obrazek beeswax
+- zablokowano przywolywanie niesmiertelnych potworow oraz motylka
+- poprawiono tlumaczenie kwesti na deathmatchu
+- poprawiono hasla dla npcow
+- dodano t³o dla okna rozmowy oraz kolory czcionek dla roznych komunikatow
+  *czcionka w oknie rozmow ma kolor podstawowy bialy, a w chmurce czarny
+  *tellall jasno fioletowy
+  *hash # jasno niebieski
+  *tell jasno zielony zielony
+  *odpowiedz supportu pomaranczowy
+- przywrocony stary system identyfikacji ze wzgledu na problemy uzytkownikow Neostrady z zalogowaniem sie do gry
+
+0.26
+- mapy wieliczki i krakowa
+- dodano siarke i sol
+- nowe NPCe
+- wprowadzono nowy system identyfikacji
+
+0.25.2
+- poprawione dzialanie listy przyjaciol
+- wycofano rejestracje z nieaktywnym kontem i tym samym wymog aktywacji kont
+- poprawiono kod, mapki i tlumaczenia
+- silnik gry Marauroa 3.7.9 poniewaz nowsza wersja sprawiala problemy
+
+0.25.1
+- poprawione dzialanie blokowania kont
+- usprawnienie informacji o aktywacji kont
+- poprawione zadanie KillDragons oraz npc Mrotho
+- poprawiony help dla GM
+- silnik gry Marauroa 3.8
+
+0.25
+- filtr dopuszczalnych slow w nazwie konta
+- wymog aktywacji konta po rejestracji
+- powiadomienie o rejestracji konta
+- komenda dla administratorow sluzaca do aktywacji zarejestrowanego konta

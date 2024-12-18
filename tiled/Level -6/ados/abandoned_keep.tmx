@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.0" orientation="orthogonal" renderorder="right-down" width="32" height="32" tilewidth="32" tileheight="32" nextobjectid="1">
+ <tileset firstgid="1" name="tiles" tilewidth="32" tileheight="32" tilecount="6" columns="3">
+  <image source="../../tileset/ground/indoor/floor_tiles2.png" width="96" height="64"/>
+ </tileset>
+ <tileset firstgid="7" name="collision" tilewidth="32" tileheight="32" tilecount="1" columns="1">
+  <image source="../../tileset/logic/collision.png" width="32" height="32"/>
+ </tileset>
+ <tileset firstgid="8" name="hell tiles" tilewidth="32" tileheight="32" tilecount="352" columns="16">
+  <image source="../../tileset/ground/rock/hell.png" width="512" height="704"/>
+ </tileset>
+ <tileset firstgid="360" name="huge animal corpse" tilewidth="32" tileheight="32" tilecount="16" columns="2">
+  <image source="../../tileset/item/corpse/huge_animal.png" width="64" height="256"/>
+ </tileset>
+ <tileset firstgid="376" name="torch" tilewidth="32" tileheight="32" tilecount="8" columns="2">
+  <image source="../../tileset/furniture/light/dark_torch.png" width="64" height="128"/>
+ </tileset>
+ <tileset firstgid="384" name="blood" tilewidth="32" tileheight="32" tilecount="4" columns="2">
+  <image source="../../tileset/item/blood/nsew_stains.png" width="64" height="64"/>
+ </tileset>
+ <tileset firstgid="388" name="pole" tilewidth="32" tileheight="32" tilecount="3" columns="1">
+  <image source="../../tileset/item/flagpole.png" width="32" height="96"/>
+ </tileset>
+ <tileset firstgid="391" name="flag" tilewidth="32" tileheight="32" tilecount="12" columns="3">
+  <image source="../../tileset/item/banners/flag.png" width="96" height="128"/>
+ </tileset>
+ <tileset firstgid="403" name="huge animal" tilewidth="32" tileheight="32" tilecount="14" columns="14">
+  <image source="../../tileset/logic/creature/huge_animal.png" width="451" height="32"/>
+ </tileset>
+ <tileset firstgid="417" name="stairs" tilewidth="32" tileheight="32" tilecount="12" columns="3">
+  <image source="../../tileset/building/stairs/stairs_orange.png" width="96" height="128"/>
+ </tileset>
+ <tileset firstgid="429" name="portal" tilewidth="32" tileheight="32" tilecount="7" columns="7">
+  <image source="../../tileset/logic/portal.png" width="224" height="32"/>
+ </tileset>
+ <tileset firstgid="436" name="giant human" tilewidth="32" tileheight="32" tilecount="13" columns="13">
+  <image source="../../tileset/logic/creature/giant_human.png" width="416" height="32"/>
+ </tileset>
+ <tileset firstgid="449" name="dwarf" tilewidth="32" tileheight="32" tilecount="8" columns="8">
+  <image source="../../tileset/logic/creature/dwarf.png" width="256" height="32"/>
+ </tileset>
+ <tileset firstgid="457" name="wall/int_grey" tilewidth="32" tileheight="32" tilecount="121" columns="11">
+  <image source="../../tileset/building/wall/int_grey.png" width="352" height="352"/>
+ </tileset>
+ <tileset firstgid="578" name="entrance/grey" tilewidth="32" tileheight="32" tilecount="25" columns="5">
+  <image source="../../tileset/building/entrance/grey.png" width="160" height="160"/>
+ </tileset>
+ <tileset firstgid="603" name="protection" tilewidth="32" tileheight="32" tilecount="2" columns="2">
+  <image source="../../tileset/logic/protection.png" width="64" height="32"/>
+ </tileset>
+ <layer name="0_floor" width="32" height="32">
+  <data encoding="base64" compression="gzip">
+   H4sIAAAAAAAAC+3Vuw2AIBhGUSRWOoQz2LuMC7sCpYVLqB0QHv8TY0Lx1eeqEN1gjPvBrmcHcKeCPRrcpBp8ewdOqiF+bqzPaUi9c4pPach9b6qPaSidNY4Paaidc65faoDcMQk/1QC931J+3GBse3+yeF9y3e9+97v/bv7AX2z4D2jZENstG3J2i4aardkAtTUasLZkA9WWaODapYbVhtOy/YYNOGlbczfvR+OSABAAAA==
+  </data>
+ </layer>
+ <layer name="1_terrain" width="32" height="32">
+  <data encoding="base64" compression="gzip">
+   H4sIAAAAAAAAC+2XbQrCMAyG2/0TPIN38ApeRQU/7uD8OIyKnqN38A777y/FFDqoNbVJUwcDAy90a7fnTZYWptQ/KNFopW5EPXV59h1kYDz5ss7OGTcu5aHx3mPiy9A1Ug9N8DyXL/EQsnP5OR4wtoTP8eCzFzBegg5azqd4CPNewfVa0H8cD1jNd0j/UfdfLB6R80FXSm0S9TGBUvexsIxBhfM5MQXNnOa8R8X8Wn/ya8Ye63v+VL7t33YPl+Rz6t/u4b0332X9t4ivvn//X/V/6vzxIzf/2Pkz7LD+owiL6kFS/xib6yEn/xSb44HLp7IpHrj157IpHqj557JTHih8KTvmgVL/Umzfw9jTEXgnp7N+nyvNxsLyL07Xwv97XcYLytlBCwAQAAA=
+  </data>
+ </layer>
+ <layer name="2_object" width="32" height="32">
+  <data encoding="base64" compression="gzip">
+   H4sIAAAAAAAAC+2OIQ6AQBADDzyKN8OXT5FgcdfdtoZ0dNOZMcLfeDbt32z8qRo6blUD42YbFO5ug9JdbXC40Qanm+UC29BdlRv8RXchhPDl2P2Oc+FwNqzczgbU7WioupUNXbeigXUzDSp3p0HtDj5eVhJ/wQAQAAA=
+  </data>
+ </layer>
+ <layer name="3_roof" width="32" height="32">
+  <data encoding="base64" compression="gzip">
+   H4sIAAAAAAAAC2NgGAWjYBSMglFQxYhbrgUoNwmPPLHqaogwY7CDSix+wCY2CmgDRsN/YAGtwh9f+UMtQA87aA1G0//AgtHwH1gwGv4DD7yYUPFQBQCB8qjeABAAAA==
+  </data>
+ </layer>
+ <layer name="objects" width="32" height="32">
+  <data encoding="base64" compression="gzip">
+   H4sIAAAAAAAAC2NgGAWjgDxwgnGgXTAK6A12YolzbGKjYBSMAtLBTBrmJVqaPQpGwSgYBaNgFIwUsJ4RgocyAABjdEgSABAAAA==
+  </data>
+ </layer>
+ <layer name="collision" width="32" height="32" opacity="0.49">
+  <data encoding="base64" compression="gzip">
+   H4sIAAAAAAAAC+2VQQrAMAgEveX/P+61pCSu7moIVPDozmCKHWY2/r6qV1XN3LHfDmqXORvhqxxW2QifdfCyEX7WwezrkeVHHeYZBR918LKRfCSD4a/2xPK9OaTQN4ryPUZ0nuGz1clf3bGu/Vfw2bqdX/X9d+yAuX8d/Ow/hrl7HXuIsNUOGfbOIXN/1A5IKdhZByV7dvD2X8H2fE70ab6iH6KUdtwAEAAA
+  </data>
+ </layer>
+ <layer name="protection" width="32" height="32">
+  <data encoding="base64" compression="gzip">
+   H4sIAAAAAAAAC+3DAQkAAAwDoPGa699jPY6CvaSqqqrq6wM7ODeSABAAAA==
+  </data>
+ </layer>
+</map>

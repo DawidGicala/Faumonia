@@ -1,0 +1,2 @@
+set FAUMONIAONLINE_VERSION=3.0set LOCALCLASSPATH=.;data\script;data\conf;faumoniaonline-server-%FAUMONIAONLINE_VERSION%.jar;libs/marauroa.jar;libs/commons-lang.jar;libs/mysql-connector.jar;libs/log4j.jar;libs/simple.jar;libs/libtiled.jar;libs/groovy.jar
+java -Xmx400m -cp "%LOCALCLASSPATH%" games.stendhal.server.StendhalServer -c server.ini -l

@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
+	<classpathentry kind="src" path="marauroa - src/functional_tests"/>
+	<classpathentry kind="src" path="marauroa - src/src"/>
+	<classpathentry kind="src" path="marauroa - src/tests"/>
+	<classpathentry kind="src" path="src"/>
+	<classpathentry kind="lib" path="build/lib/FaumoniaOnline-server-4.1.jar"/>
+	<classpathentry kind="lib" path="commons-lang.jar"/>
+	<classpathentry kind="lib" path="data/conf/commons-lang.jar"/>
+	<classpathentry kind="lib" path="data/conf/groovy.jar"/>
+	<classpathentry kind="lib" path="data/conf/h2.jar"/>
+	<classpathentry kind="lib" path="data/conf/log4j.jar"/>
+	<classpathentry kind="lib" path="data/conf/simple.jar"/>
+	<classpathentry kind="lib" path="FaumoniaOnline-maps-4.0.jar"/>
+	<classpathentry kind="lib" path="FaumoniaOnline-server-4.0.jar"/>
+	<classpathentry kind="lib" path="FaumoniaOnline-xmlconf-4.0.jar"/>
+	<classpathentry kind="lib" path="groovy.jar"/>
+	<classpathentry kind="lib" path="h2.jar"/>
+	<classpathentry kind="lib" path="libs/ant.jar"/>
+	<classpathentry kind="lib" path="libs/cglib-nodep-2.2_beta1.jar"/>
+	<classpathentry kind="lib" path="libs/cobertura/asm-3.0.jar"/>
+	<classpathentry kind="lib" path="libs/cobertura/asm-tree-3.0.jar"/>
+	<classpathentry kind="lib" path="libs/cobertura/cobertura.jar"/>
+	<classpathentry kind="lib" path="libs/cobertura/jakarta-oro-2.0.8.jar"/>
+	<classpathentry kind="lib" path="libs/commons-lang.jar"/>
+	<classpathentry kind="lib" path="libs/easymock.jar"/>
+	<classpathentry kind="lib" path="libs/easymockclassextension.jar"/>
+	<classpathentry kind="lib" path="libs/groovy.jar"/>
+	<classpathentry kind="lib" path="libs/h2.jar"/>
+	<classpathentry kind="lib" path="libs/hamcrest-all-1.1.jar"/>
+	<classpathentry kind="lib" path="libs/jardiff.jar"/>
+	<classpathentry kind="lib" path="libs/jcurses.jar"/>
+	<classpathentry kind="lib" path="libs/jorbis.jar"/>
+	<classpathentry kind="lib" path="libs/junit-4.4.jar"/>
+	<classpathentry kind="lib" path="libs/libtiled.jar"/>
+	<classpathentry kind="lib" path="libs/log4j.jar"/>
+	<classpathentry kind="lib" path="libs/marauroa.jar"/>
+	<classpathentry kind="lib" path="libs/mysql-connector.jar"/>
+	<classpathentry kind="lib" path="libs/pircbot.jar"/>
+	<classpathentry kind="lib" path="libs/simple.jar"/>
+	<classpathentry kind="lib" path="libs/swing-layout.jar"/>
+	<classpathentry kind="lib" path="log4j.jar"/>
+	<classpathentry kind="lib" path="marauroa.jar"/>
+	<classpathentry kind="lib" path="marauroa - src/libs/h2.jar"/>
+	<classpathentry kind="lib" path="marauroa - src/libs/jnlp.jar"/>
+	<classpathentry kind="lib" path="marauroa - src/libs/junit-4.4.jar"/>
+	<classpathentry kind="lib" path="marauroa - src/libs/jython.jar"/>
+	<classpathentry kind="lib" path="marauroa - src/libs/log4j.jar"/>
+	<classpathentry kind="lib" path="marauroa - src/libs/mysql-connector.jar"/>
+	<classpathentry kind="lib" path="mysql-connector.jar"/>
+	<classpathentry kind="lib" path="simple.jar"/>
+	<classpathentry kind="output" path="build/build_server"/>
+</classpath>

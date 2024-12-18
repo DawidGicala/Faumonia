@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<creatures xmlns="stendhal" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="stendhal ../creatures.xsd ">
+
+	<creature name="superczłowiek olbrzym">
+		<type class="pol/olbrzymy" subclass="superczlowiek_gigant" tileid="pol_olbrzymy.png:0"/>
+		<description/>
+		<attributes>
+			<atk value="2484"/>
+			<def value="87"/>
+			<hp value="9618"/>
+			<speed value="1.0"/>
+			<size value="2,2"/>
+		</attributes>
+		<level value="235"/>
+		<experience value="24800"/>	
+		<respawn value="21000"/>
+		<corpse name="giant_human"/>
+		<drops>
+			<item value="money" quantity="[10,450]" probability="100.0"/>
+			<item value="gigantyczny eliksir" quantity="[1,1]" probability="10.0"/>
+			<item value="wielki eliksir" quantity="[1,7]" probability="80.0"/>
+			<item value="tarta z rybnym nadzieniem" quantity="[1,2]" probability="60.0"/>
+			<item value="srebrny sztylecik" quantity="[1,1]" probability="1.0"/>
+		</drops>
+		<equips/>
+		<ai>
+			<says>
+				<noise state="idle follow fight" value="Oczyść buty nim wejdziesz w nasze progi."/>
+				<noise state="idle follow fight" value="Nauczę cię czci dla naszego sanktuarium."/>
+			</says>
+			<profile name="offensive"/>
+			<profile name="lifesteal" params="0.3"/>
+			<profile name="heal" params="50,20"/>
+			<profile name="human"/>
+			<profile name="patrolling"/>
+		</ai>
+	</creature>
+
+	<creature name="mega mag"> 
+		<type class="pol/olbrzymy" subclass="mega_mag" tileid="pol_olbrzymy.png:1"/>
+		<description/>
+		<attributes>
+			<atk value="1183"/>
+			<def value="78"/>
+			<hp value="15218"/>
+			<speed value="0.8"/>
+			<size value="2,2"/>
+		</attributes>
+		<level value="175"/>
+		<experience value="28300"/>
+		<respawn value="74650"/>
+		<corpse name="giant_human"/>
+		<drops>
+			<item value="money" quantity="[80,1800]" probability="100.0"/>
+			<item value="magia deszczu" quantity="[1,223]" probability="62.5"/>
+			<item value="magia płomieni" quantity="[1,223]" probability="62.5"/>
+			<item value="magia ziemi" quantity="[1,323]" probability="72.5"/>
+			<item value="magia mroku" quantity="[1,173]" probability="62.5"/>
+			<item value="magia światła" quantity="[1,93]" probability="42.5"/>
+			<item value="bukłak z wodą" quantity="[12,25]" probability="80.0"/>
+			<item value="czarny sztylet" quantity="[1,1]" probability="0.02"/>
+		</drops>
+		<equips/>
+		<ai>
+			<profile name="brave"/>
+			<profile name="animal"/>
+			<profile name="offensive"/>
+			<profile name="heal" params="20,20"/>
+			<profile name="patrolling"/>
+		</ai>
+	</creature>
+
+	<creature name="gigantyczna lili">
+		<type class="pol/olbrzymy" subclass="gigantyczna_lili" tileid="pol_olbrzymy.png:2"/>
+		<description/>
+		<attributes>
+			<atk value="3350"/>
+			<def value="150"/>
+			<hp value="8000"/>
+			<speed value="1.0"/>
+			<size value="2,2"/>
+		</attributes>
+		<level value="333"/>
+		<experience value="340000"/>
+		<respawn value="93200"/>
+		<corpse name="giant_humanoid"/>
+		<drops>
+			<item value="wielki eliksir" quantity="[1,18]" probability="75.0"/>
+			<item value="money" quantity="[500,3000]" probability="100.0"/>
+			<item value="serce olbrzyma" quantity="[1,1]" probability="100.0"/>
+			<item value="spinka" quantity="[1,1]" probability="0.1"/>
+		</drops>
+		<equips/>
+		<ai>
+			<says>
+				<noise state="idle follow fight" value="Czego tu szukasz śmiertelniku?"/>
+				<noise state="idle follow fight" value="Uciekaj stąd jeśli ci życie miłe!"/>
+			</says>
+			<profile name="brave"/>
+			<profile name="animal"/>
+			<profile name="offensive"/>
+			<profile name="lifesteal" params="0.05"/>
+			<profile name="heal" params="35,15"/>
+			<profile name="patrolling"/>
+		</ai>
+	</creature>
+</creatures>

@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.0" orientation="orthogonal" renderorder="right-down" width="32" height="16" tilewidth="32" tileheight="32" nextobjectid="1">
+ <tileset firstgid="1" name="castle" tilewidth="32" tileheight="32" tilecount="320" columns="20">
+  <image source="../../tileset/building/castle.png" width="640" height="512"/>
+ </tileset>
+ <tileset firstgid="321" name="collision" tilewidth="32" tileheight="32" tilecount="1" columns="1">
+  <image source="../../tileset/logic/collision.png" width="32" height="32"/>
+ </tileset>
+ <tileset firstgid="322" name="ground" tilewidth="32" tileheight="32" tilecount="5" columns="5">
+  <image source="../../tileset/ground/brown.png" width="160" height="32"/>
+ </tileset>
+ <tileset firstgid="327" name="stairs" tilewidth="32" tileheight="32" tilecount="12" columns="2">
+  <image source="../../tileset/building/stairs/stairs.png" width="64" height="192"/>
+ </tileset>
+ <tileset firstgid="339" name="imperial" tilewidth="32" tileheight="32" tilecount="14" columns="14">
+  <image source="../../tileset/logic/creature/human_imperial.png" width="448" height="32"/>
+ </tileset>
+ <tileset firstgid="353" name="edges" tilewidth="32" tileheight="32" tilecount="15" columns="5">
+  <image source="../../tileset/building/wall/bricked_edges.png" width="160" height="96"/>
+ </tileset>
+ <tileset firstgid="368" name="kalavan" tilewidth="32" tileheight="32" tilecount="5" columns="5">
+  <image source="../../tileset/logic/creature/human_kalavan.png" width="160" height="32"/>
+ </tileset>
+ <tileset firstgid="373" name="iron bars" tilewidth="32" tileheight="32" tilecount="12" columns="3">
+  <image source="../../tileset/building/entrance/int_iron_bars.png" width="96" height="128"/>
+ </tileset>
+ <tileset firstgid="385" name="wall thin bricks" tilewidth="32" tileheight="32" tilecount="12" columns="2">
+  <image source="../../tileset/building/wall/int_wall_thin_bricks.png" width="64" height="192"/>
+ </tileset>
+ <tileset firstgid="397" name="blood" tilewidth="32" tileheight="32" tilecount="4" columns="2">
+  <image source="../../tileset/item/blood/nsew_stains.png" width="64" height="64"/>
+ </tileset>
+ <tileset firstgid="401" name="lamp" tilewidth="32" tileheight="32" tilecount="4" columns="4">
+  <image source="../../tileset/furniture/light/small_lamp.png" width="128" height="32"/>
+ </tileset>
+ <tileset firstgid="405" name="protection" tilewidth="32" tileheight="32" tilecount="2" columns="2">
+  <image source="../../tileset/logic/protection.png" width="64" height="32"/>
+ </tileset>
+ <layer name="0_floor" width="32" height="16">
+  <data encoding="base64" compression="gzip">
+   H4sIAAAAAAAAC3NiZGBwGsWjeBDhcwy0wbR2L7nyxOAeNEzrONBjQMXo9qPLE8JD3X5K8aj9xOM9DMRhmNnEqqd1nhmKGABvM5XXAAgAAA==
+  </data>
+ </layer>
+ <layer name="1_terrain" width="32" height="16">
+  <data encoding="base64" compression="gzip">
+   H4sIAAAAAAAAC2NgGAWjYPCA/UB8gEb4IBH28zEyMFwD0iqM1MWXgGYKMRJn/ysgbcGIinOBOBmKcxgx5QnhZyTY/48B1b5kLPqSGYnHIPf+ItH+VCLUEgtSaGi/JxHqaGk/MYAc+zOAdBIBDAOE1KWTaP9VBuLy8x4oNkMThwFksctE2q9E5XyPjNWIsN+MjLxNLLbCYj8A91F4IAAIAAA=
+  </data>
+ </layer>
+ <layer name="2_object" width="32" height="16">
+  <data encoding="base64" compression="gzip">
+   H4sIAAAAAAAAC2NgGAWjYBQMBTCBEUL3MtLerolodvQzotKUmEUOqACaUQnFVXTw/ygY3CAHmAZMGSA4dwDSAwsQswIxGxCz0996BgkglgRiKSCWpsAcAIQurhAACAAA
+  </data>
+ </layer>
+ <layer name="3_roof" width="32" height="16">
+  <data encoding="base64" compression="gzip">
+   H4sIAAAAAAAAC2NgGAWjYBSMAvyglJGBoQyKyxkH2jWjYLiDAwTwHjRMSD2pQIWRuniwAgACOvgbAAgAAA==
+  </data>
+ </layer>
+ <layer name="4_roof_add" width="32" height="16">
+  <data encoding="base64" compression="gzip">
+   H4sIAAAAAAAAC2NgGAWjYBSMglEwCoYOMAFiUyg2GwD7WYCYFYjZgJh9AOyXAGJJIJYCYmkKzAEAB2eXqQAIAAA=
+  </data>
+ </layer>
+ <layer name="objects" width="32" height="16">
+  <data encoding="base64" compression="gzip">
+   H4sIAAAAAAAAC2NgGAWjYBSMAsKgiJF4tREkqMUGIinUDwPRVDJnIMBgczu5cRo6yPwxChAAAJn1ZoQACAAA
+  </data>
+ </layer>
+ <layer name="collision" width="32" height="16" opacity="0.33">
+  <data encoding="base64" compression="gzip">
+   H4sIAAAAAAAAC3NkZGBwHMWjeBQPaowO6G0nMh+be/ABWviXVECp/ZSCUftplz7pmQ+Hm/0AU1cxWgAIAAA=
+  </data>
+ </layer>
+ <layer name="protection" width="32" height="16">
+  <data encoding="base64" compression="gzip">
+   H4sIAAAAAAAAC5vKyMAwdRSP4lE8ikfxKB7FIwoDALCH9x8ACAAA
+  </data>
+ </layer>
+</map>

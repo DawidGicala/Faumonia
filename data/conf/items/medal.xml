@@ -1,0 +1,507 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<items xmlns="stendhal" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="stendhal ../items.xsd ">
+
+	<item name="odznaka wojownika I">
+		<type class="medal" subclass="braz0" tileid="-1"/>
+		<description>Oto odznaka wojownika Faumonii pierwszego poziomu. Przyznana za wykonanie głównego zadania u Mistrza Faumonii z miasta Semos.</description>
+		<implementation class-name="games.stendhal.server.entity.item.Item"/>
+		<attributes>
+			<def value="1"/>
+			<undroppableondeath value="1"/>
+			<autobind value=""/>
+		</attributes>
+		<weight value="45.0"/>
+		<value value="123032"/>
+		<equipable>
+			<slot name="medal"/><slot name="bag"/>
+		</equipable>
+	</item>
+	
+	<item name="odznaka wojownika II">
+		<type class="medal" subclass="braz2" tileid="-1"/>
+		<description>Oto odznaka wojownika Faumonii drugiego poziomu. Przyznana za wykonanie głównego zadania u Mistrza Faumonii z miasta Semos.</description>
+		<implementation class-name="games.stendhal.server.entity.item.Item"/>
+		<attributes>
+			<def value="2"/>
+			<undroppableondeath value="1"/>
+			<autobind value=""/>
+		</attributes>
+		<weight value="45.0"/>
+		<value value="123032"/>
+		<equipable>
+			<slot name="medal"/><slot name="bag"/>
+		</equipable>
+	</item>
+	
+	<item name="odznaka wojownika III">
+		<type class="medal" subclass="braz3" tileid="-1"/>
+		<description>Oto odznaka wojownika Faumonii trzeciego poziomu. Przyznana za wykonanie głównego zadania u Mistrza Faumonii z miasta Semos.</description>
+		<implementation class-name="games.stendhal.server.entity.item.Item"/>
+		<attributes>
+			<def value="3"/>
+			<undroppableondeath value="1"/>
+			<autobind value=""/>
+		</attributes>
+		<weight value="45.0"/>
+		<value value="123032"/>
+		<equipable>
+			<slot name="medal"/><slot name="bag"/>
+		</equipable>
+	</item>
+	
+	<item name="odznaka wojownika IV">
+		<type class="medal" subclass="braz4" tileid="-1"/>
+		<description>Oto odznaka wojownika Faumonii czwartego poziomu. Przyznana za wykonanie głównego zadania u Mistrza Faumonii z miasta Semos.</description>
+		<implementation class-name="games.stendhal.server.entity.item.Item"/>
+		<attributes>
+			<def value="4"/>
+			<undroppableondeath value="1"/>
+			<autobind value=""/>
+		</attributes>
+		<weight value="45.0"/>
+		<value value="123032"/>
+		<equipable>
+			<slot name="medal"/><slot name="bag"/>
+		</equipable>
+	</item>
+	
+	<item name="odznaka wojownika V">
+		<type class="medal" subclass="braz5" tileid="-1"/>
+		<description>Oto odznaka wojownika Faumonii piątego poziomu. Przyznana za wykonanie głównego zadania u Mistrza Faumonii z miasta Semos.</description>
+		<implementation class-name="games.stendhal.server.entity.item.Item"/>
+		<attributes>
+			<def value="5"/>
+			<undroppableondeath value="1"/>
+			<autobind value=""/>
+		</attributes>
+		<weight value="45.0"/>
+		<value value="123032"/>
+		<equipable>
+			<slot name="medal"/><slot name="bag"/>
+		</equipable>
+	</item>
+	
+	<item name="odznaka wojownika VI">
+		<type class="medal" subclass="braz6" tileid="-1"/>
+		<description>Oto odznaka wojownika Faumonii szóstego poziomu. Przyznana za wykonanie głównego zadania u Mistrza Faumonii z miasta Semos.</description>
+		<implementation class-name="games.stendhal.server.entity.item.Item"/>
+		<attributes>
+			<def value="6"/>
+			<undroppableondeath value="1"/>
+			<autobind value=""/>
+		</attributes>
+		<weight value="45.0"/>
+		<value value="123032"/>
+		<equipable>
+			<slot name="medal"/><slot name="bag"/>
+		</equipable>
+	</item>
+	
+	<item name="odznaka wojownika VII">
+		<type class="medal" subclass="braz7" tileid="-1"/>
+		<description>Oto odznaka wojownika Faumonii siódmego poziomu. Przyznana za wykonanie głównego zadania u Mistrza Faumonii z miasta Semos.</description>
+		<implementation class-name="games.stendhal.server.entity.item.Item"/>
+		<attributes>
+			<def value="7"/>
+			<undroppableondeath value="1"/>
+			<autobind value=""/>
+		</attributes>
+		<weight value="45.0"/>
+		<value value="123032"/>
+		<equipable>
+			<slot name="medal"/><slot name="bag"/>
+		</equipable>
+	</item>
+	
+	<item name="odznaka wojownika VIII">
+		<type class="medal" subclass="braz8" tileid="-1"/>
+		<description>Oto odznaka wojownika Faumonii ósmego poziomu. Przyznana za wykonanie głównego zadania u Mistrza Faumonii z miasta Semos.</description>
+		<implementation class-name="games.stendhal.server.entity.item.Item"/>
+		<attributes>
+			<def value="8"/>
+			<undroppableondeath value="1"/>
+			<autobind value=""/>
+		</attributes>
+		<weight value="45.0"/>
+		<value value="123032"/>
+		<equipable>
+			<slot name="medal"/><slot name="bag"/>
+		</equipable>
+	</item>
+	
+	<item name="odznaka wojownika IX">
+		<type class="medal" subclass="braz9" tileid="-1"/>
+		<description>Oto odznaka wojownika Faumonii dziewiątego poziomu. Przyznana za wykonanie głównego zadania u Mistrza Faumonii z miasta Semos.</description>
+		<implementation class-name="games.stendhal.server.entity.item.Item"/>
+		<attributes>
+			<atk value="1"/>
+			<def value="8"/>
+			<undroppableondeath value="1"/>
+			<autobind value=""/>
+		</attributes>
+		<weight value="45.0"/>
+		<value value="123032"/>
+		<equipable>
+			<slot name="medal"/><slot name="bag"/>
+		</equipable>
+	</item>
+	
+	<item name="odznaka wojownika X">
+		<type class="medal" subclass="srebro1" tileid="-1"/>
+		<description>Oto odznaka wojownika Faumonii dziesiątego poziomu. Przyznana za wykonanie głównego zadania u Mistrza Faumonii z miasta Semos.</description>
+		<implementation class-name="games.stendhal.server.entity.item.Item"/>
+		<attributes>
+			<atk value="1"/>
+			<def value="9"/>
+			<undroppableondeath value="1"/>
+			<autobind value=""/>
+		</attributes>
+		<weight value="45.0"/>
+		<value value="123032"/>
+		<equipable>
+			<slot name="medal"/><slot name="bag"/>
+		</equipable>
+	</item>
+	
+	<item name="odznaka wojownika XI">
+		<type class="medal" subclass="srebro2" tileid="-1"/>
+		<description>Oto odznaka wojownika Faumonii jedenastego poziomu. Przyznana za wykonanie głównego zadania u Mistrza Faumonii z miasta Semos.</description>
+		<implementation class-name="games.stendhal.server.entity.item.Item"/>
+		<attributes>
+			<atk value="1"/>
+			<def value="10"/>
+			<undroppableondeath value="1"/>
+			<autobind value=""/>
+		</attributes>
+		<weight value="45.0"/>
+		<value value="123032"/>
+		<equipable>
+			<slot name="medal"/><slot name="bag"/>
+		</equipable>
+	</item>
+	
+	<item name="odznaka wojownika XII">
+		<type class="medal" subclass="srebro3" tileid="-1"/>
+		<description>Oto odznaka wojownika Faumonii dwunastego poziomu. Przyznana za wykonanie głównego zadania u Mistrza Faumonii z miasta Semos.</description>
+		<implementation class-name="games.stendhal.server.entity.item.Item"/>
+		<attributes>
+			<atk value="1"/>
+			<def value="11"/>
+			<undroppableondeath value="1"/>
+			<autobind value=""/>
+		</attributes>
+		<weight value="45.0"/>
+		<value value="123032"/>
+		<equipable>
+			<slot name="medal"/><slot name="bag"/>
+		</equipable>
+	</item>
+	
+	<item name="odznaka wojownika XIII">
+		<type class="medal" subclass="srebro4" tileid="-1"/>
+		<description>Oto odznaka wojownika Faumonii trzynastego poziomu. Przyznana za wykonanie głównego zadania u Mistrza Faumonii z miasta Semos.</description>
+		<implementation class-name="games.stendhal.server.entity.item.Item"/>
+		<attributes>
+			<atk value="1"/>
+			<def value="12"/>
+			<undroppableondeath value="1"/>
+			<autobind value=""/>
+		</attributes>
+		<weight value="45.0"/>
+		<value value="123032"/>
+		<equipable>
+			<slot name="medal"/><slot name="bag"/>
+		</equipable>
+	</item>
+	
+	<item name="odznaka wojownika XIV">
+		<type class="medal" subclass="srebro5" tileid="-1"/>
+		<description>Oto odznaka wojownika Faumonii czternastego poziomu. Przyznana za wykonanie głównego zadania u Mistrza Faumonii z miasta Semos.</description>
+		<implementation class-name="games.stendhal.server.entity.item.Item"/>
+		<attributes>
+			<atk value="1"/>
+			<def value="13"/>
+			<undroppableondeath value="1"/>
+			<autobind value=""/>
+		</attributes>
+		<weight value="45.0"/>
+		<value value="123032"/>
+		<equipable>
+			<slot name="medal"/><slot name="bag"/>
+		</equipable>
+	</item>
+	
+	<item name="odznaka wojownika XV">
+		<type class="medal" subclass="srebro6" tileid="-1"/>
+		<description>Oto odznaka wojownika Faumonii piętnastego poziomu. Przyznana za wykonanie głównego zadania u Mistrza Faumonii z miasta Semos.</description>
+		<implementation class-name="games.stendhal.server.entity.item.Item"/>
+		<attributes>
+			<atk value="1"/>
+			<def value="14"/>
+			<undroppableondeath value="1"/>
+			<autobind value=""/>
+		</attributes>
+		<weight value="45.0"/>
+		<value value="123032"/>
+		<equipable>
+			<slot name="medal"/><slot name="bag"/>
+		</equipable>
+	</item>
+	
+	<item name="odznaka wojownika XVI">
+		<type class="medal" subclass="srebro7" tileid="-1"/>
+		<description>Oto odznaka wojownika Faumonii szesnastego poziomu. Przyznana za wykonanie głównego zadania u Mistrza Faumonii z miasta Semos.</description>
+		<implementation class-name="games.stendhal.server.entity.item.Item"/>
+		<attributes>
+			<atk value="1"/>
+			<def value="15"/>
+			<undroppableondeath value="1"/>
+			<autobind value=""/>
+		</attributes>
+		<weight value="45.0"/>
+		<value value="123032"/>
+		<equipable>
+			<slot name="medal"/><slot name="bag"/>
+		</equipable>
+	</item>
+	
+	<item name="odznaka wojownika XVII">
+		<type class="medal" subclass="srebro8" tileid="-1"/>
+		<description>Oto odznaka wojownika Faumonii siedemnastego poziomu. Przyznana za wykonanie głównego zadania u Mistrza Faumonii z miasta Semos.</description>
+		<implementation class-name="games.stendhal.server.entity.item.Item"/>
+		<attributes>
+			<atk value="1"/>
+			<def value="16"/>
+			<undroppableondeath value="1"/>
+			<autobind value=""/>
+		</attributes>
+		<weight value="45.0"/>
+		<value value="123032"/>
+		<equipable>
+			<slot name="medal"/><slot name="bag"/>
+		</equipable>
+	</item>
+	
+	<item name="odznaka wojownika XVIII">
+		<type class="medal" subclass="zloto0" tileid="-1"/>
+		<description>Oto odznaka wojownika Faumonii osiemnastego poziomu. Przyznana za wykonanie głównego zadania u Mistrza Faumonii z miasta Semos.</description>
+		<implementation class-name="games.stendhal.server.entity.item.Item"/>
+		<attributes>
+			<atk value="1"/>
+			<def value="17"/>
+			<undroppableondeath value="1"/>
+			<autobind value=""/>
+		</attributes>
+		<weight value="45.0"/>
+		<value value="123032"/>
+		<equipable>
+			<slot name="medal"/><slot name="bag"/>
+		</equipable>
+	</item>
+	
+	<item name="odznaka wojownika XIX">
+		<type class="medal" subclass="zloto1" tileid="-1"/>
+		<description>Oto odznaka wojownika Faumonii dziewietnastego poziomu. Przyznana za wykonanie głównego zadania u Mistrza Faumonii z miasta Semos.</description>
+		<implementation class-name="games.stendhal.server.entity.item.Item"/>
+		<attributes>
+			<atk value="1"/>
+			<def value="19"/>
+			<undroppableondeath value="1"/>
+			<autobind value=""/>
+		</attributes>
+		<weight value="45.0"/>
+		<value value="123032"/>
+		<equipable>
+			<slot name="medal"/><slot name="bag"/>
+		</equipable>
+	</item>
+	
+	<item name="odznaka wojownika XX">
+		<type class="medal" subclass="zloto2" tileid="-1"/>
+		<description>Oto odznaka wojownika Faumonii dwudziestego poziomu. Przyznana za wykonanie głównego zadania u Mistrza Faumonii z miasta Semos.</description>
+		<implementation class-name="games.stendhal.server.entity.item.Item"/>
+		<attributes>
+			<atk value="1"/>
+			<def value="21"/>
+			<undroppableondeath value="1"/>
+			<autobind value=""/>
+		</attributes>
+		<weight value="45.0"/>
+		<value value="123032"/>
+		<equipable>
+			<slot name="medal"/><slot name="bag"/>
+		</equipable>
+	</item>
+	
+	<item name="odznaka wojownika XXI">
+		<type class="medal" subclass="zloto3" tileid="-1"/>
+		<description>Oto odznaka wojownika Faumonii dwudziestego-pierwszego poziomu. Przyznana za wykonanie głównego zadania u Mistrza Faumonii z miasta Semos.</description>
+		<implementation class-name="games.stendhal.server.entity.item.Item"/>
+		<attributes>
+			<atk value="2"/>
+			<def value="22"/>
+			<undroppableondeath value="1"/>
+			<autobind value=""/>
+		</attributes>
+		<weight value="45.0"/>
+		<value value="123032"/>
+		<equipable>
+			<slot name="medal"/><slot name="bag"/>
+		</equipable>
+	</item>
+	
+	<item name="odznaka wojownika XXII">
+		<type class="medal" subclass="zloto4" tileid="-1"/>
+		<description>Oto odznaka wojownika Faumonii dwudziestego-drugiego poziomu. Przyznana za wykonanie głównego zadania u Mistrza Faumonii z miasta Semos.</description>
+		<implementation class-name="games.stendhal.server.entity.item.Item"/>
+		<attributes>
+			<atk value="2"/>
+			<def value="25"/>
+			<undroppableondeath value="1"/>
+			<autobind value=""/>
+		</attributes>
+		<weight value="45.0"/>
+		<value value="123032"/>
+		<equipable>
+			<slot name="medal"/><slot name="bag"/>
+		</equipable>
+	</item>
+	
+	<item name="odznaka wojownika XXIII">
+		<type class="medal" subclass="zloto5" tileid="-1"/>
+		<description>Oto odznaka wojownika Faumonii dwudziestego-trzeciego poziomu. Przyznana za wykonanie głównego zadania u Mistrza Faumonii z miasta Semos.</description>
+		<implementation class-name="games.stendhal.server.entity.item.Item"/>
+		<attributes>
+			<atk value="2"/>
+			<def value="28"/>
+			<undroppableondeath value="1"/>
+			<autobind value=""/>
+		</attributes>
+		<weight value="45.0"/>
+		<value value="123032"/>
+		<equipable>
+			<slot name="medal"/><slot name="bag"/>
+		</equipable>
+	</item>
+	
+	<item name="odznaka wojownika XXIV">
+		<type class="medal" subclass="zloto6" tileid="-1"/>
+		<description>Oto odznaka wojownika Faumonii dwudziestego-czwartego poziomu. Przyznana za wykonanie głównego zadania u Mistrza Faumonii z miasta Semos.</description>
+		<implementation class-name="games.stendhal.server.entity.item.Item"/>
+		<attributes>
+			<atk value="2"/>
+			<def value="31"/>
+			<undroppableondeath value="1"/>
+			<autobind value=""/>
+		</attributes>
+		<weight value="45.0"/>
+		<value value="123032"/>
+		<equipable>
+			<slot name="medal"/><slot name="bag"/>
+		</equipable>
+	</item>
+	
+	<item name="odznaka wojownika XXV">
+		<type class="medal" subclass="zloto7" tileid="-1"/>
+		<description>Oto odznaka wojownika Faumonii dwudziestego-piątego poziomu. Przyznana za wykonanie głównego zadania u Mistrza Faumonii z miasta Semos.</description>
+		<implementation class-name="games.stendhal.server.entity.item.Item"/>
+		<attributes>
+			<atk value="2"/>
+			<def value="34"/>
+			<undroppableondeath value="1"/>
+			<autobind value=""/>
+		</attributes>
+		<weight value="45.0"/>
+		<value value="123032"/>
+		<equipable>
+			<slot name="medal"/><slot name="bag"/>
+		</equipable>
+	</item>
+	
+	<item name="odznaka wojownika XXVI">
+		<type class="medal" subclass="mithril0" tileid="-1"/>
+		<description>Oto odznaka wojownika Faumonii dwudziestego-szóstego poziomu. Przyznana za wykonanie głównego zadania u Mistrza Faumonii z miasta Semos.</description>
+		<implementation class-name="games.stendhal.server.entity.item.Item"/>
+		<attributes>
+			<atk value="3"/>
+			<def value="38"/>
+			<undroppableondeath value="1"/>
+			<autobind value=""/>
+		</attributes>
+		<weight value="45.0"/>
+		<value value="123032"/>
+		<equipable>
+			<slot name="medal"/><slot name="bag"/>
+		</equipable>
+	</item>
+	
+	<item name="odznaka wojownika XXVII">
+		<type class="medal" subclass="mithril1" tileid="-1"/>
+		<description>Oto odznaka wojownika Faumonii dwudziestego-siódmego poziomu. Przyznana za wykonanie głównego zadania u Mistrza Faumonii z miasta Semos.</description>
+		<implementation class-name="games.stendhal.server.entity.item.Item"/>
+		<attributes>
+			<atk value="3"/>
+			<def value="44"/>
+			<undroppableondeath value="1"/>
+			<autobind value=""/>
+		</attributes>
+		<weight value="45.0"/>
+		<value value="123032"/>
+		<equipable>
+			<slot name="medal"/><slot name="bag"/>
+		</equipable>
+	</item>
+	
+	<item name="odznaka wojownika XXVIII">
+		<type class="medal" subclass="mithril2" tileid="-1"/>
+		<description>Oto odznaka wojownika Faumonii dwudziestego-ósmego poziomu. Przyznana za wykonanie głównego zadania u Mistrza Faumonii z miasta Semos.</description>
+		<implementation class-name="games.stendhal.server.entity.item.Item"/>
+		<attributes>
+			<atk value="4"/>
+			<def value="52"/>
+			<undroppableondeath value="1"/>
+			<autobind value=""/>
+		</attributes>
+		<weight value="45.0"/>
+		<value value="123032"/>
+		<equipable>
+			<slot name="medal"/><slot name="bag"/>
+		</equipable>
+	</item>
+	
+	<item name="odznaka wojownika XXIX">
+		<type class="medal" subclass="mithril3" tileid="-1"/>
+		<description>Oto odznaka wojownika Faumonii dwudziestego-dziewiątego poziomu. Przyznana za wykonanie głównego zadania u Mistrza Faumonii z miasta Semos.</description>
+		<implementation class-name="games.stendhal.server.entity.item.Item"/>
+		<attributes>
+			<atk value="4"/>
+			<def value="54"/>
+			<undroppableondeath value="1"/>
+			<autobind value=""/>
+		</attributes>
+		<weight value="45.0"/>
+		<value value="123032"/>
+		<equipable>
+			<slot name="medal"/><slot name="bag"/>
+		</equipable>
+	</item>
+	
+	<item name="odznaka wojownika XXX">
+		<type class="medal" subclass="mithril4" tileid="-1"/>
+		<description>Oto odznaka wojownika Faumonii trzydziestego poziomu. Przyznana za wykonanie głównego zadania u Mistrza Faumonii z miasta Semos. Jesteś szalony. Zgłoś się do administracji, zostaniesz wpisany na oficjalną stronę gry wraz z datą.</description>
+		<implementation class-name="games.stendhal.server.entity.item.Item"/>
+		<attributes>
+			<atk value="4"/>
+			<def value="60"/>
+			<undroppableondeath value="1"/>
+			<autobind value=""/>
+		</attributes>
+		<weight value="45.0"/>
+		<value value="123032"/>
+		<equipable>
+			<slot name="medal"/><slot name="bag"/>
+		</equipable>
+	</item>
+	
+</items>

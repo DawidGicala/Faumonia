@@ -1,0 +1,1112 @@
+<?xml version='1.0'?>
+
+<project name="FaumoniaOnline" default="compile" basedir=".">
+	<!--
+		Sets a property (by name and value), or set of properties (from file or resource) in the project. Properties are case sensitive.
+		Properties are immutable: whoever sets a property first freezes it for the rest of the build; they are most definitely not variables.
+	-->
+	<property file="build.ant-private.properties"/>
+	<property file="build.ant.properties"/>
+
+	<property name="build_tests" value="${buildroot}/build_tests"/>
+	<property name="build_tests_report" value="${buildroot}/build_test_report"/>
+
+	<property name="build_client" value="${buildroot}/build_client"/>
+	<property name="build_client_data" value="${buildroot}/build_client_data"/>
+	<property name="build_client_sound_data" value="${buildroot}/build_client_sound_data"/>
+	<property name="build_client_music_data" value="${buildroot}/build_client_music_data"/>
+
+	<property name="build_postman" value="${buildroot}/buildbot/"/>
+
+	<property name="build_server" value="${buildroot}/build_server"/>
+	<property name="build_server_maps" value="${buildroot}/build_server_maps"/>
+	<property name="build_server_script" value="${buildroot}/build_server_script"/>
+	<property name="build_server_xmlconf" value="${buildroot}/build_server_xmlconf"/>
+
+
+	<property name="build_FaumoniaOnlinetextclient" value="${buildroot}/build_FaumoniaOnlinetextclient"/>
+	<property name="build_FaumoniaOnlinetools" value="${buildroot}/build_FaumoniaOnlinetools"/>
+
+	<property name="build_client" value="${buildroot}/build_client"/>
+
+	<property name="client_data" value="FaumoniaOnline-data-${version}.jar"/>
+	<property name="client_jarname" value="FaumoniaOnline-${version}.jar"/>
+	<property name="client_sound_data" value="FaumoniaOnline-sound-data-${version}.jar"/>
+	<property name="client_music_data" value="FaumoniaOnline-music-data-${version}.jar"/>
+	<property name="client_starter_jarname" value="FaumoniaOnline-starter-${version}.jar"/>
+
+	<property name="maps_jarname" value="FaumoniaOnline-maps-${version}.jar"/>
+
+	<property name="server_jarname" value="FaumoniaOnline-server-${version}.jar"/>
+	<property name="xmlconf_jarname" value="FaumoniaOnline-xmlconf-${version}.jar"/>
+
+	<property name="config_dir" value="data/conf"/>
+
+	<property name="schema_location" value="${config_dir}"/>
+
+	<property name="cobertura.dir" value="${libdir}/cobertura" />
+
+	<condition property="exclude.signing" value="true">
+		<not>
+			<available file="keystore.ks"/>
+		</not>
+	</condition>
+	<condition property="exclude.jardiff" value="true">
+		<not>
+			<available file="${build-archive}/FaumoniaOnline-${version.old}.zip"/>
+		</not>
+	</condition>
+
+
+	<!--
+	Definitions for cobertura coverage
+	-->
+	<path id="cobertura.classpath">
+	    <fileset dir="${cobertura.dir}">
+	        <include name="cobertura.jar" />
+	        <include name="*.jar" />
+	    </fileset>
+		<fileset dir="${libdir}">
+			<include name="*.jar" />
+		</fileset>
+	</path>
+
+	<taskdef classpathref="cobertura.classpath" resource="tasks.properties" />
+	
+	<property name="build_cobertura" value="${buildroot}/cobertura"/>
+	<property name="build_cobertura_report" value="${buildroot}/cobertura_report"/>
+
+
+	<target name="init">
+		<mkdir dir="${lib}"/>
+
+		<!-- We update the version number -->
+		<replaceregexp file="${src}/games/stendhal/common/Debug.java"
+			match="String VERSION ?= ?&quot;.*&quot;;"
+			replace="String VERSION = &quot;${version}&quot;;"
+			byline="true"/>
+		<replaceregexp file="${src}/games/stendhal/server/core/engine/GenerateINI.java"
+			match="out.println\(&quot;server_version=.*&quot;\);"
+			replace="out.println(&quot;server_version=${version}&quot;);"
+			byline="true"/>
+		<replaceregexp file="runserver.bat"
+			match="STENDHAL_VERSION=.*"
+			replace="STENDHAL_VERSION=${version}"
+			byline="true"/>
+		<replaceregexp file="runserver.sh"
+			match="STENDHAL_VERSION ?= ?&quot;.*&quot;"
+			replace="STENDHAL_VERSION=&quot;${version}&quot;"
+			byline="true"/>
+		<!-- Update location of resources -->
+		<replaceregexp file="${src}/games/stendhal/client/update/game-default.properties"
+			match="GAME_NAME=.*"
+			replace="GAME_NAME=${game_name}"
+			byline="true"/>
+		<replaceregexp file="${src}/games/stendhal/client/update/game-default.properties"
+			match="DEFAULT_SERVER=.*"
+			replace="DEFAULT_SERVER=${default_server}"
+			byline="true"/>
+		<replaceregexp file="${src}/games/stendhal/client/update/game-default.properties"
+			match="UPDATE_SERVER_FOLDER=.*"
+			replace="UPDATE_SERVER_FOLDER=${updates_server}"
+			byline="true"/>
+		<replaceregexp file="${src}/games/stendhal/client/update/game-default.properties"
+			match="UPDATE_VERSION_CHECK=.*"
+			replace="UPDATE_VERSION_CHECK=${version_server}"
+			byline="true"/>
+
+		<replaceregexp file="pol.jnlp"
+			match="-0\..*\.jar&quot;"
+			replace="-${version}.jar&quot;"
+			byline="true"/>
+
+		<!-- pre release version -->
+		<replaceregexp file="${src}/games/stendhal/common/Debug.java"
+			match="String PRE_RELEASE_VERSION ?= .*;"
+			replace="String PRE_RELEASE_VERSION = null;"
+			byline="true"/>
+		<antcall target="internalUpdatePrereleaseVersion" />
+	</target>
+
+	<target name="internalUpdatePrereleaseVersion" if="PRE_RELEASE">
+		<tstamp prefix="date">
+			<format property="iso" pattern="yyyy-MM-dd" />
+		</tstamp>
+		<replaceregexp file="${src}/games/stendhal/common/Debug.java"
+			match="String PRE_RELEASE_VERSION ?= .*;"
+			replace="String PRE_RELEASE_VERSION = &quot;PRE_RELEASE ${date.iso}&quot;;"
+			byline="true"/>
+	</target>
+
+	<target name="clean">
+		<delete dir="${lib}" />
+		<delete dir="${build_client}" />
+		<delete dir="${buildroot}/build_client_data" />
+		<delete dir="${build}/build_client_music_data"/>
+		<delete dir="${build}/build_client_sound_data"/>
+		<delete dir="${build_server}" />
+		<delete dir="${build_server_maps}" />
+		<delete dir="${build_server_script}" />
+		<delete dir="${buildroot}/build_server_quests" />
+		<delete dir="${buildroot}/build_server_xmlconf" />
+		<delete dir="${build_tests}" />
+		<delete dir="${buildroot}/build_FaumoniaOnlinetools"/>
+		<delete dir="${buildroot}/build_FaumoniaOnlinetextclient"/>
+		<delete dir="${buildroot}/buildbot" />
+		<delete dir="${build_tests_report}" />
+		<delete dir="${buildroot}"/>
+		<delete dir="${build_cobertura}"/>
+		<delete dir="${build_cobertura_report}"/>
+		<delete file="cobertura.ser" />
+		<delete>
+			<fileset dir=".">
+				<include name="TEST-*.xml"/>
+			</fileset>
+		</delete>
+	</target>
+
+
+
+	<target name = "postman">
+		<mkdir dir="${buildroot}/buildbot"/>
+		<javac srcdir="${src}" destdir="${buildroot}/buildbot" debug="${javac.debug}" debuglevel="${javac.debuglevel}" source="1.8" target="1.8" deprecation="${javac.deprecation}" includeantruntime="false">
+			<include name="games/stendhal/bot/postman/*.java"/>
+			<include name="games/stendhal/bot/package-info.java"/>
+			<include name="games/stendhal/bot/shouter/*.java"/>
+			<include name="games/stendhal/bot/core/*.java"/>
+
+			<compilerarg value="-Xlint:unchecked"/>
+
+			<classpath>
+				<pathelement path="${build_server}"/>
+				<pathelement path="${marauroa_jar}"/>
+				<pathelement path="${log4j_jar}"/>
+				<pathelement path="${junit_jar}"/>
+			</classpath>
+
+		</javac>
+
+		<copy todir="${buildroot}/buildbot/games/stendhal" file="data/conf/log4j.properties"/>
+		<jar jarfile="${buildroot}/buildbot/postman.jar">
+			<fileset dir="${buildroot}/buildbot">
+				<include name="games/stendhal/log4j.properties"/>
+				<include name="games/stendhal/bot/postman/*"/>
+
+				<include name="games/stendhal/bot/core/*"/>
+
+				<include name="games/stendhal/bot/shouter/*"/>
+			</fileset>
+			<manifest>
+				<attribute name="Main-Class" value="games.stendhal.bot.postman.PostmanMain"/>
+			</manifest>
+		</jar>
+		<!-- ende build bot -->
+
+	</target>
+	<target name="server_build" depends="init, checkxml" description="Build JAR file for FaumoniaOnline server">
+		<mkdir dir="${build_server}"/>
+
+		<copy todir="${build_server}/data/conf" file="data/conf/stendhalcreateaccount.properties"/>
+		<copy todir="${build_server}/games/stendhal/server" file="${src}/games/stendhal/server/stendhal_init.sql"/>
+		<copy todir="${build_server}/games/stendhal/common">
+			<fileset dir="${src}/games/stendhal/common">
+				<include name="**/*.txt"/>
+			</fileset>
+		</copy>
+
+		<javac srcdir="${src}" destdir="${build_server}" debug="${javac.debug}" debuglevel="${javac.debuglevel}" source="1.8" target="1.8" deprecation="${javac.deprecation}" includeantruntime="false">
+			<include name="games/stendhal/common/*.java"/>
+			<include name="games/stendhal/common/**/*.java"/>
+
+			<include name="games/stendhal/server/*.java"/>
+			<include name="games/stendhal/server/**/*.java"/>
+			<exclude name="games/stendhal/server/maps/**"/>
+			<exclude name="games/stendhal/server/script/**"/>
+
+			<include name="games/stendhal/tools/tiled/LayerDefinition.java"/>
+			<include name="games/stendhal/tools/tiled/ServerTMXLoader.java"/>
+			<include name="games/stendhal/tools/tiled/StendhalMapStructure.java"/>
+			<include name="games/stendhal/tools/tiled/TileSetDefinition.java"/>
+			<include name="games/stendhal/tools/test/LineAnalyser.java"/>
+
+			<compilerarg value="-encoding"/>
+			<compilerarg value="utf-8"/>
+			<compilerarg value="-Xlint:unchecked"/>
+			<classpath>
+				<pathelement path="${marauroa_jar}"/>
+				<pathelement path="${log4j_jar}"/>
+				<pathelement path="${junit_jar}"/>
+				<pathelement path="${groovy_jar}"/>
+				<pathelement path="${simple_jar}"/>
+				<pathelement path="${commons_lang_jar}"/>
+			</classpath>
+		</javac>
+
+		<jar jarfile="${lib}/${server_jarname}" basedir="${build_server}">
+			<manifest>
+				<attribute name="Main-Class" value="games.stendhal.server.StendhalServer"/>
+				<attribute name="Class-path" value=". marauroa.jar ${maps_jarname} ${xmlconf_jarname} ${maps_jarname} commons-lang.jar log4j.jar groovy.jar ${mysqldriver_jarname} mysql.jar h2.jar"/>
+			</manifest>
+		</jar>
+		<chmod file="${lib}/${server_jarname}" perm="+x"/>
+
+		<mkdir dir="${build_server_maps}"/>
+
+		<javac srcdir="${src}" destdir="${build_server_maps}" debug="${javac.debug}" debuglevel="${javac.debuglevel}" source="1.8" target="1.8" deprecation="${javac.deprecation}" includeantruntime="false">
+			<include name="games/stendhal/server/maps/*.java"/>
+			<exclude name="games/stendhal/server/maps/ZoneConfigurator.java"/>
+			<include name="games/stendhal/server/maps/**/*.java"/>
+
+			<compilerarg value="-encoding"/>
+			<compilerarg value="utf-8"/>
+			<compilerarg value="-Xlint:unchecked"/>
+
+			<classpath>
+				<pathelement path="${build_server}"/>
+				<pathelement path="${marauroa_jar}"/>
+				<pathelement path="${log4j_jar}"/>
+				<pathelement path="${junit_jar}"/>
+				<pathelement path="${commons_lang_jar}"/>
+			</classpath>
+		</javac>
+
+		<copy todir="${build_server_maps}/data/maps">
+			<fileset dir="${tiled}">
+				<include name="**/*.tmx"/>
+			</fileset>
+		</copy>
+
+		<jar jarfile="${lib}/${maps_jarname}" basedir="${build_server_maps}"/>
+
+		<mkdir dir="${build_server_xmlconf}"/>
+
+		<copy todir="${build_server_xmlconf}/data/conf">
+			<fileset dir="data/conf">
+				<include name="creatures.xml"/>
+				<include name="creatures/*.xml"/>
+				<include name="items.xml"/>
+				<include name="items/*.xml"/>
+				<include name="zones.xml"/>
+				<include name="zones/*.xml"/>
+				<include name="riddles.xml"/>
+				<include name="spells.xml" />
+				<include name="spells/*.xml" />
+				<include name="woodcutter_test.xml"/>
+			</fileset>
+		</copy>
+		<copy todir="${build_server_xmlconf}/data/languages">
+			<fileset dir="data/languages" />
+		</copy>
+
+		<jar jarfile="${lib}/${xmlconf_jarname}" basedir="${build_server_xmlconf}"/>
+
+		<mkdir dir="${build_server_script}"/>
+
+		<javac srcdir="${src}" destdir="${build_server_script}" debug="${javac.debug}" debuglevel="${javac.debuglevel}"  source="1.8" target="1.8" deprecation="${javac.deprecation}" includeantruntime="false">
+			<include name="games/stendhal/server/script/*.java"/>
+
+			<compilerarg value="-encoding"/>
+			<compilerarg value="utf-8"/>
+			<compilerarg value="-Xlint:unchecked"/>
+
+			<classpath>
+				<pathelement path="${marauroa_jar}"/>
+				<pathelement path="${log4j_jar}"/>
+				<pathelement path="${junit_jar}"/>
+				<pathelement path="${groovy_jar}"/>
+				<pathelement path="${simple_jar}"/>
+				<pathelement path="${commons_lang_jar}"/>
+				<pathelement path="${lib}/${server_jarname}"/>
+				<pathelement path="${lib}/${maps_jarname}"/>
+			</classpath>
+		</javac>
+
+	</target>
+
+	<target name="jar" depends="client_build, server_build" description="Builds Client and Server">
+		<echo>Built client and server for NetBeans.</echo>
+	</target>
+
+	<!-- Runs the client -->
+	<target name="client_run" depends="client_build" description="Runs the client">
+		<mkdir dir="run_clnt"/>
+		<mkdir dir="run_clnt/lib"/>
+
+		<copy todir="run_clnt">
+			<fileset file="build/lib/${client_jarname}"/>
+		</copy>
+
+		<copy todir="run_clnt/lib">
+			<fileset file="build/lib/${client_data}"/>
+			<fileset file="build/lib/${client_sound_data}"/>
+			<fileset file="build/lib/${client_music_data}"/>
+			<fileset file="${marauroa_jar}"/>
+			<fileset file="${log4j_jar}"/>
+			<fileset file="${jorbis_jar}"/>
+		</copy>
+
+		<chmod file="run_clnt/lib/${client_jarname}" perm="+x"/>
+
+		<exec dir="." executable="java">
+			<arg line="-Xmx256m -cp run_clnt -jar run_clnt/${client_jarname}"/>
+		</exec>
+
+		<!-- we've run the program, so delete the jars -->
+		<delete dir="run_clnt"/>
+	</target>
+
+	<!-- Netbeans won't let you choose ant options, so this does it for us-->
+	<target name="run" depends="client_run" description="Runs client for netbeans trick"/>
+
+	<!-- Runs the server -->
+	<target name="server_run" depends="server_build" description="Runs the server">
+		<mkdir dir="run_srvr"/>
+
+		<copy todir="run_srvr">
+			<fileset file="build/lib/${server_jarname}"/>
+			<fileset file="build/lib/${xmlconf_jarname}"/>
+			<fileset file="build/lib/${maps_jarname}"/>
+			<fileset file="libs/marauroa.jar"/>
+			<fileset file="libs/groovy.jar"/>
+			<fileset file="libs/commons-lang.jar"/>
+			<fileset file="libs/log4j.jar"/>
+			<fileset file="libs/${mysqldriver_jarname}"/>
+		</copy>
+
+		<chmod file="run_srvr/${server_jarname}" perm="+x"/>
+
+		<exec dir="." executable="java">
+			<arg line="-Xmx256m -cp run_srvr -jar run_srvr/${server_jarname} -c server.ini -l"/>
+		</exec>
+
+		<!-- we've run the program, so delete the jars -->
+		<delete dir="run_srvr"/>
+	</target>
+
+	<target name="client_build" depends="init" description="Build JAR file for FaumoniaOnline client">
+		<mkdir dir="${build_client}"/>
+
+		<copy todir="${build_client}/games/stendhal/client">
+			<fileset dir="${src}/games/stendhal/client">
+				<include name="**/*.txt"/>
+			</fileset>
+		</copy>
+
+		<copy todir="${build_client}/games/stendhal/common">
+			<fileset dir="${src}/games/stendhal/common">
+				<include name="**/*.txt"/>
+			</fileset>
+		</copy>
+
+
+		<tstamp>
+			<format property="timestamp" pattern="yyyy-MM-dd HH:mm:ss" />
+		</tstamp>
+		<echo file="${src}/games/stendhal/client/StendhalBuild.java">
+			package games.stendhal.client;
+			public class StendhalBuild {
+			private static final String BUILD_NUMBER = "${timestamp}";
+			public static String getBuildNumber() {return BUILD_NUMBER;}
+			}
+		</echo>
+		<javac srcdir="${src}" destdir="${build_client}" debug="${javac.debug}" debuglevel="${javac.debuglevel}" source="1.8" target="1.8" deprecation="${javac.deprecation}" includeantruntime="false">
+			<include name="games/stendhal/client/*.java"/>
+			<include name="games/stendhal/client/**/*.java"/>
+			<exclude name="games/stendhal/client/update/Starter.java"/>
+
+			<include name="games/stendhal/common/*.java"/>
+			<include name="games/stendhal/common/**/*.java"/>
+
+			<compilerarg value="-encoding"/>
+			<compilerarg value="utf-8"/>
+			<compilerarg value="-Xlint:unchecked"/>
+
+			<!-- Only include the libraries which are distributed to detect
+				 unwanted dependencies (i. e. .jar which are not part of the 
+				client-distribution) during compile time -->
+			<classpath>
+				<pathelement path="${marauroa_jar}"/>
+				<pathelement path="${log4j_jar}"/>
+				<pathelement path="${jorbis_jar}"/>
+			</classpath>
+		</javac>
+		<delete file="${src}/games/stendhal/client/StendhalBuild.java" quiet="true" failonerror="false" />
+
+		<!-- compile Starter.java for Java 1.2. So we will be able to
+		 display a dialogbox if running on an old Java Version -->
+		<javac srcdir="${src}" destdir="${build_client}" debug="${javac.debug}" debuglevel="${javac.debuglevel}" source="1.8" target="1.8" deprecation="${javac.deprecation}" includeantruntime="false">
+			<include name="games/stendhal/client/update/Starter.java"/>
+
+			<compilerarg value="-encoding"/>
+			<compilerarg value="utf-8"/>
+		</javac>
+
+		<copy todir="${build_client}/games/stendhal/client/update">
+			<fileset file="${src}/games/stendhal/client/update/**">
+				<exclude name="*.java" />
+			</fileset>
+		</copy>
+
+		<jar jarfile="${lib}/${client_starter_jarname}">
+			<fileset dir="${build_client}">
+				<include name="games/stendhal/client/update/*"/>
+			</fileset>
+			<manifest>
+				<attribute name="Main-Class" value="games.stendhal.client.update.Starter"/>
+				<attribute name="Class-path" value="lib/log4j.jar lib/marauroa.jar lib/jorbis.jar lib/${client_data} lib/${client_sound_data} lib/${client_music_data}"/>
+			</manifest>
+		</jar>
+		<antcall target="signjar" />
+		<chmod file="${lib}/${client_starter_jarname}" perm="+x"/>
+
+		<jar jarfile="${lib}/${client_jarname}">
+			<fileset dir="${build_client}">
+				<!--<exclude name="games/stendhal/client/update/**"/>-->
+			</fileset>
+			<manifest>
+				<attribute name="Main-Class" value="games.stendhal.client.update.Starter"/>
+				<attribute name="Class-path" value="lib/log4j.jar lib/marauroa.jar lib/jorbis.jar lib/${client_data} lib/${client_sound_data} lib/${client_music_data}"/>
+			</manifest>
+		</jar>
+
+		<mkdir dir="${build_client_data}"/>
+
+		<copy todir="${build_client_data}/data/sprites">
+			<fileset dir="${sprites}">
+				<exclude name="**/*.bz2" />
+				<exclude name="**/*.gz" />
+				<exclude name="**/*.psd" />
+				<exclude name="**/*.xcf" />
+				<exclude name="**/*.xcf.*" />
+			</fileset>
+		</copy>
+
+		<copy todir="${build_client_data}/data/tileset">
+			<fileset dir="${tiled}/tileset">
+				<exclude name="**/*.bz2" />
+				<exclude name="**/*.gz" />
+				<exclude name="**/*.psd" />
+				<exclude name="**/*.xcf" />
+				<exclude name="**/*.xcf.*" />
+			</fileset>
+		</copy>
+
+		<copy todir="${build_client_data}/data/gui">
+			<fileset dir="${data}">
+				<exclude name="paneldrock*.jpg"/>
+				<exclude name="panelmetal003.gif"/>
+				<exclude name="panelrock016.jpg"/>
+				<exclude name="panelwood006.jpg"/>
+				<exclude name="panelwood032.gif"/>
+				<exclude name="panelwood003.jpg"/>
+				<exclude name="**/*.bz2" />
+				<exclude name="**/*.gz" />
+				<exclude name="**/*.psd" />
+				<exclude name="**/*.xcf" />
+				<exclude name="**/*.xcf.*" />
+			</fileset>
+		</copy>
+
+		<copy todir="${build_client_data}/data/conf" file="data/conf/log4j.properties"/>
+		<jar jarfile="${lib}/${client_data}" basedir="${build_client_data}"/>
+
+		<mkdir dir="${build_client_sound_data}"/>
+
+		<copy todir="${build_client_sound_data}/data/sounds">
+			<fileset dir="data/sounds">
+				<include name="**.*"/>
+			</fileset>
+		</copy>
+
+		<jar jarfile="${lib}/${client_sound_data}" basedir="${build_client_sound_data}"/>
+
+		<mkdir dir="${build_client_music_data}"/>
+
+		<copy todir="${build_client_music_data}/data/music">
+			<fileset dir="data/music">
+				<include name="**.ogg"/>
+				<exclude name="demiurgo_a_new_homeland.ogg" />
+				<exclude name="demon_haunting.ogg" />
+			</fileset>
+		</copy>
+
+		<jar jarfile="${lib}/${client_music_data}" basedir="${build_client_music_data}"/>
+
+	</target>
+
+
+	<target name="signjar" unless="exclude.signing">
+		<signjar alias="${keystore.alias}" keystore="keystore.ks" storepass="${keystore.password}" jar="${lib}/${client_starter_jarname}" />
+	</target>
+
+	<target name="docs" description="Build javadocs for fixedFaumoniaOnline">
+		<javadoc packagenames="games.stendhal.*"
+			defaultexcludes="yes"
+			destdir="${docs}"
+			author="true"
+			encoding="UTF-8"
+			version="true"
+			use="true"
+			windowtitle="FaumoniaOnline API Documentation Version: ${version}"
+			sourcepath="${src}">
+			<classpath>
+				<pathelement path="${commons_lang_jar}"/>
+				<pathelement path="${groovy_jar}"/>
+				<pathelement path="${marauroa_jar}"/>
+				<pathelement path="${jorbis_jar}"/>
+				<pathelement path="${junit_jar}"/>
+				<pathelement path="${log4j_jar}"/>
+				<pathelement path="${simple_jar}"/>
+				<pathelement path="${swinglayout_jar}"/>
+				<pathelement path="${tiled_jar}"/>
+				<pathelement path="libs/ant.jar"/>
+				<pathelement path="libs/jcurses.jar"/>
+			</classpath>
+		</javadoc>
+	</target>
+
+	<target name="compile" depends="server_build, client_build" description="Generates JAR files for both client and server"/>
+
+	<target name="dist" depends="clean, dist_binary, dist_source, signupdates" description="Creates all the packages needed for a Stendhal release"/>
+	<target name="dist_binary" depends="clean, dist_server_binary, dist_client_binary, dist_client_starter"/>
+
+	<target name="dist_server_binary" depends="server_build">
+		<mkdir dir="${buildroot}/FaumoniaOnline-server-${version}"/>
+
+		<copy todir="${buildroot}/FaumoniaOnline-server-${version}/data/script">
+			<fileset dir="${buildroot}/build_server_script">
+				<include name="games/stendhal/server/script/**.*"/>
+			</fileset>
+		</copy>
+
+		<copy todir="${buildroot}/FaumoniaOnline-server-${version}" file="${groovy_jar}"/>
+		<copy todir="${buildroot}/FaumoniaOnline-server-${version}" file="${simple_jar}"/>
+		<copy todir="${buildroot}/FaumoniaOnline-server-${version}" file="${commons_lang_jar}"/>
+		<copy todir="${buildroot}/FaumoniaOnline-server-${version}" file="${log4j_jar}"/>
+		<copy todir="${buildroot}/FaumoniaOnline-server-${version}" file="${h2_jar}"/>
+		<copy todir="${buildroot}/FaumoniaOnline-server-${version}" file="${lib}/${server_jarname}"/>
+		<copy todir="${buildroot}/FaumoniaOnline-server-${version}" file="${lib}/${maps_jarname}"/>
+		<copy todir="${buildroot}/FaumoniaOnline-server-${version}" file="${lib}/${xmlconf_jarname}"/>
+		<copy todir="${buildroot}/FaumoniaOnline-server-${version}" file="${marauroa_jar}"/>
+		<copy todir="${buildroot}/FaumoniaOnline-server-${version}" file="runserver.sh"/>
+		<copy todir="${buildroot}/FaumoniaOnline-server-${version}" file="runserver.bat"/>
+		<copy todir="${buildroot}/FaumoniaOnline-server-${version}/lib">
+			<fileset dir="libs">
+				<include name="*.txt"/>
+				<include name="*.html"/>
+			</fileset>
+		</copy>
+		<copy todir="${buildroot}/FaumoniaOnline-server-${version}/doc">
+			<fileset dir="doc"/>
+			<fileset dir="." includes="LICENSE.txt"/>
+		</copy>
+
+		<copy todir="${buildroot}/FaumoniaOnline-server-${version}/data/conf" file="data/conf/admins.txt"/>
+
+		<copy todir="${buildroot}/FaumoniaOnline-server-${version}" file="README.txt"/>
+		<mkdir dir="${buildroot}/FaumoniaOnline-server-${version}/log"/>
+		<touch file="${buildroot}/FaumoniaOnline-server-${version}/log/empty"/>
+		<zip destfile="${buildroot}/FaumoniaOnline-server-${version}.zip">
+			<zipfileset dir="${buildroot}/FaumoniaOnline-server-${version}" excludes="${server_jarname}"/>
+			<zipfileset dir="${buildroot}/FaumoniaOnline-server-${version}" includes="${server_jarname}" filemode="755"/>
+		</zip>
+		<delete dir="${buildroot}/FaumoniaOnline-server-${version}"/>
+	</target>
+
+	<target name="dist_client_binary" depends="client_build">
+		<mkdir dir="${buildroot}/FaumoniaOnline-${version}"/>
+		<mkdir dir="${buildroot}/FaumoniaOnline-${version}/lib"/>
+		<mkdir dir="${buildroot}/FaumoniaOnline-${version}/log"/>
+
+		<copy tofile="${buildroot}/FaumoniaOnline-${version}/lib/FaumoniaOnline-starter.jar" file="${lib}/${client_starter_jarname}"/>
+		<copy tofile="${buildroot}/FaumoniaOnline-${version}/FaumoniaOnline.jar" file="${lib}/${client_jarname}"/>
+		<copy tofile="${buildroot}/FaumoniaOnline-${version}/lib/log4j.jar" file="${log4j_jar}"/>
+		<copy tofile="${buildroot}/FaumoniaOnline-${version}/lib/marauroa.jar" file="${marauroa_jar}"/>
+		<copy tofile="${buildroot}/FaumoniaOnline-${version}/lib/jorbis.jar" file="${jorbis_jar}"/>
+		<copy tofile="${buildroot}/FaumoniaOnline-${version}/lib/FaumoniaOnline-sound-data-7.0.jar" file="${lib}/${client_sound_data}"/>
+		<copy tofile="${buildroot}/FaumoniaOnline-${version}/lib/FaumoniaOnline-music-data-7.0.jar" file="${lib}/${client_music_data}"/>
+		<copy tofile="${buildroot}/FaumoniaOnline-${version}/lib/FaumoniaOnline-data-7.0.jar" file="${lib}/${client_data}"/>
+		<copy todir="${buildroot}/FaumoniaOnline-${version}/lib">
+			<fileset dir="libs">
+				<include name="*.txt"/>
+				<include name="*.html"/>
+			</fileset>
+		</copy>
+		<copy todir="${buildroot}/FaumoniaOnline-${version}/doc">
+			<fileset dir="doc"/>
+			<fileset dir="." includes="LICENSE.txt"/>
+		</copy>
+		<touch file="${buildroot}/FaumoniaOnline-${version}/log/FaumoniaOnline.txt"/>
+		<copy todir="${buildroot}/FaumoniaOnline-${version}" file="README.txt"/>
+		<copy todir="${buildroot}/FaumoniaOnline-${version}" file=".hotspotrc"/>
+		<zip destfile="${buildroot}/FaumoniaOnline-FULL-${version}.zip">
+			<zipfileset dir="${buildroot}/FaumoniaOnline-${version}" excludes="${client_jarname}"/>
+			<zipfileset dir="${buildroot}/FaumoniaOnline-${version}" includes="${client_jarname}" filemode="755"/>
+		</zip>
+		<delete dir="${buildroot}/FaumoniaOnline-${version}"/>
+	</target>
+
+
+	<target name="dist_client_starter" depends="client_build">
+		<mkdir dir="${buildroot}/FaumoniaOnline-${version}"/>
+		<copy todir="${buildroot}/FaumoniaOnline-${version}" file="lib/${client_starter_jarname}"/>
+		<copy todir="${buildroot}/FaumoniaOnline-${version}/lib">
+			<fileset dir="libs">
+				<include name="*.txt"/>
+				<include name="*.html"/>
+			</fileset>
+		</copy>
+		<copy todir="${buildroot}/FaumoniaOnline-${version}/doc">
+			<fileset dir="doc"/>
+			<fileset dir="." includes="LICENSE.txt"/>
+		</copy>
+		<copy todir="${buildroot}/FaumoniaOnline-${version}" file="README.txt"/>
+		<copy todir="${buildroot}/FaumoniaOnline-${version}" file=".hotspotrc"/>
+		<zip destfile="${buildroot}/FaumoniaOnline-starter-${version}.zip">
+			<zipfileset dir="${buildroot}/FaumoniaOnline-${version}" excludes="${client_starter_jarname}"/>
+			<zipfileset dir="${buildroot}/FaumoniaOnline-${version}" includes="${client_starter_jarname}" filemode="755"/>
+		</zip>
+		<delete dir="${buildroot}/FaumoniaOnline-${version}"/>
+	</target>
+
+	<target name="dist_source">
+		<mkdir dir="${buildroot}/FaumoniaOnline-${version}-src"/>
+
+		<copy todir="${buildroot}/FaumoniaOnline-${version}-src/src">
+			<fileset dir="src"/>
+		</copy>
+
+		<mkdir dir="${buildroot}/FaumoniaOnline-${version}-src/libs"/>
+		<copy todir="${buildroot}/FaumoniaOnline-${version}-src/libs">
+			<fileset dir="libs"/>
+		</copy>
+
+		<copy todir="${buildroot}/FaumoniaOnline-${version}-src/tests">
+			<fileset dir="tests"/>
+		</copy>
+
+		<copy todir="${buildroot}/FaumoniaOnline-${version}-src/data">
+			<fileset dir="data">
+				<exclude name="music/demiurgo_a_new_homeland.ogg" />
+				<exclude name="music/demon_haunting.ogg" />
+				<exclude name="music/*.wav" />				
+			</fileset>
+		</copy>
+
+		<copy todir="${buildroot}/FaumoniaOnline-${version}-src/tiled">
+			<fileset dir="${tiled}">
+				<exclude name="miragetilesets/**" />
+				<exclude name="world/**" />
+			</fileset>
+		</copy>
+
+		<copy todir="${buildroot}/FaumoniaOnline-${version}-src" file="build.xml"/>
+		<copy todir="${buildroot}/FaumoniaOnline-${version}-src" file="build.ant.properties"/>
+
+		<copy todir="${buildroot}/FaumoniaOnline-${version}-src" file="README.txt"/>
+		<copy todir="${buildroot}/FaumoniaOnline-${version}-src" file="COPYING.txt"/>
+		<copy todir="${buildroot}/FaumoniaOnline-${version}-src" file="LICENSE.txt"/>
+		<copy todir="${buildroot}/FaumoniaOnline-${version}-src" file="runserver.bat"/>
+		<copy todir="${buildroot}/FaumoniaOnline-${version}-src" file="runserver.sh"/>
+		<copy todir="${buildroot}/FaumoniaOnline-${version}-src" file=".hotspotrc"/>
+		<copy todir="${buildroot}/FaumoniaOnline-${version}-src/lib">
+			<fileset dir="libs">
+				<include name="*.txt"/>
+				<include name="*.html"/>
+			</fileset>
+		</copy>
+		<copy todir="${buildroot}/FaumoniaOnline-server-${version}-src/doc">
+			<fileset dir="doc"/>
+			<fileset dir="." includes="LICENSE.txt"/>
+		</copy>
+
+		<tar destfile="${buildroot}/FaumoniaOnline-${version}-src.tar.gz" compression="gzip" longfile="gnu">
+			<tarfileset dir="${buildroot}/FaumoniaOnline-${version}-src" prefix="FaumoniaOnline-${version}">
+				<exclude name="**/CVS/**"/>
+			</tarfileset>
+		</tar>
+
+		<delete dir="${buildroot}/FaumoniaOnline-${version}-src"/>
+	</target>
+
+	<target name="compile_FaumoniaOnlinetools" description="compiles the FaumoniaOnline build tools">
+		<mkdir dir="${build_FaumoniaOnlinetools}"/>
+
+		<javac srcdir="${src}" destdir="${build_FaumoniaOnlinetools}" source="1.8" target="1.8" debug="${javac.debug}" debuglevel="${javac.debuglevel}" deprecation="${javac.deprecation}" includeantruntime="true">
+			<include name="games/stendhal/tools/**/*.java"/>
+			<include name="games/stendhal/tools/*.java"/>
+			<compilerarg value="-encoding"/>
+			<compilerarg value="utf-8"/>
+			<compilerarg value="-Xlint:unchecked"/>
+
+			<classpath>
+				<pathelement path="${commons_lang_jar}"/>
+				<pathelement path="${marauroa_jar}"/>
+				<pathelement path="${log4j_jar}"/>
+				<pathelement path="${groovy_jar}"/>
+				<pathelement path="${tiled_jar}"/>
+				<pathelement path="${jorbis_jar}"/>
+				<pathelement path="${swinglayout_jar}"/>
+			</classpath>
+		</javac>
+	</target>
+
+	<target name="compile_FaumoniaOnlinetextclient" description="compiles the FaumoniaOnline text client ">
+		<mkdir dir="${build_FaumoniaOnlinetextclient}"/>
+
+		<javac srcdir="${src}" destdir="${build_FaumoniaOnlinetextclient}" source="1.8" target="1.8" debug="${javac.debug}" debuglevel="${javac.debuglevel}" deprecation="${javac.deprecation}" includeantruntime="false">
+			<include name="games/stendhal/bot/textclient/*.java"/>
+			<compilerarg value="-encoding"/>
+			<compilerarg value="utf-8"/>
+			<compilerarg value="-Xlint:unchecked"/>
+
+			<classpath>
+				<pathelement path="${commons_lang_jar}"/>
+				<pathelement path="${marauroa_jar}"/>
+				<pathelement path="${log4j_jar}"/>
+				<pathelement path="${groovy_jar}"/>
+				<pathelement path="${tiled_jar}"/>
+				<pathelement path="${jorbis_jar}"/>
+				<pathelement path="${swinglayout_jar}"/>
+			</classpath>
+		</javac>
+	</target>
+
+	<target name="rendermaps" description="Converts the *.tmx files to PNG images scaled 1:16" depends="compile_FaumoniaOnlinetools">
+		<taskdef name="maprenderer" classname="games.stendhal.tools.MapRenderer">
+			<classpath>
+				<pathelement path="${build_FaumoniaOnlinetools}"/>
+				<pathelement path="${tiled_jar}"/>
+			</classpath>
+		</taskdef>
+
+		<mkdir dir="tiled/world"/>
+		<maprenderer imagePath="${tiled}/world/">
+			<fileset dir="tiled">
+				<include name="Level */**/*.tmx"/>
+				<include name="interiors/**/*.tmx"/>
+			</fileset>
+		</maprenderer>
+	</target>
+	<target name="renderatlas" description="Generates the files for the FaumoniaOnline Atlas" depends="compile_FaumoniaOnlinetools">
+		<taskdef name="maprenderer" classname="games.stendhal.tools.MapRenderer">
+			<classpath>
+				<pathelement path="${build_FaumoniaOnlinetools}"/>
+				<pathelement path="${tiled_jar}"/>
+			</classpath>
+		</taskdef>
+<!--
+7   1  1
+6   2  0.5
+5   4  0.25
+4   8  0.125
+3  16  0.0625
+2  32  0.03125
+1  64  0.015625
+0 128  0.0078125
+-->
+
+		<mkdir dir="tiled/world" />
+		<maprenderer imagePath="${tiled}/world/" zoom="0.0625">
+			<fileset dir="tiled">
+				<include name="Level 0/**/*.tmx"/>
+				<exclude name="**/memory/**" />
+			</fileset>
+		</maprenderer>
+		<mkdir dir="tiled/world/large" />
+		<maprenderer imagePath="${tiled}/world/large" zoom="0.25">
+			<fileset dir="tiled">
+				<include name="Level 0/**/*.tmx"/>
+				<exclude name="**/memory/**" />
+			</fileset>
+		</maprenderer>
+	</target>
+
+	<target name="updatemaps" description="Load and save TMX files to fix tilesets changes." depends="compile_FaumoniaOnlinetools">
+		<taskdef name="mapupdater" classname="games.stendhal.tools.MapUpdater">
+			<classpath>
+				<pathelement path="${build_FaumoniaOnlinetools}"/>
+				<pathelement path="${tiled_jar}"/>
+			</classpath>
+		</taskdef>
+
+		<mapupdater>
+			<fileset dir="tiled">
+				<include name="Level */**/*.tmx"/>
+				<include name="interiors/**/*.tmx"/>
+			</fileset>
+		</mapupdater>
+	</target>
+
+	<target name="jardiff" depends="client_build" unless="exclude.jardiff">
+		<echo>Creating update from ${version.old} to ${version}</echo>
+		<delete>
+			<fileset dir="${build-archive}">
+				<exclude name="*.zip"/>
+			</fileset>
+		</delete>
+		<unzip src="${build-archive}/FaumoniaOnline-${version.old}.zip" dest="${build-archive}" />
+		<java jar="libs/jardiff.jar" fork="true">
+			<arg value="-nonminimal" />
+			<arg value="-creatediff" />
+			<arg value="-output" />
+			<arg value="${build}/lib/FaumoniaOnline-diff-${version.old}-${version}.jar" />
+			<arg value="${build-archive}/lib/FaumoniaOnline.jar" />
+			<arg value="${build}/lib/FaumoniaOnline-${version}.jar" />
+		</java>
+		<java jar="libs/jardiff.jar" fork="true">
+			<arg value="-nonminimal" />
+			<arg value="-creatediff" />
+			<arg value="-output" />
+			<arg value="${build}/lib/FaumoniaOnline-data-diff-${version.old}-${version}.jar" />
+			<arg value="${build-archive}/lib/FaumoniaOnline-data.jar" />
+			<arg value="${build}/lib/FaumoniaOnline-data-${version}.jar" />
+		</java>
+		<java jar="libs/jardiff.jar" fork="true">
+			<arg value="-nonminimal" />
+			<arg value="-creatediff" />
+			<arg value="-output" />
+			<arg value="${build}/lib/FaumoniaOnline-music-data-diff-${version.old}-${version}.jar" />
+			<arg value="${build-archive}/lib/FaumoniaOnline-music-data.jar" />
+			<arg value="${build}/lib/FaumoniaOnline-music-data-${version}.jar" />
+		</java>
+		<java jar="libs/jardiff.jar" fork="true">
+			<arg value="-nonminimal" />
+			<arg value="-creatediff" />
+			<arg value="-output" />
+			<arg value="${build}/lib/FaumoniaOnline-sound-data-diff-${version.old}-${version}.jar" />
+			<arg value="${build-archive}/lib/FaumoniaOnline-sound-data.jar" />
+			<arg value="${build}/lib/FaumoniaOnline-sound-data-${version}.jar" />
+		</java>
+	<!-- TODO maraurora.jar-->
+	</target>
+
+	<target name="signupdates" description="signs updates" depends="compile_FaumoniaOnlinetools,jardiff" unless="exclude.signing">
+		<taskdef name="updatesigner" classname="games.stendhal.tools.updateprop.UpdateSigner">
+			<classpath>
+				<pathelement path="."/>
+				<pathelement path="${build_FaumoniaOnlinetools}"/>
+			</classpath>
+		</taskdef>
+
+		<updatesigner>
+			<fileset dir="${lib}">
+				<include name="*.jar"/>
+			</fileset>
+		</updatesigner>
+	</target>
+
+
+
+
+
+<!--************************************************************************-->
+<!--************************************************************************-->
+<!--****                                                                ****-->
+<!--****                     T  E  S  T  I  N  G                        ****-->
+<!--****                                                                ****-->
+<!--************************************************************************-->
+<!--************************************************************************-->
+
+
+	<target name="tests" description="Compile and run tests" depends="compile_tests,run_tests,report_test"/>
+
+	<target name="compile_tests" description="Compile all tests" depends="server_build, client_build, compile_FaumoniaOnlinetools, compile_FaumoniaOnlinetextclient, postman">
+		<mkdir dir="${build_tests}"/>
+
+		<copy todir="${build_tests}">
+			<fileset dir="tests">
+				<exclude name="**/*.java"/>
+			</fileset>
+		</copy>
+
+		<javac srcdir="tests" destdir="${build_tests}" debug="${javac.debug}" debuglevel="${javac.debuglevel}" source="1.8" target="1.8" deprecation="${javac.deprecation}" includeantruntime="false">
+			<include name="**/*.java"/>
+
+			<compilerarg value="-encoding"/>
+			<compilerarg value="utf-8"/>
+
+			<compilerarg value="-Xlint:unchecked"/>
+
+			<classpath>
+				<pathelement path="${build_FaumoniaOnlinetools}"/>
+				<pathelement path="${build_FaumoniaOnlinetextclient}"/>
+				<pathelement path="${build_client}"/>
+				<pathelement path="${build_server}"/>
+				<pathelement path="${build_server_maps}"/>
+				<pathelement path="${build_postman}"/>
+				<pathelement path="${marauroa_jar}"/>
+				<pathelement path="${log4j_jar}"/>
+				<pathelement path="${hamcrest_jar}"/>
+				<pathelement path="${junit_jar}"/>
+				<pathelement path="${groovy_jar}"/>
+				<pathelement path="${simple_jar}"/>
+				<pathelement path="${easymock_jar}"/>
+				<pathelement path="${easymockclassextension_jar}"/>
+				<pathelement path="${build_server_script}"/>
+				<pathelement path="${tiled_jar}"/>
+			</classpath>
+		</javac>
+	</target>
+
+	<target name="run_tests" description="Run tests">
+		<mkdir dir="${build_tests_report}"/>
+		<junit printsummary="yes" fork="no">
+			<jvmarg value="-Djava.awt.headless=true"/>
+
+			<classpath>
+				<pathelement path="${build_tests}"/>
+				<pathelement path="${build_client}"/>
+				<pathelement path="${build_server}"/>
+				<pathelement path="${build_server_maps}"/>
+				<pathelement path="${build_FaumoniaOnlinetools}"/>
+				<pathelement path="${build_FaumoniaOnlinetextclient}"/>
+				<pathelement path="${build_postman}"/>
+				<pathelement path="${easymock_jar}"/>
+				<pathelement path="${easymockclassextension_jar}"/>
+				<pathelement path="${cglib_jar}"/>
+				<pathelement path="${marauroa_jar}"/>
+				<pathelement path="${hamcrest_jar}"/>
+				<pathelement path="${log4j_jar}"/>
+				<pathelement path="${junit_jar}"/>
+				<pathelement path="${groovy_jar}"/>
+				<pathelement path="${simple_jar}"/>
+				<pathelement path="${commons_lang_jar}"/>
+				<pathelement path="${mysqldriver_jar}"/>
+				<pathelement path="${jorbis_jar}"/>
+				<pathelement path="."/>
+				<pathelement path="data/conf"/>
+				<pathelement path="data/script"/>
+			</classpath>
+			<formatter type="plain" usefile="false"/>
+			<formatter type="xml"/>
+			<batchtest todir="${build_tests_report}">
+				<fileset dir="tests">
+					<include name="**/*Test.java"/>
+					<include name="**/Test*.java"/>
+				</fileset>
+			</batchtest>
+		</junit>
+	</target>
+
+	<target name="report_test" description="Aggregate Testresults">
+		<mkdir dir="${build_tests_report}" />
+		<junitreport todir="." tofile="${build_tests_report}/testresults.xml">
+			<fileset dir="${build_tests_report}">
+				<include name="TEST-*.xml"/>
+			</fileset>
+			<report format="noframes" todir="${build_tests_report}"/>
+		</junitreport>
+		<delete>
+			<fileset dir="${build_tests_report}">
+				<include name="TEST-*.xml"/>
+			</fileset>
+		</delete>
+	</target>
+
+	<target name="checkxml" description="Verify XML files are well-formed">
+		<schemavalidate failonerror="yes" lenient="yes" warn="yes">
+			<schema namespace="stendhal" file="${config_dir}/zones.xsd"/>
+			<fileset dir="${config_dir}/zones">
+				<include name="*.xml"/>
+			</fileset>
+		</schemavalidate>
+		<schemavalidate>
+		<schema namespace="stendhal" file="${config_dir}/creatures.xsd" />
+			<fileset dir="${config_dir}/creatures">
+				<include name="*.xml" />
+			</fileset>
+		</schemavalidate>
+		<schemavalidate>
+			<schema namespace="stendhal" file="${config_dir}/items.xsd" />
+			<fileset dir="data/conf/items">
+				<include name="*.xml"/>
+			</fileset>
+		</schemavalidate>
+		<schemavalidate>
+			<schema namespace="stendhal" file="${config_dir}/groups.xsd"/>
+			<fileset dir="${config_dir}">
+				<filename name="zones.xml"/>
+				<filename name="items.xml"/>
+				<filename name="creatures.xml"/>
+			</fileset>
+		</schemavalidate>
+	</target>
+	
+	<target name="cobertura-instrument">
+		<cobertura-instrument todir="${build_cobertura}" datafile="${build_cobertura}/cobertura.ser">
+		    <ignore regex="org.apache.log4j.*" />
+		    <fileset dir="${build_server}">
+		        <include name="**/*.class" />
+		    </fileset>
+			<fileset dir="${build_server_maps}">
+		        <include name="**/*.class" />
+		    </fileset>
+			<fileset dir="${build_server_script}">
+		        <include name="**/*.class" />
+		    </fileset>
+			<fileset dir="${build_server_xmlconf}">
+		        <include name="**/*.class" />
+		    </fileset>
+		    <fileset dir="${build_client}">
+		        <include name="**/*.class" />
+		    </fileset>
+			<fileset dir="${build_client_data}">
+				<include name="**/*.class" />
+			</fileset>
+			<fileset dir="${build_FaumoniaOnlinetools}">
+		        <include name="**/*.class" />
+		    </fileset>
+		</cobertura-instrument>
+	</target>
+	
+	<target name="cobertura-test">
+		<mkdir dir="${build_tests_report}"/>
+		<junit printsummary="yes" fork="yes" forkmode="once">
+			<sysproperty key="net.sourceforge.cobertura.datafile"
+			file="${build_cobertura}/cobertura.ser" />
+			<classpath>
+				<pathelement path="${build_cobertura}"/>
+				<pathelement path="${build_tests}"/>
+				<pathelement path="${build_client}"/>
+				<pathelement path="${build_server}"/>
+				<pathelement path="${build_server_maps}"/>
+				<pathelement path="${build_FaumoniaOnlinetools}"/>
+				<pathelement path="${build_FaumoniaOnlinetextclient}"/>
+				<pathelement path="${build_postman}"/>
+				<pathelement path="${easymock_jar}"/>
+				<pathelement path="${easymockclassextension_jar}"/>
+				<pathelement path="${cglib_jar}"/>
+				<pathelement path="${marauroa_jar}"/>
+				<pathelement path="${hamcrest_jar}"/>
+				<pathelement path="${log4j_jar}"/>
+				<pathelement path="${junit_jar}"/>
+				<pathelement path="${groovy_jar}"/>
+				<pathelement path="${simple_jar}"/>
+				<pathelement path="${commons_lang_jar}"/>
+				<pathelement path="${mysqldriver_jar}"/>
+				<pathelement path="."/>
+				<pathelement path="data/conf"/>
+				<pathelement path="data/script"/>
+			</classpath>
+			<classpath refid="cobertura.classpath" />
+			<formatter type="plain" usefile="false"/>
+			<formatter type="xml"/>
+			<batchtest todir="${build_tests_report}">
+				<fileset dir="tests">
+					<include name="**/*Test.java"/>
+					<include name="**/Test*.java"/>
+				</fileset>
+			</batchtest>
+		</junit>
+	</target>
+
+	<target name="cobertura-report">
+		<mkdir dir="${build_cobertura_report}"/>
+		<cobertura-report format="html" destdir="${build_cobertura_report}" srcdir="${src}" datafile="${build_cobertura}/cobertura.ser" />
+		<cobertura-report format="xml" destdir="${build_cobertura_report}" srcdir="${src}" datafile="${build_cobertura}/cobertura.ser" />
+	</target>
+
+	<target name="run_tests_with_cobertura" depends="compile_tests,cobertura-instrument,cobertura-test,cobertura-report,report_test" description="Run tests with cobertura coverage"/>
+
+</project>

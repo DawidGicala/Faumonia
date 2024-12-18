@@ -1,0 +1,598 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<creatures xmlns="stendhal" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="stendhal ../creatures.xsd ">
+
+	<creature name="zielony smok">
+		<type class="huge_animal" subclass="green_dragon" tileid="huge_animal.png:6"/>
+		<description>Oto zielony smok. Jego skrzydła są zbyt małe by unieść go w powietrze, ale i tak wygląda potężnie, a jego zielonkawa skóra wydaje się go całkiem dobrze bronić.</description>
+		<attributes>
+			<atk value="603"/>
+			<def value="50"/>
+			<hp value="900"/>
+			<speed value="1.0"/>
+			<size value="3,3"/>
+		</attributes>
+		<level value="50"/>
+		<experience value="9850"/>
+		<respawn value="8830"/>
+		<corpse name="dragon_3x3" width="3" height="3"/>
+		<drops>
+			<item value="money" quantity="[10,150]" probability="100.0"/>
+			<item value="duży eliksir" quantity="[1,2]" probability="100.0"/>
+			<item value="szmaragd" quantity="[1,4]" probability="10.0"/>
+			<item value="szmaragdowa tarcza smocza" quantity="[1,1]" probability="1.25"/>
+			<item value="szmaragdowy płaszcz smoczy" quantity="[1,1]" probability="2.5"/>
+			<item value="pazur zielonego smoka" quantity="[1,1]" probability="0.05"/>
+			<item value="kieł smoka" quantity="[1,1]" probability="2.5"/>
+			<item value="skóra zielonego smoka" quantity="[1,1]" probability="5.0"/>
+			<item value="smoczy zwój" quantity="[1,1]" probability="0.05"/>
+			<item value="figurka zielonego smoka" quantity="[1,1]" probability="1.0"/>
+		</drops>
+		<equips>
+		</equips>
+		<abilities>
+			<damage type="fire"/>
+		</abilities>
+		<ai>
+			<profile name="brave"/>
+			<profile name="animal"/>
+			<profile name="offensive"/>
+			<profile name="lifesteal" params="0.05"/>
+			<profile name="heal" params="5,10"/>
+			<profile name="patrolling"/>
+		</ai>
+	</creature>
+
+	<creature name="kobold olbrzymi">
+		<type class="huge_animal" subclass="giant_kobold" tileid="huge_animal.png:4"/>
+		<description>Oto kobold olbrzymi. Choć jest zabawny to nie jest świadomy swej siły. Kiedy zaproponuje przytulenie to najlepiej jest odrzucić jego szczodrą ofertę.</description>
+		<attributes>
+			<atk value="213"/>
+			<def value="14"/>
+			<hp value="600"/>
+			<speed value="1.0"/>
+			<size value="2,2"/>
+		</attributes>
+		<level value="35"/>
+		<experience value="2810"/>
+		<respawn value="1050"/>
+		<corpse name="giant_humanoid" width="2" height="2"/>
+		<drops>
+			<item value="money" quantity="[1,6]" probability="100.0"/>
+			<item value="duży eliksir" quantity="[1,1]" probability="20.0"/>
+			<item value="zwój wofol" quantity="[1,1]" probability="5.0"/>
+			<item value="ruda żelaza" quantity="[1,4]" probability="8.0"/>
+			<item value="bryłka złota" quantity="[1,3]" probability="6.0"/>
+			<item value="bryłka mithrilu" quantity="[1,1]" probability="1.0"/>
+		</drops>
+		<equips>
+		</equips>
+		<ai>
+			<says>
+				<noise state="idle follow fight" value="Huu?"/>
+			</says>
+			<profile name="brave"/>
+			<profile name="animal"/>
+			<profile name="offensive"/>
+			<profile name="lifesteal" params="0.3"/>
+			<profile name="heal" params="5,20"/>
+			<profile name="patrolling"/>
+		</ai>
+	</creature>
+
+	<creature name="szkielet smoka">
+		<type class="huge_animal" subclass="bone_dragon" tileid="huge_animal.png:2"/>
+		<description>Oto szkielet smoka. Zostało kiedyś powiedziane, że są potwory z wystarczającą siłą woli życia. Ich duszę nadal trzymają się życia nawet, gdy ich ciała i krew zawiodły je. Oto dowód życia.</description>
+		<attributes>
+			<atk value="635"/>
+			<def value="53"/>
+			<hp value="900"/>
+			<speed value="1.0"/>
+			<size value="3,3"/>
+		</attributes>
+		<level value="55"/>
+		<experience value="9910"/>
+		<respawn value="6850"/>
+		<corpse name="dragon_3x3" width="3" height="3"/>
+		<drops>
+			<item value="money" quantity="[10,150]" probability="100.0"/>
+			<item value="duży eliksir" quantity="[1,2]" probability="100.0"/>
+			<item value="kościany płaszcz smoczy" quantity="[1,1]" probability="2.5"/>
+			<item value="kieł smoka" quantity="[1,1]" probability="2.5"/>
+			<item value="nóż z kości" quantity="[1,1]" probability="5.0"/>
+			<item value="smoczy zwój" quantity="[1,1]" probability="0.05"/>
+			<item value="figurka kościanego smoka" quantity="[1,1]" probability="1.0"/>
+		</drops>
+		<equips>
+		</equips>
+		<abilities>
+			<damage type="fire"/>
+		</abilities>
+		<ai>
+			<profile name="brave"/>
+			<profile name="animal"/>
+			<profile name="offensive"/>
+			<profile name="lifesteal" params="0.5"/>
+			<profile name="patrolling"/>
+		</ai>
+	</creature>
+
+	<creature name="błękitny smok">
+		<type class="huge_animal" subclass="blue_dragon" tileid="huge_animal.png:1"/>
+		<description>Oto błękitny smok. Ma śliczną niebieskawą skórę pięknie połyskującą w słońcu. Nie zapomniej jednak, że ma też szczęki, a w nich ostre zęby!</description>
+		<attributes>
+			<atk value="961"/>
+			<def value="57"/>
+			<hp value="1300"/>
+			<speed value="1.0"/>
+			<size value="3,3"/>
+		</attributes>
+		<level value="80"/>
+		<experience value="12830"/>
+		<respawn value="10220"/>
+		<corpse name="dragon_3x3" width="3" height="3"/>
+		<drops>
+			<item value="duży eliksir" quantity="[1,3]" probability="100.0"/>
+			<item value="money" quantity="[20,230]" probability="100.0"/>
+			<item value="szafir" quantity="[1,4]" probability="10.0"/>
+			<item value="lazurowy płaszcz smoczy" quantity="[1,1]" probability="2.5"/>
+			<item value="pazur niebieskiego smoka" quantity="[1,1]" probability="0.05"/>
+			<item value="kieł smoka" quantity="[1,1]" probability="2.5"/>
+			<item value="skóra niebieskiego smoka" quantity="[1,1]" probability="5.0"/>
+			<item value="smoczy zwój" quantity="[1,1]" probability="0.05"/>
+			<item value="figurka błękitnego smoka" quantity="[1,1]" probability="1.0"/>
+		</drops>
+		<equips>
+		</equips>
+		<abilities>
+			<damage type="fire"/>
+		</abilities>
+		<ai>
+			<profile name="brave"/>
+			<profile name="animal"/>
+			<profile name="offensive"/>
+			<profile name="lifesteal" params="0.05"/>
+			<profile name="heal" params="10,10"/>
+			<profile name="patrolling"/>
+		</ai>
+	</creature>
+
+	<creature name="królowa pająków">
+		<type class="huge_animal" subclass="giant_spider" tileid="huge_animal.png:5"/>
+		<description>Oto królowa pająków. Jej kończyny są długie i bardzo niebezpieczne.</description>
+		<attributes>
+			<atk value="989"/>
+			<def value="74"/>
+			<hp value="1000"/>
+			<speed value="1.0"/>
+			<size value="2,2"/>
+		</attributes>
+		<level value="100"/>
+		<experience value="9200"/>
+		<respawn value="8200"/>
+		<corpse name="huge_animal" width="2" height="2"/>
+		<drops>
+			<item value="duży eliksir" quantity="[1,3]" probability="70.0"/>
+			<item value="mocna trucizna" quantity="[1,2]" probability="80.0"/>
+			<item value="money" quantity="[30,150]" probability="100.0"/>
+			<item value="gruczoł przędzy" quantity="[1,1]" probability="30.0"/>
+		</drops>
+		<equips>
+		</equips>
+		<ai>
+			<profile name="poisonous" params="5,trucizna uniwersalna"/>
+			<profile name="brave"/>
+			<profile name="animal"/>
+			<profile name="offensive"/>
+			<profile name="heal" params="5,5"/>
+			<profile name="patrolling"/>
+		</ai>
+	</creature>
+
+	<creature name="czerwony smok">
+		<type class="huge_animal" subclass="red_dragon" tileid="huge_animal.png:7"/>
+		<description>Oto czerwony smok. Ze zmaragdowymi ślepiami może widzieć w ciemnościach. Czerwone łuski służa mu do odbijania światła w celu oślepienia przeciwnika. Łuski dodają mu urody i są cieżkie do zdobycia z tak dzikiej bestii.</description>
+		<attributes>
+			<atk value="1577"/>
+			<def value="75"/>
+			<hp value="3000"/>
+			<speed value="1.0"/>
+			<size value="3,2"/>
+		</attributes>
+		<level value="125"/>
+		<experience value="18800"/>
+		<respawn value="12150"/>
+		<corpse name="dragon_3x3" width="3" height="3"/>
+		<drops>
+			<item value="duży eliksir" quantity="[1,5]" probability="85.0"/>
+			<item value="money" quantity="[60,220]" probability="100.0"/>
+			<item value="rubin" quantity="[1,4]" probability="10.0"/>
+			<item value="karmazynowy płaszcz smoczy" quantity="[1,1]" probability="2.5"/>
+			<item value="pazur czerwonego smoka" quantity="[1,1]" probability="0.05"/>
+			<item value="kieł smoka" quantity="[1,1]" probability="2.5"/>
+			<item value="skóra czerwonego smoka" quantity="[1,1]" probability="5.0"/>
+			<item value="ogniste rękawice" quantity="[1,1]" probability="0.1"/>
+			<item value="smoczy zwój" quantity="[1,1]" probability="0.075"/>
+			<item value="figurka czerwonego smoka" quantity="[1,1]" probability="1.0"/>
+		</drops>
+		<equips>
+		</equips>
+		<abilities>
+			<damage type="fire"/>
+		</abilities>
+		<ai>
+			<profile name="brave"/>
+			<profile name="animal"/>
+			<profile name="offensive"/>
+			<profile name="lifesteal" params="0.05"/>
+			<profile name="heal" params="15,5"/>
+			<profile name="patrolling"/>
+		</ai>
+	</creature>
+
+	<creature name="złoty smok">
+		<type class="huge_animal" subclass="flying_golden_dragon" tileid="huger_animal.png:0"/>
+		<description>Oto latający złoty smok. Gdy rozpościera swe skrzydła przechodzi cię dreszcz... ten mityczny potwór wygląda na potężnego!</description>
+		<attributes>
+			<atk value="1237"/>
+			<def value="78"/>
+			<hp value="4000"/>
+			<speed value="1.0"/>
+			<size value="3,2"/>
+		</attributes>
+		<level value="130"/>
+		<experience value="22080"/>
+		<respawn value="14350"/>
+		<corpse name="dragon_3x3" width="3" height="3"/>
+		<drops>
+			<item value="duży eliksir" quantity="[1,4]" probability="50.0"/>
+			<item value="money" quantity="[30,200]" probability="100.0"/>
+			<item value="bryłka złota" quantity="[2,10]" probability="10.0"/>
+			<item value="diament" quantity="[1,1]" probability="2.0"/>
+			<item value="złoty płaszcz" quantity="[1,1]" probability="0.5"/>
+			<item value="skóra złotego smoka" quantity="[1,1]" probability="5.0"/>
+			<item value="smoczy zwój" quantity="[1,1]" probability="0.075"/>
+			<item value="figurka złotego smoka" quantity="[1,1]" probability="1.0"/>
+		</drops>
+		<equips>
+		</equips>
+		<abilities>
+			<damage rangedType="fire"/>
+		</abilities>
+		<ai>
+			<profile name="brave"/>
+			<profile name="animal"/>
+			<profile name="offensive"/>
+			<profile name="lifesteal" params="0.05"/>
+			<profile name="heal" params="15,5"/>
+			<profile name="patrolling"/>
+		</ai>
+	</creature>
+
+	<creature name="jeździec chaosu na zielonym smoku">
+		<type class="huge_animal" subclass="chaos_green_dragonrider" tileid="huge_animal.png:3"/>
+		<description>Oto jeździec chaosu na zielonym smoku. Nie myl go z normalnym zielonym smokiem, który jest kontrolowany przez tajmeniczego maga siedzącego na jego grzbiecie.</description>
+		<attributes>
+			<atk value="2667"/>
+			<def value="111"/>
+			<hp value="7000"/>
+			<speed value="1.0"/>
+			<size value="3,2"/>
+		</attributes>
+		<level value="235"/>
+		<experience value="36900"/>
+		<respawn value="24800"/>
+		<corpse name="dragon_3x3" width="3" height="3"/>
+		<drops>
+			<item value="money" quantity="[90,400]" probability="100.0"/>
+			<item value="wielki eliksir" quantity="[1,4]" probability="100.0"/>
+			<item value="szmaragdowy płaszcz smoczy" quantity="[1,1]" probability="2.5"/>
+			<item value="szmaragdowa tarcza smocza" quantity="[1,1]" probability="2.0"/>
+			<item value="szmaragd" quantity="[1,3]" probability="10.0"/>
+			<item value="pazur zielonego smoka" quantity="[1,1]" probability="0.05"/>
+			<item value="kieł smoka" quantity="[1,1]" probability="2.5"/>
+			<item value="skóra zielonego smoka" quantity="[1,1]" probability="5.0"/>
+			<item value="sztylet chaosu" quantity="[1,1]" probability="0.005"/>
+			<item value="topór chaosu" quantity="[1,1]" probability="0.0015"/>
+			<item value="spodnie chaosu" quantity="[1,1]" probability="2.0"/>
+			<item value="złote rękawice" quantity="[1,1]" probability="0.01"/>
+			<item value="smoczy zwój" quantity="[1,1]" probability="0.08"/>
+			<item value="figurka zielonego smoka" quantity="[1,1]" probability="0.35"/>
+			</drops>
+		<equips>
+		</equips>
+		<abilities>
+			<damage rangedType="fire"/>
+		</abilities>
+		<ai>
+			<says>
+				<noise state="idle follow fight" value="Jupii!!"/>
+				<noise state="idle follow fight" value="Ale jazda na górze!!"/>
+			</says>
+			<profile name="brave"/>
+			<profile name="animal"/>
+			<profile name="offensive"/>
+			<profile name="lifesteal" params="0.025"/>
+			<profile name="heal" params="40,10"/>
+			<profile name="patrolling"/>
+		</ai>
+	</creature>
+
+	<creature name="jeździec chaosu na czerwonym smoku">
+		<type class="huge_animal" subclass="chaos_red_dragonrider" tileid="huge_animal.png:11"/>
+		<description>Oto jeździec chaosu na czerwonym smoku. Może wygląda na czerwonego smoka, ale mag siedzący na jego grzbiecie daje mu dużo więcej siły.</description>
+		<attributes>
+			<atk value="2714"/>
+			<def value="121"/>
+			<hp value="8618"/>
+			<speed value="1.0"/>
+			<size value="3,2"/>
+		</attributes>
+		<level value="238"/>
+		<experience value="42100"/>
+		<respawn value="27300"/>
+		<corpse name="dragon_3x3" width="3" height="3"/>
+		<drops>
+			<item value="money" quantity="[90,600]" probability="100.0"/>
+			<item value="wielki eliksir" quantity="[1,5]" probability="100.0"/>
+			<item value="rubin" quantity="[1,3]" probability="10.0"/>
+			<item value="karmazynowy płaszcz smoczy" quantity="[1,1]" probability="2.5"/>
+			<item value="pazur czerwonego smoka" quantity="[1,1]" probability="0.05"/>
+			<item value="kieł smoka" quantity="[1,1]" probability="2.5"/>
+			<item value="skóra czerwonego smoka" quantity="[1,1]" probability="5.0"/>
+			<item value="sztylet chaosu" quantity="[1,1]" probability="0.01"/>
+			<item value="topór chaosu" quantity="[1,1]" probability="0.0015"/>
+			<item value="płaszcz chaosu" quantity="[1,1]" probability="1.5"/>
+			<item value="złote rękawice" quantity="[1,1]" probability="0.02"/>
+			<item value="smoczy zwój" quantity="[1,1]" probability="0.085"/>
+			<item value="figurka czerwonego smoka" quantity="[1,1]" probability="0.35"/>
+		</drops>
+		<equips>
+		</equips>
+		<abilities>
+			<damage rangedType="fire"/>
+		</abilities>
+		<ai>
+			<says>
+				<noise state="idle follow fight" value="Do ataku!!"/>
+			</says>
+			<profile name="brave"/>
+			<profile name="animal"/>
+			<profile name="offensive"/>
+			<profile name="lifesteal" params="0.025"/>
+			<profile name="heal" params="60,10"/>
+			<profile name="patrolling"/>
+		</ai>
+	</creature>
+
+
+<!-- kikareukin monsters --> 
+
+
+
+<creature name="coś">
+		<type class="huge_animal" subclass="thing" tileid="huge_animal.png:8"/>
+		<description>To jest coś. Niby nic, ale czymś jednak jest. Być może ludzkim mutantem lub może potworem z innego świata.</description>
+		<attributes>
+			<atk value="2177"/>
+			<def value="101"/>
+			<hp value="4250"/>
+			<speed value="1.0"/>
+			<size value="2,2"/>
+		</attributes>
+		<level value="200"/>
+		<experience value="18300"/>
+		<respawn value="6150"/>
+		<corpse name="giant_humanoid" width="2" height="2"/>
+		<drops>
+			<item value="wielki eliksir" quantity="[1,3]" probability="100.0"/>
+			<item value="mocne antidotum" quantity="[1,6]" probability="80.0"/>
+			<item value="money" quantity="[100,700]" probability="100.0"/>
+			<item value="buty zielonego potwora" quantity="[1,1]" probability="2.5"/>
+			<item value="ząb potwora" quantity="[1,1]" probability="2.5"/>
+		</drops>
+		<equips>
+		</equips>
+		<ai>
+			<profile name="brave"/>
+			<profile name="animal"/>
+			<profile name="offensive"/>
+			<profile name="heal" params="40,10"/>
+			<profile name="patrolling"/>
+		</ai>
+	</creature>
+	
+	<creature name="olbrzymi ptasznik">
+		<type class="huge_animal" subclass="giant_spider_blue" tileid="faumonia_huge_animal.png:1"/>
+		<description>Oto olbrzymi ptasznik. Lepiej przygotuj antidotum, bo gdy cie ugryzie bez niego nie przeżyjesz.</description>
+		<attributes>
+			<atk value="2889"/>
+			<def value="164"/>
+			<hp value="4300"/>
+			<speed value="1.0"/>
+			<size value="2,2"/>
+		</attributes>
+		<level value="300"/>
+		<experience value="124400"/>
+		<respawn value="38000"/>
+		<corpse name="huge_animal" width="2" height="2"/>
+		<drops>
+			<item value="wielki eliksir" quantity="[1,5]" probability="70.0"/>
+			<item value="zabójcza trucizna" quantity="[1,1]" probability="30.0"/>
+			<item value="money" quantity="[30,750]" probability="100.0"/>
+			<item value="gruczoł przędzy" quantity="[1,4]" probability="80.0"/>
+			<item value="magiczna tarcza płytowa" quantity="[1,1]" probability="0.25"/>
+		</drops>
+		<equips>
+		</equips>
+		<ai>
+			<profile name="poisonous" params="4,trucizna ptasznika"/>
+			<profile name="brave"/>
+			<profile name="animal"/>
+			<profile name="offensive"/>
+			<profile name="heal" params="3,20"/>
+			<profile name="patrolling"/>
+		</ai>
+	</creature>
+
+	<creature name="gigantyczny kamienny golem">
+		<type class="huge_animal" subclass="stone_golem" tileid="faumonia_huge_animal.png:0"/>
+		<description>Oto gigantyczny kamienny golem. Ma bardzo potężne ręce i potrafi trzasnąć. </description>
+		<attributes>
+			<atk value="4086"/>
+			<def value="146"/>
+			<hp value="9300"/>
+			<speed value="1.0"/>
+			<size value="2,2"/>
+		</attributes>
+		<level value="359"/>
+		<experience value="201100"/>
+		<respawn value="36000"/>
+		<corpse name="huge_animal" width="2" height="2"/>
+		<drops>
+			<item value="wielki eliksir" quantity="[1,13]" probability="90.0"/>
+			<item value="money" quantity="[30,1300]" probability="100.0"/>
+			<item value="rękawice płytowe" quantity="[1,1]" probability="2.5"/>
+			<item value="srebrny sztylecik" quantity="[1,1]" probability="1.0"/>
+		</drops>
+		<equips>
+		</equips>
+		<ai>
+			<profile name="brave"/>
+			<profile name="animal"/>
+			<profile name="offensive"/>
+			<profile name="heal" params="200,10"/>
+			<profile name="patrolling"/>
+		</ai>
+	</creature>
+	
+	<creature name="dwugłowy niebieski smok">
+		<type class="huge_animal" subclass="twin_head_dragon" tileid="huge_animal.png:10"/>
+		<description>Oto dwugłowy niebieski smok. Dwugłowe wpatrują się w Ciebie swoimi czterema ślepiami!</description>
+		<attributes>
+			<atk value="2986"/>
+			<def value="106"/>
+			<hp value="9000"/>
+			<speed value="1.0"/>
+			<size value="3,2"/>
+		</attributes>
+		<level value="239"/>
+		<experience value="108100"/>
+		<respawn value="18000"/>
+		<corpse name="dragon_3x3" width="3" height="3"/>
+		<drops>
+			<item value="wielki eliksir" quantity="[1,11]" probability="60.0"/>
+			<item value="money" quantity="[30,700]" probability="100.0"/>
+			<item value="szafir" quantity="[2,5]" probability="10.0"/>
+			<item value="lazurowy płaszcz smoczy" quantity="[1,1]" probability="1.0"/>
+			<item value="pazur niebieskiego smoka" quantity="[1,1]" probability="0.05"/>
+			<item value="kieł smoka" quantity="[1,1]" probability="5.0"/>
+			<item value="skóra niebieskiego smoka" quantity="[1,1]" probability="5.0"/>
+			<item value="magia deszczu" quantity="[111,133]" probability="15.0"/>
+			<item value="smoczy zwój" quantity="[1,1]" probability="0.093"/>
+		</drops>
+		<equips>
+		</equips>
+		<abilities>
+			<damage rangedType="fire"/>
+		</abilities>
+		<ai>
+			<profile name="brave"/>
+			<profile name="animal"/>
+			<profile name="offensive"/>
+			<profile name="lifesteal" params="0.1"/>
+			<profile name="heal" params="50,10"/>
+			<profile name="patrolling"/>
+		</ai>
+	</creature>
+
+	<creature name="czarna śmierć">
+		<type class="huge_animal" subclass="black_death" tileid="huge_animal.png:0"/>
+		<description>Oto czarna śmierć. Swą kosą wytnie twą duszę i zaniesie ją za rzekę, gdzie pozostanie do nadejścia dnia sądu.</description>
+		<attributes>
+			<atk value="3551"/>
+			<def value="174"/>
+			<hp value="14900"/>
+			<speed value="1.0"/>
+			<size value="3,2"/>
+		</attributes>
+		<level value="350"/>
+		<experience value="340000"/>
+		<respawn value="55000"/>
+		<corpse name="giant_humanoid" width="2" height="2"/>
+		<drops>
+			<item value="wielki eliksir" quantity="[2,11]" probability="80.0"/>
+			<item value="money" quantity="[3000,10000]" probability="100.0"/>
+			<item value="czarna zbroja" quantity="[1,1]" probability="1.0"/>
+			<item value="czarne spodnie" quantity="[1,1]" probability="2.0"/>
+			<item value="buty czarne" quantity="[1,1]" probability="0.25"/>
+			<item value="czarna tarcza" quantity="[1,1]" probability="1.0"/>
+			<item value="kosa czarna" quantity="[1,1]" probability="0.5"/>
+			<item value="bilet śmierci" quantity="[1,1]" probability="0.5"/>
+			<item value="skóra śmierci 2024" quantity="[1,1]" probability="10.0"/>
+		</drops>
+		<equips>
+		</equips>
+		<abilities>
+			<damage type="dark"/>
+			<susceptibility type="dark" value="0.6"/>
+			<susceptibility type="light" value="1.3"/>
+		</abilities>
+		<ai>
+			<says>
+				<noise state="idle follow fight" value="Nadszedł dzień twej śmierci!"/>
+				<noise state="idle follow fight" value="Pożegnaj się z tym światem!"/>
+			</says>
+			<profile name="brave"/>
+			<profile name="animal"/>
+			<profile name="offensive"/>
+			<profile name="lifesteal" params="0.15"/>
+			<profile name="heal" params="35,5"/>
+			<profile name="patrolling"/>
+		</ai>
+	</creature>
+
+	<creature name="złota śmierć">
+		<type class="huge_animal" subclass="golden_death" tileid="huge_animal.png:12"/>
+		<description>Oto złota śmierć. Jest tu aby zabrać twą duszę i zapłacić nią za twoje winy.</description>
+		<attributes>
+			<atk value="7968"/>
+			<def value="201"/>
+			<hp value="26000"/>
+			<speed value="1.0"/>
+			<size value="3,2"/>
+		</attributes>
+		<level value="550"/>
+		<experience value="700000"/>
+		<respawn value="144000"/>
+		<corpse name="giant_humanoid" width="2" height="2"/>
+		<drops>
+			<item value="wielki eliksir" quantity="[5,50]" probability="100.0"/>
+			<item value="sztabka złota" quantity="[2,20]" probability="30.0"/>
+			<item value="money" quantity="[8000,50000]" probability="100.0"/>
+			<item value="pierścień szmaragdowy" quantity="[1,1]" probability="2.5"/>
+			<item value="złota klinga" quantity="[1,1]" probability="0.5"/>
+			<item value="bilet śmierci" quantity="[1,1]" probability="2.0"/>
+			<item value="skóra śmierci 2024" quantity="[1,1]" probability="10.0"/>
+		</drops>
+		<equips>
+		</equips>
+		<abilities>
+			<damage type="light"/>
+			<susceptibility type="dark" value="1.1"/>
+			<susceptibility type="light" value="0.8"/>
+		</abilities>
+		<ai>
+			<says>
+				<noise state="idle follow fight" value="Będziesz śnił o mnie tej nocy..."/>
+				<noise state="idle follow fight" value="Zapłacisz za swą chciwość!"/>
+			</says>
+			<profile name="brave"/>
+			<profile name="animal"/>
+			<profile name="offensive"/>
+			<profile name="heal" params="55,5"/>
+			<profile name="lifesteal" params="0.2"/>
+			<profile name="patrolling"/>
+		</ai>
+	</creature>
+</creatures>
