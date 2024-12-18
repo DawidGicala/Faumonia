@@ -355,7 +355,7 @@ public class j2DClient implements UserInterface {
 		
 		
 		// Tworzenie przycisku z napisem "Chat On"
-		JButton buttonChat = new JButton("Chat On");
+		JButton buttonChat = new JButton("WSAD Off");
 		buttonChat.setPreferredSize(new Dimension(100, 30));  // Dopasowanie rozmiaru przycisku
 
 		// Tworzenie panelu wejściowego

@@ -53,7 +53,7 @@ class GameKeyHandler implements KeyListener {
 	 /**
      * Zmienna przechowująca stan, czy użytkownik może się poruszać (false = pisanie, true = poruszanie).
      */
-    private boolean canMove = true;
+    private boolean canMove = false;
 	
     
     
@@ -68,7 +68,7 @@ class GameKeyHandler implements KeyListener {
             System.out.println("Możesz się poruszać!");
             if (buttonChat != null) {
                 System.out.println("Ustawiam tekst przycisku na: Chat Off");
-                buttonChat.setText("Chat Off");
+                buttonChat.setText("WSAD ON");
             } else {
                 System.out.println("Przycisk jest null");
             }
@@ -76,7 +76,7 @@ class GameKeyHandler implements KeyListener {
             System.out.println("Jesteś w trybie pisania!");
             if (buttonChat != null) {
                 System.out.println("Ustawiam tekst przycisku na: Chat On");
-                buttonChat.setText("Chat On");
+                buttonChat.setText("WSAD OFF");
             } else {
                 System.out.println("Przycisk jest null");
             }
@@ -187,6 +187,11 @@ class GameKeyHandler implements KeyListener {
 
 	public void keyTyped(final KeyEvent e) {
 		// Ignore. All the work is done in keyPressed and keyReleased methods.
+	    // Sprawdzamy, czy klawisz to W, S, A, D i czy canMove jest true
+	    char keyChar = e.getKeyChar(); // Znak wciśniętego klawisza
+	    if (canMove && (keyChar == 'w' || keyChar == 'a' || keyChar == 's' || keyChar == 'd')) {
+	        e.consume(); // Zatrzymanie dalszego przetwarzania zdarzenia
+	    }
 	}
 
 	/**
