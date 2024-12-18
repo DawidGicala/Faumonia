@@ -21,6 +21,7 @@ import games.stendhal.common.Direction;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import javax.swing.JButton;
+import java.awt.Color;
 
 /**
  * Main window keyboard handling.
@@ -66,11 +67,13 @@ class GameKeyHandler implements KeyListener {
         if (canMove) {
             if (buttonChat != null) {
                 buttonChat.setText("WSAD ON");
+                buttonChat.setForeground(Color.GREEN);
             } else {
             }
         } else {
             if (buttonChat != null) {
                 buttonChat.setText("WSAD OFF");
+                buttonChat.setForeground(Color.RED);
             } else {
             }
         }
