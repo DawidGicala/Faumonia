@@ -167,8 +167,8 @@ public class j2DClient implements UserInterface {
 
 	/** Key handling */
 	private GameKeyHandler gameKeyHandler;
-
-
+	
+	
 	/**
 	 * Get the default UI.
 	 * @return  the instance
@@ -358,13 +358,15 @@ public class j2DClient implements UserInterface {
 		
 		
 		// Tworzenie przycisku z napisem "Chat On"
-		JButton myButton = new JButton("Chat On");
-		myButton.setPreferredSize(new Dimension(100, 30));  // Dopasowanie rozmiaru przycisku
+		JButton buttonChat = new JButton("Chat On");
+		buttonChat.setPreferredSize(new Dimension(100, 30));  // Dopasowanie rozmiaru przycisku
 
 		// Tworzenie panelu wejściowego
 		final JComponent inputPanel = new JPanel();
 		inputPanel.setLayout(new SBoxLayout(SBoxLayout.HORIZONTAL));
-		inputPanel.add(myButton, SBoxLayout.constraint(SLayout.EXPAND_Y)); // Przycisk po lewej
+		inputPanel.add(buttonChat, SBoxLayout.constraint(SLayout.EXPAND_Y)); // Przycisk po lewej
+		gameKeyHandler.setButtonChat(buttonChat); // Przypisanie przycisku do istniejącego GameKeyHandler
+		buttonChat.addActionListener(e -> gameKeyHandler.toggleMovementMode());// Dodanie ActionListener do przycisku
 		inputPanel.add(chatText.getPlayerChatText(), SBoxLayout.constraint(SLayout.EXPAND_X)); // Pole tekstowe
 
 		// Dodanie panelu wejściowego i logu do głównego panelu

@@ -20,6 +20,7 @@ import games.stendhal.common.Direction;
 
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import javax.swing.JButton;
 
 /**
  * Main window keyboard handling.
@@ -44,7 +45,57 @@ class GameKeyHandler implements KeyListener {
 		this.screen = screen;
 	}
 
+	private JButton buttonChat;
+	
+	public void setButtonChat(JButton buttonChat) {
+	    this.buttonChat = buttonChat;
+	}
+	   /**
+     * Zmienna przechowująca stan, czy użytkownik może się poruszać (false = pisanie, true = poruszanie).
+     */
+    private boolean canMove = true;
+	
+    
+    
+    /**
+     * Funkcja przełączająca tryb poruszania/pisania po naciśnięciu tyldy (~).
+     */
+    public void toggleMovementMode() {
+        System.out.println("toggleMovementMode wywołane, canMove: " + !canMove);
+        canMove = !canMove;
+
+        if (canMove) {
+            System.out.println("Możesz się poruszać!");
+            if (buttonChat != null) {
+                System.out.println("Ustawiam tekst przycisku na: Chat Off");
+                buttonChat.setText("Chat Off");
+            } else {
+                System.out.println("Przycisk jest null");
+            }
+        } else {
+            System.out.println("Jesteś w trybie pisania!");
+            if (buttonChat != null) {
+                System.out.println("Ustawiam tekst przycisku na: Chat On");
+                buttonChat.setText("Chat On");
+            } else {
+                System.out.println("Przycisk jest null");
+            }
+        }
+    }
+	
 	public void keyPressed(final KeyEvent e) {
+        // Jeżeli wciśnięta tylda, przełącz tryb
+        if (e.getKeyCode() == KeyEvent.VK_BACK_QUOTE) { // Tylda to BACKQUOTE
+            toggleMovementMode(); // Przełącz tryb
+            return; // Jeśli tylda to nie przechodzimy do dalszej logiki
+        }
+
+        if (!canMove) {
+            // Jeżeli użytkownik nie może się poruszać, ignorujemy ruchy
+            return;
+        }
+
+        // Jeżeli Shift jest wciśnięty, ignorujemy ruchy
 		if (e.isShiftDown()) {
 			/*
 			 * We are going to use shift to move to previous/next line of text
@@ -68,6 +119,11 @@ class GameKeyHandler implements KeyListener {
 		case KeyEvent.VK_RIGHT:
 		case KeyEvent.VK_UP:
 		case KeyEvent.VK_DOWN:
+        case KeyEvent.VK_W:
+        case KeyEvent.VK_A:
+        case KeyEvent.VK_S:
+        case KeyEvent.VK_D:
+        	
 			/*
 			 * Ctrl means face, otherwise move
 			 */
@@ -110,6 +166,10 @@ class GameKeyHandler implements KeyListener {
 		case KeyEvent.VK_RIGHT:
 		case KeyEvent.VK_UP:
 		case KeyEvent.VK_DOWN:
+        case KeyEvent.VK_W:
+        case KeyEvent.VK_A:
+        case KeyEvent.VK_S:
+        case KeyEvent.VK_D:
 			/*
 			 * Ctrl means face, otherwise move
 			 */
@@ -143,17 +203,18 @@ class GameKeyHandler implements KeyListener {
 	 */
 	private Direction keyCodeToDirection(final int keyCode) {
 		switch (keyCode) {
-		case KeyEvent.VK_LEFT:
-			return Direction.LEFT;
-
-		case KeyEvent.VK_RIGHT:
-			return Direction.RIGHT;
-
-		case KeyEvent.VK_UP:
-			return Direction.UP;
-
-		case KeyEvent.VK_DOWN:
-			return Direction.DOWN;
+        case KeyEvent.VK_LEFT:
+        case KeyEvent.VK_A:
+            return Direction.LEFT;
+        case KeyEvent.VK_RIGHT:
+        case KeyEvent.VK_D:
+            return Direction.RIGHT;
+        case KeyEvent.VK_UP:
+        case KeyEvent.VK_W:
+            return Direction.UP;
+        case KeyEvent.VK_DOWN:
+        case KeyEvent.VK_S:
+            return Direction.DOWN;
 
 		default:
 			return null;
