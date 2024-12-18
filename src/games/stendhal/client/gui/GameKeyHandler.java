@@ -61,24 +61,17 @@ class GameKeyHandler implements KeyListener {
      * Funkcja przełączająca tryb poruszania/pisania po naciśnięciu przycisku albo tyldy (~).
      */
     public void toggleMovementMode() {
-        System.out.println("toggleMovementMode wywołane, canMove: " + !canMove);
         canMove = !canMove;
 
         if (canMove) {
-            System.out.println("Możesz się poruszać!");
             if (buttonChat != null) {
-                System.out.println("Ustawiam tekst przycisku na: Chat Off");
                 buttonChat.setText("WSAD ON");
             } else {
-                System.out.println("Przycisk jest null");
             }
         } else {
-            System.out.println("Jesteś w trybie pisania!");
             if (buttonChat != null) {
-                System.out.println("Ustawiam tekst przycisku na: Chat On");
                 buttonChat.setText("WSAD OFF");
             } else {
-                System.out.println("Przycisk jest null");
             }
         }
     }

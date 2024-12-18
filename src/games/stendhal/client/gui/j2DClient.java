@@ -93,6 +93,7 @@ import org.apache.log4j.Logger;
 
 import javax.swing.JButton;
 
+
 /** The main class that create the screen and starts the arianne client. */
 public class j2DClient implements UserInterface {
 	static {
@@ -357,7 +358,7 @@ public class j2DClient implements UserInterface {
 		// Tworzenie przycisku z napisem "Chat On"
 		JButton buttonChat = new JButton("WSAD Off");
 		buttonChat.setPreferredSize(new Dimension(100, 30));  // Dopasowanie rozmiaru przycisku
-
+		buttonChat.setFocusable(false); // Przycisk nie przechwytuje zdarzeń klawiszy
 		// Tworzenie panelu wejściowego
 		final JComponent inputPanel = new JPanel();
 		inputPanel.setLayout(new SBoxLayout(SBoxLayout.HORIZONTAL));
@@ -369,16 +370,12 @@ public class j2DClient implements UserInterface {
 		// Dodanie panelu wejściowego i logu do głównego panelu
 		chatBox.add(inputPanel, SBoxLayout.constraint(SLayout.EXPAND_X)); // Panel wejściowy
 		chatBox.add(chatLogArea, SBoxLayout.constraint(SLayout.EXPAND_X, SLayout.EXPAND_Y)); // Log poniżej
-	
-		
 		
 		// Set maximum size to prevent the entry requesting massive widths, but
 		// force expand if there's extra space anyway
 		chatText.getPlayerChatText().setPreferredSize(new Dimension(screenSize.width - 150, 30)); // Szerokość - 150px
 		inputPanel.add(chatText.getPlayerChatText(), SBoxLayout.constraint(SLayout.EXPAND_X)); // Pole tekstowe
-
 		chatBox.add(chatLogArea, SBoxLayout.constraint(SLayout.EXPAND_X, SLayout.EXPAND_Y));
-
 		// Give the user the ability to make the the game area less tall
 		final JSplitPane splitPane = new JSplitPane(JSplitPane.VERTICAL_SPLIT, pane, chatBox);
 		splitPane.setBorder(null);
