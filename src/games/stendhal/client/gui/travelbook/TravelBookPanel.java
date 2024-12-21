@@ -70,12 +70,14 @@ public class TravelBookPanel extends JPanel {
         }
 
         if (RPEntity.getMobKillCount() != null) {
+            RPEntity.getMobKillCount().clear(); // Wyczyść globalną listę przed wczytaniem danych
             loadMobList(playerName, RPEntity.getMobKillCount());
             System.out.println("[INFO] Lista zabójstw została ręcznie odświeżona przez gracza: " + playerName);
         } else {
             System.out.println("[ERROR] Nie można odświeżyć listy – mobKillCount jest null.");
         }
     }
+
 
     // Metoda do aktualizacji liczby zabitych mobków
     public void updateMobCount(String mobName, int count) {
@@ -150,18 +152,17 @@ public class TravelBookPanel extends JPanel {
             e.printStackTrace();
         }
 
-        // Aktualizacja danych o zabójstwach
+        // Nadpisz wartość bez sumowania
         for (Map.Entry<String, JPanel> entry : mobPanels.entrySet()) {
             JLabel mobLabel = (JLabel) entry.getValue().getComponent(0);
             String mobText = mobLabel.getText();
             int count = Integer.parseInt(mobText.split(" x ")[0]);
 
-            // Jeśli potwór już istnieje w pliku, aktualizujemy wartość
-            int existingCount = Integer.parseInt(properties.getProperty(entry.getKey(), "0"));
-            properties.setProperty(entry.getKey(), String.valueOf(existingCount + count));
+            // Zapisz aktualną wartość z GUI
+            properties.setProperty(entry.getKey(), String.valueOf(count));
         }
 
-        // Zapis danych z powrotem do pliku
+        // Zapisz dane z powrotem do pliku
         try (OutputStream output = new FileOutputStream(filePath)) {
             properties.store(output, "Mob Kill List for " + playerName);
             System.out.println("[INFO] Lista zabójstw została zapisana do pliku: " + filePath);
@@ -170,6 +171,7 @@ public class TravelBookPanel extends JPanel {
             e.printStackTrace();
         }
     }
+
 
  // Metoda pomocnicza do pobierania ścieżki pliku
     private String getSaveFilePath(String playerName) {
@@ -204,13 +206,19 @@ public class TravelBookPanel extends JPanel {
 
  // Metoda do wczytywania listy mobów dla konkretnego gracza
     public void loadMobList(String playerName, Map<String, Integer> mobKillCount) {
-    	if (playerName == null || playerName.isEmpty()) {
-    	    System.out.println("[ERROR] Próba wczytania danych z pustą nazwą gracza!");
-    	    playerName = "default_player";
-    	}
+        if (playerName == null || playerName.isEmpty()) {
+            System.out.println("[ERROR] Próba wczytania danych z pustą nazwą gracza!");
+            playerName = "default_player";
+        }
 
         Properties properties = new Properties();
         String filePath = getSaveFilePath(playerName);
+
+        // Wyczyść GUI przed załadowaniem nowych danych
+        mobPanels.clear();
+        mobListPanel.removeAll();
+        mobListPanel.revalidate();
+        mobListPanel.repaint();
 
         try (InputStream input = new FileInputStream(filePath)) {
             properties.load(input);
@@ -229,4 +237,5 @@ public class TravelBookPanel extends JPanel {
             e.printStackTrace();
         }
     }
+
 }

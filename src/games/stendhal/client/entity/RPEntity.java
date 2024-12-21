@@ -1309,22 +1309,30 @@ public abstract class RPEntity extends ActiveEntity {
 	private static int saveCounter = 0;
 
 	private void incrementKillCount(String mobName) {
-	    mobKillCount.put(mobName, mobKillCount.getOrDefault(mobName, 0) + 1);
-	    int killCount = mobKillCount.get(mobName);
+	    // Pobierz aktualny licznik i zwiększ o 1
+	    int currentKillCount = mobKillCount.getOrDefault(mobName, 0);
+	    mobKillCount.put(mobName, currentKillCount + 1);
+
+	    int killCount = mobKillCount.get(mobName); // Pobierz nową wartość po inkrementacji
 
 	    String playerName = User.getCharacterName();
 	    if (playerName == null || playerName.isEmpty()) {
 	        playerName = "default_player";
 	    }
 
+	    // Log w konsoli
 	    System.out.println("Gracz " + playerName + " zabił " + mobName + ". Liczba zabójstw: " + killCount);
 
+	    // Aktualizacja GUI
 	    if (travelBookPanel != null) {
 	        travelBookPanel.updateMobCount(mobName, killCount);
+
+	        // Zapis do pliku co 1 zabójstwo
 	        saveCounter++;
-	        if (saveCounter >= 1) { // Zapis po 10 aktualizacjach
+	        if (saveCounter >= 1) {
 	            travelBookPanel.saveMobList(playerName);
 	            saveCounter = 0;
+	            System.out.println("[INFO] Dane zabójstw zapisane do pliku po 10 aktualizacjach.");
 	        }
 	    }
 	}
@@ -1355,24 +1363,18 @@ public abstract class RPEntity extends ActiveEntity {
 	            incrementKillCount(mobName); // Zliczanie zabójstwa
 	        }
 
-	        // Pobranie liczby zabójstw dla danego potwora
-	        int killCount = mobKillCount.getOrDefault(mobName, 0);
-
-	        // Generowanie komunikatu z liczbą zabójstw
+	        // Generowanie komunikatu
 	        String message = mobName + " został zabity przez ";
 	        if ("F".equals(getGender())) {
 	            message = mobName + " została zabita przez ";
 	        }
 	        message += Grammar.enumerateCollection(attackerNames);
 
-	        if (isPlayerAttacker) {
-	            message += ". Liczba zabójstw tego potwora: " + killCount;
-	        }
-
 	        // Wyświetlenie komunikatu
 	        ClientSingletonRepository.getUserInterface().addEventLine(new StandardEventLine(message));
 	    }
 	}
+
 
 	/**
 	 * The object removed attribute(s).
