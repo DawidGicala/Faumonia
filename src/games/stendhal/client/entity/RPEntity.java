@@ -39,6 +39,8 @@ import java.util.Map;
 import java.util.HashMap;
 import java.util.Collection;
 import java.util.LinkedList;
+import games.stendhal.client.gui.travelbook.TravelBookPanel;
+
 /**
  * This class is a link between client graphical objects and server attributes
  * objects.<br>
@@ -200,6 +202,10 @@ public abstract class RPEntity extends ActiveEntity {
 		attackTarget = null;
 	}
 
+	//
+	// Dodanie Panelu Dziennika Podróży
+	//	
+	private static TravelBookPanel travelBookPanel; // Panel dziennika podróży
 	//
 	// RPEntity
 	//
@@ -1294,14 +1300,37 @@ public abstract class RPEntity extends ActiveEntity {
 	// --- Zliczanie zabitych potworków ---
 	private static Map<String, Integer> mobKillCount = new HashMap<>(); // Licznik zabójstw
 
+	// Getter dla mapy mobKillCount
+	public static Map<String, Integer> getMobKillCount() {
+	    return mobKillCount;
+	}
+
 	// --- Metoda pomocnicza ---
+	private static int saveCounter = 0;
+
 	private void incrementKillCount(String mobName) {
 	    mobKillCount.put(mobName, mobKillCount.getOrDefault(mobName, 0) + 1);
-	    String playerName = User.getCharacterName(); // Pobranie nicku gracza
-	    if (playerName == null) {
-	        playerName = "Nieznany gracz"; // Zabezpieczenie, jeśli nick jest niedostępny
+	    int killCount = mobKillCount.get(mobName);
+
+	    String playerName = User.getCharacterName();
+	    if (playerName == null || playerName.isEmpty()) {
+	        playerName = "default_player";
 	    }
-	    System.out.println("Gracz " + playerName + " zabił " + mobName + ". Liczba zabójstw: " + mobKillCount.get(mobName));
+
+	    System.out.println("Gracz " + playerName + " zabił " + mobName + ". Liczba zabójstw: " + killCount);
+
+	    if (travelBookPanel != null) {
+	        travelBookPanel.updateMobCount(mobName, killCount);
+	        saveCounter++;
+	        if (saveCounter >= 1) { // Zapis po 10 aktualizacjach
+	            travelBookPanel.saveMobList(playerName);
+	            saveCounter = 0;
+	        }
+	    }
+	}
+	
+	public static void setTravelBookPanel(TravelBookPanel panel) {
+	    travelBookPanel = panel;
 	}
 
 	// --- Metoda wywoływana przy śmierci ---

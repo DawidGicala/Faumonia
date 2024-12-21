@@ -92,7 +92,8 @@ import marauroa.common.game.RPObject;
 import org.apache.log4j.Logger;
 
 import javax.swing.JButton;
-
+import games.stendhal.client.gui.travelbook.TravelBookPanel;
+import games.stendhal.client.entity.RPEntity;
 
 /** The main class that create the screen and starts the arianne client. */
 public class j2DClient implements UserInterface {
@@ -159,7 +160,9 @@ public class j2DClient implements UserInterface {
 
 	OutfitDialog outfitDialog;
 
-
+	// Dodanie travel book panel
+	private TravelBookPanel travelBookPanel;
+	
 	private final PositionChangeMulticaster positionChangeListener = new PositionChangeMulticaster();
 
 	private UserContext userContext;
@@ -593,6 +596,24 @@ public class j2DClient implements UserInterface {
 		tabs.add("Przyjaciele", buddyPane);
 		
 		tabs.add("Grupa", GroupPanelController.get().getComponent());
+		
+		// Tworzenie panelu Travel Book
+		TravelBookPanel travelBookPanel = new TravelBookPanel();
+		tabs.add("Księga Podróży", travelBookPanel);
+
+		// Ustawienie panelu w RPEntity
+		RPEntity.setTravelBookPanel(travelBookPanel);
+
+		// Wczytanie danych gracza do mapy mobKillCount i GUI
+		String playerName = User.getCharacterName();
+		if (playerName == null || playerName.isEmpty()) {
+		    playerName = "default_player";
+		}
+
+		// Wczytanie danych z pliku i synchronizacja GUI
+		travelBookPanel.loadMobList(playerName, RPEntity.getMobKillCount());
+		System.out.println("[INFO] Dane zabójstw zostały wczytane i zsynchronizowane z GUI dla gracza: " + playerName);
+		System.out.println("[DEBUG] Stan mapy mobKillCount po wczytaniu: " + RPEntity.getMobKillCount().toString());
 		
 		tabBackground.add(tabs, SBoxLayout.constraint(SLayout.EXPAND_X, SLayout.EXPAND_Y));
 		leftColumn.add(tabBackground, SBoxLayout.constraint(SLayout.EXPAND_X, SLayout.EXPAND_Y));
