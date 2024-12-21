@@ -91,6 +91,7 @@ import marauroa.common.game.RPObject;
 
 import org.apache.log4j.Logger;
 
+import javax.swing.BorderFactory;
 import javax.swing.JButton;
 import games.stendhal.client.gui.travelbook.TravelBookPanel;
 import games.stendhal.client.entity.RPEntity;
@@ -371,9 +372,13 @@ public class j2DClient implements UserInterface {
 		buttonChat.addActionListener(e -> gameKeyHandler.toggleMovementMode());// Dodanie ActionListener do przycisku
 		inputPanel.add(chatText.getPlayerChatText(), SBoxLayout.constraint(SLayout.EXPAND_X)); // Pole tekstowe
 
+		
 		// Dodanie panelu wejściowego i logu do głównego panelu
 		chatBox.add(inputPanel, SBoxLayout.constraint(SLayout.EXPAND_X)); // Panel wejściowy
 		chatBox.add(chatLogArea, SBoxLayout.constraint(SLayout.EXPAND_X, SLayout.EXPAND_Y)); // Log poniżej
+
+		//Dodanie inputPanel do gamekeyhandle żeby mógł np. dac czerwony border 
+		gameKeyHandler.setInputPanel(inputPanel);
 		
 		// Set maximum size to prevent the entry requesting massive widths, but
 		// force expand if there's extra space anyway

@@ -20,7 +20,11 @@ import games.stendhal.common.Direction;
 
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+
+import javax.swing.BorderFactory;
 import javax.swing.JButton;
+import javax.swing.JComponent;
+
 import java.awt.Color;
 
 /**
@@ -34,6 +38,15 @@ class GameKeyHandler implements KeyListener {
 	 * Delayed direction release holder.
 	 */
 	private DelayedDirectionRelease directionRelease;
+	
+	/**
+	 * Dodanie referencji do inputPanel, do metody wyszarzania podczas trybu wsad
+	 */
+	private JComponent inputPanel;
+
+	public void setInputPanel(JComponent inputPanel) {
+	    this.inputPanel = inputPanel;
+	}
 
 	/**
 	 * Create a new GameKeyHandler.
@@ -68,16 +81,21 @@ class GameKeyHandler implements KeyListener {
             if (buttonChat != null) {
                 buttonChat.setText("WSAD ON");
                 buttonChat.setForeground(Color.GREEN);
-            } else {
+            }
+            if (inputPanel != null) {
+            	inputPanel.setBorder(BorderFactory.createLineBorder(Color.RED, 2)); // Ustaw border na czerwony
             }
         } else {
             if (buttonChat != null) {
                 buttonChat.setText("WSAD OFF");
                 buttonChat.setForeground(Color.RED);
-            } else {
+            }
+            if (inputPanel != null) {
+            	inputPanel.setBorder(null); // Przywróć domyślny border
             }
         }
     }
+
 	
 	public void keyPressed(final KeyEvent e) {
         // Jeżeli wciśnięta tylda, przełącz tryb
