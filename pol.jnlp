@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- set codebase to game-server to allow connection (security restriction) -->
+<!-- the .jar-files are downloaded from sf.net in order not to cause lag in game -->
+<jnlp  spec="1.0+" codebase="http://polskaonline.sourceforge.net/download" href="pol.jnlp">
+  <information>
+    <title>PolskaOnLine</title>
+    <vendor>PolskaOnLine based on Stendhal - Miguel Angel Blanch Lardin</vendor>
+    <homepage href="http://www.gra.polskaonline.org/"/>
+    <description>
+PolskaOnLine to turniej dla wszelakiej liczby dzielnych wojowników, rozgrywany bez ustanku, zaczerpnięty z oryginalnego Stendhal'a.
+Zadaniem Twym jest słowo zamienić z każdym napotkanym, gdyż dać ci może niełatwą misję do wypełnienia, która rzuci blask na zawiłe intrygi rycerskiego świata.
+
+Wszędy tutaj chodzić możesz, gwarne wsie odwiedzać, z ludźmi gadać, zakupić i sprzedać swą broń, a także w pojednykach swych sił próbować!
+Napotkani okazać się mogą Wybranymi, a imię ich błękitne. Oni misję ci wyznaczą niełatwą i morderczą, a w nagrodę doświadczenie zdobędziesz i uznanie.
+    </description>
+    <description kind="short">Pełen przygód niekończący się turniej dla wszelakiej liczby dzielnych wojowników</description>
+    <icon href="/data/gui/POLicon.png"/>
+    <icon kind="splash" href="/data/gui/POLsplash.jpg"/>
+    <offline-allowed/>
+  </information>
+  <security>
+    <all-permissions/>
+  </security>
+  <resources>
+    <j2se version="1.6*" href="http://java.sun.com/products/autodl/j2se" version="1.6+" /> <!-- max-heap-size="200M" -->
+    <jar href="http://polskaonline.sourceforge.net/download/lib/polskaonline-starter-1.0.jar" download="eager" main="true"/>
+    <jar href="http://polskaonline.sourceforge.net/download/lib/log4j.jar" download="eager"/>
+    <jar href="http://polskaonline.sourceforge.net/download/polskaonline-1.0.jar" download="eager"/>
+    <jar href="http://polskaonline.sourceforge.net/download/lib/polskaonline-data-1.0.jar" download="eager"/>
+    <jar href="http://polskaonline.sourceforge.net/download/lib/polskaonline-music-data-1.0.jar" download="eager"/>
+    <jar href="http://polskaonline.sourceforge.net/download/lib/polskaonline-sound-data-1.0.jar" download="eager"/>
+    <jar href="http://polskaonline.sourceforge.net/download/lib/jorbis.jar" download="eager"/>
+    <jar href="http://polskaonline.sourceforge.net/download/lib/marauroa.jar" download="eager"/>
+  </resources>
+  <application-desc/>
+</jnlp>

@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.0" orientation="orthogonal" renderorder="right-down" width="16" height="16" tilewidth="32" tileheight="32" nextobjectid="1">
+ <tileset firstgid="1" name="plant" tilewidth="32" tileheight="32" tilecount="12" columns="6">
+  <image source="../../tileset/plant/indoor/pot_plant_1.png" width="192" height="64"/>
+ </tileset>
+ <tileset firstgid="13" name="stairs" tilewidth="32" tileheight="32" tilecount="12" columns="2">
+  <image source="../../tileset/building/stairs/stairs.png" width="64" height="192"/>
+ </tileset>
+ <tileset firstgid="25" name="books" tilewidth="32" tileheight="32" tilecount="4" columns="2">
+  <image source="../../tileset/item/documents/books.png" width="64" height="64"/>
+ </tileset>
+ <tileset firstgid="29" name="rug border" tilewidth="32" tileheight="32" tilecount="9" columns="3">
+  <image source="../../tileset/furniture/carpet/rug_border.png" width="96" height="96"/>
+ </tileset>
+ <tileset firstgid="38" name="rugcolor" tilewidth="32" tileheight="32" tilecount="10" columns="10">
+  <image source="../../tileset/furniture/carpet/plain_colours.png" width="320" height="32"/>
+ </tileset>
+ <tileset firstgid="48" name="collision" tilewidth="32" tileheight="32" tilecount="1" columns="1">
+  <image source="../../tileset/logic/collision.png" width="32" height="32"/>
+ </tileset>
+ <tileset firstgid="49" name="rug" tilewidth="32" tileheight="32" tilecount="16" columns="4">
+  <image source="../../tileset/furniture/carpet/nain_rug.png" width="128" height="128"/>
+ </tileset>
+ <tileset firstgid="65" name="portal" tilewidth="32" tileheight="32" tilecount="7" columns="7">
+  <image source="../../tileset/logic/portal.png" width="224" height="32"/>
+ </tileset>
+ <tileset firstgid="72" name="fancy gate" tilewidth="32" tileheight="32" tilecount="6" columns="3">
+  <image source="../../tileset/building/decoration/fancy_gate.png" width="96" height="64"/>
+ </tileset>
+ <tileset firstgid="78" name="jacuzzi" tilewidth="32" tileheight="32" tilecount="36" columns="3">
+  <image source="../../tileset/furniture/sink/jacuzzi_dark_side_on.png" width="96" height="384"/>
+ </tileset>
+ <tileset firstgid="114" name="grey sofa" tilewidth="32" tileheight="32" tilecount="12" columns="3">
+  <image source="../../tileset/furniture/chair/sofa_chair_grey.png" width="96" height="128"/>
+ </tileset>
+ <tileset firstgid="126" name="my buddy" tilewidth="32" tileheight="32" tilecount="4" columns="2">
+  <image source="../../tileset/furniture/picture/blackdragon.png" width="64" height="64"/>
+ </tileset>
+ <tileset firstgid="130" name="lamp" tilewidth="32" tileheight="32" tilecount="12" columns="6">
+  <image source="../../tileset/furniture/light/weird_lamp.png" width="192" height="64"/>
+ </tileset>
+ <tileset firstgid="142" name="nymph" tilewidth="32" tileheight="32" tilecount="4" columns="1">
+  <image source="../../tileset/item/statue/nymph_aqua.png" width="32" height="128"/>
+ </tileset>
+ <tileset firstgid="146" name="banner" tilewidth="32" tileheight="32" tilecount="6" columns="2">
+  <image source="../../tileset/item/banners/superhumans_wall_hanging.png" width="64" height="96"/>
+ </tileset>
+ <tileset firstgid="152" name="Untitled" tilewidth="32" tileheight="32" tilecount="9" columns="3">
+  <image source="../../tileset/furniture/table/grey_fancy_horizontal.png" width="96" height="96"/>
+ </tileset>
+ <tileset firstgid="161" name="glass" tilewidth="32" tileheight="32" tilecount="16" columns="4">
+  <image source="../../tileset/building/wall/glass.png" width="128" height="128"/>
+ </tileset>
+ <tileset firstgid="177" name="glass_details" tilewidth="32" tileheight="32" tilecount="28" columns="4">
+  <image source="../../tileset/building/wall/glass_details.png" width="128" height="224"/>
+ </tileset>
+ <tileset firstgid="205" name="double_purple_gold" tilewidth="32" tileheight="32" tilecount="18" columns="6">
+  <image source="../../tileset/furniture/bed/double_purple_gold.png" width="192" height="96"/>
+ </tileset>
+ <tileset firstgid="223" name="../../tileset/logic/protection.png" tilewidth="32" tileheight="32" tilecount="2" columns="2">
+  <image source="../../tileset/logic/protection.png" width="64" height="32"/>
+ </tileset>
+ <layer name="0_floor" width="16" height="16">
+  <data encoding="base64" compression="gzip">
+   H4sIAAAAAAAAC9NjYGDQG8WjeBSPSAwA7sE32gAEAAA=
+  </data>
+ </layer>
+ <layer name="1_terrain" width="16" height="16">
+  <data encoding="base64" compression="gzip">
+   H4sIAAAAAAAAC83POQqAMBRF0ZSWbsGlO4GCU29h5Sxoo40uxldECIGQsbA4BPLzuSQkhEQQG5wJpDDDwFkE9+w8gxwmCDij4J6dF7T/vfM19133WR20Fn0ZWV9l/0/9HQ6L/gmXRf+GR2GPOPi/x/VX6DVttF9CBbXB2cALwzCIcQAEAAA=
+  </data>
+ </layer>
+ <layer name="2_object" width="16" height="16">
+  <data encoding="base64" compression="gzip">
+   H4sIAAAAAAAAC83QuQrCQBDG8W08QF/G+z56TxQr30LRRvEoUqUQPAvPR/UvrDCEZV3Bwg9+zGSzk02i1G8SEn0YW+zgYYSxqJ5hPib6OPY4wMcEU1F9h/c54qT7BJJIIe30NUotsNR9BlnkkHecX2Gt+wKKKKHsOC9TQRU11L+cNf0r09rG8owZ5qKa0kYHAwx13w3sOeOCq+WsntAP3Lvhjodl/pUGWuK6+WG/La6zUUR0fZ8v12T9pzwBxSRwDwAEAAA=
+  </data>
+ </layer>
+ <layer name="3_roof" width="16" height="16">
+  <data encoding="base64" compression="gzip">
+   H4sIAAAAAAAAC2NgGAWDGbQSKdaHx4wKIK5EomkBEoA4F4jTkegMNDVSQCwDxJJY9AcCcRCU7QHEXkhynkTYfx2Ib2ARJ0YvCDABMSOUhtmPLIZODxcAAK8/rYQABAAA
+  </data>
+ </layer>
+ <layer name="objects" width="16" height="16">
+  <data encoding="base64" compression="gzip">
+   H4sIAAAAAAAAC2NgGD7AdaAdMApGwRADAOqB2FkABAAA
+  </data>
+ </layer>
+ <layer name="collision" width="16" height="16" opacity="0.37">
+  <data encoding="base64" compression="gzip">
+   H4sIAAAAAAAACzNgYGAwGCQYBnCJ45LHpwYXGOz6CQFi9RMbfqS6ldg4IMZeYtIEIf3Y1OFyBz6zCPmBEr8MRgwAh7r+IAAEAAA=
+  </data>
+ </layer>
+ <layer name="protection" width="16" height="16">
+  <data encoding="base64" compression="gzip">
+   H4sIAAAAAAAAC7vPwMBwfxSP4lE8IjEAy7gOnwAEAAA=
+  </data>
+ </layer>
+</map>

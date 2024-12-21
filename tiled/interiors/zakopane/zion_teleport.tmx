@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.0" orientation="orthogonal" renderorder="right-down" width="15" height="25" tilewidth="32" tileheight="32" nextobjectid="1">
+ <tileset firstgid="1" name="barrel" tilewidth="32" tileheight="32" tilecount="2" columns="1">
+  <image source="../../tileset/item/pot/barrel.png" width="32" height="64"/>
+ </tileset>
+ <tileset firstgid="3" name="bright_bookshelf_and_cupboard" tilewidth="32" tileheight="32" tilecount="6" columns="3">
+  <image source="../../tileset/furniture/shelve/bright_bookshelf_and_cupboard.png" width="96" height="64"/>
+ </tileset>
+ <tileset firstgid="9" name="pot_plant" tilewidth="32" tileheight="32" tilecount="3" columns="1">
+  <image source="../../tileset/plant/indoor/pot_plant.png" width="32" height="96"/>
+ </tileset>
+ <tileset firstgid="12" name="bushes" tilewidth="32" tileheight="32" tilecount="10" columns="5">
+  <image source="../../tileset/plant/bush/bushes.png" trans="ffffff" width="160" height="64"/>
+ </tileset>
+ <tileset firstgid="22" name="collision" tilewidth="32" tileheight="32" tilecount="1" columns="1">
+  <image source="../../tileset/logic/collision.png" width="32" height="32"/>
+ </tileset>
+ <tileset firstgid="23" name="plant" tilewidth="32" tileheight="32" tilecount="2" columns="1">
+  <image source="../../tileset/plant/indoor/oriental_plant.png" width="32" height="64"/>
+ </tileset>
+ <tileset firstgid="25" name="beer" tilewidth="32" tileheight="32" tilecount="10" columns="5">
+  <image source="../../tileset/furniture/table/table_with_beer_dark.png" width="160" height="64"/>
+ </tileset>
+ <tileset firstgid="35" name="tiles" tilewidth="32" tileheight="32" tilecount="12" columns="6">
+  <image source="../../tileset/ground/indoor/floors_3.png" width="192" height="64"/>
+ </tileset>
+ <tileset firstgid="47" name="household" tilewidth="32" tileheight="32" tilecount="16" columns="4">
+  <image source="../../tileset/item/household/food_preparation.png" width="128" height="128"/>
+ </tileset>
+ <tileset firstgid="63" name="sciany" tilewidth="32" tileheight="32" tilecount="27" columns="3">
+  <image source="../../tileset/pol/waly/int_plazy.png" width="96" height="288"/>
+ </tileset>
+ <tileset firstgid="90" name="doors" tilewidth="32" tileheight="32" tilecount="15" columns="5">
+  <image source="../../tileset/pol/domki/drzwi/door_drewno_int.png" width="160" height="96"/>
+ </tileset>
+ <tileset firstgid="105" name="fajka" tilewidth="32" tileheight="32" tilecount="4" columns="2">
+  <image source="../../tileset/item/household/food_preparation_2.png" width="64" height="64"/>
+ </tileset>
+ <tileset firstgid="109" name="protection" tilewidth="32" tileheight="32" tilecount="2" columns="2">
+  <image source="../../tileset/logic/protection.png" width="64" height="32"/>
+ </tileset>
+ <layer name="0_floor" width="15" height="25">
+  <data encoding="base64" compression="gzip">
+   H4sIAAAAAAAAC1NhYGBQGcWjeBSP4lE8rDAAP0KHC9wFAAA=
+  </data>
+ </layer>
+ <layer name="1_terrain" width="15" height="25">
+  <data encoding="base64" compression="gzip">
+   H4sIAAAAAAAAC7NnYGBwIAM7ArETEHsAsScJ2AuIXaB6vYGYEQ3DgCkDKgDJ+WLRSwwYTHqJBZToZcCiVw6I5dGwAhArookpUWAv/xDUy4BFrwQZel2B2A0NBxOp154BM39FkujmTDLcTElYgfwbhIZJ8W8EGibVv+S4mRp6ufGoFUDC3Gh6/YDYnwQcwIA7XRGD3YEYAApToRDcBQAA
+  </data>
+ </layer>
+ <layer name="2_object" width="15" height="25">
+  <data encoding="base64" compression="gzip">
+   H4sIAAAAAAAAC2NgoC1ghmIWItVzI7HZoJid2o4aBaNgFIyCAQZRQBwNxDE0Mh8A2wDP/9wFAAA=
+  </data>
+ </layer>
+ <layer name="3_roof" width="15" height="25">
+  <data encoding="base64" compression="gzip">
+   H4sIAAAAAAAAC2NgwA44cYgTA7go0DsKcANJIJZCw9JALIMmJjtQDhxEQHygHTAKaAqILZ+wqSO2fBrq5RgAByu0kdwFAAA=
+  </data>
+ </layer>
+ <layer name="4_roof_add" width="15" height="25">
+  <data encoding="base64" compression="gzip">
+   H4sIAAAAAAAAC2NgGAWjYBSMglEw3AAAv2wkb9wFAAA=
+  </data>
+ </layer>
+ <layer name="objects" width="15" height="25">
+  <data encoding="base64" compression="gzip">
+   H4sIAAAAAAAAC2NgGAWjYBSMglEw3AAAv2wkb9wFAAA=
+  </data>
+ </layer>
+ <layer name="collision" width="15" height="25">
+  <data encoding="base64" compression="gzip">
+   H4sIAAAAAAAACxNjYGAQG2SYgUS1hMBg0kssoEQvNv300DtQ/qV2WFFqN7HmUFsvuW4mBQwW/1LiZkr04tNP67KOVAwAcwPLptwFAAA=
+  </data>
+ </layer>
+ <layer name="protection" width="15" height="25">
+  <data encoding="base64" compression="gzip">
+   H4sIAAAAAAAAC8tlYGDIHcWjeBSP4lE8rDAAhPudhNwFAAA=
+  </data>
+ </layer>
+</map>

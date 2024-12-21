@@ -1,0 +1,334 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<creatures xmlns="stendhal" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="stendhal ../creatures.xsd ">
+
+	<creature name="pisklak">
+		<type class="farm_animal" subclass="chick" tileid="farm_animal.png:2"/>
+		<description>Oto pisklę. Woli nie oddalać się od kokoszki.</description>
+		<attributes>
+			<atk value="32"/>
+			<def value="5"/>
+			<hp value="25"/>
+			<speed value="0.5"/>
+			<size value="1,1"/>
+		</attributes>
+		<level value="1"/>
+		<experience value="5"/>
+		<respawn value="450"/>
+		<corpse name="small_winged"/>
+		<drops>
+			<item value="udko" quantity="[1,1]" probability="70.0"/>
+			<item value="jajo" quantity="[1,1]" probability="30.0"/>
+		</drops>
+		<equips>
+		</equips>
+		<ai>
+			<says>
+				<noise state="idle follow fight" value="pii piii"/>
+				<noise state="idle follow fight" value="pii piii pii"/>
+			</says>
+			<profile name="animal"/>
+			<profile name="patrolling"/>
+			<profile name="non offensive"/>
+			<profile name="coward"/>
+		</ai>
+	</creature>
+
+	<creature name="prosiak">
+		<type class="farm_animal" subclass="piglet" tileid="farm_animal.png:9"/>
+		<description>Oto prosię umorusane w błocie.</description>
+		<attributes>
+			<atk value="31"/>
+			<def value="7"/>
+			<hp value="25"/>
+			<speed value="0.6"/>
+			<size value="1,1"/>
+		</attributes>
+		<level value="1"/>
+		<experience value="15"/>
+		<respawn value="450"/>
+		<corpse name="animal"/>
+		<drops>
+			<item value="szynka" quantity="[1,3]" probability="70.0"/>
+			<item value="kiełbasa wiejska" quantity="[1,9]" probability="60.0"/>
+			<item value="skóra zwierzęca" quantity="[1,1]" probability="16.0"/>
+		</drops>
+		<equips>
+		</equips>
+		<ai>
+			<says>
+				<noise state="idle follow fight" value="kwik"/>
+				<noise state="idle follow fight" value="kwik kwik"/>
+				<noise state="idle follow fight" value="chrum chrum"/>
+			</says>
+			<profile name="animal"/>
+			<profile name="patrolling"/>
+		</ai>
+	</creature>
+
+	<creature name="kokoszka">
+		<type class="farm_animal" subclass="hen" tileid="farm_animal.png:6"/>
+		<description>Oto kokoszka. Zrani cię jeśli zbliżysz się do jej piskląt.</description>
+		<attributes>
+			<atk value="29"/>
+			<def value="6"/>
+			<hp value="25"/>
+			<speed value="0.7"/>
+			<size value="1,1"/>
+		</attributes>
+		<level value="1"/>
+		<experience value="5"/>
+		<respawn value="450"/>
+		<corpse name="small_winged"/>
+		<drops>
+			<item value="udko" quantity="[1,2]" probability="70.0"/>
+			<item value="jajo" quantity="[1,4]" probability="90.0"/>
+		</drops>
+		<equips>
+		</equips>
+		<ai>
+			<says>
+				<noise state="idle follow fight" value="piii piiii"/>
+				<noise state="idle follow fight" value="pii piiii piii"/>
+			</says>
+			<profile name="animal"/>
+			<profile name="patrolling"/>
+			<profile name="non offensive"/>
+		</ai>
+	</creature>
+
+	<creature name="baran">
+		<type class="farm_animal" subclass="ram" tileid="farm_animal.png:10"/>
+		<description>Oto baran. Oby nie wziął cię na rogi.</description>
+		<attributes>
+			<atk value="32"/>
+			<def value="7"/>
+			<hp value="50"/>
+			<speed value="0.5"/>
+			<size value="1,1"/>
+		</attributes>
+		<level value="2"/>
+		<experience value="20"/>
+		<respawn value="450"/>
+		<corpse name="animal"/>
+		<drops>
+			<item value="mięso" quantity="[1,4]" probability="80.0"/>
+		</drops>
+		<equips>
+		</equips>
+		<ai>
+			<says>
+				<noise state="idle follow fight" value="Beeeeee"/>
+			</says>
+			<profile name="animal"/>
+			<profile name="offensive"/>
+		</ai>
+	</creature>
+
+	<creature name="bóbr">
+		<type class="farm_animal" subclass="beaver" tileid="farm_animal.png:0"/>
+		<description>Oto bóbr. Najlepszy budowniczy wśród zwierząt.</description>
+		<attributes>
+			<atk value="33"/>
+			<def value="8"/>
+			<hp value="35"/>
+			<speed value="0.6"/>
+			<size value="1,1"/>
+		</attributes>
+		<level value="2"/>
+		<experience value="20"/>
+		<respawn value="450"/>
+		<corpse name="animal"/>
+		<drops>
+			<item value="mięso" quantity="[1,2]" probability="80.0"/>
+			<item value="polano" quantity="[1,2]" probability="20.0"/>
+		</drops>
+		<equips>
+		</equips>
+		<ai>
+			<profile name="animal"/>
+			<profile name="offensive"/>
+			<profile name="patrolling"/>
+		</ai>
+	</creature>
+
+	<creature name="krowa">
+		<type class="farm_animal" subclass="cow" tileid="farm_animal.png:3"/>
+		<description>Oto krowa. Daje pyszne mleko.</description>
+		<attributes>
+			<atk value="31"/>
+			<def value="9"/>
+			<hp value="30"/>
+			<speed value="0.3"/>
+			<size value="1,1"/>
+		</attributes>
+		<level value="2"/>
+		<experience value="20"/>
+		<respawn value="450"/>
+		<corpse name="animal"/>
+		<drops>
+			<item value="mięso" quantity="[1,2]" probability="80.0"/>
+			<item value="mleko" quantity="[1,5]" probability="70.0"/>
+			<item value="skóra zwierzęca" quantity="[1,1]" probability="16.0"/>
+		</drops>
+		<equips>
+		</equips>
+		<ai>
+			<says>
+				<noise state="idle follow fight" value="Muuuu	muuuuuuu"/>
+				<noise state="idle follow fight" value="muuuuu"/>
+			</says>
+			<profile name="animal"/>
+		</ai>
+	</creature>
+
+	<creature name="koza">
+		<type class="farm_animal" subclass="goat" tileid="farm_animal.png:4"/>
+		<description>Oto koza. Jest zdziczała bo zamieszkuje góry.</description>
+		<attributes>
+			<atk value="32"/>
+			<def value="9"/>
+			<hp value="30"/>
+			<speed value="0.3"/>
+			<size value="1,1"/>
+		</attributes>
+		<level value="2"/>
+		<experience value="20"/>
+		<respawn value="450"/>
+		<corpse name="animal"/>
+		<drops>
+			<item value="mięso" quantity="[1,4]" probability="80.0"/>
+		</drops>
+		<equips>
+		</equips>
+		<ai>
+			<profile name="animal"/>
+			<profile name="offensive"/>
+			<profile name="patrolling"/>
+		</ai>
+	</creature>
+
+	<creature name="gniady koń">
+		<type class="farm_animal" subclass="horse" tileid="farm_animal.png:7"/>
+		<description>Oto koń. Nie ujeździsz go z pewnością.</description>
+		<attributes>
+			<atk value="38"/>
+			<def value="8"/>
+			<hp value="30"/>
+			<speed value="1.0"/>
+			<size value="1,1"/>
+		</attributes>
+		<level value="2"/>
+		<experience value="20"/>
+		<respawn value="450"/>
+		<corpse name="animal"/>
+		<drops>
+			<item value="mięso" quantity="[1,3]" probability="80.0"/>
+			<item value="stek" quantity="[1,2]" probability="20.0"/>
+		</drops>
+		<equips>
+		</equips>
+		<ai>
+			<says>
+				<noise state="idle follow fight" value="ihaaaaaahaa"/>
+				<noise state="idle follow fight" value="*patataj, patataj*"/>
+			</says>
+			<profile name="animal"/>
+			<profile name="non offensive"/>
+			<profile name="patrolling"/>
+		</ai>
+	</creature>
+
+	<creature name="siwy koń">
+		<type class="farm_animal" subclass="white_horse" tileid="farm_animal.png:11"/>
+		<description>Oto biały koń. Lubią paść się z innymi na łące.</description>
+		<attributes>
+			<atk value="30"/>
+			<def value="9"/>
+			<hp value="30"/>
+			<speed value="1.0"/>
+			<size value="1,1"/>
+		</attributes>
+		<level value="2"/>
+		<experience value="20"/>
+		<respawn value="450"/>
+		<corpse name="animal"/>
+		<drops>
+			<item value="mięso" quantity="[1,3]" probability="80.0"/>
+			<item value="stek" quantity="[1,2]" probability="20.0"/>
+		</drops>
+		<equips>
+		</equips>
+		<ai>
+			<says>
+				<noise state="idle follow fight" value="niiihhaaa"/>
+				<noise state="idle follow fight" value="*patataj, patataj*"/>
+			</says>
+			<profile name="animal"/>
+			<profile name="non offensive"/>
+			<profile name="patrolling"/>
+		</ai>
+	</creature>
+
+	<creature name="byk">
+		<type class="farm_animal" subclass="bull" tileid="farm_animal.png:1"/>
+		<description>Oto byk! Lepiej zmykaj!</description>
+		<attributes>
+			<atk value="37"/>
+			<def value="9"/>
+			<hp value="35"/>
+			<speed value="0.9"/>
+			<size value="1,1"/>
+		</attributes>
+		<level value="2"/>
+		<experience value="20"/>
+		<respawn value="450"/>
+		<corpse name="animal"/>
+		<drops>
+			<item value="mięso" quantity="[1,3]" probability="80.0"/>
+			<item value="skóra zwierzęca" quantity="[1,1]" probability="26.0"/>
+			<item value="stek" quantity="[1,4]" probability="20.0"/>
+		</drops>
+		<equips>
+		</equips>
+		<ai>
+			<says>
+				<noise state="idle follow fight" value="MUUUUUU!!!"/>
+			</says>
+			<profile name="animal"/>
+			<profile name="offensive"/>
+			<profile name="patrolling"/>
+		</ai>
+	</creature>
+
+	<creature name="żmija">
+		<type class="farm_animal" subclass="grass_snake" tileid="farm_animal.png:5"/>
+		<description>Oto żmija. Może cię boleśnie ukąsić.</description>
+		<attributes>
+			<atk value="38"/>
+			<def value="5"/>
+			<hp value="65"/>
+			<speed value="0.6"/>
+			<size value="1,1"/>
+		</attributes>
+		<level value="3"/>
+		<experience value="30"/>
+		<respawn value="450"/>
+		<corpse name="small_boneless"/>
+		<drops>
+			<item value="money" quantity="[2,6]" probability="60.0"/>
+			<item value="trucizna" quantity="[1,1]" probability="10.0"/>
+		</drops>
+		<equips>
+		</equips>
+		<ai>
+			<says>
+				<noise state="idle follow fight" value="sssSSSsssss..."/>
+			</says>
+			<profile name="animal"/>
+			<profile name="offensive"/>
+			<profile name="patrolling"/>
+		</ai>
+	</creature>
+	
+</creatures>

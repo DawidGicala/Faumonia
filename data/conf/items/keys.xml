@@ -1,0 +1,506 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<items xmlns="stendhal" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="stendhal ../items.xsd ">
+
+	<item name="srebrny klucz do lochów">
+		<type class="key" subclass="silver" tileid="-1"/>
+		<description>Oto srebrny klucz do lochów. Używaj go jeżeli jesteś odważny.</description>
+		<implementation class-name="games.stendhal.server.entity.item.Item"/>
+		<attributes>
+			<autobind value=""/>
+		</attributes>
+		<weight value="1.0"/>
+		<value value="1"/>
+		<equipable>
+			<slot name="ground"/>
+			<slot name="content"/>
+			<slot name="bag"/>
+			<slot name="trade"/>
+			<slot name="keyring"/>
+		</equipable>
+	</item>
+
+	<item name="klucz czarnoksiężników chaosu">
+		<type class="key" subclass="navy" tileid="-1"/>
+		<description>Oto klucz czarnoksiężników chaosu. Otwiera drzwi do podziemi pełnych niebezpiecznych bogactw. Użyj go, aby uzyskać dostęp do ukrytych skarbów czarnoksiężników chaosu.</description>
+		<implementation class-name="games.stendhal.server.entity.item.Item"/>
+		<attributes>
+			<autobind value=""/>
+		</attributes>
+		<weight value="1.0"/>
+		<value value="1"/>
+		<equipable>
+			<slot name="ground"/>
+			<slot name="content"/>
+			<slot name="bag"/>
+			<slot name="trade"/>
+			<slot name="keyring"/>
+		</equipable>
+	</item>
+	
+	<item name="klucz do smoczej groty">
+		<type class="key" subclass="tsoh_key" tileid="-1"/>
+		<description>Oto zdobiony klucz do smoczej groty. Musiałeś już wiele osiągnąć skoro go posiadłeś.</description>
+		<implementation class-name="games.stendhal.server.entity.item.Item"/>
+		<attributes>
+			<autobind value=""/>
+		</attributes>
+		<weight value="1.0"/>
+		<value value="1"/>
+		<equipable>
+			<slot name="ground"/>
+			<slot name="content"/>
+			<slot name="bag"/>
+			<slot name="trade"/>
+			<slot name="keyring"/>
+		</equipable>
+	</item>
+	
+	<item name="klucz do tawerny6">
+		<type class="key" subclass="filigree" tileid="-1"/>
+		<description>Oto klucz do sekretnego pokoju w  tawernie Semos.</description>
+		<implementation class-name="games.stendhal.server.entity.item.Item"/>
+		<attributes>
+			<autobind value=""/>
+		</attributes>
+		<weight value="1.0"/>
+		<value value="1"/>
+		<equipable>
+			<slot name="ground"/>
+			<slot name="content"/>
+			<slot name="bag"/>
+			<slot name="trade"/>
+			<slot name="keyring"/>
+		</equipable>
+	</item>
+	
+	<item name="klucz do więzienia">
+		<type class="key" subclass="klucz_zrc" tileid="-1"/>
+		<description>Oto klucz do więzienia mithrilbourg. Wygląda na bardzo stary, jego kiedyś błyszczące fragmenty mithrilu teraz jakby wyblakły.</description>
+		<implementation class-name="games.stendhal.server.entity.item.Item"/>
+		<attributes>
+			<autobind value=""/>
+		</attributes>
+		<weight value="1.0"/>
+		<value value="1"/>
+		<equipable>
+			<slot name="ground"/>
+			<slot name="content"/>
+			<slot name="bag"/>
+			<slot name="trade"/>
+			<slot name="keyring"/>
+		</equipable>
+	</item>
+	
+	<item name="złoty klucz Licha">
+		<type class="key" subclass="gold" tileid="-1"/>
+		<description>Oto złoty klucz Licha. Otworzy drzwi do straszliwych miejsc.</description>
+		<implementation class-name="games.stendhal.server.entity.item.Item"/>
+		<attributes>
+			<autobind value=""/>
+		</attributes>
+		<weight value="1.0"/>
+		<value value="1"/>
+		<equipable>
+			<slot name="ground"/>
+			<slot name="content"/>
+			<slot name="bag"/>
+			<slot name="trade"/>
+			<slot name="keyring"/>
+		</equipable>
+	</item>
+
+	<item name="klucz minotaura">
+		<type class="key" subclass="bronze" tileid="-1"/>
+		<description>Oto zdobiony klucz minotaura. Pachnie minotaurem może on go upuścił?</description>
+		<implementation class-name="games.stendhal.server.entity.item.Item"/>
+		<attributes>
+		</attributes>
+		<weight value="1.0"/>
+		<value value="1"/>
+		<equipable>
+			<slot name="ground"/>
+			<slot name="content"/>
+			<slot name="bag"/>
+			<slot name="trade"/>
+			<slot name="keyring"/>
+		</equipable>
+	</item>
+
+	<item name="klucz do banku Nalwor">
+		<type class="key" subclass="nalwor" tileid="-1"/>
+		<description>Oto klucz do banku Nalwor tylko dla klientów tego banku.</description>
+		<implementation class-name="games.stendhal.server.entity.item.Item"/>
+		<attributes>
+		</attributes>
+		<weight value="1.0"/>
+		<value value="1"/>
+		<equipable>
+			<slot name="ground"/>
+			<slot name="content"/>
+			<slot name="bag"/>
+			<slot name="trade"/>
+			<slot name="keyring"/>
+		</equipable>
+	</item>
+
+	<item name="klucz do więzienia Kotoch">
+		<type class="key" subclass="copper" tileid="-1"/>
+		<description>Oto klucz do więzienia Kotoch z jakimś napisem w języku Orków.</description>
+		<implementation class-name="games.stendhal.server.entity.item.Item"/>
+		<attributes>
+		</attributes>
+		<weight value="1.0"/>
+		<value value="1"/>
+		<equipable>
+			<slot name="ground"/>
+			<slot name="content"/>
+			<slot name="bag"/>
+			<slot name="trade"/>
+			<slot name="keyring"/>
+		</equipable>
+	</item>
+
+	<item name="klucz do więzienia Kanmararn">
+		<type class="key" subclass="blue" tileid="-1"/>
+		<description>Oto klucz do więzienia Kanmararn, który pasuje tylko do zamków tamtego więzienia.</description>
+		<implementation class-name="games.stendhal.server.entity.item.Item"/>
+		<attributes>
+		</attributes>
+		<weight value="1.0"/>
+		<value value="1"/>
+		<equipable>
+			<slot name="ground"/>
+			<slot name="content"/>
+			<slot name="bag"/>
+			<slot name="trade"/>
+			<slot name="keyring"/>
+		</equipable>
+	</item>
+
+	<item name="klucz do bram Sedah">
+		<type class="key" subclass="square" tileid="-1"/>
+		<description>Oto klucz do bram Sedah, który otwiera tylko zamek imperialnych bram tamtego miasta.</description>
+		<implementation class-name="games.stendhal.server.entity.item.Item"/>
+		<attributes>
+		</attributes>
+		<weight value="1.0"/>
+		<value value="1"/>
+		<equipable>
+			<slot name="ground"/>
+			<slot name="content"/>
+			<slot name="bag"/>
+			<slot name="trade"/>
+			<slot name="keyring"/>
+		</equipable>
+	</item>
+
+ <!-- this is unused as yet but we create the key object so the door can reject properly-->
+	<item name="klucz do sanktuarium dla zwierząt">
+		<type class="key" subclass="rat" tileid="-1"/>
+		<description>Oto klucz do sanktuarium dla zwierząt w Ados.</description>
+		<implementation class-name="games.stendhal.server.entity.item.Item"/>
+		<attributes>
+		</attributes>
+		<weight value="1.0"/>
+		<value value="1"/>
+		<equipable>
+			<slot name="ground"/>
+			<slot name="content"/>
+			<slot name="bag"/>
+			<slot name="trade"/>
+			<slot name="keyring"/>
+		</equipable>
+	</item>
+
+	<item name="klucz do drzwi">
+		<type class="key" subclass="purple" tileid="-1"/>
+		<description>Nie powinieneś widzieć co na nim jest napisane.</description>
+		<implementation class-name="games.stendhal.server.entity.item.HouseKey"/>
+		<attributes/>
+		<weight value="1.0"/>
+		<value value="1"/>
+		<equipable>
+			<slot name="ground"/>
+			<slot name="content"/>
+			<slot name="bag"/>
+			<slot name="trade"/>
+			<slot name="keyring"/>
+		</equipable>
+	</item>
+
+	<item name="klucz do bramy">
+		<type class="key" subclass="purple" tileid="-1"/>
+		<description>Nie powinieneś widzieć tego opisu</description>
+		<implementation class-name="games.stendhal.server.entity.item.GateKey"/>
+		<attributes/>
+		<weight value="1.0"/>
+		<value value="1"/>
+		<equipable>
+			<slot name="ground"/>
+			<slot name="content"/>
+			<slot name="bag"/>
+			<slot name="trade"/>
+			<slot name="keyring"/>
+		</equipable>
+	</item>
+
+	<!-- admin only item. *nothing* should drop this -->
+	<item name="klucz GM">
+		<type class="key" subclass="rat" tileid="-1"/>
+		<description/>
+		<implementation class-name="games.stendhal.server.entity.item.MasterKey"/>
+		<attributes/>
+		<weight value="1.0"/>
+		<value value="1"/>
+		<equipable>
+			<slot name="ground"/>
+			<slot name="content"/>
+			<slot name="bag"/>
+			<slot name="trade"/>
+			<slot name="keyring"/>
+		</equipable>
+	</item>
+
+<!--	<item name="fado hotel key 001">
+		<type class="key" subclass="hotel" tileid="-1"/>
+		<description>Oto klucz hotelowy do pokoju #001 w Fado.</description>
+		<implementation class-name="games.stendhal.server.entity.item.Item"/>
+		<attributes>
+		</attributes>
+		<weight value="1.0"/>
+		<value value="1"/>
+		<equipable>
+			<slot name="ground"/>
+			<slot name="content"/>
+			<slot name="bag"/>
+			<slot name="trade"/>
+			<slot name="keyring"/>
+		</equipable>
+	</item>
+
+	<item name="fado hotel key 002">
+		<type class="key" subclass="hotel" tileid="-1"/>
+		<description>Oto klucz hotelowy do pokoju #002 w Fado.</description>
+		<implementation class-name="games.stendhal.server.entity.item.Item"/>
+		<attributes>
+		</attributes>
+		<weight value="1.0"/>
+		<value value="1"/>
+		<equipable>
+			<slot name="ground"/>
+			<slot name="content"/>
+			<slot name="bag"/>
+			<slot name="trade"/>
+			<slot name="keyring"/>
+		</equipable>
+	</item>
+
+	<item name="fado hotel key 003">
+		<type class="key" subclass="hotel" tileid="-1"/>
+		<description>Oto klucz hotelowy do pokoju #003 w Fado.</description>
+		<implementation class-name="games.stendhal.server.entity.item.Item"/>
+		<attributes>
+		</attributes>
+		<weight value="1.0"/>
+		<value value="1"/>
+		<equipable>
+			<slot name="ground"/>
+			<slot name="content"/>
+			<slot name="bag"/>
+			<slot name="trade"/>
+			<slot name="keyring"/>
+		</equipable>
+	</item>
+
+	<item name="fado hotel key 004">
+		<type class="key" subclass="hotel" tileid="-1"/>
+		<description>Oto klucz hotelowy do pokoju #004 w Fado.</description>
+		<implementation class-name="games.stendhal.server.entity.item.Item"/>
+		<attributes>
+		</attributes>
+		<weight value="1.0"/>
+		<value value="1"/>
+		<equipable>
+			<slot name="ground"/>
+			<slot name="content"/>
+			<slot name="bag"/>
+			<slot name="trade"/>
+			<slot name="keyring"/>
+		</equipable>
+	</item>
+
+	<item name="fado hotel key 005">
+		<type class="key" subclass="hotel" tileid="-1"/>
+		<description>Oto klucz hotelowy do pokoju #005 w Fado.</description>
+		<implementation class-name="games.stendhal.server.entity.item.Item"/>
+		<attributes>
+		</attributes>
+		<weight value="1.0"/>
+		<value value="1"/>
+		<equipable>
+			<slot name="ground"/>
+			<slot name="content"/>
+			<slot name="bag"/>
+			<slot name="trade"/>
+			<slot name="keyring"/>
+		</equipable>
+	</item>
+
+	<item name="fado hotel key 006">
+		<type class="key" subclass="hotel" tileid="-1"/>
+		<description>Oto klucz hotelowy do pokoju #006 w Fado.</description>
+		<implementation class-name="games.stendhal.server.entity.item.Item"/>
+		<attributes>
+		</attributes>
+		<weight value="1.0"/>
+		<value value="1"/>
+		<equipable>
+			<slot name="ground"/>
+			<slot name="content"/>
+			<slot name="bag"/>
+			<slot name="trade"/>
+			<slot name="keyring"/>
+		</equipable>
+	</item>
+
+	<item name="fado hotel key 007">
+		<type class="key" subclass="hotel" tileid="-1"/>
+		<description>Oto klucz hotelowy do pokoju #007 w Fado.</description>
+		<implementation class-name="games.stendhal.server.entity.item.Item"/>
+		<attributes>
+		</attributes>
+		<weight value="1.0"/>
+		<value value="1"/>
+		<equipable>
+			<slot name="ground"/>
+			<slot name="content"/>
+			<slot name="bag"/>
+			<slot name="trade"/>
+			<slot name="keyring"/>
+		</equipable>
+	</item>
+
+	<item name="fado hotel key 008">
+		<type class="key" subclass="hotel" tileid="-1"/>
+		<description>Oto klucz hotelowy do pokoju #008 w Fado.</description>
+		<implementation class-name="games.stendhal.server.entity.item.Item"/>
+		<attributes>
+		</attributes>
+		<weight value="1.0"/>
+		<value value="1"/>
+		<equipable>
+			<slot name="ground"/>
+			<slot name="content"/>
+			<slot name="bag"/>
+			<slot name="trade"/>
+			<slot name="keyring"/>
+		</equipable>
+	</item>-->
+
+	<item name="kluczyk Zary">
+		<type class="key" subclass="common" tileid="-1"/>
+		<description>Oto kluczyk Zary z Ados.</description>
+		<implementation class-name="games.stendhal.server.entity.item.Item"/>
+		<attributes>
+		</attributes>
+		<weight value="1.0"/>
+		<value value="1"/>
+		<equipable>
+			<slot name="ground"/>
+			<slot name="content"/>
+			<slot name="bag"/>
+			<slot name="trade"/>
+			<slot name="keyring"/>
+		</equipable>
+	</item>
+
+	<item name="klucz do bram Zakonu">
+		<type class="key" subclass="gold" tileid="-1"/>
+		<description>Oto klucz do bram Zakonu Rycerzy Cienia.</description>
+		<implementation class-name="games.stendhal.server.entity.item.Item"/>
+		<attributes>
+		</attributes>
+		<weight value="1.0"/>
+		<value value="1"/>
+		<equipable>
+			<slot name="ground"/>
+			<slot name="content"/>
+			<slot name="bag"/>
+			<slot name="keyring"/>
+		</equipable>
+	</item>
+	
+	<item name="klucz do piekła 2024">
+		<type class="key" subclass="klucz_do_piekla_2024" tileid="-1"/>
+		<description>Oto klucz do piekła. Ten starożytny artefakt, wykuty w ogniach najgłębszych czeluści, otwiera wrota do krainy pełnej wiecznego mroku i nieopisanych cierpień #lato #2024</description>
+		<implementation class-name="games.stendhal.server.entity.item.Item"/>
+		<attributes>
+			<autobind value=""/>
+		</attributes>
+		<weight value="1.0"/>
+		<value value="1"/>
+		<equipable>
+			<slot name="ground"/>
+			<slot name="content"/>
+			<slot name="bag"/>
+			<slot name="trade"/>
+			<slot name="keyring"/>
+		</equipable>
+	</item>
+	
+	<item name="klucz do wieliczki 2024">
+		<type class="key" subclass="klucz_do_wieliczki_2024" tileid="-1"/>
+		<description>Oto klucz do Wieliczki. Ten lodowy artefakt emanuje mroźną aurą, która sprawia, że w jego pobliżu temperatura gwałtownie spada. Klucz prowadzi do starożytnych, lodowych komnat, gdzie wieczny chłód i szron pokrywają każdy zakątek. Jest to miejsce w którym możesz skryć się przed upałem... #2024</description>
+		<implementation class-name="games.stendhal.server.entity.item.Item"/>
+		<attributes>
+			<autobind value=""/>
+		</attributes>
+		<weight value="1.0"/>
+		<value value="1"/>
+		<equipable>
+			<slot name="ground"/>
+			<slot name="content"/>
+			<slot name="bag"/>
+			<slot name="trade"/>
+			<slot name="keyring"/>
+		</equipable>
+	</item>
+	
+	<item name="smocza pieczęć 2024">
+		<type class="key" subclass="smocza_pieczec_2024" tileid="-1"/>
+		<description>Oto smocza pieczęć. Przedmiot o niezwykłej mocy, stworzony z łuski pradawnego smoka i otoczony aurą gorącego powietrza. Smocza Pieczęć jest symbolem równowagi pomiędzy światami ludzi i smoków. Tylko ci, którzy udowodnią swoją wartość w walce, mogą aktywować jej moc i stanąć twarzą w twarz ze Smokiem Wawelskim #zima #2024 </description>
+		<implementation class-name="games.stendhal.server.entity.item.Item"/>
+		<attributes>
+			<autobind value=""/>
+		</attributes>
+		<weight value="1.0"/>
+		<value value="1"/>
+		<equipable>
+			<slot name="ground"/>
+			<slot name="content"/>
+			<slot name="bag"/>
+			<slot name="trade"/>
+			<slot name="keyring"/>
+		</equipable>
+	</item>
+	
+	<item name="klucz do wieliczki">
+		<type class="key" subclass="klucz_do_wieliczki" tileid="-1"/>
+		<description>Oto klucz do Wieliczki. Ten ciężki, srebrny klucz nosi wyraźne ślady wiekowego użytkowania. W jego uchwycie wyryto skomplikowane symbole, które zdają się jaśnieć w ciemności, kiedy zbliżasz się do wejścia do legendarnej kopalni. Wieliczka. Klucz otwiera bramy ukryte w sercu lodowych krain, prowadząc do głębin pełnych skarbów i zagadek solnych labiryntów. </description>
+		<implementation class-name="games.stendhal.server.entity.item.Item"/>
+		<attributes>
+			<autobind value=""/>
+		</attributes>
+		<weight value="1.0"/>
+		<value value="1"/>
+		<equipable>
+			<slot name="ground"/>
+			<slot name="content"/>
+			<slot name="bag"/>
+			<slot name="trade"/>
+			<slot name="keyring"/>
+		</equipable>
+	</item>
+	
+</items>

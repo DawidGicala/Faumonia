@@ -1,0 +1,605 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<items xmlns="stendhal" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="stendhal ../items.xsd ">
+	
+	 <!-- Płaszcze -->	
+	 <!-- Przedmioty zostały posegregowane kolejno według: minimalnego poziomu, obrony -->
+	 <!-- Dodając nowy ekwipunek postaraj się utrzymać porządek w kodzie, według podanego schematu! -->
+	 <!-- Ostatnia znacząca aktualizacja: FaumoniaOnline 2019 /davvids -->
+
+	 <!-- Cloaks -->
+	 <!-- This items was segregated by: min lvl, def -->
+	 <!-- While adding new items try to follow this! -->
+	 <!-- Last significant update: FaumoniaOnline 2019 /davvids -->
+	
+	<item name="peleryna">
+		<type class="cloak" subclass="cloak" tileid="-1"/>
+		<description>To zwykła peleryna. Załóż ją to nie bedzie ci zimno.</description>
+		<implementation class-name="games.stendhal.server.entity.item.Item"/>
+		<attributes>
+			<def value="1"/>
+		</attributes>
+		<weight value="1.0"/>
+		<value value="7"/>
+		<equipable>
+			<slot name="ground"/>
+			<slot name="content"/>
+			<slot name="cloak"/>
+			<slot name="bag"/>
+			<slot name="trade"/>
+		</equipable>
+	</item>
+	
+	<item name="płaszcz karmazynowy">
+		<type class="cloak" subclass="red_cloak" tileid="-1"/>
+		<description>Widzisz płaszcz karmazynowy w kropki. Jest odlotowy.</description>
+		<implementation class-name="games.stendhal.server.entity.item.Item"/>
+		<attributes>
+			<def value="4"/>
+			<minlevel value="15"/>
+		</attributes>
+		<weight value="5.0"/>
+		<value value="948"/>
+		<equipable>
+			<slot name="ground"/>
+			<slot name="content"/>
+			<slot name="cloak"/>
+			<slot name="bag"/>
+			<slot name="trade"/>
+		</equipable>
+	</item>
+	
+	<item name="płaszcz orczy">
+		<type class="cloak" subclass="orc_cloak" tileid="-1"/>
+		<description>Widzisz płaszcz orczy. Wygląda na malutki.</description>
+		<implementation class-name="games.stendhal.server.entity.item.Item"/>
+		<attributes>
+			<def value="8"/>
+			<minlevel value="40"/>
+		</attributes>
+		<weight value="5.0"/>
+		<value value="40824"/>
+		<equipable>
+			<slot name="ground"/>
+			<slot name="content"/>
+			<slot name="cloak"/>
+			<slot name="bag"/>
+			<slot name="trade"/>
+		</equipable>
+	</item>
+	
+	<item name="płaszcz licha">
+		<type class="cloak" subclass="lich_cloak" tileid="-1"/>
+		<description>Widzisz purpurowy płaszcz licha. Cały oblepiony krwią: twoją, Licha lub jakiegos innego potwora.</description>
+		<implementation class-name="games.stendhal.server.entity.item.Item"/>
+		<attributes>
+			<def value="10"/>
+			<minlevel value="40"/>
+		</attributes>
+		<weight value="2.0"/>
+		<value value="9317"/>
+		<equipable>
+			<slot name="ground"/>
+			<slot name="content"/>
+			<slot name="cloak"/>
+			<slot name="bag"/>
+			<slot name="trade"/>
+		</equipable>
+	</item>
+	
+	<item name="szmaragdowy płaszcz smoczy">
+		<type class="cloak" subclass="green_dragon_cloak" tileid="-1"/>
+		<description>Widzisz wielki szmaragdowy płaszcz smoczy. Jest chyba za duży na ciebie, ale za to ma potężną obronę.</description>
+		<implementation class-name="games.stendhal.server.entity.item.Item"/>
+		<attributes>
+			<def value="10"/>
+			<minlevel value="50"/>
+		</attributes>
+		<weight value="5.0"/>
+		<value value="7000"/>
+		<equipable>
+			<slot name="ground"/>
+			<slot name="content"/>
+			<slot name="cloak"/>
+			<slot name="bag"/>
+			<slot name="trade"/>
+		</equipable>
+	</item>
+	
+	<item name="prążkowany płaszcz lazurowy">
+		<type class="cloak" subclass="blue_striped_cloak" tileid="-1"/>
+		<description>Widzisz modny prążkowany płaszcz lazurowy.</description>
+		<implementation class-name="games.stendhal.server.entity.item.Item"/>
+		<attributes>
+			<def value="11"/>
+			<minlevel value="50"/>
+		</attributes>
+		<weight value="5.0"/>
+		<value value="2200"/>
+		<equipable>
+			<slot name="ground"/>
+			<slot name="content"/>
+			<slot name="cloak"/>
+			<slot name="bag"/>
+			<slot name="trade"/>
+		</equipable>
+	</item>
+	
+	<item name="kościany płaszcz smoczy">
+		<type class="cloak" subclass="bone_dragon_cloak" tileid="-1"/>
+		<description>Widzisz kościany płaszcz smoczy. Jest stasznie stary, jak jego poprzedni właściciel.</description>
+		<implementation class-name="games.stendhal.server.entity.item.Item"/>
+		<attributes>
+			<def value="11"/>
+			<minlevel value="55"/>
+		</attributes>
+		<weight value="2.0"/>
+		<value value="9317"/>
+		<equipable>
+			<slot name="ground"/>
+			<slot name="content"/>
+			<slot name="cloak"/>
+			<slot name="bag"/>
+			<slot name="trade"/>
+		</equipable>
+	</item>
+	
+	<item name="płaszcz elficki">
+		<type class="cloak" subclass="elvish_cloak" tileid="-1"/>
+		<description>Widzisz elvish cloak. Materiał utkany z leśnych pnączy jest cieńki lecz ciepły.</description>
+		<implementation class-name="games.stendhal.server.entity.item.Item"/>
+		<attributes>
+			<def value="12"/>
+			<minlevel value="60"/>
+		</attributes>
+		<weight value="5.0"/>
+		<value value="1512"/>
+		<equipable>
+			<slot name="ground"/>
+			<slot name="content"/>
+			<slot name="bag"/>
+			<slot name="trade"/>
+			<slot name="cloak"/>
+		</equipable>
+	</item>
+	
+	<item name="lazurowy płaszcz elficki">
+		<type class="cloak" subclass="blue_elf_cloak" tileid="-1"/>
+		<description>Widzisz lazurowy płaszcz elficki. Materiał jest gruby i ciepły.</description>
+		<implementation class-name="games.stendhal.server.entity.item.Item"/>
+		<attributes>
+			<def value="13"/>
+			<minlevel value="60"/>
+		</attributes>
+		<weight value="5.0"/>
+		<value value="3584"/>
+		<equipable>
+			<slot name="ground"/>
+			<slot name="content"/>
+			<slot name="cloak"/>
+			<slot name="bag"/>
+			<slot name="trade"/>
+		</equipable>
+	</item>
+	
+	<item name="peleryna elficka">
+		<type class="cloak" subclass="elf_cloak" tileid="-1"/>
+		<description>To peleryna elficka. Jest przewiewna i nie daje ochrony przez chłodem.</description>
+		<implementation class-name="games.stendhal.server.entity.item.Item"/>
+		<attributes>
+			<def value="13"/>
+			<minlevel value="60"/>
+		</attributes>
+		<weight value="1.0"/>
+		<value value="189"/>
+		<equipable>
+			<slot name="ground"/>
+			<slot name="content"/>
+			<slot name="cloak"/>
+			<slot name="bag"/>
+			<slot name="trade"/>
+		</equipable>
+	</item>
+	
+	<item name="lazurowy płaszcz smoczy">
+		<type class="cloak" subclass="blue_dragon_cloak" tileid="-1"/>
+		<description>Widzisz lazurowy płaszcz smoczy. Wiele byś dał, żeby jego kolor nie rzucał się tak w oczy.</description>
+		<implementation class-name="games.stendhal.server.entity.item.Item"/>
+		<attributes>
+			<def value="13"/>
+			<minlevel value="70"/>
+		</attributes>
+		<weight value="5.0"/>
+		<value value="15379"/>
+		<equipable>
+			<slot name="ground"/>
+			<slot name="content"/>
+			<slot name="cloak"/>
+			<slot name="bag"/>
+			<slot name="trade"/>
+		</equipable>
+	</item>
+	
+	<item name="złoty płaszcz">
+		<type class="cloak" subclass="golden_cloak" tileid="-1"/>
+		<description>Widzisz złoty płaszcz. Jest utkany ze szczerozłotych nici.</description>
+		<implementation class-name="games.stendhal.server.entity.item.Item"/>
+		<attributes>
+			<def value="15"/>
+			<minlevel value="75"/>
+		</attributes>
+		<weight value="5.0"/>
+		<value value="48013"/>
+		<equipable>
+			<slot name="ground"/>
+			<slot name="content"/>
+			<slot name="cloak"/>
+			<slot name="bag"/>
+			<slot name="trade"/>
+		</equipable>
+	</item>
+	
+	<item name="płaszcz krasnoludzki">
+		<type class="cloak" subclass="dwarf_cloak" tileid="-1"/>
+		<description>Widzisz płaszcz krasnoludzki. Najwyraźniej jest modny, ale przyda ci się bardziej w celach wojskowych.</description>
+		<implementation class-name="games.stendhal.server.entity.item.Item"/>
+		<attributes>
+			<def value="16"/>
+			<minlevel value="75"/>
+		</attributes>
+		<weight value="5.0"/>
+		<value value="448"/>
+		<equipable>
+			<slot name="ground"/>
+			<slot name="content"/>
+			<slot name="cloak"/>
+			<slot name="bag"/>
+			<slot name="trade"/>
+		</equipable>
+	</item>
+	
+	<item name="karmazynowy płaszcz smoczy">
+		<type class="cloak" subclass="red_dragon_cloak" tileid="-1"/>
+		<description>Oto karmazynowy płaszcz smoczy. Smok nie poddawał się długo, ale w końcu nie zniósł presji i stracił go.</description>
+		<implementation class-name="games.stendhal.server.entity.item.Item"/>
+		<attributes>
+			<def value="17"/>
+			<minlevel value="90"/>
+		</attributes>
+		<weight value="5.0"/>
+		<value value="20000"/>
+		<equipable>
+			<slot name="ground"/>
+			<slot name="content"/>
+			<slot name="cloak"/>
+			<slot name="bag"/>
+			<slot name="trade"/>
+		</equipable>
+	</item>
+	
+	<item name="płaszcz cieni">
+		<type class="cloak" subclass="shadow_cloak" tileid="-1"/>
+		<description>Widzisz płaszcz cieni, który w mroku jakieś złowrogie cienie przebiegają.</description>
+		<implementation class-name="games.stendhal.server.entity.item.Item"/>
+		<attributes>
+			<def value="17"/>
+			<minlevel value="90"/>
+		</attributes>
+		<weight value="2.0"/>
+		<value value="15379"/>
+		<equipable>
+			<slot name="ground"/>
+			<slot name="content"/>
+			<slot name="cloak"/>
+			<slot name="bag"/>
+			<slot name="trade"/>
+		</equipable>
+	</item>
+	
+	<item name="płaszcz z białego złota">
+		<type class="cloak" subclass="whitegold_cloak" tileid="-1"/>
+		<description>Widzisz płaszcz z białego złota. Drogo zdobiony.</description>
+		<implementation class-name="games.stendhal.server.entity.item.Item"/>
+		<attributes>
+			<def value="19"/>
+			<minlevel value="110"/>
+		</attributes>
+		<weight value="5.0"/>
+		<value value="40824"/>
+		<equipable>
+			<slot name="ground"/>
+			<slot name="content"/>
+			<slot name="cloak"/>
+			<slot name="bag"/>
+			<slot name="trade"/>
+		</equipable>
+	</item>
+	
+	<item name="płaszcz ciemności">
+		<type class="cloak" subclass="dark_cloak" tileid="-1"/>
+		<description>Widzisz płaszcz ciemności. Sprawia wrażenie brudnego.</description>
+		<implementation class-name="games.stendhal.server.entity.item.Item"/>
+		<attributes>
+			<def value="21"/>
+			<minlevel value="130"/>
+		</attributes>
+		<weight value="6.0"/>
+		<value value="73000"/>
+		<equipable>
+			<slot name="ground"/>
+			<slot name="content"/>
+			<slot name="cloak"/>
+			<slot name="bag"/>
+			<slot name="trade"/>
+		</equipable>
+	</item>
+	
+	<item name="czarny płaszcz smoczy">
+		<type class="cloak" subclass="black_dragon_cloak" tileid="-1"/>
+		<description>Widzisz czarny płaszcz smoczy. Jest niezwykły.</description>
+		<implementation class-name="games.stendhal.server.entity.item.Item"/>
+		<attributes>
+			<def value="22"/>
+			<minlevel value="140"/>
+		</attributes>
+		<weight value="5.0"/>
+		<value value="40824"/>
+		<equipable>
+			<slot name="ground"/>
+			<slot name="content"/>
+			<slot name="cloak"/>
+			<slot name="bag"/>
+			<slot name="trade"/>
+		</equipable>
+	</item>
+	
+	<item name="płaszcz kamienny">
+		<type class="cloak" subclass="stone_cloak" tileid="-1"/>
+		<description>Widzisz płaszcz kamienny. Ciężko powiedzieć z czego był zrobiony, chyba z jakichś odpadów, w dodatku jest straszne ciasny.</description>
+		<implementation class-name="games.stendhal.server.entity.item.Item"/>
+		<attributes>
+			<def value="23"/>
+			<minlevel value="140"/>
+		</attributes>
+		<weight value="5.0"/>
+		<value value="5103"/>
+		<equipable>
+			<slot name="ground"/>
+			<slot name="content"/>
+			<slot name="bag"/>
+			<slot name="trade"/>
+			<slot name="cloak"/>
+		</equipable>
+	</item>
+	
+	<item name="płaszcz smoczy">
+		<type class="cloak" subclass="dragon_cloak" tileid="-1"/>
+		<description>Widzisz płaszcz smoczy. Został stworzony z najlepszej smoczej skóry.</description>
+		<implementation class-name="games.stendhal.server.entity.item.Item"/>
+		<attributes>
+			<def value="25"/>
+			<minlevel value="150"/>
+		</attributes>
+		<weight value="5.0"/>
+		<value value="40824"/>
+		<equipable>
+			<slot name="ground"/>
+			<slot name="content"/>
+			<slot name="cloak"/>
+			<slot name="bag"/>
+			<slot name="trade"/>
+		</equipable>
+	</item>
+	
+	<item name="płaszcz pustynny">
+		<type class="cloak" subclass="desert_cloak" tileid="-1"/>
+		<description>Oto płaszcz pustynny, który ochroni cię w czasie burzy piaskowej.</description>
+		<implementation class-name="games.stendhal.server.entity.item.Item"/>
+		<attributes>
+			<def value="23"/>
+			<minlevel value="160"/>
+		</attributes>
+		<weight value="5.0"/>
+		<value value="3584"/>
+		<equipable>
+			<slot name="ground"/>
+			<slot name="content"/>
+			<slot name="cloak"/>
+			<slot name="bag"/>
+			<slot name="trade"/>
+		</equipable>
+	</item>
+	
+	<item name="płaszcz wampirzy">
+		<type class="cloak" subclass="vampire_cloak" tileid="-1"/>
+		<description>Widzisz osławiony płaszcz wampirzy. Noszenie go nie jest zbyt przyjemne.</description>
+		<implementation class-name="games.stendhal.server.entity.item.Item"/>
+		<attributes>
+			<def value="27"/>
+			<minlevel value="175"/>
+		</attributes>
+		<weight value="2.0"/>
+		<value value="12096"/>
+		<equipable>
+			<slot name="ground"/>
+			<slot name="content"/>
+			<slot name="cloak"/>
+			<slot name="bag"/>
+			<slot name="trade"/>
+		</equipable>
+	</item>
+	
+	<item name="płaszcz chaosu">
+		<type class="cloak" subclass="chaos_cloak" tileid="-1"/>
+		<description>Widzisz płaszcz chaosu. Jest bardzo silny i dobrze cię obroni.</description>
+		<implementation class-name="games.stendhal.server.entity.item.Item"/>
+		<attributes>
+			<def value="36"/>
+			<minlevel value="200"/>
+		</attributes>
+		<weight value="5.0"/>
+		<value value="56000"/>
+		<equipable>
+			<slot name="ground"/>
+			<slot name="content"/>
+			<slot name="bag"/>
+			<slot name="trade"/>
+			<slot name="cloak"/>
+		</equipable>
+	</item>
+	
+	<item name="płaszcz balorughtów">
+		<type class="cloak" subclass="balourg_cloak" tileid="-1"/>
+		<description>Widzisz płaszcz balorughtów. Dziwnie wygląda ale jest wykonany z dobrej tkaniny.</description>
+		<implementation class-name="games.stendhal.server.entity.item.Item"/>
+		<attributes>
+			<def value="38"/>
+			<minlevel value="220"/>
+		</attributes>
+		<weight value="8.0"/>
+		<value value="109375"/>
+		<equipable>
+			<slot name="ground"/>
+			<slot name="content"/>
+			<slot name="bag"/>
+			<slot name="trade"/>
+			<slot name="cloak"/>
+		</equipable>
+	</item>
+	
+	<item name="płaszcz mainiocyjski">
+		<type class="cloak" subclass="mainio_cloak" tileid="-1"/>
+		<description>Widzisz płaszcz mainiocyjski. Jest uszyty z bardzo dobrego materiału.</description>
+		<implementation class-name="games.stendhal.server.entity.item.Item"/>
+		<attributes>
+			<def value="37"/>
+			<minlevel value="230"/>
+		</attributes>
+		<weight value="6.0"/>
+		<value value="63000"/>
+		<equipable>
+			<slot name="ground"/>
+			<slot name="content"/>
+			<slot name="cloak"/>
+			<slot name="bag"/>
+			<slot name="trade"/>
+		</equipable>
+	</item>
+	
+	<item name="płaszcz xenocyjski">
+		<type class="cloak" subclass="xeno_cloak" tileid="-1"/>
+		<description>Widzisz płaszcz xenocyjski. Jest gruby i ciepły oraz dobrze broni.</description>
+		<implementation class-name="games.stendhal.server.entity.item.Item"/>
+		<attributes>
+			<def value="38"/>
+			<minlevel value="240"/>
+		</attributes>
+		<weight value="6.0"/>
+		<value value="73000"/>
+		<equipable>
+			<slot name="ground"/>
+			<slot name="content"/>
+			<slot name="cloak"/>
+			<slot name="bag"/>
+			<slot name="trade"/>
+		</equipable>
+	</item>
+	
+	<item name="czarny płaszcz">
+		<type class="cloak" subclass="black_cloak" tileid="-1"/>
+		<description>Widzisz czarny płaszcz. Ostatni właściciel miał złe myśli. A jakie masz ty?</description>
+		<implementation class-name="games.stendhal.server.entity.item.Item"/>
+		<attributes>
+			<def value="47"/>
+			<minlevel value="300"/>
+		</attributes>
+		<weight value="8.0"/>
+		<value value="109375"/>
+		<equipable>
+			<slot name="ground"/>
+			<slot name="content"/>
+			<slot name="bag"/>
+			<slot name="trade"/>
+			<slot name="cloak"/>
+		</equipable>
+	</item>
+	
+	<item name="płaszcz z mithrilu">
+		<type class="cloak" subclass="mithril_cloak" tileid="-1"/>
+		<description>Widzisz płaszcz z mithrilu. Jego splot jest bardzo delikatny. Płaszcz wygląda oszałamiająco.</description>
+		<implementation class-name="games.stendhal.server.entity.item.Item"/>
+		<attributes>
+			<def value="58"/>
+			<minlevel value="400"/>
+		</attributes>
+		<weight value="5.0"/>
+		<value value="409375"/>
+		<equipable>
+			<slot name="ground"/>
+			<slot name="content"/>
+			<slot name="bag"/>
+			<slot name="trade"/>
+			<slot name="cloak"/>
+		</equipable>
+	</item>
+	
+	<item name="świąteczny płaszcz 2023">
+		<type class="cloak" subclass="swiateczny_plaszcz_2023" tileid="-1"/>
+		<description>Oto świąteczny płaszcz. Płaszcz, przypominający zimowy płatek śniegu, jest nie tylko piękny, ale i praktyczny, chroniąc przed zimnem i wiatrem podczas zimowych przygód #zima #2023 Przedmiot utracił swą zimową moc.</description>
+		<implementation class-name="games.stendhal.server.entity.item.Item"/>
+		<attributes>
+			<def value="1"/>
+			<minlevel value="200"/>
+			<autobind value=""/>
+		</attributes>
+		<weight value="8.0"/>
+		<value value="109375"/>
+		<equipable>
+			<slot name="ground"/>
+			<slot name="content"/>
+			<slot name="bag"/>
+			<slot name="trade"/>
+			<slot name="cloak"/>
+		</equipable>
+	</item>
+	
+	<item name="płaszcz zimowy 2023">
+		<type class="cloak" subclass="zimowy_plaszcz_2023" tileid="-1"/>
+		<description>OOto zimowy płaszcz. Jego długość i grubość zapewniają ochronę przed zimowymi wichurami, a śnieżnobiały kolor przypomina śniegowe zaspy #zima #2023 Przedmiot utracił swą zimową moc.</description>
+		<implementation class-name="games.stendhal.server.entity.item.Item"/>
+		<attributes>
+			<def value="1"/>
+			<minlevel value="80"/>
+		</attributes>
+		<weight value="6.0"/>
+		<value value="73000"/>
+		<equipable>
+			<slot name="ground"/>
+			<slot name="content"/>
+			<slot name="cloak"/>
+			<slot name="bag"/>
+			<slot name="trade"/>
+		</equipable>
+	</item>
+	
+	<item name="płaszcz pustynny 2024">
+		<type class="cloak" subclass="plaszcz_pustynny_2024" tileid="-1"/>
+		<description>Oto płaszcz pustynny. Wykonany z delikatnego, chłodzącego materiału, chroni przed skwarem dnia i chłodem nocy, doskonale sprawdzając się w każdych warunkach #lato #2024</description>
+		<implementation class-name="games.stendhal.server.entity.item.Item"/>
+		<attributes>
+			<def value="1"/>
+			<minlevel value="40"/>
+			<autobind value=""/>
+		</attributes>
+		<weight value="6.0"/>
+		<value value="73000"/>
+		<equipable>
+			<slot name="ground"/>
+			<slot name="content"/>
+			<slot name="cloak"/>
+			<slot name="bag"/>
+			<slot name="trade"/>
+		</equipable>
+	</item>
+	
+</items>

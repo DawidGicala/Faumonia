@@ -1,0 +1,465 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<items xmlns="stendhal" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="stendhal ../items.xsd ">
+
+	<item name="prezent">
+		<type class="box" subclass="present" tileid="-1"/>
+		<description>Widzisz prezent. Otwórz go.</description>
+		<implementation class-name="games.stendhal.server.entity.item.Present"/>
+		<attributes>
+		</attributes>
+		<weight value="0.01"/>
+		<value value="1"/>
+		<equipable>
+			<slot name="ground"/>
+			<slot name="content"/>
+			<slot name="bag"/>
+			<slot name="trade"/>
+		</equipable>
+	</item>
+	
+	<item name="prezent świąteczny 2020">
+		<type class="box" subclass="christmas_present" tileid="-1"/>
+		<description>Widzisz prezent świąteczny. Zobacz co jest w środku! #Pamiątka #z #Bożego #Narodzenia #2020</description>
+		<implementation class-name="games.stendhal.server.entity.item.PrezentSwiateczny2020"/>
+		<attributes>
+		</attributes>
+		<weight value="0.01"/>
+		<value value="1"/>
+		<equipable>
+			<slot name="ground"/>
+			<slot name="content"/>
+			<slot name="bag"/>
+			<slot name="trade"/>
+		</equipable>
+	</item>
+	
+	<item name="sekretny kuferek 2024">
+		<type class="box" subclass="sekretny_kuferek_2024" tileid="-1"/>
+		<description>Widzisz sekretny kuferek. Jest to tajemniczy artefakt, stworzony przez starożytnych magów, który skrywa niezwykłe zwoje i skarby. Otwórz go, aby odkryć ukryte bogactwa Faumonii #lato #2024 </description>
+		<implementation class-name="games.stendhal.server.entity.item.SekretnyKuferek2024"/>
+		<attributes>
+		</attributes>
+		<weight value="0.01"/>
+		<value value="1"/>
+		<equipable>
+			<slot name="ground"/>
+			<slot name="content"/>
+			<slot name="bag"/>
+			<slot name="trade"/>
+		</equipable>
+	</item>
+
+	<item name="koszyk">
+		<type class="box" subclass="basket" tileid="-1"/>
+		<description>Widzisz koszyk. Spójrz do niego.</description>
+		<implementation class-name="games.stendhal.server.entity.item.Basket"/>
+		<attributes>
+		</attributes>
+		<weight value="0.01"/>
+		<value value="1"/>
+		<equipable>
+			<slot name="ground"/>
+			<slot name="content"/>
+			<slot name="bag"/>
+			<slot name="trade"/>
+		</equipable>
+	</item>
+
+	<item name="skarpeta">
+		<type class="box" subclass="stocking" tileid="-1"/>
+		<description>To skarpeta. Spójrz do środka.</description>
+		<implementation class-name="games.stendhal.server.entity.item.Stocking"/>
+		<attributes>
+		</attributes>
+		<weight value="0.01"/>
+		<value value="100"/>
+		<equipable>
+			<slot name="ground"/>
+			<slot name="content"/>
+			<slot name="bag"/>
+			<slot name="trade"/>
+		</equipable>
+	</item>
+	
+	<item name="skarpeta świąteczna 2020">
+		<type class="box" subclass="stocking" tileid="-1"/>
+		<description>To skarpeta świąteczna. Zbierz takie 3 i wymień u renifera Rudolpha na świąteczny prezent! #Pamiątka #z #Bożego #Narodzenia #2020</description>
+		<implementation class-name="games.stendhal.server.entity.item.Stocking"/>
+		<attributes>
+		</attributes>
+		<weight value="0.01"/>
+		<value value="100"/>
+		<equipable>
+			<slot name="ground"/>
+			<slot name="content"/>
+			<slot name="bag"/>
+			<slot name="trade"/>
+		</equipable>
+	</item>
+	
+	<item name="czerwona skarpeta">
+		<type class="box" subclass="czerwona_skarpeta" tileid="-1"/>
+		<description>To czerwona skarpeta. Spójrz do środka.</description>
+		<implementation class-name="games.stendhal.server.entity.item.CzerwonaSkarpeta"/>
+		<attributes>
+		</attributes>
+		<weight value="0.01"/>
+		<value value="100"/>
+		<equipable>
+			<slot name="ground"/>
+			<slot name="content"/>
+			<slot name="bag"/>
+			<slot name="trade"/>
+		</equipable>
+	</item>
+	
+	<item name="niebieska skarpeta">
+		<type class="box" subclass="niebieska_skarpeta" tileid="-1"/>
+		<description>To niebieska skarpeta. Spójrz do środka.</description>
+		<implementation class-name="games.stendhal.server.entity.item.CzerwonaSkarpeta"/>
+		<attributes>
+		</attributes>
+		<weight value="0.01"/>
+		<value value="100"/>
+		<equipable>
+			<slot name="ground"/>
+			<slot name="content"/>
+			<slot name="bag"/>
+			<slot name="trade"/>
+		</equipable>
+	</item>
+
+	<item name="zielona skarpeta">
+		<type class="box" subclass="zielona_skarpeta" tileid="-1"/>
+		<description>To zielona skarpeta. Spójrz do środka.</description>
+		<implementation class-name="games.stendhal.server.entity.item.CzerwonaSkarpeta"/>
+		<attributes>
+		</attributes>
+		<weight value="0.01"/>
+		<value value="100"/>
+		<equipable>
+			<slot name="ground"/>
+			<slot name="content"/>
+			<slot name="bag"/>
+			<slot name="trade"/>
+		</equipable>
+	</item>
+	
+	<item name="skrzynka">
+		<type class="box" subclass="skrzynka" tileid="-1"/>
+		<description>Widzisz skrzynkę. Otwórz ją.</description>
+		<implementation class-name="games.stendhal.server.entity.item.Present"/>
+		<attributes/>
+		<weight value="0.01"/>
+		<value value="1"/>
+		<equipable>
+			<slot name="ground"/>
+			<slot name="content"/>
+			<slot name="bag"/>
+			<slot name="trade"/>
+		</equipable>
+	</item>
+
+	<item name="paczka mikstur">
+		<type class="box" subclass="potion" tileid="-1"/>
+		<description>Widzisz paczkę mikstur. Patrząc na nią przeczuwasz, żę w środku znajdziesz silne eliksiry.</description>
+		<implementation class-name="games.stendhal.server.entity.item.Pudelkoa"/>
+		<attributes/>
+		<weight value="0.01"/>
+		<value value="1"/>
+		<equipable>
+			<slot name="ground"/>
+			<slot name="content"/>
+			<slot name="bag"/>
+			<slot name="trade"/>
+		</equipable>
+	</item>
+
+<item name="paczka słodyczy">
+		<type class="box" subclass="sweet" tileid="-1"/>
+		<description>Widzisz paczkę słodyczy. W środku na pewno jest coś pysznego !</description>
+		<implementation class-name="games.stendhal.server.entity.item.Pudelkob"/>
+		<attributes/>
+		<weight value="0.01"/>
+		<value value="1"/>
+		<equipable>
+			<slot name="ground"/>
+			<slot name="content"/>
+			<slot name="bag"/>
+			<slot name="trade"/>
+		</equipable>
+	</item>
+
+<item name="paczka owoców">
+		<type class="box" subclass="fruit" tileid="-1"/>
+		<description>Widzisz paczkę owoców. W środku zapewnie znajduje się coś dobrego.</description>
+		<implementation class-name="games.stendhal.server.entity.item.Pudelkoc"/>
+		<attributes/>
+		<weight value="0.01"/>
+		<value value="1"/>
+		<equipable>
+			<slot name="ground"/>
+			<slot name="content"/>
+			<slot name="bag"/>
+			<slot name="trade"/>
+		</equipable>
+	</item>
+
+	<item name="drewniana skrzynia">
+		<type class="box" subclass="box1" tileid="-1"/>
+		<description>Widzisz drewnianą skrzynie. W środku zapewnie znajdziesz coś na siebie.</description>
+		<implementation class-name="games.stendhal.server.entity.item.Present"/>
+		<attributes/>
+		<weight value="0.01"/>
+		<value value="1"/>
+		<equipable>
+			<slot name="ground"/>
+			<slot name="content"/>
+			<slot name="bag"/>
+			<slot name="trade"/>
+		</equipable>
+	</item>
+	
+	<item name="srebrna skrzynia">
+		<type class="box" subclass="box2" tileid="-1"/>
+		<description>Widzisz srebrną skrzynie. Otwórz ją i zobacz co dobrego trafiłeś.</description>
+		<implementation class-name="games.stendhal.server.entity.item.Present"/>
+		<attributes/>
+		<weight value="0.01"/>
+		<value value="1"/>
+		<equipable>
+			<slot name="ground"/>
+			<slot name="content"/>
+			<slot name="bag"/>
+			<slot name="trade"/>
+		</equipable>
+	</item>
+	
+	<item name="pozłacana skrzynia">
+		<type class="box" subclass="box3" tileid="-1"/>
+		<description>Widzisz pozłacaną skrzynie. Wyrwana z rąk silnego potwora skrywa w sobie coś bardzo cennego.</description>
+		<implementation class-name="games.stendhal.server.entity.item.Present"/>
+		<attributes/>
+		<weight value="0.01"/>
+		<value value="1"/>
+		<equipable>
+			<slot name="ground"/>
+			<slot name="content"/>
+			<slot name="bag"/>
+			<slot name="trade"/>
+		</equipable>
+	</item>
+	
+	<item name="czerwony zwój">
+		<type class="scroll" subclass="zwiniety_purple" tileid="-1"/>
+		<description>Widzisz czerwony zwój. Rozwiń go aby zobaczyć co się stanie..</description>
+		<implementation class-name="games.stendhal.server.entity.item.Kamyk1"/>
+		<attributes>
+		<autobind value=""/>
+		</attributes>
+		<weight value="0.01"/>
+		<value value="1"/>
+		<equipable>
+			<slot name="ground"/>
+			<slot name="content"/>
+			<slot name="bag"/>
+			<slot name="trade"/>
+		</equipable>
+	</item>
+	
+	<item name="niebieski zwój">
+		<type class="scroll" subclass="zwiniety_blue" tileid="-1"/>
+		<description>Widzisz niebieski zwój. Rozwiń go aby zobaczyć co się stanie..</description>
+		<implementation class-name="games.stendhal.server.entity.item.Kamyk2"/>
+		<attributes>
+		<autobind value=""/>
+		</attributes>
+		<weight value="0.01"/>
+		<value value="1"/>
+		<equipable>
+			<slot name="ground"/>
+			<slot name="content"/>
+			<slot name="bag"/>
+			<slot name="trade"/>
+		</equipable>
+	</item>
+	
+	<item name="czarny zwój">
+		<type class="scroll" subclass="zwiniety_black" tileid="-1"/>
+		<description>Widzisz czarny zwój. Rozwiń go aby zobaczyć co się stanie..</description>
+		<implementation class-name="games.stendhal.server.entity.item.Kamyk3"/>
+		<attributes>
+		<autobind value=""/>
+		</attributes>
+		<weight value="0.01"/>
+		<value value="1"/>
+		<equipable>
+			<slot name="ground"/>
+			<slot name="content"/>
+			<slot name="bag"/>
+			<slot name="trade"/>
+		</equipable>
+	</item>
+	
+	<item name="skrzynia skarbów I">
+		<type class="box" subclass="skrzynia_skarbow" tileid="-1"/>
+		<description>Widzisz skrzynie pełną skarbów. Możesz znaleźć w niej błękitny kamyczek szlachetny lub czerwony kamyczek szlachetny. </description>
+		<implementation class-name="games.stendhal.server.entity.item.SkrzyniaSkarbow1"/>
+		<attributes>
+		</attributes>
+		<weight value="0.01"/>
+		<value value="1"/>
+		<equipable>
+			<slot name="ground"/>
+			<slot name="content"/>
+			<slot name="bag"/>
+			<slot name="trade"/>
+		</equipable>
+	</item>
+	
+	<item name="skrzynia skarbów II">
+		<type class="box" subclass="skrzynia_skarbow" tileid="-1"/>
+		<description>Widzisz skrzynie pełną skarbów. Możesz znaleźć w niej błękitny kamyczek szlachetny, błękitne kamyczki szlachetne lub czerwony kamyczek szlachetny. </description>
+		<implementation class-name="games.stendhal.server.entity.item.SkrzyniaSkarbow2"/>
+		<attributes>
+		</attributes>
+		<weight value="0.01"/>
+		<value value="1"/>
+		<equipable>
+			<slot name="ground"/>
+			<slot name="content"/>
+			<slot name="bag"/>
+			<slot name="trade"/>
+		</equipable>
+	</item>
+	
+	<item name="skrzynia skarbów III">
+		<type class="box" subclass="skrzynia_skarbow" tileid="-1"/>
+		<description>Widzisz skrzynie pełną skarbów. Możesz znaleźć w niej błękitny kamyczek szlachetny, błękitne kamyczki szlachetne, czerwony kamyczek szlachetny lub czerwony kamień szlachetny. </description>
+		<implementation class-name="games.stendhal.server.entity.item.SkrzyniaSkarbow3"/>
+		<attributes>
+		</attributes>
+		<weight value="0.01"/>
+		<value value="1"/>
+		<equipable>
+			<slot name="ground"/>
+			<slot name="content"/>
+			<slot name="bag"/>
+			<slot name="trade"/>
+		</equipable>
+	</item>
+	
+	<item name="skrzynia skarbów IV">
+		<type class="box" subclass="skrzynia_skarbow" tileid="-1"/>
+		<description>Widzisz skrzynie pełną skarbów. Możesz znaleźć w niej błękitne kamienie szlachetne, błękitny kamień szlachetny, czerwony kamyczek szlachetny lub czerwony kamień szlachetny. </description>
+		<implementation class-name="games.stendhal.server.entity.item.SkrzyniaSkarbow4"/>
+		<attributes>
+		</attributes>
+		<weight value="0.01"/>
+		<value value="1"/>
+		<equipable>
+			<slot name="ground"/>
+			<slot name="content"/>
+			<slot name="bag"/>
+			<slot name="trade"/>
+		</equipable>
+	</item>
+	
+	<item name="skrzynia skarbów V">
+		<type class="box" subclass="skrzynia_skarbow" tileid="-1"/>
+		<description>Widzisz skrzynie pełną skarbów. Możesz znaleźć w niej błękitny kamyczek szlachetny, błękitne kamyczki szlachetne, błękitny kamień szlachetny lub błękitne kamienie szlachetne. </description>
+		<implementation class-name="games.stendhal.server.entity.item.SkrzyniaSkarbow5"/>
+		<attributes>
+		</attributes>
+		<weight value="0.01"/>
+		<value value="1"/>
+		<equipable>
+			<slot name="ground"/>
+			<slot name="content"/>
+			<slot name="bag"/>
+			<slot name="trade"/>
+		</equipable>
+	</item>
+	
+	<item name="skrzynia skarbów VI">
+		<type class="box" subclass="skrzynia_skarbow" tileid="-1"/>
+		<description>Widzisz skrzynie pełną skarbów. Możesz znaleźć w niej błękitne kamyczki szlachetne, błękitny kamień szlachetny, czerwony kamyczek szlachetny, czerwony kamień szlachetny lub czerwone kamienie szlachetne. </description>
+		<implementation class-name="games.stendhal.server.entity.item.SkrzyniaSkarbow6"/>
+		<attributes>
+		</attributes>
+		<weight value="0.01"/>
+		<value value="1"/>
+		<equipable>
+			<slot name="ground"/>
+			<slot name="content"/>
+			<slot name="bag"/>
+			<slot name="trade"/>
+		</equipable>
+	</item>
+	
+	<item name="skrzynia skarbów VII">
+		<type class="box" subclass="skrzynia_skarbow" tileid="-1"/>
+		<description>Widzisz skrzynie pełną skarbów. Możesz znaleźć w niej błękitne kamyczki szlachetne, błękitny kamień szlachetny, czerwony kamyczek szlachetny, czerwony kamień szlachetny lub czerwone kamienie szlachetne. </description>
+		<implementation class-name="games.stendhal.server.entity.item.SkrzyniaSkarbow7"/>
+		<attributes>
+		</attributes>
+		<weight value="0.01"/>
+		<value value="1"/>
+		<equipable>
+			<slot name="ground"/>
+			<slot name="content"/>
+			<slot name="bag"/>
+			<slot name="trade"/>
+		</equipable>
+	</item>
+	
+	<item name="skrzynia skarbów VIII">
+		<type class="box" subclass="skrzynia_skarbow" tileid="-1"/>
+		<description>Widzisz skrzynie pełną skarbów. Możesz znaleźć w niej czerwony kamyczek szlachetny, czerwony kamień szlachetny lub czerwone kamienie szlachetne. </description>
+		<implementation class-name="games.stendhal.server.entity.item.SkrzyniaSkarbow8"/>
+		<attributes>
+		</attributes>
+		<weight value="0.01"/>
+		<value value="1"/>
+		<equipable>
+			<slot name="ground"/>
+			<slot name="content"/>
+			<slot name="bag"/>
+			<slot name="trade"/>
+		</equipable>
+	</item>
+	
+	<item name="skrzynia pokryta lodem 2023">
+		<type class="box" subclass="skrzynia_pokryta_lodem_2023" tileid="-1"/>
+		<description>Oto skrzynia pokryta lodem. Jej mroźna powłoka sprawia, że wydaje się być zamarznięta w czasie, a zawartość skrywa tajemnice zimowego królestwa #zima #2023 </description>
+		<implementation class-name="games.stendhal.server.entity.item.SkrzyniaPokrytaLodem2023"/>
+		<attributes>
+		</attributes>
+		<weight value="0.01"/>
+		<value value="1"/>
+		<equipable>
+			<slot name="ground"/>
+			<slot name="content"/>
+			<slot name="bag"/>
+			<slot name="trade"/>
+		</equipable>
+	</item>
+	
+	<item name="prezent świąteczny 2023">
+		<type class="box" subclass="prezent_swiateczny_2023" tileid="-1"/>
+		<description>Oto prezent świąteczny. Jego barwne opakowanie kryje w sobie niespodziankę, dodając magii do świątecznego czasu i obiecując radość z nieznanego upominku #zima #2023. </description>
+		<implementation class-name="games.stendhal.server.entity.item.PrezentSwiateczny2023"/>
+		<attributes>
+		</attributes>
+		<weight value="0.01"/>
+		<value value="1"/>
+		<equipable>
+			<slot name="ground"/>
+			<slot name="content"/>
+			<slot name="bag"/>
+			<slot name="trade"/>
+		</equipable>
+	</item>
+	
+</items>

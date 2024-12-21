@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<creatures xmlns="stendhal" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="stendhal ../creatures.xsd ">
+
+	<creature name="głaz">
+		<type class="pol/kamienne_wielkie" subclass="glaz" tileid="pol_kamienne_wielkie.png:0"/>
+		<attributes>
+			<atk value="557"/>
+			<def value="32"/>
+			<hp value="4300"/>
+			<speed value="0.3"/>
+			<size value="1,1"/>
+		</attributes>
+		<level value="147"/>
+		<experience value="4880"/>
+		<respawn value="7400"/>
+		<corpse name="giant_rocks"/>
+		<drops>
+			<item value="kamyk" quantity="[1,29]" probability="100.0"/>
+			<item value="buty kamienne" quantity="[1,1]" probability="0.85"/>
+			<item value="płaszcz kamienny" quantity="[1,1]" probability="0.85"/>
+			<item value="kamienna tarcza" quantity="[1,1]" probability="0.5"/>
+			<item value="kamienna zbroja" quantity="[1,1]" probability="0.5"/>
+			<item value="wielki eliksir" quantity="[1,2]" probability="95.0"/>
+		</drops>
+		<equips/>
+		<ai>
+			<says>
+				<sound value="pol-stones2"/>
+			</says>
+			<profile name="brave"/>
+			<profile name="animal"/>
+			<profile name="offensive"/>
+		</ai>
+	</creature>
+
+	<creature name="lawina kamienna">
+		<type class="pol/kamienne_wielkie" subclass="lawina_kamienna" tileid="pol_kamienne_wielkie.png:1"/>
+		<attributes>
+			<atk value="3000"/>
+			<def value="700"/>
+			<hp value="2000"/>
+			<speed value="0.9"/>
+			<size value="2,2"/>
+			<resistance value="50"/>
+		</attributes>
+		<level value="400"/>
+		<experience value="16920"/>
+		<respawn value="64100"/>
+		<corpse name="giant_rocks"/>
+		<drops>
+			<item value="kamyk" quantity="[1,100]" probability="100.0"/>
+			<item value="buty kamienne" quantity="[1,1]" probability="1.0"/>
+			<item value="płaszcz kamienny" quantity="[1,1]" probability="1.0"/>
+			<item value="kamienna tarcza" quantity="[1,1]" probability="1.0"/>
+			<item value="kamienna zbroja" quantity="[1,1]" probability="1.0"/>
+			<item value="spodnie kamienne" quantity="[1,1]" probability="1.0"/>
+			<item value="hełm kamienny" quantity="[1,1]" probability="1.0"/>
+		</drops>
+		<equips/>
+		<ai>
+			<says>
+				<sound value="pol-stones2"/>
+			</says>
+			<profile name="brave"/>
+			<profile name="animal"/>
+			<profile name="offensive"/>
+			<profile name="rare"/>
+		</ai>
+	</creature>
+
+	<creature name="olbrzymia wieża">
+		<type class="pol/kamienne_wielkie" subclass="wieza_olbrzymia" tileid="pol_kamienne_wielkie.png:2"/>
+		<attributes>
+			<atk value="600"/>
+			<def value="44"/>
+			<hp value="15385"/>
+			<speed value="0.2"/>
+			<size value="2,2"/>
+		</attributes>
+		<level value="164"/>
+		<experience value="14060"/>
+		<respawn value="20049"/>
+		<corpse name="giant_rocks"/>
+		<drops>
+			<item value="kamyk" quantity="[1,129]" probability="100.0"/>
+			<item value="buty kamienne" quantity="[1,1]" probability="1.7"/>
+			<item value="płaszcz kamienny" quantity="[1,1]" probability="1.7"/>
+			<item value="kamienna tarcza" quantity="[1,1]" probability="1.7"/>
+			<item value="kamienna zbroja" quantity="[1,1]" probability="1.7"/>
+			<item value="spodnie kamienne" quantity="[1,1]" probability="4.85"/>
+			<item value="wielki eliksir" quantity="[1,8]" probability="90.0"/>
+		</drops>
+		<equips/>
+		<ai>
+			<says>
+				<sound value="pol-giant"/>
+			</says>
+			<profile name="brave"/>
+			<profile name="animal"/>
+			<profile name="offensive"/>
+			<profile name="rare"/>
+		</ai>
+	</creature>
+</creatures>

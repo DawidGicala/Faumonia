@@ -1,0 +1,103 @@
+related wiki page link:
+http://stendhalgame.org/wiki/ArianneAuthors
+
+Authors of Stendhal are:
+
+- Miguel Angel Blanch Lardin
+  · Project founder
+  · Project leader
+  · Coder on Arianne, Marauroa, Stendhal and others
+- Anders Asplund aka Danter
+  · *Real* Maps maker
+  · Designer, Artist on almost all original graphics
+  · some very simple code on spare time
+- Steve Ierodiaconou
+  · Project admin
+  · Improved texts and dialogs.
+  · Maps maker.
+  · Ported documentation and tested it.
+- Matthias Totz
+  · Added GUI.
+  · Helped refactoring and fixing code.
+- Athana AKA Athanas
+  · Ideas of vampire sword and club of thorns
+  · Maps maker (-2 semos catacombs, nalwor royal)
+  · Hunter of talents who like to help game development
+- Hendrik Brummermann
+  · Project admin
+  · Server admin
+  · Coder (new quest system, NPC conditions and actions) 
+  · Bugs fixer
+- Mort aka Wikipedian
+  · Stendhal producer behaviour and many related NPCs
+  · Maps maker (dwarf mine, grain fields, athor ship + more)
+  · Artist - both pixel and charas
+- Nadine Schlonies aka dine
+  · fishing quests
+  · Maps maker (athor island + more) 
+  · Artist - both pixel and charas   
+- Lenocas 
+  · Artist - outfits, creatures (zombies, headless, hybrids) and NPCs created with charas
+  · Planned marriage quest features
+  · Maps maker (lovers rooms, fado church)
+- Kiheru
+  · Coder
+  · Bugs fixer
+  · Artist - pixel (bone dragon, fishes, vegetables, some new interior items) 
+  · Artist - pixel (all the the outdoors map images and buildings and many more)   
+- Kymara
+  · Project leader
+  · Project admin
+  · Server admin  
+  · Coder (lots of quests, creatures, NPCs, shops and items)
+  · Artist - both pixel and charas for NPCs, items and building interiors
+  · Maps maker (mountain temple, kikareukin, lovers rooms, many shops outside semos, dreamscape) 
+  · Docs writer
+- BerserkerA3
+  · Maps maker (nalwor interiors, ados barracks, ados church, wofol interiors, tunnels)
+- Oslsachem
+  · Coder (some introductory quests, NPCs)
+- Sshk5
+  · Maps maker (nalwor interiors, fado, -1 semos catacombs, dwarf blacksmith)
+- Timothyb89
+  · Coder (NPCs for fado city)
+  · Maps maker (fado city)
+- Durkham
+  · Project admin
+  · Server admin
+  · Coder (sounds system, JUnit tests, new creature ai)
+  · Artist - pixel, floors and carpets mostly
+- ChadF
+  · Coder (implemented new zones configuration; /away command)
+  · Bugs fixer  
+- Kawn
+  · Coder (client pathfinding)
+  · Bugs fixer 
+- Bleutailfly
+  · Map maker (magic city, Kalavan, hell, kirdneh city)
+  · Artist - creatures and outfits with Charas
+  · The Pot Queen (also drew indoor furniture)
+- Johnnnny
+  · Coder (XML for some creatures, Starkad NPC, CrownForTheWannaBeKing quest, timed teleport scroll)
+  · Artist - clurichaun, leprechaun images by hand
+- Atlan
+  · Server admin
+  · donated server (hardware) for project
+- Teiv
+  · Coder (amazon princess quest, kill spiders quest)
+  · Maps maker (magic city interiors and amazon island)
+- Martin Fuchs aka martinf
+  · Coder (JUnit tests, SpeakerNPC speech parsing) 
+- tigertoes
+  · Coder (mithril, gnome village and ados abandoned keep NPCs and quests)
+  · Coder (assassin HQ, blordrough hideout, dragon lair and entwifes' valley)
+  · Maps maker
+  · Bugs fixer
+  · Artist - charas (NPCs, creatures and outfits), psp (tilesets for maps)    
+- madmetzger
+  · Coder (JUnit tests, Player-Killer-Icon)
+- Laurent Soubrevilla
+  · Coder (contributed colored GameLogDialog window)
+- Janet Hunt
+  · Coder (added sound system)
+- Jo

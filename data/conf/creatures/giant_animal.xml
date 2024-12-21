@@ -1,0 +1,149 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<creatures xmlns="stendhal" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="stendhal ../creatures.xsd ">
+
+	<creature name="szczur olbrzymi">
+		<type class="giant_animal" subclass="giantrat" tileid="giant_animal.png:1"/>
+		<description>Oto szczur olbrzymi. Chyba komuś nie udał się eksperyment.</description>
+		<attributes>
+			<atk value="123"/>
+			<def value="5"/>
+			<hp value="300"/>
+			<speed value="1.0"/>
+			<size value="2,2"/>
+		</attributes>
+		<level value="15"/>
+		<experience value="400"/>
+		<respawn value="730"/>
+		<corpse name="huge_animal" width="2" height="2"/>
+		<drops>
+			<item value="money" quantity="[7,20]" probability="100.0"/>
+			<item value="ser" quantity="[3,7]" probability="80.0"/>
+			<item value="wyśmienity ser" quantity="[1,3]" probability="68.8"/>
+			<item value="buty kolcze" quantity="[1,1]" probability="1.0"/>
+			<item value="buty żelazne" quantity="[1,1]" probability="0.1"/>
+			<item value="peleryna" quantity="[1,1]" probability="2.0"/>
+			<item value="hełm nabijany ćwiekami" quantity="[1,1]" probability="1.0"/>
+			<item value="hełm kolczy" quantity="[1,1]" probability="0.15"/>
+			<item value="spodnie kolcze" quantity="[1,1]" probability="0.1"/>
+			<item value="spodnie nabijane ćwiekami" quantity="[1,1]" probability="1.0"/>
+			<item value="tarcza ćwiekowa" quantity="[1,1]" probability="2.25"/>
+			<item value="skórzany kirys" quantity="[1,1]" probability="1.5"/>
+			<item value="skórzany kirys z naramiennikami" quantity="[1,1]" probability="0.5"/>
+			<item value="żelazna zbroja łuskowa" quantity="[1,1]" probability="0.1"/>
+			<item value="skórzane rekawice" quantity="[1,1]" probability="0.05"/>
+			<item value="skórzane wzmocnione rekawice" quantity="[1,1]" probability="0.5"/>
+			<item value="szczurzy zwój" quantity="[1,1]" probability="0.25"/>
+		</drops>
+		<equips>
+		</equips>
+		<ai>
+			<profile name="brave"/>
+			<profile name="animal"/>
+			<profile name="offensive"/>
+			<profile name="heal" params="5,150"/>
+			<profile name="patrolling"/>
+		</ai>
+	</creature>
+
+	<creature name="krokodyl">
+		<type class="giant_animal" subclass="crocodile" tileid="giant_animal.png:0"/>
+		<description>Oto krokodyl. Nagle wyskakuje na brzeg z rzek i jezior.</description>
+		<attributes>
+			<atk value="122"/>
+			<def value="8"/>
+			<hp value="200"/>
+			<speed value="1.0"/>
+			<size value="2,2"/>
+		</attributes>
+		<level value="15"/>
+		<experience value="180"/>
+		<respawn value="730"/>
+		<corpse name="huge_animal" width="2" height="2"/>
+		<drops>
+			<item value="money" quantity="[3,12]" probability="100.0"/>
+			<item value="mięso" quantity="[3,7]" probability="80.0"/>
+			<item value="szynka" quantity="[2,5]" probability="50.0"/>
+		</drops>
+		<equips>
+		</equips>
+		<ai>
+			<says>
+				<noise state="idle follow fight" value="Rrrrrrrrr"/>
+			</says>
+			<profile name="brave"/>
+			<profile name="animal"/>
+			<profile name="offensive"/>
+			<profile name="heal" params="5,150"/>
+			<profile name="patrolling"/>
+		</ai>
+	</creature>
+
+	<!-- used to be in giant human folder which is why the tiled image is different -->
+	<creature name="krasnal golem">
+		<type class="giant_animal" subclass="dwarf_golem" tileid="giant_human.png:5"/>
+		<description>Oto krasnal golem. Niegdyś krasnal, dziś przemieniony w głaz przez starożytne siły. By ocalić przyjaciół inne krasnale z kamieni ułożyły golema! Od tego czasu mieszka on z nimi.</description>
+		<attributes>
+			<atk value="3339"/>
+			<def value="119"/>
+			<hp value="4700"/>
+			<speed value="1.0"/>
+			<size value="3,2"/>
+		</attributes>
+		<level value="300"/>
+		<experience value="24800"/>
+		<respawn value="9000"/>
+		<corpse name="giant_humanoid" width="2" height="2"/>
+		<drops>
+			<item value="money" quantity="[30,150]" probability="100.0"/>
+			<item value="duży eliksir" quantity="[1,7]" probability="100.0"/>
+			<item value="kamienna zbroja" quantity="[1,1]" probability="3.0"/>
+			<item value="topór Durina" quantity="[1,1]" probability="0.2"/>
+			<item value="topór oburęczny magiczny" quantity="[1,1]" probability="0.1"/>
+			<item value="rękawice płytowe" quantity="[1,1]" probability="1.0"/>
+		</drops>
+		<equips>
+		</equips>
+		<ai>
+			<profile name="brave"/>
+			<profile name="animal"/>
+			<profile name="offensive"/>
+			<profile name="heal" params="5,50"/>
+		</ai>
+	</creature>
+
+	<creature name="Lord Durin">
+		<type class="dwarf" subclass="lord_durin" tileid="dwarf.png:7"/>
+		<description>Oto potężny Lord Durin, starożytny krasnolud, który prowadził niezliczoną ilość bitew.</description>
+		<attributes>
+			<atk value="3855"/>
+			<def value="140"/>
+			<hp value="12500"/>
+			<speed value="0.5"/>
+			<size value="2,2"/>
+		</attributes>
+		<level value="425"/>
+		<experience value="220000"/>
+		<respawn value="57500"/>
+		<corpse name="giant_humanoid" width="2" height="2"/>
+		<drops>
+			<item value="wielki eliksir" quantity="[1,8]" probability="100.0"/>
+			<item value="halabarda czarna" quantity="[1,1]" probability="0.25"/>
+			<item value="topór Durina" quantity="[1,1]" probability="1.0"/>
+			<item value="zwój do krypty" quantity="[12,12]" probability="5.0"/>
+			<item value="money" quantity="[3000,8000]" probability="100.0"/>
+		</drops>
+		<equips>
+			<slot name="lhand" item="topór Durina" quantity="1"/>
+		</equips>
+		<ai>
+			<says>
+				<noise state="idle follow fight" value="Nie nazywaj mnie przyjacielem."/>
+			</says>
+			<profile name="brave"/>
+			<profile name="offensive"/>
+			<profile name="patrolling"/>
+		</ai>
+	</creature>
+
+</creatures>
