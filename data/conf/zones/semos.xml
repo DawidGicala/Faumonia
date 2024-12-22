@@ -3001,6 +3001,7 @@ dorsz - 4
 	<configurator class-name="games.stendhal.server.maps.semos.masterhouse.MasterNPC19"/>
 	<configurator class-name="games.stendhal.server.maps.semos.masterhouse.MasterNPC20"/>
 	<configurator class-name="games.stendhal.server.maps.semos.masterhouse.MasterNPC21"/>
+	<configurator class-name="games.stendhal.server.maps.semos.masterhouse.MasterNPC22"/>
 	
 		<portal x="14" y="1" ref="d1">
 			<destination zone="0_semos_city" ref="u1" />

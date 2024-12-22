@@ -271,7 +271,7 @@ public class GenerateINI {
 		out.println();
 		out.println("server_typeGame=" + gameName);
 		out.println("server_name=" + gameName + " Marauroa server");
-		out.println("server_version=4.1");
+		out.println("server_version=5.0");
 		out.println("server_contact=https://pol.FaumoniaOnline.org/bugzilla/");
 		out.println();
 		out.println("# Extensions configured on the server. Enable at will.");
