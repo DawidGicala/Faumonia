@@ -301,7 +301,6 @@
 			<item value="obsydian" quantity="[1,4]" probability="50.0"/>
 			<item value="smoczy zwój" quantity="[1,1]" probability="1.0"/>
 			<item value="smocze rękawice" quantity="[1,1]" probability="0.01"/>
-			<item value="skóra smocza 2024" quantity="[1,1]" probability="40.0"/>
 		</drops>
 		<equips/>
 		<abilities>
@@ -340,7 +339,6 @@
 			<item value="skóra złotego smoka" quantity="[1,1]" probability="50.0"/>
 			<item value="smoczy zwój" quantity="[1,1]" probability="1.0"/>
 			<item value="smocze rękawice" quantity="[1,1]" probability="0.01"/>
-			<item value="skóra smocza 2024" quantity="[1,1]" probability="10.0"/>
 		</drops>
 		<equips>
 		</equips>
