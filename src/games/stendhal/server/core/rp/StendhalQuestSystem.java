@@ -240,8 +240,6 @@ public class StendhalQuestSystem {
 		loadQuest(new MainTask19());
 		loadQuest(new KillXeno());
 		loadQuest(new TaskHayunn());
-		loadQuest(new DailyMikolaj());
-		loadQuest(new BalwanekQuest());
 		loadQuest(new DailyGnom());
 		loadQuest(new CollectChaosThorgal());
 		loadQuest(new KillChaosMonsters());
