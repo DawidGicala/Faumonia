@@ -1426,4 +1426,70 @@
 		</equipable>
 	</item>
 	
+	<item name="drewniany sztylecik 2024">
+		<type class="sword" subclass="mieczyk_drewno" tileid="-1"/>
+		<description>Oto drewniany sztylecik. Za jego pomocą możesz ekstremalnie szybko zwiększyć swoje umiejętności ataku i obrony. Trenować możesz przy drzewkach pod bankiem Semos. Przedmiot będzie działał tylko w ograniczonym czasie, dlatego wykorzystaj go jak najlepiej! #Pamiątka #z #Bożego #Narodzenia #2024 </description>
+		<implementation class-name="games.stendhal.server.entity.item.Item"/>
+		<attributes>
+			<atk value="1"/>
+			<rate value="5"/>
+			<autobind value=""/>
+		</attributes>
+		<weight value="10.0"/>
+		<value value="617400"/>
+		<equipable>
+			<slot name="ground"/>
+			<slot name="content"/>
+			<slot name="bag"/>
+			<slot name="trade"/>
+			<slot name="lhand"/>
+			<slot name="rhand"/>
+		</equipable>
+	</item>
+	
+	<item name="sztylet imprezowy 2025">
+		<type class="sword" subclass="ice_dagger_2" tileid="-1"/>
+		<description>Oto sztylet imprezowy. Ten błyszczący sztylet wydaje przy każdym ciosie dźwięk fajerwerków, a jego ostrze mieni się wszystkimi kolorami tęczy. Idealny do rozkręcenia każdej noworocznej zabawy... lub do wyeliminowania kilku przeszkód na drodze do szampańskiej nocy #Sylwester #2025 </description>
+		<implementation class-name="games.stendhal.server.entity.item.Item"/>
+		<attributes>
+			<atk value="1"/>
+			<rate value="12"/>
+			<lifesteal value="0.1"/>
+			<minlevel value="200"/>
+			<autobind value=""/>
+		</attributes>
+		<weight value="10.0"/>
+		<value value="617400"/>
+		<equipable>
+			<slot name="ground"/>
+			<slot name="content"/>
+			<slot name="bag"/>
+			<slot name="trade"/>
+			<slot name="lhand"/>
+			<slot name="rhand"/>
+		</equipable>
+	</item>
+	
+	<item name="miecz imprezowy 2025">
+		<type class="sword" subclass="ancient_japan_sai_r" tileid="-1"/>
+		<description>Oto miecz imprezowy. Ten masywny miecz o szerokim ostrzu zdaje się być wykuty z samego światła. Przy każdym zamachu rozlega się donośny huk przypominający eksplozję sztucznych ogni, a w powietrzu pozostaje świetlisty ślad, który mieni się wszystkimi barwami tęczy #Sylwester #2025 </description>
+		<implementation class-name="games.stendhal.server.entity.item.Item"/>
+		<attributes>
+			<atk value="2"/>
+			<rate value="20"/>
+			<lifesteal value="0.1"/>
+			<autobind value=""/>
+		</attributes>
+		<weight value="10.0"/>
+		<value value="617400"/>
+		<equipable>
+			<slot name="ground"/>
+			<slot name="content"/>
+			<slot name="bag"/>
+			<slot name="trade"/>
+			<slot name="lhand"/>
+			<slot name="rhand"/>
+		</equipable>
+	</item>
+	
 </items>

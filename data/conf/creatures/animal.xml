@@ -203,7 +203,6 @@
 		<drops>
 			<item value="mięso" quantity="[2,4]" probability="60.0"/>
 			<item value="dorsz" quantity="[2,3]" probability="30.0"/>
-			<item value="lodowe igloo 2024" quantity="[1,1]" probability="100.0"/>
 		</drops>
 		<equips>
 		</equips>
