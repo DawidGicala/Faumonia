@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<creatures xmlns="stendhal" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="stendhal ../creatures.xsd ">
+
+	<creature name="turoń">
+		<type class="sheepman" subclass="sheepman" tileid="sheepman.png:3"/>
+		<description></description>
+		<attributes>
+			<atk value="405"/>
+			<def value="26"/>
+			<hp value="400"/>
+			<speed value="0.6"/>
+			<size value="1,1"/>
+		</attributes>
+		<level value="102"/>
+		<experience value="1760"/>
+		<respawn value="1450"/>
+		<corpse name="humanoid"/>
+		<drops>
+			<item value="money" quantity="[1,49]" probability="100.0"/>
+			<item value="bukłak z wodą" quantity="[1,3]" probability="80.0"/>
+		</drops>
+		<equips>
+		</equips>
+		<ai>
+			<says>
+				<noise state="idle follow fight" value="Nie jestem miękki jak owieczka!"/>
+			</says>
+			<profile name="brave"/>
+			<profile name="offensive"/>
+			<profile name="human"/>
+			<profile name="patrolling"/>
+		</ai>
+	</creature>
+
+	<creature name="turoń uzbrojony">
+		<type class="sheepman" subclass="armored_sheepman" tileid="sheepman.png:0"/>
+		<description></description>
+		<attributes>
+			<atk value="427"/>
+			<def value="29"/>
+			<hp value="500"/>
+			<speed value="0.7"/>
+			<size value="1,1"/>
+		</attributes>
+		<level value="109"/>
+		<experience value="1780"/>
+		<respawn value="1575"/>
+		<corpse name="humanoid"/>
+		<drops>
+			<item value="money" quantity="[1,61]" probability="100.0"/>
+			<item value="bukłak z wodą" quantity="[1,3]" probability="90.0"/>
+		</drops>
+		<equips>
+		</equips>
+		<ai>
+			<says>
+				<noise state="idle follow fight" value="Jak śmieeesz mnieee wyzywać!"/>
+			</says>
+			<profile name="brave"/>
+			<profile name="offensive"/>
+			<profile name="human"/>
+			<profile name="patrolling"/>
+		</ai>
+	</creature>
+
+	<creature name="starszy turoń">
+		<type class="sheepman" subclass="elder_sheepman" tileid="sheepman.png:1"/>
+		<description></description>
+		<attributes>
+			<atk value="441"/>
+			<def value="31"/>
+			<hp value="421"/>
+			<speed value="0.4"/>
+			<size value="1,1"/>
+		</attributes>
+		<level value="115"/>
+		<experience value="1820"/>
+		<respawn value="1590"/>
+		<corpse name="humanoid"/>
+		<drops>
+			<item value="money" quantity="[1,58]" probability="100.0"/>
+			<item value="złoty kiścień" quantity="[1,1]" probability="0.25"/>
+			<item value="bukłak z wodą" quantity="[1,4]" probability="60.0"/>
+		</drops>
+		<equips>
+		</equips>
+		<ai>
+			<says>
+				<noise state="idle follow fight" value="A kysz! Preeecz!"/>
+			</says>
+			<profile name="brave"/>
+			<profile name="offensive"/>
+			<profile name="human"/>
+		</ai>
+	</creature>
+
+	<creature name="turoń elitarny">
+		<type class="sheepman" subclass="elite_sheepman" tileid="sheepman.png:2"/>
+		<description></description>
+		<attributes>
+			<atk value="453"/>
+			<def value="34"/>
+			<hp value="447"/>
+			<speed value="0.7"/>
+			<size value="1,1"/>
+		</attributes>
+		<level value="118"/>
+		<experience value="1890"/>
+		<respawn value="1620"/>
+		<corpse name="humanoid"/>
+		<drops>
+			<item value="money" quantity="[1,63]" probability="100.0"/>
+			<item value="bukłak z wodą" quantity="[1,4]" probability="90.0"/>
+		</drops>
+		<equips>
+		</equips>
+		<ai>
+			<says>
+				<noise state="idle follow fight" value="Preeecz stąd!"/>
+			</says>
+			<profile name="brave"/>
+			<profile name="offensive"/>
+			<profile name="human"/>
+			<profile name="patrolling"/>
+		</ai>
+	</creature>
+</creatures>

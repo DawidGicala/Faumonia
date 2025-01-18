@@ -2254,6 +2254,14 @@ Burmistrz Semos
 			</attribute>
 		</entity>
 		
+		<entity x="85" y="23">
+			<implementation class-name="games.stendhal.server.entity.mapstuff.sign.Sign" />
+			<attribute name="text">
+Chcesz wspierać Faumonie finansowo? Wszystkie środki przeznaczymy na reklamę i rozwój Faumonii. Sprawdź co dla Ciebie przygotowaliśmy.
+#https://sklep.dawidgicala.pl/faumonia/
+			</attribute>
+		</entity>
+		
 		<entity x="26" y="41">
 			<implementation class-name="games.stendhal.server.entity.mapstuff.sign.Sign" />
 			<attribute name="text">

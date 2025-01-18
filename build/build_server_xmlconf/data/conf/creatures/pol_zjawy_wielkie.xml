@@ -1,0 +1,237 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<creatures xmlns="stendhal" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="stendhal ../creatures.xsd ">
+
+	<creature name="czarny szkielet gigant">
+		<type class="pol/zjawy_wielkie" subclass="ae_szkielet_czarny_gigant" tileid="pol_zjawy_wielkie.png:0"/>
+		<description/>
+		<attributes>
+			<atk value="2232"/>
+			<def value="89"/>
+			<hp value="5555"/>
+			<speed value="1.0"/>
+			<size value="2,2"/>
+		</attributes>
+		<level value="199"/>
+		<experience value="32543"/>
+		<respawn value="26500"/>
+		<corpse name="giant_humanoid"/>
+		<drops>
+			<item value="wielki eliksir" quantity="[1,5]" probability="50.0"/>
+			<item value="money" quantity="[99,999]" probability="100.0"/>
+			<item value="buty czarne" quantity="[1,1]" probability="0.15"/>
+			<item value="czarny płaszcz" quantity="[1,1]" probability="0.15"/>
+			<item value="nóż z kości" quantity="[1,1]" probability="25.0"/>
+			<item value="czarny miecz" quantity="[1,1]" probability="0.1"/>
+			<item value="czarny sztylet" quantity="[1,1]" probability="0.1"/>
+		</drops>
+		<equips/>
+		<abilities>
+			<damage type="dark"/>
+		</abilities>
+		<ai>
+			<says>
+				<noise state="idle follow fight" value="Powiadam ci, to twa ostatnia chwila!"/>
+			</says>
+			<profile name="brave"/>
+			<profile name="animal"/>
+			<profile name="offensive"/>
+			<profile name="heal" params="15,4"/>
+			<profile name="lifesteal" params="0.025"/>
+			<profile name="patrolling"/>
+		</ai>
+	</creature>
+
+	<creature name="książę szkieletów">
+		<type class="pol/zjawy_wielkie" subclass="ae_ksiaze_szkieletow" tileid="pol_zjawy_wielkie.png:1"/>
+		<description/>
+		<attributes>
+			<atk value="3344"/>
+			<def value="144"/>
+			<hp value="19000"/>
+			<speed value="1.0"/>
+			<size value="2,2"/>
+		</attributes>
+		<level value="550"/>
+		<experience value="826420"/>
+		<respawn value="140000"/>
+		<corpse name="giant_humanoid"/>
+		<drops>
+			<item value="magiczna tarcza płytowa" quantity="[1,1]" probability="0.5"/>
+			<item value="gigantyczny eliksir" quantity="[1,14]" probability="60.0"/>
+			<item value="wielki eliksir" quantity="[1,31]" probability="80.0"/>
+			<item value="serce olbrzyma" quantity="[1,1]" probability="100.0"/>
+			<item value="money" quantity="[11000,30000]" probability="100.0"/>
+			<item value="złoty płaszcz" quantity="[1,1]" probability="5.0"/>
+			<item value="nóż z kości" quantity="[1,1]" probability="50.0"/>
+			<item value="złote rękawice" quantity="[1,1]" probability="0.1"/>
+		</drops>
+		<equips/>
+		<abilities>
+			<damage type="light"/>
+		</abilities>
+		<ai>
+			<says>
+				<noise state="idle follow fight" value="Pogrzechoczę twoje żebra!"/>
+			</says>
+			<profile name="brave"/>
+			<profile name="animal"/>
+			<profile name="offensive"/>
+			<profile name="heal" params="50,8"/>
+			<profile name="lifesteal" params="0.1"/>
+			<profile name="patrolling"/>
+		</ai>
+	</creature>
+
+	<creature name="szkielet anioła">
+		<type class="pol/zjawy_wielkie" subclass="szkielet_aniola" tileid="pol_zjawy_wielkie.png:2"/>
+		<description/>
+		<attributes>
+			<atk value="3244"/>
+			<def value="114"/>
+			<hp value="14000"/>
+			<speed value="1.0"/>
+			<size value="2,2"/>
+		</attributes>
+		<level value="400"/>
+		<experience value="562345"/>
+		<respawn value="85000"/>
+		<corpse name="giant_humanoid"/>
+		<drops>
+			<item value="wielki eliksir" quantity="[2,14]" probability="90.0"/>
+			<item value="serce olbrzyma" quantity="[1,1]" probability="100.0"/>
+			<item value="money" quantity="[2000,5000]" probability="100.0"/>
+			<item value="zbroja światła" quantity="[1,1]" probability="0.5"/>
+			<item value="nóż z kości" quantity="[1,1]" probability="35.0"/>
+			<item value="bilet śmierci" quantity="[1,1]" probability="0.125"/>
+			<item value="anielski zwój" quantity="[1,1]" probability="0.085"/>
+		</drops>
+		<equips/>
+		<abilities>
+			<damage type="light"/>
+		</abilities>
+		<ai>
+			<says>
+				<noise state="idle follow fight" value="Pękanie kości, to mój ulubiony dźwięk!"/>
+			</says>
+			<profile name="brave"/>
+			<profile name="animal"/>
+			<profile name="offensive"/>
+			<profile name="heal" params="20,6"/>
+			<profile name="lifesteal" params="0.1"/>
+			<profile name="patrolling"/>
+		</ai>
+	</creature>
+
+	<creature name="kostucha różowa wielka">
+		<type class="pol/zjawy_wielkie" subclass="zai_kostucha_rozowa_gigant" tileid="pol_zjawy_wielkie.png:3"/>
+		<description/>
+		<attributes>
+			<atk value="3099"/>
+			<def value="141"/>
+			<hp value="6900"/>
+			<speed value="1.0"/>
+			<size value="2,2"/>
+		</attributes>
+		<level value="333"/>
+		<experience value="333333"/>
+		<respawn value="58000"/>
+		<corpse name="giant_humanoid"/>
+		<drops>
+			<item value="wielki eliksir" quantity="[2,9]" probability="80.0"/>
+			<item value="money" quantity="[3000,9000]" probability="100.0"/>
+			<item value="pierścień szmaragdowy" quantity="[1,1]" probability="1.0"/>
+			<item value="bilet śmierci" quantity="[1,1]" probability="0.7"/>
+		</drops>
+		<equips/>
+		<ai>
+			<says>
+				<noise state="idle follow fight" value="Do twarzy mi w tym kolorze?"/>
+				<noise state="idle follow fight" value="Nie masz gustu, więc giń!"/>
+			</says>
+			<profile name="brave"/>
+			<profile name="animal"/>
+			<profile name="offensive"/>
+			<profile name="lifesteal" params="0.05"/>
+			<profile name="heal" params="35,5"/>
+			<profile name="patrolling"/>
+		</ai>
+	</creature>
+
+	<creature name="kostucha wielka">
+		<type class="pol/zjawy_wielkie" subclass="zai_kostucha_gigant" tileid="pol_zjawy_wielkie.png:4"/>
+		<description/>
+		<attributes>
+			<atk value="5199"/>
+			<def value="129"/>
+			<hp value="6900"/>
+			<speed value="1.0"/>
+			<size value="2,2"/>
+		</attributes>
+		<level value="433"/>
+		<experience value="380000"/>
+		<respawn value="58000"/>
+		<corpse name="giant_humanoid"/>
+		<drops>
+			<item value="wielki eliksir" quantity="[2,9]" probability="90.0"/>
+			<item value="money" quantity="[3000,10000]" probability="100.0"/>
+			<item value="kosa czarna" quantity="[1,1]" probability="0.25"/>
+			<item value="czarny hełm" quantity="[1,1]" probability="0.4"/>
+			<item value="bilet śmierci" quantity="[1,1]" probability="0.8"/>
+			<item value="czarny sztylet" quantity="[1,1]" probability="0.025"/>
+		</drops>
+		<equips/>
+		<abilities>
+			<damage type="dark"/>
+		</abilities>
+		<ai>
+			<says>
+				<noise state="idle follow fight" value="Na proch cię zmielę!"/>
+			</says>
+			<profile name="brave"/>
+			<profile name="animal"/>
+			<profile name="offensive"/>
+			<profile name="lifesteal" params="0.05"/>
+			<profile name="heal" params="35,5"/>
+			<profile name="patrolling"/>
+		</ai>
+	</creature>
+
+	<creature name="kostucha złota wielka">
+		<type class="pol/zjawy_wielkie" subclass="zai_kostucha_zlota_gigant" tileid="pol_zjawy_wielkie.png:5"/>
+		<description/>
+		<attributes>
+			<atk value="3999"/>
+			<def value="174"/>
+			<hp value="18000"/>
+			<speed value="1.0"/>
+			<size value="2,2"/>
+		</attributes>
+		<level value="555"/>
+		<experience value="660000"/>
+		<respawn value="95000"/>
+		<corpse name="giant_humanoid"/>
+		<drops>
+			<item value="wielki eliksir" quantity="[2,19]" probability="90.0"/>
+			<item value="hełm z mithrilu" quantity="[1,1]" probability="0.5"/>
+			<item value="sztabka złota" quantity="[1,9]" probability="40.0"/>
+			<item value="kieł złotej kostuchy" quantity="[1,1]" probability="1.5"/>
+			<item value="bilet śmierci" quantity="[1,1]" probability="1.25"/>
+		</drops>
+		<equips/>
+		<abilities>
+			<damage type="light"/>
+		</abilities>
+		<ai>
+			<says>
+				<noise state="idle follow fight" value="Złotko ty moje! Podejdź bliżej!"/>
+				<noise state="idle follow fight" value="Nie wszystko złoto, co się świeci!"/>
+			</says>
+			<profile name="brave"/>
+			<profile name="offensive"/>
+			<profile name="heal" params="50,5"/>
+			<profile name="lifesteal" params="0.05"/>
+			<profile name="patrolling"/>
+		</ai>
+	</creature>
+</creatures>

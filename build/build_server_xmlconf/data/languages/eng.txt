@@ -1,0 +1,5 @@
+koszula=dress
+Oto skórzana zbroja. Zapewnia tylko minimalną ochronę=You see leather armor. It is a minimal protection for you.
+skórzana zbroja=leather amor
+Już otrzymałeś zadanie na zgładzenie=test
+Dzienne Zadanie na Potwora = daily task 

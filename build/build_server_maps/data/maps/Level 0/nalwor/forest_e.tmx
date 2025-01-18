@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.0" orientation="orthogonal" renderorder="right-down" width="128" height="128" tilewidth="32" tileheight="32" nextobjectid="1">
+ <tileset firstgid="1" name="../../tileset/ground/ground.png" tilewidth="32" tileheight="32" tilecount="33" columns="3">
+  <image source="../../tileset/ground/ground.png" trans="ffffff" width="96" height="352"/>
+ </tileset>
+ <tileset firstgid="34" name="../../tileset/plant/tree/tree_darkgreen.png" tilewidth="32" tileheight="32" tilecount="88" columns="8">
+  <image source="../../tileset/plant/tree/tree_darkgreen.png" trans="ffffff" width="256" height="352"/>
+ </tileset>
+ <tileset firstgid="122" name="../../tileset/logic/collision.png" tilewidth="32" tileheight="32" tilecount="1" columns="1">
+  <image source="../../tileset/logic/collision.png" width="32" height="32"/>
+ </tileset>
+ <tileset firstgid="123" name="protection" tilewidth="32" tileheight="32" tilecount="2" columns="2">
+  <image source="../../tileset/logic/protection.png" width="64" height="32"/>
+ </tileset>
+ <layer name="0_floor" width="128" height="128">
+  <data encoding="base64" compression="zlib">
+   eJztwwEJAAAMBKHj+4dekCm4aqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqr5/wEuAAQ==
+  </data>
+ </layer>
+ <layer name="1_terrain" width="128" height="128">
+  <data encoding="base64" compression="zlib">
+   eJztwQEBAAAAgJD+r+4ICgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAGoADwAB
+  </data>
+ </layer>
+ <layer name="2_object" width="128" height="128">
+  <data encoding="base64" compression="zlib">
+   eJztzqERgEAAA8GvDBx0Aq+A/hVxdEDM7sz5GwMAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAPkta2xPUbGlvTwC/O9KZZnuEiivd6Ukvus4DjQ==
+  </data>
+ </layer>
+ <layer name="3_roof" width="128" height="128">
+  <data encoding="base64" compression="zlib">
+   eJzt1jsOAVAYhNG7FhRehVeFChUSOjr2vwqTWIDOX9wzySRnCd+gtTbMR/mAu/M0n+Vz7tKrfJ1vuEtv812+5y59yI/5ibv0Ob/kV+7S1f3J+p/1P+t/1v+s/1n/s/5n/c/6n/U/63/W/6z/Wf+z/mf9z/qf9T/rf9b/rP9Z/7P+Z/3P+p/1P+t/1v+s/1n/s/7n+v5k/c/6n/U/63/W/6z/Wf+z/mf9z/qf9T/rf9b/rP9Z/7P+Z/3P+p/1P+t/1v+s/1n/s/5n/c/6n/U/63/W/6z/Wf9zfX+y/mf9z/qf9T/rf9b/rP9Z/7P+Z/3P+p/1P+t/1v+s/1n/s/5n/c/6n/U/63/W/6z/Wf+z/mf9z/qf9T/rf9b/rP+5vj9Z/7P+Z/3P+p/1P+t/1v+s/1n/s/5n/c/6n/U/63/W/6z/Wf+z/mf9z/qf9T//9i2/t/r+5Bo/8mer70+u8St/t/r+5P97nE/ad9X9yf/3Il+27z5wN7CK
+  </data>
+ </layer>
+ <layer name="objects" width="128" height="128">
+  <data encoding="base64" compression="zlib">
+   eJztwQEBAAAAgJD+r+4ICgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAGoADwAB
+  </data>
+ </layer>
+ <layer name="collision" width="128" height="128" opacity="0.4">
+  <data encoding="base64" compression="zlib">
+   eJzt0cEJAAAIA7HO7fQiOIP4SCH/wlWSAgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABYefAB/dGf+/azBg1Df2E=
+  </data>
+ </layer>
+ <layer name="protection" width="128" height="128" opacity="0.4">
+  <data encoding="base64" compression="zlib">
+   eJztwwENAAAMw6D6nvkLOSSsmqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqu8fMSvBww==
+  </data>
+ </layer>
+</map>

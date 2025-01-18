@@ -1,0 +1,184 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<creatures xmlns="stendhal" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="stendhal ../creatures.xsd ">
+
+	<creature name="elf albinos rycerz">
+		<type class="albino_elf" subclass="albino_elf_swordsman" tileid="albino_elf.png:4"/>
+		<description>Oto elf albinos rycerz, który jest profesjonalistą w posługiwaniu się mieczem. Może cię zaatakować od tyłu w mgnieniu oka.</description>
+		<attributes>
+			<atk value="500"/>
+			<def value="37"/>
+			<hp value="450"/>
+			<speed value="1.0"/>
+			<size value="1,1"/>
+		</attributes>
+		<level value="106"/>
+		<experience value="1660"/>
+		<respawn value="530"/>
+		<corpse name="humanoid"/>
+		<drops>
+			<item value="money" quantity="[4,20]" probability="100.0"/>
+			<item value="zbroja z białego złota" quantity="[1,1]" probability="0.5"/>
+			<item value="buty z białego złota" quantity="[1,1]" probability="0.5"/>
+			<item value="hełm z białego złota" quantity="[1,1]" probability="0.35"/>
+			<item value="pałasz" quantity="[1,1]" probability="1.5"/>
+			<item value="płaszcz z białego złota" quantity="[1,1]" probability="0.2"/>
+			<item value="wielki eliksir" quantity="[1,2]" probability="40.0"/>
+		</drops>
+		<equips>
+		</equips>
+		<abilities>
+			<damage type="light"/>
+		</abilities>
+		<ai>
+			<profile name="offensive"/>
+			<profile name="human"/>
+			<profile name="patrolling"/>
+		</ai>
+	</creature>
+
+	<creature name="elf albinos łucznik">
+		<type class="albino_elf" subclass="albino_elf_archer" tileid="albino_elf.png:0"/>
+		<description>Oto elf albinos łucznik. Jego bystre oko potrafi trafić w pszczołę ze 100 metrów.</description>
+		<attributes>
+			<atk value="517"/>
+			<def value="14"/>
+			<hp value="720"/>
+			<speed value="0.7"/>
+			<size value="1,1"/>
+		</attributes>
+		<level value="109"/>
+		<experience value="1880"/>
+		<respawn value="515"/>
+		<corpse name="humanoid"/>
+		<drops>
+			<item value="money" quantity="[10,20]" probability="90.0"/>
+			<item value="zbroja z białego złota" quantity="[1,1]" probability="0.4"/>
+			<item value="tarcza z białego złota" quantity="[1,1]" probability="0.4"/>
+			<item value="strzała żelazna" quantity="[5,25]" probability="70.0"/>
+			<item value="strzała" quantity="[1,23]" probability="90.0"/>
+			<item value="drewniany łuk" quantity="[1,1]" probability="2.0"/>
+			<item value="długi łuk" quantity="[1,1]" probability="0.5"/>
+			<item value="wielki eliksir" quantity="[1,2]" probability="40.0"/>
+		</drops>
+		<equips>
+			<slot name="lhand" item="strzała żelazna" quantity="10000"/>
+			<slot name="rhand" item="drewniany łuk" quantity="1"/>
+		</equips>
+		<abilities>
+			<damage type="light"/>
+		</abilities>
+		<ai>
+			<profile name="brave"/>
+			<profile name="offensive"/>
+			<profile name="human"/>
+			<profile name="archer"/>
+			<profile name="patrolling"/>
+		</ai>
+	</creature>
+
+	<creature name="elf albinos magik">
+		<type class="albino_elf" subclass="albino_elf_magician" tileid="albino_elf.png:2"/>
+		<description>Oto elf albinos magik. ZNa wszystkie sekrety magii. Lepiej nie pozwól mu uwolnić jego całej mocy!</description>
+		<attributes>
+			<atk value="522"/>
+			<def value="35"/>
+			<hp value="450"/>
+			<speed value="0.7"/>
+			<size value="1,1"/>
+		</attributes>
+		<level value="113"/>
+		<experience value="1945"/>
+		<respawn value="525"/>
+		<corpse name="humanoid"/>
+		<drops>
+			<item value="płaszcz z białego złota" quantity="[1,1]" probability="0.5"/>
+			<item value="spodnie z białego złota" quantity="[1,1]" probability="0.5"/>
+			<item value="money" quantity="[1,20]" probability="100.0"/>
+			<item value="zwój czyszczący" quantity="[1,1]" probability="0.4"/>
+			<item value="wielki eliksir" quantity="[1,2]" probability="40.0"/>
+		</drops>
+		<equips>
+		</equips>
+		<abilities>
+			<damage type="light"/>
+		</abilities>
+		<ai>
+			<profile name="offensive"/>
+			<profile name="human"/>
+			<profile name="heal" params="10,60"/>
+			<profile name="patrolling"/>
+		</ai>
+	</creature>
+
+	<creature name="elf albinos królowa">
+		<type class="albino_elf" subclass="albino_elf_queen" tileid="albino_elf.png:3"/>
+		<description>Oto elf albinos królowa. Jest matką rasy elfów albinosów i zrobi wszystko, aby ją ochronić.</description>
+		<attributes>
+			<atk value="519"/>
+			<def value="39"/>
+			<hp value="480"/>
+			<speed value="0.9"/>
+			<size value="1,1"/>
+		</attributes>
+		<level value="117"/>
+		<experience value="1980"/>
+		<respawn value="525"/>
+		<corpse name="humanoid"/>
+		<drops>
+			<item value="money" quantity="[1,23]" probability="100.0"/>
+			<item value="buty z białego złota" quantity="[1,1]" probability="0.5"/>
+			<item value="spodnie z białego złota" quantity="[1,1]" probability="0.5"/>
+			<item value="tarcza z białego złota" quantity="[1,1]" probability="0.5"/>
+			<item value="wielki eliksir" quantity="[1,2]" probability="50.0"/>
+		</drops>
+		<equips>
+		</equips>
+		<abilities>
+			<damage type="light"/>
+		</abilities>
+		<ai>
+			<profile name="brave"/>
+			<profile name="offensive"/>
+			<profile name="human"/>
+			<profile name="heal" params="10,30"/>
+			<profile name="patrolling"/>
+		</ai>
+	</creature>
+
+	<creature name="elf albinos król">
+		<type class="albino_elf" subclass="albino_elf_king" tileid="albino_elf.png:1"/>
+		<description>Oto elf albinos król. Jest ojcem elfów albinosów i wygrał wiele walk ze swoją poteżną armią elfów albinosów.</description>
+		<attributes>
+			<atk value="521"/>
+			<def value="42"/>
+			<hp value="475"/>
+			<speed value="0.8"/>
+			<size value="1,1"/>
+		</attributes>
+		<level value="118"/>
+		<experience value="2280"/>
+		<respawn value="550"/>
+		<corpse name="humanoid"/>
+		<drops>
+			<item value="money" quantity="[1,25]" probability="100.0"/>
+			<item value="zbroja z białego złota" quantity="[1,1]" probability="0.75"/>
+			<item value="buty z białego złota" quantity="[1,1]" probability="0.85"/>
+			<item value="płaszcz z białego złota" quantity="[1,1]" probability="0.95"/>
+			<item value="półtorak" quantity="[1,1]" probability="0.5"/>
+			<item value="wielki eliksir" quantity="[1,2]" probability="50.0"/>
+		</drops>
+		<equips>
+		</equips>
+		<abilities>
+			<damage type="light"/>
+		</abilities>
+		<ai>
+			<profile name="brave"/>
+			<profile name="offensive"/>
+			<profile name="human"/>
+			<profile name="heal" params="5,50"/>
+			<profile name="patrolling"/>
+		</ai>
+	</creature>
+</creatures>

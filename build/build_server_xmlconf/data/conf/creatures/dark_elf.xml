@@ -1,0 +1,560 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<creatures xmlns="stendhal" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="stendhal ../creatures.xsd ">
+
+	<creature name="elf mikrus">
+		<type class="dark_elf" subclass="baby_drow" tileid="dark_elf.png:10"/>
+		<description>Oto elf mikrus. Powinieneś wiedzieć, że dzieci mrocznych elfów są całkiem silne i inteligentne. Nie myśl, że możesz je łatwo pokonać!</description>
+		<attributes>
+			<atk value="564"/>
+			<def value="37"/>
+			<hp value="483"/>
+			<speed value="0.6"/>
+			<size value="1,1"/>
+		</attributes>
+		<level value="123"/>
+		<experience value="1920"/>
+		<respawn value="840"/>
+		<corpse name="tiny_humanoid"/>
+		<drops>
+			<item value="money" quantity="[5,10]" probability="100.0"/>
+			<item value="zbroja ciemności" quantity="[1,1]" probability="0.15"/>
+			<item value="buty ciemności" quantity="[1,1]" probability="0.25"/>
+			<item value="płaszcz elficki" quantity="[1,1]" probability="1.0"/>
+			<item value="miecz elfów ciemności" quantity="[1,1]" probability="0.5"/>
+			<item value="elficki naszyjnik" quantity="[1,1]" probability="0.1"/>
+			<item value="wielki eliksir" quantity="[1,1]" probability="40.0"/>
+		</drops>
+		<equips>
+		</equips>
+		<abilities>
+			<damage type="dark"/>
+		</abilities>
+		<ai>
+			<profile name="brave"/>
+			<profile name="offensive"/>
+			<profile name="human"/>
+			<profile name="patrolling"/>
+		</ai>
+	</creature>
+
+	<creature name="elf ciemności łucznik">
+		<type class="dark_elf" subclass="dark_elf_archer" tileid="dark_elf.png:0"/>
+		<description>Oto elf ciemności łucznik. Ciemni elfowie łucznicy strzelają bezbłędnie co może być fatalne w skutkach dla tych co ośmielą się stanąć przeciwko nim.</description>
+		<attributes>
+			<atk value="575"/>
+			<def value="21"/>
+			<hp value="700"/>
+			<speed value="0.7"/>
+			<size value="1,1"/>
+		</attributes>
+		<level value="131"/>
+		<experience value="1980"/>
+		<respawn value="810"/>
+		<corpse name="humanoid"/>
+		<drops>
+			<item value="money" quantity="[15,50]" probability="100.0"/>
+			<item value="hełm ciemności" quantity="[1,1]" probability="1.0"/>
+			<item value="buty ciemności" quantity="[1,1]" probability="0.25"/>
+			<item value="strzała żelazna" quantity="[1,25]" probability="80.0"/>
+			<item value="strzała złota" quantity="[1,15]" probability="60.0"/>
+			<item value="długi łuk" quantity="[1,1]" probability="1.0"/>
+			<item value="klejony łuk" quantity="[1,1]" probability="0.5"/>
+			<item value="elficki naszyjnik" quantity="[1,1]" probability="0.1"/>
+			<item value="wielki eliksir" quantity="[1,1]" probability="80.0"/>
+		</drops>
+		<equips>
+			<slot name="lhand" item="strzała żelazna" quantity="10000"/>
+			<slot name="rhand" item="drewniany łuk" quantity="1"/>
+		</equips>
+		<abilities>
+			<damage type="dark"/>
+		</abilities>
+		<ai>
+			<profile name="brave"/>
+			<profile name="offensive"/>
+			<profile name="human"/>
+			<profile name="archer"/>
+			<profile name="patrolling"/>
+		</ai>
+	</creature>
+
+	<creature name="elf ciemności">
+		<type class="dark_elf" subclass="dark_elf" tileid="dark_elf.png:6"/>
+		<description></description>
+		<attributes>
+			<atk value="603"/>
+			<def value="41"/>
+			<hp value="500"/>
+			<speed value="1.0"/>
+			<size value="1,1"/>
+		</attributes>
+		<level value="134"/>
+		<experience value="2060"/>
+		<respawn value="820"/>
+		<corpse name="humanoid"/>
+		<drops>
+			<item value="money" quantity="[5,50]" probability="100.0"/>
+			<item value="zbroja ciemności" quantity="[1,1]" probability="1.5"/>
+			<item value="buty ciemności" quantity="[1,1]" probability="0.5"/>
+			<item value="miecz elfów ciemności" quantity="[1,1]" probability="0.5"/>
+			<item value="elficki naszyjnik" quantity="[1,1]" probability="0.1"/>
+			<item value="wielki eliksir" quantity="[1,1]" probability="80.0"/>
+		</drops>
+		<equips>
+		</equips>
+		<abilities>
+			<damage type="dark"/>
+		</abilities>
+		<ai>
+			<profile name="brave"/>
+			<profile name="offensive"/>
+			<profile name="human"/>
+			<profile name="patrolling"/>
+		</ai>
+	</creature>
+
+	<creature name="elf ciemności łucznik elitarny">
+		<type class="dark_elf" subclass="dark_elf_elite_archer" tileid="dark_elf.png:2"/>
+		<description></description>
+		<attributes>
+			<atk value="592"/>
+			<def value="23"/>
+			<hp value="900"/>
+			<speed value="0.8"/>
+			<size value="1,1"/>
+		</attributes>
+		<level value="139"/>
+		<experience value="2140"/>
+		<respawn value="880"/>
+		<corpse name="humanoid"/>
+		<drops>
+			<item value="money" quantity="[15,40]" probability="100.0"/>
+			<item value="tarcza ciemności" quantity="[1,1]" probability="1.0"/>
+			<item value="strzała złota" quantity="[2,48]" probability="82.0"/>
+			<item value="strzała żelazna" quantity="[1,15]" probability="68.0"/>
+			<item value="długi łuk" quantity="[1,1]" probability="2.5"/>
+			<item value="klejony łuk" quantity="[1,1]" probability="1.0"/>
+			<item value="elficki naszyjnik" quantity="[1,1]" probability="0.1"/>
+			<item value="wielki eliksir" quantity="[1,1]" probability="80.0"/>
+		</drops>
+		<equips>
+			<slot name="lhand" item="strzała złota" quantity="10000"/>
+			<slot name="rhand" item="klejony łuk" quantity="1"/>
+		</equips>
+		<abilities>
+			<damage type="dark"/>
+		</abilities>
+		<ai>
+			<profile name="brave"/>
+			<profile name="offensive"/>
+			<profile name="human"/>
+			<profile name="archer"/>
+			<profile name="patrolling"/>
+		</ai>
+	</creature>
+
+	<creature name="elf ciemności kapitan">
+		<type class="dark_elf" subclass="dark_elf_captain" tileid="dark_elf.png:1"/>
+		<description></description>
+		<attributes>
+			<atk value="605"/>
+			<def value="43"/>
+			<hp value="500"/>
+			<speed value="1.0"/>
+			<size value="1,1"/>
+		</attributes>
+		<level value="142"/>
+		<experience value="3240"/>
+		<respawn value="1900"/>
+		<corpse name="humanoid"/>
+		<drops>
+			<item value="money" quantity="[5,40]" probability="100.0"/>
+			<item value="zbroja ciemności" quantity="[1,1]" probability="0.65"/>
+			<item value="buty ciemności" quantity="[1,1]" probability="1.5"/>
+			<item value="tarcza ciemności" quantity="[1,1]" probability="1.0"/>
+			<item value="hełm ciemności" quantity="[1,1]" probability="0.5"/>
+			<item value="miecz elfów ciemności" quantity="[1,1]" probability="0.05"/>
+			<item value="elficki naszyjnik" quantity="[1,1]" probability="0.1"/>
+			<item value="wielki eliksir" quantity="[1,1]" probability="80.0"/>
+		</drops>
+		<equips>
+		</equips>
+		<abilities>
+			<damage type="dark"/>
+		</abilities>
+		<ai>
+			<says>
+				<noise state="idle follow fight" value="Nie stawisz czoła Elfom Ciemności!"/>
+			</says>
+			<profile name="brave"/>
+			<profile name="offensive"/>
+			<profile name="human"/>
+			<profile name="patrolling"/>
+		</ai>
+	</creature>
+
+	<creature name="elf ciemności rycerz">
+		<type class="dark_elf" subclass="dark_elf_knight" tileid="dark_elf.png:4"/>
+		<description></description>
+		<attributes>
+			<atk value="614"/>
+			<def value="46"/>
+			<hp value="490"/>
+			<speed value="0.8"/>
+			<size value="1,1"/>
+		</attributes>
+		<level value="143"/>
+		<experience value="3320"/>
+		<respawn value="2000"/>
+		<corpse name="humanoid"/>
+		<drops>
+			<item value="money" quantity="[10,50]" probability="100.0"/>
+			<item value="zbroja ciemności" quantity="[1,1]" probability="0.5"/>
+			<item value="buty ciemności" quantity="[1,1]" probability="1.5"/>
+			<item value="hełm ciemności" quantity="[1,1]" probability="1.35"/>
+			<item value="tarcza ciemności" quantity="[1,1]" probability="0.5"/>
+			<item value="miecz elfów ciemności" quantity="[1,1]" probability="0.05"/>
+			<item value="elficki naszyjnik" quantity="[1,1]" probability="0.1"/>
+			<item value="wielki eliksir" quantity="[1,1]" probability="80.0"/>
+		</drops>
+		<equips>
+			<slot name="rhand" item="miecz elfów ciemności"/>
+		</equips>
+		<abilities>
+			<damage type="dark"/>
+		</abilities>
+		<ai>
+			<profile name="brave"/>
+			<profile name="offensive"/>
+			<profile name="human"/>
+			<profile name="heal" params="5,50"/>
+			<profile name="patrolling"/>
+		</ai>
+	</creature>
+
+	<creature name="elf ciemności generał">
+		<type class="dark_elf" subclass="dark_elf_general" tileid="dark_elf.png:3"/>
+		<description>Oto Elf Ciemności Generał. Jest dowódcą oddziałów zła Jaskiń Nalwor przeciwko intruzom.</description>
+		<attributes>
+			<atk value="608"/>
+			<def value="42"/>
+			<hp value="550"/>
+			<speed value="1.0"/>
+			<size value="1,1"/>
+		</attributes>
+		<level value="144"/>
+		<experience value="3280"/>
+		<respawn value="2920"/>
+		<corpse name="humanoid"/>
+		<drops>
+			<item value="money" quantity="[10,60]" probability="100.0"/>
+			<item value="zbroja ciemności" quantity="[1,1]" probability="1.0"/>
+			<item value="spodnie ciemności" quantity="[1,1]" probability="1.0"/>
+			<item value="buty ciemności" quantity="[1,1]" probability="0.35"/>
+			<item value="miecz elfów ciemności" quantity="[1,1]" probability="0.5"/>
+			<item value="elficki naszyjnik" quantity="[1,1]" probability="0.1"/>
+			<item value="wielki eliksir" quantity="[1,1]" probability="90.0"/>
+		</drops>
+		<equips>
+		</equips>
+		<abilities>
+			<damage type="dark"/>
+		</abilities>
+		<ai>
+			<says>
+				<noise state="idle follow fight" value="Niech światło słońca będzie przeklęte!"/>
+			</says>
+			<profile name="brave"/>
+			<profile name="offensive"/>
+			<profile name="human"/>
+			<profile name="heal" params="5,50"/>
+		</ai>
+	</creature>
+
+	<creature name="elf ciemności czarownik">
+		<type class="dark_elf" subclass="dark_elf_wizard" tileid="dark_elf.png:9"/>
+		<description>Elf ciemności czarownik jest bardzo potężny i niebezpieczny. Specjalizują się w ciemnej magii.</description>
+		<attributes>
+			<atk value="625"/>
+			<def value="43"/>
+			<hp value="500"/>
+			<speed value="1.0"/>
+			<size value="1,1"/>
+		</attributes>
+		<level value="145"/>
+		<experience value="3374"/>
+		<respawn value="2980"/>
+		<corpse name="humanoid"/>
+		<drops>
+			<item value="money" quantity="[50,60]" probability="100.0"/>
+			<item value="mocna trucizna" quantity="[1,2]" probability="50.0"/>
+			<item value="buty ciemności" quantity="[1,1]" probability="1.0"/>
+			<item value="magia mroku" quantity="[1,26]" probability="90.0"/>
+			<item value="magia światła" quantity="[1,13]" probability="70.0"/>
+			<item value="różdżka Strzyboga" quantity="[1,1]" probability="2.5"/>
+			<item value="elficki naszyjnik" quantity="[1,1]" probability="0.1"/>
+			<item value="wielki eliksir" quantity="[1,1]" probability="80.0"/>
+		</drops>
+		<equips>
+		</equips>
+		<abilities>
+			<damage type="dark"/>
+		</abilities>
+		<ai>
+			<says>
+				<noise state="idle follow fight" value="Pajęcza Królowa pomści mnie!"/>
+			</says>
+			<profile name="brave"/>
+			<profile name="offensive"/>
+			<profile name="human"/>
+			<profile name="heal" params="5,50"/>
+			<profile name="patrolling"/>
+		</ai>
+	</creature>
+
+	<creature name="elf ciemności królewicz">
+		<type class="dark_elf" subclass="dark_elf_viceroy" tileid="dark_elf.png:8"/>
+		<description></description>
+		<attributes>
+			<atk value="638"/>
+			<def value="43"/>
+			<hp value="550"/>
+			<speed value="1.0"/>
+			<size value="1,1"/>
+		</attributes>
+		<level value="144"/>
+		<experience value="3400"/>
+		<respawn value="2950"/>
+		<corpse name="humanoid"/>
+		<drops>
+			<item value="money" quantity="[50,60]" probability="100.0"/>
+			<item value="zbroja ciemności" quantity="[1,1]" probability="1.5"/>
+			<item value="buty ciemności" quantity="[1,1]" probability="0.2"/>
+			<item value="tarcza ciemności" quantity="[1,1]" probability="0.1"/>
+			<item value="miecz elfów ciemności" quantity="[1,1]" probability="1.0"/>
+			<item value="elficki naszyjnik" quantity="[1,1]" probability="0.1"/>
+			<item value="wielki eliksir" quantity="[1,2]" probability="60.0"/>
+		</drops>
+		<equips>
+		</equips>
+		<abilities>
+			<damage type="dark"/>
+		</abilities>
+		<ai>
+			<says>
+				<noise state="idle follow fight" value="Trzymaj się ode mnie z daleka, wysłanniku światłości!"/>
+			</says>
+			<profile name="brave"/>
+			<profile name="offensive"/>
+			<profile name="human"/>
+			<profile name="heal" params="5,50"/>
+		</ai>
+	</creature>
+
+	<creature name="elf ciemności komandos">
+		<type class="dark_elf" subclass="dark_elf_ranger" tileid="dark_elf.png:11"/>
+		<description></description>
+		<attributes>
+			<atk value="648"/>
+			<def value="48"/>
+			<hp value="579"/>
+			<speed value="1.0"/>
+			<size value="1,1"/>
+		</attributes>
+		<level value="147"/>
+		<experience value="3420"/>
+		<respawn value="3050"/>
+		<corpse name="humanoid"/>
+		<drops>
+			<item value="money" quantity="[50,60]" probability="100.0"/>
+			<item value="zbroja ciemności" quantity="[1,1]" probability="0.5"/>
+			<item value="buty ciemności" quantity="[1,1]" probability="0.2"/>
+			<item value="tarcza ciemności" quantity="[1,1]" probability="1.1"/>
+			<item value="miecz elfów ciemności" quantity="[1,1]" probability="1.0"/>
+			<item value="elficki naszyjnik" quantity="[1,1]" probability="0.1"/>
+			<item value="wielki eliksir" quantity="[1,2]" probability="60.0"/>
+		</drops>
+		<equips>
+		</equips>
+		<abilities>
+			<damage type="dark"/>
+		</abilities>
+		<ai>
+			<says>
+				<noise state="idle follow fight" value="Trzymaj się z dala, wysłanniku światłości!"/>
+			</says>
+			<profile name="brave"/>
+			<profile name="offensive"/>
+			<profile name="human"/>
+			<profile name="heal" params="5,50"/>
+			<profile name="patrolling"/>
+		</ai>
+	</creature>
+
+	<creature name="elf ciemności czarnoksiężnik">
+		<type class="dark_elf" subclass="dark_elf_sacerdotist" tileid="dark_elf.png:7"/>
+		<description></description>
+		<attributes>
+			<atk value="649"/>
+			<def value="42"/>
+			<hp value="560"/>
+			<speed value="1.0"/>
+			<size value="1,1"/>
+		</attributes>
+		<level value="149"/>
+		<experience value="3480"/>
+		<respawn value="3650"/>
+		<corpse name="humanoid"/>
+		<drops>
+			<item value="mocna trucizna" quantity="[1,1]" probability="50.0"/>
+			<item value="money" quantity="[30,80]" probability="100.0"/>
+			<item value="spodnie ciemności" quantity="[1,1]" probability="1.5"/>
+			<item value="elficki naszyjnik" quantity="[1,1]" probability="0.1"/>
+			<item value="wielki eliksir" quantity="[1,2]" probability="60.0"/>
+		</drops>
+		<equips>
+			<slot name="rhand" item="sztylecik"/>
+		</equips>
+		<abilities>
+			<damage type="dark"/>
+		</abilities>
+		<ai>
+			<says>
+				<noise state="idle follow fight" value="Moją śmierć pomści Pajęcza Królowa!"/>
+			</says>
+			<profile name="brave"/>
+			<profile name="animal"/>
+			<profile name="offensive"/>
+			<profile name="heal" params="10,50"/>
+		</ai>
+	</creature>
+
+	<creature name="elf ciemności admirał">
+		<type class="dark_elf" subclass="dark_elf_admiral" tileid="dark_elf.png:13"/>
+		<description></description>
+		<attributes>
+			<atk value="639"/>
+			<def value="43"/>
+			<hp value="600"/>
+			<speed value="1.0"/>
+			<size value="1,1"/>
+		</attributes>
+		<level value="153"/>
+		<experience value="3560"/>
+		<respawn value="3500"/>
+		<corpse name="humanoid"/>
+		<drops>
+			<item value="money" quantity="[30,70]" probability="100.0"/>
+			<item value="mocna trucizna" quantity="[1,2]" probability="75.0"/>
+			<item value="tarcza ciemności" quantity="[1,1]" probability="2.0"/>
+			<item value="miecz elfów ciemności" quantity="[1,1]" probability="0.2"/>
+			<item value="elficki naszyjnik" quantity="[1,1]" probability="0.1"/>
+			<item value="wielki eliksir" quantity="[1,2]" probability="60.0"/>
+		</drops>
+		<equips>
+		</equips>
+		<abilities>
+			<damage type="dark"/>
+		</abilities>
+		<ai>
+			<says>
+				<noise state="idle follow fight" value="Drżyj przed armią ciemności!"/>
+				<noise state="idle follow fight" value="Jesteśmy ciemnością, której się lękasz!"/>
+			</says>
+			<profile name="brave"/>
+			<profile name="animal"/>
+			<profile name="offensive"/>
+		</ai>
+	</creature>
+
+	<creature name="elf ciemności mistrz">
+		<type class="dark_elf" subclass="dark_elf_master" tileid="dark_elf.png:12"/>
+		<description></description>
+		<attributes>
+			<atk value="668"/>
+			<def value="41"/>
+			<hp value="500"/>
+			<speed value="1.0"/>
+			<size value="1,1"/>
+		</attributes>
+		<level value="156"/>
+		<experience value="4200"/>
+		<respawn value="4150"/>
+		<corpse name="humanoid"/>
+		<drops>
+			<item value="money" quantity="[30,60]" probability="100.0"/>
+			<item value="mocna trucizna" quantity="[1,2]" probability="75.0"/>
+			<item value="hełm ciemności" quantity="[1,1]" probability="2.5"/>
+			<item value="miecz elfów ciemności" quantity="[1,1]" probability="0.5"/>
+			<item value="elficki naszyjnik" quantity="[1,1]" probability="0.1"/>
+			<item value="wielki eliksir" quantity="[1,2]" probability="90.0"/>
+		</drops>
+		<equips>
+		</equips>
+		<abilities>
+			<damage type="dark"/>
+			<susceptibility type="dark" value="0.8"/>
+			<susceptibility type="light" value="1.2"/>
+		</abilities>
+		<ai>
+			<says>
+				<noise state="idle follow fight" value="Nigdy już nie ujrzysz światła!"/>
+				<noise state="idle follow fight" value="Ciemność cię pochłonie!"/>
+			</says>
+			<profile name="brave"/>
+			<profile name="animal"/>
+			<profile name="offensive"/>
+			<profile name="heal" params="10,50"/>
+			<profile name="patrolling"/>
+		</ai>
+	</creature>
+
+	<creature name="elf ciemności matrona">
+		<type class="dark_elf" subclass="dark_elf_matronmother" tileid="dark_elf.png:5"/>
+		<description></description>
+		<attributes>
+			<atk value="709"/>
+			<def value="46"/>
+			<hp value="800"/>
+			<speed value="1.0"/>
+			<size value="1,1"/>
+		</attributes>
+		<level value="160"/>
+		<experience value="5400"/>
+		<respawn value="4850"/>
+		<corpse name="humanoid"/>
+		<drops>
+			<item value="wielki eliksir" quantity="[1,4]" probability="90.0"/>
+			<item value="śmiertelna trucizna" quantity="[1,3]" probability="40.0"/>
+			<item value="money" quantity="[100,400]" probability="100.0"/>
+			<item value="spodnie nabijane klejnotami" quantity="[1,1]" probability="0.05"/>
+			<item value="elficki naszyjnik" quantity="[1,1]" probability="0.25"/>
+			<item value="zbroja ciemności" quantity="[1,1]" probability="2.0"/>
+			<item value="buty ciemności" quantity="[1,1]" probability="2.0"/>
+			<item value="hełm ciemności" quantity="[1,1]" probability="2.0"/>
+			<item value="spodnie ciemności" quantity="[1,1]" probability="2.0"/>
+			<item value="tarcza ciemności" quantity="[1,1]" probability="2.0"/>
+			<item value="miecz elfów ciemności" quantity="[1,1]" probability="1.0"/>
+		</drops>
+		<equips>
+		</equips>
+		<abilities>
+		<damage type="dark"/>
+			<susceptibility type="dark" value="0.8"/>
+			<susceptibility type="light" value="1.1"/>
+		</abilities>
+		<ai>
+			<says>
+				<noise state="idle follow fight" value="Zakłócasz mój spoczynek!"/>
+				<noise state="idle follow fight" value="Zapłacisz mi za to!"/>
+			</says>
+			<profile name="brave"/>
+			<profile name="animal"/>
+			<profile name="offensive"/>
+			<profile name="lifesteal" params="0.1"/>
+			<profile name="heal" params="15,50"/>
+			<profile name="patrolling"/>
+		</ai>
+	</creature>
+</creatures>

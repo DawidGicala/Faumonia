@@ -1,0 +1,296 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<creatures xmlns="stendhal" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="stendhal ../creatures.xsd ">
+
+
+<!-- monsters  --> 
+
+
+
+	<creature name="świetlisty potwór">
+		<type class="mutant" subclass="glow_monster" tileid="mutant.png:1"/>
+		<description></description>
+		<attributes>
+			<atk value="142"/>
+			<def value="23"/>
+			<hp value="220"/>
+			<speed value="0.5"/>
+			<size value="1,1"/>
+		</attributes>
+		<level value="35"/>
+		<experience value="400"/>
+		<respawn value="880"/>
+		<corpse name="humanoid"/>
+		<drops>
+			<item value="money" quantity="[4,30]" probability="100.0"/>
+			<item value="żelazny kirys z naramiennikami" quantity="[1,1]" probability="5.0"/>
+			<item value="zbroja płytowa" quantity="[1,1]" probability="3.5"/>
+			<item value="buty żelazne" quantity="[1,1]" probability="2.5"/>
+			<item value="złoty kiścień" quantity="[1,1]" probability="1.0"/>
+		</drops>
+		<equips>
+		</equips>
+		<ai>
+			<profile name="brave"/>
+			<profile name="offensive"/>
+			<profile name="human"/>
+		</ai>
+	</creature>
+
+	<creature name="mutant ciemności">
+		<type class="mutant" subclass="blacky" tileid="mutant.png:0"/>
+		<description></description>
+		<attributes>
+			<atk value="113"/>
+			<def value="13"/>
+			<hp value="270"/>
+			<speed value="0.5"/>
+			<size value="1,1"/>
+		</attributes>
+		<level value="40"/>
+		<experience value="440"/>
+		<respawn value="910"/>
+		<corpse name="humanoid"/>
+		<drops>
+			<item value="money" quantity="[1,25]" probability="100.0"/>
+			<item value="eliksir" quantity="[1,1]" probability="70.0"/>
+			<item value="zbroja płytowa" quantity="[1,1]" probability="2.5"/>
+			<item value="sztylet mroku" quantity="[1,1]" probability="0.35"/>
+			<item value="hełm wikingów" quantity="[1,1]" probability="3.5"/>
+		</drops>
+		<equips>
+		</equips>
+		<ai>
+			<profile name="brave"/>
+			<profile name="offensive"/>
+			<profile name="human"/>
+			<profile name="patrolling"/>
+		</ai>
+	</creature>
+
+	<creature name="kobieta kot">
+		<type class="mutant" subclass="cat_woman" tileid="mutant.png:5"/>
+		<attributes>
+			<atk value="145"/>
+			<def value="24"/>
+			<hp value="235"/>
+			<speed value="1.0"/>
+			<size value="1,1"/>
+		</attributes>
+		<level value="38"/>
+		<experience value="390"/>
+		<respawn value="880"/>
+		<corpse name="humanoid"/>
+		<drops>
+			<item value="money" quantity="[10,30]" probability="100.0"/>
+			<item value="okoń" quantity="[1,4]" probability="25.0"/>
+			<item value="czarny sztylet" quantity="[1,1]" probability="0.001"/>
+		</drops>
+		<equips>
+		</equips>
+		<ai>
+			<profile name="offensive"/>
+			<profile name="human"/>
+			<profile name="heal" params="5,30"/>
+			<profile name="patrolling"/>
+		</ai>
+	</creature>
+
+		<creature name="wilkołak">
+		<type class="mutant" subclass="werewolf" tileid="mutant.png:2"/>
+		<description>Oto wilkołak. Zazwyczaj jest człowiekiem, ale dziś przy pełni księżyca zamienił się w niebezpieczną bestię!</description>
+		<attributes>
+			<atk value="204"/>
+			<def value="9"/>
+			<hp value="800"/>
+			<speed value="0.8"/>
+			<size value="1,1"/>
+		</attributes>
+		<level value="36"/>
+		<experience value="420"/>
+		<respawn value="1410"/>
+		<corpse name="humanoid"/>
+		<drops>
+			<item value="money" quantity="[1,60]" probability="100.0"/>
+			<item value="czarny sztylet" quantity="[1,1]" probability="0.0001"/>
+			<item value="zbroja światła" quantity="[1,1]" probability="0.002"/>
+		</drops>
+		<equips>
+		</equips>
+		<ai>
+			<profile name="brave"/>
+			<profile name="offensive"/>
+			<profile name="human"/>
+			<profile name="heal" params="15,50"/>
+			<profile name="patrolling"/>
+		</ai>
+	</creature>
+
+		<creature name="eksperyment imperium">
+		<type class="mutant" subclass="imperial_experiment" tileid="mutant.png:4"/>
+		<description></description>
+		<attributes>
+			<atk value="2272"/>
+			<def value="126"/>
+			<hp value="3650"/>
+			<speed value="0.9"/>
+			<size value="1,1"/>
+		</attributes>
+		<level value="244"/>
+		<experience value="8900"/>
+		<respawn value="5100"/>
+		<corpse name="humanoid"/>
+		<drops>
+			<item value="money" quantity="[1,80]" probability="100.0"/>
+			<item value="wielki eliksir" quantity="[1,2]" probability="70.0"/>
+		</drops>
+		<equips>
+		</equips>
+		<ai>
+			<profile name="brave"/>
+			<profile name="offensive"/>
+			<profile name="human"/>
+			<profile name="patrolling"/>
+		</ai>
+	</creature>
+
+	<creature name="mutant imperium">
+		<type class="mutant" subclass="imperial_mutant" tileid="mutant.png:3"/>
+		<description></description>
+		<attributes>
+			<atk value="2263"/>
+			<def value="121"/>
+			<hp value="3800"/>
+			<speed value="1.0"/>
+			<size value="1,1"/>
+		</attributes>
+		<level value="241"/>
+		<experience value="8980"/>
+		<respawn value="6400"/>
+		<corpse name="humanoid"/>
+		<drops>
+			<item value="money" quantity="[20,70]" probability="100.0"/>
+			<item value="wielki eliksir" quantity="[1,2]" probability="70.0"/>
+		</drops>
+		<equips>
+		</equips>
+		<ai>
+			<says>
+				<noise state="idle follow fight" value="Ouurgghh!"/>
+			</says>
+			<profile name="brave"/>
+			<profile name="offensive"/>
+			<profile name="human"/>
+			<profile name="patrolling"/>
+		</ai>
+	</creature>
+
+
+<!-- syrens  --> 
+
+<creature name="syrena">
+		<type class="mutant" subclass="naga" tileid="naga.png:2"/>
+		<description></description>
+		<attributes>
+			<atk value="2476"/>
+			<def value="71"/>
+			<hp value="3222"/>
+			<speed value="1.0"/>
+			<size value="1,1"/>
+		</attributes>
+		<level value="333"/>
+		<experience value="5920"/>
+		<respawn value="3400"/>
+		<corpse name="humanoid"/>
+		<drops>
+			<item value="magiczna tarcza płytowa" quantity="[1,1]" probability="0.05"/>
+			<item value="money" quantity="[24,267]" probability="100.0"/>
+			<item value="wielki eliksir" quantity="[2,3]" probability="90.0"/>
+			<item value="zwój kikareukin" quantity="[1,1]" probability="1.0"/>
+		</drops>
+		<equips>
+		</equips>
+		<abilities>
+			<damage type="light"/>
+		</abilities>
+		<ai>
+			<profile name="brave"/>
+			<profile name="offensive"/>
+			<profile name="human"/>
+			<profile name="heal" params="20,6"/>
+			<profile name="lifesteal" params="0.1"/>
+			<profile name="patrolling"/>
+		</ai>
+	</creature>
+
+<creature name="wysoka syrena">
+		<type class="mutant" subclass="high_naga" tileid="naga.png:1"/>
+		<description></description>
+		<attributes>
+			<atk value="2477"/>
+			<def value="74"/>
+			<hp value="3382"/>
+			<speed value="1.0"/>
+			<size value="1,1"/>
+		</attributes>
+		<level value="337"/>
+		<experience value="6060"/>
+		<respawn value="3440"/>
+		<corpse name="humanoid"/>
+		<drops>
+			<item value="magiczna tarcza płytowa" quantity="[1,1]" probability="0.095"/>
+			<item value="money" quantity="[24,267]" probability="100.0"/>
+			<item value="wielki eliksir" quantity="[2,3]" probability="90.0"/>
+			<item value="zwój kikareukin" quantity="[1,1]" probability="1.0"/>
+		</drops>
+		<equips>
+		</equips>
+		<abilities>
+			<damage type="light"/>
+		</abilities>
+		<ai>
+			<profile name="brave"/>
+			<profile name="offensive"/>
+			<profile name="human"/>
+			<profile name="heal" params="20,6"/>
+			<profile name="lifesteal" params="0.1"/>
+			<profile name="patrolling"/>
+		</ai>
+	</creature>
+
+
+	<creature name="uzbrojona syrena">
+		<type class="mutant" subclass="armed_naga" tileid="naga.png:0"/>
+		<description></description>
+		<attributes>
+			<atk value="2483"/>
+			<def value="87"/>
+			<hp value="3214"/>
+			<speed value="1.0"/>
+			<size value="1,1"/>
+		</attributes>
+		<level value="344"/>
+		<experience value="6180"/>
+		<respawn value="3410"/>
+		<corpse name="humanoid"/>
+		<drops>
+			<item value="magiczna tarcza płytowa" quantity="[1,1]" probability="0.095"/>
+			<item value="money" quantity="[24,267]" probability="100.0"/>
+			<item value="wielki eliksir" quantity="[2,3]" probability="90.0"/>
+			<item value="zwój kikareukin" quantity="[1,1]" probability="1.0"/>
+		</drops>
+		<equips>
+		</equips>
+		<abilities>
+			<damage type="light"/>
+		</abilities>
+		<ai>
+			<profile name="brave"/>
+			<profile name="offensive"/>
+			<profile name="human"/>
+			<profile name="patrolling"/>
+			<profile name="heal" params="20,6"/>
+			<profile name="lifesteal" params="0.1"/>
+		</ai>
+	</creature>
+</creatures>

@@ -1,0 +1,173 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<creatures xmlns="stendhal" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="stendhal ../creatures.xsd ">
+
+	<creature name="Mgła Treningowa I">
+		<type class="pol/niesmiertelne" subclass="mgla" tileid="faumonia_mgly.png:0"/>
+		<description>Oto Mgła Treningowa I.</description>
+		<attributes>
+			<atk value="30"/>
+			<def value="20000"/>
+			<hp value="5000"/>
+			<speed value="0.0"/>
+			<size value="1,1"/>
+		</attributes>
+		<level value="1"/>
+		<experience value="1"/>
+		<respawn value="10"/>
+		<corpse name="humanoid"/>
+		<drops>
+		</drops>
+		<equips>
+		</equips>
+		<ai>
+			<profile name="non offensive"/>
+			<profile name="human"/>
+		</ai>
+	</creature>
+	
+	<creature name="Mgła Treningowa II">
+		<type class="pol/niesmiertelne" subclass="mgla" tileid="faumonia_mgly.png:1"/>
+		<description>Oto Mgła Treningowa II.</description>
+		<attributes>
+			<atk value="60"/>
+			<def value="20000"/>
+			<hp value="5000"/>
+			<speed value="0.0"/>
+			<size value="1,1"/>
+		</attributes>
+		<level value="1"/>
+		<experience value="1"/>
+		<respawn value="10"/>
+		<corpse name="humanoid"/>
+		<drops>
+		</drops>
+		<equips>
+		</equips>
+		<ai>
+			<profile name="non offensive"/>
+			<profile name="human"/>
+		</ai>
+	</creature>
+	
+	<creature name="Mgła Treningowa III">
+		<type class="pol/niesmiertelne" subclass="mgla" tileid="faumonia_mgly.png:2"/>
+		<description>Oto Mgła Treningowa III.</description>
+		<attributes>
+			<atk value="80"/>
+			<def value="20000"/>
+			<hp value="5000"/>
+			<speed value="0.0"/>
+			<size value="1,1"/>
+		</attributes>
+		<level value="1"/>
+		<experience value="1"/>
+		<respawn value="10"/>
+		<corpse name="humanoid"/>
+		<drops>
+		</drops>
+		<equips>
+		</equips>
+		<ai>
+			<profile name="non offensive"/>
+			<profile name="human"/>
+		</ai>
+	</creature>
+	
+	<creature name="Mgła Treningowa IV">
+		<type class="pol/niesmiertelne" subclass="mgla" tileid="faumonia_mgly.png:3"/>
+		<description>Oto Mgła Treningowa IV.</description>
+		<attributes>
+			<atk value="120"/>
+			<def value="20000"/>
+			<hp value="5000"/>
+			<speed value="0.0"/>
+			<size value="1,1"/>
+		</attributes>
+		<level value="1"/>
+		<experience value="1"/>
+		<respawn value="10"/>
+		<corpse name="humanoid"/>
+		<drops>
+		</drops>
+		<equips>
+		</equips>
+		<ai>
+			<profile name="non offensive"/>
+			<profile name="human"/>
+		</ai>
+	</creature>
+	
+	<creature name="Mgła Treningowa V">
+		<type class="pol/niesmiertelne" subclass="mgla" tileid="faumonia_mgly.png:4"/>
+		<description>Oto Mgła Treningowa V.</description>
+		<attributes>
+			<atk value="150"/>
+			<def value="20000"/>
+			<hp value="5000"/>
+			<speed value="0.0"/>
+			<size value="1,1"/>
+		</attributes>
+		<level value="1"/>
+		<experience value="1"/>
+		<respawn value="10"/>
+		<corpse name="humanoid"/>
+		<drops>
+		</drops>
+		<equips>
+		</equips>
+		<ai>
+			<profile name="non offensive"/>
+			<profile name="human"/>
+		</ai>
+	</creature>
+	
+	<creature name="Mgła Treningowa VI">
+		<type class="pol/niesmiertelne" subclass="mgla" tileid="faumonia_mgly.png:5"/>
+		<description>Oto Mgła Treningowa VI.</description>
+		<attributes>
+			<atk value="200"/>
+			<def value="20000"/>
+			<hp value="5000"/>
+			<speed value="0.0"/>
+			<size value="1,1"/>
+		</attributes>
+		<level value="1"/>
+		<experience value="1"/>
+		<respawn value="10"/>
+		<corpse name="humanoid"/>
+		<drops>
+		</drops>
+		<equips>
+		</equips>
+		<ai>
+			<profile name="non offensive"/>
+			<profile name="human"/>
+		</ai>
+	</creature>
+	
+	<creature name="Mgła Treningowa VII">
+		<type class="pol/niesmiertelne" subclass="mgla" tileid="faumonia_mgly.png:6"/>
+		<description>Oto Mgła Treningowa VII.</description>
+		<attributes>
+			<atk value="300"/>
+			<def value="20000"/>
+			<hp value="5000"/>
+			<speed value="0.0"/>
+			<size value="1,1"/>
+		</attributes>
+		<level value="1"/>
+		<experience value="1"/>
+		<respawn value="10"/>
+		<corpse name="humanoid"/>
+		<drops>
+		</drops>
+		<equips>
+		</equips>
+		<ai>
+			<profile name="non offensive"/>
+			<profile name="human"/>
+		</ai>
+	</creature>
+	
+</creatures>

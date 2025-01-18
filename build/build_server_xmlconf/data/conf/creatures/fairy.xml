@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<creatures xmlns="stendhal" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="stendhal ../creatures.xsd ">
+
+	<creature name="karzełek jadeitowy">
+		<type class="fairy" subclass="leprechaun" tileid="fairy.png:2"/>
+		<description>Oto karzełek jadeitowy. Być może przyniesie ci szczęście.</description>
+		<attributes>
+			<atk value="76"/>
+			<def value="13"/>
+			<hp value="95"/>
+			<speed value="0.6"/>
+			<size value="1,1"/>
+		</attributes>
+		<level value="11"/>
+		<experience value="125"/>
+		<respawn value="600"/>
+		<corpse name="tiny_humanoid"/>
+		<drops>
+			<item value="money" quantity="[30,40]" probability="60.0"/>
+			<item value="kanapka" quantity="[1,1]" probability="10.0"/>
+			<item value="sok z chmielu" quantity="[2,5]" probability="10.0"/>
+			<item value="czterolistna koniczyna" quantity="[1,1]" probability="1.0"/>
+			<item value="zwój fado" quantity="[1,1]" probability="2.5"/>
+			<item value="lazurowy hełm" quantity="[1,1]" probability="4.5"/>
+		</drops>
+		<equips>
+		</equips>
+		<ai>
+			<says>
+				<noise state="idle follow fight" value="Szczęście, żem cię napotkał!"/>
+				<noise state="idle follow fight" value="Koniczyna i tęcza... gwiazdy i końskie podkowy..."/>
+			</says>
+			<profile name="brave"/>
+			<profile name="offensive"/>
+			<profile name="human"/>
+			<profile name="patrolling"/>
+		</ai>
+	</creature>
+
+<creature name="karzełek amarantowy">
+		<type class="fairy" subclass="clurichaun" tileid="fairy.png:1"/>
+		<description>Oto karzełek amarantowy. Jest bogaty, ale nie dowiesz się, gdzie schował swoje złoto.</description>
+		<attributes>
+			<atk value="69"/>
+			<def value="14"/>
+			<hp value="105"/>
+			<speed value="0.4"/>
+			<size value="1,1"/>
+		</attributes>
+		<level value="15"/>
+		<experience value="140"/>
+		<respawn value="610"/>
+		<corpse name="tiny_humanoid"/>
+		<drops>
+			<item value="money" quantity="[10,95]" probability="50.0"/>
+			<item value="napój z winogron" quantity="[1,5]" probability="10.0"/>
+			<item value="kanapka" quantity="[1,1]" probability="10.0"/>
+			<item value="czterolistna koniczyna" quantity="[1,1]" probability="1.0"/>
+			<item value="zwój fado" quantity="[1,1]" probability="2.5"/>
+			<item value="buty lazurowe" quantity="[1,1]" probability="3.5"/>
+			<item value="spodnie lazurowe" quantity="[1,1]" probability="3.5"/>
+		</drops>
+		<equips>
+		</equips>
+		<ai> 
+			<says>
+				<noise state="idle follow fight" value="Napijesz się, kochaneczko moja?"/>
+				<noise state="idle follow fight" value="Baloniki na druciku..."/>
+			</says>
+			<profile name="brave"/>
+			<profile name="offensive"/>
+			<profile name="human"/>
+			<profile name="patrolling"/>
+		</ai>
+	</creature>
+
+	<creature name="mała wróżka">
+		<type class="fairy" subclass="littlefairy" tileid="fairy.png:3"/>
+		<description>Oto mała wróżka. Jest przyjazna i miła.</description>
+		<attributes>
+			<atk value="33"/>
+			<def value="3"/>
+			<hp value="322"/>
+			<speed value="0.5"/>
+			<size value="1,1"/>
+		</attributes>
+		<level value="11"/>
+		<experience value="111"/>
+		<respawn value="610"/>
+		<corpse name="tiny_humanoid"/>
+		<drops>
+			<item value="money" quantity="[3,7]" probability="90.0"/>
+			<item value="mufinka" quantity="[1,2]" probability="40.0"/>
+			<item value="zbroja lazurowa" quantity="[1,1]" probability="4.5"/>
+		</drops>
+		<equips>
+		</equips>
+		<ai>
+			<profile name="offensive"/>
+			<profile name="human"/>
+			<profile name="patrolling"/>
+		</ai>
+	</creature>
+
+	<creature name="aniołek">
+		<type class="fairy" subclass="baby_angel" tileid="fairy.png:0"/>
+		<description>Oto aniołek. Dostanie kiedyś szanse na dorośnięcie?</description>
+		<attributes>
+			<atk value="1628"/>
+			<def value="60"/>
+			<hp value="900"/>
+			<speed value="0.9"/>
+			<size value="1,1"/>
+		</attributes>
+		<level value="190"/>
+		<experience value="6890"/>
+		<respawn value="6780"/>
+		<corpse name="humanoid"/>
+		<drops>
+			<item value="money" quantity="[30,60]" probability="100.0"/>
+			<item value="mufinka" quantity="[1,5]" probability="10.0"/>
+			<item value="hełm libertyński" quantity="[1,1]" probability="0.1"/>
+			<item value="balonik" quantity="[1,1]" probability="5.0"/>
+			<item value="bełt złoty" quantity="[30,120]" probability="100.0"/>
+			<item value="anielski zwój" quantity="[1,1]" probability="0.05"/>
+		</drops>
+		<equips>
+		</equips>
+		<ai>
+			<says>
+				<noise state="idle follow fight" value="Będę wszechmocny!"/>
+			</says>
+			<profile name="brave"/>
+			<profile name="offensive"/>
+			<profile name="human"/>
+			<profile name="heal" params="5,50"/>
+			<profile name="patrolling"/>
+		</ai>
+	</creature>
+</creatures>
