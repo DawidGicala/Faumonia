@@ -66,7 +66,7 @@ protected void createDialog() {
             ConversationStates.IDLE,
             ConversationPhrases.GREETING_MESSAGES,
             new AndCondition(
-                    new LevelLessThanCondition(20)
+                    new LevelLessThanCondition(600)
             ),
             ConversationStates.ATTENDING,
             greetingBasis + "To miejsce to samouczek, który przygotuje cię do dalszej przygody. Mogę opowiedzieć Ci o podnoszeniu #przedmiotów, #miksturach, #zadaniach, #mistrzach #gry, #czacie #globalnym oraz wielu innych rzeczach. Zapytaj śmiało, jeśli potrzebujesz pomocy! Powinieneś używać słów podświetlonych na niebiesko.",
