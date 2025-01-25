@@ -6,7 +6,7 @@
 		<type class="small_animal" subclass="rat" tileid="small_animal.png:1"/>
 		<description>Oto szczur. Wygląda na wyjątkowo wygłodzonego.</description>
 		<attributes>
-			<atk value="7"/>
+			<atk value="1"/>
 			<def value="3"/>
 			<hp value="20"/>
 			<speed value="0.5"/>
@@ -77,7 +77,7 @@
 		<type class="small_animal" subclass="caverat" tileid="small_animal.png:0"/>
 		<description>Oto szczur jaskiniowy. Jest brudny i chowa się w podziemiach.</description>
 		<attributes>
-			<atk value="24"/>
+			<atk value="3"/>
 			<def value="4"/>
 			<hp value="30"/>
 			<speed value="0.5"/>

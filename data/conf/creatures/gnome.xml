@@ -6,7 +6,7 @@
 		<type class="gnome" subclass="gnome" tileid="gnome.png:0"/>
 		<description>Oto gnom. Żyje w górach.</description>
 		<attributes>
-			<atk value="14"/>
+			<atk value="4"/>
 			<def value="7"/>
 			<hp value="15"/>
 			<speed value="0.5"/>
@@ -39,7 +39,7 @@
 		<type class="gnome" subclass="woman_gnome" tileid="gnome.png:1"/>
 		<description>Oto panna gnom. Wciąż poleruje skały w górach.</description>
 		<attributes>
-			<atk value="12"/>
+			<atk value="6"/>
 			<def value="6"/>
 			<hp value="20"/>
 			<speed value="0.5"/>

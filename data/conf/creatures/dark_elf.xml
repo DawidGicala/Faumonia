@@ -20,7 +20,7 @@
 			<item value="money" quantity="[5,10]" probability="100.0"/>
 			<item value="zbroja ciemności" quantity="[1,1]" probability="0.15"/>
 			<item value="buty ciemności" quantity="[1,1]" probability="0.25"/>
-			<item value="płaszcz elficki" quantity="[1,1]" probability="1.0"/>
+			<item value="płaszcz ciemności" quantity="[1,1]" probability="1.0"/>
 			<item value="miecz elfów ciemności" quantity="[1,1]" probability="0.5"/>
 			<item value="elficki naszyjnik" quantity="[1,1]" probability="0.1"/>
 			<item value="wielki eliksir" quantity="[1,1]" probability="40.0"/>

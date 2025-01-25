@@ -49,9 +49,15 @@ public class LuckNPC implements ZoneConfigurator {
 			@Override
 			protected void createPath() {
 				final List<Node> nodes = new LinkedList<Node>();
-				nodes.add(new Node(101, 54));
-				nodes.add(new Node(110, 54));
-			    nodes.add(new Node(110, 42));
+				nodes.add(new Node(111, 39));
+				nodes.add(new Node(111, 45));
+			    nodes.add(new Node(111, 48));
+				nodes.add(new Node(126, 48));
+				nodes.add(new Node(126, 33));
+				nodes.add(new Node(118, 33));
+				nodes.add(new Node(118, 36));
+				nodes.add(new Node(113, 36));
+				nodes.add(new Node(111, 36));
 				setPath(new FixedPath(nodes, true));
 			}
 
@@ -66,7 +72,7 @@ public class LuckNPC implements ZoneConfigurator {
 		};
 
 		barman.setEntityClass("azannpc");
-		barman.setPosition(101, 42);
+		barman.setPosition(111, 39);
 		barman.initHP(100);
 		barman.setDescription("Oto Luck.");
 		zone.add(barman);

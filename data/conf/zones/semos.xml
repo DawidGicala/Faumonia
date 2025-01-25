@@ -1062,6 +1062,60 @@
 			<attribute name="hidden"/>
 		</portal>
 	</zone>
+	
+	<zone name="int_semos_zuzakina_house" file="interiors/kalavan/house_10.tmx">
+	<configurator class-name="games.stendhal.server.entity.mapstuff.chest.StoredChestConfigurator">
+			<parameter name="x">12</parameter>
+			<parameter name="y">2</parameter>
+		</configurator>
+	<portal x="3" y="23" ref="zuzakina_house_4">
+			<destination zone="0_semos_plains_n" ref="zuzakina_house_3"/>
+		</portal>
+	<portal x="4" y="23" ref="zuzakina_house_5">
+			<destination zone="0_semos_plains_n" ref="zuzakina_house_3"/>
+		</portal>
+	</zone>
+	
+	<zone name="int_semos_madejski_house" file="interiors/kirdneh/house_38.tmx">
+	<configurator class-name="games.stendhal.server.entity.mapstuff.chest.StoredChestConfigurator">
+			<parameter name="x">22</parameter>
+			<parameter name="y">13</parameter>
+		</configurator>
+	<portal x="19" y="23" ref="madejski_house_4">
+			<destination zone="0_semos_plains_n" ref="madejski_house_3"/>
+		</portal>
+	</zone>
+	
+	<zone name="int_semos_miszka96_house" file="interiors/ados/house_68.tmx">
+	<configurator class-name="games.stendhal.server.entity.mapstuff.chest.StoredChestConfigurator">
+			<parameter name="x">11</parameter>
+			<parameter name="y">20</parameter>
+		</configurator>
+	<portal x="13" y="21" ref="miszka96_house_4">
+			<destination zone="0_semos_plains_n" ref="miszka96_house_3"/>
+		</portal>
+	</zone>
+	
+	<zone name="int_semos_oxbowharp_house" file="interiors/kirdneh/house_45.tmx">
+	<configurator class-name="games.stendhal.server.entity.mapstuff.chest.StoredChestConfigurator">
+			<parameter name="x">9</parameter>
+			<parameter name="y">2</parameter>
+		</configurator>
+	<portal x="19" y="23" ref="oxbowharp_house_4">
+			<destination zone="0_semos_plains_n" ref="oxbowharp_house_3"/>
+		</portal>
+	</zone>
+	
+	<zone name="int_semos_golbatjov_house" file="interiors/kirdneh/house_35.tmx">
+	<configurator class-name="games.stendhal.server.entity.mapstuff.chest.StoredChestConfigurator">
+			<parameter name="x">28</parameter>
+			<parameter name="y">13</parameter>
+		</configurator>
+	<portal x="19" y="23" ref="golbatjov_house_4">
+			<destination zone="0_semos_plains_n" ref="golbatjov_house_3"/>
+		</portal>
+	</zone>
+	
 
 	<zone name="0_semos_plains_n" level="0" x="500000" y="499872"
 		file="Level 0/semos/plains_n.tmx">
@@ -1092,6 +1146,166 @@
 			<parameter name="orientation">v</parameter>
 			<parameter name="autoclose">2</parameter>
 		</configurator>
+		
+		
+		<entity x="48" y="77">
+			<implementation class-name="games.stendhal.server.entity.mapstuff.sign.Description" />
+			<attribute name="text">Oto parcela mieszkalna wojownika Madejski.</attribute>
+			<attribute name="class">transparent</attribute>
+			<attribute name="width">1</attribute>
+		</entity>
+		
+		<entity x="94" y="57">
+			<implementation class-name="games.stendhal.server.entity.mapstuff.sign.Description" />
+			<attribute name="text">Oto parcela mieszkalna wojowniczki Zuzakina.</attribute>
+			<attribute name="class">transparent</attribute>
+			<attribute name="width">1</attribute>
+		</entity>
+		
+		<entity x="96" y="27">
+			<implementation class-name="games.stendhal.server.entity.mapstuff.sign.Description" />
+			<attribute name="text">Oto parcela mieszkalna wojownika Golbatjov.</attribute>
+			<attribute name="class">transparent</attribute>
+			<attribute name="width">1</attribute>
+		</entity>
+		
+		<entity x="66" y="32">
+			<implementation class-name="games.stendhal.server.entity.mapstuff.sign.Description" />
+			<attribute name="text">Oto parcela mieszkalna wojownika Miszka96.</attribute>
+			<attribute name="class">transparent</attribute>
+			<attribute name="width">1</attribute>
+		</entity>
+		
+		<entity x="71" y="15">
+			<implementation class-name="games.stendhal.server.entity.mapstuff.sign.Description" />
+			<attribute name="text">Parcela residencial del guerrero Oxbowharp.</attribute>
+			<attribute name="class">transparent</attribute>
+			<attribute name="width">1</attribute>
+		</entity>
+		
+		<portal x="54" y="75" ref="madejski_house_1">
+			<destination zone="0_semos_plains_n" ref="madejski_house_2" />
+			<implementation
+				class-name="games.stendhal.server.entity.mapstuff.portal.KeyedPortal">
+				<parameter name="key">klucz do domu madejski</parameter>
+				<parameter name="rejected">Parcela mieszkalna wojownika madejski.</parameter>
+			</implementation>
+			<attribute name="hidden"/>
+		</portal>
+		
+		<portal x="53" y="75" ref="madejski_house_2">
+			<destination zone="0_semos_plains_n" ref="madejski_house_1" />
+			<implementation
+				class-name="games.stendhal.server.entity.mapstuff.portal.KeyedPortal">
+				<parameter name="key">klucz do domu madejski</parameter>
+				<parameter name="rejected">Parcela mieszkalna wojownika madejski.</parameter>
+			</implementation>
+			<attribute name="hidden"/>
+		</portal>
+		
+		<portal x="48" y="75" ref="madejski_house_3">
+			<destination zone="int_semos_madejski_house" ref="madejski_house_4"/>
+		</portal>
+		
+		<portal x="105" y="61" ref="zuzakina_house_1">
+			<destination zone="0_semos_plains_n" ref="zuzakina_house_2" />
+			<implementation
+				class-name="games.stendhal.server.entity.mapstuff.portal.KeyedPortal">
+				<parameter name="key">klucz do domu zuzakina</parameter>
+				<parameter name="rejected">Parcela mieszkalna wojowniczki zuzakina.</parameter>
+			</implementation>
+			<attribute name="hidden"/>
+		</portal>
+		
+		<portal x="105" y="60" ref="zuzakina_house_2">
+			<destination zone="0_semos_plains_n" ref="zuzakina_house_1" />
+			<implementation
+				class-name="games.stendhal.server.entity.mapstuff.portal.KeyedPortal">
+				<parameter name="key">klucz do domu zuzakina</parameter>
+				<parameter name="rejected">Parcela mieszkalna wojowniczki zuzakina.</parameter>
+			</implementation>
+			<attribute name="hidden"/>
+		</portal>
+		
+		<portal x="94" y="58" ref="zuzakina_house_3">
+			<destination zone="int_semos_zuzakina_house" ref="zuzakina_house_4"/>
+		</portal>
+		
+		<portal x="66" y="39" ref="miszka96_house_1">
+			<destination zone="0_semos_plains_n" ref="miszka96_house_2" />
+			<implementation
+				class-name="games.stendhal.server.entity.mapstuff.portal.KeyedPortal">
+				<parameter name="key">klucz do domu miszka96</parameter>
+				<parameter name="rejected">Parcela mieszkalna wojownika Miszka96.</parameter>
+			</implementation>
+			<attribute name="hidden"/>
+		</portal>
+		
+		<portal x="66" y="38" ref="miszka96_house_2">
+			<destination zone="0_semos_plains_n" ref="miszka96_house_1" />
+			<implementation
+				class-name="games.stendhal.server.entity.mapstuff.portal.KeyedPortal">
+				<parameter name="key">klucz do domu miszka96</parameter>
+				<parameter name="rejected">Parcela mieszkalna wojownika Miszka96.</parameter>
+			</implementation>
+			<attribute name="hidden"/>
+		</portal>
+		
+		<portal x="66" y="34" ref="miszka96_house_3">
+			<destination zone="int_semos_miszka96_house" ref="miszka96_house_4"/>
+		</portal>
+		
+		<portal x="104" y="30" ref="golbatjov_house_1">
+			<destination zone="0_semos_plains_n" ref="golbatjov_house_2" />
+			<implementation
+				class-name="games.stendhal.server.entity.mapstuff.portal.KeyedPortal">
+				<parameter name="key">klucz do domu golbatjov</parameter>
+				<parameter name="rejected">Parcela mieszkalna wojownika Golbatjov.</parameter>
+			</implementation>
+			<attribute name="hidden"/>
+		</portal>
+		
+		<portal x="103" y="30" ref="golbatjov_house_2">
+			<destination zone="0_semos_plains_n" ref="golbatjov_house_1" />
+			<implementation
+				class-name="games.stendhal.server.entity.mapstuff.portal.KeyedPortal">
+				<parameter name="key">klucz do domu golbatjov</parameter>
+				<parameter name="rejected">Parcela mieszkalna wojownika Golbatjov.</parameter>
+			</implementation>
+			<attribute name="hidden"/>
+		</portal>
+		
+		<portal x="96" y="28" ref="golbatjov_house_3">
+			<destination zone="int_semos_golbatjov_house" ref="golbatjov_house_4"/>
+		</portal>
+		
+		<portal x="71" y="21" ref="oxbowharp_house_1">
+			<destination zone="0_semos_plains_n" ref="oxbowharp_house_2" />
+			<implementation
+				class-name="games.stendhal.server.entity.mapstuff.portal.KeyedPortal">
+				<parameter name="key">klucz do domu oxbowharp</parameter>
+				<parameter name="rejected">Parcela residencial del guerrero Oxbowharp.</parameter>
+			</implementation>
+			<attribute name="hidden"/>
+		</portal>
+		
+		<portal x="71" y="20" ref="oxbowharp_house_2">
+			<destination zone="0_semos_plains_n" ref="oxbowharp_house_1" />
+			<implementation
+				class-name="games.stendhal.server.entity.mapstuff.portal.KeyedPortal">
+				<parameter name="key">klucz do domu oxbowharp</parameter>
+				<parameter name="rejected">Parcela residencial del guerrero Oxbowharp.</parameter>
+			</implementation>
+			<attribute name="hidden"/>
+		</portal>
+		
+		<portal x="71" y="16" ref="oxbowharp_house_3">
+			<destination zone="int_semos_oxbowharp_house" ref="oxbowharp_house_4"/>
+		</portal>
+		
+		
+		
+
 
 		<portal x="92" y="101" ref="catacombs_entrance">
 			<destination zone="-1_semos_catacombs_se" ref="entrance" />
@@ -2243,16 +2457,6 @@ Zadania u Mistrzów Gry przeprowadzą Cię przez całą grę, nie tylko przez po
 
 		<!-- writing on the wooden arch -->
 		
-		<entity x="34" y="15">
-			<implementation class-name="games.stendhal.server.entity.mapstuff.sign.Sign" />
-			<attribute name="text">
-Projekt "#Zalanie #Kamieniołomu" został zrealizowany dzięki funduszom pochodzącym z podatków mieszkańców Semos. Celem projektu było przekształcenie kamieniołomu w atrakcyjne miejsce wypoczynku na wakacje poprzez zalanie go wodą oraz wysypanie piasku, tworząc tym samym nową plażę dla mieszkańców.
-
-Podpisano,
-#Mayor #Sakhs
-Burmistrz Semos
-			</attribute>
-		</entity>
 		
 		<entity x="85" y="23">
 			<implementation class-name="games.stendhal.server.entity.mapstuff.sign.Sign" />
@@ -2356,7 +2560,7 @@ Potrzebna dojrzała owca: Proszę rozmawiać z Sato.
 			<attribute name="resistance">0</attribute>
 		</entity>
 
-		<portal x="95" y="40" ref="semos_restart_life">
+		<portal x="63" y="45" ref="semos_restart_life">
 			<implementation class-name="games.stendhal.server.entity.mapstuff.portal.OneWayPortalDestination"/>
 		</portal>
 		

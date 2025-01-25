@@ -254,7 +254,7 @@
 		<type class="animal" subclass="boar" tileid="animal.png:4"/>
 		<description>Dzik jest dziki, dzik jest zły, dzik ma bardzo ostre kły...</description>
 		<attributes>
-			<atk value="33"/>
+			<atk value="8"/>
 			<def value="7"/>
 			<hp value="50"/>
 			<speed value="0.5"/>
@@ -283,7 +283,7 @@
 		<type class="animal" subclass="wolf" tileid="animal.png:20"/>
 		<description>Oto wilk. Jest dziki i wygłodniały.</description>
 		<attributes>
-			<atk value="32"/>
+			<atk value="9"/>
 			<def value="9"/>
 			<hp value="35"/>
 			<speed value="0.5"/>

@@ -1588,4 +1588,109 @@
 		</equipable>
 	</item>
 		
+	<item name="zwój do domu madejski">
+		<type class="scroll" subclass="smile" tileid="-1"/>
+		<description>Oto zwój do domu Madejski.</description>
+		<implementation class-name="games.stendhal.server.entity.item.scroll.MarkedScroll"/>
+		<attributes>
+			<infostring value="0_semos_plains_n 57 75"/>
+			<quantity value="1"/>
+		</attributes>
+		<weight value="0.01"/>
+		<value value="1"/>
+		<equipable>
+			<slot name="ground"/>
+			<slot name="content"/>
+			<slot name="bag"/>
+			<slot name="trade"/>
+			<slot name="lhand"/>
+			<slot name="rhand"/>
+			<slot name="keyring"/>
+		</equipable>
+	</item>
+	
+	<item name="zwój do domu zuzakina">
+		<type class="scroll" subclass="smile" tileid="-1"/>
+		<description>Oto zwój do domu Zuzakina.</description>
+		<implementation class-name="games.stendhal.server.entity.item.scroll.MarkedScroll"/>
+		<attributes>
+			<infostring value="0_semos_plains_n 105 64"/>
+			<quantity value="1"/>
+		</attributes>
+		<weight value="0.01"/>
+		<value value="1"/>
+		<equipable>
+			<slot name="ground"/>
+			<slot name="content"/>
+			<slot name="bag"/>
+			<slot name="trade"/>
+			<slot name="lhand"/>
+			<slot name="rhand"/>
+			<slot name="keyring"/>
+		</equipable>
+	</item>
+	
+	<item name="zwój do domu miszka96">
+		<type class="scroll" subclass="smile" tileid="-1"/>
+		<description>Oto zwój do domu Miszka96.</description>
+		<implementation class-name="games.stendhal.server.entity.item.scroll.MarkedScroll"/>
+		<attributes>
+			<infostring value="0_semos_plains_n 66 42"/>
+			<quantity value="1"/>
+		</attributes>
+		<weight value="0.01"/>
+		<value value="1"/>
+		<equipable>
+			<slot name="ground"/>
+			<slot name="content"/>
+			<slot name="bag"/>
+			<slot name="trade"/>
+			<slot name="lhand"/>
+			<slot name="rhand"/>
+			<slot name="keyring"/>
+		</equipable>
+	</item>
+	
+	<item name="zwój do domu oxbowharp">
+		<type class="scroll" subclass="smile" tileid="-1"/>
+		<description>Este es el pergamino para la casa de Oxbowharp</description>
+		<implementation class-name="games.stendhal.server.entity.item.scroll.MarkedScroll"/>
+		<attributes>
+			<infostring value="0_semos_plains_n 71 23"/>
+			<quantity value="1"/>
+		</attributes>
+		<weight value="0.01"/>
+		<value value="1"/>
+		<equipable>
+			<slot name="ground"/>
+			<slot name="content"/>
+			<slot name="bag"/>
+			<slot name="trade"/>
+			<slot name="lhand"/>
+			<slot name="rhand"/>
+			<slot name="keyring"/>
+		</equipable>
+	</item>
+	
+	<item name="zwój do domu golbatjov">
+		<type class="scroll" subclass="smile" tileid="-1"/>
+		<description>Oto zwój do domu Golbatjov.</description>
+		<implementation class-name="games.stendhal.server.entity.item.scroll.MarkedScroll"/>
+		<attributes>
+			<infostring value="0_semos_plains_n 107 30"/>
+			<quantity value="1"/>
+		</attributes>
+		<weight value="0.01"/>
+		<value value="1"/>
+		<equipable>
+			<slot name="ground"/>
+			<slot name="content"/>
+			<slot name="bag"/>
+			<slot name="trade"/>
+			<slot name="lhand"/>
+			<slot name="rhand"/>
+			<slot name="keyring"/>
+		</equipable>
+	</item>
+	
 </items>
