@@ -20,7 +20,7 @@
 			<item value="udko" quantity="[1,1]" probability="80.0"/>
 			<item value="piórko" quantity="[1,1]" probability="90.0"/>
 			<item value="wisienka" quantity="[1,1]" probability="5.0"/>
-		</drops>
+		<item value="prezent czerwonego wędrowca 2025" quantity="[1,1]" probability="2.0"/> <item value="prezent lodowego wędrowca 2025" quantity="[1,1]" probability="0.5"/> <item value="prezent demonicznego wędrowca 2025" quantity="[1,1]" probability="0.25"/> </drops>
 		<equips/>
 		<ai>
 			<profile name="coward"/>
@@ -47,7 +47,7 @@
 			<item value="udko" quantity="[1,1]" probability="80.0"/>
 			<item value="spinka" quantity="[1,1]" probability="0.0001"/>
 			<item value="wisienka" quantity="[1,1]" probability="40.0"/>
-		</drops>
+		<item value="prezent czerwonego wędrowca 2025" quantity="[1,1]" probability="2.0"/> <item value="prezent lodowego wędrowca 2025" quantity="[1,1]" probability="0.5"/> <item value="prezent demonicznego wędrowca 2025" quantity="[1,1]" probability="0.25"/> </drops>
 		<equips/>
 		<ai>
 			<profile name="brave"/>

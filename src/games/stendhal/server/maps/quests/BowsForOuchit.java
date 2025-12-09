@@ -186,7 +186,7 @@ ask for horse hair.
 		/*
 		 * For simplicity, respond to 'Karl' at any time.
 		 */
-		npc.addReply("Karl", "Karl jest rolnikiem mieszkającym na zachód od Semos. Posiada sporo zwierząt na swojej farmie.");
+		npc.addReply("Karl", "Karl jest rolnikiem mieszkającym na wschód od Semos. Posiada sporo zwierząt na swojej farmie.");
 	}
 
 	public void getHairStep() {

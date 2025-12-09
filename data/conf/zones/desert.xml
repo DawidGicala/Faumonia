@@ -113,6 +113,14 @@
 		<portal x="45" y="74" ref="desert_entrance_3">
 			<implementation class-name="games.stendhal.server.entity.mapstuff.portal.OneWayPortalDestination"/>
 		</portal>
+		
+		<portal x="66" y="84" ref="chess_exit">
+			<destination zone="-1_desert_chess_pyramid" ref="chess_entrance1"/>
+		</portal>
+		<portal x="67" y="84" ref="chess_exit2">
+			<destination zone="-1_desert_chess_pyramid" ref="chess_entrance1"/>
+		</portal>
+		
 	</zone>
 
 	<!-- Pyramid SE -->
@@ -274,6 +282,17 @@
 		<configurator class-name="games.stendhal.server.core.config.zone.NoTeleportIn"/>
 		<portal x="59" y="60" ref="corridor_exit">
 			<destination zone="0_desert_pyramid_nw" ref="corridor_entrance"/>
+		</portal>
+	</zone>
+	
+	<zone name="-1_desert_chess_pyramid" level="-1" x="513312" y="512" file="Level -1/desert/chess_pyramid.tmx">
+		<configurator class-name="games.stendhal.server.core.config.zone.NoTeleportIn"/>
+		<portal x="50" y="93" ref="chess_entrance1">
+			<destination zone="0_desert_pyramid_sw" ref="chess_exit"/>
+		</portal>
+		
+		<portal x="50" y="49" ref="chess_entrance2">
+			<destination zone="0_desert_pyramid_sw" ref="chess_exit"/>
 		</portal>
 	</zone>
 	

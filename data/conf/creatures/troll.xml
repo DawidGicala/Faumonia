@@ -23,7 +23,7 @@
 			<item value="kolczuga wzmocniona" quantity="[1,1]" probability="0.5"/>
 			<item value="kiścień" quantity="[1,1]" probability="4.0"/>
 			<item value="mały eliksir" quantity="[1,1]" probability="20.0"/>
-		</drops>
+		<item value="prezent czerwonego wędrowca 2025" quantity="[1,1]" probability="2.0"/> <item value="prezent lodowego wędrowca 2025" quantity="[1,1]" probability="0.5"/> <item value="prezent demonicznego wędrowca 2025" quantity="[1,1]" probability="0.25"/> </drops>
 		<equips>
 		</equips>
 		<ai>
@@ -57,7 +57,7 @@
 			<item value="kiścień" quantity="[1,1]" probability="4.0"/>
 			<item value="kropacz" quantity="[1,1]" probability="0.125"/>
 			<item value="mały eliksir" quantity="[1,1]" probability="20.0"/>
-		</drops>
+		<item value="prezent czerwonego wędrowca 2025" quantity="[1,1]" probability="2.0"/> <item value="prezent lodowego wędrowca 2025" quantity="[1,1]" probability="0.5"/> <item value="prezent demonicznego wędrowca 2025" quantity="[1,1]" probability="0.25"/> </drops>
 		<equips>
 		</equips>
 		<ai>
@@ -90,7 +90,7 @@
 			<item value="kropacz" quantity="[1,1]" probability="1.0"/>
 			<item value="mały eliksir" quantity="[1,1]" probability="20.0"/>
 			<item value="czarny sztylet" quantity="[1,1]" probability="0.025"/>
-		</drops>
+		<item value="prezent czerwonego wędrowca 2025" quantity="[1,1]" probability="2.0"/> <item value="prezent lodowego wędrowca 2025" quantity="[1,1]" probability="0.5"/> <item value="prezent demonicznego wędrowca 2025" quantity="[1,1]" probability="0.25"/> </drops>
 		<equips>
 		</equips>
 		<ai>

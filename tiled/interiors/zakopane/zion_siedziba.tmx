@@ -48,14 +48,17 @@
  <tileset firstgid="178" name="protection" tilewidth="32" tileheight="32" tilecount="2" columns="2">
   <image source="../../tileset/logic/protection.png" width="64" height="32"/>
  </tileset>
+ <tileset firstgid="180" name="pol_zbojnicy_gorscy" tilewidth="32" tileheight="32" tilecount="6" columns="6">
+  <image source="../../tileset/logic/creature/pol_zbojnicy_gorscy.png" width="192" height="32"/>
+ </tileset>
  <layer name="0_floor" width="25" height="25">
   <data encoding="base64" compression="gzip">
-   H4sIAAAAAAAAC5NmYGCQJoCLsIjloWFCZpBjBzVxNY3Nh9lBa3+AcCURagroEFaU2EEspocd9MYlaDStMT3SJD3iqogOdtDDH8MJqxDA9LBnoOzQAGJNINaikh3VWNRrA7EOEOuiiedS0Q49INYHYgMgZsQij628ImQHsWUOvrxGqj9oEefUKjupmU5LkDCIDwCmFDjdxAkAAA==
+   H4sIAAAAAAAAC5NmYGCQJoCLsIjloWFCZpBjBzVxNY3Nh9lBa3+AcCURagroEFaU2EEspocd9MYlaDStMT3SJD3iqogOdtDDH8MJqxDA9LBnoOzQAGJNINaikh3VWNRrA7EOEOvS0B96QKwPxAZAzEglf1CjzCE1rGgR59QqO6mZTkuQMIgPAHLvBgDECQAA
   </data>
  </layer>
  <layer name="1_terrain" width="25" height="25">
   <data encoding="base64" compression="gzip">
-   H4sIAAAAAAAAC82VywrCMBBF8w8KbvqL2uIDBbGCKzVV20WLn+sdSCEEm8RkEgycVW96SDuTWQohVgE8wBO8HLkSVMK+jqABhYNKZU3Wno4usUOCIbGjVTmXQ0Y4ek9HG+EYcy5Hn8ERW1c+jg3YKvTe4XTYaiG1g2qhYXDMwFxjoT2jWugSn4P2Dhkc9D9OFmomx97CgcmR41v9o0NfHA454Xh/cVDWnLWh82PqHJQ9i9/vK+pTn3k+9vTF2M85zwv1rlCHzzy3OfR7n4sruIE72IEPUX3+wMQJAAA=
+   H4sIAAAAAAAAC8tlYGDIIwP3AnEfEPcTUJcPxAUM+EE1EBcBsQwBXABVi46LRu0YtWOQ21EMxCVYMDXtwIWJsaMGiEtpbAcx5ggDsQgSFifRjjIGSJlDS39QKz5q8eA6KtlRjgdXUMkOeoTVYLQDGdAqD1LbDmz6qG3HUMqDtLYDV7lPLQxKLwANa7WHxAkAAA==
   </data>
  </layer>
  <layer name="2_object" width="25" height="25">
@@ -75,15 +78,15 @@
  </layer>
  <layer name="objects" width="25" height="25">
   <data encoding="base64" compression="gzip">
-   H4sIAAAAAAAAC2NgIB8sokDvQICh5l5sYDj4YRQMv3ikl3+GW7iNglFAT0BK/lmEgz1YwGB0E70Ast8B/B4PhsQJAAA=
+   H4sIAAAAAAAAC2NgGAVDFWxB428dEFcQB3YMtAMoANtwiKOH/1AC2wfaAVAwGNLsUIvHwRBmo4AysBOJPRqf1AmDoZaPqQUA3Kl4LMQJAAA=
   </data>
  </layer>
- <layer name="collision" width="25" height="25">
+ <layer name="collision" width="25" height="25" opacity="0.2">
   <data encoding="base64" compression="gzip">
-   H4sIAAAAAAAAC9WVXQrAMAiDc4He/7p7Kozh1hhj6QQpFfXzB9oBYIiKpO+bMD4ZllIDy9jRBxPfyXDNy8E4fR8q42lzMCrxVcbM4aojmk1mzqrs3IfrzTqBgeAEfIyqDxP/pz6YnUZ9RHe2ps7/I7Kt9sHKFyMbpzA69J7/AgBjF+7ECQAA
+   H4sIAAAAAAAAC+NlYGDgJRMzkKgWFyBGDSl2kesOYuyghz9G7Ri1gxw7KNFPDztIMQdb2AwWf1DLDmqUV4PFDgYsNAMD9eygVA0x+keCPygFg8UfQy0+aIkBUILa0sQJAAA=
   </data>
  </layer>
- <layer name="protection" width="25" height="25">
+ <layer name="protection" width="25" height="25" visible="0">
   <data encoding="base64" compression="gzip">
    H4sIAAAAAAAAC+3DAQkAAAwEoesf5xMux0DBVVNV9dUDfwezKMQJAAA=
   </data>

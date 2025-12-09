@@ -462,4 +462,49 @@
 		</equipable>
 	</item>
 	
+	<item name="prezent czerwonego wędrowca 2025">
+		<type class="box" subclass="prezent_czerwonego_wedrowca_2025" tileid="-1"/>
+		<description>Oto Prezent Czerwonego Wędrowcy, zapakowany w świąteczne futerko i przewiązany wstążką, która ucieka, jeśli ktoś próbuje ją rozwiązać; w środku czeka niespodzianka od Zawadiaki i szansa na mały świąteczny chaos #zima #2025</description>
+		<implementation class-name="games.stendhal.server.entity.item.PrezentZima12025"/>
+		<attributes>
+		</attributes>
+		<weight value="0.01"/>
+		<value value="1"/>
+		<equipable>
+			<slot name="ground"/>
+			<slot name="content"/>
+			<slot name="bag"/>
+		</equipable>
+	</item>
+	
+	<item name="prezent lodowego wędrowca 2025">
+		<type class="box" subclass="prezent_lodowego_wedrowca_2025" tileid="-1"/>
+		<description>Oto Prezent Lodowego Wędrowcy, otulony mrozem tak czystym, że odbija gwiazdy północnego nieba; otwarcie go to jak rozchylenie bramy do krainy, gdzie zima nigdy nie odpuszcza #zima #2025 </description>
+		<implementation class-name="games.stendhal.server.entity.item.PrezentZima22025"/>
+		<attributes>
+		</attributes>
+		<weight value="0.01"/>
+		<value value="1"/>
+		<equipable>
+			<slot name="ground"/>
+			<slot name="content"/>
+			<slot name="bag"/>
+		</equipable>
+	</item>
+	
+	<item name="prezent demonicznego wędrowca 2025">
+		<type class="box" subclass="prezent_demonicznego_wedrowca_2025" tileid="-1"/>
+		<description>Oto Prezent Demonicznego Wędrowcy, owinięty skórą, która wciąż drży pod dotykiem; w środku szepczą uwięzione potwory, prosząc o kolejną szansę na chaos i krew #zima #2025 </description>
+		<implementation class-name="games.stendhal.server.entity.item.PrezentZima32025"/>
+		<attributes>
+		</attributes>
+		<weight value="0.01"/>
+		<value value="1"/>
+		<equipable>
+			<slot name="ground"/>
+			<slot name="content"/>
+			<slot name="bag"/>
+		</equipable>
+	</item>
+	
 </items>

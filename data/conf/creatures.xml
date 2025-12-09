@@ -67,4 +67,6 @@
 	<group uri="creatures/faumonia_balourghy.xml"/>	
 	<group uri="creatures/faumonia_duchy.xml"/>	
 	<group uri="creatures/faumonia_kamienie.xml"/>	
+	<group uri="creatures/pol_pokutniki.xml"/>	
+	<group uri="creatures/faumonia_arena.xml"/>	
 </groups>

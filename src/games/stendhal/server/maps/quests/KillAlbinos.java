@@ -110,8 +110,8 @@ public class KillAlbinos extends AbstractQuest {
 		toKill.put("elf albinos rycerz", new Pair<Integer, Integer>(0,50));
 		toKill.put("elf albinos łucznik", new Pair<Integer, Integer>(0,40));
 		toKill.put("elf albinos magik", new Pair<Integer, Integer>(0,20));
-		toKill.put("elf albinos królowa", new Pair<Integer, Integer>(0,20));
-		toKill.put("elf albinos król", new Pair<Integer, Integer>(0,20));
+		toKill.put("elf albinos królowa", new Pair<Integer, Integer>(0,10));
+		toKill.put("elf albinos król", new Pair<Integer, Integer>(0,10));
 
 		final List<ChatAction> actions = new LinkedList<ChatAction>();
 		actions.add(new SetQuestAction(QUEST_SLOT, "start"));

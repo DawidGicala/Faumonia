@@ -18,48 +18,51 @@
  <tileset firstgid="56" name="pol_mythical_animal" tilewidth="32" tileheight="32" tilecount="10" columns="10">
   <image source="../../tileset/logic/creature/pol_smoki.png" width="320" height="32"/>
  </tileset>
- <tileset firstgid="66" name="floor_stains_2" tilewidth="32" tileheight="32" tilecount="3" columns="2">
+ <tileset firstgid="66" name="floor_stains_2" tilewidth="32" tileheight="32" tilecount="4" columns="2">
   <image source="../../../../Tiled/PolskaOnLine/tiled/tileset/item/blood/floor_stains_2.png" width="64" height="64"/>
  </tileset>
- <tileset firstgid="70" name="skulls" tilewidth="32" tileheight="32" tilecount="8" columns="4">
+ <tileset firstgid="70" name="skulls" tilewidth="32" tileheight="32" tilecount="16" columns="4">
   <image source="../../../../Tiled/PolskaOnLine/tiled/tileset/item/corpse/skulls.png" width="128" height="128"/>
  </tileset>
- <tileset firstgid="85" name="pol_mutanty_wielkie" tilewidth="32" tileheight="32" tilecount="0" columns="4">
+ <tileset firstgid="86" name="pol_mutanty_wielkie" tilewidth="32" tileheight="32" tilecount="4" columns="4">
   <image source="../../../../Tiled/PolskaOnLine/tiled/tileset/logic/creature/pol_mutanty_wielkie.png" width="128" height="32"/>
  </tileset>
- <tileset firstgid="85" name="golem" tilewidth="32" tileheight="32" tilecount="0" columns="3">
-  <image source="../../../../Tiled/PolskaOnLine/tiled/tileset/logic/creature/golem.png" width="96" height="32"/>
+ <tileset firstgid="90" name="golem" tilewidth="32" tileheight="32" tilecount="4" columns="4">
+  <image source="../../../../Tiled/PolskaOnLine/tiled/tileset/logic/creature/golem.png" width="128" height="32"/>
  </tileset>
- <tileset firstgid="85" name="pol_magowie" tilewidth="32" tileheight="32" tilecount="0" columns="9">
+ <tileset firstgid="94" name="pol_magowie" tilewidth="32" tileheight="32" tilecount="9" columns="9">
   <image source="../../../../Tiled/PolskaOnLine/tiled/tileset/logic/creature/pol_magowie.png" width="288" height="32"/>
  </tileset>
- <tileset firstgid="85" name="hybrid" tilewidth="32" tileheight="32" tilecount="0" columns="15">
+ <tileset firstgid="103" name="hybrid" tilewidth="32" tileheight="32" tilecount="15" columns="15">
   <image source="../../../../Tiled/PolskaOnLine/tiled/tileset/logic/creature/hybrid.png" width="480" height="32"/>
  </tileset>
- <tileset firstgid="85" name="huge_animal" tilewidth="32" tileheight="32" tilecount="0" columns="14">
+ <tileset firstgid="118" name="huge_animal" tilewidth="32" tileheight="32" tilecount="14" columns="14">
   <image source="../../../../Tiled/PolskaOnLine/tiled/tileset/logic/creature/huge_animal.png" width="451" height="32"/>
  </tileset>
- <tileset firstgid="85" name="animal" tilewidth="32" tileheight="32" tilecount="1" columns="30">
+ <tileset firstgid="132" name="animal" tilewidth="32" tileheight="32" tilecount="30" columns="30">
   <image source="../../../../Tiled/PolskaOnLine/tiled/tileset/logic/creature/animal.png" width="960" height="32"/>
  </tileset>
- <tileset firstgid="104" name="golem" tilewidth="32" tileheight="32" tilecount="3" columns="3">
-  <image source="../../tileset/logic/creature/golem.png" width="96" height="32"/>
+ <tileset firstgid="162" name="golem" tilewidth="32" tileheight="32" tilecount="4" columns="4">
+  <image source="../../tileset/logic/creature/golem.png" width="128" height="32"/>
  </tileset>
- <tileset firstgid="107" name="animal" tilewidth="32" tileheight="32" tilecount="30" columns="30">
+ <tileset firstgid="166" name="animal" tilewidth="32" tileheight="32" tilecount="30" columns="30">
   <image source="../../tileset/logic/creature/animal.png" width="960" height="32"/>
  </tileset>
- <tileset firstgid="137" name="hybrid" tilewidth="32" tileheight="32" tilecount="15" columns="15">
+ <tileset firstgid="196" name="hybrid" tilewidth="32" tileheight="32" tilecount="15" columns="15">
   <image source="../../tileset/logic/creature/hybrid.png" width="480" height="32"/>
  </tileset>
- <tileset firstgid="152" name="huge_animal" tilewidth="32" tileheight="32" tilecount="14" columns="14">
+ <tileset firstgid="211" name="huge_animal" tilewidth="32" tileheight="32" tilecount="14" columns="14">
   <image source="../../tileset/logic/creature/huge_animal.png" width="451" height="32"/>
  </tileset>
- <tileset firstgid="166" name="protection" tilewidth="32" tileheight="32" tilecount="2" columns="2">
+ <tileset firstgid="225" name="protection" tilewidth="32" tileheight="32" tilecount="2" columns="2">
   <image source="../../tileset/logic/protection.png" width="64" height="32"/>
+ </tileset>
+ <tileset firstgid="227" name="grass_snow" tilewidth="32" tileheight="32" tilecount="9" columns="3">
+  <image source="../../tileset/ground/grass_snow.png" width="96" height="96"/>
  </tileset>
  <layer name="0_floor" width="32" height="32">
   <data encoding="base64" compression="gzip">
-   H4sIAAAAAAAAC+3DwQkAAAwDoftk/5W7R1Fw1VRVVdXXD+tjLhgAEAAA
+   H4sIAAAAAAAAC+3DAQkAAAwEoetf9Gusx1Bw1VRVVdXXDxKnfD4AEAAA
   </data>
  </layer>
  <layer name="1_terrain" width="32" height="32">
@@ -84,7 +87,7 @@
  </layer>
  <layer name="objects" width="32" height="32">
   <data encoding="base64" compression="gzip">
-   H4sIAAAAAAAAC2NgGAWjYGiCjIF2wAgBNRTqr6WKK4gDlLp1FIxsQEqZMo1mrhgFQwGkD7QD6ADoWXZTG4zWBaNguABq5MPR9vIoQAcA0DaWfAAQAAA=
+   H4sIAAAAAAAAC2NgGAWjgDZgG43NX0Rj8wcToHVY4rNrO4Xm7aBQPymAUreOgpENSClTLtLMFdQB9CwzaA0Go1+mDbQD6ADoWXZTG4zWBbQDuPIjpfl0MObzwQCokQ9HUnt5FBAHAMMC97YAEAAA
   </data>
  </layer>
  <layer name="collision" width="32" height="32">
@@ -92,9 +95,9 @@
    H4sIAAAAAAAAC+3XwQkAMAgDwLj/0u5QRClcIN/cO5WkPm2GtzbD5/P5fD6fz+fz+fwb//UzTuxctgGMp+bYABAAAA==
   </data>
  </layer>
- <layer name="protection" width="32" height="32">
+ <layer name="protection" width="32" height="32" visible="0">
   <data encoding="base64" compression="gzip">
-   H4sIAAAAAAAAC+3DAQkAAAwEoesf5HOux1Bw1VRVVdXXD6hGKbUAEAAA
+   H4sIAAAAAAAAC+3DAQkAAAwEoevf8pusx1Bw1VRVVdXXD77loKsAEAAA
   </data>
  </layer>
 </map>

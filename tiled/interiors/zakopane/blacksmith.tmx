@@ -72,6 +72,9 @@
  <tileset firstgid="291" name="jedzenie" tilewidth="32" tileheight="32" tilecount="24" columns="8">
   <image source="../../tileset/pol/wyposazenie/jedzenie/jedzenie.png" width="256" height="96"/>
  </tileset>
+ <tileset firstgid="315" name="pol_zbojnicy_gorscy" tilewidth="32" tileheight="32" tilecount="6" columns="6">
+  <image source="../../tileset/logic/creature/pol_zbojnicy_gorscy.png" width="192" height="32"/>
+ </tileset>
  <layer name="0_floor" width="32" height="16">
   <data encoding="base64" compression="gzip">
    H4sIAAAAAAAAC5vBwMAwc4DwLCBeCsTLBggvR7KfEQk/AOKLUPoBmhwyvkgBxmc/utqhYP9DNExIfLD5H5uaBySYh8ufD3DQxNhPS0zIfnR/kBsGpPgfW7oZLP7HFb+0TH/0jH9q+g09rIjJ/9ep6LcHZPifnLpjGQX6YWbMBuI5ZOC5UJpc/TAzAFEYVFUACAAA
@@ -102,12 +105,12 @@
    H4sIAAAAAAAAC2NgGAWjYBSMglEwCkbBSAMAnrro8QAIAAA=
   </data>
  </layer>
- <layer name="collision" width="32" height="16">
+ <layer name="collision" width="32" height="16" opacity="0.4">
   <data encoding="base64" compression="gzip">
    H4sIAAAAAAAAC+1UMRIAIAjy/4NvbrdLUSOXuGPjQC1VEdHPjQJqqkCyIy0r33pHmsz8kHy01g5uenl+9j1Ps3kN9M95es/P65uRnwXaDwus24L6Rvveya/UOZ1f4S2fSS4ZpqTnAAgAAA==
   </data>
  </layer>
- <layer name="protection" width="32" height="16">
+ <layer name="protection" width="32" height="16" visible="0">
   <data encoding="base64" compression="gzip">
    H4sIAAAAAAAAC+tnYGDoH8WjeBSP4lE8ikfxiMIApx5ILQAIAAA=
   </data>

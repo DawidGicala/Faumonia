@@ -227,6 +227,7 @@ Idź dalej, a wrócisz do krainy, w której żyjesz...
 	<configurator class-name="games.stendhal.server.maps.testing_grid.GiantLandNPC" />
 	<configurator class-name="games.stendhal.server.maps.testing_grid.MaleusLandNPC" />
 	<configurator class-name="games.stendhal.server.maps.testing_grid.FaumoniaNPC" />
+	<configurator class-name="games.stendhal.server.maps.testing_grid.Swieta2025NPC" />
 	<configurator class-name="games.stendhal.server.core.config.zone.NoTeleportIn"/>
 	</zone>
 

@@ -39,6 +39,9 @@
  <tileset firstgid="109" name="protection" tilewidth="32" tileheight="32" tilecount="2" columns="2">
   <image source="../../tileset/logic/protection.png" width="64" height="32"/>
  </tileset>
+ <tileset firstgid="111" name="pol_zbojnicy_gorscy" tilewidth="32" tileheight="32" tilecount="6" columns="6">
+  <image source="../../tileset/logic/creature/pol_zbojnicy_gorscy.png" width="192" height="32"/>
+ </tileset>
  <layer name="0_floor" width="15" height="25">
   <data encoding="base64" compression="gzip">
    H4sIAAAAAAAAC1NhYGBQGcWjeBSP4lE8rDAAP0KHC9wFAAA=
@@ -46,7 +49,7 @@
  </layer>
  <layer name="1_terrain" width="15" height="25">
   <data encoding="base64" compression="gzip">
-   H4sIAAAAAAAAC7NnYGBwIAM7ArETEHsAsScJ2AuIXaB6vYGYEQ3DgCkDKgDJ+WLRSwwYTHqJBZToZcCiVw6I5dGwAhArookpUWAv/xDUy4BFrwQZel2B2A0NBxOp154BM39FkujmTDLcTElYgfwbhIZJ8W8EGibVv+S4mRp6ufGoFUDC3Gh6/YDYnwQcwIA7XRGD3YEYAApToRDcBQAA
+   H4sIAAAAAAAAC7NnYGBwIAM7ArETEHsAsScJ2AuIXaB6vYGYEQ3DgCkDKgDJ+WLRSwwYTHqJBZToZcCjVw6I5aFYAYgVkfggrESBvfxDUC8DFr0SZOh1BWI3NBxMpF57Bsz8FUmimzPJcDMlYQXybxAaJsW/EWiYVP+S42Zq6OXGo1YACXOj6fUDYn8ScAAD7nRFDHYHYgCBk23/3AUAAA==
   </data>
  </layer>
  <layer name="2_object" width="15" height="25">
@@ -56,7 +59,7 @@
  </layer>
  <layer name="3_roof" width="15" height="25">
   <data encoding="base64" compression="gzip">
-   H4sIAAAAAAAAC2NgwA44cYgTA7go0DsKcANJIJZCw9JALIMmJjtQDhxEQHygHTAKaAqILZ+wqSO2fBrq5RgAByu0kdwFAAA=
+   H4sIAAAAAAAAC2NgwA44cYgTA7go0DsKCANJIJaCYmkglkHig7DswDlt0ADxgXbAKKApILZ8wqaO2PJpqJdjANSidi/cBQAA
   </data>
  </layer>
  <layer name="4_roof_add" width="15" height="25">
@@ -66,15 +69,15 @@
  </layer>
  <layer name="objects" width="15" height="25">
   <data encoding="base64" compression="gzip">
-   H4sIAAAAAAAAC2NgGAWjYBSMglEw3AAAv2wkb9wFAAA=
+   H4sIAAAAAAAAC2NgGAXUBMUD7YBhDAoG2gFUBPkD7QA0MNjcQw1AKL0U0sUVAwcAM8/ivdwFAAA=
   </data>
  </layer>
- <layer name="collision" width="15" height="25">
+ <layer name="collision" width="15" height="25" opacity="0.4">
   <data encoding="base64" compression="gzip">
-   H4sIAAAAAAAACxNjYGAQG2SYgUS1hMBg0kssoEQvNv300DtQ/qV2WFFqN7HmUFsvuW4mBQwW/1LiZkr04tNP67KOVAwAcwPLptwFAAA=
+   H4sIAAAAAAAACxNjYGAQG2SYgUS1hMBg0ksswKeX3DClVC8lbh6semlhN7HmUFsvuW4mBQwW/1LiZkr04tNPbt4iRx8xGAAS2lPt3AUAAA==
   </data>
  </layer>
- <layer name="protection" width="15" height="25">
+ <layer name="protection" width="15" height="25" visible="0" opacity="0.5">
   <data encoding="base64" compression="gzip">
    H4sIAAAAAAAAC8tlYGDIHcWjeBSP4lE8rDAAhPudhNwFAAA=
   </data>

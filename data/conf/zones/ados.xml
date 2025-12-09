@@ -864,7 +864,7 @@ Zachód: Semos
 		<entity x="91" y="18">
 			<implementation class-name="games.stendhal.server.entity.mapstuff.sign.Description" />
 			<attribute name="text">
-			#Oxbowharp	14.12.2024
+			#Oxbowharp	17.11.2024	18.06.2025
 			</attribute>
 			<attribute name="class">transparent</attribute>
 			<attribute name="width">2</attribute>
@@ -874,6 +874,33 @@ Zachód: Semos
 			<implementation class-name="games.stendhal.server.entity.mapstuff.sign.Description" />
 			<attribute name="text">
 			#SSejPaulo	29.12.2024
+			</attribute>
+			<attribute name="class">transparent</attribute>
+			<attribute name="width">2</attribute>
+		</entity>
+		
+		<entity x="105" y="18">
+			<implementation class-name="games.stendhal.server.entity.mapstuff.sign.Description" />
+			<attribute name="text">
+			#WywózOrków	28.02.2025
+			</attribute>
+			<attribute name="class">transparent</attribute>
+			<attribute name="width">2</attribute>
+		</entity>
+		
+		<entity x="87" y="22">
+			<implementation class-name="games.stendhal.server.entity.mapstuff.sign.Description" />
+			<attribute name="text">
+			#Madejski	22.04.2025
+			</attribute>
+			<attribute name="class">transparent</attribute>
+			<attribute name="width">2</attribute>
+		</entity>
+		
+		<entity x="91" y="22">
+			<implementation class-name="games.stendhal.server.entity.mapstuff.sign.Description" />
+			<attribute name="text">
+			#Miszka96	05.05.2025
 			</attribute>
 			<attribute name="class">transparent</attribute>
 			<attribute name="width">2</attribute>
@@ -3409,6 +3436,7 @@ Południowy-wschód: Doki
 		</attributes>
 		<configurator class-name="games.stendhal.server.maps.ados.wall.HolidayingManNPC"/>
 		<configurator class-name="games.stendhal.server.maps.ados.wall.HolidayingBoyNPC"/>
+		<configurator class-name="games.stendhal.server.maps.ados.city.WaltNPC"/>
 		<!-- table at Holiday House -->
 		<entity x="109" y="74">
 			<implementation

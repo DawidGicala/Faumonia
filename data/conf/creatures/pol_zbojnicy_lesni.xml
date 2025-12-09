@@ -26,7 +26,7 @@
 			<item value="korale" quantity="[1,1]" probability="0.05"/>
 			<item value="butelka wody" quantity="[1,4]" probability="60.0"/>
 			<item value="ciupaga" quantity="[1,1]" probability="0.2"/>
-		</drops>
+		<item value="prezent czerwonego wędrowca 2025" quantity="[1,1]" probability="2.0"/> <item value="prezent lodowego wędrowca 2025" quantity="[1,1]" probability="0.5"/> <item value="prezent demonicznego wędrowca 2025" quantity="[1,1]" probability="0.25"/> </drops>
 		<equips/>
 		<ai>
 			<says>
@@ -58,7 +58,7 @@
 			<item value="korale" quantity="[1,1]" probability="0.1"/>
 			<item value="butelka wody" quantity="[1,4]" probability="65.0"/>
 			<item value="ciupaga" quantity="[1,1]" probability="0.5"/>
-		</drops>
+		<item value="prezent czerwonego wędrowca 2025" quantity="[1,1]" probability="2.0"/> <item value="prezent lodowego wędrowca 2025" quantity="[1,1]" probability="0.5"/> <item value="prezent demonicznego wędrowca 2025" quantity="[1,1]" probability="0.25"/> </drops>
 		<equips/>
 		<ai>
 			<says>
@@ -90,7 +90,7 @@
 			<item value="korale" quantity="[1,1]" probability="0.1"/>
 			<item value="butelka wody" quantity="[1,4]" probability="70.0"/>
 			<item value="ciupaga" quantity="[1,1]" probability="0.25"/>
-		</drops>
+		<item value="prezent czerwonego wędrowca 2025" quantity="[1,1]" probability="2.0"/> <item value="prezent lodowego wędrowca 2025" quantity="[1,1]" probability="0.5"/> <item value="prezent demonicznego wędrowca 2025" quantity="[1,1]" probability="0.25"/> </drops>
 		<equips/>
 		<ai>
 			<says>
@@ -127,7 +127,7 @@
 			<item value="karp" quantity="[1,1]" probability="2.5"/>
 			<item value="karp lustrzeń" quantity="[1,1]" probability="4.0"/>
 			<item value="ciupaga" quantity="[1,1]" probability="0.15"/>
-		</drops>
+		<item value="prezent czerwonego wędrowca 2025" quantity="[1,1]" probability="2.0"/> <item value="prezent lodowego wędrowca 2025" quantity="[1,1]" probability="0.5"/> <item value="prezent demonicznego wędrowca 2025" quantity="[1,1]" probability="0.25"/> </drops>
 		<equips/>
 		<ai>
 			<says>
@@ -162,7 +162,7 @@
 			<item value="kiść winogron" quantity="[1,2]" probability="5.0"/>
 			<item value="winogrona" quantity="[1,2]" probability="5.0"/>
 			<item value="ciupaga" quantity="[1,1]" probability="0.25"/>
-		</drops>
+		<item value="prezent czerwonego wędrowca 2025" quantity="[1,1]" probability="2.0"/> <item value="prezent lodowego wędrowca 2025" quantity="[1,1]" probability="0.5"/> <item value="prezent demonicznego wędrowca 2025" quantity="[1,1]" probability="0.25"/> </drops>
 		<equips/>
 		<ai>
 			<says>
@@ -204,7 +204,7 @@
 			<item value="karp" quantity="[1,1]" probability="2.5"/>
 			<item value="karp lustrzeń" quantity="[1,1]" probability="0.75"/>
 			<item value="ciupaga" quantity="[1,1]" probability="0.0125"/>
-		</drops>
+		<item value="prezent czerwonego wędrowca 2025" quantity="[1,1]" probability="2.0"/> <item value="prezent lodowego wędrowca 2025" quantity="[1,1]" probability="0.5"/> <item value="prezent demonicznego wędrowca 2025" quantity="[1,1]" probability="0.25"/> </drops>
 		<equips/>
 		<ai>
 			<says>
@@ -236,7 +236,7 @@
 			<item value="korale" quantity="[1,1]" probability="0.05"/>
 			<item value="buteleczka wody" quantity="[1,4]" probability="80.0"/>
 			<item value="ciupaga" quantity="[1,1]" probability="0.0125"/>
-		</drops>
+		<item value="prezent czerwonego wędrowca 2025" quantity="[1,1]" probability="2.0"/> <item value="prezent lodowego wędrowca 2025" quantity="[1,1]" probability="0.5"/> <item value="prezent demonicznego wędrowca 2025" quantity="[1,1]" probability="0.25"/> </drops>
 		<equips/>
 		<ai>
 			<says>
@@ -271,7 +271,7 @@
 			<item value="babka lekarska" quantity="[1,1]" probability="10.0"/>
 			<item value="ciupaga" quantity="[1,1]" probability="0.0125"/>
 			<item value="buteleczka wody" quantity="[1,3]" probability="95.0"/>
-		</drops>
+		<item value="prezent czerwonego wędrowca 2025" quantity="[1,1]" probability="2.0"/> <item value="prezent lodowego wędrowca 2025" quantity="[1,1]" probability="0.5"/> <item value="prezent demonicznego wędrowca 2025" quantity="[1,1]" probability="0.25"/> </drops>
 		<equips/>
 		<ai>
 			<says>

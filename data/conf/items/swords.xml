@@ -1492,4 +1492,73 @@
 		</equipable>
 	</item>
 	
+		<item name="miecz czerwonego w 2025">
+		<type class="sword" subclass="swiateczny_miecz_2025" tileid="-1"/>
+		<description>Oto Miecz Czerwonego Wędrowca. Jego ostrze wykuto z lodowej stali, która nigdy nie tępie się w zimie, a rękojeść owinięto czerwono-białym materiałem z mikołajowej pracowni. Podczas machnięcia wydaje delikatny dźwięk przypominający dzwoneczki, choć nikt nie znalazł na nim ani jednego dzwonka. To broń dla wojownika, który chce wyglądać świątecznie, ale ciąć poważnie #zima #2025 </description>
+		<implementation class-name="games.stendhal.server.entity.item.Item"/>
+		<attributes>
+			<atk value="13"/>
+			<rate value="3"/>
+			<lifesteal value="0.025"/>
+			<minlevel value="20"/>
+			<autobind value=""/>
+		</attributes>
+		<weight value="10.0"/>
+		<value value="617400"/>
+		<equipable>
+			<slot name="ground"/>
+			<slot name="content"/>
+			<slot name="bag"/>
+			<slot name="trade"/>
+			<slot name="lhand"/>
+			<slot name="rhand"/>
+		</equipable>
+	</item>
+	
+	<item name="miecz lodowego w 2025">
+		<type class="sword" subclass="zimowy_miecz_2025" tileid="-1"/>
+		<description>Oto Miecz Lodowego Wędrowcy. Ostrze ukształtowane z jednego lodowego kryształu sprawia, że każdy jego zamach zamraża powietrze na drodze ciosu. Gdy złote runy płoną chłodnym blaskiem, sama zima ścina krew w żyłach przeciwników, nim jeszcze ostrze ich dosięgnie #zima #2025 </description>
+		<implementation class-name="games.stendhal.server.entity.item.Item"/>
+		<attributes>
+			<atk value="26"/>
+			<rate value="2"/>
+			<lifesteal value="0.05"/>
+			<minlevel value="150"/>
+			<autobind value=""/>
+		</attributes>
+		<weight value="10.0"/>
+		<value value="617400"/>
+		<equipable>
+			<slot name="ground"/>
+			<slot name="content"/>
+			<slot name="bag"/>
+			<slot name="trade"/>
+			<slot name="lhand"/>
+			<slot name="rhand"/>
+		</equipable>
+	</item>
+	
+	<item name="sztylet demonicznego w 2025">
+		<type class="sword" subclass="demoniczny_sztylet_2025" tileid="-1"/>
+		<description>Oto Sztylet Demonicznego Wędrowca, wykuty z kła lodowej bestii, którego ostrze pragnie ciepłej krwi; w dłoni wroga zamarznie na drobny lód, lecz w ręce swojego pana jest szybki jak głód, który nigdy nie odpuszcza #zima #2025</description>
+		<implementation class-name="games.stendhal.server.entity.item.Item"/>
+		<attributes>
+			<atk value="13"/>
+			<rate value="1"/>
+			<lifesteal value="0.1"/>
+			<minlevel value="300"/>
+			<autobind value=""/>
+		</attributes>
+		<weight value="10.0"/>
+		<value value="617400"/>
+		<equipable>
+			<slot name="ground"/>
+			<slot name="content"/>
+			<slot name="bag"/>
+			<slot name="trade"/>
+			<slot name="lhand"/>
+			<slot name="rhand"/>
+		</equipable>
+	</item>
+	
 </items>

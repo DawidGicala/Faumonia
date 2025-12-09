@@ -29,7 +29,7 @@
 			<item value="magia światła" quantity="[111,499]" probability="90.0"/>
 			<item value="różdżka Wołosa" quantity="[1,1]" probability="50.0"/>
 			<item value="anielski zwój" quantity="[1,1]" probability="1.5"/>
-		</drops>
+		<item value="prezent czerwonego wędrowca 2025" quantity="[1,1]" probability="2.0"/> <item value="prezent lodowego wędrowca 2025" quantity="[1,1]" probability="0.5"/> <item value="prezent demonicznego wędrowca 2025" quantity="[1,1]" probability="0.25"/> </drops>
 		<equips>
 			<slot name="lhand" item="magia światła" quantity="10000"/>
 			<slot name="rhand" item="luk waga 16" quantity="1"/>
@@ -74,7 +74,7 @@
 			<item value="różdżka Peruna" quantity="[1,1]" probability="5.0"/>
 			<item value="sztylet mroku" quantity="[1,1]" probability="5.0"/>
 			<item value="anielski zwój" quantity="[1,1]" probability="2.0"/>
-		</drops>
+		<item value="prezent czerwonego wędrowca 2025" quantity="[1,1]" probability="2.0"/> <item value="prezent lodowego wędrowca 2025" quantity="[1,1]" probability="0.5"/> <item value="prezent demonicznego wędrowca 2025" quantity="[1,1]" probability="0.25"/> </drops>
 		<equips>
 			<slot name="lhand" item="magia mroku" quantity="10000"/>
 			<slot name="rhand" item="luk waga 16" quantity="1"/>

@@ -22,7 +22,7 @@
 			<item value="krwawe buty" quantity="[1,1]" probability="1.0"/>
 			<item value="krwawa suknia" quantity="[1,1]" probability="1.0"/>
 			<item value="zakrwawiony zwój" quantity="[1,1]" probability="1.5"/>
-		</drops>
+		<item value="prezent czerwonego wędrowca 2025" quantity="[1,1]" probability="2.0"/> <item value="prezent lodowego wędrowca 2025" quantity="[1,1]" probability="0.5"/> <item value="prezent demonicznego wędrowca 2025" quantity="[1,1]" probability="0.25"/> </drops>
 		<equips>
 		</equips>
 		<abilities>
@@ -56,7 +56,7 @@
 			<item value="krwawe spodnie" quantity="[1,1]" probability="1.0"/>
 			<item value="krwawa kolczuga" quantity="[1,1]" probability="1.0"/>
 			<item value="zakrwawiony zwój" quantity="[1,1]" probability="1.5"/>
-		</drops>
+		<item value="prezent czerwonego wędrowca 2025" quantity="[1,1]" probability="2.0"/> <item value="prezent lodowego wędrowca 2025" quantity="[1,1]" probability="0.5"/> <item value="prezent demonicznego wędrowca 2025" quantity="[1,1]" probability="0.25"/> </drops>
 		<equips>
 		</equips>
 		<abilities>
@@ -90,7 +90,7 @@
 			<item value="krwawe buty" quantity="[1,1]" probability="1.0"/>
 			<item value="krwawa suknia" quantity="[1,1]" probability="1.0"/>
 			<item value="zakrwawiony zwój" quantity="[1,1]" probability="1.5"/>
-		</drops>
+		<item value="prezent czerwonego wędrowca 2025" quantity="[1,1]" probability="2.0"/> <item value="prezent lodowego wędrowca 2025" quantity="[1,1]" probability="0.5"/> <item value="prezent demonicznego wędrowca 2025" quantity="[1,1]" probability="0.25"/> </drops>
 		<equips>
 		</equips>
 		<abilities>
@@ -127,7 +127,7 @@
 			<item value="strzała żelazna" quantity="[1,6]" probability="3.0"/>
 			<item value="zakrwawiony zwój" quantity="[1,1]" probability="1.5"/>
 			<item value="krwawa obrączka" quantity="[1,1]" probability="0.5"/>
-		</drops>
+		<item value="prezent czerwonego wędrowca 2025" quantity="[1,1]" probability="2.0"/> <item value="prezent lodowego wędrowca 2025" quantity="[1,1]" probability="0.5"/> <item value="prezent demonicznego wędrowca 2025" quantity="[1,1]" probability="0.25"/> </drops>
 		<equips>
 			<slot name="lhand" item="strzała" quantity="10000"/>
 			<slot name="rhand" item="drewniany łuk" quantity="1"/>
@@ -167,7 +167,7 @@
 			<item value="strzała żelazna" quantity="[1,6]" probability="6.0"/>
 			<item value="zakrwawiony zwój" quantity="[1,1]" probability="1.5"/>
 			<item value="krwawa obrączka" quantity="[1,1]" probability="0.5"/>
-		</drops>
+		<item value="prezent czerwonego wędrowca 2025" quantity="[1,1]" probability="2.0"/> <item value="prezent lodowego wędrowca 2025" quantity="[1,1]" probability="0.5"/> <item value="prezent demonicznego wędrowca 2025" quantity="[1,1]" probability="0.25"/> </drops>
 		<equips>
 			<slot name="lhand" item="strzała" quantity="10000"/>
 			<slot name="rhand" item="drewniany łuk" quantity="1"/>
@@ -209,7 +209,7 @@
 			<item value="krwawe spodnie" quantity="[1,1]" probability="2.0"/>
 			<item value="krwawa obrączka" quantity="[1,1]" probability="5.0"/>
 			<item value="zakrwawiony zwój" quantity="[1,1]" probability="5.0"/>
-		</drops>
+		<item value="prezent czerwonego wędrowca 2025" quantity="[1,1]" probability="2.0"/> <item value="prezent lodowego wędrowca 2025" quantity="[1,1]" probability="0.5"/> <item value="prezent demonicznego wędrowca 2025" quantity="[1,1]" probability="0.25"/> </drops>
 		<equips>
 		</equips>
 		<abilities>

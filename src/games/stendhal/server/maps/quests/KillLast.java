@@ -209,7 +209,7 @@ public class KillLast extends AbstractQuest {
 			if (!isCompleted(player)) {
 				res.add("Muszę zabić: 20 kostuch wielkich, 20 kostuch różowych wielkich, 10 kostuch złotych wielkich, 20 czarnych śmierci, 10 srebrnych śmierci i 5 złotych śmierci.");
 			} else if(isRepeatable(player)){
-				res.add("Błąd gry. Zgłoś go administracji.");
+				res.add("Na tą chwilę niczego więcej nie potrzebuję. Wróć w przyszłości.");
 			} else {
 				res.add("Pomogłem Fagowi i zabiłem potwory.	W nagrodę za ukończenie zadania otrzymałem: 5.000.000 pkt doświadczenia, 60.000 pkt ataku, 80.000 pkt obrony, bilet śmierci, anielski zwój i smoczy zwój.");
 			}

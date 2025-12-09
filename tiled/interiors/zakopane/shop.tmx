@@ -63,6 +63,9 @@
  <tileset firstgid="323" name="protection" tilewidth="32" tileheight="32" tilecount="2" columns="2">
   <image source="../../tileset/logic/protection.png" width="64" height="32"/>
  </tileset>
+ <tileset firstgid="325" name="pol_zbojnicy_gorscy" tilewidth="32" tileheight="32" tilecount="6" columns="6">
+  <image source="../../tileset/logic/creature/pol_zbojnicy_gorscy.png" width="192" height="32"/>
+ </tileset>
  <layer name="0_floor" width="16" height="21">
   <data encoding="base64" compression="gzip">
    H4sIAAAAAAAAC2NnYGBgH8WjeBSP4lFMMgYAm6Q4QEAFAAA=
@@ -70,7 +73,7 @@
  </layer>
  <layer name="1_terrain" width="16" height="21">
   <data encoding="base64" compression="gzip">
-   H4sIAAAAAAAAC9XOSQoCMRAF0OqlOIETbh1Ad7rTGzrjJRTE6RBewOEiXsCFv0gFQki66cSNHx5NuvhUFYioGKgEZahAN6cqNKTfJ5Wb8EXP3tCz+jx7Cc4M5rCAJWxldpe53efZDvYp+3Uejr4Z3r2CNWxkN+cp309GPyuu/gHOHidhxu5fU1wEZ5Ioee43+4NECe2PEiW0/4v7h5H3jyPvn0b0df6pfxS+fg06BrLeLnXpN6FlIcc/lzZ8AbN9JQhABQAA
+   H4sIAAAAAAAAC9XOSQrCQBAF0MpSnMAJtw6gO93pDZ3JJRTE6RBewOEiXsCFv+kfaJqOId1u/PBokuJTVRCRoqcSlKEC3Zyq0GC/LzpXSksye0HP6qvZk1RmMIcFLCHm7Ma53VezLey+7E9yd/TNqN0rWMOGu1UefN8Z/ay4+ns4WYTvkczY/YuD8D2TyiTS8txv9geR5tsfRZpv/xf3DwPvHwfePw3oJ/mn/oHS+jXoGMT6dqmz34SWRRz/XNrwAXAvbDtABQAA
   </data>
  </layer>
  <layer name="2_object" width="16" height="21">
@@ -90,15 +93,15 @@
  </layer>
  <layer name="objects" width="16" height="21">
   <data encoding="base64" compression="gzip">
-   H4sIAAAAAAAAC2NgGAWjYBSMglFADgAAduqPIkAFAAA=
+   H4sIAAAAAAAAC2NgGAWEgCcjYTVuRKgZicB1NFyIBuhhNRjTlMcgdNNAAgBOdb2ZQAUAAA==
   </data>
  </layer>
- <layer name="collision" width="16" height="21">
+ <layer name="collision" width="16" height="21" opacity="0.3">
   <data encoding="base64" compression="gzip">
-   H4sIAAAAAAAAC9vFwMCwaxBgYgAh/djYtHALIT343EeMfnLsJ9VfpNhPTLiO6h8a+tHFhot+bHmNHhgA6CVkPEAFAAA=
+   H4sIAAAAAAAAC9vFwMCwaxBgYgAh/djYtHALIT343EeMfnLsJxQmhNxIjH347B7VPzT0o4sNF/340j0tMQAxgzBzQAUAAA==
   </data>
  </layer>
- <layer name="protection" width="16" height="21">
+ <layer name="protection" width="16" height="21" visible="0">
   <data encoding="base64" compression="gzip">
    H4sIAAAAAAAAC3NmZGBwHsWjeBSP4lFMMgYAZFHGgkAFAAA=
   </data>

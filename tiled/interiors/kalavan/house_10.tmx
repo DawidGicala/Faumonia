@@ -120,6 +120,9 @@
  <tileset firstgid="383" name="protection" tilewidth="32" tileheight="32" tilecount="2" columns="2">
   <image source="../../tileset/logic/protection.png" width="64" height="32"/>
  </tileset>
+ <tileset firstgid="385" name="meat_and_fish" tilewidth="32" tileheight="32" tilecount="5" columns="5">
+  <image source="../../tileset/logic/item/meat_and_fish.png" width="160" height="32"/>
+ </tileset>
  <layer name="0_floor" width="25" height="25">
   <data encoding="base64" compression="gzip">
    H4sIAAAAAAAAC+XUTQqAIBCAUS1LK9q1btMF+6/zdpImaDFIGMSMlC3eSuTDYVAJIdSPSRA5xASNBKQOmrFhPDQo35GB3KG4uNNYKPfDnEqLRme2p43DhnA1MLtBMasWdEjP0BjAiEyBNWr4mCrJ1xgDafiYVUh79bXGDBZkZWjceXtjB7IcdCnECQAA
@@ -142,15 +145,15 @@
  </layer>
  <layer name="objects" width="25" height="25">
   <data encoding="base64" compression="gzip">
-   H4sIAAAAAAAAC2NgGAWjYBSMgsEJlgwze0bBKBgFo4CaAAAZFXA5xAkAAA==
+   H4sIAAAAAAAAC2NgGAWjYBSMgsEJlgwze0bBKBgF5INGxoF2weADAKP7cXrECQAA
   </data>
  </layer>
- <layer name="collision" width="25" height="25" opacity="0.37">
+ <layer name="collision" width="25" height="25" visible="0" opacity="0.37">
   <data encoding="base64" compression="gzip">
    H4sIAAAAAAAAC+2USwoAIAhEvbH337VqE6ZjU1HUA6EPzHNRqojoA1Vp9whelrWOMqK95UI9aA9sjpVrORiP5+p5dryj78DyK6vze4723IP1oIw4srA93uRA7293RJz6djMO5g8iHmSezJ5TO6oAaLH9tcQJAAA=
   </data>
  </layer>
- <layer name="protection" width="25" height="25">
+ <layer name="protection" width="25" height="25" visible="0">
   <data encoding="base64" compression="gzip">
    H4sIAAAAAAAAC+3DAQkAAAwDoD35qi/HQcFeUlVVXx0ooMTExAkAAA==
   </data>

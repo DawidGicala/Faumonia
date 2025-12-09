@@ -510,6 +510,27 @@
 		</equipable>
 	</item>
 	
+	<item name="zwój zbójnicki">
+		<type class="scroll" subclass="zakopane" tileid="-1"/>
+		<description>Na pergaminie widnieje prosty, ale wymowny znak ciupagi, który zdaje się być kluczem do historii zapisanej w cieniu górskich szczytów.</description>
+		<implementation class-name="games.stendhal.server.entity.item.scroll.MarkedScroll"/>
+		<attributes>
+			<infostring value="0_orril_mountain_n2_w2 78 47"/>
+			<quantity value="1"/>
+		</attributes>
+		<weight value="0.01"/>
+		<value value="1"/>
+		<equipable>
+			<slot name="ground"/>
+			<slot name="content"/>
+			<slot name="bag"/>
+			<slot name="trade"/>
+			<slot name="lhand"/>
+			<slot name="rhand"/>
+			<slot name="keyring"/>
+		</equipable>
+	</item>
+	
 	<item name="zwój athor">
 		<type class="scroll" subclass="athor_scroll" tileid="-1"/>
 		<description>Oto zwój athor, który przeniesie cię na egzotyczną wyspę.</description>
@@ -1029,6 +1050,90 @@
 		</attributes>
 		<weight value="0.01"/>
 		<value value="10000"/>
+		<equipable>
+			<slot name="ground"/>
+			<slot name="content"/>
+			<slot name="bag"/>
+			<slot name="trade"/>
+			<slot name="lhand"/>
+			<slot name="rhand"/>
+			<slot name="keyring"/>
+		</equipable>
+	</item>
+	
+	<item name="zwój do domu madejski">
+		<type class="scroll" subclass="smile" tileid="-1"/>
+		<description>Oto zwój do domu Madejski.</description>
+		<implementation class-name="games.stendhal.server.entity.item.scroll.MarkedScroll"/>
+		<attributes>
+			<infostring value="0_semos_plains_n 57 75"/>
+			<quantity value="1"/>
+		</attributes>
+		<weight value="0.01"/>
+		<value value="1"/>
+		<equipable>
+			<slot name="ground"/>
+			<slot name="content"/>
+			<slot name="bag"/>
+			<slot name="trade"/>
+			<slot name="lhand"/>
+			<slot name="rhand"/>
+			<slot name="keyring"/>
+		</equipable>
+	</item>
+	
+		<item name="zwój do domu oxbowharp">
+		<type class="scroll" subclass="smile" tileid="-1"/>
+		<description>Este es el pergamino para la casa de Oxbowharp</description>
+		<implementation class-name="games.stendhal.server.entity.item.scroll.MarkedScroll"/>
+		<attributes>
+			<infostring value="0_semos_plains_n 71 23"/>
+			<quantity value="1"/>
+		</attributes>
+		<weight value="0.01"/>
+		<value value="1"/>
+		<equipable>
+			<slot name="ground"/>
+			<slot name="content"/>
+			<slot name="bag"/>
+			<slot name="trade"/>
+			<slot name="lhand"/>
+			<slot name="rhand"/>
+			<slot name="keyring"/>
+		</equipable>
+	</item>
+	
+	<item name="zwój do domu zetsuuki">
+		<type class="scroll" subclass="smile" tileid="-1"/>
+		<description>Oto zwój do domu Zetsuuki.</description>
+		<implementation class-name="games.stendhal.server.entity.item.scroll.MarkedScroll"/>
+		<attributes>
+			<infostring value="0_semos_plains_n 66 41"/>
+			<quantity value="1"/>
+		</attributes>
+		<weight value="0.01"/>
+		<value value="1"/>
+		<equipable>
+			<slot name="ground"/>
+			<slot name="content"/>
+			<slot name="bag"/>
+			<slot name="trade"/>
+			<slot name="lhand"/>
+			<slot name="rhand"/>
+			<slot name="keyring"/>
+		</equipable>
+	</item>
+	
+	<item name="zwój do domu mlodylagi">
+		<type class="scroll" subclass="smile" tileid="-1"/>
+		<description>Oto zwój do domu Mlodylagi.</description>
+		<implementation class-name="games.stendhal.server.entity.item.scroll.MarkedScroll"/>
+		<attributes>
+			<infostring value="0_semos_plains_n 105 63"/>
+			<quantity value="1"/>
+		</attributes>
+		<weight value="0.01"/>
+		<value value="1"/>
 		<equipable>
 			<slot name="ground"/>
 			<slot name="content"/>
@@ -1587,5 +1692,77 @@
 			<slot name="keyring"/>
 		</equipable>
 	</item>
-		
+	
+	<item name="świąteczny zwój I zima 2025">
+		<type class="scroll" subclass="arena_swiateczna_a" tileid="-1"/>
+		<description>Oto świąteczny zwój. Jeżeli go użyjesz to przeniesiesz się na arenę treningowa w Fado, na której znacząco wzmocnisz swoje umiejętności obrony przez 1 godzinę. Tajemniczy zwój, który przeniesie Cie arenę ukrytą w mieście Fado. To miejsce, gdzie łucznicy nie znają litości, a każdy unik i blok wzmacnia Twoją obronę #zima #2025</description>
+		<implementation class-name="games.stendhal.server.entity.item.scroll.Swieta2025Task1Scroll"/>
+		<attributes>
+			<infostring value="int_fado_battle_arena_1 31 45 13400 0_fado_city 82 46"/>
+			<quantity value="1"/>
+		</attributes>
+		<weight value="0.01"/>
+		<value value="1"/>
+		<equipable>
+			<slot name="ground"/>
+			<slot name="content"/>
+			<slot name="bag"/>
+			<slot name="trade"/>
+			<slot name="lhand"/>
+			<slot name="rhand"/>
+			<slot name="keyring"/>
+		</equipable>
+	</item>
+	
+	<item name="świąteczny zwój II zima 2025">
+		<type class="scroll" subclass="arena_swiateczna_b" tileid="-1"/>
+		<description>Oto świąteczny zwój. Jeżeli go użyjesz to przeniesiesz się na arenę treningowa w Fado, na której znacząco wzmocnisz swoje umiejętności obrony przez 2 godziny. Symbol zimowej determinacji. Użyj go, by stanąć na magicznej arenie łuczników i udowodnić swoją wytrzymałość. Każdy trening w tym miejscu wzmacnia ciało i ducha #zima #2025</description>
+		<implementation class-name="games.stendhal.server.entity.item.scroll.Swieta2025Task2Scroll"/>
+		<attributes>
+			<infostring value="int_fado_battle_arena_1 31 45 26800 0_fado_city 82 46"/>
+			<quantity value="1"/>
+		</attributes>
+		<weight value="0.01"/>
+		<value value="1"/>
+		<equipable>
+			<slot name="ground"/>
+			<slot name="content"/>
+			<slot name="bag"/>
+			<slot name="trade"/>
+			<slot name="lhand"/>
+			<slot name="rhand"/>
+			<slot name="keyring"/>
+		</equipable>
+	</item>
+	
+	<item name="świąteczny zwój III zima 2025">
+		<type class="scroll" subclass="arena_swiateczna_c" tileid="-1"/>
+		<description>Oto świąteczny zwój. Jeżeli go użyjesz to przeniesiesz się na arenę treningowa w Fado, na której znacząco wzmocnisz swoje umiejętności obrony przez 4 godziny. Rzadki zwój o magicznej poświacie, otwierający bramę do areny łuczników w Fado. Ich zimne spojrzenia i precyzyjne strzały uczą koncentracji, refleksu i niezłomnej obrony #zima #2025</description>
+		<implementation class-name="games.stendhal.server.entity.item.scroll.Swieta2025Task3Scroll"/>
+		<attributes>
+			<infostring value="int_fado_battle_arena_1 31 45 53600 0_fado_city 82 46"/>
+			<quantity value="1"/>
+		</attributes>
+		<weight value="0.01"/>
+		<value value="1"/>
+		<equipable>
+			<slot name="ground"/>
+			<slot name="content"/>
+			<slot name="bag"/>
+			<slot name="trade"/>
+			<slot name="lhand"/>
+			<slot name="rhand"/>
+			<slot name="keyring"/>
+		</equipable>
+	</item>
+
+	
+	
+	
+	
+	
+	
+	
+	
+		 	
 </items>

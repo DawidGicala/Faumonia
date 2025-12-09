@@ -259,7 +259,7 @@ public class CheeseForSoro extends AbstractQuest {
 				ConversationPhrases.QUEST_MESSAGES,
 				null,
 			    ConversationStates.ATTENDING, 
-			    "Wróć do mnie gdy osiągniesz 5 poziom doświadczenia, zajmij się krażącymi tu szczurami lub wybierz się do podziemii przez niebieski portal pod czerwonym domkiem. Na tą chwile dziękuje.",
+			    "Dziękuje za Twoją pomoc! Pamiętaj, żeby wybrać się do czerwonego domku po lewej stronie i wykonać zadanie dla Mistrza Gry. Możesz również odwiedzić Sedro siedzącego przed domkiem startowym. Dzięki temu przejdziesz dalej.",
 			    null);
 	}
 	

@@ -372,7 +372,7 @@ import org.apache.log4j.Logger;
 	// Amazon is dangerous below this level - don't hint to go there
 	@Override
 	public int getMinLevel() {
-		return 70;
+		return 300;
 	}
 	
 	@Override

@@ -209,7 +209,7 @@ public class TaskHayunn extends AbstractQuest {
 				ConversationPhrases.QUEST_MESSAGES,
 				null,
 			    ConversationStates.ATTENDING, 
-			    "Błąd gry. Napisz na #/support",
+			    "Wykonałeś już swoje zadanie. Czas wyruszyć na podbój krainy Faumonii!",
 			    null);
 	}
 	

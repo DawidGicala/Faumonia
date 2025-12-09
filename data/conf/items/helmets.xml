@@ -405,6 +405,25 @@
 		</equipable>
 	</item>
 	
+	<item name="kapelusz zbójnicki">
+		<type class="helmet" subclass="goralski_kapelusz" tileid="-1"/>
+		<description>Oto kapelusz zbójnicki. Wykonany z filcu, lekki, lecz trwały, jest nieodłącznym atrybutem każdego, kto przemierza zbójnickie szlaki.</description>
+		<implementation class-name="games.stendhal.server.entity.item.Item"/>
+		<attributes>
+			<def value="57"/>
+			<minlevel value="220"/>
+		</attributes>
+		<weight value="15.0"/>
+		<value value="19208"/>
+		<equipable>
+			<slot name="ground"/>
+			<slot name="content"/>
+			<slot name="bag"/>
+			<slot name="trade"/>
+			<slot name="head"/>
+		</equipable>
+	</item>
+	
 	<item name="hełm mainiocyjski">
 		<type class="helmet" subclass="lion_clan_helmet" tileid="-1"/>
 		<description>Widzisz hełm mainiocyjski. Pownien chronić cię bardzo dobrze.</description>
@@ -440,6 +459,25 @@
 			<slot name="bag"/>
 			<slot name="trade"/>
 			<slot name="head"/>
+		</equipable>
+	</item>
+	
+	<item name="czapka nicości">
+		<type class="helmet" subclass="rift_hat" tileid="-1"/>
+		<description>Oto hełm nicości. Jego gładka, czarna powierzchnia odbija wspomnienia, a jarzące się akcenty zdają się oświetlać drogę w mroku.</description>
+		<implementation class-name="games.stendhal.server.entity.item.Item"/>
+		<attributes>
+			<def value="63"/>
+			<minlevel value="250"/>
+		</attributes>
+		<weight value="15.0"/>
+		<value value="74536"/>
+		<equipable>
+			<slot name="ground"/>
+			<slot name="content"/>
+			<slot name="head"/>
+			<slot name="bag"/>
+			<slot name="trade"/>
 		</equipable>
 	</item>
 	
@@ -567,6 +605,66 @@
 		<attributes>
 			<def value="1"/>
 			<minlevel value="40"/>
+			<autobind value=""/>
+		</attributes>
+		<weight value="6.0"/>
+		<value value="1512"/>
+		<equipable>
+			<slot name="ground"/>
+			<slot name="content"/>
+			<slot name="head"/>
+			<slot name="bag"/>
+			<slot name="trade"/>
+		</equipable>
+	</item>
+	
+		<item name="czapka czerwonego w 2025">
+		<type class="helmet" subclass="swiateczna_czapka_2025" tileid="-1"/>
+		<description>Oto Czapka Czerwonego Wędrowca. Należała do wędrowca, który przemierzał Faumonię, zostawiając w śniegu nie tylko ślady, lecz także drobne prezenty dla przypadkowych wojowników. Jej futrzany brzeg podobno ogrzewa nawet wtedy, gdy wiatr chce odgryźć uszy. Mówią, że czapka unosi się lekko, jakby wciąż chciała ruszyć dalej #zima #2025</description>
+		<implementation class-name="games.stendhal.server.entity.item.Item"/>
+		<attributes>
+			<def value="19"/>
+			<minlevel value="20"/>
+			<autobind value=""/>
+		</attributes>
+		<weight value="6.0"/>
+		<value value="1512"/>
+		<equipable>
+			<slot name="ground"/>
+			<slot name="content"/>
+			<slot name="head"/>
+			<slot name="bag"/>
+			<slot name="trade"/>
+		</equipable>
+	</item>
+	
+	<item name="hełm lodowego w 2025">
+		<type class="helmet" subclass="zimowy_helm_2025" tileid="-1"/>
+		<description>Oto Hełm Lodowego Wędrowcy. Wykuty z lodowych kryształów, które przetrwały oddech Pradawnych Smoków, bije od niego chłód tak głęboki, że potrafi zamrozić echo własnego imienia. Złote runy chronią umysł przed szeptami mrozu, by wojownik zawsze pozostał panem swojej siły #zima #2025</description>
+		<implementation class-name="games.stendhal.server.entity.item.Item"/>
+		<attributes>
+			<def value="55"/>
+			<minlevel value="150"/>
+			<autobind value=""/>
+		</attributes>
+		<weight value="6.0"/>
+		<value value="1512"/>
+		<equipable>
+			<slot name="ground"/>
+			<slot name="content"/>
+			<slot name="head"/>
+			<slot name="bag"/>
+			<slot name="trade"/>
+		</equipable>
+	</item>
+	
+	<item name="hełm demonicznego w 2025">
+		<type class="helmet" subclass="demoniczny_helm_2025" tileid="-1"/>
+		<description>Oto Hełm Demonicznego Wędrowca, wykuty z kości lodowych bestii, które nigdy naprawdę nie zginęły; czerwone oczy czuwają nawet wtedy, gdy wojownik śpi, a kto go nosi, przestaje uciekać przed mrozem, staje się nim #zima #2025</description>
+		<implementation class-name="games.stendhal.server.entity.item.Item"/>
+		<attributes>
+			<def value="81"/>
+			<minlevel value="300"/>
 			<autobind value=""/>
 		</attributes>
 		<weight value="6.0"/>

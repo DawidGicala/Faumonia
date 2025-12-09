@@ -49,7 +49,7 @@ import java.util.List;
  * STEPS:
  * <ul>
  * <li>If you go to Ognir with a broken emerald ring he offers to fix it </li>
- * <li>Bring him the money he wants (a lot) and gold to fix the ring.</li>
+ * <li>Bring him the money he wants (a lot), gold, emeralds, and a diamond to fix the ring.</li>
  * </ul>
  * 
  * REWARD:
@@ -68,194 +68,199 @@ import java.util.List;
  */
 public class RingMaker extends AbstractQuest {
 
-	private static final String FORGING = "forging";
+    private static final String FORGING = "forging";
 
-	private static final int REQUIRED_GOLD = 40;
+    private static final int REQUIRED_GOLD = 40;
+    private static final int REQUIRED_MONEY = 100000;
+    private static final int REQUIRED_GEM = 10;
+    private static final int REQUIRED_DIAMOND = 1;
+    private static final int REQUIRED_MINUTES = 15;
 
-	private static final int REQUIRED_MONEY = 100000;
+    private static final String QUEST_SLOT = "fix_emerald_ring";
 
-	private static final int REQUIRED_GEM = 10;
+    @Override
+    public String getSlotName() {
+        return QUEST_SLOT;
+    }
 
-	private static final int REQUIRED_MINUTES = 15;
+    void fixRingStep(final SpeakerNPC npc) {
 
-	private static final String QUEST_SLOT = "fix_emerald_ring";
+        npc.add(ConversationStates.ATTENDING, Arrays.asList("pierścień szmaragdowy","pierścień szmaragdowy", "life", "szmaragd"),
+            new AndCondition(
+                new PlayerHasItemWithHimCondition("pierścień szmaragdowy"), 
+                new NotCondition(new QuestStateStartsWithCondition(QUEST_SLOT, FORGING))
+            ),
+            ConversationStates.QUEST_ITEM_BROUGHT, 
+            null,
+            new ChatAction() {
+                public void fire(final Player player, final Sentence sentence, final EventRaiser npc) {
+                    final RingOfLife emeraldRing = (RingOfLife) player.getFirstEquipped("pierścień szmaragdowy");
+                    if (emeraldRing.isBroken()) {
+                        npc.say("Co za szkoda, twój pierścień szmaragdowy jest zepsuty. Mogę go naprawić, ale to #kosztuje.");
+                    } else {
+                        // ring is not broken so he just lets player know
+                        // where it can be fixed
+                        npc.say("Cześć. Na twoim pierścieniu znajduje się rzadki szmaragd. Jeżeli się zepsuje, to przyjdź do mnie, a ja go naprawię.");
+                        npc.setCurrentState(ConversationStates.ATTENDING);
+                    }
+                }
+            });
 
-	@Override
-	public String getSlotName() {
-		return QUEST_SLOT;
-	}
+        npc.add(ConversationStates.ATTENDING, 
+                Arrays.asList("pierścień szmaragdowy", "life", "szmaragd"),
+                new AndCondition(
+                    new NotCondition(new PlayerHasItemWithHimCondition("pierścień szmaragdowy")), 
+                    new NotCondition(new QuestStateStartsWithCondition(QUEST_SLOT, FORGING))
+                ),
+                ConversationStates.ATTENDING, 
+                "Ciężko jest zdobyć pierścień życia. Wyświadczysz przysługę wszechmocnemu elfowi w Nalwor i będziesz mógł dostać nagrodę.",
+                null);
 
-	void fixRingStep(final SpeakerNPC npc) {
+        npc.add(ConversationStates.ATTENDING, 
+                Arrays.asList("pierścień szmaragdowy", "life", "szmaragd"),
+                new AndCondition(
+                    new QuestStateStartsWithCondition(QUEST_SLOT, FORGING),
+                    new NotCondition(new QuestStateStartsWithCondition(QUEST_SLOT, FORGING + "unbound")),
+                    new TimePassedCondition(QUEST_SLOT, 1, REQUIRED_MINUTES)
+                ),
+                ConversationStates.ATTENDING, 
+                "Z radością ci powiem, że twój pierścień szmaragdowy udało się naprawić! Jest teraz jak nowy.",
+                new MultipleActions(
+                        new IncreaseXPAction(500),
+                        new SetQuestAction(QUEST_SLOT, "done"),
+                        new EquipItemAction("pierścień szmaragdowy", 1, true)));
 
-		npc.add(ConversationStates.ATTENDING, Arrays.asList("pierścień szmaragdowy","pierścień szmaragdowy", "life", "szmaragd"),
-			new AndCondition(new PlayerHasItemWithHimCondition("pierścień szmaragdowy"), 
-					         new NotCondition(new QuestStateStartsWithCondition(QUEST_SLOT, FORGING))),
-			ConversationStates.QUEST_ITEM_BROUGHT, 
-			null,
-			new ChatAction() {
-				public void fire(final Player player, final Sentence sentence, final EventRaiser npc) {
-					final RingOfLife emeraldRing = (RingOfLife) player.getFirstEquipped("pierścień szmaragdowy");
-					
-						if (emeraldRing.isBroken()) {
-							npc.say("Co za szkoda twój pierścień szmaragdowy jest zepsuty. Mogę go naprawić ale to #kosztuje.");
-						} else {
-							// ring is not broken so he just lets player know
-							// where it can be fixed
-							npc.say("Cześć. Na twoim pierścieniu znajduje się rzadki szmaragd. Jeżeli się zepsuje to przyjdź do mnie, a ja go naprawię.");
-							npc.setCurrentState(ConversationStates.ATTENDING);
-						}
-					
-				}
-			});
-		
-		npc.add(ConversationStates.ATTENDING, 
-				Arrays.asList("pierścień szmaragdowy", "life", "szmaragd"),
-				new AndCondition(new NotCondition(new PlayerHasItemWithHimCondition("pierścień szmaragdowy")), 
-				         new NotCondition(new QuestStateStartsWithCondition(QUEST_SLOT, FORGING))),
+        npc.add(ConversationStates.ATTENDING, 
+                Arrays.asList("pierścień szmaragdowy", "life", "szmaragd"),
+                new AndCondition(
+                    new QuestStateStartsWithCondition(QUEST_SLOT, FORGING),
+                    new QuestStateStartsWithCondition(QUEST_SLOT, FORGING + "unbound"),
+                    new TimePassedCondition(QUEST_SLOT, 1, REQUIRED_MINUTES)
+                ),
+                ConversationStates.ATTENDING, 
+                "Z radością ci powiem, że twój pierścień życia udało się naprawić! Jest teraz jak nowy.",
+                new MultipleActions(
+                        new IncreaseXPAction(500),
+                        new SetQuestAction(QUEST_SLOT, "done"),
+                        new EquipItemAction("pierścień szmaragdowy", 1, false)));
 
-				ConversationStates.ATTENDING, 
-				"Ciężko jest zdobyć pierścień życia. Wyświadczysz przysługę wszechmocnemu elfowi w Nalwor i będziesz mógł dostać nagrodę."
-				, null);
-	
-		npc.add(ConversationStates.ATTENDING, 
-				Arrays.asList("pierścień szmaragdowy", "life", "szmaragd"),
-				new AndCondition(new QuestStateStartsWithCondition(QUEST_SLOT, FORGING),
-						new NotCondition(new QuestStateStartsWithCondition(QUEST_SLOT, FORGING + "unbound")),
-						new TimePassedCondition(QUEST_SLOT,1,REQUIRED_MINUTES)),
-				ConversationStates.ATTENDING, 
-				"Z radością ci powiem, że twój pierścień szmaragdowy udało się naprawić! Jest teraz jak nowy.",
-				new MultipleActions(
-						new IncreaseXPAction(500),
-						new SetQuestAction(QUEST_SLOT, "done"),
-						new EquipItemAction("pierścień szmaragdowy", 1, true)));
-		
-		npc.add(ConversationStates.ATTENDING, 
-				Arrays.asList("pierścień szmaragdowy", "life", "szmaragd"),
-				new AndCondition(new QuestStateStartsWithCondition(QUEST_SLOT, FORGING),
-						new QuestStateStartsWithCondition(QUEST_SLOT, FORGING + "unbound"),
-						new TimePassedCondition(QUEST_SLOT,1,REQUIRED_MINUTES)),
-				ConversationStates.ATTENDING, 
-				"Z radością ci powiem, że twój pierścień życia udało się naprawić! Jest teraz jak nowy",
-				new MultipleActions(
-						new IncreaseXPAction(500),
-						new SetQuestAction(QUEST_SLOT, "done"),
-						new EquipItemAction("pierścień szmaragdowy", 1, false)));
+        npc.add(ConversationStates.ATTENDING, 
+                Arrays.asList("pierścień szmaragdowy", "life", "szmaragd"),
+                new AndCondition(
+                    new QuestStateStartsWithCondition(QUEST_SLOT, FORGING),
+                    new NotCondition(new TimePassedCondition(QUEST_SLOT, 1, REQUIRED_MINUTES))
+                ),
+                ConversationStates.IDLE, null,
+                new SayTimeRemainingAction(QUEST_SLOT, 1, REQUIRED_MINUTES, "Nie skończyłem jeszcze naprawy twego pierścienia życia. Powróć proszę za "));
 
-		npc.add(ConversationStates.ATTENDING, 
-				Arrays.asList("pierścień szmaragdowy", "life", "szmaragd"),
-				new AndCondition(new QuestStateStartsWithCondition(QUEST_SLOT, FORGING),
-						new NotCondition(new TimePassedCondition(QUEST_SLOT,1,REQUIRED_MINUTES))),
-				ConversationStates.IDLE, null,
-				new SayTimeRemainingAction(QUEST_SLOT,1, REQUIRED_MINUTES,"Nie skończyłem jeszcze naprawy twego pierścienia życia. Powróć proszę za "));
-		
-		
-		npc.add(ConversationStates.QUEST_ITEM_BROUGHT, 
-				"kosztuje", 
-				null,
-				ConversationStates.QUEST_ITEM_BROUGHT,
-				"Zapłata za moją usługę wynosi " + REQUIRED_MONEY
-					+ " money oraz potrzebuję " + REQUIRED_GOLD
-					+ " sztabek złota, a także " + REQUIRED_GEM
-					+ " szmaragdów, aby naprawić pierścień. Czy chcesz teraz zapłacić?",
-				null);
+        npc.add(ConversationStates.QUEST_ITEM_BROUGHT, 
+                "kosztuje", 
+                null,
+                ConversationStates.QUEST_ITEM_BROUGHT,
+                "Zapłata za moją usługę wynosi " + REQUIRED_MONEY
+                    + " money oraz potrzebuję " + REQUIRED_GOLD
+                    + " sztabek złota, " + REQUIRED_GEM
+                    + " szmaragdów i " + REQUIRED_DIAMOND
+                    + " diament, aby naprawić pierścień. Czy chcesz teraz zapłacić?",
+                null);
 
-		npc.add(ConversationStates.QUEST_ITEM_BROUGHT,
-				ConversationPhrases.YES_MESSAGES, 
-				new AndCondition(
-						new PlayerHasItemWithHimCondition("sztabka złota", REQUIRED_GOLD),
-						new PlayerHasItemWithHimCondition("money", REQUIRED_MONEY),
-						new PlayerHasItemWithHimCondition("szmaragd", REQUIRED_GEM)), 
-				ConversationStates.IDLE,
-				"Dobrze to wszystko czego potrzebuję do naprawienia pierścienia. Wróć za "
-						+ REQUIRED_MINUTES
-						+ " minutę" + ", a będzie gotowy. Dowidzenia.",
-				new MultipleActions(
-						new DropItemAction("sztabka złota", REQUIRED_GOLD),
-						new DropItemAction("szmaragd", REQUIRED_GEM),
-						new DropItemAction("money", REQUIRED_MONEY), 
-						new ChatAction() {
-							public void fire(final Player player,
-									final Sentence sentence,
-									final EventRaiser npc) {
-								final RingOfLife emeraldRing = (RingOfLife) player.getFirstEquipped("pierścień szmaragdowy");
-								if (player.isBoundTo(emeraldRing)) {
-									player.setQuest(QUEST_SLOT, "forging;"
-											+ System.currentTimeMillis());
-								} else {
-									player.setQuest(QUEST_SLOT, "forgingunbound;"
-											+ System.currentTimeMillis());
-								}
+        npc.add(ConversationStates.QUEST_ITEM_BROUGHT,
+                ConversationPhrases.YES_MESSAGES, 
+                new AndCondition(
+                    new PlayerHasItemWithHimCondition("sztabka złota", REQUIRED_GOLD),
+                    new PlayerHasItemWithHimCondition("money", REQUIRED_MONEY),
+                    new PlayerHasItemWithHimCondition("szmaragd", REQUIRED_GEM),
+                    new PlayerHasItemWithHimCondition("diament", REQUIRED_DIAMOND)
+                ), 
+                ConversationStates.IDLE,
+                "Dobrze, to wszystko czego potrzebuję do naprawienia pierścienia. Wróć za "
+                        + REQUIRED_MINUTES
+                        + " minutę, a będzie gotowy. Dowidzenia.",
+                new MultipleActions(
+                        new DropItemAction("sztabka złota", REQUIRED_GOLD),
+                        new DropItemAction("szmaragd", REQUIRED_GEM),
+                        new DropItemAction("diament", REQUIRED_DIAMOND),
+                        new DropItemAction("money", REQUIRED_MONEY), 
+                        new ChatAction() {
+                            public void fire(final Player player,
+                                    final Sentence sentence, final EventRaiser npc) {
+                                final RingOfLife emeraldRing = (RingOfLife) player.getFirstEquipped("pierścień szmaragdowy");
+                                if (player.isBoundTo(emeraldRing)) {
+                                    player.setQuest(QUEST_SLOT, "forging;" + System.currentTimeMillis());
+                                } else {
+                                    player.setQuest(QUEST_SLOT, "forgingunbound;" + System.currentTimeMillis());
+                                }
+                            }
+                        },
+                        new DropItemAction("pierścień szmaragdowy")));
 
-							}
-						},
-						new DropItemAction("pierścień szmaragdowy")));
-		
-		npc.add(ConversationStates.QUEST_ITEM_BROUGHT,
-				ConversationPhrases.YES_MESSAGES, 
-				new NotCondition(new  AndCondition(
-						new PlayerHasItemWithHimCondition("sztabka złota", REQUIRED_GOLD),
-						new PlayerHasItemWithHimCondition("money", REQUIRED_MONEY),
-						new PlayerHasItemWithHimCondition("szmaragd", REQUIRED_GEM))),
-				ConversationStates.IDLE, 
-				"Wróć jak będziesz miał pieniądze, szmaragd oraz złoto. Tymczasem żegnaj.",
-				null);
+        npc.add(ConversationStates.QUEST_ITEM_BROUGHT,
+                ConversationPhrases.YES_MESSAGES, 
+                new NotCondition(new AndCondition(
+                    new PlayerHasItemWithHimCondition("sztabka złota", REQUIRED_GOLD),
+                    new PlayerHasItemWithHimCondition("money", REQUIRED_MONEY),
+                    new PlayerHasItemWithHimCondition("szmaragd", REQUIRED_GEM),
+                    new PlayerHasItemWithHimCondition("diament", REQUIRED_DIAMOND)
+                )),
+                ConversationStates.IDLE, 
+                "Wróć jak będziesz miał pieniądze, szmaragd, diament oraz złoto. Tymczasem żegnaj.",
+                null);
 
-		npc.add(ConversationStates.QUEST_ITEM_BROUGHT,
-			ConversationPhrases.NO_MESSAGES, 
-			null,
-			ConversationStates.ATTENDING, 
-			"Nie ma problemu. Wróć jak będziesz miał pieniądze, szmaragd i złoto.",
-			null);
-	}
+        npc.add(ConversationStates.QUEST_ITEM_BROUGHT,
+            ConversationPhrases.NO_MESSAGES, 
+            null,
+            ConversationStates.ATTENDING, 
+            "Nie ma problemu. Wróć jak będziesz miał pieniądze, szmaragd, diament i złoto.",
+            null);
+    }
 
-	@Override
-	public void addToWorld() {
-		super.addToWorld();
-		fillQuestInfo(
-				"Twórca Pierścienia",
-				"Ognir, ekspert pierścieni, może naprawić uszkodzony pierścień życia.",
-				false);
-		fixRingStep(npcs.get("Ognir"));
-	}
+    @Override
+    public void addToWorld() {
+        super.addToWorld();
+        fillQuestInfo(
+                "Twórca Pierścienia",
+                "Ognir, ekspert pierścieni, może naprawić uszkodzony pierścień życia.",
+                false);
+        fixRingStep(npcs.get("Ognir"));
+    }
 
-	@Override
-	public List<String> getHistory(final Player player) {
-		final List<String> res = new ArrayList<String>();
-		if (player.isEquipped("pierścień szmaragdowy")) { 
-			final RingOfLife emeraldRing = (RingOfLife) player.getFirstEquipped("pierścień szmaragdowy");
-			if (emeraldRing.isBroken()) {
-				res.add("O nie! Mój pierścień szmaragdowy jest uszkodzony. Muszę poszukać rzemieślnika, który mi go naprawi.");
-			}
-		}
-		if (!player.hasQuest(QUEST_SLOT)) {
-			return res;
-		}
-		// Note: this will not be seen till the forging stage starts as no quest slot is set before then.
-		res.add("Ognir powiedział, że może naprawić mój pierścień życia za: 20 szmaragdów, 240000 money i 40 złotych sztabek.");
-		final String questState = player.getQuest(QUEST_SLOT);
-		if (questState.startsWith(FORGING) && (new TimePassedCondition(QUEST_SLOT, 1, REQUIRED_MINUTES)).fire(player,null, null)) {
-				res.add("Mój pierścień jest gotowy do odebrania u Ognira! Muszę powiedzieć mu \"szmaragd \", aby go odzyskać.");
-		} else if (questState.startsWith(FORGING) || isCompleted(player))  {
-				res.add("Ognir powiedział, że naprawa pierścienia będzie trwać 15 minut. Muszę mu powiedzieć \"szmaragd\" aby wiedział, że to mój pierścień.");
-		}
-		if (isCompleted(player)) {
-			res.add("Mój pierścień życia jest jak nowy i znowu będzie działać, aby ograniczyć moje straty, gdy zginę.");
-		}
-		return res;
-	}
+    @Override
+    public List<String> getHistory(final Player player) {
+        final List<String> res = new ArrayList<String>();
+        if (player.isEquipped("pierścień szmaragdowy")) { 
+            final RingOfLife emeraldRing = (RingOfLife) player.getFirstEquipped("pierścień szmaragdowy");
+            if (emeraldRing.isBroken()) {
+                res.add("O nie! Mój pierścień szmaragdowy jest uszkodzony. Muszę poszukać rzemieślnika, który mi go naprawi.");
+            }
+        }
+        if (!player.hasQuest(QUEST_SLOT)) {
+            return res;
+        }
+        res.add("Ognir powiedział, że może naprawić mój pierścień życia za: 10 szmaragdów, 100000 money, 40 złotych sztabek i 1 diament.");
+        final String questState = player.getQuest(QUEST_SLOT);
+        if (questState.startsWith(FORGING) && (new TimePassedCondition(QUEST_SLOT, 1, REQUIRED_MINUTES)).fire(player,null, null)) {
+            res.add("Mój pierścień jest gotowy do odebrania u Ognira! Muszę powiedzieć mu \"szmaragd\", aby go odzyskać.");
+        } else if (questState.startsWith(FORGING) || isCompleted(player))  {
+            res.add("Ognir powiedział, że naprawa pierścienia będzie trwać 15 minut. Muszę mu powiedzieć \"szmaragd\", aby wiedział, że to mój pierścień.");
+        }
+        if (isCompleted(player)) {
+            res.add("Mój pierścień życia jest jak nowy i znowu będzie działać, aby ograniczyć moje straty, gdy zginę.");
+        }
+        return res;
+    }
 
-	@Override
-	public String getName() {
-		return "RingMaker";
-	}
-	
-	@Override
-	public String getRegion() {
-		return Region.FADO_CITY;
-	}
+    @Override
+    public String getName() {
+        return "RingMaker";
+    }
 
-	@Override
-	public String getNPCName() {
-		return "Ognir";
-	}
+    @Override
+    public String getRegion() {
+        return Region.FADO_CITY;
+    }
+
+    @Override
+    public String getNPCName() {
+        return "Ognir";
+    }
 }

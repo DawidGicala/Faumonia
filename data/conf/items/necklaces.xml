@@ -3,24 +3,7 @@
 	xsi:schemaLocation="stendhal ../items.xsd ">
 
 	
-	<item name="pas zbójecki">
-		<type class="necklace" subclass="pas_zbojecki" tileid="-1"/>
-		<description>Oto pas zbójecki. Idealny dla górala.</description>
-		<implementation class-name="games.stendhal.server.entity.item.Item"/>
-		<attributes>
-			<def value="11"/>
-		</attributes>
-		<weight value="1.0"/>
-		<value value="1234"/>
-		<equipable>
-			<slot name="ground"/>
-			<slot name="content"/>
-			<slot name="bag"/>
-			<slot name="trade"/>
-			<slot name="neck"/>
-		</equipable>
-	</item>
-	
+
 	<item name="naszyjnik pustelnika">
 		<type class="necklace" subclass="tsoh_amulet" tileid="-1"/>
 		<description>Oto naszyjnik pustelnika. Jest bardzo rzadki.</description>
@@ -75,6 +58,24 @@
 		</equipable>
 	</item>
 	
+	<item name="amulecik">
+		<type class="necklace" subclass="amulet" tileid="-1"/>
+		<description>Oto amulecik, który być może ochroni cię przed złem.</description>
+		<implementation class-name="games.stendhal.server.entity.item.Item"/>
+		<attributes>
+			<def value="4"/>
+		</attributes>
+		<weight value="1.0"/>
+		<value value="1234"/>
+		<equipable>
+			<slot name="ground"/>
+			<slot name="content"/>
+			<slot name="bag"/>
+			<slot name="trade"/>
+			<slot name="neck"/>
+		</equipable>
+	</item>
+	
 	<item name="elficki naszyjnik">
 		<type class="necklace" subclass="elficki_amulet" tileid="-1"/>
 		<description>Oto elficki naszyjnik Mając go na szyji czujesz przyjemne łaskotanie w okolicach brody.</description>
@@ -92,13 +93,13 @@
 			<slot name="neck"/>
 		</equipable>
 	</item>
-
-	<item name="amulecik">
-		<type class="necklace" subclass="amulet" tileid="-1"/>
-		<description>Oto amulecik, który być może ochroni cię przed złem.</description>
+	
+	<item name="złoty talizman">
+		<type class="necklace" subclass="zloty_naszyjnik" tileid="-1"/>
+		<description>Oto złoty talizman. Jego złocista poświata budzi respekt wśród wrogów, a ukryta moc pozwala noszącemu dostrzec ścieżki, które innym pozostają niewidoczne.</description>
 		<implementation class-name="games.stendhal.server.entity.item.Item"/>
 		<attributes>
-			<def value="4"/>
+			<def value="7"/>
 		</attributes>
 		<weight value="1.0"/>
 		<value value="1234"/>
@@ -117,6 +118,24 @@
 		<implementation class-name="games.stendhal.server.entity.item.Item"/>
 		<attributes>
 			<def value="9"/>
+		</attributes>
+		<weight value="1.0"/>
+		<value value="1234"/>
+		<equipable>
+			<slot name="ground"/>
+			<slot name="content"/>
+			<slot name="bag"/>
+			<slot name="trade"/>
+			<slot name="neck"/>
+		</equipable>
+	</item>
+	
+	<item name="pas zbójecki">
+		<type class="necklace" subclass="pas_zbojecki" tileid="-1"/>
+		<description>Oto pas zbójecki. Idealny dla górala.</description>
+		<implementation class-name="games.stendhal.server.entity.item.Item"/>
+		<attributes>
+			<def value="11"/>
 		</attributes>
 		<weight value="1.0"/>
 		<value value="1234"/>

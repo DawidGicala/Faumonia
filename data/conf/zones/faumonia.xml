@@ -619,8 +619,8 @@ Zadania u Mistrzów Gry przeprowadzą Cię przez całą grę, nie tylko przez po
 	
 	<zone name="int_fado_tower_1" file="interiors/fado/tower_1.tmx">
 	<configurator class-name="games.stendhal.server.core.config.zone.NoTeleportIn"/>
-	<portal x="15" y="1" ref="wiezaw1">
-			<destination zone="0_fado_city" ref="wieza1" />
+	<portal x="15" y="1" ref="tower_ba1">
+			<destination zone="0_fado_city" ref="tower_ab1" />
 		</portal>
 	<portal x="15" y="30" ref="wiezaw2">
 			<destination zone="int_fado_tower_2" ref="wieza2" />
@@ -694,22 +694,18 @@ Zadania u Mistrzów Gry przeprowadzą Cię przez całą grę, nie tylko przez po
 	
 	<zone name="heaven" file="interiors/faumonia/heaven.tmx">
 	<configurator class-name="games.stendhal.server.core.config.zone.NoTeleportIn"/>
-	<configurator class-name="games.stendhal.server.core.config.zone.NoTeleportOut"/>
 	</zone>
 	
 	<zone name="death_cavern" file="interiors/faumonia/death_cavern.tmx">
 	<configurator class-name="games.stendhal.server.core.config.zone.NoTeleportIn"/>
-	<configurator class-name="games.stendhal.server.core.config.zone.NoTeleportOut"/>
 	</zone>
 	
 	<zone name="angel_cavern" file="interiors/faumonia/angel_cavern.tmx">
 	<configurator class-name="games.stendhal.server.core.config.zone.NoTeleportIn"/>
-	<configurator class-name="games.stendhal.server.core.config.zone.NoTeleportOut"/>
 	</zone>
 	
 	<zone name="-1_giant_cavern" file="interiors/faumonia/-1_giant_cavern.tmx">
 	<configurator class-name="games.stendhal.server.core.config.zone.NoTeleportIn"/>
-	<configurator class-name="games.stendhal.server.core.config.zone.NoTeleportOut"/>
 	<portal x="55" y="14" ref="giant1">
 			<destination zone="-2_giant_cavern" ref="giant2" />
 		</portal>
@@ -717,7 +713,6 @@ Zadania u Mistrzów Gry przeprowadzą Cię przez całą grę, nie tylko przez po
 	
 	<zone name="-2_giant_cavern" file="interiors/faumonia/-2_giant_cavern.tmx">
 	<configurator class-name="games.stendhal.server.core.config.zone.NoTeleportIn"/>
-	<configurator class-name="games.stendhal.server.core.config.zone.NoTeleportOut"/>
 		<portal x="37" y="11" ref="giant2">
 			<destination zone="-1_giant_cavern" ref="giant1" />
 		</portal>
@@ -728,7 +723,6 @@ Zadania u Mistrzów Gry przeprowadzą Cię przez całą grę, nie tylko przez po
 	
 	<zone name="-3_giant_cavern" file="interiors/faumonia/-3_giant_cavern.tmx">
 	<configurator class-name="games.stendhal.server.core.config.zone.NoTeleportIn"/>
-	<configurator class-name="games.stendhal.server.core.config.zone.NoTeleportOut"/>
 		<portal x="13" y="14" ref="giant4">
 			<destination zone="-2_giant_cavern" ref="giant3" />
 		</portal>
@@ -739,7 +733,6 @@ Zadania u Mistrzów Gry przeprowadzą Cię przez całą grę, nie tylko przez po
 	
 	<zone name="-4_giant_cavern" file="interiors/faumonia/-4_giant_cavern.tmx">
 	<configurator class-name="games.stendhal.server.core.config.zone.NoTeleportIn"/>
-	<configurator class-name="games.stendhal.server.core.config.zone.NoTeleportOut"/>
 		<portal x="38" y="45" ref="giant6">
 			<destination zone="-3_giant_cavern" ref="giant5" />
 		</portal>
@@ -750,7 +743,6 @@ Zadania u Mistrzów Gry przeprowadzą Cię przez całą grę, nie tylko przez po
 	
 	<zone name="-5_giant_cavern" file="interiors/faumonia/-5_giant_cavern.tmx">
 	<configurator class-name="games.stendhal.server.core.config.zone.NoTeleportIn"/>
-	<configurator class-name="games.stendhal.server.core.config.zone.NoTeleportOut"/>
 		<portal x="9" y="52" ref="giant8">
 			<destination zone="-4_giant_cavern" ref="giant7" />
 		</portal>
@@ -761,7 +753,6 @@ Zadania u Mistrzów Gry przeprowadzą Cię przez całą grę, nie tylko przez po
 	
 	<zone name="-6_giant_cavern" file="interiors/faumonia/-6_giant_cavern.tmx">
 	<configurator class-name="games.stendhal.server.core.config.zone.NoTeleportIn"/>
-	<configurator class-name="games.stendhal.server.core.config.zone.NoTeleportOut"/>
 		<portal x="36" y="48" ref="giant10">
 			<destination zone="-5_giant_cavern" ref="giant9" />
 		</portal>

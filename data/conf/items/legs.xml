@@ -318,8 +318,27 @@
 		<description>Oto spodnie superczłowieka. Wyglądają dziwacznie.</description>
 		<implementation class-name="games.stendhal.server.entity.item.Item"/>
 		<attributes>
-			<def value="26"/>
+			<def value="27"/>
 			<minlevel value="200"/>
+		</attributes>
+		<weight value="25.0"/>
+		<value value="23625"/>
+		<equipable>
+			<slot name="ground"/>
+			<slot name="content"/>
+			<slot name="bag"/>
+			<slot name="trade"/>
+			<slot name="legs"/>
+		</equipable>
+	</item>
+	
+	<item name="portki zbójnickie">
+		<type class="legs" subclass="goralskie_portki" tileid="-1"/>
+		<description>Oto portki zbójnickie. Długie i trwałe, zapewniają swobodę ruchów, pozwalając na szybkie ucieczki w razie pościgu.</description>
+		<implementation class-name="games.stendhal.server.entity.item.Item"/>
+		<attributes>
+			<def value="26"/>
+			<minlevel value="220"/>
 		</attributes>
 		<weight value="25.0"/>
 		<value value="23625"/>
@@ -493,6 +512,66 @@
 		<attributes>
 			<def value="1"/>
 			<minlevel value="40"/>
+			<autobind value=""/>
+		</attributes>
+		<weight value="22.0"/>
+		<value value="53625"/>
+			<equipable>
+			<slot name="ground"/>
+			<slot name="content"/>
+			<slot name="bag"/>
+			<slot name="trade"/>
+			<slot name="legs"/>
+		</equipable>
+	</item>
+	
+		<item name="spodnie czerwonego w 2025">
+		<type class="legs" subclass="swiateczne_spodnie_2025" tileid="-1"/>
+		<description>Oto Spodnie Czerwonego Wędrowca. Uszyto je z wyjątkowo trwałego materiału, który nie przemięka nawet po całym dniu w śniegu po kolana. Czerwone pasy i białe obszycia miały sprawiać, że wędrowca zawsze było widać w zamieci, choć bardziej wyglądał wtedy jak uciekający prezent. To idealne spodnie dla wojownika, który lubi ciepło i swobodę ruchu #zima #2025</description>
+		<implementation class-name="games.stendhal.server.entity.item.Item"/>
+		<attributes>
+			<def value="9"/>
+			<minlevel value="20"/>
+			<autobind value=""/>
+		</attributes>
+		<weight value="22.0"/>
+		<value value="53625"/>
+			<equipable>
+			<slot name="ground"/>
+			<slot name="content"/>
+			<slot name="bag"/>
+			<slot name="trade"/>
+			<slot name="legs"/>
+		</equipable>
+	</item>
+	
+	<item name="spodnie lodowego w 2025">
+		<type class="legs" subclass="zimowe_spodnie_2025" tileid="-1"/>
+		<description>Oto Spodnie Lodowego Wędrowcy. Tkane z nici zmrożonego smoczego jedwabiu, zapewniają zwinność nawet wtedy, gdy mróz próbuje skruszyć kości. Każdy ich ruch przywołuje delikatny pyłek śniegu, jakby wojownik poruszał się w objęciach samej zimy #zima #2025</description>
+		<implementation class-name="games.stendhal.server.entity.item.Item"/>
+		<attributes>
+			<def value="24"/>
+			<minlevel value="150"/>
+			<autobind value=""/>
+		</attributes>
+		<weight value="22.0"/>
+		<value value="53625"/>
+			<equipable>
+			<slot name="ground"/>
+			<slot name="content"/>
+			<slot name="bag"/>
+			<slot name="trade"/>
+			<slot name="legs"/>
+		</equipable>
+	</item>
+	
+	<item name="spodnie demonicznego w 2025">
+		<type class="legs" subclass="demoniczne_spodnie_2025" tileid="-1"/>
+		<description>Oto Spodnie Demonicznego Wędrowca, zszyte z twardych jak skała łusek kuzynów piekielnych wilków; poruszają się jakby miały własny cel, prowadząc wojownika tam, gdzie czekają krzyki i krew #zima #2025</description>
+		<implementation class-name="games.stendhal.server.entity.item.Item"/>
+		<attributes>
+			<def value="47"/>
+			<minlevel value="300"/>
 			<autobind value=""/>
 		</attributes>
 		<weight value="22.0"/>

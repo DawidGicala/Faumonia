@@ -129,6 +129,9 @@
  <tileset firstgid="419" name="protection" tilewidth="32" tileheight="32" tilecount="2" columns="2">
   <image source="../../tileset/logic/protection.png" width="64" height="32"/>
  </tileset>
+ <tileset firstgid="421" name="pol_zbojnicy_gorscy" tilewidth="32" tileheight="32" tilecount="6" columns="6">
+  <image source="../../../../Pliki - Faumonia 5.0 — EVENT LUTOWY/tiled/tileset/logic/creature/pol_zbojnicy_gorscy.png" width="192" height="32"/>
+ </tileset>
  <layer name="0_floor" width="30" height="35">
   <data encoding="base64" compression="gzip">
    H4sIAAAAAAAAC+2USwqDMBCG47ZuXfUGfa0ET9KH9v28U9cFT9T2Pp3CCGNIYhITW8UfPhzIyEcmIYyVEyJ8rYpOjywR+UaqRsW/NomBObBAaL3EdZqkAlmfyLtCT4p1imQNeAtXW72JpM+F9wm8gLcDL71PxZ0SeUcBY2NgAkyBWVB/vxvCVuIdCrAJP+eMqefsKm3x3gM7/sm7ZuX7ROuY63XldR0Tb6jAlzfSwIWbz/fM6LuSEx64roOpV/W+5wZe6q7rTX60X59ekzm20cu7e2+3zreOdwfsBRw8e4/AScC593bCewGuAm4WXp9p0jeoWP8Ajn0VWWgQAAA=
@@ -156,15 +159,15 @@
  </layer>
  <layer name="objects" width="30" height="35">
   <data encoding="base64" compression="gzip">
-   H4sIAAAAAAAAC+3BMQEAAADCoPVPbQlPoAAAAAA+BjO3YgZoEAAA
+   H4sIAAAAAAAAC+3VsQ0AIAhEUdx/DiU6pQOQQNSoBf/1UBwQRIB3tKzXVKembfTDXd68Muvkgg+4xxh/xCITi0yQ0WDvcWACNApcnWgQAAA=
   </data>
  </layer>
- <layer name="collision" width="30" height="35">
+ <layer name="collision" width="30" height="35" visible="0">
   <data encoding="base64" compression="gzip">
    H4sIAAAAAAAAC+2UUQ6AMAhD5/1vsZP6ZWLMBu0oJFNJ+BAnj5LOfrTWP5ijuL+L9mXZozlGZ58165w1VzRYLtKL2c1buJ4/kDrrKY/N1hVslsvc52q9isj2M8r15lDtCPVnJH9uvJdXY7jWOVVk3WGV3gou65GduaqIcK/nlXl207v630G1zPpbdXZuRm80Knw1+zZbr4Kr2PWqr1g24keUm5HVPCtPgnOEdmgQAAA=
   </data>
  </layer>
- <layer name="protection" width="30" height="35">
+ <layer name="protection" width="30" height="35" visible="0">
   <data encoding="base64" compression="gzip">
    H4sIAAAAAAAAC+3DMQ0AAAwDoM6/jBqtiZ2Q0Euqqqqq+nBqmbNwaBAAAA==
   </data>

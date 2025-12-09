@@ -1062,6 +1062,98 @@
 			<attribute name="hidden"/>
 		</portal>
 	</zone>
+	
+	<zone name="int_semos_mlodylagi_house" file="interiors/kalavan/house_10.tmx">
+	<configurator class-name="games.stendhal.server.entity.mapstuff.chest.StoredChestConfigurator">
+			<parameter name="x">12</parameter>
+			<parameter name="y">2</parameter>
+		</configurator>
+	<portal x="3" y="23" ref="mlodylagi_house_4">
+			<destination zone="0_semos_plains_n" ref="mlodylagi_house_3"/>
+		</portal>
+	<portal x="4" y="23" ref="mlodylagi_house_5">
+			<destination zone="0_semos_plains_n" ref="mlodylagi_house_3"/>
+		</portal>
+	</zone>
+	
+	<zone name="int_semos_madejski_house" file="interiors/kirdneh/house_38.tmx">
+	<configurator class-name="games.stendhal.server.entity.mapstuff.chest.StoredChestConfigurator">
+			<parameter name="x">22</parameter>
+			<parameter name="y">13</parameter>
+		</configurator>
+	<portal x="19" y="23" ref="madejski_house_4">
+			<destination zone="0_semos_plains_n" ref="madejski_house_3"/>
+		</portal>
+	</zone>
+	
+	<zone name="int_semos_zetsuuki_house" file="interiors/ados/house_68.tmx">
+	<configurator class-name="games.stendhal.server.entity.mapstuff.chest.StoredChestConfigurator">
+			<parameter name="x">11</parameter>
+			<parameter name="y">20</parameter>
+		</configurator>
+	<configurator class-name="games.stendhal.server.entity.mapstuff.chest.StoredChestConfigurator">
+			<parameter name="x">11</parameter>
+			<parameter name="y">19</parameter>
+		</configurator>
+	<configurator class-name="games.stendhal.server.entity.mapstuff.chest.StoredChestConfigurator">
+			<parameter name="x">11</parameter>
+			<parameter name="y">18</parameter>
+		</configurator>
+	<configurator class-name="games.stendhal.server.entity.mapstuff.chest.StoredChestConfigurator">
+			<parameter name="x">11</parameter>
+			<parameter name="y">17</parameter>
+		</configurator>
+	<configurator class-name="games.stendhal.server.entity.mapstuff.chest.StoredChestConfigurator">
+			<parameter name="x">11</parameter>
+			<parameter name="y">16</parameter>
+		</configurator>
+	<configurator class-name="games.stendhal.server.entity.mapstuff.chest.StoredChestConfigurator">
+			<parameter name="x">22</parameter>
+			<parameter name="y">20</parameter>
+		</configurator>
+	<configurator class-name="games.stendhal.server.entity.mapstuff.chest.StoredChestConfigurator">
+			<parameter name="x">22</parameter>
+			<parameter name="y">19</parameter>
+		</configurator>
+	<configurator class-name="games.stendhal.server.entity.mapstuff.chest.StoredChestConfigurator">
+			<parameter name="x">22</parameter>
+			<parameter name="y">18</parameter>
+		</configurator>
+	<configurator class-name="games.stendhal.server.entity.mapstuff.chest.StoredChestConfigurator">
+			<parameter name="x">22</parameter>
+			<parameter name="y">17</parameter>
+		</configurator>
+	<configurator class-name="games.stendhal.server.entity.mapstuff.chest.StoredChestConfigurator">
+			<parameter name="x">22</parameter>
+			<parameter name="y">16</parameter>
+		</configurator>
+		
+		
+	<portal x="13" y="21" ref="zetsuuki_house_4">
+			<destination zone="0_semos_plains_n" ref="zetsuuki_house_3"/>
+		</portal>
+	</zone>
+	
+	<zone name="int_semos_oxbowharp_house" file="interiors/kirdneh/house_45.tmx">
+	<configurator class-name="games.stendhal.server.entity.mapstuff.chest.StoredChestConfigurator">
+			<parameter name="x">9</parameter>
+			<parameter name="y">2</parameter>
+		</configurator>
+	<portal x="19" y="23" ref="oxbowharp_house_4">
+			<destination zone="0_semos_plains_n" ref="oxbowharp_house_3"/>
+		</portal>
+	</zone>
+	
+	<zone name="int_semos_empty_house" file="interiors/kirdneh/house_35.tmx">
+	<configurator class-name="games.stendhal.server.entity.mapstuff.chest.StoredChestConfigurator">
+			<parameter name="x">28</parameter>
+			<parameter name="y">13</parameter>
+		</configurator>
+	<portal x="19" y="23" ref="empty_house_4">
+			<destination zone="0_semos_plains_n" ref="empty_house_3"/>
+		</portal>
+	</zone>
+	
 
 	<zone name="0_semos_plains_n" level="0" x="500000" y="499872"
 		file="Level 0/semos/plains_n.tmx">
@@ -1092,6 +1184,166 @@
 			<parameter name="orientation">v</parameter>
 			<parameter name="autoclose">2</parameter>
 		</configurator>
+		
+		
+		<entity x="48" y="77">
+			<implementation class-name="games.stendhal.server.entity.mapstuff.sign.Description" />
+			<attribute name="text">Oto parcela mieszkalna wojownika Madejski.</attribute>
+			<attribute name="class">transparent</attribute>
+			<attribute name="width">1</attribute>
+		</entity>
+		
+		<entity x="94" y="57">
+			<implementation class-name="games.stendhal.server.entity.mapstuff.sign.Description" />
+			<attribute name="text">Oto parcela mieszkalna wojowniczki Zuzakina.</attribute>
+			<attribute name="class">transparent</attribute>
+			<attribute name="width">1</attribute>
+		</entity>
+		
+		<entity x="96" y="27">
+			<implementation class-name="games.stendhal.server.entity.mapstuff.sign.Description" />
+			<attribute name="text">Oto parcela mieszkalna wojownika Golbatjov.</attribute>
+			<attribute name="class">transparent</attribute>
+			<attribute name="width">1</attribute>
+		</entity>
+		
+		<entity x="66" y="32">
+			<implementation class-name="games.stendhal.server.entity.mapstuff.sign.Description" />
+			<attribute name="text">Oto parcela mieszkalna wojownika Zetsuuki.</attribute>
+			<attribute name="class">transparent</attribute>
+			<attribute name="width">1</attribute>
+		</entity>
+		
+		<entity x="71" y="15">
+			<implementation class-name="games.stendhal.server.entity.mapstuff.sign.Description" />
+			<attribute name="text">Parcela residencial del guerrero Oxbowharp.</attribute>
+			<attribute name="class">transparent</attribute>
+			<attribute name="width">1</attribute>
+		</entity>
+		
+		<portal x="54" y="75" ref="madejski_house_1">
+			<destination zone="0_semos_plains_n" ref="madejski_house_2" />
+			<implementation
+				class-name="games.stendhal.server.entity.mapstuff.portal.KeyedPortal">
+				<parameter name="key">klucz do domu madejski</parameter>
+				<parameter name="rejected">Parcela mieszkalna wojownika madejski.</parameter>
+			</implementation>
+			<attribute name="hidden"/>
+		</portal>
+		
+		<portal x="53" y="75" ref="madejski_house_2">
+			<destination zone="0_semos_plains_n" ref="madejski_house_1" />
+			<implementation
+				class-name="games.stendhal.server.entity.mapstuff.portal.KeyedPortal">
+				<parameter name="key">klucz do domu madejski</parameter>
+				<parameter name="rejected">Parcela mieszkalna wojownika madejski.</parameter>
+			</implementation>
+			<attribute name="hidden"/>
+		</portal>
+		
+		<portal x="48" y="75" ref="madejski_house_3">
+			<destination zone="int_semos_madejski_house" ref="madejski_house_4"/>
+		</portal>
+		
+		<portal x="105" y="61" ref="mlodylagi_house_1">
+			<destination zone="0_semos_plains_n" ref="mlodylagi_house_2" />
+			<implementation
+				class-name="games.stendhal.server.entity.mapstuff.portal.KeyedPortal">
+				<parameter name="key">klucz do domu mlodylagi</parameter>
+				<parameter name="rejected">Parcela mieszkalna wojowniczki mlodylagi.</parameter>
+			</implementation>
+			<attribute name="hidden"/>
+		</portal>
+		
+		<portal x="105" y="60" ref="mlodylagi_house_2">
+			<destination zone="0_semos_plains_n" ref="mlodylagi_house_1" />
+			<implementation
+				class-name="games.stendhal.server.entity.mapstuff.portal.KeyedPortal">
+				<parameter name="key">klucz do domu mlodylagi</parameter>
+				<parameter name="rejected">Parcela mieszkalna wojowniczki mlodylagi.</parameter>
+			</implementation>
+			<attribute name="hidden"/>
+		</portal>
+		
+		<portal x="94" y="58" ref="mlodylagi_house_3">
+			<destination zone="int_semos_mlodylagi_house" ref="mlodylagi_house_4"/>
+		</portal>
+		
+		<portal x="66" y="39" ref="zetsuuki_house_1">
+			<destination zone="0_semos_plains_n" ref="zetsuuki_house_2" />
+			<implementation
+				class-name="games.stendhal.server.entity.mapstuff.portal.KeyedPortal">
+				<parameter name="key">klucz do domu zetsuuki</parameter>
+				<parameter name="rejected">Parcela mieszkalna wojownika Zetsuuki.</parameter>
+			</implementation>
+			<attribute name="hidden"/>
+		</portal>
+		
+		<portal x="66" y="38" ref="zetsuuki_house_2">
+			<destination zone="0_semos_plains_n" ref="zetsuuki_house_1" />
+			<implementation
+				class-name="games.stendhal.server.entity.mapstuff.portal.KeyedPortal">
+				<parameter name="key">klucz do domu zetsuuki</parameter>
+				<parameter name="rejected">Parcela mieszkalna wojownika zetsuuki.</parameter>
+			</implementation>
+			<attribute name="hidden"/>
+		</portal>
+		
+		<portal x="66" y="34" ref="zetsuuki_house_3">
+			<destination zone="int_semos_zetsuuki_house" ref="zetsuuki_house_4"/>
+		</portal>
+		
+		<portal x="104" y="30" ref="empty_house_1">
+			<destination zone="0_semos_plains_n" ref="empty_house_2" />
+			<implementation
+				class-name="games.stendhal.server.entity.mapstuff.portal.KeyedPortal">
+				<parameter name="key">klucz do domu empty</parameter>
+				<parameter name="rejected">Parcela mieszkalna wojownika Golbatjov.</parameter>
+			</implementation>
+			<attribute name="hidden"/>
+		</portal>
+		
+		<portal x="103" y="30" ref="empty_house_2">
+			<destination zone="0_semos_plains_n" ref="empty_house_1" />
+			<implementation
+				class-name="games.stendhal.server.entity.mapstuff.portal.KeyedPortal">
+				<parameter name="key">klucz do domu empty</parameter>
+				<parameter name="rejected">Parcela mieszkalna wojownika Golbatjov.</parameter>
+			</implementation>
+			<attribute name="hidden"/>
+		</portal>
+		
+		<portal x="96" y="28" ref="empty_house_3">
+			<destination zone="int_semos_empty_house" ref="empty_house_4"/>
+		</portal>
+		
+		<portal x="71" y="21" ref="oxbowharp_house_1">
+			<destination zone="0_semos_plains_n" ref="oxbowharp_house_2" />
+			<implementation
+				class-name="games.stendhal.server.entity.mapstuff.portal.KeyedPortal">
+				<parameter name="key">klucz do domu oxbowharp</parameter>
+				<parameter name="rejected">Parcela residencial del guerrero Oxbowharp.</parameter>
+			</implementation>
+			<attribute name="hidden"/>
+		</portal>
+		
+		<portal x="71" y="20" ref="oxbowharp_house_2">
+			<destination zone="0_semos_plains_n" ref="oxbowharp_house_1" />
+			<implementation
+				class-name="games.stendhal.server.entity.mapstuff.portal.KeyedPortal">
+				<parameter name="key">klucz do domu oxbowharp</parameter>
+				<parameter name="rejected">Parcela residencial del guerrero Oxbowharp.</parameter>
+			</implementation>
+			<attribute name="hidden"/>
+		</portal>
+		
+		<portal x="71" y="16" ref="oxbowharp_house_3">
+			<destination zone="int_semos_oxbowharp_house" ref="oxbowharp_house_4"/>
+		</portal>
+		
+		
+		
+
 
 		<portal x="92" y="101" ref="catacombs_entrance">
 			<destination zone="-1_semos_catacombs_se" ref="entrance" />
@@ -2072,7 +2324,7 @@ Podstawowe komendy w grze znajdziesz pod komendą #/help
 	</zone>
 
 	<zone name="0_semos_city" level="0" x="500000" y="500000"
-		file="Level 0/semos/village_w.tmx">
+		file="Level 0/semos/village_w_xmas.tmx">
 		<title>Miasto Semos</title>
 		<attributes>
 			<parameter name="color_method">time</parameter>
@@ -2243,14 +2495,12 @@ Zadania u Mistrzów Gry przeprowadzą Cię przez całą grę, nie tylko przez po
 
 		<!-- writing on the wooden arch -->
 		
-		<entity x="34" y="15">
+		
+		<entity x="85" y="23">
 			<implementation class-name="games.stendhal.server.entity.mapstuff.sign.Sign" />
 			<attribute name="text">
-Projekt "#Zalanie #Kamieniołomu" został zrealizowany dzięki funduszom pochodzącym z podatków mieszkańców Semos. Celem projektu było przekształcenie kamieniołomu w atrakcyjne miejsce wypoczynku na wakacje poprzez zalanie go wodą oraz wysypanie piasku, tworząc tym samym nową plażę dla mieszkańców.
-
-Podpisano,
-#Mayor #Sakhs
-Burmistrz Semos
+Chcesz wspierać Faumonie finansowo? Wszystkie środki przeznaczymy na reklamę i rozwój Faumonii. Sprawdź co dla Ciebie przygotowaliśmy.
+#https://sklep.dawidgicala.pl/faumonia/
 			</attribute>
 		</entity>
 		
@@ -2348,7 +2598,7 @@ Potrzebna dojrzała owca: Proszę rozmawiać z Sato.
 			<attribute name="resistance">0</attribute>
 		</entity>
 
-		<portal x="95" y="40" ref="semos_restart_life">
+		<portal x="63" y="45" ref="semos_restart_life">
 			<implementation class-name="games.stendhal.server.entity.mapstuff.portal.OneWayPortalDestination"/>
 		</portal>
 		
@@ -2921,8 +3171,7 @@ dorsz - 4
 	</zone>
 
 	<zone name="int_semos_tavern_1" file="interiors/semos/tavern_1.tmx">
-		<configurator
-			class-name="games.stendhal.server.maps.semos.tavern.RareWeaponsSellerNPC" />
+
 		<configurator
 			class-name="games.stendhal.server.maps.semos.tavern.BowAndArrowSellerNPC" />
 
@@ -2934,7 +3183,7 @@ dorsz - 4
 			<destination zone="int_semos_tavern_2" ref="tavern2b" />
 			<implementation
 				class-name="games.stendhal.server.entity.mapstuff.portal.KeyedPortal">
-				<parameter name="key">klucz do tawerny6</parameter>
+				<parameter name="key">klucz do tawerny23</parameter>
 				<parameter name="rejected">Przejście tylko dla personelu.</parameter>
 			</implementation>
 		</portal>
@@ -3002,6 +3251,7 @@ dorsz - 4
 	<configurator class-name="games.stendhal.server.maps.semos.masterhouse.MasterNPC20"/>
 	<configurator class-name="games.stendhal.server.maps.semos.masterhouse.MasterNPC21"/>
 	<configurator class-name="games.stendhal.server.maps.semos.masterhouse.MasterNPC22"/>
+	<configurator class-name="games.stendhal.server.maps.semos.masterhouse.MasterNPC23"/>
 	
 		<portal x="14" y="1" ref="d1">
 			<destination zone="0_semos_city" ref="u1" />
@@ -4847,6 +5097,24 @@ Południowy-zachód: Zamek Or'ril i Miasto Fado
 		<portal x="82" y="4" ref="tunel2">
 			<destination zone="-1_semos_mine_tunnel_w" ref="tunel1" />
 		</portal>
+		
+		<portal x="124" y="25" ref="phalk1">
+			<destination zone="0_semos_plains_n" ref="phalk2"/>
+			<implementation class-name="games.stendhal.server.entity.mapstuff.portal.LevelCheckingPortal">
+				<parameter name="minimum-level">50</parameter>
+				<parameter name="rejected">Nie możesz tędy przejść. Jesteś za słaby.</parameter>
+			</implementation>
+			<attribute name="hidden"/>
+		</portal>
+		
+		<portal x="125" y="25" ref="phalk2">
+			<destination zone="0_semos_plains_n" ref="phalk1"/>
+			<implementation class-name="games.stendhal.server.entity.mapstuff.portal.LevelCheckingPortal">
+				<parameter name="minimum-level">50</parameter>
+				<parameter name="rejected">Nie możesz tędy przejść. Jesteś za słaby.</parameter>
+			</implementation>
+			<attribute name="hidden"/>
+		</portal>
 			
 	</zone>
 
@@ -5461,7 +5729,7 @@ Lodowe rękawice - 2.500
 			<parameter name="message">Ze względu bezpieczeństwa nie można przesuwać przedmiotów na terenie więzienia.</parameter>
 		</configurator>
 		<portal x="59" y="67" ref="jail_entrance_left">
-			<destination zone="0_semos_city" ref="tavern_entrance"/>
+			<destination zone="0_semos_city" ref="tav1b"/>
 		</portal>
 
 	</zone>

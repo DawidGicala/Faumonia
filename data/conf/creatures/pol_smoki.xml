@@ -28,7 +28,7 @@
 			<item value="magia ziemi" quantity="[111,133]" probability="15.0"/>
 			<item value="złote rękawice" quantity="[1,1]" probability="0.005"/>
 			<item value="smoczy zwój" quantity="[1,1]" probability="0.09"/>
-		</drops>
+		<item value="prezent czerwonego wędrowca 2025" quantity="[1,1]" probability="2.0"/> <item value="prezent lodowego wędrowca 2025" quantity="[1,1]" probability="0.5"/> <item value="prezent demonicznego wędrowca 2025" quantity="[1,1]" probability="0.25"/> </drops>
 		<equips/>
 		<abilities>
 			<damage type="fire"/>
@@ -67,7 +67,7 @@
 			<item value="magia płomieni" quantity="[111,133]" probability="15.0"/>
 			<item value="ogniste rękawice" quantity="[1,1]" probability="0.5"/>
 			<item value="smoczy zwój" quantity="[1,1]" probability="0.096"/>
-		</drops>
+		<item value="prezent czerwonego wędrowca 2025" quantity="[1,1]" probability="2.0"/> <item value="prezent lodowego wędrowca 2025" quantity="[1,1]" probability="0.5"/> <item value="prezent demonicznego wędrowca 2025" quantity="[1,1]" probability="0.25"/> </drops>
 		<equips/>
 		<abilities>
 			<damage type="fire"/>
@@ -108,7 +108,7 @@
 			<item value="czarna tarcza" quantity="[1,1]" probability="0.05"/>
 			<item value="obsydian" quantity="[2,5]" probability="10.0"/>
 			<item value="smoczy zwój" quantity="[1,1]" probability="0.099"/>
-		</drops>
+		<item value="prezent czerwonego wędrowca 2025" quantity="[1,1]" probability="2.0"/> <item value="prezent lodowego wędrowca 2025" quantity="[1,1]" probability="0.5"/> <item value="prezent demonicznego wędrowca 2025" quantity="[1,1]" probability="0.25"/> </drops>
 		<equips/>
 		<abilities>
 			<damage type="fire"/>
@@ -145,7 +145,7 @@
 			<item value="spodnie pustynne" quantity="[1,1]" probability="2.5"/>
 			<item value="smoczy zwój" quantity="[1,1]" probability="0.083"/>
 			<item value="figurka złotego smoka" quantity="[1,1]" probability="0.35"/>
-		</drops>
+		<item value="prezent czerwonego wędrowca 2025" quantity="[1,1]" probability="2.0"/> <item value="prezent lodowego wędrowca 2025" quantity="[1,1]" probability="0.5"/> <item value="prezent demonicznego wędrowca 2025" quantity="[1,1]" probability="0.25"/> </drops>
 		<equips/>
 		<abilities>
 			<damage type="fire"/>
@@ -182,7 +182,7 @@
 			<item value="nóż z kości" quantity="[1,1]" probability="5.0"/>
 			<item value="smoczy zwój" quantity="[1,1]" probability="0.06"/>
 			<item value="figurka kościanego smoka" quantity="[1,1]" probability="0.35"/>
-		</drops>
+		<item value="prezent czerwonego wędrowca 2025" quantity="[1,1]" probability="2.0"/> <item value="prezent lodowego wędrowca 2025" quantity="[1,1]" probability="0.5"/> <item value="prezent demonicznego wędrowca 2025" quantity="[1,1]" probability="0.25"/> </drops>
 		<equips/>
 		<abilities>
 			<damage type="fire"/>
@@ -221,7 +221,7 @@
 			<item value="kieł smoka" quantity="[1,1]" probability="10.0"/>
 			<item value="pazur arktycznego smoka" quantity="[1,1]" probability="0.05"/>
 			<item value="smoczy zwój" quantity="[1,1]" probability="0.1"/>
-		</drops>
+		<item value="prezent czerwonego wędrowca 2025" quantity="[1,1]" probability="2.0"/> <item value="prezent lodowego wędrowca 2025" quantity="[1,1]" probability="0.5"/> <item value="prezent demonicznego wędrowca 2025" quantity="[1,1]" probability="0.25"/> </drops>
 		<equips/>
 		<abilities>
 			<damage type="fire"/>
@@ -259,7 +259,7 @@
 			<item value="skóra czarnego smoka" quantity="[1,1]" probability="25.0"/>
 			<item value="smoczy zwój" quantity="[1,1]" probability="0.12"/>
 			<item value="figurka czarnego smoka" quantity="[1,1]" probability="1.0"/>
-		</drops>
+		<item value="prezent czerwonego wędrowca 2025" quantity="[1,1]" probability="2.0"/> <item value="prezent lodowego wędrowca 2025" quantity="[1,1]" probability="0.5"/> <item value="prezent demonicznego wędrowca 2025" quantity="[1,1]" probability="0.25"/> </drops>
 		<equips>
 			<slot name="rhand" item="złoty buzdygan"/>
 		</equips>
@@ -301,7 +301,7 @@
 			<item value="obsydian" quantity="[1,4]" probability="50.0"/>
 			<item value="smoczy zwój" quantity="[1,1]" probability="1.0"/>
 			<item value="smocze rękawice" quantity="[1,1]" probability="0.01"/>
-		</drops>
+		<item value="prezent czerwonego wędrowca 2025" quantity="[1,1]" probability="2.0"/> <item value="prezent lodowego wędrowca 2025" quantity="[1,1]" probability="0.5"/> <item value="prezent demonicznego wędrowca 2025" quantity="[1,1]" probability="0.25"/> </drops>
 		<equips/>
 		<abilities>
 			<damage type="fire"/>
@@ -339,7 +339,7 @@
 			<item value="skóra złotego smoka" quantity="[1,1]" probability="50.0"/>
 			<item value="smoczy zwój" quantity="[1,1]" probability="1.0"/>
 			<item value="smocze rękawice" quantity="[1,1]" probability="0.01"/>
-		</drops>
+		<item value="prezent czerwonego wędrowca 2025" quantity="[1,1]" probability="2.0"/> <item value="prezent lodowego wędrowca 2025" quantity="[1,1]" probability="0.5"/> <item value="prezent demonicznego wędrowca 2025" quantity="[1,1]" probability="0.25"/> </drops>
 		<equips>
 		</equips>
 		<abilities>
@@ -380,7 +380,7 @@
 			<item value="smoczy zwój" quantity="[1,1]" probability="5.0"/>
 			<item value="smocze rękawice" quantity="[1,1]" probability="2.0"/>
 			<item value="rękawice ze smoczej skóry" quantity="[1,1]" probability="3.0"/>
-		</drops>
+		<item value="prezent czerwonego wędrowca 2025" quantity="[1,1]" probability="2.0"/> <item value="prezent lodowego wędrowca 2025" quantity="[1,1]" probability="0.5"/> <item value="prezent demonicznego wędrowca 2025" quantity="[1,1]" probability="0.25"/> </drops>
 		<equips>
 			<slot name="rhand" item="sztylet mroku"/>
 		</equips>
@@ -402,14 +402,14 @@
 		<description/>
 		<attributes>
 			<atk value="25555"/>
-			<def value="499"/>
+			<def value="1499"/>
 			<hp value="19000"/>
 			<speed value="0.7"/>
 			<size value="8,6"/>
 		</attributes>
 		<level value="990"/>
 		<experience value="12011112"/>
-		<respawn value="2256000"/>
+		<respawn value="5256000"/>
 		<corpse name="dragon_6x6" width="6" height="6"/>
 		<drops>
 			<item value="wielki eliksir" quantity="[1,129]" probability="100.0"/>
@@ -422,8 +422,8 @@
 			<item value="Tarcza Smoka Wawelskiego" quantity="[1,1]" probability="3.23"/>
 			<item value="ogniste rękawice" quantity="[1,1]" probability="25.0"/>
 			<item value="smoczy zwój" quantity="[1,1]" probability="10.0"/>
-			<item value="ognista tarcza" quantity="[1,1]" probability="20.0"/>
-		</drops>
+			<item value="ognista tarcza" quantity="[1,1]" probability="10.0"/>
+		<item value="prezent czerwonego wędrowca 2025" quantity="[1,1]" probability="2.0"/> <item value="prezent lodowego wędrowca 2025" quantity="[1,1]" probability="0.5"/> <item value="prezent demonicznego wędrowca 2025" quantity="[1,1]" probability="0.25"/> </drops>
 		<equips>
 			<slot name="rhand" item="ognisty miecz demonów" quantity="1"/>
 		</equips>

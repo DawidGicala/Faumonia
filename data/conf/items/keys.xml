@@ -56,9 +56,9 @@
 		</equipable>
 	</item>
 	
-	<item name="klucz do tawerny6">
+	<item name="klucz do tawerny23">
 		<type class="key" subclass="filigree" tileid="-1"/>
-		<description>Oto klucz do sekretnego pokoju w  tawernie Semos.</description>
+		<description>Oto klucz do sekretnego pokoju w tawernie Semos.</description>
 		<implementation class-name="games.stendhal.server.entity.item.Item"/>
 		<attributes>
 			<autobind value=""/>
@@ -431,60 +431,6 @@
 		</equipable>
 	</item>
 	
-	<item name="klucz do piekła 2024">
-		<type class="key" subclass="klucz_do_piekla_2024" tileid="-1"/>
-		<description>Oto klucz do piekła. Ten starożytny artefakt, wykuty w ogniach najgłębszych czeluści, otwiera wrota do krainy pełnej wiecznego mroku i nieopisanych cierpień #lato #2024</description>
-		<implementation class-name="games.stendhal.server.entity.item.Item"/>
-		<attributes>
-			<autobind value=""/>
-		</attributes>
-		<weight value="1.0"/>
-		<value value="1"/>
-		<equipable>
-			<slot name="ground"/>
-			<slot name="content"/>
-			<slot name="bag"/>
-			<slot name="trade"/>
-			<slot name="keyring"/>
-		</equipable>
-	</item>
-	
-	<item name="klucz do wieliczki 2024">
-		<type class="key" subclass="klucz_do_wieliczki_2024" tileid="-1"/>
-		<description>Oto klucz do Wieliczki. Ten lodowy artefakt emanuje mroźną aurą, która sprawia, że w jego pobliżu temperatura gwałtownie spada. Klucz prowadzi do starożytnych, lodowych komnat, gdzie wieczny chłód i szron pokrywają każdy zakątek. Jest to miejsce w którym możesz skryć się przed upałem... #2024</description>
-		<implementation class-name="games.stendhal.server.entity.item.Item"/>
-		<attributes>
-			<autobind value=""/>
-		</attributes>
-		<weight value="1.0"/>
-		<value value="1"/>
-		<equipable>
-			<slot name="ground"/>
-			<slot name="content"/>
-			<slot name="bag"/>
-			<slot name="trade"/>
-			<slot name="keyring"/>
-		</equipable>
-	</item>
-	
-	<item name="smocza pieczęć 2024">
-		<type class="key" subclass="smocza_pieczec_2024" tileid="-1"/>
-		<description>Oto smocza pieczęć. Przedmiot o niezwykłej mocy, stworzony z łuski pradawnego smoka i otoczony aurą gorącego powietrza. Smocza Pieczęć jest symbolem równowagi pomiędzy światami ludzi i smoków. Tylko ci, którzy udowodnią swoją wartość w walce, mogą aktywować jej moc i stanąć twarzą w twarz ze Smokiem Wawelskim #zima #2024 </description>
-		<implementation class-name="games.stendhal.server.entity.item.Item"/>
-		<attributes>
-			<autobind value=""/>
-		</attributes>
-		<weight value="1.0"/>
-		<value value="1"/>
-		<equipable>
-			<slot name="ground"/>
-			<slot name="content"/>
-			<slot name="bag"/>
-			<slot name="trade"/>
-			<slot name="keyring"/>
-		</equipable>
-	</item>
-	
 	<item name="klucz do wieliczki">
 		<type class="key" subclass="klucz_do_wieliczki" tileid="-1"/>
 		<description>Oto klucz do Wieliczki. Ten ciężki, srebrny klucz nosi wyraźne ślady wiekowego użytkowania. W jego uchwycie wyryto skomplikowane symbole, które zdają się jaśnieć w ciemności, kiedy zbliżasz się do wejścia do legendarnej kopalni. Wieliczka. Klucz otwiera bramy ukryte w sercu lodowych krain, prowadząc do głębin pełnych skarbów i zagadek solnych labiryntów. </description>
@@ -502,5 +448,75 @@
 			<slot name="keyring"/>
 		</equipable>
 	</item>
+	
+	<item name="klucz do domu madejski">
+		<type class="key" subclass="rat" tileid="-1"/>
+		<description>Oto klucz do domu Madejski.</description>
+		<implementation class-name="games.stendhal.server.entity.item.Item"/>
+		<attributes>
+		</attributes>
+		<weight value="1.0"/>
+		<value value="1"/>
+		<equipable>
+			<slot name="ground"/>
+			<slot name="content"/>
+			<slot name="bag"/>
+			<slot name="trade"/>
+			<slot name="keyring"/>
+		</equipable>
+	</item>
+	
+	<item name="klucz do domu oxbowharp">
+		<type class="key" subclass="rat" tileid="-1"/>
+		<description>Esta es la llave de la casa de Oxbowharp.</description>
+		<implementation class-name="games.stendhal.server.entity.item.Item"/>
+		<attributes>
+		</attributes>
+		<weight value="1.0"/>
+		<value value="1"/>
+		<equipable>
+			<slot name="ground"/>
+			<slot name="content"/>
+			<slot name="bag"/>
+			<slot name="trade"/>
+			<slot name="keyring"/>
+		</equipable>
+	</item>
+	
+	<item name="klucz do domu zetsuuki">
+		<type class="key" subclass="rat" tileid="-1"/>
+		<description>Oto klucz do domu Zetsuuki.</description>
+		<implementation class-name="games.stendhal.server.entity.item.Item"/>
+		<attributes>
+		</attributes>
+		<weight value="1.0"/>
+		<value value="1"/>
+		<equipable>
+			<slot name="ground"/>
+			<slot name="content"/>
+			<slot name="bag"/>
+			<slot name="trade"/>
+			<slot name="keyring"/>
+		</equipable>
+	</item>
+	
+	<item name="klucz do domu mlodylagi">
+		<type class="key" subclass="rat" tileid="-1"/>
+		<description>Oto klucz do domu Mlodylagi.</description>
+		<implementation class-name="games.stendhal.server.entity.item.Item"/>
+		<attributes>
+		</attributes>
+		<weight value="1.0"/>
+		<value value="1"/>
+		<equipable>
+			<slot name="ground"/>
+			<slot name="content"/>
+			<slot name="bag"/>
+			<slot name="trade"/>
+			<slot name="keyring"/>
+		</equipable>
+	</item>
+	
+	
 	
 </items>

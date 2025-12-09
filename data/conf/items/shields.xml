@@ -485,6 +485,26 @@
 		</equipable>
 	</item>
 	
+	<item name="tarcza zbójnicka">
+		<type class="shield" subclass="polish_light_shield" tileid="-1"/>
+		<description>Oto tarcza zbójnicka. Poręczna i wytrzymała, zaprojektowana tak, by zbójnik mógł z nią zarówno walczyć, jak i z łatwością wspinać się po skałach.</description>
+		<implementation class-name="games.stendhal.server.entity.item.Item"/>
+		<attributes>
+			<def value="44"/>
+			<minlevel value="220"/>
+		</attributes>
+		<weight value="34.0"/>
+		<value value="415233"/>
+		<equipable>
+			<slot name="ground"/>
+			<slot name="content"/>
+			<slot name="bag"/>
+			<slot name="trade"/>
+			<slot name="lhand"/>
+			<slot name="rhand"/>
+		</equipable>
+	</item>
+	
 	<item name="tarcza mainiocyjska">
 		<type class="shield" subclass="mainio_shield" tileid="-1"/>
 		<description>Oto tarcza mainiocyjska. Nie masz pojęcia z czego jest zrobiona, ale będzie cię dobrze chronić.</description>
@@ -566,7 +586,7 @@
 	</item>
 	
 	<item name="ognista tarcza">
-		<type class="shield" subclass="fire_shield" tileid="-1"/>
+		<type class="shield" subclass="tarcza_smocza" tileid="-1"/>
 		<description>Oto ognista tarcza. Niech jej płomień ogarnie twoich wrogów.</description>
 		<implementation class-name="games.stendhal.server.entity.item.Item"/>
 		<attributes>
@@ -674,6 +694,69 @@
 		<attributes>
 			<def value="1"/>
 			<minlevel value="40"/>
+			<autobind value=""/>
+		</attributes>
+		<weight value="34.0"/>
+		<value value="518616"/>
+		<equipable>
+			<slot name="ground"/>
+			<slot name="content"/>
+			<slot name="bag"/>
+			<slot name="trade"/>
+			<slot name="lhand"/>
+			<slot name="rhand"/>
+		</equipable>
+	</item>
+	
+		<item name="tarcza czerwonego w 2025">
+		<type class="shield" subclass="swiateczna_tarcza_2025" tileid="-1"/>
+		<description>Oto Tarcza Czerwonego Wędrowca. Zawadiaka stworzył ją z lekkiego, ale niezwykle wytrzymałego materiału, który podobno powstał z połączenia mikołajowej stali i… resztek prezentowych skrzyń. Jej czerwono-biały wzór rozświetla się lekko, gdy w pobliżu czai się magia. To tarcza, która potrafi rozchmurzyć nawet najciemniejszą zimową bitwę #zima #2025</description>
+		<implementation class-name="games.stendhal.server.entity.item.Item"/>
+		<attributes>
+			<def value="21"/>
+			<minlevel value="20"/>
+			<autobind value=""/>
+		</attributes>
+		<weight value="34.0"/>
+		<value value="518616"/>
+		<equipable>
+			<slot name="ground"/>
+			<slot name="content"/>
+			<slot name="bag"/>
+			<slot name="trade"/>
+			<slot name="lhand"/>
+			<slot name="rhand"/>
+		</equipable>
+	</item>
+	
+	<item name="tarcza lodowego w 2025">
+		<type class="shield" subclass="zimowa_tarcza_2025" tileid="-1"/>
+		<description>Oto Tarcza Lodowego Wędrowcy. Wzmocniona rdzeniem smoczego lodu potrafi zatrzymać nawet płonący gniew demonów z południa. Gdy runy rozbłysną mroźnym światłem, tarcza tworzy wokół wojownika kopułę zimowej potęgi, zamrażając każdy atak, który odważy się ją naruszyć #zima #2025</description>
+		<implementation class-name="games.stendhal.server.entity.item.Item"/>
+		<attributes>
+			<def value="42"/>
+			<minlevel value="150"/>
+			<autobind value=""/>
+		</attributes>
+		<weight value="34.0"/>
+		<value value="518616"/>
+		<equipable>
+			<slot name="ground"/>
+			<slot name="content"/>
+			<slot name="bag"/>
+			<slot name="trade"/>
+			<slot name="lhand"/>
+			<slot name="rhand"/>
+		</equipable>
+	</item>
+	
+	<item name="tarcza demonicznego w 2025">
+		<type class="shield" subclass="demoniczna_tarcza_2025" tileid="-1"/>
+		<description>Oto Tarcza Demonicznego Wędrowca, wykuta z lodowego pancerza potworów i spięta czaszką, która nigdy nie przestała nienawidzić; każdy cios w nią sprawia, że oczy demona zapalają się jaśniej, głodne strachu przeciwnika #zima #2025</description>
+		<implementation class-name="games.stendhal.server.entity.item.Item"/>
+		<attributes>
+			<def value="61"/>
+			<minlevel value="300"/>
 			<autobind value=""/>
 		</attributes>
 		<weight value="34.0"/>

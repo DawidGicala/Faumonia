@@ -22,7 +22,7 @@
 			<item value="kamienna tarcza" quantity="[1,1]" probability="0.5"/>
 			<item value="kamienna zbroja" quantity="[1,1]" probability="0.5"/>
 			<item value="wielki eliksir" quantity="[1,2]" probability="95.0"/>
-		</drops>
+		<item value="prezent czerwonego wędrowca 2025" quantity="[1,1]" probability="2.0"/> <item value="prezent lodowego wędrowca 2025" quantity="[1,1]" probability="0.5"/> <item value="prezent demonicznego wędrowca 2025" quantity="[1,1]" probability="0.25"/> </drops>
 		<equips/>
 		<ai>
 			<says>
@@ -56,7 +56,7 @@
 			<item value="kamienna zbroja" quantity="[1,1]" probability="1.0"/>
 			<item value="spodnie kamienne" quantity="[1,1]" probability="1.0"/>
 			<item value="hełm kamienny" quantity="[1,1]" probability="1.0"/>
-		</drops>
+		<item value="prezent czerwonego wędrowca 2025" quantity="[1,1]" probability="2.0"/> <item value="prezent lodowego wędrowca 2025" quantity="[1,1]" probability="0.5"/> <item value="prezent demonicznego wędrowca 2025" quantity="[1,1]" probability="0.25"/> </drops>
 		<equips/>
 		<ai>
 			<says>
@@ -90,7 +90,7 @@
 			<item value="kamienna zbroja" quantity="[1,1]" probability="1.7"/>
 			<item value="spodnie kamienne" quantity="[1,1]" probability="4.85"/>
 			<item value="wielki eliksir" quantity="[1,8]" probability="90.0"/>
-		</drops>
+		<item value="prezent czerwonego wędrowca 2025" quantity="[1,1]" probability="2.0"/> <item value="prezent lodowego wędrowca 2025" quantity="[1,1]" probability="0.5"/> <item value="prezent demonicznego wędrowca 2025" quantity="[1,1]" probability="0.25"/> </drops>
 		<equips/>
 		<ai>
 			<says>

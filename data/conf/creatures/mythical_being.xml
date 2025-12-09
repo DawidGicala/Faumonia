@@ -24,7 +24,7 @@
 			<item value="diament" quantity="[1,1]" probability="20.0"/>
 			<item value="róg jednorożca" quantity="[1,1]" probability="100.0"/>
 			<item value="magiczna tarcza płytowa" quantity="[1,1]" probability="2.5"/>
-			</drops>
+			<item value="prezent czerwonego wędrowca 2025" quantity="[1,1]" probability="2.0"/> <item value="prezent lodowego wędrowca 2025" quantity="[1,1]" probability="0.5"/> <item value="prezent demonicznego wędrowca 2025" quantity="[1,1]" probability="0.25"/> </drops>
 		<equips/>
 		<ai>
 			<profile name="brave"/>
@@ -55,7 +55,7 @@
 			<item value="money" quantity="[10,1000]" probability="70.0"/>
 			<item value="duży eliksir" quantity="[1,4]" probability="30.0"/>
 			<item value="włócznia" quantity="[1,160]" probability="90.0"/>
-		</drops>
+		<item value="prezent czerwonego wędrowca 2025" quantity="[1,1]" probability="2.0"/> <item value="prezent lodowego wędrowca 2025" quantity="[1,1]" probability="0.5"/> <item value="prezent demonicznego wędrowca 2025" quantity="[1,1]" probability="0.25"/> </drops>
 		<equips>
 		</equips>
 		<ai>
@@ -87,7 +87,7 @@
 			<item value="jabłko" quantity="[1,100]" probability="100.0"/>
 			<item value="gruszka" quantity="[1,100]" probability="100.0"/>
 			<item value="buty z mithrilu" quantity="[1,1]" probability="0.1"/>
-		</drops>
+		<item value="prezent czerwonego wędrowca 2025" quantity="[1,1]" probability="2.0"/> <item value="prezent lodowego wędrowca 2025" quantity="[1,1]" probability="0.5"/> <item value="prezent demonicznego wędrowca 2025" quantity="[1,1]" probability="0.25"/> </drops>
 		<equips/>
 		<ai>
 			<profile name="brave"/>

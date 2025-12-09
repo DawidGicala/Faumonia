@@ -20,7 +20,7 @@
 			<item value="money" quantity="[4,20]" probability="100.0"/>
 			<item value="buteleczka wody" quantity="[1,2]" probability="70.0"/>
 			<item value="srebrny sztylecik" quantity="[1,1]" probability="0.001"/>
-		</drops>
+		<item value="prezent czerwonego wędrowca 2025" quantity="[1,1]" probability="2.0"/> <item value="prezent lodowego wędrowca 2025" quantity="[1,1]" probability="0.5"/> <item value="prezent demonicznego wędrowca 2025" quantity="[1,1]" probability="0.25"/> </drops>
 		<equips/>
 		<ai>
 			<profile name="brave"/>
@@ -48,7 +48,7 @@
 			<item value="money" quantity="[4,20]" probability="100.0"/>
 			<item value="buteleczka wody" quantity="[1,2]" probability="70.0"/>
 			<item value="srebrny sztylecik" quantity="[1,1]" probability="0.001"/>
-		</drops>
+		<item value="prezent czerwonego wędrowca 2025" quantity="[1,1]" probability="2.0"/> <item value="prezent lodowego wędrowca 2025" quantity="[1,1]" probability="0.5"/> <item value="prezent demonicznego wędrowca 2025" quantity="[1,1]" probability="0.25"/> </drops>
 		<equips/>
 		<ai>
 			<profile name="brave"/>
@@ -76,7 +76,7 @@
 			<item value="money" quantity="[4,20]" probability="100.0"/>
 			<item value="buteleczka wody" quantity="[1,2]" probability="70.0"/>
 			<item value="srebrny sztylecik" quantity="[1,1]" probability="0.001"/>
-		</drops>
+		<item value="prezent czerwonego wędrowca 2025" quantity="[1,1]" probability="2.0"/> <item value="prezent lodowego wędrowca 2025" quantity="[1,1]" probability="0.5"/> <item value="prezent demonicznego wędrowca 2025" quantity="[1,1]" probability="0.25"/> </drops>
 		<equips/>
 		<ai>
 			<profile name="brave"/>
@@ -104,7 +104,7 @@
 			<item value="money" quantity="[4,20]" probability="100.0"/>
 			<item value="buteleczka wody" quantity="[1,2]" probability="70.0"/>
 			<item value="srebrny sztylecik" quantity="[1,1]" probability="0.001"/>
-		</drops>
+		<item value="prezent czerwonego wędrowca 2025" quantity="[1,1]" probability="2.0"/> <item value="prezent lodowego wędrowca 2025" quantity="[1,1]" probability="0.5"/> <item value="prezent demonicznego wędrowca 2025" quantity="[1,1]" probability="0.25"/> </drops>
 		<equips/>
 		<ai>
 			<profile name="brave"/>
@@ -132,7 +132,7 @@
 			<item value="money" quantity="[4,20]" probability="100.0"/>
 			<item value="buteleczka wody" quantity="[1,2]" probability="70.0"/>
 			<item value="srebrny sztylecik" quantity="[1,1]" probability="0.001"/>
-		</drops>
+		<item value="prezent czerwonego wędrowca 2025" quantity="[1,1]" probability="2.0"/> <item value="prezent lodowego wędrowca 2025" quantity="[1,1]" probability="0.5"/> <item value="prezent demonicznego wędrowca 2025" quantity="[1,1]" probability="0.25"/> </drops>
 		<equips/>
 		<ai>
 			<profile name="brave"/>
@@ -161,7 +161,7 @@
 			<item value="money" quantity="[4,20]" probability="100.0"/>
 			<item value="buteleczka wody" quantity="[1,2]" probability="70.0"/>
 			<item value="srebrny sztylecik" quantity="[1,1]" probability="0.001"/>
-		</drops>
+		<item value="prezent czerwonego wędrowca 2025" quantity="[1,1]" probability="2.0"/> <item value="prezent lodowego wędrowca 2025" quantity="[1,1]" probability="0.5"/> <item value="prezent demonicznego wędrowca 2025" quantity="[1,1]" probability="0.25"/> </drops>
 		<equips/>
 		<ai>
 			<profile name="brave"/>
@@ -190,7 +190,7 @@
 			<item value="money" quantity="[4,20]" probability="100.0"/>
 			<item value="buteleczka wody" quantity="[1,2]" probability="70.0"/>
 			<item value="srebrny sztylecik" quantity="[1,1]" probability="0.001"/>
-		</drops>
+		<item value="prezent czerwonego wędrowca 2025" quantity="[1,1]" probability="2.0"/> <item value="prezent lodowego wędrowca 2025" quantity="[1,1]" probability="0.5"/> <item value="prezent demonicznego wędrowca 2025" quantity="[1,1]" probability="0.25"/> </drops>
 		<equips/>
 		<ai>
 			<profile name="brave"/>
@@ -219,7 +219,7 @@
 			<item value="money" quantity="[4,20]" probability="100.0"/>
 			<item value="buteleczka wody" quantity="[1,2]" probability="70.0"/>
 			<item value="srebrny sztylecik" quantity="[1,1]" probability="0.001"/>
-		</drops>
+		<item value="prezent czerwonego wędrowca 2025" quantity="[1,1]" probability="2.0"/> <item value="prezent lodowego wędrowca 2025" quantity="[1,1]" probability="0.5"/> <item value="prezent demonicznego wędrowca 2025" quantity="[1,1]" probability="0.25"/> </drops>
 		<equips/>
 		<ai>
 			<profile name="brave"/>

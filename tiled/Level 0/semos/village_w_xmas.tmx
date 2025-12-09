@@ -342,10 +342,10 @@
  <tileset firstgid="1461" name="animal" tilewidth="32" tileheight="32" tilecount="30" columns="30">
   <image source="../../tileset/logic/creature/animal.png" width="960" height="32"/>
  </tileset>
- <tileset firstgid="1491" name="golem" tilewidth="32" tileheight="32" tilecount="3" columns="3">
-  <image source="../../tileset/logic/creature/golem.png" width="96" height="32"/>
+ <tileset firstgid="1491" name="golem" tilewidth="32" tileheight="32" tilecount="4" columns="4">
+  <image source="../../tileset/logic/creature/golem.png" width="128" height="32"/>
  </tileset>
- <tileset firstgid="1494" name="pol_smoki" tilewidth="32" tileheight="32" tilecount="10" columns="10">
+ <tileset firstgid="1495" name="pol_smoki" tilewidth="32" tileheight="32" tilecount="10" columns="10">
   <image source="../../tileset/logic/creature/pol_smoki.png" width="320" height="32"/>
  </tileset>
  <layer name="0_floor" width="128" height="64">
@@ -375,7 +375,7 @@
  </layer>
  <layer name="objects" width="128" height="64">
   <data encoding="base64" compression="zlib">
-   eJzt3E1uwjAQhmGQ6FX6c3pOwaZSu2jVVReV2PQaReqCEDmOg+3xfPb7SNkgAYnHY49Nwm5n73Pf4EuBBaf99UCa00PrM/CHca0ccrE/nseMUO7SB+1N+wjtr+/Lcc6HeB6jWlOLZQmMQWOZ1wHe4s8awxb7Asu+heYDYgiM5Y2cB6KoJ5FCcV+E8X9ZrXp4xD0i5FMcX1SxFkYN5DDQhxFymXnQn+PB7ruIP+CHZe4re+983JqPy4+H6/F0OZ4vxwt9JUp9bpue/8jxV49jCcT/39q433pe+G0Uk55zJHZt6tfdqr/AFnEGgDHdU6e0rmWR5nVjnEo9T0H/0MDzM/5YxKPUfcWxPO+hX3H/9a0tMe0h/r0pHZO1z6MO8K1WjraI+81/kwxwf1Qta2sGctqf3Dol9Vmc2Hoh9HrO+oK1yX1oMyjg+T9A29a6g/0UAChPbc+D+q9PI68/VeqbD6PzzOkL8/eO3K+28P77ceo8RbzXnQP37tJueWrVUbG4qMwbvbJofy956eE8QuNWKvXfhUqcu/L1K6Pd9eWuSebvZ+7GlNo+HPxgfgGQ4ofntuVROwJY8gdn8GQV
+   eJzt3E1uwjAQhmGQ6FX6c3pOwaZSu2jVXaVKbHqNInVBiBzHwfZ4Pvt9pGyQgMTjsccmYbez97lv8KXAgtP+eiDN6aH1GfjDuFYOudgfz2NGKHfpg/amfYT21/flOOdDPI9RranFsgTGoLHM6wBv8WeNYYt9gWXfQvMBMQTG8kbOA1HUk0ihuC/C+L+sVj084h4R8imOL6pYC6MGchjowwi5zDzoz/Fg913EH/DDMveVvXc+bs3H5cfD9Xi6HM+X44W+EqU+t03Pf+T4q8exBOL/b23cbz0v/DaKSc85Ers29etu1V9gizgDwJjuqVNa17JI87oxTqWep6B/aOD5GX8s4lHqvuJYnvfQr7j/+taWmPYQ/96Ujsna51EH+FYrR1vE/ea/SQa4P6qWtTUDOe1Pbp2S+ixObL0Qej1nfcHa5D60GRTw/B+gbWvdwX4KAJSntudB/denkdefKvXNh9F55vSF+XtH7ldbeP/9OHWeIt7rzoF7d2m3PLXqqFhcVOaNXlm0v5e89HAeoXErlfrvQiXOXfn6ldHu+nLXJPP3M3djSm0fDn4wvwBI8cNz2/KoHQEs+QPTtGQW
   </data>
  </layer>
  <layer name="collision" width="128" height="64" visible="0" opacity="0.66">

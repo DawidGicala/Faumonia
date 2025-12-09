@@ -204,4 +204,23 @@
 		</equipable>
 	</item>
 	
+	<item name="puchar na rocznice 2025">
+		<type class="special" subclass="puchar" tileid="-1"/>
+		<description>Oto puchar na drugą rocznicę Faumonii w 2025 roku. Przyznany tym, którzy świętowali razem z nami. Niech przypomina o wspólnej przygodzie i potędze społeczności!</description>
+		<implementation class-name="games.stendhal.server.entity.item.Item"/>
+		<attributes>
+			<quantity value="1"/>
+			<max_quantity value="2147483647"/>
+			<undroppableondeath value="1" />
+			<autobind value=""/>
+		</attributes>
+		<weight value="0.01"/>
+		<value value="1"/>
+		<equipable>
+			<slot name="ground"/>
+			<slot name="content"/>
+			<slot name="bag"/>
+		</equipable>
+	</item>
+	
 </items>

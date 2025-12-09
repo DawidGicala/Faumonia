@@ -248,6 +248,25 @@
 			<slot name="trade"/>
 		</equipable>
 	</item>
+	
+	<item name="rękawice nicości">
+		<type class="glove" subclass="rift_gloves" tileid="-1"/>
+		<description>Oto rękawice nicości. Utkane z cieni i mroku, chronią dłonie przed widmowym zimnem, jednocześnie wzmacniając więź z pustką.</description>
+		<implementation class-name="games.stendhal.server.entity.item.Item"/>
+		<attributes>
+			<atk value="2"/>
+			<def value="4"/>
+		</attributes>
+		<weight value="44.0"/>
+		<value value="1551"/>
+		<equipable>
+			<slot name="ground"/>
+			<slot name="content"/>
+			<slot name="glove"/>
+			<slot name="bag"/>
+			<slot name="trade"/>
+		</equipable>
+	</item>
 
 	<item name="czarne rękawice">
 		<type class="glove" subclass="black_gloves" tileid="-1"/>
@@ -313,6 +332,69 @@
 		<attributes>
 			<atk value="1"/>
 			<def value="1"/>
+			<autobind value=""/>
+		</attributes>
+		<weight value="10.0"/>
+		<value value="151"/>
+		<equipable>
+			<slot name="ground"/>
+			<slot name="content"/>
+			<slot name="glove"/>
+			<slot name="bag"/>
+			<slot name="trade"/>
+		</equipable>
+	</item>
+	
+		<item name="rękawice czerwonego w 2025">
+		<type class="glove" subclass="swiateczne_rekawice_2025" tileid="-1"/>
+		<description>Oto Rękawice Czerwonego Wędrowca. Uszyte z miękkiej, czerwonej tkaniny i obszyte białym futerkiem, były podobno pierwszą rzeczą, jaką Zawadiaka zakładał przed wyruszeniem na zimowe psoty. Chronią dłonie przed mrozem tak skutecznie, że można w nich spokojnie kopać w śniegu nawet po łokcie. To idealny wybór dla wojowników, którzy chcą zachować ciepło i styl #zima #2025</description>
+		<implementation class-name="games.stendhal.server.entity.item.Item"/>
+		<attributes>
+			<atk value="1"/>
+			<def value="3"/>
+			<minlevel value="20"/>
+			<autobind value=""/>
+		</attributes>
+		<weight value="10.0"/>
+		<value value="151"/>
+		<equipable>
+			<slot name="ground"/>
+			<slot name="content"/>
+			<slot name="glove"/>
+			<slot name="bag"/>
+			<slot name="trade"/>
+		</equipable>
+	</item>
+	
+	<item name="rękawice lodowego w 2025">
+		<type class="glove" subclass="zimowe_rekawice_2025" tileid="-1"/>
+		<description>Oto Rękawice Lodowego Wędrowcy. Wzmocnione czystym kryształem północy, pozwalają ujarzmić siłę zimy w gołych dłoniach. Ich dotyk potrafi zamrozić stal i uciszyć płomienie, a każdy chwyt wzmacnia potęgę wojownika, jakby sam mróz służył mu jako broń #zima #2025</description>
+		<implementation class-name="games.stendhal.server.entity.item.Item"/>
+		<attributes>
+			<atk value="2"/>
+			<def value="6"/>
+			<minlevel value="150"/>
+			<autobind value=""/>
+		</attributes>
+		<weight value="10.0"/>
+		<value value="151"/>
+		<equipable>
+			<slot name="ground"/>
+			<slot name="content"/>
+			<slot name="glove"/>
+			<slot name="bag"/>
+			<slot name="trade"/>
+		</equipable>
+	</item>
+	
+	<item name="rękawice demonicznego w 2025">
+		<type class="glove" subclass="demoniczne_rekawice_2025" tileid="-1"/>
+		<description>Oto Rękawiczki Demonicznego Wędrowca, stworzone z lodowych kości i pazurów, które drżą z niecierpliwości przed kolejną walką; zaciskają się mocniej, gdy zbliża się wróg, jakby same chciały rozerwać gardło temu, kto odważy się stawić opór #zima #2025</description>
+		<implementation class-name="games.stendhal.server.entity.item.Item"/>
+		<attributes>
+			<atk value="3"/>
+			<def value="6"/>
+			<minlevel value="300"/>
 			<autobind value=""/>
 		</attributes>
 		<weight value="10.0"/>

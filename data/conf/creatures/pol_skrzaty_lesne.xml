@@ -18,7 +18,7 @@
 		<corpse name="gnome"/>
 		<drops>
 			<item value="sok z chmielu" quantity="[1,1]" probability="60.0"/>
-		</drops>
+		<item value="prezent czerwonego wędrowca 2025" quantity="[1,1]" probability="2.0"/> <item value="prezent lodowego wędrowca 2025" quantity="[1,1]" probability="0.5"/> <item value="prezent demonicznego wędrowca 2025" quantity="[1,1]" probability="0.25"/> </drops>
 		<equips/>
 		<ai>
 			<profile name="coward"/>
@@ -46,7 +46,7 @@
 			<item value="miód pitny" quantity="[1,1]" probability="50.0"/>
 			<item value="opieńka miodowa" quantity="[1,5]" probability="50.0"/>
 			<item value="sok z chmielu" quantity="[1,1]" probability="60.0"/>
-		</drops>
+		<item value="prezent czerwonego wędrowca 2025" quantity="[1,1]" probability="2.0"/> <item value="prezent lodowego wędrowca 2025" quantity="[1,1]" probability="0.5"/> <item value="prezent demonicznego wędrowca 2025" quantity="[1,1]" probability="0.25"/> </drops>
 		<equips/>
 		<ai>
 			<profile name="coward"/>
@@ -73,7 +73,7 @@
 		<drops>
 			<item value="miód pitny" quantity="[1,1]" probability="75.0"/>
 			<item value="sok z chmielu" quantity="[1,1]" probability="60.0"/>
-		</drops>
+		<item value="prezent czerwonego wędrowca 2025" quantity="[1,1]" probability="2.0"/> <item value="prezent lodowego wędrowca 2025" quantity="[1,1]" probability="0.5"/> <item value="prezent demonicznego wędrowca 2025" quantity="[1,1]" probability="0.25"/> </drops>
 		<equips/>
 		<ai>
 			<profile name="coward"/>
@@ -100,7 +100,7 @@
 		<drops>
 			<item value="miód pitny" quantity="[1,1]" probability="90.0"/>
 			<item value="sok z chmielu" quantity="[1,1]" probability="60.0"/>
-		</drops>
+		<item value="prezent czerwonego wędrowca 2025" quantity="[1,1]" probability="2.0"/> <item value="prezent lodowego wędrowca 2025" quantity="[1,1]" probability="0.5"/> <item value="prezent demonicznego wędrowca 2025" quantity="[1,1]" probability="0.25"/> </drops>
 		<equips/>
 		<ai>
 			<profile name="coward"/>
@@ -127,7 +127,7 @@
 		<drops>
 			<item value="miód pitny" quantity="[1,1]" probability="99.0"/>
 			<item value="sok z chmielu" quantity="[1,1]" probability="60.0"/>
-		</drops>
+		<item value="prezent czerwonego wędrowca 2025" quantity="[1,1]" probability="2.0"/> <item value="prezent lodowego wędrowca 2025" quantity="[1,1]" probability="0.5"/> <item value="prezent demonicznego wędrowca 2025" quantity="[1,1]" probability="0.25"/> </drops>
 		<equips/>
 		<ai>
 			<profile name="coward"/>
@@ -154,7 +154,7 @@
 		<drops>
 			<item value="żyntyca" quantity="[1,1]" probability="50.0"/>
 			<item value="sok z chmielu" quantity="[1,1]" probability="60.0"/>
-		</drops>
+		<item value="prezent czerwonego wędrowca 2025" quantity="[1,1]" probability="2.0"/> <item value="prezent lodowego wędrowca 2025" quantity="[1,1]" probability="0.5"/> <item value="prezent demonicznego wędrowca 2025" quantity="[1,1]" probability="0.25"/> </drops>
 		<equips/>
 		<ai>
 			<profile name="coward"/>
@@ -181,7 +181,7 @@
 		<drops>
 			<item value="żyntyca" quantity="[1,1]" probability="75.0"/>
 			<item value="sok z chmielu" quantity="[1,1]" probability="60.0"/>
-		</drops>
+		<item value="prezent czerwonego wędrowca 2025" quantity="[1,1]" probability="2.0"/> <item value="prezent lodowego wędrowca 2025" quantity="[1,1]" probability="0.5"/> <item value="prezent demonicznego wędrowca 2025" quantity="[1,1]" probability="0.25"/> </drops>
 		<equips/>
 		<ai>
 			<profile name="coward"/>
@@ -209,7 +209,7 @@
 			<item value="żyntyca" quantity="[1,1]" probability="99.0"/>
 			<item value="miód pitny" quantity="[1,1]" probability="99.0"/>
 			<item value="sok z chmielu" quantity="[1,1]" probability="60.0"/>
-		</drops>
+		<item value="prezent czerwonego wędrowca 2025" quantity="[1,1]" probability="2.0"/> <item value="prezent lodowego wędrowca 2025" quantity="[1,1]" probability="0.5"/> <item value="prezent demonicznego wędrowca 2025" quantity="[1,1]" probability="0.25"/> </drops>
 		<equips/>
 		<ai>
 			<profile name="coward"/>

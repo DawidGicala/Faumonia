@@ -20,7 +20,7 @@ import java.util.Set;
 
 /**
  * Singleton class that contains inventory and prices of NPC stores.
- */
+ */ 
 public final class ShopList {
 
 	static {
@@ -512,7 +512,6 @@ public final class ShopList {
 		shops.add("sellarrows", "strzała", 4);
 		shops.add("sellarrows", "strzała żelazna", 6);
 		shops.add("sellarrows", "strzała złota", 9);
-		shops.add("sellarrows", "strzała płonąca", 16);
 		
 		// assassinhq chief falatheen the dishwasher and veggie buyer)
 		// sign is hard dorszed so if you change this change the sign
@@ -743,6 +742,8 @@ public final class ShopList {
 		shops.add("startkasa", "buty kolcze", 80);
 		shops.add("startkasa", "butelka wody", 40);
 		shops.add("startkasa", "woda", 5);
+		
+		shops.add("oscypki", "oscypek", 2000);
 		
 
 		

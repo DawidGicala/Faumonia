@@ -84,6 +84,12 @@
  <tileset firstgid="205" name="grey_long" tilewidth="32" tileheight="32" tilecount="4" columns="2">
   <image source="../../tileset/furniture/table/grey_long.png" width="64" height="64"/>
  </tileset>
+ <tileset firstgid="209" name="pol_zjawy_wielkie" tilewidth="32" tileheight="32" tilecount="6" columns="6">
+  <image source="../../tileset/logic/creature/pol_zjawy_wielkie.png" width="192" height="32"/>
+ </tileset>
+ <tileset firstgid="215" name="pol_zbojnicy_gorscy" tilewidth="32" tileheight="32" tilecount="6" columns="6">
+  <image source="../../tileset/logic/creature/pol_zbojnicy_gorscy.png" width="192" height="32"/>
+ </tileset>
  <layer name="0_floor" width="21" height="19">
   <data encoding="base64" compression="gzip">
    H4sIAAAAAAAAC7WSWwqAIBBFZ4s96B09tlPuuRsYiKTO1PhxwCAO94gFEZWKVKAGAxgVmEBjnTM4AhiH+/uMnBehM+Z6zlJnaqNhOg3pt7s+rXbJRk673/2l3f+P2xtrD+1ykba/Nfp3ofXmuRslb/5Pe8qXo52zN3f7CjYFdutsQadIDy7m+ONsPAYAAA==
@@ -106,12 +112,12 @@
  </layer>
  <layer name="objects" width="21" height="19">
   <data encoding="base64" compression="gzip">
-   H4sIAAAAAAAAC2NgGAWjYBSMglEwCkgDAITB1j48BgAA
+   H4sIAAAAAAAAC2NgGAUDDW6QoecilL5OTYeMgiENbqHxByJtoNtJTtoeBUMDAADFX8vQPAYAAA==
   </data>
  </layer>
  <layer name="collision" width="21" height="19" opacity="0.4">
   <data encoding="base64" compression="gzip">
-   H4sIAAAAAAAAC/NjYGDwG8IYGVDDDGIBLcwkZD41ACVm0iI8aRlHhOyitnnI5mKjibFz1EzyzcRmx2BzJ7o8ITMHMwYABSE52jwGAAA=
+   H4sIAAAAAAAAC/NjYGDwG8IYGVDDDGIBLcwkZD41ACVm0iI8aRlHhOyitnnI5mKjibFz1EzyzcRmx2BzJ7o8ITPJwdQ2DxcGAMGTGw08BgAA
   </data>
  </layer>
  <layer name="protection" width="21" height="19" visible="0">

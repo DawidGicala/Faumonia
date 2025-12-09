@@ -13,7 +13,7 @@
 			<size value="1,1"/>
 		</attributes>
 		<level value="203"/>
-		<experience value="4060"/>
+		<experience value="6040"/>
 		<respawn value="1270"/>
 		<corpse name="humanoid"/>
 		<drops>
@@ -25,7 +25,7 @@
 			<item value="tarcza chaosu" quantity="[1,1]" probability="0.3"/>
 			<item value="miecz chaosu" quantity="[1,1]" probability="0.1"/>
 			<item value="wielki eliksir" quantity="[1,2]" probability="90.0"/>
-		</drops>
+		<item value="prezent czerwonego wędrowca 2025" quantity="[1,1]" probability="2.0"/> <item value="prezent lodowego wędrowca 2025" quantity="[1,1]" probability="0.5"/> <item value="prezent demonicznego wędrowca 2025" quantity="[1,1]" probability="0.25"/> </drops>
 		<equips>
 		</equips>
 		<abilities>
@@ -50,7 +50,7 @@
 			<size value="1,1"/>
 		</attributes>
 		<level value="205"/>
-		<experience value="4090"/>
+		<experience value="6090"/>
 		<respawn value="1550"/>
 		<corpse name="humanoid"/>
 		<drops>
@@ -62,7 +62,7 @@
 			<item value="hełm chaosu" quantity="[1,1]" probability="0.2"/>
 			<item value="tarcza chaosu" quantity="[1,1]" probability="0.5"/>
 			<item value="miecz chaosu" quantity="[1,1]" probability="0.5"/>
-		</drops>
+		<item value="prezent czerwonego wędrowca 2025" quantity="[1,1]" probability="2.0"/> <item value="prezent lodowego wędrowca 2025" quantity="[1,1]" probability="0.5"/> <item value="prezent demonicznego wędrowca 2025" quantity="[1,1]" probability="0.25"/> </drops>
 		<equips>
 		</equips>
 		<abilities>
@@ -90,7 +90,7 @@
 			<size value="1,1"/>
 		</attributes>
 		<level value="213"/>
-		<experience value="4120"/>
+		<experience value="8120"/>
 		<respawn value="2060"/>
 		<corpse name="humanoid"/>
 		<drops>
@@ -102,7 +102,7 @@
 			<item value="tarcza chaosu" quantity="[1,1]" probability="1.0"/>
 			<item value="miecz chaosu" quantity="[1,1]" probability="1.0"/>
 			<item value="wielki eliksir" quantity="[1,2]" probability="90.0"/>
-		</drops>
+		<item value="prezent czerwonego wędrowca 2025" quantity="[1,1]" probability="2.0"/> <item value="prezent lodowego wędrowca 2025" quantity="[1,1]" probability="0.5"/> <item value="prezent demonicznego wędrowca 2025" quantity="[1,1]" probability="0.25"/> </drops>
 		<equips>
 		</equips>
 		<abilities>
@@ -131,7 +131,7 @@
 			<size value="1,1"/>
 		</attributes>
 		<level value="218"/>
-		<experience value="4200"/>
+		<experience value="6800"/>
 		<respawn value="1500"/>
 		<corpse name="humanoid"/>
 		<drops>
@@ -140,7 +140,7 @@
 			<item value="sztylet chaosu" quantity="[1,1]" probability="0.1"/>
 			<item value="płaszcz chaosu" quantity="[1,1]" probability="1.5"/>
 			<item value="wielki eliksir" quantity="[1,2]" probability="90.0"/>
-		</drops>
+		<item value="prezent czerwonego wędrowca 2025" quantity="[1,1]" probability="2.0"/> <item value="prezent lodowego wędrowca 2025" quantity="[1,1]" probability="0.5"/> <item value="prezent demonicznego wędrowca 2025" quantity="[1,1]" probability="0.25"/> </drops>
 		<equips>
 		</equips>
 		<abilities>
@@ -169,7 +169,7 @@
 			<size value="1,1"/>
 		</attributes>
 		<level value="221"/>
-		<experience value="6240"/>
+		<experience value="7840"/>
 		<respawn value="2650"/>
 		<corpse name="humanoid"/>
 		<drops>
@@ -179,7 +179,7 @@
 			<item value="hełm chaosu" quantity="[1,1]" probability="0.35"/>
 			<item value="kieł smoka" quantity="[1,1]" probability="0.5"/>
 			<item value="wielki eliksir" quantity="[1,2]" probability="90.0"/>
-		</drops>
+		<item value="prezent czerwonego wędrowca 2025" quantity="[1,1]" probability="2.0"/> <item value="prezent lodowego wędrowca 2025" quantity="[1,1]" probability="0.5"/> <item value="prezent demonicznego wędrowca 2025" quantity="[1,1]" probability="0.25"/> </drops>
 		<equips>
 		</equips>
 		<abilities>
@@ -204,7 +204,7 @@
 			<size value="1,1"/>
 		</attributes>
 		<level value="225"/>
-		<experience value="6320"/>
+		<experience value="12320"/>
 		<respawn value="2650"/>
 		<corpse name="humanoid"/>
 		<drops>
@@ -216,7 +216,7 @@
 			<item value="młot chaosu" quantity="[1,1]" probability="0.05"/>
 			<item value="topór chaosu" quantity="[1,1]" probability="0.001"/>
 			<item value="wielki eliksir" quantity="[1,3]" probability="90.0"/>
-		</drops>
+		<item value="prezent czerwonego wędrowca 2025" quantity="[1,1]" probability="2.0"/> <item value="prezent lodowego wędrowca 2025" quantity="[1,1]" probability="0.5"/> <item value="prezent demonicznego wędrowca 2025" quantity="[1,1]" probability="0.25"/> </drops>
 		<equips>
 		</equips>
 		<abilities>
@@ -256,7 +256,7 @@
 			<item value="tarcza chaosu" quantity="[1,1]" probability="1.0"/>
 			<item value="topór chaosu" quantity="[1,1]" probability="0.005"/>
 			<item value="wielki eliksir" quantity="[1,5]" probability="90.0"/>
-		</drops>
+		<item value="prezent czerwonego wędrowca 2025" quantity="[1,1]" probability="2.0"/> <item value="prezent lodowego wędrowca 2025" quantity="[1,1]" probability="0.5"/> <item value="prezent demonicznego wędrowca 2025" quantity="[1,1]" probability="0.25"/> </drops>
 		<equips>
 		</equips>
 		<abilities>
@@ -297,7 +297,7 @@
 		<respawn value="5000"/>
 		<corpse name="humanoid"/>
 		<drops>
-		</drops>
+		<item value="prezent czerwonego wędrowca 2025" quantity="[1,1]" probability="2.0"/> <item value="prezent lodowego wędrowca 2025" quantity="[1,1]" probability="0.5"/> <item value="prezent demonicznego wędrowca 2025" quantity="[1,1]" probability="0.25"/> </drops>
 		<equips>
 		</equips>
 		<ai>
@@ -322,7 +322,7 @@
 		<respawn value="5000"/>
 		<corpse name="humanoid"/>
 		<drops>
-		</drops>
+		<item value="prezent czerwonego wędrowca 2025" quantity="[1,1]" probability="2.0"/> <item value="prezent lodowego wędrowca 2025" quantity="[1,1]" probability="0.5"/> <item value="prezent demonicznego wędrowca 2025" quantity="[1,1]" probability="0.25"/> </drops>
 		<equips>
 		</equips>
 		<ai>
@@ -347,7 +347,7 @@
 		<respawn value="5000"/>
 		<corpse name="humanoid"/>
 		<drops>
-		</drops>
+		<item value="prezent czerwonego wędrowca 2025" quantity="[1,1]" probability="2.0"/> <item value="prezent lodowego wędrowca 2025" quantity="[1,1]" probability="0.5"/> <item value="prezent demonicznego wędrowca 2025" quantity="[1,1]" probability="0.25"/> </drops>
 		<equips>
 		</equips>
 		<ai>
@@ -372,7 +372,7 @@
 		<respawn value="5000"/>
 		<corpse name="humanoid"/>
 		<drops>
-		</drops>
+		<item value="prezent czerwonego wędrowca 2025" quantity="[1,1]" probability="2.0"/> <item value="prezent lodowego wędrowca 2025" quantity="[1,1]" probability="0.5"/> <item value="prezent demonicznego wędrowca 2025" quantity="[1,1]" probability="0.25"/> </drops>
 		<equips>
 		</equips>
 		<ai>
@@ -397,7 +397,7 @@
 		<respawn value="5000"/>
 		<corpse name="humanoid"/>
 		<drops>
-		</drops>
+		<item value="prezent czerwonego wędrowca 2025" quantity="[1,1]" probability="2.0"/> <item value="prezent lodowego wędrowca 2025" quantity="[1,1]" probability="0.5"/> <item value="prezent demonicznego wędrowca 2025" quantity="[1,1]" probability="0.25"/> </drops>
 		<equips>
 		</equips>
 		<ai>
@@ -422,7 +422,7 @@
 		<respawn value="5000"/>
 		<corpse name="humanoid"/>
 		<drops>
-		</drops>
+		<item value="prezent czerwonego wędrowca 2025" quantity="[1,1]" probability="2.0"/> <item value="prezent lodowego wędrowca 2025" quantity="[1,1]" probability="0.5"/> <item value="prezent demonicznego wędrowca 2025" quantity="[1,1]" probability="0.25"/> </drops>
 		<equips>
 		</equips>
 		<ai>

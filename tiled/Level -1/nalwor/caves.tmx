@@ -30,6 +30,12 @@
  <tileset firstgid="206" name="protection" tilewidth="32" tileheight="32" tilecount="2" columns="2">
   <image source="../../tileset/logic/protection.png" width="64" height="32"/>
  </tileset>
+ <tileset firstgid="208" name="giant_human" tilewidth="32" tileheight="32" tilecount="13" columns="13">
+  <image source="../../tileset/logic/creature/giant_human.png" width="416" height="32"/>
+ </tileset>
+ <tileset firstgid="221" name="pol_olbrzymy" tilewidth="32" tileheight="32" tilecount="3" columns="3">
+  <image source="../../tileset/logic/creature/pol_olbrzymy.png" width="96" height="32"/>
+ </tileset>
  <layer name="0_floor" width="128" height="128">
   <data encoding="base64" compression="gzip">
    H4sIAAAAAAAAC+3SsQ0AMAgDQYSy/8wZgsIJuuJ6xLurqgEAAAAAAAAAAAAAAAAAAAAAAAAAAACAr5yB9O2bTbokpP+1TbqnLehvC/rbgv52oL8t6G8L+tuC/ragvx3obwf628H70p3s4h3pNuzbcPpXG6Wb2oL+tqC/LehvC/rbgf62oL8N6G8D+tuE/nagPwAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACRdB0LbvAAAAQA=
@@ -47,7 +53,7 @@
  </layer>
  <layer name="objects" width="128" height="128">
   <data encoding="base64" compression="gzip">
-   H4sIAAAAAAAAC+3ZwRHAIAgEQJtIOkj/LeaTAvRBPJzdCu4DIowBAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAnOzeHYBlz+4AQKlrd4CPXgP/mZnH1CRJ/CEAzmPWAABSmEt6qdpn2z1QJeUG011Fjab2/9RczPGeQD59FgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAB6ewH6BnmnAAABAA==
+   H4sIAAAAAAAAC+3ZsRGAIAwFUJbQDdx/GO9sXcXGygpOMYF7r6P7TUIIpQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAzW6MD0GyLDsArZ3QA0luiA9z0GvhPzTymJsnEGwJgPmYNWhzRAQCYmrlkLL322XYPfGV/nLP8wYyuR41m7f9Zc1HHfQL56bMAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAMLYLFB4BSQAAAQA=
   </data>
  </layer>
  <layer name="collision" width="128" height="128" visible="0" opacity="0.37">

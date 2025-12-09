@@ -26,7 +26,7 @@
 			<item value="skóra czarnego smoka" quantity="[1,1]" probability="10.0"/>
 			<item value="smoczy zwój" quantity="[1,1]" probability="0.1"/>
 			<item value="figurka czarnego smoka" quantity="[1,1]" probability="2.0"/>
-		</drops>
+		<item value="prezent czerwonego wędrowca 2025" quantity="[1,1]" probability="2.0"/> <item value="prezent lodowego wędrowca 2025" quantity="[1,1]" probability="0.5"/> <item value="prezent demonicznego wędrowca 2025" quantity="[1,1]" probability="0.25"/> </drops>
 		<equips>
 			<slot name="rhand" item="złoty buzdygan"/>
 		</equips>
@@ -66,7 +66,7 @@
 			<item value="sztabka mithrilu" quantity="[1,7]" probability="10.0"/>
 			<item value="ognisty miecz demonów" quantity="[1,1]" probability="0.35"/>
 			<item value="róg demona" quantity="[1,1]" probability="100.0"/>
-		</drops>
+		<item value="prezent czerwonego wędrowca 2025" quantity="[1,1]" probability="2.0"/> <item value="prezent lodowego wędrowca 2025" quantity="[1,1]" probability="0.5"/> <item value="prezent demonicznego wędrowca 2025" quantity="[1,1]" probability="0.25"/> </drops>
 		<equips>
 			<slot name="rhand" item="ognisty miecz demonów"/>
 		</equips>
@@ -105,7 +105,7 @@
 		<drops>
 			<item value="money" quantity="[5000,60000]" probability="100.0"/>
 			<item value="kij z czaszką" quantity="[1,1]" probability="3.0"/>
-		</drops>
+		<item value="prezent czerwonego wędrowca 2025" quantity="[1,1]" probability="2.0"/> <item value="prezent lodowego wędrowca 2025" quantity="[1,1]" probability="0.5"/> <item value="prezent demonicznego wędrowca 2025" quantity="[1,1]" probability="0.25"/> </drops>
 		<equips>
 		</equips>
 		<ai>

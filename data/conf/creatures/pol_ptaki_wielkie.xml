@@ -23,7 +23,8 @@
 			<item value="nakrapiane jajo" quantity="[1,1]" probability="20.0"/>
 			<item value="spinka" quantity="[1,1]" probability="0.01"/>
 			<item value="piórko" quantity="[1,10]" probability="100.0"/>
-		</drops>
+			<item value="niebiańskie pióro" quantity="[1,1]" probability="1.0"/>
+		<item value="prezent czerwonego wędrowca 2025" quantity="[1,1]" probability="2.0"/> <item value="prezent lodowego wędrowca 2025" quantity="[1,1]" probability="0.5"/> <item value="prezent demonicznego wędrowca 2025" quantity="[1,1]" probability="0.25"/> </drops>
 		<equips/>
 		<ai>
 			<says>

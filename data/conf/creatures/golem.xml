@@ -21,7 +21,7 @@
 			<item value="polano" quantity="[1,4]" probability="38.0"/>
 			<item value="eliksir" quantity="[1,1]" probability="90.0"/>
 			<item value="drewniana tarcza" quantity="[1,1]" probability="2.0"/>
-		</drops>
+		<item value="prezent czerwonego wędrowca 2025" quantity="[1,1]" probability="2.0"/> <item value="prezent lodowego wędrowca 2025" quantity="[1,1]" probability="0.5"/> <item value="prezent demonicznego wędrowca 2025" quantity="[1,1]" probability="0.25"/> </drops>
 		<equips>
 		</equips>
 		<abilities>
@@ -60,7 +60,7 @@
 			<item value="kamienna zbroja" quantity="[1,1]" probability="0.00015"/>
 			<item value="spodnie kamienne" quantity="[1,1]" probability="0.0002"/>
 			<item value="rękawice płytowe" quantity="[1,1]" probability="0.025"/>
-		</drops>
+		<item value="prezent czerwonego wędrowca 2025" quantity="[1,1]" probability="2.0"/> <item value="prezent lodowego wędrowca 2025" quantity="[1,1]" probability="0.5"/> <item value="prezent demonicznego wędrowca 2025" quantity="[1,1]" probability="0.25"/> </drops>
 		<equips>
 		</equips>
 		<abilities>
@@ -95,7 +95,7 @@
 			<item value="duży eliksir" quantity="[1,1]" probability="100.0"/>
 			<item value="płaszcz kamienny" quantity="[1,1]" probability="0.05"/>
 			<item value="rękawice płytowe" quantity="[1,1]" probability="0.25"/>
-		</drops>
+		<item value="prezent czerwonego wędrowca 2025" quantity="[1,1]" probability="2.0"/> <item value="prezent lodowego wędrowca 2025" quantity="[1,1]" probability="0.5"/> <item value="prezent demonicznego wędrowca 2025" quantity="[1,1]" probability="0.25"/> </drops>
 		<equips>
 		</equips>
 		<abilities>
@@ -131,7 +131,7 @@
 			<item value="lodowa zbroja" quantity="[1,1]" probability="0.01"/>
 			<item value="hełm lodowy" quantity="[1,1]" probability="0.015"/>
 			<item value="lodowe rękawice" quantity="[1,1]" probability="0.5"/>
-		</drops>
+		<item value="prezent czerwonego wędrowca 2025" quantity="[1,1]" probability="2.0"/> <item value="prezent lodowego wędrowca 2025" quantity="[1,1]" probability="0.5"/> <item value="prezent demonicznego wędrowca 2025" quantity="[1,1]" probability="0.25"/> </drops>
 		<equips>
 		</equips>
 		<abilities>

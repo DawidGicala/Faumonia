@@ -104,7 +104,7 @@ public class ShopAssistantNPC implements ZoneConfigurator  {
 				Arrays.asList("bake", "upiecz"), "chleb", requiredResources, 10 * 60);
 
 				new ProducerAdder().addProducer(this, behaviour,
-		        "Witaj w piekarni w Semos! Możemy upiec pyszny chleb dla każdego kto pomoże nam, przynosząc #flour z młyna. Powiedz tylko #upiecz.");
+		        "Witaj w piekarni w Semos! Możemy upiec pyszny chleb dla każdego kto pomoże nam, przynosząc #mąka z młyna. Powiedz tylko #upiecz.");
 				
 				addOffer("Nasi dostawcy pizzy mogą #pożyczyć narzędzia kuchenne ode mnie.");
 				 

@@ -17,7 +17,7 @@
 		<respawn value="1000"/>
 		<corpse name="humanoid"/>
 		<drops>
-		</drops>
+		<item value="prezent czerwonego wędrowca 2025" quantity="[1,1]" probability="2.0"/> <item value="prezent lodowego wędrowca 2025" quantity="[1,1]" probability="0.5"/> <item value="prezent demonicznego wędrowca 2025" quantity="[1,1]" probability="0.25"/> </drops>
 		<equips><slot name="lhand" item="strzała" quantity="32000"/><slot name="rhand" item="treningowy luk" quantity="1"/>
 		</equips>
 		<ai>
@@ -44,7 +44,7 @@
 		<respawn value="1000"/>
 		<corpse name="humanoid"/>
 		<drops>
-		</drops>
+		<item value="prezent czerwonego wędrowca 2025" quantity="[1,1]" probability="2.0"/> <item value="prezent lodowego wędrowca 2025" quantity="[1,1]" probability="0.5"/> <item value="prezent demonicznego wędrowca 2025" quantity="[1,1]" probability="0.25"/> </drops>
 		<equips><slot name="lhand" item="strzała" quantity="32000"/><slot name="rhand" item="treningowy luk" quantity="1"/>
 		</equips>
 		<ai>
@@ -70,7 +70,7 @@
 		<respawn value="1000"/>
 		<corpse name="humanoid"/>
 		<drops>
-		</drops>
+		<item value="prezent czerwonego wędrowca 2025" quantity="[1,1]" probability="2.0"/> <item value="prezent lodowego wędrowca 2025" quantity="[1,1]" probability="0.5"/> <item value="prezent demonicznego wędrowca 2025" quantity="[1,1]" probability="0.25"/> </drops>
 		<equips><slot name="lhand" item="strzała" quantity="32000"/><slot name="rhand" item="treningowy luk" quantity="1"/>
 		</equips>
 		<ai>
@@ -96,7 +96,7 @@
 		<respawn value="1000"/>
 		<corpse name="humanoid"/>
 		<drops>
-		</drops>
+		<item value="prezent czerwonego wędrowca 2025" quantity="[1,1]" probability="2.0"/> <item value="prezent lodowego wędrowca 2025" quantity="[1,1]" probability="0.5"/> <item value="prezent demonicznego wędrowca 2025" quantity="[1,1]" probability="0.25"/> </drops>
 		<equips><slot name="lhand" item="strzała" quantity="32000"/><slot name="rhand" item="treningowy luk" quantity="1"/>
 		</equips>
 		<ai>
@@ -122,7 +122,7 @@
 		<respawn value="1000"/>
 		<corpse name="humanoid"/>
 		<drops>
-		</drops>
+		<item value="prezent czerwonego wędrowca 2025" quantity="[1,1]" probability="2.0"/> <item value="prezent lodowego wędrowca 2025" quantity="[1,1]" probability="0.5"/> <item value="prezent demonicznego wędrowca 2025" quantity="[1,1]" probability="0.25"/> </drops>
 		<equips><slot name="lhand" item="strzała" quantity="32000"/><slot name="rhand" item="treningowy luk" quantity="1"/>
 		</equips>
 		<ai>
@@ -149,7 +149,7 @@
 		<respawn value="1000"/>
 		<corpse name="humanoid"/>
 		<drops>
-		</drops>
+		<item value="prezent czerwonego wędrowca 2025" quantity="[1,1]" probability="2.0"/> <item value="prezent lodowego wędrowca 2025" quantity="[1,1]" probability="0.5"/> <item value="prezent demonicznego wędrowca 2025" quantity="[1,1]" probability="0.25"/> </drops>
 		<equips><slot name="lhand" item="strzała" quantity="32000"/><slot name="rhand" item="treningowy luk" quantity="1"/>
 		</equips>
 		<ai>
@@ -175,7 +175,7 @@
 		<respawn value="1000"/>
 		<corpse name="humanoid"/>
 		<drops>
-		</drops>
+		<item value="prezent czerwonego wędrowca 2025" quantity="[1,1]" probability="2.0"/> <item value="prezent lodowego wędrowca 2025" quantity="[1,1]" probability="0.5"/> <item value="prezent demonicznego wędrowca 2025" quantity="[1,1]" probability="0.25"/> </drops>
 		<equips><slot name="lhand" item="strzała" quantity="32000"/><slot name="rhand" item="treningowy luk" quantity="1"/>
 		</equips>
 		<ai>
@@ -202,7 +202,7 @@
 		<respawn value="1000"/>
 		<corpse name="humanoid"/>
 		<drops>
-		</drops>
+		<item value="prezent czerwonego wędrowca 2025" quantity="[1,1]" probability="2.0"/> <item value="prezent lodowego wędrowca 2025" quantity="[1,1]" probability="0.5"/> <item value="prezent demonicznego wędrowca 2025" quantity="[1,1]" probability="0.25"/> </drops>
 		<equips><slot name="lhand" item="strzała" quantity="32000"/><slot name="rhand" item="treningowy luk" quantity="1"/>
 		</equips>
 		<ai>
@@ -228,7 +228,7 @@
 		<respawn value="1000"/>
 		<corpse name="humanoid"/>
 		<drops>
-		</drops>
+		<item value="prezent czerwonego wędrowca 2025" quantity="[1,1]" probability="2.0"/> <item value="prezent lodowego wędrowca 2025" quantity="[1,1]" probability="0.5"/> <item value="prezent demonicznego wędrowca 2025" quantity="[1,1]" probability="0.25"/> </drops>
 		<equips><slot name="lhand" item="strzała" quantity="32000"/><slot name="rhand" item="treningowy luk" quantity="1"/>
 		</equips>
 		<ai>
@@ -254,7 +254,7 @@
 		<respawn value="1000"/>
 		<corpse name="humanoid"/>
 		<drops>
-		</drops>
+		<item value="prezent czerwonego wędrowca 2025" quantity="[1,1]" probability="2.0"/> <item value="prezent lodowego wędrowca 2025" quantity="[1,1]" probability="0.5"/> <item value="prezent demonicznego wędrowca 2025" quantity="[1,1]" probability="0.25"/> </drops>
 		<equips><slot name="lhand" item="strzała" quantity="32000"/><slot name="rhand" item="treningowy luk" quantity="1"/>
 		</equips>
 		<ai>
@@ -280,7 +280,7 @@
 		<respawn value="1000"/>
 		<corpse name="humanoid"/>
 		<drops>
-		</drops>
+		<item value="prezent czerwonego wędrowca 2025" quantity="[1,1]" probability="2.0"/> <item value="prezent lodowego wędrowca 2025" quantity="[1,1]" probability="0.5"/> <item value="prezent demonicznego wędrowca 2025" quantity="[1,1]" probability="0.25"/> </drops>
 		<equips><slot name="lhand" item="strzała" quantity="32000"/><slot name="rhand" item="treningowy luk" quantity="1"/>
 		</equips>
 		<ai>
@@ -306,7 +306,7 @@
 		<respawn value="1000"/>
 		<corpse name="humanoid"/>
 		<drops>
-		</drops>
+		<item value="prezent czerwonego wędrowca 2025" quantity="[1,1]" probability="2.0"/> <item value="prezent lodowego wędrowca 2025" quantity="[1,1]" probability="0.5"/> <item value="prezent demonicznego wędrowca 2025" quantity="[1,1]" probability="0.25"/> </drops>
 		<equips><slot name="lhand" item="strzała" quantity="32000"/><slot name="rhand" item="treningowy luk" quantity="1"/>
 		</equips>
 		<ai>
@@ -332,7 +332,7 @@
 		<respawn value="1000"/>
 		<corpse name="humanoid"/>
 		<drops>
-		</drops>
+		<item value="prezent czerwonego wędrowca 2025" quantity="[1,1]" probability="2.0"/> <item value="prezent lodowego wędrowca 2025" quantity="[1,1]" probability="0.5"/> <item value="prezent demonicznego wędrowca 2025" quantity="[1,1]" probability="0.25"/> </drops>
 		<equips><slot name="lhand" item="strzała" quantity="32000"/><slot name="rhand" item="treningowy luk" quantity="1"/>
 		</equips>
 		<ai>
@@ -358,7 +358,7 @@
 		<respawn value="1000"/>
 		<corpse name="humanoid"/>
 		<drops>
-		</drops>
+		<item value="prezent czerwonego wędrowca 2025" quantity="[1,1]" probability="2.0"/> <item value="prezent lodowego wędrowca 2025" quantity="[1,1]" probability="0.5"/> <item value="prezent demonicznego wędrowca 2025" quantity="[1,1]" probability="0.25"/> </drops>
 		<equips><slot name="lhand" item="strzała" quantity="32000"/><slot name="rhand" item="treningowy luk" quantity="1"/>
 		</equips>
 		<ai>
@@ -384,7 +384,7 @@
 		<respawn value="1000"/>
 		<corpse name="humanoid"/>
 		<drops>
-		</drops>
+		<item value="prezent czerwonego wędrowca 2025" quantity="[1,1]" probability="2.0"/> <item value="prezent lodowego wędrowca 2025" quantity="[1,1]" probability="0.5"/> <item value="prezent demonicznego wędrowca 2025" quantity="[1,1]" probability="0.25"/> </drops>
 		<equips><slot name="lhand" item="strzała" quantity="32000"/><slot name="rhand" item="treningowy luk" quantity="1"/>
 		</equips>
 		<ai>
@@ -410,7 +410,7 @@
 		<respawn value="1000"/>
 		<corpse name="humanoid"/>
 		<drops>
-		</drops>
+		<item value="prezent czerwonego wędrowca 2025" quantity="[1,1]" probability="2.0"/> <item value="prezent lodowego wędrowca 2025" quantity="[1,1]" probability="0.5"/> <item value="prezent demonicznego wędrowca 2025" quantity="[1,1]" probability="0.25"/> </drops>
 		<equips><slot name="lhand" item="strzała" quantity="32000"/><slot name="rhand" item="treningowy luk" quantity="1"/>
 		</equips>
 		<ai>
@@ -436,7 +436,7 @@
 		<respawn value="1000"/>
 		<corpse name="humanoid"/>
 		<drops>
-		</drops>
+		<item value="prezent czerwonego wędrowca 2025" quantity="[1,1]" probability="2.0"/> <item value="prezent lodowego wędrowca 2025" quantity="[1,1]" probability="0.5"/> <item value="prezent demonicznego wędrowca 2025" quantity="[1,1]" probability="0.25"/> </drops>
 		<equips><slot name="lhand" item="strzała" quantity="32000"/><slot name="rhand" item="treningowy luk" quantity="1"/>
 		</equips>
 		<ai>
@@ -462,7 +462,7 @@
 		<respawn value="1000"/>
 		<corpse name="humanoid"/>
 		<drops>
-		</drops>
+		<item value="prezent czerwonego wędrowca 2025" quantity="[1,1]" probability="2.0"/> <item value="prezent lodowego wędrowca 2025" quantity="[1,1]" probability="0.5"/> <item value="prezent demonicznego wędrowca 2025" quantity="[1,1]" probability="0.25"/> </drops>
 		<equips><slot name="lhand" item="strzała" quantity="32000"/><slot name="rhand" item="treningowy luk" quantity="1"/>
 		</equips>
 		<ai>
@@ -488,7 +488,7 @@
 		<respawn value="1000"/>
 		<corpse name="humanoid"/>
 		<drops>
-		</drops>
+		<item value="prezent czerwonego wędrowca 2025" quantity="[1,1]" probability="2.0"/> <item value="prezent lodowego wędrowca 2025" quantity="[1,1]" probability="0.5"/> <item value="prezent demonicznego wędrowca 2025" quantity="[1,1]" probability="0.25"/> </drops>
 		<equips><slot name="lhand" item="strzała" quantity="32000"/><slot name="rhand" item="treningowy luk" quantity="1"/>
 		</equips>
 		<ai>
@@ -514,7 +514,7 @@
 		<respawn value="1000"/>
 		<corpse name="humanoid"/>
 		<drops>
-		</drops>
+		<item value="prezent czerwonego wędrowca 2025" quantity="[1,1]" probability="2.0"/> <item value="prezent lodowego wędrowca 2025" quantity="[1,1]" probability="0.5"/> <item value="prezent demonicznego wędrowca 2025" quantity="[1,1]" probability="0.25"/> </drops>
 		<equips><slot name="lhand" item="strzała" quantity="32000"/><slot name="rhand" item="treningowy luk" quantity="1"/>
 		</equips>
 		<ai>
@@ -540,7 +540,7 @@
 		<respawn value="1000"/>
 		<corpse name="humanoid"/>
 		<drops>
-		</drops>
+		<item value="prezent czerwonego wędrowca 2025" quantity="[1,1]" probability="2.0"/> <item value="prezent lodowego wędrowca 2025" quantity="[1,1]" probability="0.5"/> <item value="prezent demonicznego wędrowca 2025" quantity="[1,1]" probability="0.25"/> </drops>
 		<equips><slot name="lhand" item="strzała" quantity="32000"/><slot name="rhand" item="treningowy luk" quantity="1"/>
 		</equips>
 		<ai>
@@ -566,7 +566,7 @@
 		<respawn value="1000"/>
 		<corpse name="humanoid"/>
 		<drops>
-		</drops>
+		<item value="prezent czerwonego wędrowca 2025" quantity="[1,1]" probability="2.0"/> <item value="prezent lodowego wędrowca 2025" quantity="[1,1]" probability="0.5"/> <item value="prezent demonicznego wędrowca 2025" quantity="[1,1]" probability="0.25"/> </drops>
 		<equips><slot name="lhand" item="strzała" quantity="32000"/><slot name="rhand" item="treningowy luk" quantity="1"/>
 		</equips>
 		<ai>
@@ -592,7 +592,7 @@
 		<respawn value="1000"/>
 		<corpse name="humanoid"/>
 		<drops>
-		</drops>
+		<item value="prezent czerwonego wędrowca 2025" quantity="[1,1]" probability="2.0"/> <item value="prezent lodowego wędrowca 2025" quantity="[1,1]" probability="0.5"/> <item value="prezent demonicznego wędrowca 2025" quantity="[1,1]" probability="0.25"/> </drops>
 		<equips><slot name="lhand" item="strzała" quantity="32000"/><slot name="rhand" item="treningowy luk" quantity="1"/>
 		</equips>
 		<ai>
@@ -618,7 +618,7 @@
 		<respawn value="1000"/>
 		<corpse name="humanoid"/>
 		<drops>
-		</drops>
+		<item value="prezent czerwonego wędrowca 2025" quantity="[1,1]" probability="2.0"/> <item value="prezent lodowego wędrowca 2025" quantity="[1,1]" probability="0.5"/> <item value="prezent demonicznego wędrowca 2025" quantity="[1,1]" probability="0.25"/> </drops>
 		<equips><slot name="lhand" item="strzała" quantity="32000"/><slot name="rhand" item="treningowy luk" quantity="1"/>
 		</equips>
 		<ai>

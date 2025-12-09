@@ -28,7 +28,7 @@ import java.util.Map;
 
 public class ThorgalNPC implements ZoneConfigurator {
 
-	public static final int BUYING_PRICE = 4000;
+	public static final int BUYING_PRICE = 10000;
  	private static final String QUEST_SLOT = "chaos_tunnels";
 
 	/**

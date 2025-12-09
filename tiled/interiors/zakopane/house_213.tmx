@@ -162,12 +162,12 @@
    H4sIAAAAAAAAC2NgGAWjYPiCaEba2xFFBzti6WDHKBgY4DfEzR8Fo2AUDBwAAJG1ZFDECQAA
   </data>
  </layer>
- <layer name="collision" width="25" height="25">
+ <layer name="collision" width="25" height="25" visible="0">
   <data encoding="base64" compression="gzip">
    H4sIAAAAAAAAC+2TQRLAIAgDeZn/f1bvjOImxV4sM16UkARhRMS4+JDYYfK9w6fqqvIrjY5/oqPS1enbwRDf1McO7+YTLyd34Is9+zm0f1dxb/lWdWjOSO85Tw2qecZP8VVvOnpVzRAJ8udER1V/xTPrheuDalRnVcE6O9m546fOA56XNH7ECQAA
   </data>
  </layer>
- <layer name="protection" width="25" height="25">
+ <layer name="protection" width="25" height="25" visible="0">
   <data encoding="base64" compression="gzip">
    H4sIAAAAAAAAC+3DAQkAAAwDoL3o+sdYjoOCvaSqqr46ZxqTI8QJAAA=
   </data>

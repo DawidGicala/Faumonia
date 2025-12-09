@@ -370,12 +370,31 @@
 		</equipable>
 	</item>
 	
+	<item name="kierpce zbójnickie">
+		<type class="boots" subclass="goralskie_kierpce" tileid="-1"/>
+		<description>Oto kierpce zbójnickie. Ręcznie szyte, odporne na zużycie, pozwalają zbójnikom przemierzać najtrudniejsze tereny bez obawy o komfort.</description>
+		<implementation class-name="games.stendhal.server.entity.item.Item"/>
+		<attributes>
+			<def value="28"/>
+			<minlevel value="220"/>
+		</attributes>
+		<weight value="17.0"/>
+		<value value="9317"/>
+		<equipable>
+			<slot name="ground"/>
+			<slot name="content"/>
+			<slot name="bag"/>
+			<slot name="trade"/>
+			<slot name="feet"/>
+		</equipable>
+	</item>
+	
 	<item name="buty superczłowieka">
 		<type class="boots" subclass="buty_superczlowieka" tileid="-1"/>
 		<description>Oto buty superczłowieka. Wyglądają kosmicznie.</description>
 		<implementation class-name="games.stendhal.server.entity.item.Item"/>
 		<attributes>
-			<def value="28"/>
+			<def value="29"/>
 			<minlevel value="200"/>
 		</attributes>
 		<weight value="17.0"/>
@@ -394,7 +413,7 @@
 		<description>Widzisz buty mainiocyjskie. Ciężko uwierzyć, że wyglądają tak samo dobrze jak chronią.</description>
 		<implementation class-name="games.stendhal.server.entity.item.Item"/>
 		<attributes>
-			<def value="29"/>
+			<def value="30"/>
 			<minlevel value="230"/>
 		</attributes>
 		<weight value="17.0"/>
@@ -413,7 +432,7 @@
 		<description>Widzisz buty xenocyjskie.</description>
 		<implementation class-name="games.stendhal.server.entity.item.Item"/>
 		<attributes>
-			<def value="30"/>
+			<def value="31"/>
 			<minlevel value="240"/>
 		</attributes>
 		<weight value="17.0"/>
@@ -532,6 +551,66 @@
 		<attributes>
 			<def value="1"/>
 			<minlevel value="40"/>
+			<autobind value=""/>
+		</attributes>
+		<weight value="17.0"/>
+		<value value="23625"/>
+		<equipable>
+			<slot name="ground"/>
+			<slot name="content"/>
+			<slot name="bag"/>
+			<slot name="trade"/>
+			<slot name="feet"/>
+		</equipable>
+	</item>
+
+	<item name="buty czerwonego w 2025">
+		<type class="boots" subclass="swiateczne_buty_2025" tileid="-1"/>
+		<description>Oto Buty Czerwonego Wędrowca. Stworzono je z miękkiej skóry i obszyto futerkiem, które nigdy nie nasiąka śniegiem, nawet jeśli właściciel wpadnie w zaspę po pas. Ich podeszwy pozostawiają na śniegu drobne, gwiazdkowe ślady, co podobno miało pomagać Zawadiace wracać do domu… choć zwykle gubił się tak czy inaczej. To idealne obuwie dla wojowników, którzy lubią iść daleko, ale nie lubią marznąć #zima #2025</description>
+		<implementation class-name="games.stendhal.server.entity.item.Item"/>
+		<attributes>
+			<def value="9"/>
+			<minlevel value="20"/>
+			<autobind value=""/>
+		</attributes>
+		<weight value="17.0"/>
+		<value value="23625"/>
+		<equipable>
+			<slot name="ground"/>
+			<slot name="content"/>
+			<slot name="bag"/>
+			<slot name="trade"/>
+			<slot name="feet"/>
+		</equipable>
+	</item>
+	
+	<item name="buty lodowego w 2025">
+		<type class="boots" subclass="zimowe_buty_2025" tileid="-1"/>
+		<description>Oto Buty Lodowego Wędrowcy. Ich podeszwy z lodowego kryształu zamrażają ślady wrogów i skrywają własne, by nikt nie mógł iść tropem wojownika. Dzięki nim każdy krok jest pewny nawet na najostrzejszym lodzie, jakby ziemia sama klękała przed tym, kto nimi stąpa #zima #2025</description>
+		<implementation class-name="games.stendhal.server.entity.item.Item"/>
+		<attributes>
+			<def value="26"/>
+			<minlevel value="150"/>
+			<autobind value=""/>
+		</attributes>
+		<weight value="17.0"/>
+		<value value="23625"/>
+		<equipable>
+			<slot name="ground"/>
+			<slot name="content"/>
+			<slot name="bag"/>
+			<slot name="trade"/>
+			<slot name="feet"/>
+		</equipable>
+	</item>
+	
+	<item name="buty demonicznego w 2025">
+		<type class="boots" subclass="demoniczne_buty_2025" tileid="-1"/>
+		<description>Oto Spodnie Demonicznego Wędrowca, zszyte z twardych jak skała łusek kuzynów piekielnych wilków; poruszają się jakby miały własny cel, prowadząc wojownika tam, gdzie czekają krzyki i krew #zima #2025</description>
+		<implementation class-name="games.stendhal.server.entity.item.Item"/>
+		<attributes>
+			<def value="43"/>
+			<minlevel value="300"/>
 			<autobind value=""/>
 		</attributes>
 		<weight value="17.0"/>

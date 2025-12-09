@@ -27,6 +27,9 @@
  <tileset firstgid="90" name="protection" tilewidth="32" tileheight="32" tilecount="2" columns="2">
   <image source="../../tileset/logic/protection.png" width="64" height="32"/>
  </tileset>
+ <tileset firstgid="92" name="pol_zbojnicy_gorscy" tilewidth="32" tileheight="32" tilecount="6" columns="6">
+  <image source="../../tileset/logic/creature/pol_zbojnicy_gorscy.png" width="192" height="32"/>
+ </tileset>
  <layer name="0_floor" width="10" height="20">
   <data encoding="base64" compression="gzip">
    H4sIAAAAAAAAC+NnYGDgH6JYdASpEyVBHTXtpNRdogTUyBLpN1ki1MDUEeN/BSLVAQCFVth8IAMAAA==
@@ -54,15 +57,15 @@
  </layer>
  <layer name="objects" width="10" height="20">
   <data encoding="base64" compression="gzip">
-   H4sIAAAAAAAAC2NgGAWjYPADrwGyFwAdDKo1IAMAAA==
+   H4sIAAAAAAAAC2NgGBwgcaAdQGUQSyd7YuhkDy5AK38OtL9gAACZZrIkIAMAAA==
   </data>
  </layer>
- <layer name="collision" width="10" height="20">
+ <layer name="collision" width="10" height="20" opacity="0.5">
   <data encoding="base64" compression="gzip">
    H4sIAAAAAAAAC+NlYGDgJRHDADFqsAFi1NBbHS5/EWMeul5i1BFrHj411FZHqdtIUYeslhh1xJrFi4WPS4wYDACH6tdzIAMAAA==
   </data>
  </layer>
- <layer name="protection" width="10" height="20">
+ <layer name="protection" width="10" height="20" visible="0">
   <data encoding="base64" compression="gzip">
    H4sIAAAAAAAAC4tiYGCIGsWjeBRjxQBClsdUIAMAAA==
   </data>

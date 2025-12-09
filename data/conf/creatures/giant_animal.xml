@@ -34,7 +34,7 @@
 			<item value="skórzane rekawice" quantity="[1,1]" probability="0.05"/>
 			<item value="skórzane wzmocnione rekawice" quantity="[1,1]" probability="0.5"/>
 			<item value="szczurzy zwój" quantity="[1,1]" probability="0.25"/>
-		</drops>
+		<item value="prezent czerwonego wędrowca 2025" quantity="[1,1]" probability="2.0"/> <item value="prezent lodowego wędrowca 2025" quantity="[1,1]" probability="0.5"/> <item value="prezent demonicznego wędrowca 2025" quantity="[1,1]" probability="0.25"/> </drops>
 		<equips>
 		</equips>
 		<ai>
@@ -64,7 +64,7 @@
 			<item value="money" quantity="[3,12]" probability="100.0"/>
 			<item value="mięso" quantity="[3,7]" probability="80.0"/>
 			<item value="szynka" quantity="[2,5]" probability="50.0"/>
-		</drops>
+		<item value="prezent czerwonego wędrowca 2025" quantity="[1,1]" probability="2.0"/> <item value="prezent lodowego wędrowca 2025" quantity="[1,1]" probability="0.5"/> <item value="prezent demonicznego wędrowca 2025" quantity="[1,1]" probability="0.25"/> </drops>
 		<equips>
 		</equips>
 		<ai>
@@ -101,7 +101,8 @@
 			<item value="topór Durina" quantity="[1,1]" probability="0.2"/>
 			<item value="topór oburęczny magiczny" quantity="[1,1]" probability="0.1"/>
 			<item value="rękawice płytowe" quantity="[1,1]" probability="1.0"/>
-		</drops>
+			<item value="tytanowa skała" quantity="[1,1]" probability="0.25"/>
+		<item value="prezent czerwonego wędrowca 2025" quantity="[1,1]" probability="2.0"/> <item value="prezent lodowego wędrowca 2025" quantity="[1,1]" probability="0.5"/> <item value="prezent demonicznego wędrowca 2025" quantity="[1,1]" probability="0.25"/> </drops>
 		<equips>
 		</equips>
 		<ai>
@@ -132,7 +133,8 @@
 			<item value="topór Durina" quantity="[1,1]" probability="1.0"/>
 			<item value="zwój do krypty" quantity="[12,12]" probability="5.0"/>
 			<item value="money" quantity="[3000,8000]" probability="100.0"/>
-		</drops>
+			<item value="tytanowa skała" quantity="[1,1]" probability="1.0"/>
+		<item value="prezent czerwonego wędrowca 2025" quantity="[1,1]" probability="2.0"/> <item value="prezent lodowego wędrowca 2025" quantity="[1,1]" probability="0.5"/> <item value="prezent demonicznego wędrowca 2025" quantity="[1,1]" probability="0.25"/> </drops>
 		<equips>
 			<slot name="lhand" item="topór Durina" quantity="1"/>
 		</equips>

@@ -21,6 +21,8 @@ import marauroa.server.db.DBTransaction;
 import marauroa.server.db.TransactionPool;
 import marauroa.server.game.db.CharacterDAO;
 import marauroa.server.game.db.DAORegister;
+import games.stendhal.common.NotificationType;
+
 
 import org.apache.log4j.Logger;
 
@@ -91,9 +93,11 @@ public class CharacterCreator {
 
 			final Player object = Player.createZeroLevelPlayer(character, template);
 				// monitor new account names
-			final String text = "Administrator: Została utworzona nowa postać zwana " + character + ".";
-	
-			SingletonRepository.getRuleProcessor().sendMessageToSupporters(text);
+			final String text = "Została utworzona nowa postać zwana " + character + ".";
+				SingletonRepository.getRuleProcessor()
+				.tellAllPlayers(NotificationType.PRIVMSG, text);
+
+
 
 			/*
 			 * Finally we add it to database.

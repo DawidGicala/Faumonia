@@ -93,6 +93,9 @@
  <tileset firstgid="212" name="protection" tilewidth="32" tileheight="32" tilecount="2" columns="2">
   <image source="../../tileset/logic/protection.png" width="64" height="32"/>
  </tileset>
+ <tileset firstgid="214" name="pol_zbojnicy_gorscy" tilewidth="32" tileheight="32" tilecount="6" columns="6">
+  <image source="../../../../Pliki - Faumonia 5.0 — EVENT LUTOWY/tiled/tileset/logic/creature/pol_zbojnicy_gorscy.png" width="192" height="32"/>
+ </tileset>
  <layer name="0_floor" width="15" height="15">
   <data encoding="base64" compression="gzip">
    H4sIAAAAAAAAC1NlYGBQHQRYCY2mljm4zEMXJ1Yfpfop9acihfrQ9RPiE9JPqT5i9ZPrHlw0peFJTQwAuMhRl4QDAAA=
@@ -100,7 +103,7 @@
  </layer>
  <layer name="1_terrain" width="15" height="15">
   <data encoding="base64" compression="gzip">
-   H4sIAAAAAAAAC53POQrCQBSA4Wm8gYV6Ae3EThsF7dy9goigfRpPEMV9w6V2weWO/gPPZjJhjA8+MiT8Q95GKbX9ww57XHCN4IaDtHeMVHAq8DFGGgP08DDa70xQwtS4xxPDkLaMGeZYoGj5l7BWzxIrrC2dqzVH75kRet9+hNazcLVdJJAUKXmnHG0dDct9VdQcbRsdOWeRk3MTLUubD904OGZb+LGPG+0Trwje0h5xstATk6ft+xkfQ5tmkoQDAAA=
+   H4sIAAAAAAAAC53PSQ4BQRSA4dq4gQUuwE7s2JCwM7uCiIS9OyDmKYa1IYY7+it5q/JKay/50pXu/JV+a2PM5g9b7HDGJYQr9tLejD4lDDFCEj10cPe0YxQwce4ZiL6nLWKKGebIK//ia+0ssMTKs8e31h27Z0rYfbsh2oEiqG0jhrhIyDsT0FZRU+4roxLQNtGScxoZOdfRUNqsd+PPcdvcj33UaR94hvCS9oCjwk5Entr3E944Es1ihAMAAA==
   </data>
  </layer>
  <layer name="2_object" width="15" height="15">
@@ -120,15 +123,15 @@
  </layer>
  <layer name="objects" width="15" height="15">
   <data encoding="base64" compression="gzip">
-   H4sIAAAAAAAAC2NgGAVDBVykQO95CvReoEDvZQr0jhQAACjNe9CEAwAA
+   H4sIAAAAAAAAC2NgGAUDCa4PtAMoANcG2gHDBAAA1bChF4QDAAA=
   </data>
  </layer>
- <layer name="collision" width="15" height="15">
+ <layer name="collision" width="15" height="15" visible="0">
   <data encoding="base64" compression="gzip">
    H4sIAAAAAAAACzNiYGAwGkCMDZCqlxzzqKGXECBFL73CCl0fMeag6yPFD9jUoNuPLkatsCZGPynhR6s8AAC6irg8hAMAAA==
   </data>
  </layer>
- <layer name="protection" width="15" height="15">
+ <layer name="protection" width="15" height="15" visible="0">
   <data encoding="base64" compression="gzip">
    H4sIAAAAAAAAC7vCwMBwZRSP4lE8YBgAlRaTe4QDAAA=
   </data>

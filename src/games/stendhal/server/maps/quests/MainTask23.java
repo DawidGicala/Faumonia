@@ -1,4 +1,4 @@
-/* $Id: MainTask23.java,v 1.18 2020/12/07 16:24:17 davvids Exp $ */
+/* $Id: MainTask23.java 2025/06/22 13:32:13 davvids $ */
 /***************************************************************************
  *                   (C) Copyright 2003-2010 - Stendhal                    *
  ***************************************************************************
@@ -12,191 +12,222 @@
  ***************************************************************************/
 package games.stendhal.server.maps.quests;
 
-import games.stendhal.common.MathHelper;
-import games.stendhal.server.entity.npc.ChatAction;
+import games.stendhal.common.grammar.Grammar;
 import games.stendhal.server.entity.npc.ConversationPhrases;
 import games.stendhal.server.entity.npc.ConversationStates;
 import games.stendhal.server.entity.npc.SpeakerNPC;
+import games.stendhal.server.entity.npc.action.DropRecordedItemAction;
+import games.stendhal.server.entity.npc.action.IncreaseKarmaAction;
+import games.stendhal.server.entity.npc.action.IncreaseAtkXPAction;
+import games.stendhal.server.entity.npc.action.IncreaseDefXPAction;
 import games.stendhal.server.entity.npc.action.EquipItemAction;
 import games.stendhal.server.entity.npc.action.IncreaseXPAction;
 import games.stendhal.server.entity.npc.action.MultipleActions;
+import games.stendhal.server.entity.npc.action.SayRequiredItemAction;
 import games.stendhal.server.entity.npc.action.SetQuestAction;
-import games.stendhal.server.entity.npc.action.SetQuestToTimeStampAction;
-import games.stendhal.server.entity.npc.action.StartRecordingKillsAction;
+import games.stendhal.server.entity.npc.action.StartRecordingRandomItemCollectionAction;
 import games.stendhal.server.entity.npc.condition.AndCondition;
-import games.stendhal.server.entity.npc.condition.KilledForQuestCondition;
+import games.stendhal.server.entity.npc.condition.GreetingMatchesNameCondition;
 import games.stendhal.server.entity.npc.condition.NotCondition;
-import games.stendhal.server.entity.npc.condition.QuestInStateCondition;
-import games.stendhal.server.entity.npc.condition.QuestNotStartedCondition;
-import games.stendhal.server.entity.npc.condition.QuestStateStartsWithCondition;
-import games.stendhal.server.entity.npc.condition.TimePassedCondition;
+import games.stendhal.server.entity.npc.condition.OrCondition;
+import games.stendhal.server.entity.npc.condition.PlayerHasRecordedItemWithHimCondition;
+import games.stendhal.server.entity.npc.action.DropItemAction;
+import games.stendhal.server.entity.npc.condition.QuestActiveCondition;
 import games.stendhal.server.entity.npc.condition.QuestCompletedCondition;
 import games.stendhal.server.entity.npc.condition.QuestNotCompletedCondition;
-import games.stendhal.server.entity.npc.condition.LevelGreaterThanCondition;
-import games.stendhal.server.entity.npc.action.DropItemAction;
-import games.stendhal.server.entity.npc.condition.AndCondition;
-import games.stendhal.server.entity.npc.action.IncreaseAtkXPAction;
-import games.stendhal.server.entity.npc.action.IncreaseDefXPAction;
+import games.stendhal.server.entity.npc.condition.QuestNotStartedCondition;
 import games.stendhal.server.entity.player.Player;
+import games.stendhal.server.entity.npc.condition.PlayerHasItemWithHimCondition;
+import games.stendhal.server.entity.npc.condition.AndCondition;
+import games.stendhal.server.entity.npc.condition.QuestInStateCondition;
+import games.stendhal.server.entity.npc.condition.NotCondition;
+import games.stendhal.server.entity.npc.condition.LevelGreaterThanCondition;
+import games.stendhal.server.entity.npc.condition.LevelLessThanCondition;
 import games.stendhal.server.maps.Region;
 
 import java.util.ArrayList;
-import java.util.LinkedList;
+import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.TreeMap;
-
-import marauroa.common.Pair;
 
 public class MainTask23 extends AbstractQuest {
 
+	//this quest slot
 	private static final String QUEST_SLOT = "main_task_23";
 	
-	private static final String RESOURCE = "resource_for_czek";
-	private static final String DWARFS = "kill_high_dwarfs";
- 
+	private static final String FIRST_QUEST_SLOT = "main_task_3";
+	private static final String SAUSID = "kill_sausid";
+	private static final String WALT_SPIDER = "kill_ados_spiders";
+	
+	private static final String MAIN1 = "main_task_1";
+	private static final String MAIN2 = "main_task_2";
+	
 	@Override
 	public String getSlotName() {
 		return QUEST_SLOT;
 	}
+
+	@Override
+	public List<String> getHistory(final Player player) {
+		final List<String> res = new ArrayList<String>();
+		if (!player.hasQuest(QUEST_SLOT)) {
+			return res;
+		}
+		res.add("Podjąłem się głownego zadania na wojownika Faumonii");
+		final String questState = player.getQuest(QUEST_SLOT);
+		if (questState.equals("rejected")) {
+			res.add("Nie chce podjąć się głównego zadania na wojownika Faumonii");
+			return res;
+		}
+		res.add("Zanim Mistrz Faumonii XXIII przyzna mi kolejne główne zadanie musze wykonać kilka zadań.	Powinienem wybrać się do stolicy Ados odszukać rodzinę Walta i pomóc z pająkami..	Powinienem wybrac się również na południe, do miasta Fado i wykonać tajmnicze zadanie dla Sausida.");
+		if (!isCompleted(player)) {
+			res.add("Żeby ukończyć główne zadanie musze przynieść " + Grammar.a_noun(player.getRequiredItemName(QUEST_SLOT,0)) + ".");
+		}
+		if (isCompleted(player)) {
+			res.add("Ukończyłem dwudzieste-trzecie zadanie od Mistrza Faumonii i otrzymałem odznakę wojownika Faumonii dwudziestego-trzeciego poziomu.	Następne główne zadanie otrzymam po przekroczeniu 280 poziomu doświadczenia.");
+		}
+		return res;
+	}
 	
-	private void step_1() {
+	private void checkCollectingQuests() {
 		final SpeakerNPC npc = npcs.get("Mistrz Faumonii XXIII");
-
-		npc.add(ConversationStates.ATTENDING,
-				ConversationPhrases.QUEST_MESSAGES, 
-				new AndCondition(
-				new QuestNotStartedCondition(QUEST_SLOT),
-				new LevelGreaterThanCondition(299)),
-				ConversationStates.QUEST_OFFERED,
-				"Witaj, mam dla ciebie główne zadanie dwudziestego-trzeciego poziomu."
-				+ " Jesteś zainteresowany?",
-				null);
-
-		final Map<String, Pair<Integer, Integer>> toKill = new TreeMap<String, Pair<Integer, Integer>>();
-		toKill.put("Lord Durin", new Pair<Integer, Integer>(0,10));
-
-		final List<ChatAction> actions = new LinkedList<ChatAction>();
-		actions.add(new SetQuestAction(QUEST_SLOT, "start"));
-		actions.add(new StartRecordingKillsAction(QUEST_SLOT, 1, toKill));
 		
-		npc.add(ConversationStates.QUEST_OFFERED,
-				ConversationPhrases.YES_MESSAGES,
-				null,
-				ConversationStates.ATTENDING,
-				"Czas na prawdziwe wyzwania. Wybierz się do kopalni w Semos, odnajdź Franka i wykonaj dla niego zadanie. Następnie odnajdź przepracowanego krasnoluda Czeka. Powinieneś szukać go w tunelach pod górą Semos. Na sam koniec idź i zabij 10 lordów Durinów. Jesli wykonasz poprzednie zadania rzetelnie, to będziesz wiedział gdzie go szukać.",
-				new MultipleActions(actions));
+		npc.add(
+		ConversationStates.IDLE,
+		ConversationPhrases.GREETING_MESSAGES,
+			new AndCondition(new QuestCompletedCondition(MAIN1),
+			new QuestCompletedCondition(MAIN2),
+			new LevelGreaterThanCondition(259),
+			new GreetingMatchesNameCondition(npc.getName()),
+			new QuestNotStartedCondition(QUEST_SLOT)),
+		ConversationStates.ATTENDING,
+		"Witaj, mam dla ciebie główne #zadanie dwudziestego-trzeciego poziomu.",
+		null);
+		
+		npc.add(ConversationStates.ATTENDING,
+			Arrays.asList("główne zadanie", "zadanie", "główne", "task"),
+			new AndCondition(new QuestCompletedCondition(MAIN1),
+			new QuestCompletedCondition(MAIN2),
+			new LevelGreaterThanCondition(259),
+			new QuestNotCompletedCondition(SAUSID),
+					new QuestNotStartedCondition(QUEST_SLOT)),
+			ConversationStates.ATTENDING,
+			"Zanim przyznam ci kolejne główne zadanie, powinieneś pomóc Sausidowi. W tym celu wybierz się karczmy w Fado i wykonaj tajne zadanie.",
+			null);
+			
+		npc.add(ConversationStates.ATTENDING,
+			Arrays.asList("główne zadanie", "zadanie", "główne", "task"),
+			new AndCondition(new QuestCompletedCondition(MAIN1),
+			new QuestCompletedCondition(MAIN2),
+			new LevelGreaterThanCondition(259),
+			new QuestNotCompletedCondition(FIRST_QUEST_SLOT),
+					new QuestNotStartedCondition(QUEST_SLOT)),
+			ConversationStates.ATTENDING,
+			"Zanim przyznam ci kolejne główne zadanie, czas abyś trochę powalczył. W tym celu wybierz się do stolicy Ados, odszukaj Verdana w ratuszu i pokonaj dla niego armie Superczłowieków.",
+			null);	
+			
+		npc.add(ConversationStates.ATTENDING,
+			Arrays.asList("główne zadanie", "zadanie", "główne", "task"),
+			new AndCondition(new QuestCompletedCondition(MAIN1),
+			new QuestCompletedCondition(MAIN2),
+			new LevelGreaterThanCondition(259),
+			new QuestNotCompletedCondition(WALT_SPIDER),
+					new QuestNotStartedCondition(QUEST_SLOT)),
+			ConversationStates.ATTENDING,
+			"Zanim przyznam ci kolejne główne zadanie, musisz pomóc rodzinie Walta z pajęczakami. W tym celu wybierz się stolicy Ados i pomóż Waltowi. Jego posiadłości powinieneś szukać na południu.",
+			null);	
+			
+	}
 
-		npc.add(ConversationStates.QUEST_OFFERED, 
+	private void requestItem() {
+		
+		final SpeakerNPC npc = npcs.get("Mistrz Faumonii XXIII");
+		final Map<String,Integer> items = new HashMap<String, Integer>();
+		
+		items.put("gruczoł przędzy",42);
+		items.put("gruczoł przędzy",34);
+		items.put("gruczoł przędzy",39);
+		items.put("gruczoł przędzy",63);
+		items.put("gruczoł przędzy",49);
+		items.put("gruczoł przędzy",56);
+		
+		npc.add(ConversationStates.ATTENDING,
+				Arrays.asList("główne zadanie", "zadanie", "główne", "task"),
+				new AndCondition(
+						new QuestNotStartedCondition(QUEST_SLOT),
+						new QuestCompletedCondition(MAIN1),
+						new QuestCompletedCondition(MAIN2),
+						new LevelGreaterThanCondition(259),
+						new QuestCompletedCondition(SAUSID),
+						new QuestCompletedCondition(FIRST_QUEST_SLOT),
+						new QuestCompletedCondition(WALT_SPIDER)),
+					ConversationStates.ATTENDING,
+					null,
+					new StartRecordingRandomItemCollectionAction(QUEST_SLOT, items, "Wykonałeś już zadania o które cie prosiłem, pomogłeś rodzinie Walta i wykonałeś tajmnicze zadanie dla Sausida."
+						+ ". Potrzebuje jeszcze czegoś... Powinieneś nazbierać tego sporo podczas walki z pajęczakami. Przynieś mi: [item]."));
+	}
+						
+	private void collectItem() {
+			final SpeakerNPC npc = npcs.get("Mistrz Faumonii XXIII");
+			
+					npc.add(ConversationStates.IDLE,
+				ConversationPhrases.GREETING_MESSAGES,
+				new AndCondition(new GreetingMatchesNameCondition(npc.getName()),
+						new QuestActiveCondition(QUEST_SLOT)),
+				ConversationStates.QUEST_ITEM_QUESTION, 
+				"Przyniosłeś mi przedmioty o które cię prosiłem?",
+				null);
+				
+			npc.add(ConversationStates.QUEST_ITEM_QUESTION,
+				ConversationPhrases.YES_MESSAGES, 
+				new AndCondition(new QuestActiveCondition(QUEST_SLOT),
+								new NotCondition(new PlayerHasRecordedItemWithHimCondition(QUEST_SLOT))),
+				ConversationStates.ATTENDING, 
+				null,
+				new SayRequiredItemAction(QUEST_SLOT, "Nie masz przy sobie [item]."));
+
+					npc.add(ConversationStates.QUEST_ITEM_QUESTION,
+				ConversationPhrases.YES_MESSAGES, 
+				new AndCondition(new QuestActiveCondition(QUEST_SLOT),
+								new PlayerHasRecordedItemWithHimCondition(QUEST_SLOT)),
+				ConversationStates.ATTENDING, 
+				"Pomogłeś rodzinie Walta, wykonałeś tajne zadanie Sausida oraz dostarczyłeś gruczoły przędzy. Zasługujesz na odznakę wojownika Faumonii dwudziestego-trzeciego poziomu. Następne główne zadanie otrzymasz po przekroczeniu 280 poziomu doświadczenia. ",
+				new MultipleActions(new DropRecordedItemAction(QUEST_SLOT), 
+									new SetQuestAction(QUEST_SLOT, "done"),
+									new DropItemAction("odznaka wojownika XXII",1),
+									new EquipItemAction("klucz do tawerny23", 1, true),
+									new EquipItemAction("odznaka wojownika XXIII", 1, true)));
+																
+				npc.add(ConversationStates.QUEST_ITEM_QUESTION,
 				ConversationPhrases.NO_MESSAGES, 
 				null,
-				ConversationStates.ATTENDING,
-				"Nie ma problemu. "
-				+ "Wróć gdy zdecydujesz się zostać wojownikiem Faumonii. ",
-				new SetQuestAction(QUEST_SLOT, "rejected"));
-	}
-
-	private void step_2() {
-		/* Player has to kill the creatures*/
-	}
-
-	private void step_3() {
-
-		final SpeakerNPC npc = npcs.get("Mistrz Faumonii XXIII");
-
-
-		final List<ChatAction> actions = new LinkedList<ChatAction>();
-		actions.add(new DropItemAction("odznaka wojownika XXII",1));
-	    actions.add(new EquipItemAction("odznaka wojownika XXIII", 1));
-		actions.add(new SetQuestAction(QUEST_SLOT, "done;1"));	
-		actions.add(new SetQuestToTimeStampAction(QUEST_SLOT, 1));
-		
-		LinkedList<String> triggers = new LinkedList<String>();
-		triggers.addAll(ConversationPhrases.FINISH_MESSAGES);
-		triggers.addAll(ConversationPhrases.QUEST_MESSAGES);		
-		npc.add(ConversationStates.ATTENDING, 
-				triggers,
-				new AndCondition(
-						new QuestInStateCondition(QUEST_SLOT, 0, "start"),
-						new QuestCompletedCondition(RESOURCE),
-						new QuestCompletedCondition(DWARFS),
-						new KilledForQuestCondition(QUEST_SLOT, 1)),
 				ConversationStates.ATTENDING, 
-				"Widze, że wykonałeś swoje dwudzieste-trzecie zadanie. Pomogłeś górnikowi Frankowi z górskimi krasnoludami, Czekowi z surowcami oraz zabiłeś 10 lordów Durinów. "
-				+ "Zasługujesz na odznakę wojownika Faumonii dwudziestego-trzeciego poziomu. Po nastepne główne zadanie powinieneś przyjść do Mistrza Faumonii XXIV po przekroczeniu 320 poziomu doświadczenia.",
-				new MultipleActions(actions));
-
-				npc.add(ConversationStates.ATTENDING, 
-				triggers,
-				new AndCondition(new QuestInStateCondition(QUEST_SLOT, 0, "start"),
-						new NotCondition(new QuestCompletedCondition(RESOURCE))),
-				ConversationStates.ATTENDING, 
-				"Zapomniałes jakie zadanie dostałeś? "
-				+ "Powinieneś wybrać się kopalni Semos, odnaleźć górnika Czeka i przynieść mu surowce.",
-				null);
-				
-				npc.add(ConversationStates.ATTENDING, 
-				triggers,
-				new AndCondition(new QuestInStateCondition(QUEST_SLOT, 0, "start"),
-						new NotCondition(new QuestCompletedCondition(DWARFS))),
-				ConversationStates.ATTENDING, 
-				"Zapomniałes jakie zadanie dostałeś? "
-				+ "Powinieneś wybrać się do kopalni Semos, odnaleźć górnika Franka i pomóc mu z krasnoludami.",
-				null);
-				
-				npc.add(ConversationStates.ATTENDING, 
-				triggers,
-				new AndCondition(new QuestInStateCondition(QUEST_SLOT, 0, "start"),
-						new NotCondition(new KilledForQuestCondition(QUEST_SLOT, 1))),
-				ConversationStates.ATTENDING, 
-				"Zapomniałes jakie zadanie dostałeś? "
-				+ "Miałeś wybrać się do opuszczonej krypty i zabić 10 lordów Durinów.",
-				null);
-		
-	}
+				null,
+				new SayRequiredItemAction(QUEST_SLOT, "Wróć kiedy będziesz mieć [item] ze sobą."));
+	}			
 
 	@Override
 	public void addToWorld() {
-		super.addToWorld();
 		fillQuestInfo(
 				"Wojownik Faumonii 23",
 				"Mistrz Faumonii XXIII ma dla ciebie dwudzieste-trzecie główne zadanie które pomoże ci zostać wielkim wojownikiem Faumonii.",
-				false);
-		step_1();
-		step_2();
-		step_3();
-	}
+				true);
+		
+		checkCollectingQuests();
+		requestItem();
+		collectItem();
+
+	}	
 	
-	@Override
-	public List<String> getHistory(final Player player) {
-			final List<String> res = new ArrayList<String>();
-			if (!player.hasQuest(QUEST_SLOT)) {
-				return res;
-			}
-			if (!isCompleted(player)) {
-				res.add("Muszę wybrać się do kopalni Semos, odnaleźć górnika Franka i pomóc mu z krasnoludami.	Następnie powinienem wybrać się do tuneli w kopalni Semos, odnaleźć górnika Czeka i pomóc mu z surowcami.	Na sam koniec muszę zabić 10 lordów Durinów.");
-			} else if(isRepeatable(player)){
-				res.add("Błąd gry. Zgłoś go administracji.");
-			} else {
-				res.add("Ukończyłem dwudzieste-trzecie zadanie od Mistrza Faumonii i otrzymałem odznakę wojownika Faumonii dwudziestego-trzeciego poziomu.	Następne główne zadanie otrzymam po przekroczeniu 320 poziomu doświadczenia.");
-			}
-			return res;
-	}
-
-
-	@Override
+		@Override
 	public String getName() {
 		return "MainTask23";
 	}
 	
 	@Override
 	public int getMinLevel() {
-		return 320; 
-	}
-	
-	@Override
-	public boolean isCompleted(final Player player) {
-		return new QuestStateStartsWithCondition(QUEST_SLOT,"done").fire(player, null, null);
+		return 260;
 	}
 
 	@Override
@@ -206,7 +237,8 @@ public class MainTask23 extends AbstractQuest {
 	
 	@Override
 	public String getRegion() {
-		return Region.SEMOS_SURROUNDS;
+		return Region.ADOS_CITY;
 	}
-	
 }
+		
+	        	

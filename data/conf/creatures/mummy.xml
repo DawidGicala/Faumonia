@@ -21,7 +21,7 @@
 			<item value="zatruty sztylet egipski" quantity="[1,1]" probability="0.005"/>
 			<item value="chopesz" quantity="[1,1]" probability="0.1"/>
 			<item value="napój z oliwką" quantity="[1,4]" probability="67.5"/>
-		</drops>
+		<item value="prezent czerwonego wędrowca 2025" quantity="[1,1]" probability="2.0"/> <item value="prezent lodowego wędrowca 2025" quantity="[1,1]" probability="0.5"/> <item value="prezent demonicznego wędrowca 2025" quantity="[1,1]" probability="0.25"/> </drops>
 		<equips>
 		</equips>
 		<ai>
@@ -51,7 +51,7 @@
 			<item value="chopesz" quantity="[1,1]" probability="0.1"/>
 			<item value="zatruty sztylet egipski" quantity="[1,1]" probability="0.005"/>
 			<item value="napój z oliwką" quantity="[1,6]" probability="75.5"/>
-		</drops>
+		<item value="prezent czerwonego wędrowca 2025" quantity="[1,1]" probability="2.0"/> <item value="prezent lodowego wędrowca 2025" quantity="[1,1]" probability="0.5"/> <item value="prezent demonicznego wędrowca 2025" quantity="[1,1]" probability="0.25"/> </drops>
 		<equips>
 		</equips>
 		<ai>

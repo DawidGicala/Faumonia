@@ -57,22 +57,22 @@
    H4sIAAAAAAAAC2NgGAWjYBSMglEwCkgHADV9EcVABgAA
   </data>
  </layer>
- <layer name="collision" width="20" height="20">
+ <layer name="collision" width="20" height="20" visible="0">
   <data encoding="base64" compression="gzip">
    H4sIAAAAAAAAC2NkYGBgHAaYYZCZx4BkBjZArnm4ALXcSkrY4LIfnxiyXmL9RiwYNW9wmkeP9DzYzRuuGAAXZQvpQAYAAA==
   </data>
  </layer>
- <layer name="protection" width="20" height="20">
+ <layer name="protection" width="20" height="20" visible="0">
   <data encoding="base64" compression="gzip">
    H4sIAAAAAAAAC2NiYGBgGsWjeBSP4lE8iknEAC9MrVpABgAA
   </data>
  </layer>
- <layer name="blend_ground" width="20" height="20" opacity="0.3">
+ <layer name="blend_ground" width="20" height="20" visible="0" opacity="0.3">
   <data encoding="base64" compression="gzip">
    H4sIAAAAAAAAC+2TyQrDMAwF/dlp06zdkmb95M5FF6HgqC6FQAfmJgvewwrhN2R4wjPmeEncV2CJFdbYJO5r8Yo3vOPD8dbK9cQOe3zhYLzTnQhWrhEnnHHB1dinOxE+zaU7EWK5ttCdCLFcW+hOjoT3HmLz3nuIzXvvwTvv+Td78PybP9/jDUUSAaxABgAA
   </data>
  </layer>
- <layer name="blend_roof" width="20" height="20" opacity="0.3">
+ <layer name="blend_roof" width="20" height="20" visible="0" opacity="0.3">
   <data encoding="base64" compression="gzip">
    H4sIAAAAAAAAC+WSSQqAUAxDe2znWXHA4chm80EKUgJFFB+8XRsojcjzpDBzzKtg7ZjHEsNE+LsitRsoYCn8XbnaDbSwgz0ciLxG7QZGOMEZLkTeHSvc4A4Ph7wvoH9v9caa17+3emPN699bvWHnPXpz5S+9eRsnaC0h60AGAAA=
   </data>

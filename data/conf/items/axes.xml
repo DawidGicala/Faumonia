@@ -283,12 +283,99 @@
 	
 	<item name="ciupaga">
 		<type class="axe" subclass="ciupaga" tileid="-1"/>
-		<description>Oto prawdziwa góralska ciupaga!</description>
+		<description>Oto ciupaga. Narzędzie, które od wieków towarzyszy mieszkańcom gór. Prosta, ale pełna charakteru – niezastąpiona w podróży i starciach.</description>
 		<implementation class-name="games.stendhal.server.entity.item.Item"/>
 		<attributes>
 			<atk value="13"/>
 			<rate value="3"/>
 			<minlevel value="40"/>
+		</attributes>
+		<weight value="0.5"/>
+		<value value="5716"/>
+		<equipable>
+			<slot name="ground"/>
+			<slot name="content"/>
+			<slot name="lhand"/>
+			<slot name="rhand"/>
+			<slot name="bag"/>
+			<slot name="trade"/>
+		</equipable>
+	</item>
+	
+	<item name="złota ciupaga">
+		<type class="axe" subclass="zlota_ciupaga" tileid="-1"/>
+		<description>Oto złota ciupaga. Lśniąca niczym pierwsze promienie słońca nad górskimi szczytami, w rękach wojownika staje się narzędziem, które łączy tradycję z siłą. To broń, którą doceni każdy poszukiwacz przygód.</description>
+		<implementation class-name="games.stendhal.server.entity.item.Item"/>
+		<attributes>
+			<atk value="24"/>
+			<rate value="2"/>
+			<minlevel value="200"/>
+		</attributes>
+		<weight value="0.5"/>
+		<value value="5716"/>
+		<equipable>
+			<slot name="ground"/>
+			<slot name="content"/>
+			<slot name="lhand"/>
+			<slot name="rhand"/>
+			<slot name="bag"/>
+			<slot name="trade"/>
+		</equipable>
+	</item>
+	
+	<item name="złota ciupaga z wąsem">
+		<type class="axe" subclass="zlota_ciupaga1" tileid="-1"/>
+		<description>Oto złota ciupaga z wąsem. Elegancki dodatek w postaci wąsa czyni tę broń prawdziwie wyjątkową. Tylko wybrani będą mogli poszczycić się jej posiadaniem.</description>
+		<implementation class-name="games.stendhal.server.entity.item.Item"/>
+		<attributes>
+			<atk value="25"/>
+			<rate value="2"/>
+			<lifesteal value="0.05"/>
+			<minlevel value="250"/>
+		</attributes>
+		<weight value="0.5"/>
+		<value value="5716"/>
+		<equipable>
+			<slot name="ground"/>
+			<slot name="content"/>
+			<slot name="lhand"/>
+			<slot name="rhand"/>
+			<slot name="bag"/>
+			<slot name="trade"/>
+		</equipable>
+	</item>
+	
+	<item name="złota ciupaga z dwoma wąsami">
+		<type class="axe" subclass="zlota_ciupaga2" tileid="-1"/>
+		<description>Oto złota ciupaga z dwoma wąsami. Podwójne wąsy to podwójny prestiż. Ta broń to znak, że jej właściciel pokonał nie lada wyzwania, by ją zdobyć.</description>
+		<implementation class-name="games.stendhal.server.entity.item.Item"/>
+		<attributes>
+			<atk value="29"/>
+			<rate value="2"/>
+			<lifesteal value="0.1"/>
+			<minlevel value="300"/>
+		</attributes>
+		<weight value="0.5"/>
+		<value value="5716"/>
+		<equipable>
+			<slot name="ground"/>
+			<slot name="content"/>
+			<slot name="lhand"/>
+			<slot name="rhand"/>
+			<slot name="bag"/>
+			<slot name="trade"/>
+		</equipable>
+	</item>
+	
+	<item name="złota ciupaga z trzema wąsami">
+		<type class="axe" subclass="zlota_ciupaga3" tileid="-1"/>
+		<description>Oto złota ciupaga z trzema wąsami. Arcydzieło rzemieślnicze, które wywołuje respekt. Trzy wąsy są symbolem perfekcji i osiągnięcia szczytu górskiego kunsztu.</description>
+		<implementation class-name="games.stendhal.server.entity.item.Item"/>
+		<attributes>
+			<atk value="36"/>
+			<rate value="2"/>
+			<lifesteal value="0.15"/>
+			<minlevel value="400"/>
 		</attributes>
 		<weight value="0.5"/>
 		<value value="5716"/>
@@ -407,5 +494,75 @@
 			<slot name="rhand"/>
 		</equipable>
 	</item>
+	
+		<item name="topór czerwonego w 2025">
+		<type class="axe" subclass="swiateczny_topor_2025" tileid="-1"/>
+		<description>Oto Topór Czerwonego Wędrowca. Jego ostrze wykuto tak ostre, że podobno potrafi przeciąć nawet zamarzniętą belkę z pracowni Mikołaja, czego Zawadiaka oczywiście spróbował, ku rozpaczy elfów. Czerwono-biała rękojeść nie tylko wygląda świątecznie, ale też rozgrzewa dłoń w najgorszej zamieci. To broń dla wojowników, którzy lubią, gdy każdy cios niesie w sobie odrobinę świątecznej energii #zima #2025</description>
+		<implementation class-name="games.stendhal.server.entity.item.Item"/>
+		<attributes>
+			<atk value="17"/>
+			<rate value="4"/>
+			<lifesteal value="0.025"/>
+			<minlevel value="20"/>
+			<autobind value=""/>
+		</attributes>
+		<weight value="3.0"/>
+		<value value="878800"/>
+		<equipable>
+			<slot name="ground"/>
+			<slot name="content"/>
+			<slot name="bag"/>
+			<slot name="trade"/>
+			<slot name="lhand"/>
+			<slot name="rhand"/>
+		</equipable>
+	</item>
+	
+	<item name="topór lodowego w 2025">
+		<type class="axe" subclass="zimowy_topor_2025" tileid="-1"/>
+		<description>Oto Dwustronny Topór Lodowego Wędrowcy. Jego ostrza powstały z kryształowych łusek pradawnych smoków, a każdy jego zamach pozostawia w powietrzu smużkę lodu, która nie topnieje przez całą zimę. To broń furii północy, gotowa rozłupać nawet mury Cytadeli Ciemności #zima #2025</description>
+		<implementation class-name="games.stendhal.server.entity.item.Item"/>
+		<attributes>
+			<atk value="61"/>
+			<rate value="7"/>
+			<lifesteal value="0.05"/>
+			<minlevel value="150"/>
+			<autobind value=""/>
+		</attributes>
+		<weight value="3.0"/>
+		<value value="878800"/>
+		<equipable>
+			<slot name="ground"/>
+			<slot name="content"/>
+			<slot name="bag"/>
+			<slot name="trade"/>
+			<slot name="lhand"/>
+			<slot name="rhand"/>
+		</equipable>
+	</item>
+	
+	<item name="topór demonicznego w 2025">
+		<type class="axe" subclass="demoniczny_topor_2025" tileid="-1"/>
+		<description>Oto Topór Demonicznego Wędrowca, którego ostrza powstały z rozdartych szczęk lodowych bestii; każdy zamach to głód, który wraca po więcej, a czerwień w jego oku rozbłyska mocniej z każdym oddechem wroga #zima #2025</description>
+		<implementation class-name="games.stendhal.server.entity.item.Item"/>
+		<attributes>
+			<atk value="72"/>
+			<rate value="5"/>
+			<lifesteal value="0.1"/>
+			<minlevel value="300"/>
+			<autobind value=""/>
+		</attributes>
+		<weight value="3.0"/>
+		<value value="878800"/>
+		<equipable>
+			<slot name="ground"/>
+			<slot name="content"/>
+			<slot name="bag"/>
+			<slot name="trade"/>
+			<slot name="lhand"/>
+			<slot name="rhand"/>
+		</equipable>
+	</item>
+	
 
 </items>

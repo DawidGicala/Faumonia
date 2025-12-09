@@ -246,7 +246,16 @@ public class StendhalQuestSystem {
 		loadQuest(new MainTask20());
 		loadQuest(new MainTask21());
 		loadQuest(new MainTask22());
+		loadQuest(new LookingAtHorse());
+		loadQuest(new BanditItemQuest());
+		loadQuest(new Ciupagaz1Wasem());
+		loadQuest(new KillAdosSpiders());
+		loadQuest(new KillSausid());
+		loadQuest(new MainTask23());
 
+		loadQuest(new Zima2025_1());
+		loadQuest(new Zima2025_2());
+		loadQuest(new Zima2025_3());
 
 
 		

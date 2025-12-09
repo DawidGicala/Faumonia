@@ -63,9 +63,12 @@
  <tileset firstgid="318" name="protection" tilewidth="32" tileheight="32" tilecount="2" columns="2">
   <image source="../../tileset/logic/protection.png" width="64" height="32"/>
  </tileset>
+ <tileset firstgid="320" name="huge_animal" tilewidth="32" tileheight="32" tilecount="14" columns="14">
+  <image source="../../../../Pliki - Faumonia 5.0 — EVENT LUTOWY/tiled/tileset/logic/creature/huge_animal.png" width="451" height="32"/>
+ </tileset>
  <layer name="0_floor" width="25" height="25">
   <data encoding="base64" compression="gzip">
-   H4sIAAAAAAAAC9XSTQqAIBCGYRcdomu0cNl/Xa6TdMxmkSAyyednhQ68EAg+TGVMXdM9PLs5iTTDTzMOsD8M5zBGqsMaKQ5j2DvUydkD3Yc1rMGdnD38dxZzcgxkH+bffWNqN1rl/i/2QIxGCbknVslGLw3SqNwZnrHGJM3SohjhGWus0ibtihGesUbp37z2uQCSe5PjxAkAAA==
+   H4sIAAAAAAAAC9XS2wmAMAyF4T44hGs4gHddzkkc07wUpBxrehqlDfwgBPIh6lxd0z08+zmJkHEPGYeyPwzvMEaqwxopTo6hdXINjWNhvDlWRsyxNJDD/LsWU7vRgvtfvIfGaECaO7FKNnppkEZwM9yxxiTN0gKMcMcaq7RJOzDCHWuU/s1rnwvngjTrxAkAAA==
   </data>
  </layer>
  <layer name="1_terrain" width="25" height="25">
@@ -75,12 +78,12 @@
  </layer>
  <layer name="2_object" width="25" height="25">
   <data encoding="base64" compression="gzip">
-   H4sIAAAAAAAAC2NggIBrQLyNCHyXARVEAHEYA3HgHhDvIwI/RdMXDcS5WMzzwyL2DIglGRkYjjPgxp+A+C2RdlATDDY79IDhpA/EBkBsyEgbO4yA5hoDsQkQm9LIDnIBOXaQGmbk2EFqmA3WsKKXHYVAXATExVSyIwaIY9EwAxYxXDiOCDtAZWY4GmZAYkfgUIOMCwjYAQNlQFwOxBVo4qCwiCTSDHJACR3sqKSDHXV0sAMZlNLQbJg/quhgRz0d7KAlIGQHKeUOLgAqK2Io0A8CABBbhfPECQAA
+   H4sIAAAAAAAAC2NggIBrQLyNCHyXARVEAHEYA3HgHhDvIwI/RdMXDcS5WMzzwyL2DIglGRkYjjPgxp+A+C2RdlATDDY79IDhpA/EBkBsyEgbO8gFg9UOUsNssPpj1A7cIAaIY9EwAxYxXDiOCDtAZWY4GmZAYkfgUIOMCwjYQQiAwiKSQjNG7aAOKIHaAQKlNLKjEoldRSM76hgQYVVPIzsYGAZHnBcCcREQF1NgB6isiKFAPwgAAPCvFUvECQAA
   </data>
  </layer>
  <layer name="3_roof" width="25" height="25">
   <data encoding="base64" compression="gzip">
-   H4sIAAAAAAAAC2NgGAWjYBSMgsEFlIFYFYjVgFh9gN0yEoDiQDtgFIx4MJoGyQMAmkB7MsQJAAA=
+   H4sIAAAAAAAAC2NgGAWjYBSMgsEFlIFYFYjVgFh9gN0yEoDiQDtgFNAFRANx5EA7AgcYTYPkAQB1c8+zxAkAAA==
   </data>
  </layer>
  <layer name="4_roof_add" width="25" height="25">
@@ -90,15 +93,15 @@
  </layer>
  <layer name="objects" width="25" height="25">
   <data encoding="base64" compression="gzip">
-   H4sIAAAAAAAAC+3BAQ0AAADCoPdPbQ43oAAAeDP5i1XpxAkAAA==
+   H4sIAAAAAAAAC2NgGAWjADdwZBxoFww+4DUaJqNgFIyCUTAKBgEAAM8zWUzECQAA
   </data>
  </layer>
- <layer name="collision" width="25" height="25">
+ <layer name="collision" width="25" height="25" opacity="0.4">
   <data encoding="base64" compression="gzip">
-   H4sIAAAAAAAAC92Oyw0AMAhCHcX9p+zdWMVfUmvCCeTBRMQfyjqZ6ez2mLeeCUbUrzKkt4nBoLeJofkdjKg/wdDyXqbKyOgVRpXtMZANWs469DfbjzLQHZsYmZMMrQfZEWWw43f0ZzXRGdUBGsfEB8QJAAA=
+   H4sIAAAAAAAAC+WPwQ0AIAgDGaX7T+mfoICAESXp67QHICI8mNXwN5ndmnPWU+Hw8qiDs04OGFknh8QzHF5e4eiSE3fc4LDu4BnL30j/b47ocIfkie4hOaDwjP7dVHR6MwAe2R50xAkAAA==
   </data>
  </layer>
- <layer name="protection" width="25" height="25">
+ <layer name="protection" width="25" height="25" visible="0" opacity="0.4">
   <data encoding="base64" compression="gzip">
    H4sIAAAAAAAAC+3DAQkAAAwDoL3Y+sdajoOCvaSqqr46vSl2VMQJAAA=
   </data>

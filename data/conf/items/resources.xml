@@ -261,6 +261,57 @@
 			<slot name="trade"/>
 		</equipable>
 	</item>
+	
+	<item name="zielony kamyczek szlachetny zima 2025">
+		<type class="jewellery" subclass="gcrystal1" tileid="-1"/>
+		<description>Oto zielony kamyczek szlachetny. W mieście Fado, wymienisz go na godzinny bilet na arenę treningową. Ten kamień pozwala przenieść się do magicznej krainy pełnej celnych łuczników. Tylko najodważniejsi potrafią tam przetrwać, zimny wiatr hartuje ciało, a każde uniknięcie strzały wzmacnia ducha i umiejętności obrony #zima #2025</description>
+		<implementation class-name="games.stendhal.server.entity.item.StackableItem"/>
+		<attributes>
+			<quantity value="1"/>
+			<max_quantity value="999"/>
+		</attributes>
+		<weight value="2.0"/>
+		<value value="1"/>
+		<equipable>
+			<slot name="ground"/>
+			<slot name="content"/>
+			<slot name="bag"/>
+		</equipable>
+	</item>
+	
+	<item name="zielony kamień szlachetny zima 2025">
+		<type class="jewellery" subclass="gcrystal2" tileid="-1"/>
+		<description>Oto xielony kamień szlachetny. W mieście Fado, wymienisz go na 2 godzinny bilet na arene treningową. Jeżeli go dobrze wykorzystasz, to trafisz do magicznej arey, gdzie łucznicy przetestują Twój refleks i odporność. Idealny na trening obrony #zima #2025</description>
+		<implementation class-name="games.stendhal.server.entity.item.StackableItem"/>
+		<attributes>
+			<quantity value="1"/>
+			<max_quantity value="999"/>
+		</attributes>
+		<weight value="2.0"/>
+		<value value="1"/>
+		<equipable>
+			<slot name="ground"/>
+			<slot name="content"/>
+			<slot name="bag"/>
+		</equipable>
+	</item>
+	
+	<item name="zielone kamienie szlachetne zima 2025">
+		<type class="jewellery" subclass="gcrystal3" tileid="-1"/>
+		<description>Oto zielone kamienie szlachetne. W mieście Fado, wymienisz go na 4 godzinny bilet na arene treningową. Starożytny kamień, którego moc otwiera portal na arenę łuczników ukrytą w mieście Fado. Wśród świszczących strzał możesz tam wzmocnić swoje skille i hart ducha, zanim nadejdzie odwilż #zima #2025</description>
+		<implementation class-name="games.stendhal.server.entity.item.StackableItem"/>
+		<attributes>
+			<quantity value="1"/>
+			<max_quantity value="999"/>
+		</attributes>
+		<weight value="2.0"/>
+		<value value="1"/>
+		<equipable>
+			<slot name="ground"/>
+			<slot name="content"/>
+			<slot name="bag"/>
+		</equipable>
+	</item>
 
 	<item name="węgiel">
 		<type class="resource" subclass="coal" tileid="-1"/>
@@ -1835,6 +1886,46 @@
 			<max_quantity value="2147483647"/>
 		</attributes>
 		<weight value="1.0"/>
+		<value value="1"/>
+		<equipable>
+			<slot name="ground"/>
+			<slot name="content"/>
+			<slot name="lhand"/>
+			<slot name="rhand"/>
+			<slot name="bag"/>
+			<slot name="trade"/>
+		</equipable>
+	</item>
+	
+	<item name="niebiańskie pióro">
+		<type class="resource" subclass="niebianskie_pioro" tileid="-1"/>
+		<description>Oto niebiańskie pióro. Pochodzi z istoty, której skrzydła nigdy nie dotknęły ziemi. Lśni delikatnym błękitem, emanując spokojem i czystą energią niebios.</description>
+		<implementation class-name="games.stendhal.server.entity.item.StackableItem"/>
+		<attributes>
+			<quantity value="1"/>
+			<max_quantity value="2147483647"/>
+		</attributes>
+		<weight value="2.0"/>
+		<value value="1"/>
+		<equipable>
+			<slot name="ground"/>
+			<slot name="content"/>
+			<slot name="lhand"/>
+			<slot name="rhand"/>
+			<slot name="bag"/>
+			<slot name="trade"/>
+		</equipable>
+	</item>
+	
+	<item name="tytanowa skała">
+		<type class="resource" subclass="tytanowa_skala" tileid="-1"/>
+		<description>Oto tytanowa skała. Wykuta w sercu gór, jest tak twarda, że nawet krasnoludzkie młoty ledwo pozostawiają na niej ślad.</description>
+		<implementation class-name="games.stendhal.server.entity.item.StackableItem"/>
+		<attributes>
+			<quantity value="1"/>
+			<max_quantity value="2147483647"/>
+		</attributes>
+		<weight value="2.0"/>
 		<value value="1"/>
 		<equipable>
 			<slot name="ground"/>

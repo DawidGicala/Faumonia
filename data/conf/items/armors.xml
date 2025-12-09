@@ -594,12 +594,31 @@
 		</equipable>
 	</item>
 	
+	<item name="gorset zbójnicki">
+		<type class="armor" subclass="goralski_gorset" tileid="-1"/>
+		<description>Oto gorset zbójnicki. Wytrzymały na uderzenia, ale lekki, stworzony z myślą o zbójnikach, którzy muszą być szybcy i zręczni w walce.</description>
+		<implementation class-name="games.stendhal.server.entity.item.Item"/>
+		<attributes>
+			<def value="44"/>
+		<minlevel value="220"/>
+		</attributes>
+		<weight value="45.0"/>
+		<value value="56000"/>
+		<equipable>
+			<slot name="ground"/>
+			<slot name="content"/>
+			<slot name="bag"/>
+			<slot name="trade"/>
+			<slot name="armor"/>
+		</equipable>
+	</item>
+	
 	<item name="zbroja balorughtów">
 		<type class="armor" subclass="balourg_armor" tileid="-1"/>
 		<description>Oto zbroja balourghtów. Jest bardzo wytrzymała i twarda.</description>
 		<implementation class-name="games.stendhal.server.entity.item.Item"/>
 		<attributes>
-			<def value="44"/>
+			<def value="45"/>
 			<minlevel value="220"/>
 		</attributes>
 		<weight value="45.0"/>
@@ -618,7 +637,7 @@
 		<description>Oto straszna zbroja mainiocyjska. Brak jej subtelności, ale nie ma to znaczenia, jeśli poznasz jej wytrzymałość w walce.</description>
 		<implementation class-name="games.stendhal.server.entity.item.Item"/>
 		<attributes>
-			<def value="44"/>
+			<def value="45"/>
 		<minlevel value="230"/>
 		</attributes>
 		<weight value="45.0"/>
@@ -637,7 +656,7 @@
 		<description>Oto zbroja xenocyjska. Jej wygląd przypomina skórę zabitych hybryd xenocium.</description>
 		<implementation class-name="games.stendhal.server.entity.item.Item"/>
 		<attributes>
-			<def value="45"/>
+			<def value="46"/>
 		<minlevel value="240"/>
 		</attributes>
 		<weight value="45.0"/>
@@ -651,7 +670,7 @@
 		</equipable>
 	</item>
 	
-		<item name="magiczna zbroja płytowa">
+	<item name="magiczna zbroja płytowa">
 		<type class="armor" subclass="magic_plate_armor" tileid="-1"/>
 		<description>Oto magiczna zbroja płytowa. Ktoś rzucił na nią czar i ma niezwykłe właściwości.</description>
 		<implementation class-name="games.stendhal.server.entity.item.Item"/>
@@ -793,6 +812,66 @@
 		<attributes>
 			<def value="1"/>
 			<minlevel value="40"/>
+			<autobind value=""/>
+		</attributes>
+		<weight value="15.0"/>
+		<value value="23625"/>
+		<equipable>
+			<slot name="ground"/>
+			<slot name="content"/>
+			<slot name="bag"/>
+			<slot name="trade"/>
+			<slot name="armor"/>
+		</equipable>
+	</item>
+	
+	<item name="zbroja czerwonego w 2025">
+		<type class="armor" subclass="swiateczna_zbroja_2025" tileid="-1"/>
+		<description>Oto Zbroja Czerwonego Wędrowca. Stworzono ją z grubego materiału wzmocnionego zaklęciami, dzięki którym nawet największa zamieć nie była w stanie zatrzymać jej właściciela. Futrzane obszycia nie tylko ogrzewają, ale też podobno mruczą, gdy w pobliżu pojawia się świąteczna magia. To pancerz idealny dla wojowników, którzy lubią wyglądać groźnie, a czuć się przytulnie #zima #2025</description>
+		<implementation class-name="games.stendhal.server.entity.item.Item"/>
+		<attributes>
+			<def value="20"/>
+			<minlevel value="20"/>
+			<autobind value=""/>
+		</attributes>
+		<weight value="15.0"/>
+		<value value="23625"/>
+		<equipable>
+			<slot name="ground"/>
+			<slot name="content"/>
+			<slot name="bag"/>
+			<slot name="trade"/>
+			<slot name="armor"/>
+		</equipable>
+	</item>
+	
+	<item name="zbroja lodowego w 2025">
+		<type class="armor" subclass="zimowa_zbroja_2025" tileid="-1"/>
+		<description>Oto Zbroja Lodowego Wędrowcy. Jej płyty powstały z kryształów zamrożonych przez sam oddech prastarego smoka, a złote runy oplatają powierzchnię niczym stalowe żyły pulsujące mocą. W chwili zagrożenia zbroja przywołuje wir śniegu, który otacza wojownika i odpiera ciosy niewidzialną tarczą zimy #zima #2025</description>
+		<implementation class-name="games.stendhal.server.entity.item.Item"/>
+		<attributes>
+			<def value="42"/>
+			<minlevel value="150"/>
+			<autobind value=""/>
+		</attributes>
+		<weight value="15.0"/>
+		<value value="23625"/>
+		<equipable>
+			<slot name="ground"/>
+			<slot name="content"/>
+			<slot name="bag"/>
+			<slot name="trade"/>
+			<slot name="armor"/>
+		</equipable>
+	</item>
+	
+	<item name="zbroja demonicznego w 2025">
+		<type class="armor" subclass="demoniczna_zbroja_2025" tileid="-1"/>
+		<description>Oto Zbroja Demonicznego Wędrowca, stworzona z pancerzy martwych potworów, które wciąż pragną walki; każdy jej fragment oddycha lodem i krwią, a wojownik ubrany w nią czuje, jak mrok szarpie za jego serce, domagając się kolejnej ofiary #zima #2025</description>
+		<implementation class-name="games.stendhal.server.entity.item.Item"/>
+		<attributes>
+			<def value="63"/>
+			<minlevel value="300"/>
 			<autobind value=""/>
 		</attributes>
 		<weight value="15.0"/>

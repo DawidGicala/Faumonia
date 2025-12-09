@@ -168,6 +168,15 @@
  <tileset firstgid="399" name="protection" tilewidth="32" tileheight="32" tilecount="2" columns="2">
   <image source="../../tileset/logic/protection.png" width="64" height="32"/>
  </tileset>
+ <tileset firstgid="401" name="pol_mutanty_wielkie" tilewidth="32" tileheight="32" tilecount="4" columns="4">
+  <image source="../../tileset/logic/creature/pol_mutanty_wielkie.png" width="128" height="32"/>
+ </tileset>
+ <tileset firstgid="405" name="pol_zbojnicy_gorscy" tilewidth="32" tileheight="32" tilecount="6" columns="6">
+  <image source="../../tileset/logic/creature/pol_zbojnicy_gorscy.png" width="192" height="32"/>
+ </tileset>
+ <tileset firstgid="411" name="pol_olbrzymy" tilewidth="32" tileheight="32" tilecount="3" columns="3">
+  <image source="../../tileset/logic/creature/pol_olbrzymy.png" width="96" height="32"/>
+ </tileset>
  <layer name="0_floor" width="40" height="25">
   <data encoding="base64" compression="gzip">
    H4sIAAAAAAAAC+3SMQqAMAxG4VyiQq+XO3lfHcwSGowISYc3fBTq4OOnKiIKAACA0Lydz5lR3WdtUaO/79wvOnfa763xSOraz/4/ivp8Q3a/qr5VQ2Y/E33v3q/y/X1B37++C/PyYsGgDwAA
@@ -195,15 +204,15 @@
  </layer>
  <layer name="objects" width="40" height="25">
   <data encoding="base64" compression="gzip">
-   H4sIAAAAAAAAC+3OMQ4AEBAAQb6P+DK9QidOzDTbbkqcMJYC/Kjk2wd7LfhfDf7Xg/8BwGsm55ySG6APAAA=
+   H4sIAAAAAAAAC2NgGAW0AP/R6FFAGZjGONAuoAxMJdH9pKofBbjBlGEWljOHmH+6Brl7e6jgPlqWT904zB4sZUTfIHHHKKAOoEddO1jS7nAB02kcnvRsf80eoLQxmiZHwWADAGvf6c6gDwAA
   </data>
  </layer>
- <layer name="collision" width="40" height="25">
+ <layer name="collision" width="40" height="25" opacity="0.4">
   <data encoding="base64" compression="gzip">
    H4sIAAAAAAAAC+2UQQ4AIQgD+ZP//5t3Q6DUSjxAQrJRux0RXWa2Jq/zDG/uHFN5ecFosn9U+SpzL0NRv0x/s59Ii4wjftk53GjR82XWm/ON8jF7Unqo+bwe6OZj36Su+x7xRf2E9KuK5Zf6veRTMFb4kLdGsX74dHwsYyefFxUdW4vMJ/JV8KExfH/wVfs+8mDv2ev8jacjNxAWPHWgDwAA
   </data>
  </layer>
- <layer name="protection" width="40" height="25">
+ <layer name="protection" width="40" height="25" visible="0">
   <data encoding="base64" compression="gzip">
    H4sIAAAAAAAAC+3DMQ0AAAwDoM7/UcuVsQcSeklVVVXV1wP+jE9ooA8AAA==
   </data>

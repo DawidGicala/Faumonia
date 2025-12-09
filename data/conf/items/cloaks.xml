@@ -448,12 +448,31 @@
 		</equipable>
 	</item>
 	
+	<item name="cucha zbójnicka">
+		<type class="armor" subclass="goralska_cucha" tileid="-1"/>
+		<description>Oto cucha zbójnicka. Tkana z owczej wełny, zapewnia ochronę przed zimnem i deszczem, jednocześnie świadcząc o statusie zbójnika w bandzie.</description>
+		<implementation class-name="games.stendhal.server.entity.item.Item"/>
+		<attributes>
+			<def value="36"/>
+			<minlevel value="220"/>
+		</attributes>
+		<weight value="5.0"/>
+		<value value="56000"/>
+		<equipable>
+			<slot name="ground"/>
+			<slot name="content"/>
+			<slot name="bag"/>
+			<slot name="trade"/>
+			<slot name="cloak"/>
+		</equipable>
+	</item>
+	
 	<item name="płaszcz balorughtów">
 		<type class="cloak" subclass="balourg_cloak" tileid="-1"/>
 		<description>Widzisz płaszcz balorughtów. Dziwnie wygląda ale jest wykonany z dobrej tkaniny.</description>
 		<implementation class-name="games.stendhal.server.entity.item.Item"/>
 		<attributes>
-			<def value="38"/>
+			<def value="39"/>
 			<minlevel value="220"/>
 		</attributes>
 		<weight value="8.0"/>
@@ -472,7 +491,7 @@
 		<description>Widzisz płaszcz mainiocyjski. Jest uszyty z bardzo dobrego materiału.</description>
 		<implementation class-name="games.stendhal.server.entity.item.Item"/>
 		<attributes>
-			<def value="37"/>
+			<def value="38"/>
 			<minlevel value="230"/>
 		</attributes>
 		<weight value="6.0"/>
@@ -491,7 +510,7 @@
 		<description>Widzisz płaszcz xenocyjski. Jest gruby i ciepły oraz dobrze broni.</description>
 		<implementation class-name="games.stendhal.server.entity.item.Item"/>
 		<attributes>
-			<def value="38"/>
+			<def value="39"/>
 			<minlevel value="240"/>
 		</attributes>
 		<weight value="6.0"/>
@@ -512,6 +531,44 @@
 		<attributes>
 			<def value="47"/>
 			<minlevel value="300"/>
+		</attributes>
+		<weight value="8.0"/>
+		<value value="109375"/>
+		<equipable>
+			<slot name="ground"/>
+			<slot name="content"/>
+			<slot name="bag"/>
+			<slot name="trade"/>
+			<slot name="cloak"/>
+		</equipable>
+	</item>
+	
+	<item name="płaszcz nicości">
+		<type class="cloak" subclass="rift_cloak_2" tileid="-1"/>
+		<description>Oto płaszcz nicości. Ten eteryczny płaszcz zdaje się falować w rytm niewidzialnych wiatrów, otulając noszącego aurą tajemnicy i mroku.</description>
+		<implementation class-name="games.stendhal.server.entity.item.Item"/>
+		<attributes>
+			<def value="49"/>
+			<minlevel value="320"/>
+		</attributes>
+		<weight value="8.0"/>
+		<value value="109375"/>
+		<equipable>
+			<slot name="ground"/>
+			<slot name="content"/>
+			<slot name="bag"/>
+			<slot name="trade"/>
+			<slot name="cloak"/>
+		</equipable>
+	</item>
+	
+	<item name="płaszcz bezkresu">
+		<type class="cloak" subclass="rift_cloak" tileid="-1"/>
+		<description>Oto płaszcz bezkresu. Gdy go założysz, świat wokół ciebie zdaje się blaknąć, a twoja sylwetka stapia się z cieniami. Noszący go zbierają szepty istot, których nikt inny nie słyszy.</description>
+		<implementation class-name="games.stendhal.server.entity.item.Item"/>
+		<attributes>
+			<def value="52"/>
+			<minlevel value="320"/>
 		</attributes>
 		<weight value="8.0"/>
 		<value value="109375"/>
@@ -589,6 +646,66 @@
 		<attributes>
 			<def value="1"/>
 			<minlevel value="40"/>
+			<autobind value=""/>
+		</attributes>
+		<weight value="6.0"/>
+		<value value="73000"/>
+		<equipable>
+			<slot name="ground"/>
+			<slot name="content"/>
+			<slot name="cloak"/>
+			<slot name="bag"/>
+			<slot name="trade"/>
+		</equipable>
+	</item>
+	
+		<item name="płaszcz czerwonego w 2025">
+		<type class="cloak" subclass="swiateczny_plaszcz_2025" tileid="-1"/>
+		<description>Oto Płaszcz Czerwonego Wędrowca. Uszyty z miękkiej, czerwonej tkaniny i obszyty białym futerkiem, miał chronić Zawadiakę przed mroźnym wiatrem gór Faumonii. Legenda głosi, że płaszcz sam układa się tak, by wyglądać „jak najbohaterszej”, ilekroć ktoś na niego patrzy. To idealny towarzysz zimowych wypraw, zwłaszcza gdy śnieg zaczyna padać poziomo #zima #2025</description>
+		<implementation class-name="games.stendhal.server.entity.item.Item"/>
+		<attributes>
+			<def value="10"/>
+			<minlevel value="20"/>
+			<autobind value=""/>
+		</attributes>
+		<weight value="6.0"/>
+		<value value="73000"/>
+		<equipable>
+			<slot name="ground"/>
+			<slot name="content"/>
+			<slot name="cloak"/>
+			<slot name="bag"/>
+			<slot name="trade"/>
+		</equipable>
+	</item>
+	
+	<item name="płaszcz lodowego w 2025">
+		<type class="cloak" subclass="zimowy_plaszcz_2025" tileid="-1"/>
+		<description>Oto Płaszcz Lodowego Wędrowcy. Jego lodowe włókna falują na wietrze jak chorągiew zimy, zwiastując nadejście strażnika północnych tajemnic. Gdy bitwa rozpala się gniewem, płaszcz unosi się wśród wiru śniegu, jakby sam mróz stawał u boku wojownika #zima #2025</description>
+		<implementation class-name="games.stendhal.server.entity.item.Item"/>
+		<attributes>
+			<def value="35"/>
+			<minlevel value="150"/>
+			<autobind value=""/>
+		</attributes>
+		<weight value="6.0"/>
+		<value value="73000"/>
+		<equipable>
+			<slot name="ground"/>
+			<slot name="content"/>
+			<slot name="cloak"/>
+			<slot name="bag"/>
+			<slot name="trade"/>
+		</equipable>
+	</item>
+	
+	<item name="płaszcz demonicznego w 2025">
+		<type class="cloak" subclass="demoniczny_plaszcz_2025" tileid="-1"/>
+		<description>Oto Płaszcz Demonicznego Wędrowca, z tkaniny wyrwanej z grzbietów zamarzniętych bestii i spiętej czaszką, której oczy nadal szukają ofiar; unosi się za wojownikiem, jakby był cieniem samego mrozu, gotowym rzucić się na tych, którzy ośmielą się podejść zbyt blisko #zima #2025</description>
+		<implementation class-name="games.stendhal.server.entity.item.Item"/>
+		<attributes>
+			<def value="60"/>
+			<minlevel value="300"/>
 			<autobind value=""/>
 		</attributes>
 		<weight value="6.0"/>

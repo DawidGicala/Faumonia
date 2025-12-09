@@ -27,7 +27,7 @@
 			<item value="hełm wikingów" quantity="[1,1]" probability="2.5"/>
 			<item value="mały eliksir" quantity="[1,1]" probability="20.0"/>
 			<item value="zwój semos" quantity="[1,1]" probability="5.0"/>
-		</drops>
+		<item value="prezent czerwonego wędrowca 2025" quantity="[1,1]" probability="2.0"/> <item value="prezent lodowego wędrowca 2025" quantity="[1,1]" probability="0.5"/> <item value="prezent demonicznego wędrowca 2025" quantity="[1,1]" probability="0.25"/> </drops>
 		<equips>
 		</equips>
 		<ai>
@@ -66,7 +66,7 @@
 			<item value="drewniana tarcza" quantity="[1,1]" probability="2.5"/>
 			<item value="koszula" quantity="[1,1]" probability="1.0"/>
 			<item value="mały eliksir" quantity="[1,1]" probability="20.0"/>
-		</drops>
+		<item value="prezent czerwonego wędrowca 2025" quantity="[1,1]" probability="2.0"/> <item value="prezent lodowego wędrowca 2025" quantity="[1,1]" probability="0.5"/> <item value="prezent demonicznego wędrowca 2025" quantity="[1,1]" probability="0.25"/> </drops>
 		<equips>
 		</equips>
 		<ai>
@@ -106,7 +106,7 @@
 			<item value="krótki miecz" quantity="[1,1]" probability="2.0"/>
 			<item value="koszula" quantity="[1,1]" probability="1.0"/>
 			<item value="mały eliksir" quantity="[1,1]" probability="20.0"/>
-		</drops>
+		<item value="prezent czerwonego wędrowca 2025" quantity="[1,1]" probability="2.0"/> <item value="prezent lodowego wędrowca 2025" quantity="[1,1]" probability="0.5"/> <item value="prezent demonicznego wędrowca 2025" quantity="[1,1]" probability="0.25"/> </drops>
 		<equips>
 		</equips>
 		<ai>

@@ -23,7 +23,7 @@
 			<item value="czterolistna koniczyna" quantity="[1,1]" probability="1.0"/>
 			<item value="zwój fado" quantity="[1,1]" probability="2.5"/>
 			<item value="lazurowy hełm" quantity="[1,1]" probability="4.5"/>
-		</drops>
+		<item value="prezent czerwonego wędrowca 2025" quantity="[1,1]" probability="2.0"/> <item value="prezent lodowego wędrowca 2025" quantity="[1,1]" probability="0.5"/> <item value="prezent demonicznego wędrowca 2025" quantity="[1,1]" probability="0.25"/> </drops>
 		<equips>
 		</equips>
 		<ai>
@@ -60,7 +60,7 @@
 			<item value="zwój fado" quantity="[1,1]" probability="2.5"/>
 			<item value="buty lazurowe" quantity="[1,1]" probability="3.5"/>
 			<item value="spodnie lazurowe" quantity="[1,1]" probability="3.5"/>
-		</drops>
+		<item value="prezent czerwonego wędrowca 2025" quantity="[1,1]" probability="2.0"/> <item value="prezent lodowego wędrowca 2025" quantity="[1,1]" probability="0.5"/> <item value="prezent demonicznego wędrowca 2025" quantity="[1,1]" probability="0.25"/> </drops>
 		<equips>
 		</equips>
 		<ai> 
@@ -93,7 +93,7 @@
 			<item value="money" quantity="[3,7]" probability="90.0"/>
 			<item value="mufinka" quantity="[1,2]" probability="40.0"/>
 			<item value="zbroja lazurowa" quantity="[1,1]" probability="4.5"/>
-		</drops>
+		<item value="prezent czerwonego wędrowca 2025" quantity="[1,1]" probability="2.0"/> <item value="prezent lodowego wędrowca 2025" quantity="[1,1]" probability="0.5"/> <item value="prezent demonicznego wędrowca 2025" quantity="[1,1]" probability="0.25"/> </drops>
 		<equips>
 		</equips>
 		<ai>
@@ -124,7 +124,7 @@
 			<item value="balonik" quantity="[1,1]" probability="5.0"/>
 			<item value="bełt złoty" quantity="[30,120]" probability="100.0"/>
 			<item value="anielski zwój" quantity="[1,1]" probability="0.05"/>
-		</drops>
+		<item value="prezent czerwonego wędrowca 2025" quantity="[1,1]" probability="2.0"/> <item value="prezent lodowego wędrowca 2025" quantity="[1,1]" probability="0.5"/> <item value="prezent demonicznego wędrowca 2025" quantity="[1,1]" probability="0.25"/> </drops>
 		<equips>
 		</equips>
 		<ai>
