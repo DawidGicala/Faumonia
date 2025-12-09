@@ -66,7 +66,7 @@ protected void createDialog() {
             ConversationStates.IDLE,
             ConversationPhrases.GREETING_MESSAGES,
             new AndCondition(
-                    new LevelLessThanCondition(20)
+                    new LevelLessThanCondition(600)
             ),
             ConversationStates.ATTENDING,
             greetingBasis + " Wyjdź z domku i zacznij od walki z potworami. Możesz mnie zapytać, jak #atakować, jak się #leczyć albo jak #podnosić #przedmioty. Jeśli masz pytania, śmiało – słowa podświetlone na niebiesko to te których powinieneś używać w rozmowie!",

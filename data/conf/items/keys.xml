@@ -466,6 +466,60 @@
 		</equipable>
 	</item>
 	
+<<<<<<< HEAD
+=======
+	<item name="klucz do domu zuzakina">
+		<type class="key" subclass="rat" tileid="-1"/>
+		<description>Oto klucz do domu Zuzakina.</description>
+		<implementation class-name="games.stendhal.server.entity.item.Item"/>
+		<attributes>
+		</attributes>
+		<weight value="1.0"/>
+		<value value="1"/>
+		<equipable>
+			<slot name="ground"/>
+			<slot name="content"/>
+			<slot name="bag"/>
+			<slot name="trade"/>
+			<slot name="keyring"/>
+		</equipable>
+	</item>
+	
+	<item name="klucz do domu miszka96">
+		<type class="key" subclass="rat" tileid="-1"/>
+		<description>Oto klucz do domu Miszka96.</description>
+		<implementation class-name="games.stendhal.server.entity.item.Item"/>
+		<attributes>
+		</attributes>
+		<weight value="1.0"/>
+		<value value="1"/>
+		<equipable>
+			<slot name="ground"/>
+			<slot name="content"/>
+			<slot name="bag"/>
+			<slot name="trade"/>
+			<slot name="keyring"/>
+		</equipable>
+	</item>
+	
+	<item name="klucz do domu golbatjov">
+		<type class="key" subclass="rat" tileid="-1"/>
+		<description>Oto klucz do domu Golbatjov.</description>
+		<implementation class-name="games.stendhal.server.entity.item.Item"/>
+		<attributes>
+		</attributes>
+		<weight value="1.0"/>
+		<value value="1"/>
+		<equipable>
+			<slot name="ground"/>
+			<slot name="content"/>
+			<slot name="bag"/>
+			<slot name="trade"/>
+			<slot name="keyring"/>
+		</equipable>
+	</item>
+	
+>>>>>>> 7b0a398c1f4141a0e7410574c72f975c4119ff73
 	<item name="klucz do domu oxbowharp">
 		<type class="key" subclass="rat" tileid="-1"/>
 		<description>Esta es la llave de la casa de Oxbowharp.</description>
@@ -483,6 +537,7 @@
 		</equipable>
 	</item>
 	
+<<<<<<< HEAD
 	<item name="klucz do domu zetsuuki">
 		<type class="key" subclass="rat" tileid="-1"/>
 		<description>Oto klucz do domu Zetsuuki.</description>
@@ -519,4 +574,6 @@
 	
 	
 	
+=======
+>>>>>>> 7b0a398c1f4141a0e7410574c72f975c4119ff73
 </items>

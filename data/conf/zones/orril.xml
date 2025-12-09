@@ -535,6 +535,7 @@
 			<url>http://www.faumoniaonline.pl/orril</url>
 		</point-of-interest>
 		
+<<<<<<< HEAD
 		<portal x="120" y="18" ref="gold_mine_2">
 				<destination zone="-1_orril_gold_mine_e" ref="gold_mine_1"/>
 		</portal>
@@ -615,6 +616,8 @@
 			<attribute name="hidden"/>
 		</portal>
 		
+=======
+>>>>>>> 7b0a398c1f4141a0e7410574c72f975c4119ff73
 	</zone>
 
 	<zone name="0_orril_mountain_w" level="0" x="499744" y="500256" file="Level 0/orril/mountain_w.tmx">
@@ -1315,6 +1318,7 @@ Potrzebujesz trochę mąki, jajek, masła, cukru, czekolady i mleka, gorącego n
 		</portal>
 	</zone>
 	
+<<<<<<< HEAD
 	<zone name="-1_orril_gold_mine_w" level="-1" x="500000" y="500000" file="Level -1/orril/gold_mine_w.tmx">
 	</zone>
 	
@@ -1325,6 +1329,8 @@ Potrzebujesz trochę mąki, jajek, masła, cukru, czekolady i mleka, gorącego n
 		</portal>
 	
 	</zone>
+=======
+>>>>>>> 7b0a398c1f4141a0e7410574c72f975c4119ff73
 
 	<!-- Level -2 -->
 

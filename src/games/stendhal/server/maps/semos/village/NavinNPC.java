@@ -86,7 +86,7 @@ protected void createDialog() {
             ConversationStates.IDLE,
             ConversationPhrases.GREETING_MESSAGES,
             new AndCondition(
-                    new LevelLessThanCondition(20)
+                    new LevelLessThanCondition(600)
             ),
             ConversationStates.ATTENDING,
             greetingBasis + "Pamiętaj, że słowa podświetlone na niebiesko możesz wpisać, by uzyskać więcej informacji!",

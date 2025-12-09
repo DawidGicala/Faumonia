@@ -85,7 +85,7 @@ protected void createDialog() {
             ConversationStates.IDLE,
             ConversationPhrases.GREETING_MESSAGES,
             new AndCondition(
-                    new LevelLessThanCondition(20)
+                    new LevelLessThanCondition(600)
             ),
             ConversationStates.ATTENDING,
             greetingBasis + "Zapytaj o cokolwiek, co cię interesuje. Słowa podświetlone na niebiesko to słowa których możesz użyć, aby ze mną porozmawiać.",
