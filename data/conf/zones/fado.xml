@@ -612,7 +612,7 @@
 
 	<!-- Ground level -->
 
-	<zone name="0_fado_city" level="0" x="499616" y="500512" file="Level 0/fado/city_xmas.tmx">
+	<zone name="0_fado_city" level="0" x="499616" y="500512" file="Level 0/fado/city.tmx">
 		<attributes>
 			<parameter name="color_method">time</parameter>
 		</attributes>
@@ -662,10 +662,6 @@
 			<attribute name="resistance">0</attribute>
 		</entity>
 		
-		<portal x="80" y="27" ref="tower_ab1">
-			<destination zone="int_fado_tower_1" ref="tower_ba1"/>
-		</portal>
-
 		<portal x="40" y="30" ref="fado_restart_life">
 			<implementation class-name="games.stendhal.server.entity.mapstuff.portal.OneWayPortalDestination"/>
 		</portal>
@@ -840,9 +836,6 @@ Zdecydowanie potrzebujesz pierścionka ślubnego. Przyjdź tutaj, gdy będziesz 
 	</zone>
 
 	<zone name="int_fado_tavern" file="interiors/fado/tavern.tmx">
-		<configurator class-name="games.stendhal.server.maps.fado.tavern.Zima2025_1NPC"/>
-		<configurator class-name="games.stendhal.server.maps.fado.tavern.Zima2025_2NPC"/>
-		<configurator class-name="games.stendhal.server.maps.fado.tavern.Zima2025_3NPC"/>
 		<configurator class-name="games.stendhal.server.maps.fado.tavern.MaidNPC"/>
 		<configurator class-name="games.stendhal.server.maps.fado.tavern.UrzednikFadoNPC"/>
 		<configurator class-name="games.stendhal.server.maps.fado.tavern.StaroNPC"/>
@@ -858,44 +851,6 @@ Zdecydowanie potrzebujesz pierścionka ślubnego. Przyjdź tutaj, gdy będziesz 
 		</portal>
 
 
-		<portal x="32" y="21" ref="r1b">
-			<destination zone="int_fado_tavern" ref="r1a"/>
-			<implementation class-name="games.stendhal.server.entity.mapstuff.portal.KeyDestroyingDoor">
-				<parameter name="class">none</parameter>
-				<parameter name="key">zielony kamyczek szlachetny zima 2025</parameter>
-				<parameter name="rejected">Potrzebujesz zielony kamyczek szlachetny, aby przejść dalej.</parameter>
-			</implementation>
-			<attribute name="description">Tylko określony kamień szlachetny przepuści cie dalej.</attribute>
-		</portal>
-		<portal x="35" y="21" ref="r1a">
-			<destination zone="int_fado_tavern" ref="r1b" />
-		</portal>
-		
-		<portal x="32" y="12" ref="r2b">
-			<destination zone="int_fado_tavern" ref="r2a"/>
-			<implementation class-name="games.stendhal.server.entity.mapstuff.portal.KeyDestroyingDoor">
-				<parameter name="class">none</parameter>
-				<parameter name="key">zielony kamień szlachetny zima 2025</parameter>
-				<parameter name="rejected">Potrzebujesz zielony kamień szlachetny, aby przejść dalej.</parameter>
-			</implementation>
-			<attribute name="description">Tylko określony kamień szlachetny przepuści cie dalej.</attribute>
-		</portal>
-		<portal x="35" y="12" ref="r2a">
-			<destination zone="int_fado_tavern" ref="r2b" />
-		</portal>
-		
-		<portal x="32" y="4" ref="r3b">
-			<destination zone="int_fado_tavern" ref="r3a"/>
-			<implementation class-name="games.stendhal.server.entity.mapstuff.portal.KeyDestroyingDoor">
-				<parameter name="class">none</parameter>
-				<parameter name="key">zielone kamienie szlachetne zima 2025</parameter>
-				<parameter name="rejected">Potrzebujesz zielone kamienie szlachetne, aby przejść dalej.</parameter>
-			</implementation>
-			<attribute name="description">Tylko określony kamień szlachetny przepuści cie dalej.</attribute>
-		</portal>
-		<portal x="35" y="4" ref="r3a">
-			<destination zone="int_fado_tavern" ref="r3b" />
-		</portal>
 
 
 
@@ -1376,31 +1331,66 @@ na przykład powiedz:  11  jeżeli chcesz pokój Water of Love.
 		<!--Don't allow teleporting in as we don't want marked scrolls made or ring abused-->
 		<configurator class-name="games.stendhal.server.core.config.zone.NoTeleportIn"/>
 
-
+		<entity x="1" y="1">
+			<implementation
+				class-name="games.stendhal.server.entity.mapstuff.area.LifeHealArea">
+				<parameter name="width">61</parameter>
+				<parameter name="height">31</parameter>
+				<parameter name="interval">2</parameter>
+				<parameter name="damage">800</parameter>
+				<parameter name="probability">100</parameter>
+				<parameter name="players-only">true</parameter>
+			</implementation>
+			<attribute name="name">kojące zdrowie źródełka</attribute>
+		</entity>
 
 		<portal x="9" y="15" ref="a1">
 			<destination zone="int_fado_battle_arena_1" ref="a2"/>
 		</portal>
 		<portal x="9" y="16" ref="a2">
 			<destination zone="int_fado_battle_arena_1" ref="a1"/>
+			<implementation class-name="games.stendhal.server.entity.mapstuff.portal.KeyDestroyingDoor">
+				<parameter name="class">none</parameter>
+				<parameter name="key">zielone jajo 2025</parameter>
+				<parameter name="rejected">Potrzebujesz zielone jajo, aby przejść dalej.</parameter>
+			</implementation>
+			<attribute name="description">Tylko zielone jajo przepuści cie dalej.</attribute>
 		</portal>
 		<portal x="23" y="15" ref="b1">
 			<destination zone="int_fado_battle_arena_1" ref="b2"/>
 		</portal>
 		<portal x="23" y="16" ref="b2">
 			<destination zone="int_fado_battle_arena_1" ref="b1"/>
+			<implementation class-name="games.stendhal.server.entity.mapstuff.portal.KeyDestroyingDoor">
+				<parameter name="class">none</parameter>
+				<parameter name="key">zielone jajo 2025</parameter>
+				<parameter name="rejected">Potrzebujesz zielone jajo, aby przejść dalej.</parameter>
+			</implementation>
+			<attribute name="description">Tylko zielone jajo przepuści cie dalej.</attribute>
 		</portal>
 		<portal x="40" y="15" ref="c1">
 			<destination zone="int_fado_battle_arena_1" ref="c2"/>
 		</portal>
 		<portal x="40" y="16" ref="c2">
 			<destination zone="int_fado_battle_arena_1" ref="c1"/>
+			<implementation class-name="games.stendhal.server.entity.mapstuff.portal.KeyDestroyingDoor">
+				<parameter name="class">none</parameter>
+				<parameter name="key">zielone jajo 2025</parameter>
+				<parameter name="rejected">Potrzebujesz zielone jajo, aby przejść dalej.</parameter>
+			</implementation>
+			<attribute name="description">Tylko zielone jajo przepuści cie dalej.</attribute>
 		</portal>
 		<portal x="54" y="15" ref="d1">
 			<destination zone="int_fado_battle_arena_1" ref="d2"/>
 		</portal>
 		<portal x="54" y="16" ref="d2">
 			<destination zone="int_fado_battle_arena_1" ref="d1"/>
+			<implementation class-name="games.stendhal.server.entity.mapstuff.portal.KeyDestroyingDoor">
+				<parameter name="class">none</parameter>
+				<parameter name="key">zielone jajo 2025</parameter>
+				<parameter name="rejected">Potrzebujesz zielone jajo, aby przejść dalej.</parameter>
+			</implementation>
+			<attribute name="description">Tylko zielone jajo przepuści cie dalej.</attribute>
 		</portal>
 		
 		<portal x="9" y="29" ref="a11">
@@ -1408,24 +1398,48 @@ na przykład powiedz:  11  jeżeli chcesz pokój Water of Love.
 		</portal>
 		<portal x="9" y="30" ref="a21">
 			<destination zone="int_fado_battle_arena_1" ref="a11"/>
+			<implementation class-name="games.stendhal.server.entity.mapstuff.portal.KeyDestroyingDoor">
+				<parameter name="class">none</parameter>
+				<parameter name="key">złote jajo 2025</parameter>
+				<parameter name="rejected">Potrzebujesz złote jajo, aby przejść dalej.</parameter>
+			</implementation>
+			<attribute name="description">Tylko złote jajo przepuści cie dalej.</attribute>
 		</portal>
 		<portal x="23" y="29" ref="b11">
 			<destination zone="int_fado_battle_arena_1" ref="b21"/>
 		</portal>
 		<portal x="23" y="30" ref="b21">
 			<destination zone="int_fado_battle_arena_1" ref="b11"/>
+			<implementation class-name="games.stendhal.server.entity.mapstuff.portal.KeyDestroyingDoor">
+				<parameter name="class">none</parameter>
+				<parameter name="key">złote jajo 2025</parameter>
+				<parameter name="rejected">Potrzebujesz złote jajo, aby przejść dalej.</parameter>
+			</implementation>
+			<attribute name="description">Tylko złote jajo przepuści cie dalej.</attribute>
 		</portal>
 		<portal x="40" y="29" ref="c11">
 			<destination zone="int_fado_battle_arena_1" ref="c21"/>
 		</portal>
 		<portal x="40" y="30" ref="c21">
 			<destination zone="int_fado_battle_arena_1" ref="c11"/>
+			<implementation class-name="games.stendhal.server.entity.mapstuff.portal.KeyDestroyingDoor">
+				<parameter name="class">none</parameter>
+				<parameter name="key">złote jajo 2025</parameter>
+				<parameter name="rejected">Potrzebujesz złote jajo, aby przejść dalej.</parameter>
+			</implementation>
+			<attribute name="description">Tylko złote jajo przepuści cie dalej.</attribute>
 		</portal>
 		<portal x="54" y="29" ref="d11">
 			<destination zone="int_fado_battle_arena_1" ref="d21"/>
 		</portal>
 		<portal x="54" y="30" ref="d21">
 			<destination zone="int_fado_battle_arena_1" ref="d11"/>
+			<implementation class-name="games.stendhal.server.entity.mapstuff.portal.KeyDestroyingDoor">
+				<parameter name="class">none</parameter>
+				<parameter name="key">złote jajo 2025</parameter>
+				<parameter name="rejected">Potrzebujesz złote jajo, aby przejść dalej.</parameter>
+			</implementation>
+			<attribute name="description">Tylko złote jajo przepuści cie dalej.</attribute>
 		</portal>
 		
 		<portal x="9" y="43" ref="a12">
@@ -1480,7 +1494,7 @@ na przykład powiedz:  11  jeżeli chcesz pokój Water of Love.
 		
 	</zone>
 	
-	<zone name="0_fado_forest" level="0" x="499744" y="500512" file="Level 0/fado/forest_xmas.tmx">
+	<zone name="0_fado_forest" level="0" x="499744" y="500512" file="Level 0/fado/forest.tmx">
 		<attributes>
 			<parameter name="color_method">time</parameter>
 		</attributes>
@@ -1507,7 +1521,7 @@ na przykład powiedz:  11  jeżeli chcesz pokój Water of Love.
 	</zone>
 
 
-	<zone name="0_fado_forest_e" level="0" x="499872" y="500512" file="Level 0/fado/forest_e_xmas.tmx">
+	<zone name="0_fado_forest_e" level="0" x="499872" y="500512" file="Level 0/fado/forest_e.tmx">
 		<attributes>
 			<parameter name="color_method">time</parameter>
 		</attributes>

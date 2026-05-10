@@ -29,7 +29,7 @@
 			<item value="zwój wofol" quantity="[1,1]" probability="0.25"/>
 			<item value="ruda żelaza" quantity="[1,1]" probability="0.75"/>
 			<item value="bryłka złota" quantity="[1,1]" probability="0.15"/>
-		<item value="prezent czerwonego wędrowca 2025" quantity="[1,1]" probability="2.0"/> <item value="prezent lodowego wędrowca 2025" quantity="[1,1]" probability="0.5"/> <item value="prezent demonicznego wędrowca 2025" quantity="[1,1]" probability="0.25"/> </drops>
+		</drops>
 		<equips>
 		</equips>
 		<ai>
@@ -71,7 +71,7 @@
 			<item value="zwój wofol" quantity="[1,1]" probability="0.5"/>
 			<item value="ruda żelaza" quantity="[1,1]" probability="0.75"/>
 			<item value="bryłka złota" quantity="[1,1]" probability="0.15"/>
-		<item value="prezent czerwonego wędrowca 2025" quantity="[1,1]" probability="2.0"/> <item value="prezent lodowego wędrowca 2025" quantity="[1,1]" probability="0.5"/> <item value="prezent demonicznego wędrowca 2025" quantity="[1,1]" probability="0.25"/> </drops>
+		</drops>
 		<equips>
 		</equips>
 		<ai>
@@ -109,7 +109,7 @@
 			<item value="zwój wofol" quantity="[1,1]" probability="1.0"/>
 			<item value="ruda żelaza" quantity="[1,1]" probability="0.75"/>
 			<item value="bryłka złota" quantity="[1,1]" probability="0.15"/>
-		<item value="prezent czerwonego wędrowca 2025" quantity="[1,1]" probability="2.0"/> <item value="prezent lodowego wędrowca 2025" quantity="[1,1]" probability="0.5"/> <item value="prezent demonicznego wędrowca 2025" quantity="[1,1]" probability="0.25"/> </drops>
+		</drops>
 		<equips>
 			<slot name="lhand" item="strzała" quantity="10000" />
 			<slot name="rhand" item="drewniany łuk" quantity="1" />
@@ -154,7 +154,7 @@
 			<item value="zwój wofol" quantity="[1,1]" probability="0.5"/>
 			<item value="ruda żelaza" quantity="[1,1]" probability="0.75"/>
 			<item value="bryłka złota" quantity="[1,1]" probability="0.15"/>
-		<item value="prezent czerwonego wędrowca 2025" quantity="[1,1]" probability="2.0"/> <item value="prezent lodowego wędrowca 2025" quantity="[1,1]" probability="0.5"/> <item value="prezent demonicznego wędrowca 2025" quantity="[1,1]" probability="0.25"/> </drops>
+		</drops>
 		<equips>
 		</equips>
 		<ai>
@@ -200,7 +200,7 @@
 			<item value="zwój wofol" quantity="[1,1]" probability="2.5"/>
 			<item value="ruda żelaza" quantity="[1,1]" probability="1.25"/>
 			<item value="bryłka złota" quantity="[1,1]" probability="0.25"/>
-		<item value="prezent czerwonego wędrowca 2025" quantity="[1,1]" probability="2.0"/> <item value="prezent lodowego wędrowca 2025" quantity="[1,1]" probability="0.5"/> <item value="prezent demonicznego wędrowca 2025" quantity="[1,1]" probability="0.25"/> </drops>
+		</drops>
 		<equips>
 		</equips>
 		<ai>
@@ -209,4 +209,42 @@
 			<profile name="human"/>
 		</ai>
 	</creature>
+	
+	<creature name="kobold olbrzymi">
+		<type class="huge_animal" subclass="giant_kobold" tileid="huge_animal.png:4"/>
+		<description>Oto kobold olbrzymi. Choć jest zabawny to nie jest świadomy swej siły. Kiedy zaproponuje przytulenie to najlepiej jest odrzucić jego szczodrą ofertę.</description>
+		<attributes>
+			<atk value="213"/>
+			<def value="14"/>
+			<hp value="600"/>
+			<speed value="1.0"/>
+			<size value="2,2"/>
+		</attributes>
+		<level value="35"/>
+		<experience value="2810"/>
+		<respawn value="1050"/>
+		<corpse name="giant_humanoid" width="2" height="2"/>
+		<drops>
+			<item value="money" quantity="[1,6]" probability="100.0"/>
+			<item value="duży eliksir" quantity="[1,1]" probability="20.0"/>
+			<item value="zwój wofol" quantity="[1,1]" probability="5.0"/>
+			<item value="ruda żelaza" quantity="[1,4]" probability="8.0"/>
+			<item value="bryłka złota" quantity="[1,3]" probability="6.0"/>
+			<item value="bryłka mithrilu" quantity="[1,1]" probability="1.0"/>
+		</drops>
+		<equips>
+		</equips>
+		<ai>
+			<says>
+				<noise state="idle follow fight" value="Huu?"/>
+			</says>
+			<profile name="brave"/>
+			<profile name="animal"/>
+			<profile name="offensive"/>
+			<profile name="lifesteal" params="0.3"/>
+			<profile name="heal" params="5,20"/>
+			<profile name="patrolling"/>
+		</ai>
+	</creature>
+	
 </creatures>

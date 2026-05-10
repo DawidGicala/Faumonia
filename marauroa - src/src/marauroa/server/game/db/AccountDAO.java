@@ -380,6 +380,50 @@ public class AccountDAO {
 	}
 
 	/**
+	 * adds marketing consent for an account.
+	 *
+	 * @param transaction DBTransaction
+	 * @param username username
+	 * @param email email-address
+	 * @param address ip-address
+	 * @throws SQLException in case of an database error
+	 */
+	public void addMarketingConsent(DBTransaction transaction, String username, String email, String address) throws SQLException {
+		try {
+			if (!StringChecker.validString(username) || !StringChecker.validString(email)) {
+				throw new SQLException("Invalid string username=(" + username + ") email=(" + email
+						+ ")");
+			}
+
+			int playerId = getDatabasePlayerId(transaction, username);
+
+			if (playerId < 0) {
+				throw new SQLException("Cannot add marketing consent. Account not found username=(" + username + ")");
+			}
+
+			if (address == null) {
+				address = "";
+			}
+
+			String query = "insert into marketing_consents(player_id, email, consent_type, consent_given, consent_date, source, ip_address)"
+				+ " values([player_id], '[email]', '[consent_type]', [consent_given], CURRENT_TIMESTAMP, '[source]', '[ip_address]')";
+			Map<String, Object> params = new HashMap<String, Object>();
+			params.put("player_id", playerId);
+			params.put("email", email);
+			params.put("consent_type", "email_marketing");
+			params.put("consent_given", 1);
+			params.put("source", "registration_client");
+			params.put("ip_address", address);
+			logger.debug("addMarketingConsent is using query: " + query);
+
+			transaction.execute(query, params);
+		} catch (SQLException e) {
+			logger.error("Can't add marketing consent for player \"" + username + "\" to database", e);
+			throw e;
+		}
+	}
+
+	/**
 	 * verifies username and password
 	 *
 	 * @param transaction DBTransaction
@@ -590,6 +634,23 @@ public class AccountDAO {
 		DBTransaction transaction = TransactionPool.get().beginWork();
 		try {
 			addPlayer(transaction, username, password, email);
+		} finally {
+			TransactionPool.get().commit(transaction);
+		}
+	}
+
+	/**
+	 * adds marketing consent for an account.
+	 *
+	 * @param username username
+	 * @param email email-address
+	 * @param address ip-address
+	 * @throws SQLException in case of an database error
+	 */
+	public void addMarketingConsent(String username, String email, String address) throws SQLException {
+		DBTransaction transaction = TransactionPool.get().beginWork();
+		try {
+			addMarketingConsent(transaction, username, email, address);
 		} finally {
 			TransactionPool.get().commit(transaction);
 		}

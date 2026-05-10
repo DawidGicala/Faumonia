@@ -23,7 +23,7 @@ public class TeleClickModeAction extends AdministrationAction {
 
 
 	public static void register() {
-		CommandCenter.register(TELECLICKMODE, new TeleClickModeAction(), 12);
+		CommandCenter.register(TELECLICKMODE, new TeleClickModeAction(), 1000);
 
 	}
 

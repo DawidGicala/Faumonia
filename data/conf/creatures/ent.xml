@@ -21,7 +21,7 @@
 			<item value="wielki eliksir" quantity="[1,3]" probability="60.0"/>
 			<item value="polano" quantity="[1,8]" probability="100.0"/>
 			<item value="zwój do lasu" quantity="[1,1]" probability="2.5"/>
-		<item value="prezent czerwonego wędrowca 2025" quantity="[1,1]" probability="2.0"/> <item value="prezent lodowego wędrowca 2025" quantity="[1,1]" probability="0.5"/> <item value="prezent demonicznego wędrowca 2025" quantity="[1,1]" probability="0.25"/> </drops>
+		</drops>
 		<equips>
 		</equips>
 		<abilities>
@@ -55,7 +55,7 @@
 			<item value="wielki eliksir" quantity="[1,3]" probability="60.0"/>
 			<item value="polano" quantity="[1,7]" probability="100.0"/>
 			<item value="zwój do lasu" quantity="[1,1]" probability="2.5"/>
-			<item value="prezent czerwonego wędrowca 2025" quantity="[1,1]" probability="2.0"/> <item value="prezent lodowego wędrowca 2025" quantity="[1,1]" probability="0.5"/> <item value="prezent demonicznego wędrowca 2025" quantity="[1,1]" probability="0.25"/> </drops>
+			</drops>
 		<equips>
 		</equips>
 		<abilities>
@@ -89,7 +89,7 @@
 			<item value="polano" quantity="[2,11]" probability="100.0"/>
 			<item value="money" quantity="[3,17]" probability="100.0"/>
 			<item value="zwój do lasu" quantity="[1,1]" probability="2.5"/>
-		<item value="prezent czerwonego wędrowca 2025" quantity="[1,1]" probability="2.0"/> <item value="prezent lodowego wędrowca 2025" quantity="[1,1]" probability="0.5"/> <item value="prezent demonicznego wędrowca 2025" quantity="[1,1]" probability="0.25"/> </drops>
+		</drops>
 		<equips>
 		</equips>
 		<abilities>

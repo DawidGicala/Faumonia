@@ -115,6 +115,7 @@
 		<configurator class-name="games.stendhal.server.maps.ados.market.ElectroNPC"/>
 		<configurator class-name="games.stendhal.server.maps.ados.market.FlakeNPC"/>
 
+
 		<entity x="80" y="12">
 			<implementation class-name="games.stendhal.server.entity.mapstuff.sound.PeriodicAmbientSoundSource">
 				<parameter name="sound">water-2, wave-11</parameter>

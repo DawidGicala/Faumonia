@@ -630,7 +630,7 @@
 		<description>Oto Tarcza Smoka Wawelskiego. Jeśli wierzyć pogłoskom jest ona najsilniejszą wykutą do tej pory tarczą. Ognie które pokrywają jej zewnętrzną stronę pieką przeciwnika żywcem.</description>
 		<implementation class-name="games.stendhal.server.entity.item.Item"/>
 		<attributes>
-			<def value="68"/>
+			<def value="59"/>
 			<minlevel value="400"/>
 		</attributes>
 		<weight value="24.0"/>

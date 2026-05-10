@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.0" orientation="orthogonal" renderorder="right-down" width="64" height="64" tilewidth="32" tileheight="32" nextobjectid="1">
+ <tileset firstgid="1" name="kafel" tilewidth="32" tileheight="32" tilecount="8" columns="4">
+  <image source="../../tileset/pol/domki/podloga/wiezienie_kafelki.png" width="128" height="64"/>
+ </tileset>
+ <tileset firstgid="9" name="scianka" tilewidth="32" tileheight="32" tilecount="30" columns="6">
+  <image source="../../tileset/pol/domki/sciany_kamienne.png" width="192" height="160"/>
+ </tileset>
+ <tileset firstgid="39" name="krew" tilewidth="32" tileheight="32" tilecount="16" columns="4">
+  <image source="../../tileset/pol/podloze/krewka.png" width="128" height="128"/>
+ </tileset>
+ <tileset firstgid="55" name="portal" tilewidth="32" tileheight="32" tilecount="7" columns="7">
+  <image source="../../tileset/logic/portal.png" width="224" height="32"/>
+ </tileset>
+ <tileset firstgid="62" name="collision" tilewidth="32" tileheight="32" tilecount="1" columns="1">
+  <image source="../../tileset/logic/collision.png" width="32" height="32"/>
+ </tileset>
+ <tileset firstgid="63" name="potworki slabe" tilewidth="32" tileheight="32" tilecount="10" columns="10">
+  <image source="../../tileset/logic/creature/pol_smoki.png" width="320" height="32"/>
+ </tileset>
+ <tileset firstgid="73" name="schody" tilewidth="32" tileheight="32" tilecount="2" columns="1">
+  <image source="../../tileset/building/stairs/dark_stairs.png" width="32" height="64"/>
+ </tileset>
+ <tileset firstgid="75" name="cos" tilewidth="32" tileheight="32" tilecount="6" columns="6">
+  <image source="../../tileset/logic/creature/pol_zjawy_wielkie.png" width="192" height="32"/>
+ </tileset>
+ <tileset firstgid="81" name="olbrzymy" tilewidth="32" tileheight="32" tilecount="3" columns="3">
+  <image source="../../tileset/logic/creature/pol_olbrzymy.png" width="96" height="32"/>
+ </tileset>
+ <tileset firstgid="84" name="latarnia_blask" tilewidth="32" tileheight="32" tilecount="25" columns="5">
+  <image source="../../tileset/pol/oswietlenie/latarnia_blask.png" width="160" height="160"/>
+ </tileset>
+ <tileset firstgid="109" name="latarnia_blaszczysko" tilewidth="32" tileheight="32" tilecount="25" columns="5">
+  <image source="../../tileset/pol/oswietlenie/latarnia_blaszczysko.png" width="160" height="160"/>
+ </tileset>
+ <tileset firstgid="134" name="protection" tilewidth="32" tileheight="32" tilecount="2" columns="2">
+  <image source="../../tileset/logic/protection.png" width="64" height="32"/>
+ </tileset>
+ <layer name="0_floor" width="64" height="64">
+  <data encoding="base64" compression="gzip">
+   H4sIAAAAAAAAC+3WsQkAMAgEQIXsP3OqEDKAQeSK64XH14yIBACAwVaDGZDjJLIAgHruLfCLvgEAePmPAHrT0/3IBACAw28IVNMzMJ89h2sD6L8ydgBAAAA=
+  </data>
+ </layer>
+ <layer name="1_terrain" width="64" height="64">
+  <data encoding="base64" compression="gzip">
+   H4sIAAAAAAAAC+3Zza7CIBAFYB5A41/UhbpQl6YLjS/h+7+QNQ2JIW1h4AwdykxyVtfe8F2kF4a1MWat0RSQXZsDKFsBHmo2bc6grAR4Yvw3UEr1owrlR65J37qU6EeuSd+6lOpHrUnfupTqR1aI/5nwbMhnc/nfiYaUZyX4Uw227N+xVn/Ms1x+6u+lPI/wvyr3x45Tgn/p8S9m7p9ynLn8e4PdT9scC/GfDHY/bXMpxH812P20zb0Qf66y46SeX93z6ZT+l/8jg2XHST2/ur7S5596fkX7ff/TuerfH/Mcyp8rQ+NUf1d9Z/EcfnT/kPqennr+0f3DkPd0M+Kn+hB+jv1O6Dgl+DlK/epXf3n+2P1D7DjVr3714/zU/h2qLyfFT+3fofpy3P6hO7bU/h2qLydl/lNL/fP3j/UaOP1Nz89T/ej+3dgdnsT5lxL1q1/9/H6u+2nu+22Un+t+mvt+O7T/j97f5opvH42af64KvX8JrdL86FI/xj/V/XRqufvoWP9cov6uHpX7Xaf66/a77/fY/oP0/PyfHn8tqeV7PpRavufUfAHbUC18AEAAAA==
+  </data>
+ </layer>
+ <layer name="2_object" width="64" height="64">
+  <data encoding="base64" compression="gzip">
+   H4sIAAAAAAAAC+3BMQEAAADCoPVPbQwfoAAAAAAAAAAAAAAAAAAAAIC3AYbSVKsAQAAA
+  </data>
+ </layer>
+ <layer name="3_roof" width="64" height="64">
+  <data encoding="base64" compression="gzip">
+   H4sIAAAAAAAAC+3ZMQrAIAwFUNfW+9/Xzi1VbCUivgd/dzAhxpQAANZ1XDlfkieeC3ZRq0F1Cf/UagkAWEfPvPw15mxou79f1Q1AjN79oT4NAEC0kXs6AACYLeJ/enQAaNM32YF7/lQA0vyjCQBAAAA=
+  </data>
+ </layer>
+ <layer name="4_roof_add" width="64" height="64">
+  <data encoding="base64" compression="gzip">
+   H4sIAAAAAAAAC+3BMQEAAADCoPVPbQwfoAAAAAAAAAAAAAAAAAAAAIC3AYbSVKsAQAAA
+  </data>
+ </layer>
+ <layer name="objects" width="64" height="64">
+  <data encoding="base64" compression="gzip">
+   H4sIAAAAAAAAC+3OwRFAMBQFwPTlIM4OGP33ogmT98VuBdsaAAC8b08HmM6WDgAADNTTAQCAAo50APikNR0AYGo9HQAAgALudIBfu9KBQc50ACBgSQegmAeX2gyFAEAAAA==
+  </data>
+ </layer>
+ <layer name="collision" width="64" height="64">
+  <data encoding="base64" compression="gzip">
+   H4sIAAAAAAAAC+3P2w3AIAhAUSdz/7G6QRMFfLSH5H6inN5a65Kk48ua3Q5+/q/4Myfy18guPz9/vr96n5//z/6dd/Lz89f6Vw0/P//4/xX+VfHz87/7Z3z8MX/F8PPz3+ef2Y/eyc/Pz8/PH303Ovz8/Hf5T4mfn5+fn7/Kf8vw82f5vxI/Pz8/P//uW/j5T+gBHsx6fABAAAA=
+  </data>
+ </layer>
+ <layer name="protection" width="64" height="64">
+  <data encoding="base64" compression="gzip">
+   H4sIAAAAAAAAC+3DQQ0AAAwDoVNf3ZOxDySsmqqqqqqqqqqqqqqqqqqqqvr6AJCHK2sAQAAA
+  </data>
+ </layer>
+ <layer name="blend_ground" width="64" height="64" opacity="0.3">
+  <data encoding="base64" compression="gzip">
+   H4sIAAAAAAAAC+3OUQpAUABE0bdjFAqFpZtdjI9z6v7fMQAAAAAAAAAAAAAAAAAAoGNKc1raIyVr2tLeHik50pmu9kjJnZ70lj/4jw9S0TMWAEAAAA==
+  </data>
+ </layer>
+ <layer name="blend_roof" width="64" height="64" opacity="0.3">
+  <data encoding="base64" compression="gzip">
+   H4sIAAAAAAAAC+3BMQEAAADCoPVPbQwfoAAAAAAAAAAAAAAAAAAAAIC3AYbSVKsAQAAA
+  </data>
+ </layer>
+</map>

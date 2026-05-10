@@ -252,10 +252,9 @@ public class StendhalQuestSystem {
 		loadQuest(new KillAdosSpiders());
 		loadQuest(new KillSausid());
 		loadQuest(new MainTask23());
+		loadQuest(new FindDragons());
+		loadQuest(new MainTask24());
 
-		loadQuest(new Zima2025_1());
-		loadQuest(new Zima2025_2());
-		loadQuest(new Zima2025_3());
 
 
 		

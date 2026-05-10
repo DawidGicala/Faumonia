@@ -29,7 +29,7 @@
 			<item value="duży eliksir" quantity="[1,1]" probability="40.0"/>
 			<item value="bryłka złota" quantity="[1,1]" probability="1.0"/>
 			<item value="ruda żelaza" quantity="[1,1]" probability="0.25"/>
-		<item value="prezent czerwonego wędrowca 2025" quantity="[1,1]" probability="2.0"/> <item value="prezent lodowego wędrowca 2025" quantity="[1,1]" probability="0.5"/> <item value="prezent demonicznego wędrowca 2025" quantity="[1,1]" probability="0.25"/> </drops>
+		</drops>
 		<equips>
 		</equips>
 		<ai>
@@ -63,7 +63,7 @@
 			<item value="duży eliksir" quantity="[1,1]" probability="40.0"/>
 			<item value="ruda żelaza" quantity="[1,1]" probability="0.25"/>
 			<item value="bryłka złota" quantity="[1,1]" probability="1.0"/>
-		<item value="prezent czerwonego wędrowca 2025" quantity="[1,1]" probability="2.0"/> <item value="prezent lodowego wędrowca 2025" quantity="[1,1]" probability="0.5"/> <item value="prezent demonicznego wędrowca 2025" quantity="[1,1]" probability="0.25"/> </drops>
+		</drops>
 		<equips>
 		</equips>
 		<ai>
@@ -97,7 +97,7 @@
 			<item value="duży eliksir" quantity="[1,1]" probability="40.0"/>
 			<item value="bryłka złota" quantity="[1,1]" probability="1.0"/>
 			<item value="ruda żelaza" quantity="[1,1]" probability="0.25"/>
-		<item value="prezent czerwonego wędrowca 2025" quantity="[1,1]" probability="2.0"/> <item value="prezent lodowego wędrowca 2025" quantity="[1,1]" probability="0.5"/> <item value="prezent demonicznego wędrowca 2025" quantity="[1,1]" probability="0.25"/> </drops>
+		</drops>
 		<equips/>
 		<ai>
 			<profile name="brave"/>
@@ -130,7 +130,7 @@
 			<item value="duży eliksir" quantity="[1,1]" probability="40.0"/>
 			<item value="bryłka złota" quantity="[1,1]" probability="1.0"/>
 			<item value="ruda żelaza" quantity="[1,1]" probability="0.25"/>
-		<item value="prezent czerwonego wędrowca 2025" quantity="[1,1]" probability="2.0"/> <item value="prezent lodowego wędrowca 2025" quantity="[1,1]" probability="0.5"/> <item value="prezent demonicznego wędrowca 2025" quantity="[1,1]" probability="0.25"/> </drops>
+		</drops>
 		<equips>
 		</equips>
 		<ai>
@@ -169,7 +169,7 @@
 			<item value="złota tarcza" quantity="[1,1]" probability="0.15"/>
 			<item value="ruda żelaza" quantity="[1,1]" probability="0.25"/>
 			<item value="bryłka złota" quantity="[1,3]" probability="2.0"/>
-		<item value="prezent czerwonego wędrowca 2025" quantity="[1,1]" probability="2.0"/> <item value="prezent lodowego wędrowca 2025" quantity="[1,1]" probability="0.5"/> <item value="prezent demonicznego wędrowca 2025" quantity="[1,1]" probability="0.25"/> </drops>
+		</drops>
 		<equips>
 		</equips>
 		<ai>
@@ -206,7 +206,7 @@
 			<item value="wielki eliksir" quantity="[1,1]" probability="60.0"/>
 			<item value="halabarda" quantity="[1,1]" probability="0.5"/>
 			<item value="sztabka złota" quantity="[1,1]" probability="1.0"/>
-		<item value="prezent czerwonego wędrowca 2025" quantity="[1,1]" probability="2.0"/> <item value="prezent lodowego wędrowca 2025" quantity="[1,1]" probability="0.5"/> <item value="prezent demonicznego wędrowca 2025" quantity="[1,1]" probability="0.25"/> </drops>
+		</drops>
 		<equips>
 		</equips>
 		<ai>
@@ -235,7 +235,7 @@
 			<item value="miecz duergarów" quantity="[1,1]" probability="0.4"/>
 			<item value="wielki eliksir" quantity="[1,1]" probability="70.0"/>
 			<item value="sztabka złota" quantity="[1,1]" probability="1.0"/>
-		<item value="prezent czerwonego wędrowca 2025" quantity="[1,1]" probability="2.0"/> <item value="prezent lodowego wędrowca 2025" quantity="[1,1]" probability="0.5"/> <item value="prezent demonicznego wędrowca 2025" quantity="[1,1]" probability="0.25"/> </drops>
+		</drops>
 		<equips>
 		</equips>
 		<ai>
@@ -264,7 +264,7 @@
 			<item value="miecz duergarów" quantity="[1,1]" probability="0.4"/>
 			<item value="wielki eliksir" quantity="[1,1]" probability="80.0"/>
 			<item value="sztabka złota" quantity="[1,1]" probability="1.0"/>
-		<item value="prezent czerwonego wędrowca 2025" quantity="[1,1]" probability="2.0"/> <item value="prezent lodowego wędrowca 2025" quantity="[1,1]" probability="0.5"/> <item value="prezent demonicznego wędrowca 2025" quantity="[1,1]" probability="0.25"/> </drops>
+		</drops>
 		<equips>
 		</equips>
 		<ai>
@@ -293,7 +293,7 @@
 			<item value="miecz duergarów" quantity="[1,1]" probability="0.4"/>
 			<item value="wielki eliksir" quantity="[1,1]" probability="80.0"/>
 			<item value="sztabka złota" quantity="[1,1]" probability="1.0"/>
-		<item value="prezent czerwonego wędrowca 2025" quantity="[1,1]" probability="2.0"/> <item value="prezent lodowego wędrowca 2025" quantity="[1,1]" probability="0.5"/> <item value="prezent demonicznego wędrowca 2025" quantity="[1,1]" probability="0.25"/> </drops>
+		</drops>
 		<equips>
 		</equips>
 		<ai>
@@ -322,7 +322,7 @@
 			<item value="miecz duergarów" quantity="[1,1]" probability="0.4"/>
 			<item value="wielki eliksir" quantity="[1,1]" probability="90.0"/>
 			<item value="sztabka złota" quantity="[1,1]" probability="1.0"/>
-		<item value="prezent czerwonego wędrowca 2025" quantity="[1,1]" probability="2.0"/> <item value="prezent lodowego wędrowca 2025" quantity="[1,1]" probability="0.5"/> <item value="prezent demonicznego wędrowca 2025" quantity="[1,1]" probability="0.25"/> </drops>
+		</drops>
 		<equips>
 		</equips>
 		<ai>
@@ -355,7 +355,7 @@
 			<item value="wielki eliksir" quantity="[1,1]" probability="90.0"/>
 			<item value="trójząb Trzygłowa" quantity="[1,1]" probability="0.125"/>
 			<item value="sztabka złota" quantity="[1,1]" probability="1.0"/>
-		<item value="prezent czerwonego wędrowca 2025" quantity="[1,1]" probability="2.0"/> <item value="prezent lodowego wędrowca 2025" quantity="[1,1]" probability="0.5"/> <item value="prezent demonicznego wędrowca 2025" quantity="[1,1]" probability="0.25"/> </drops>
+		</drops>
 		<equips>
 		</equips>
 		<ai>
@@ -387,7 +387,7 @@
 			<item value="miecz duergarów" quantity="[1,1]" probability="0.4"/>
 			<item value="wielki eliksir" quantity="[1,2]" probability="80.0"/>
 			<item value="sztabka złota" quantity="[1,1]" probability="2.0"/>
-		<item value="prezent czerwonego wędrowca 2025" quantity="[1,1]" probability="2.0"/> <item value="prezent lodowego wędrowca 2025" quantity="[1,1]" probability="0.5"/> <item value="prezent demonicznego wędrowca 2025" quantity="[1,1]" probability="0.25"/> </drops>
+		</drops>
 		<equips>
 		</equips>
 		<ai>
@@ -420,7 +420,7 @@
 			<item value="wielki eliksir" quantity="[1,3]" probability="90.0"/>
 			<item value="złoty hełm wikingów" quantity="[1,1]" probability="0.5"/>
 			<item value="sztabka złota" quantity="[1,1]" probability="8.0"/>
-		<item value="prezent czerwonego wędrowca 2025" quantity="[1,1]" probability="2.0"/> <item value="prezent lodowego wędrowca 2025" quantity="[1,1]" probability="0.5"/> <item value="prezent demonicznego wędrowca 2025" quantity="[1,1]" probability="0.25"/> </drops>
+		</drops>
 		<equips>
 		</equips>
 		<ai>
@@ -430,247 +430,5 @@
 	</creature>
 
 
-<!-- mountain dwarfs --> 
-
-
-
-	<creature name="górski krasnal">
-		<type class="dwarf" subclass="dwarf" tileid="mountain_dwarf.png:1"/>
-		<description>Oto górski krasnal miłujący się w ziemi, kamieniach i skałach. Głęboko w czeluściach górskich jaskiń słychać tępy odgłos kilofa, którym wydobywa rudę złota i żelaza.</description>
-		<attributes>
-			<atk value="3217"/>
-			<def value="102"/>
-			<hp value="3390"/>
-			<speed value="0.5"/>
-			<size value="1,1"/>
-		</attributes>
-		<level value="304"/>
-		<experience value="8110"/>
-		<respawn value="4280"/>
-		<corpse name="humanoid"/>
-		<drops>
-			<item value="money" quantity="[50,152]" probability="100.0"/>
-			<item value="wielki eliksir" quantity="[1,1]" probability="65.0"/>
-			<item value="bryłka złota" quantity="[1,2]" probability="10.0"/>
-			<item value="żelazo" quantity="[1,1]" probability="0.25"/>
-			<item value="sztabka złota" quantity="[1,1]" probability="2.5"/>
-			<item value="ruda żelaza" quantity="[1,1]" probability="2.5"/>
-		<item value="prezent czerwonego wędrowca 2025" quantity="[1,1]" probability="2.0"/> <item value="prezent lodowego wędrowca 2025" quantity="[1,1]" probability="0.5"/> <item value="prezent demonicznego wędrowca 2025" quantity="[1,1]" probability="0.25"/> </drops>
-		<equips>
-		</equips>
-		<ai>
-			<profile name="brave"/>
-			<profile name="offensive"/>
-			<profile name="heal" params="10,4"/>
-			<profile name="lifesteal" params="0.02"/>
-			<profile name="human"/>
-			<profile name="patrolling"/>
-		</ai>
-	</creature>
-
-	<creature name="górski krasnal strażnik">
-		<type class="dwarf" subclass="dwarf_guardian" tileid="mountain_dwarf.png:0"/>
-		<description>Oto górski krasnal strażnik. Wypatruje wrogów i strzeże gór w czasie gdy inne krasnale pracują.</description>
-		<attributes>
-			<atk value="3221"/>
-			<def value="100"/>
-			<hp value="3740"/>
-			<speed value="0.7"/>
-			<size value="1,1"/>
-		</attributes>
-		<level value="307"/>
-		<experience value="8140"/>
-		<respawn value="4290"/>
-		<corpse name="humanoid"/>
-		<drops>
-			<item value="money" quantity="[59,131]" probability="100.0"/>
-			<item value="wielki eliksir" quantity="[1,1]" probability="65.0"/>
-			<item value="bryłka złota" quantity="[1,2]" probability="10.0"/>
-			<item value="żelazo" quantity="[1,1]" probability="0.25"/>
-			<item value="sztabka złota" quantity="[1,1]" probability="2.5"/>
-			<item value="ruda żelaza" quantity="[1,1]" probability="2.5"/>
-		<item value="prezent czerwonego wędrowca 2025" quantity="[1,1]" probability="2.0"/> <item value="prezent lodowego wędrowca 2025" quantity="[1,1]" probability="0.5"/> <item value="prezent demonicznego wędrowca 2025" quantity="[1,1]" probability="0.25"/> </drops>
-		<equips>
-		</equips>
-		<ai>
-			<profile name="brave"/>
-			<profile name="offensive"/>
-			<profile name="heal" params="10,4"/>
-			<profile name="lifesteal" params="0.02"/>
-			<profile name="human"/>
-			<profile name="patrolling"/>
-		</ai>
-	</creature>
-
-	<creature name="górski starszy krasnal">
-		<type class="dwarf" subclass="elder_dwarf" tileid="mountain_dwarf.png:2"/>
-		<description>Oto górski starszy krasnal. Przez wiele lat pracował w najgłębszej kopalni i znalazł wiele złota i rud. Niedługo nie będzie miał siły by pracować, ale póki co wciąż jest silnym krasnoludem.</description>
-		<attributes>
-			<atk value="3324"/>
-			<def value="102"/>
-			<hp value="3680"/>
-			<speed value="1.0"/>
-			<size value="1,1"/>
-		</attributes>
-		<level value="312"/>
-		<experience value="8190"/>
-		<respawn value="4290"/>
-		<corpse name="humanoid"/>
-		<drops>
-			<item value="money" quantity="[59,155]" probability="100.0"/>
-			<item value="wielki eliksir" quantity="[1,1]" probability="65.0"/>
-			<item value="bryłka złota" quantity="[1,2]" probability="10.0"/>
-			<item value="żelazo" quantity="[1,1]" probability="0.25"/>
-			<item value="sztabka złota" quantity="[1,1]" probability="2.5"/>
-			<item value="ruda żelaza" quantity="[1,1]" probability="2.5"/>
-		<item value="prezent czerwonego wędrowca 2025" quantity="[1,1]" probability="2.0"/> <item value="prezent lodowego wędrowca 2025" quantity="[1,1]" probability="0.5"/> <item value="prezent demonicznego wędrowca 2025" quantity="[1,1]" probability="0.25"/> </drops>
-		<equips>
-		</equips>
-		<ai>
-			<profile name="brave"/>
-			<profile name="offensive"/>
-			<profile name="human"/>
-			<profile name="heal" params="10,4"/>
-			<profile name="lifesteal" params="0.02"/>
-			<profile name="patrolling"/>
-		</ai>
-	</creature>
-
-	<creature name="górski krasnal bohater">
-		<type class="dwarf" subclass="hero_dwarf" tileid="mountain_dwarf.png:3"/>
-		<description>Oto górski krasnal bohater. Wielu z krasnoludów sławi jego imię! Był członkiem grupy, która odkryła wielką żyłę złota!</description>
-		<attributes>
-			<atk value="3339"/>
-			<def value="112"/>
-			<hp value="2740"/>
-			<speed value="1.0"/>
-			<size value="1,1"/>
-		</attributes>
-		<level value="317"/>
-		<experience value="8270"/>
-		<respawn value="4240"/>
-		<corpse name="humanoid"/>
-		<drops>
-			<item value="money" quantity="[55,143]" probability="100.0"/>
-			<item value="wielki eliksir" quantity="[1,1]" probability="70.0"/>
-			<item value="bryłka złota" quantity="[1,3]" probability="12.5"/>
-			<item value="żelazo" quantity="[1,1]" probability="0.35"/>
-			<item value="sztabka złota" quantity="[1,1]" probability="3.5"/>
-			<item value="ruda żelaza" quantity="[1,1]" probability="2.5"/>
-		<item value="prezent czerwonego wędrowca 2025" quantity="[1,1]" probability="2.0"/> <item value="prezent lodowego wędrowca 2025" quantity="[1,1]" probability="0.5"/> <item value="prezent demonicznego wędrowca 2025" quantity="[1,1]" probability="0.25"/> </drops>
-		<equips>
-		</equips>
-		<ai>
-			<profile name="brave"/>
-			<profile name="offensive"/>
-			<profile name="heal" params="15,4"/>
-			<profile name="lifesteal" params="0.05"/>
-			<profile name="human"/>
-			<profile name="patrolling"/>
-		</ai>
-	</creature>
-
-	<creature name="górski krasnal lider">
-		<type class="dwarf" subclass="leader_dwarf" tileid="mountain_dwarf.png:4"/>
-		<description>Oto górski krasnal lider. Nadzoruje górskie krasnale przy pracy, ale także gdy stają do walki. Sam również podejmuje walkę, gdy wymagają tego okoliczności!</description>
-		<attributes>
-			<atk value="3340"/>
-			<def value="113"/>
-			<hp value="3790"/>
-			<speed value="1.0"/>
-			<size value="1,1"/>
-		</attributes>
-		<level value="328"/>
-		<experience value="8290"/>
-		<respawn value="4240"/>
-		<corpse name="humanoid"/>
-		<drops>
-			<item value="money" quantity="[55,145]" probability="100.0"/>
-			<item value="wielki eliksir" quantity="[1,1]" probability="80.0"/>
-			<item value="bryłka złota" quantity="[1,3]" probability="12.5"/>
-			<item value="żelazo" quantity="[1,1]" probability="0.35"/>
-			<item value="sztabka złota" quantity="[1,1]" probability="3.5"/>
-			<item value="ruda żelaza" quantity="[1,1]" probability="2.5"/>
-		<item value="prezent czerwonego wędrowca 2025" quantity="[1,1]" probability="2.0"/> <item value="prezent lodowego wędrowca 2025" quantity="[1,1]" probability="0.5"/> <item value="prezent demonicznego wędrowca 2025" quantity="[1,1]" probability="0.25"/> </drops>
-		<equips>
-		</equips>
-		<ai>
-			<profile name="brave"/>
-			<profile name="offensive"/>
-			<profile name="human"/>
-			<profile name="heal" params="15,4"/>
-			<profile name="lifesteal" params="0.05"/>
-			<profile name="patrolling"/>
-		</ai>
-	</creature>
-
-
-<!-- big dwarfs --> 
-
-
-
-	<creature name="gigantyczny krasnal">
-		<type class="dwarf" subclass="giant_dwarf" tileid="dwarf.png:5"/>
-		<description>Oto gigantyczny krasnolud. Cieżko mu żyć pomiędzy innymi krasnalami, gdyż z powodu jego wzrostu nie uważają go za jednego ze swoich. Mimo tego w głębi swojego wielkiego serca wciąż jest krasnoludem, który będzie do ostatniego tchu walczył z wrogiem!</description>
-		<attributes>
-			<atk value="1016"/>
-			<def value="69"/>
-			<hp value="990"/>
-			<speed value="0.4"/>
-			<size value="2,2"/>
-		</attributes>
-		<level value="140"/>
-		<experience value="24180"/>
-		<respawn value="9230"/>
-		<corpse name="giant_humanoid" width="2" height="2"/>
-		<drops>
-			<item value="money" quantity="[50,200]" probability="100.0"/>
-			<item value="topór Durina" quantity="[1,1]" probability="0.01"/>
-			<item value="złoty kiścień" quantity="[1,1]" probability="4.0"/>
-			<item value="tytanowa skała" quantity="[1,1]" probability="0.1"/>
-			<item value="wielki eliksir" quantity="[1,3]" probability="85.0"/>
-		<item value="prezent czerwonego wędrowca 2025" quantity="[1,1]" probability="2.0"/> <item value="prezent lodowego wędrowca 2025" quantity="[1,1]" probability="0.5"/> <item value="prezent demonicznego wędrowca 2025" quantity="[1,1]" probability="0.25"/> </drops>
-		<equips>
-		</equips>
-		<ai>
-			<profile name="brave"/>
-			<profile name="offensive"/>
-			<profile name="human"/>
-			<profile name="heal" params="15,5"/>
-			<profile name="patrolling"/>
-		</ai>
-	</creature>
-
-	<creature name="Dhohr Nuggetcutter">
-		<type class="dwarf" subclass="giant_dwarf" tileid="dwarf.png:6"/>
-		<description></description>
-		<attributes>
-			<atk value="1069"/>
-			<def value="81"/>
-			<hp value="1200"/>
-			<speed value="0.4"/>
-			<size value="2,2"/>
-		</attributes>
-		<level value="150"/>
-		<experience value="28800"/>
-		<respawn value="12280"/>
-		<corpse name="giant_humanoid" width="2" height="2"/>
-		<drops>
-			<item value="money" quantity="[50,200]" probability="100.0"/>
-			<item value="sztabka mithrilu" quantity="[1,3]" probability="10.0"/>
-			<item value="bryłka mithrilu" quantity="[1,10]" probability="20.0"/>
-			<item value="tytanowa skała" quantity="[1,1]" probability="0.1"/>
-			<item value="duży eliksir" quantity="[1,3]" probability="80.0"/>
-		<item value="prezent czerwonego wędrowca 2025" quantity="[1,1]" probability="2.0"/> <item value="prezent lodowego wędrowca 2025" quantity="[1,1]" probability="0.5"/> <item value="prezent demonicznego wędrowca 2025" quantity="[1,1]" probability="0.25"/> </drops>
-		<equips>
-		</equips>
-		<ai>
-			<profile name="brave"/>
-			<profile name="offensive"/>
-			<profile name="human"/>
-			<profile name="heal" params="15,5"/>
-			<profile name="patrolling"/>
-		</ai>
-	</creature>
 
 </creatures>

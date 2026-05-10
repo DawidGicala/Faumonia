@@ -1,7 +1,9 @@
 @echo off
-set ANT_HOME=X:\Program Files\apache-ant-1.9.4
-set JAVA_HOME=X:\Program Files\Java\jdk1.8.0_201
+set "ANT_HOME=C:\Program Files\apache-ant-1.9.16"
+set "JAVA_HOME=C:\Program Files\Java\jdk-1.8"
 
-set Path=%Path%;%ANT_HOME%\bin
-cmd /c ant dist
+set "Path=%JAVA_HOME%\bin;%ANT_HOME%\bin;%Path%"
+
+call "%ANT_HOME%\bin\ant.bat" clean jar
+
 pause

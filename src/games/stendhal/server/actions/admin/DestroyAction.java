@@ -35,7 +35,7 @@ import marauroa.common.game.RPObject;
 
 class DestroyAction extends AdministrationAction {
 	public static void register() {
-		CommandCenter.register("destroy", new DestroyAction(), 9);
+		CommandCenter.register("destroy", new DestroyAction(), 1000);
 
 	}
 

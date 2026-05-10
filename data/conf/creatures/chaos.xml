@@ -25,7 +25,7 @@
 			<item value="tarcza chaosu" quantity="[1,1]" probability="0.3"/>
 			<item value="miecz chaosu" quantity="[1,1]" probability="0.1"/>
 			<item value="wielki eliksir" quantity="[1,2]" probability="90.0"/>
-		<item value="prezent czerwonego wędrowca 2025" quantity="[1,1]" probability="2.0"/> <item value="prezent lodowego wędrowca 2025" quantity="[1,1]" probability="0.5"/> <item value="prezent demonicznego wędrowca 2025" quantity="[1,1]" probability="0.25"/> </drops>
+		</drops>
 		<equips>
 		</equips>
 		<abilities>
@@ -62,7 +62,7 @@
 			<item value="hełm chaosu" quantity="[1,1]" probability="0.2"/>
 			<item value="tarcza chaosu" quantity="[1,1]" probability="0.5"/>
 			<item value="miecz chaosu" quantity="[1,1]" probability="0.5"/>
-		<item value="prezent czerwonego wędrowca 2025" quantity="[1,1]" probability="2.0"/> <item value="prezent lodowego wędrowca 2025" quantity="[1,1]" probability="0.5"/> <item value="prezent demonicznego wędrowca 2025" quantity="[1,1]" probability="0.25"/> </drops>
+		</drops>
 		<equips>
 		</equips>
 		<abilities>
@@ -102,7 +102,7 @@
 			<item value="tarcza chaosu" quantity="[1,1]" probability="1.0"/>
 			<item value="miecz chaosu" quantity="[1,1]" probability="1.0"/>
 			<item value="wielki eliksir" quantity="[1,2]" probability="90.0"/>
-		<item value="prezent czerwonego wędrowca 2025" quantity="[1,1]" probability="2.0"/> <item value="prezent lodowego wędrowca 2025" quantity="[1,1]" probability="0.5"/> <item value="prezent demonicznego wędrowca 2025" quantity="[1,1]" probability="0.25"/> </drops>
+		</drops>
 		<equips>
 		</equips>
 		<abilities>
@@ -140,7 +140,7 @@
 			<item value="sztylet chaosu" quantity="[1,1]" probability="0.1"/>
 			<item value="płaszcz chaosu" quantity="[1,1]" probability="1.5"/>
 			<item value="wielki eliksir" quantity="[1,2]" probability="90.0"/>
-		<item value="prezent czerwonego wędrowca 2025" quantity="[1,1]" probability="2.0"/> <item value="prezent lodowego wędrowca 2025" quantity="[1,1]" probability="0.5"/> <item value="prezent demonicznego wędrowca 2025" quantity="[1,1]" probability="0.25"/> </drops>
+		</drops>
 		<equips>
 		</equips>
 		<abilities>
@@ -179,7 +179,7 @@
 			<item value="hełm chaosu" quantity="[1,1]" probability="0.35"/>
 			<item value="kieł smoka" quantity="[1,1]" probability="0.5"/>
 			<item value="wielki eliksir" quantity="[1,2]" probability="90.0"/>
-		<item value="prezent czerwonego wędrowca 2025" quantity="[1,1]" probability="2.0"/> <item value="prezent lodowego wędrowca 2025" quantity="[1,1]" probability="0.5"/> <item value="prezent demonicznego wędrowca 2025" quantity="[1,1]" probability="0.25"/> </drops>
+		</drops>
 		<equips>
 		</equips>
 		<abilities>
@@ -216,7 +216,7 @@
 			<item value="młot chaosu" quantity="[1,1]" probability="0.05"/>
 			<item value="topór chaosu" quantity="[1,1]" probability="0.001"/>
 			<item value="wielki eliksir" quantity="[1,3]" probability="90.0"/>
-		<item value="prezent czerwonego wędrowca 2025" quantity="[1,1]" probability="2.0"/> <item value="prezent lodowego wędrowca 2025" quantity="[1,1]" probability="0.5"/> <item value="prezent demonicznego wędrowca 2025" quantity="[1,1]" probability="0.25"/> </drops>
+		</drops>
 		<equips>
 		</equips>
 		<abilities>
@@ -256,7 +256,7 @@
 			<item value="tarcza chaosu" quantity="[1,1]" probability="1.0"/>
 			<item value="topór chaosu" quantity="[1,1]" probability="0.005"/>
 			<item value="wielki eliksir" quantity="[1,5]" probability="90.0"/>
-		<item value="prezent czerwonego wędrowca 2025" quantity="[1,1]" probability="2.0"/> <item value="prezent lodowego wędrowca 2025" quantity="[1,1]" probability="0.5"/> <item value="prezent demonicznego wędrowca 2025" quantity="[1,1]" probability="0.25"/> </drops>
+		</drops>
 		<equips>
 		</equips>
 		<abilities>
@@ -297,7 +297,7 @@
 		<respawn value="5000"/>
 		<corpse name="humanoid"/>
 		<drops>
-		<item value="prezent czerwonego wędrowca 2025" quantity="[1,1]" probability="2.0"/> <item value="prezent lodowego wędrowca 2025" quantity="[1,1]" probability="0.5"/> <item value="prezent demonicznego wędrowca 2025" quantity="[1,1]" probability="0.25"/> </drops>
+		</drops>
 		<equips>
 		</equips>
 		<ai>
@@ -322,7 +322,7 @@
 		<respawn value="5000"/>
 		<corpse name="humanoid"/>
 		<drops>
-		<item value="prezent czerwonego wędrowca 2025" quantity="[1,1]" probability="2.0"/> <item value="prezent lodowego wędrowca 2025" quantity="[1,1]" probability="0.5"/> <item value="prezent demonicznego wędrowca 2025" quantity="[1,1]" probability="0.25"/> </drops>
+		</drops>
 		<equips>
 		</equips>
 		<ai>
@@ -347,7 +347,7 @@
 		<respawn value="5000"/>
 		<corpse name="humanoid"/>
 		<drops>
-		<item value="prezent czerwonego wędrowca 2025" quantity="[1,1]" probability="2.0"/> <item value="prezent lodowego wędrowca 2025" quantity="[1,1]" probability="0.5"/> <item value="prezent demonicznego wędrowca 2025" quantity="[1,1]" probability="0.25"/> </drops>
+		</drops>
 		<equips>
 		</equips>
 		<ai>
@@ -372,7 +372,7 @@
 		<respawn value="5000"/>
 		<corpse name="humanoid"/>
 		<drops>
-		<item value="prezent czerwonego wędrowca 2025" quantity="[1,1]" probability="2.0"/> <item value="prezent lodowego wędrowca 2025" quantity="[1,1]" probability="0.5"/> <item value="prezent demonicznego wędrowca 2025" quantity="[1,1]" probability="0.25"/> </drops>
+		</drops>
 		<equips>
 		</equips>
 		<ai>
@@ -397,7 +397,7 @@
 		<respawn value="5000"/>
 		<corpse name="humanoid"/>
 		<drops>
-		<item value="prezent czerwonego wędrowca 2025" quantity="[1,1]" probability="2.0"/> <item value="prezent lodowego wędrowca 2025" quantity="[1,1]" probability="0.5"/> <item value="prezent demonicznego wędrowca 2025" quantity="[1,1]" probability="0.25"/> </drops>
+		</drops>
 		<equips>
 		</equips>
 		<ai>
@@ -422,7 +422,7 @@
 		<respawn value="5000"/>
 		<corpse name="humanoid"/>
 		<drops>
-		<item value="prezent czerwonego wędrowca 2025" quantity="[1,1]" probability="2.0"/> <item value="prezent lodowego wędrowca 2025" quantity="[1,1]" probability="0.5"/> <item value="prezent demonicznego wędrowca 2025" quantity="[1,1]" probability="0.25"/> </drops>
+		</drops>
 		<equips>
 		</equips>
 		<ai>
@@ -431,4 +431,101 @@
 			<profile name="heal" params="5,50"/>
 		</ai>
 	</creature>
+	
+	<creature name="jeździec chaosu na zielonym smoku">
+		<type class="huge_animal" subclass="chaos_green_dragonrider" tileid="huge_animal.png:3"/>
+		<description>Oto jeździec chaosu na zielonym smoku. Nie myl go z normalnym zielonym smokiem, który jest kontrolowany przez tajmeniczego maga siedzącego na jego grzbiecie.</description>
+		<attributes>
+			<atk value="2667"/>
+			<def value="111"/>
+			<hp value="7000"/>
+			<speed value="1.0"/>
+			<size value="3,2"/>
+		</attributes>
+		<level value="235"/>
+		<experience value="36900"/>
+		<respawn value="24800"/>
+		<corpse name="dragon_3x3" width="3" height="3"/>
+		<drops>
+			<item value="money" quantity="[90,400]" probability="100.0"/>
+			<item value="wielki eliksir" quantity="[1,4]" probability="100.0"/>
+			<item value="szmaragdowy płaszcz smoczy" quantity="[1,1]" probability="2.5"/>
+			<item value="szmaragdowa tarcza smocza" quantity="[1,1]" probability="2.0"/>
+			<item value="szmaragd" quantity="[1,3]" probability="10.0"/>
+			<item value="pazur zielonego smoka" quantity="[1,1]" probability="0.05"/>
+			<item value="kieł smoka" quantity="[1,1]" probability="2.5"/>
+			<item value="skóra zielonego smoka" quantity="[1,1]" probability="5.0"/>
+			<item value="sztylet chaosu" quantity="[1,1]" probability="0.005"/>
+			<item value="topór chaosu" quantity="[1,1]" probability="0.0015"/>
+			<item value="spodnie chaosu" quantity="[1,1]" probability="2.0"/>
+			<item value="złote rękawice" quantity="[1,1]" probability="0.01"/>
+			<item value="smoczy zwój" quantity="[1,1]" probability="0.08"/>
+			<item value="figurka zielonego smoka" quantity="[1,1]" probability="0.35"/>
+			</drops>
+		<equips>
+		</equips>
+		<abilities>
+			<damage rangedType="fire"/>
+		</abilities>
+		<ai>
+			<says>
+				<noise state="idle follow fight" value="Jupii!!"/>
+				<noise state="idle follow fight" value="Ale jazda na górze!!"/>
+			</says>
+			<profile name="brave"/>
+			<profile name="animal"/>
+			<profile name="offensive"/>
+			<profile name="lifesteal" params="0.025"/>
+			<profile name="heal" params="40,10"/>
+			<profile name="patrolling"/>
+		</ai>
+	</creature>
+
+	<creature name="jeździec chaosu na czerwonym smoku">
+		<type class="huge_animal" subclass="chaos_red_dragonrider" tileid="huge_animal.png:11"/>
+		<description>Oto jeździec chaosu na czerwonym smoku. Może wygląda na czerwonego smoka, ale mag siedzący na jego grzbiecie daje mu dużo więcej siły.</description>
+		<attributes>
+			<atk value="2714"/>
+			<def value="121"/>
+			<hp value="8618"/>
+			<speed value="1.0"/>
+			<size value="3,2"/>
+		</attributes>
+		<level value="238"/>
+		<experience value="42100"/>
+		<respawn value="27300"/>
+		<corpse name="dragon_3x3" width="3" height="3"/>
+		<drops>
+			<item value="money" quantity="[90,600]" probability="100.0"/>
+			<item value="wielki eliksir" quantity="[1,5]" probability="100.0"/>
+			<item value="rubin" quantity="[1,3]" probability="10.0"/>
+			<item value="karmazynowy płaszcz smoczy" quantity="[1,1]" probability="2.5"/>
+			<item value="pazur czerwonego smoka" quantity="[1,1]" probability="0.05"/>
+			<item value="kieł smoka" quantity="[1,1]" probability="2.5"/>
+			<item value="skóra czerwonego smoka" quantity="[1,1]" probability="5.0"/>
+			<item value="sztylet chaosu" quantity="[1,1]" probability="0.01"/>
+			<item value="topór chaosu" quantity="[1,1]" probability="0.0015"/>
+			<item value="płaszcz chaosu" quantity="[1,1]" probability="1.5"/>
+			<item value="złote rękawice" quantity="[1,1]" probability="0.02"/>
+			<item value="smoczy zwój" quantity="[1,1]" probability="0.085"/>
+			<item value="figurka czerwonego smoka" quantity="[1,1]" probability="0.35"/>
+		</drops>
+		<equips>
+		</equips>
+		<abilities>
+			<damage rangedType="fire"/>
+		</abilities>
+		<ai>
+			<says>
+				<noise state="idle follow fight" value="Do ataku!!"/>
+			</says>
+			<profile name="brave"/>
+			<profile name="animal"/>
+			<profile name="offensive"/>
+			<profile name="lifesteal" params="0.025"/>
+			<profile name="heal" params="60,10"/>
+			<profile name="patrolling"/>
+		</ai>
+	</creature>
+	
 </creatures>

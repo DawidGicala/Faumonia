@@ -343,7 +343,7 @@ public class Creature extends NPC {
 		setDescription(description);
 		setAtk(attack);
 		setDef(defense);
-		setXP(xp*2);
+		setXP(xp);
 		setBaseHP(hp);
 		setHP(hp);
 

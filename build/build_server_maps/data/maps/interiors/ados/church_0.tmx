@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE map SYSTEM "http://mapeditor.org/dtd/1.0/map.dtd">
+<map version="1.0" orientation="orthogonal" width="40" height="20" tilewidth="32" tileheight="32">
+ <tileset firstgid="1" name="Unbenannt" tilewidth="32" tileheight="32">
+  <image source="../../tileset/ground/ground_2.png"/>
+ </tileset>
+ <tileset firstgid="5" name="Unbenannt" tilewidth="32" tileheight="32">
+  <image source="../../tileset/building/castle.png"/>
+ </tileset>
+ <tileset firstgid="325" name="Unbenannt" tilewidth="32" tileheight="32">
+  <image source="../../tileset/furniture/table/fancy_blue_red.png"/>
+ </tileset>
+ <tileset firstgid="333" name="Unbenannt" tilewidth="32" tileheight="32">
+  <image source="../../tileset/furniture/table/grey_fancy.png"/>
+ </tileset>
+ <tileset firstgid="342" name="Unbenannt" tilewidth="32" tileheight="32">
+  <image source="../../tileset/furniture/table/grey_plain.png"/>
+ </tileset>
+ <tileset firstgid="351" name="Unbenannt" tilewidth="32" tileheight="32">
+  <image source="../../tileset/item/documents/book.png"/>
+ </tileset>
+ <tileset firstgid="355" name="Unbenannt" tilewidth="32" tileheight="32">
+  <image source="../../tileset/furniture/chair/throne.png"/>
+ </tileset>
+ <tileset firstgid="361" name="Unbenannt" tilewidth="32" tileheight="32">
+  <image source="../../tileset/building/stairs/stairs.png"/>
+ </tileset>
+ <tileset firstgid="365" name="Unbenannt" tilewidth="32" tileheight="32">
+  <image source="../../tileset/furniture/chair/wooden_pale.png"/>
+ </tileset>
+ <tileset firstgid="369" name="Unbenannt" tilewidth="32" tileheight="32">
+  <image source="../../tileset/furniture/light/iron_lamp.png"/>
+ </tileset>
+ <tileset firstgid="372" name="Unbenannt" tilewidth="32" tileheight="32">
+  <image source="../../tileset/furniture/light/flames.png"/>
+ </tileset>
+ <tileset firstgid="378" name="Unbenannt" tilewidth="32" tileheight="32">
+  <image source="../../tileset/item/statue/grey_stone.png"/>
+ </tileset>
+ <tileset firstgid="382" name="Unbenannt" tilewidth="32" tileheight="32">
+  <image source="../../tileset/building/window/painted.png"/>
+ </tileset>
+ <tileset firstgid="383" name="Unbenannt" tilewidth="32" tileheight="32">
+  <image source="../../tileset/plant/indoor/flower_vase.png"/>
+ </tileset>
+ <tileset firstgid="386" name="Unbenannt" tilewidth="32" tileheight="32">
+  <image source="../../tileset/plant/indoor/flower_baskets.png"/>
+ </tileset>
+ <tileset firstgid="389" name="Unbenannt" tilewidth="32" tileheight="32">
+  <image source="../../tileset/item/statue/cross.png"/>
+ </tileset>
+ <tileset firstgid="390" name="Unbenannt" tilewidth="32" tileheight="32">
+  <image source="../../tileset/item/statue/metal_and_stone.png"/>
+ </tileset>
+ <tileset firstgid="396" name="Unbenannt" tilewidth="32" tileheight="32">
+  <image source="../../tileset/logic/collision.png"/>
+ </tileset>
+ <tileset firstgid="397" name="Unbenannt" tilewidth="32" tileheight="32">
+  <image source="../../tileset/logic/portal.png"/>
+ </tileset>
+ <tileset firstgid="404" name="Unbenannt" tilewidth="32" tileheight="32">
+  <image source="../../tileset/logic/protection.png"/>
+ </tileset>
+ <tileset firstgid="405" name="../../tileset/ground/green_paving.png" tilewidth="32" tileheight="32">
+  <image source="../../tileset/ground/green_paving.png"/>
+ </tileset>
+ <layer name="0_floor" width="40" height="20">
+  <data encoding="base64" compression="gzip">
+   H4sIAAAAAAAAAO3RoREAIAwEwUCZ6SzdovCgErHizKud+VoRpZZ2vMfHxzfLd8vPnY+Pj4+vz5d8I/49Y/TIWYAMAAA=
+  </data>
+ </layer>
+ <layer name="1_terrain" width="40" height="20">
+  <data encoding="base64" compression="gzip">
+   H4sIAAAAAAAAALvFwMBwaZDia0D8jgEVdDMyDBhAt/sVEDNR4J7ZQLyOCDyDTPP/Uei+UiLVlZFp/qj7IGDUfdhBPBB7EoFjBsh9MDADaMZMLHgWhWZT033daG7rHmTuG+zhN+q+UfeNum/UfUPNfReohI8yoLrtMJXMBQBV2rMZgAwAAA==
+  </data>
+ </layer>
+ <layer name="2_object" width="40" height="20">
+  <data encoding="base64" compression="gzip">
+   H4sIAAAAAAAAAGNgQIA6xsHFxgZaCcjTEuCzO4sK7koGmpECxKk08KMv0Ew/NOxPoj1pQPXpQJxBA/cFAM0MBOIoKAaxgwYwrtFBMNAtIWg4lAj3uQLVuAGxOxB7MOIWoxTEAM2JRcNxRJjtCVTjBcTeQOzDiFsMBIoZMekaRuzilIJaEs0gVT0loJ4Rlaa2eloA9LKLFuVoHiN5NLXNBYECKvuviRE/n1SAzX2j4Uc8GA0/yswbDT/KzBsq4bcHiG9QAWMDlJq5G4gBsf68uIAMAAA=
+  </data>
+ </layer>
+ <layer name="3_roof" width="40" height="20">
+  <data encoding="base64" compression="gzip">
+   H4sIAAAAAAAAAGNgQAUdjAwDBgbS7lEwOEA8MA0k0CgdlDCSRtMbFDFi0lWM2MUpBdUkmkGq+pEG0Muu0bJsFIyCUTAKRsEowA0AATazy4AMAAA=
+  </data>
+ </layer>
+ <layer name="objects" width="40" height="20">
+  <data encoding="base64" compression="gzip">
+   H4sIAAAAAAAAAGNgGAXUABMZB9oFo2AUjIJRMApGwSgYBaNgFFAXgNq4MEwtAACU6aIBgAwAAA==
+  </data>
+ </layer>
+ <layer name="collision" width="40" height="20" opacity="0.39">
+  <data encoding="base64" compression="gzip">
+   H4sIAAAAAAAAAO2VQQoAIAgE7f8+uquElLlrdHAhRFIbkkyHiH6+rFb/pTwWhCd7B7f1d2ed8j2f1RM2HxpXwefFV/QXyY/yeTayz2JjvxEkz1p2vM1jzbuKOcrkq1DzYWo+TM2HqfkwZf7Q6P/KqjkBrlJf8IAMAAA=
+  </data>
+ </layer>
+ <layer name="protection" width="40" height="20" opacity="0.39">
+  <data encoding="base64" compression="gzip">
+   H4sIAAAAAAAAAO3DMQ0AAAwDoM7/W8F1sQsSeklVVVUfDopxMeGADAAA
+  </data>
+ </layer>
+</map>

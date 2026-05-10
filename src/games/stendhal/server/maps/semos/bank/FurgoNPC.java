@@ -58,9 +58,9 @@ public class FurgoNPC implements ZoneConfigurator {
 			@Override
 			protected void createDialog() {
 				addGreeting("Witam!");
-				addJob("Skupuje totemy aniołka. Możesz je dostać od Soro na mapiee startowej. Daj mi znać jak będziesz chciał je sprzedać: #oferta. Jeśli chcesz sprzedać napisz: #sprzedaj #statuetka #aniołka");
-				addHelp("Moge kupić od ciebie totemy anioła jeśli jakieś posiadasz. Jeśli chcesz sprzedać napisz: #sprzedaj #statuetka #aniołka");
-				addQuest("Nie mam dla ciebie żadnego zadania.");
+				addGreeting("Witam! Mogę kupić od ciebie statuetki aniołka, jeśli jakieś posiadasz. Jeśli chcesz sprzedać, napisz: #sprzedaj #statuetka #aniołka");
+				addJob("Skupuję statuetki aniołka. Możesz je dostać od Soro na mapie startowej. Jeśli chcesz sprzedać, napisz: #sprzedaj #statuetka #aniołka");
+				addHelp("Mogę kupić od ciebie statuetki aniołka, jeśli jakieś posiadasz. Jeśli chcesz sprzedać, napisz: #sprzedaj #statuetka #aniołka");
  				addGoodbye("Dowidzenia, dowidzenia!");
  				new BuyerAdder().addBuyer(this, new BuyerBehaviour(shops.get("furgo1")), true);
 			}

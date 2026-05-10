@@ -118,6 +118,6 @@ public class BanAction extends AdministrationAction {
 	 * registers the ban action
 	 */
 	public static void register() {
-		CommandCenter.register("ban", new BanAction(), 519);
+		CommandCenter.register("ban", new BanAction(), 500);
 	}
 }

@@ -397,7 +397,7 @@
 		<description>Oto Maczuga Czerwonego Wędrowca. Jej kolczasta głowica powstała z magicznego lodu, który nigdy nie topnieje, nawet przy ognisku. Zawadiaka podobno używał jej do „otwierania prezentów”, co wzbudzało niemały niepokój wśród elfów. To broń dla wojownika, który lubi, gdy każdy cios niesie echo zimowej psoty #zima #2025</description>
 		<implementation class-name="games.stendhal.server.entity.item.Item"/>
 		<attributes>
-			<atk value="24"/>
+			<atk value="1"/>
 			<rate value="6"/>
 			<lifesteal value="0.025"/>
 			<minlevel value="20"/>
@@ -420,7 +420,7 @@
 		<description>Oto Maczuga Lodowego Wędrowcy. Jej kryształowe serce skrywa moc lodowego kataklizmu, który potrafi obrócić potężne bestie w zimowy posąg. Każdy uderzony nią wróg słyszy echo pękających lodowców, zwiastun końca, który nadchodzi bez oddechu i bez litości #zima #2025</description>
 		<implementation class-name="games.stendhal.server.entity.item.Item"/>
 		<attributes>
-			<atk value="53"/>
+			<atk value="1"/>
 			<rate value="5"/>
 			<lifesteal value="0.05"/>
 			<minlevel value="150"/>
@@ -443,7 +443,7 @@
 		<description>Oto Maczuga Demonicznego Wędrowca, ciężka jak nienawiść uwięzionych w niej potworów; jedno uderzenie zamienia kości w pył i zostawia po sobie ciszę tak głęboką, że nawet śmierć boi się ją przerwać #zima #2025</description>
 		<implementation class-name="games.stendhal.server.entity.item.Item"/>
 		<attributes>
-			<atk value="82"/>
+			<atk value="1"/>
 			<rate value="6"/>
 			<lifesteal value="0.1"/>
 			<minlevel value="300"/>

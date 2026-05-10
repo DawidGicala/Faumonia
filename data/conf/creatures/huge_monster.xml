@@ -1,0 +1,427 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<creatures xmlns="stendhal" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="stendhal ../creatures.xsd ">
+
+	<creature name="królowa pająków">
+		<type class="huge_animal" subclass="giant_spider" tileid="huge_animal.png:5"/>
+		<description>Oto królowa pająków. Jej kończyny są długie i bardzo niebezpieczne.</description>
+		<attributes>
+			<atk value="989"/>
+			<def value="74"/>
+			<hp value="1000"/>
+			<speed value="1.0"/>
+			<size value="2,2"/>
+			<resistance value="100"/>
+		</attributes>
+		<level value="100"/>
+		<experience value="9200"/>
+		<respawn value="8200"/>
+		<corpse name="huge_animal" width="2" height="2"/>
+		<drops>
+			<item value="duży eliksir" quantity="[1,3]" probability="70.0"/>
+			<item value="mocna trucizna" quantity="[1,2]" probability="80.0"/>
+			<item value="money" quantity="[30,150]" probability="100.0"/>
+			<item value="gruczoł przędzy" quantity="[1,1]" probability="30.0"/>
+		</drops>
+		<equips>
+		</equips>
+		<ai>
+			<profile name="poisonous" params="5,trucizna uniwersalna"/>
+			<profile name="brave"/>
+			<profile name="animal"/>
+			<profile name="offensive"/>
+			<profile name="heal" params="5,5"/>
+			<profile name="patrolling"/>
+		</ai>
+	</creature>
+	
+	<creature name="coś">
+		<type class="huge_animal" subclass="thing" tileid="huge_animal.png:8"/>
+		<description>To jest coś. Niby nic, ale czymś jednak jest. Być może ludzkim mutantem lub może potworem z innego świata.</description>
+		<attributes>
+			<atk value="2177"/>
+			<def value="101"/>
+			<hp value="4250"/>
+			<speed value="1.0"/>
+			<size value="2,2"/>
+			<resistance value="100"/>
+		</attributes>
+		<level value="200"/>
+		<experience value="18300"/>
+		<respawn value="6150"/>
+		<corpse name="giant_humanoid" width="2" height="2"/>
+		<drops>
+			<item value="wielki eliksir" quantity="[1,3]" probability="100.0"/>
+			<item value="mocne antidotum" quantity="[1,6]" probability="80.0"/>
+			<item value="money" quantity="[100,700]" probability="100.0"/>
+			<item value="buty zielonego potwora" quantity="[1,1]" probability="2.5"/>
+			<item value="ząb potwora" quantity="[1,1]" probability="2.5"/>
+		</drops>
+		<equips>
+		</equips>
+		<ai>
+			<profile name="brave"/>
+			<profile name="animal"/>
+			<profile name="offensive"/>
+			<profile name="heal" params="40,10"/>
+			<profile name="patrolling"/>
+		</ai>
+	</creature>
+	
+	<creature name="olbrzymi ptasznik">
+		<type class="huge_animal" subclass="giant_spider_blue" tileid="faumonia_huge_animal.png:1"/>
+		<description>Oto olbrzymi ptasznik. Lepiej przygotuj antidotum, bo gdy cie ugryzie bez niego nie przeżyjesz.</description>
+		<attributes>
+			<atk value="2889"/>
+			<def value="164"/>
+			<hp value="4300"/>
+			<speed value="1.0"/>
+			<size value="2,2"/>
+			<resistance value="100"/>
+		</attributes>
+		<level value="300"/>
+		<experience value="124400"/>
+		<respawn value="38000"/>
+		<corpse name="huge_animal" width="2" height="2"/>
+		<drops>
+			<item value="wielki eliksir" quantity="[1,5]" probability="70.0"/>
+			<item value="zabójcza trucizna" quantity="[1,1]" probability="30.0"/>
+			<item value="money" quantity="[30,750]" probability="100.0"/>
+			<item value="gruczoł przędzy" quantity="[1,4]" probability="80.0"/>
+			<item value="magiczna tarcza płytowa" quantity="[1,1]" probability="0.25"/>
+		</drops>
+		<equips>
+		</equips>
+		<ai>
+			<profile name="poisonous" params="4,trucizna ptasznika"/>
+			<profile name="brave"/>
+			<profile name="animal"/>
+			<profile name="offensive"/>
+			<profile name="heal" params="3,20"/>
+			<profile name="patrolling"/>
+		</ai>
+	</creature>
+	
+	<creature name="superczłowiek olbrzym">
+		<type class="pol/olbrzymy" subclass="superczlowiek_gigant" tileid="pol_olbrzymy.png:0"/>
+		<description/>
+		<attributes>
+			<atk value="2484"/>
+			<def value="87"/>
+			<hp value="9618"/>
+			<speed value="1.0"/>
+			<size value="2,2"/>
+			<resistance value="100"/>
+		</attributes>
+		<level value="235"/>
+		<experience value="24800"/>	
+		<respawn value="21000"/>
+		<corpse name="giant_human"/>
+		<drops>
+			<item value="money" quantity="[10,450]" probability="100.0"/>
+			<item value="gigantyczny eliksir" quantity="[1,1]" probability="10.0"/>
+			<item value="wielki eliksir" quantity="[1,7]" probability="80.0"/>
+			<item value="tarta z rybnym nadzieniem" quantity="[1,2]" probability="60.0"/>
+			<item value="srebrny sztylecik" quantity="[1,1]" probability="0.25"/>
+		</drops>
+		<equips/>
+		<ai>
+			<says>
+				<noise state="idle follow fight" value="Oczyść buty nim wejdziesz w nasze progi."/>
+				<noise state="idle follow fight" value="Nauczę cię czci dla naszego sanktuarium."/>
+			</says>
+			<profile name="offensive"/>
+			<profile name="lifesteal" params="0.3"/>
+			<profile name="heal" params="50,20"/>
+			<profile name="human"/>
+			<profile name="patrolling"/>
+		</ai>
+	</creature>
+
+	<creature name="mega mag"> 
+		<type class="pol/olbrzymy" subclass="mega_mag" tileid="pol_olbrzymy.png:1"/>
+		<description/>
+		<attributes>
+			<atk value="1183"/>
+			<def value="78"/>
+			<hp value="15218"/>
+			<speed value="0.8"/>
+			<size value="2,2"/>
+			<resistance value="100"/>
+		</attributes>
+		<level value="175"/>
+		<experience value="28300"/>
+		<respawn value="74650"/>
+		<corpse name="giant_human"/>
+		<drops>
+			<item value="money" quantity="[80,1800]" probability="100.0"/>
+			<item value="magia deszczu" quantity="[1,223]" probability="62.5"/>
+			<item value="magia płomieni" quantity="[1,223]" probability="62.5"/>
+			<item value="magia ziemi" quantity="[1,323]" probability="72.5"/>
+			<item value="magia mroku" quantity="[1,173]" probability="62.5"/>
+			<item value="magia światła" quantity="[1,93]" probability="42.5"/>
+			<item value="bukłak z wodą" quantity="[12,25]" probability="80.0"/>
+			<item value="czarny sztylet" quantity="[1,1]" probability="0.02"/>
+		</drops>
+		<equips/>
+		<ai>
+			<profile name="brave"/>
+			<profile name="animal"/>
+			<profile name="offensive"/>
+			<profile name="heal" params="20,20"/>
+			<profile name="patrolling"/>
+		</ai>
+	</creature>
+
+	<creature name="gigantyczna lili">
+		<type class="pol/olbrzymy" subclass="gigantyczna_lili" tileid="pol_olbrzymy.png:2"/>
+		<description/>
+		<attributes>
+			<atk value="3350"/>
+			<def value="150"/>
+			<hp value="8000"/>
+			<speed value="1.0"/>
+			<size value="2,2"/>
+			<resistance value="100"/>
+		</attributes>
+		<level value="333"/>
+		<experience value="340000"/>
+		<respawn value="93200"/>
+		<corpse name="giant_humanoid"/>
+		<drops>
+			<item value="wielki eliksir" quantity="[1,18]" probability="75.0"/>
+			<item value="money" quantity="[500,3000]" probability="100.0"/>
+			<item value="serce olbrzyma" quantity="[1,1]" probability="100.0"/>
+			<item value="spinka" quantity="[1,1]" probability="0.1"/>
+		</drops>
+		<equips/>
+		<ai>
+			<says>
+				<noise state="idle follow fight" value="Czego tu szukasz śmiertelniku?"/>
+				<noise state="idle follow fight" value="Uciekaj stąd jeśli ci życie miłe!"/>
+			</says>
+			<profile name="brave"/>
+			<profile name="animal"/>
+			<profile name="offensive"/>
+			<profile name="lifesteal" params="0.05"/>
+			<profile name="heal" params="35,15"/>
+			<profile name="patrolling"/>
+		</ai>
+	</creature>
+
+	<creature name="gigantyczny kamienny golem">
+		<type class="huge_animal" subclass="stone_golem" tileid="faumonia_huge_animal.png:0"/>
+		<description>Oto gigantyczny kamienny golem. Ma bardzo potężne ręce i potrafi trzasnąć. </description>
+		<attributes>
+			<atk value="4086"/>
+			<def value="146"/>
+			<hp value="9300"/>
+			<speed value="1.0"/>
+			<size value="2,2"/>
+			<resistance value="100"/>
+		</attributes>
+		<level value="359"/>
+		<experience value="201100"/>
+		<respawn value="36000"/>
+		<corpse name="huge_animal" width="2" height="2"/>
+		<drops>
+			<item value="wielki eliksir" quantity="[1,13]" probability="90.0"/>
+			<item value="money" quantity="[30,1300]" probability="100.0"/>
+			<item value="rękawice płytowe" quantity="[1,1]" probability="0.25"/>
+			<item value="srebrny sztylecik" quantity="[1,1]" probability="0.1"/>
+		</drops>
+		<equips>
+		</equips>
+		<ai>
+			<profile name="brave"/>
+			<profile name="animal"/>
+			<profile name="offensive"/>
+			<profile name="heal" params="200,10"/>
+			<profile name="patrolling"/>
+		</ai>
+	</creature>
+
+
+
+	<creature name="orzeł gigant">
+		<type class="pol/ptaki_wielkie" subclass="orzel_gigant" tileid="pol_ptaki_wielkie.png:0"/>
+		<description/>
+		<attributes>
+			<atk value="1900"/>
+			<def value="100"/>
+			<hp value="5000"/>
+			<speed value="1.0"/>
+			<size value="2,2"/>
+			<resistance value="1"/>
+		</attributes>
+		<level value="270"/>
+		<experience value="80000"/>
+		<respawn value="74600"/>
+		<corpse name="giant_knight"/>
+		<drops>
+			<item value="udko" quantity="[11,37]" probability="100.0"/>
+			<item value="jajo" quantity="[1,5]" probability="90.0"/>
+			<item value="nakrapiane jajo" quantity="[1,1]" probability="20.0"/>
+			<item value="spinka" quantity="[1,1]" probability="0.01"/>
+			<item value="piórko" quantity="[1,10]" probability="100.0"/>
+			<item value="niebiańskie pióro" quantity="[1,1]" probability="1.0"/>
+		</drops>
+		<equips/>
+		<ai>
+			<says>
+			</says>
+			<profile name="brave"/>
+			<profile name="animal"/>
+			<profile name="offensive"/>
+			<profile name="lifesteal" params="0.05"/>
+			<profile name="heal" params="10,5"/>
+		</ai>
+	</creature>
+	
+	<creature name="krasnal golem">
+		<type class="giant_animal" subclass="dwarf_golem" tileid="giant_human.png:5"/>
+		<description>Oto krasnal golem. Niegdyś krasnal, dziś przemieniony w głaz przez starożytne siły. By ocalić przyjaciół inne krasnale z kamieni ułożyły golema! Od tego czasu mieszka on z nimi.</description>
+		<attributes>
+			<atk value="3339"/>
+			<def value="119"/>
+			<hp value="4700"/>
+			<speed value="1.0"/>
+			<size value="3,2"/>
+			<resistance value="100"/>
+		</attributes>
+		<level value="300"/>
+		<experience value="24800"/>
+		<respawn value="9000"/>
+		<corpse name="giant_humanoid" width="2" height="2"/>
+		<drops>
+			<item value="money" quantity="[30,150]" probability="100.0"/>
+			<item value="duży eliksir" quantity="[1,7]" probability="100.0"/>
+			<item value="kamienna zbroja" quantity="[1,1]" probability="3.0"/>
+			<item value="topór Durina" quantity="[1,1]" probability="0.2"/>
+			<item value="topór oburęczny magiczny" quantity="[1,1]" probability="0.1"/>
+			<item value="rękawice płytowe" quantity="[1,1]" probability="1.0"/>
+			<item value="tytanowa skała" quantity="[1,1]" probability="0.25"/>
+		</drops>
+		<equips>
+		</equips>
+		<ai>
+			<profile name="brave"/>
+			<profile name="animal"/>
+			<profile name="offensive"/>
+			<profile name="heal" params="5,50"/>
+		</ai>
+	</creature>
+
+	<creature name="Lord Durin">
+		<type class="dwarf" subclass="lord_durin" tileid="dwarf.png:7"/>
+		<description>Oto potężny Lord Durin, starożytny krasnolud, który prowadził niezliczoną ilość bitew.</description>
+		<attributes>
+			<atk value="3855"/>
+			<def value="140"/>
+			<hp value="12500"/>
+			<speed value="0.5"/>
+			<size value="2,2"/>
+			<resistance value="100"/>
+		</attributes>
+		<level value="425"/>
+		<experience value="220000"/>
+		<respawn value="57500"/>
+		<corpse name="giant_humanoid" width="2" height="2"/>
+		<drops>
+			<item value="wielki eliksir" quantity="[1,8]" probability="100.0"/>
+			<item value="halabarda czarna" quantity="[1,1]" probability="0.25"/>
+			<item value="topór Durina" quantity="[1,1]" probability="1.0"/>
+			<item value="zwój do krypty" quantity="[12,12]" probability="5.0"/>
+			<item value="money" quantity="[3000,8000]" probability="100.0"/>
+			<item value="tytanowa skała" quantity="[1,1]" probability="1.0"/>
+		</drops>
+		<equips>
+			<slot name="lhand" item="topór Durina" quantity="1"/>
+		</equips>
+		<ai>
+			<says>
+				<noise state="idle follow fight" value="Nie nazywaj mnie przyjacielem."/>
+			</says>
+			<profile name="brave"/>
+			<profile name="offensive"/>
+			<profile name="patrolling"/>
+		</ai>
+	</creature>
+	
+	<creature name="balrog">
+		<type class="mythical_animal" subclass="balrog" tileid="enormous_creature.png:0"/>
+		<description>Oto ogromny balrog. Ciosy wymierza wolno, ale straszliwie bolesne.</description>
+		<attributes>
+			<atk value="11557"/>
+			<def value="410"/>
+			<hp value="10000"/>
+			<speed value="1.0"/>
+			<size value="6,6"/>
+			<resistance value="100"/>
+		</attributes>
+		<level value="500"/>
+		<experience value="2480000"/>
+		<respawn value="430000"/>
+		<corpse name="enormous_humanoid" width="6" height="6"/>
+		<drops>
+			<item value="money" quantity="[2000,20000]" probability="100.0"/>
+			<item value="gigantyczny eliksir" quantity="[1,49]" probability="90.0"/>
+			<item value="spodnie zabójcy" quantity="[1,1]" probability="0.5"/>
+			<item value="zbroja zabójcy" quantity="[1,1]" probability="0.5"/>
+			<item value="buty zabójcy" quantity="[1,1]" probability="0.15"/>
+			<item value="bryłka mithrilu" quantity="[2,15]" probability="5.0"/>
+			<item value="sztabka mithrilu" quantity="[1,7]" probability="10.0"/>
+			<item value="ognisty miecz demonów" quantity="[1,1]" probability="0.35"/>
+			<item value="róg demona" quantity="[1,1]" probability="100.0"/>
+		</drops>
+		<equips>
+			<slot name="rhand" item="ognisty miecz demonów"/>
+		</equips>
+		<abilities>
+			<damage type="fire"/>
+			<susceptibility type="ice" value="1.2"/>
+			<susceptibility type="fire" value="0.7"/>
+		</abilities>
+		<ai>
+			<says>
+				<noise state="idle follow fight" value="Growwwwwwwrrrrrrr!"/>
+				<noise state="idle follow fight" value="Arrrrllllggggghhhh"/>
+			</says>
+			<profile name="brave"/>
+			<profile name="offensive"/>
+			<profile name="human"/>
+			<profile name="heal" params="25,10"/>
+			<profile name="patrolling"/>
+		</ai>
+	</creature>
+
+	<creature name="gashadokuro">
+		<type class="mythical_animal" subclass="gashadokuro" tileid="mythical_animal.png:1"/>
+		<description>Gigantyczna sylwetka zrobiona z kości zwana jako gashadokuro. Składa się z kości konających ludzi.</description>
+		<attributes>
+			<atk value="6000"/>
+			<def value="281"/>
+			<hp value="18000"/>
+			<speed value="0.7"/>
+			<size value="4,3"/>
+			<resistance value="100"/>
+		</attributes>
+		<level value="500"/>
+		<experience value="1250000"/>
+		<respawn value="150000"/>
+		<corpse name="mythical_animal" width="6" height="6"/>
+		<drops>
+			<item value="money" quantity="[5000,60000]" probability="100.0"/>
+			<item value="kij z czaszką" quantity="[1,1]" probability="3.0"/>
+		</drops>
+		<equips>
+		</equips>
+		<ai>
+			<profile name="brave"/>
+			<profile name="offensive"/>
+			<profile name="heal" params="50,15"/>
+			<profile name="patrolling"/>
+		</ai>
+	</creature>
+	
+</creatures>

@@ -1,0 +1,234 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<creatures xmlns="stendhal" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="stendhal ../creatures.xsd ">
+
+	<creature name="barbarzyńca">
+		<type class="human" subclass="barbarian" tileid="human_barbarian.png:3"/>
+		<description></description>
+		<attributes>
+			<atk value="665"/>
+			<def value="32"/>
+			<hp value="858"/>
+			<speed value="1.0"/>
+			<size value="1,1"/>
+		</attributes>
+		<level value="153"/>
+		<experience value="2860"/>
+		<respawn value="760"/>
+		<corpse name="humanoid"/>
+		<drops>
+			<item value="money" quantity="[10,40]" probability="100.0"/>
+			<item value="zbroja barbarzyńcy" quantity="[1,1]" probability="0.35"/>
+			<item value="tarcza barbarzyńcy" quantity="[1,1]" probability="0.35"/>
+			<item value="wielki eliksir" quantity="[1,1]" probability="30.0"/>
+			<item value="bryłka złota" quantity="[1,1]" probability="3.35"/>
+		</drops>
+		<equips>
+		</equips>
+		<ai>
+			<profile name="offensive"/>
+			<profile name="human"/>
+			<profile name="patrolling"/>
+		</ai>
+	</creature>
+
+	<creature name="barbarzyńca wilczur">
+		<type class="human" subclass="barbarian_wolf" tileid="human_barbarian.png:5"/>
+		<description></description>
+		<attributes>
+			<atk value="665"/>
+			<def value="32"/>
+			<hp value="892"/>
+			<speed value="1.0"/>
+			<size value="1,1"/>
+		</attributes>
+		<level value="161"/>
+		<experience value="2870"/>
+		<respawn value="800"/>
+		<corpse name="humanoid"/>
+		<drops>
+			<item value="money" quantity="[10,60]" probability="100.0"/>
+			<item value="wielki eliksir" quantity="[1,1]" probability="30.0"/>
+			<item value="zbroja barbarzyńcy" quantity="[1,1]" probability="0.35"/>
+			<item value="buty barbarzyńcy" quantity="[1,1]" probability="0.25"/>
+			<item value="hełm barbarzyńcy" quantity="[1,1]" probability="0.25"/>
+			<item value="spodnie barbarzyńcy" quantity="[1,1]" probability="0.75"/>
+			<item value="bryłka złota" quantity="[1,1]" probability="3.35"/>
+		</drops>
+		<equips>
+		</equips>
+		<ai>
+			<profile name="offensive"/>
+			<profile name="human"/>
+			<profile name="patrolling"/>
+		</ai>
+	</creature>
+
+	<creature name="barbarzyńca elitarny">
+		<type class="human" subclass="barbarian_elite" tileid="human_barbarian.png:1"/>
+		<description></description>
+		<attributes>
+			<atk value="673"/>
+			<def value="37"/>
+			<hp value="900"/>
+			<speed value="1.0"/>
+			<size value="1,1"/>
+		</attributes>
+		<level value="154"/>
+		<experience value="2940"/>
+		<respawn value="800"/>
+		<corpse name="humanoid"/>
+		<drops>
+			<item value="money" quantity="[10,50]" probability="100.0"/>
+			<item value="wielki eliksir" quantity="[1,1]" probability="30.0"/>
+			<item value="zbroja barbarzyńcy" quantity="[1,1]" probability="0.5"/>
+			<item value="buty barbarzyńcy" quantity="[1,1]" probability="0.2"/>
+			<item value="spodnie barbarzyńcy" quantity="[1,1]" probability="0.34"/>
+			<item value="tarcza barbarzyńcy" quantity="[1,1]" probability="0.75"/>
+			<item value="bryłka złota" quantity="[1,1]" probability="3.35"/>
+		</drops>
+		<equips>
+		</equips>
+		<ai>
+			<profile name="offensive"/>
+			<profile name="human"/>
+			<profile name="patrolling"/>
+		</ai>
+	</creature>
+
+	<creature name="barbarzyńca kapłan">
+		<type class="human" subclass="barbarian_priest" tileid="human_barbarian.png:4"/>
+		<description></description>
+		<attributes>
+			<atk value="675"/>
+			<def value="38"/>
+			<hp value="980"/>
+			<speed value="1.0"/>
+			<size value="1,1"/>
+		</attributes>
+		<level value="157"/>
+		<experience value="2980"/>
+		<respawn value="820"/>
+		<corpse name="humanoid"/>
+		<drops>
+			<item value="money" quantity="[10,50]" probability="100.0"/>
+			<item value="wielki eliksir" quantity="[1,1]" probability="30.0"/>
+			<item value="zbroja szamana barbarzyńców" quantity="[1,1]" probability="1.0"/>
+			<item value="bryłka złota" quantity="[1,1]" probability="3.35"/>
+		</drops>
+		<equips>
+		</equips>
+		<abilities>
+			<damage type="light"/>
+			<susceptibility type="dark" value="1.2"/>
+			<susceptibility type="light" value="0.7"/>
+		</abilities>
+		<ai>
+			<profile name="offensive"/>
+			<profile name="human"/>
+			<profile name="patrolling"/>
+		</ai>
+	</creature>
+	
+	<creature name="barbarzyńca szaman">
+		<type class="human" subclass="barbarian_chaman" tileid="human_barbarian.png:0"/>
+		<description></description>
+		<attributes>
+			<atk value="669"/>
+			<def value="37"/>
+			<hp value="955"/>
+			<speed value="1.0"/>
+			<size value="1,1"/>
+		</attributes>
+		<level value="160"/>
+		<experience value="3040"/>
+		<respawn value="860"/>
+		<corpse name="humanoid"/>
+		<drops>
+			<item value="money" quantity="[10,50]" probability="100.0"/>
+			<item value="wielki eliksir" quantity="[1,1]" probability="30.0"/>
+			<item value="hełm barbarzyńcy" quantity="[1,1]" probability="0.45"/>
+			<item value="zbroja szamana barbarzyńcy" quantity="[1,1]" probability="0.54"/>
+			<item value="zbroja barbarzyńców" quantity="[1,1]" probability="0.3"/>
+			<item value="spodnie barbarzyńcy" quantity="[1,1]" probability="0.4"/>
+			<item value="bryłka złota" quantity="[1,1]" probability="3.35"/>
+		</drops>
+		<equips>
+		</equips>
+		<ai>
+			<says>
+				<noise state="idle follow fight" value="Król powiedzieć - śmierć!"/>
+			</says>
+			<profile name="offensive"/>
+			<profile name="human"/>
+			<profile name="patrolling"/>
+		</ai>
+	</creature>
+
+	<creature name="barbarzyńca lider">
+		<type class="human" subclass="barbarian_leader" tileid="human_barbarian.png:2"/>
+		<description></description>
+		<attributes>
+			<atk value="662"/>
+			<def value="35"/>
+			<hp value="1045"/>
+			<speed value="1.0"/>
+			<size value="1,1"/>
+		</attributes>
+		<level value="163"/>
+		<experience value="3115"/>
+		<respawn value="980"/>
+		<corpse name="humanoid"/>
+		<drops>
+			<item value="money" quantity="[10,50]" probability="100.0"/>
+			<item value="tarcza barbarzyńcy" quantity="[1,1]" probability="0.3"/>
+			<item value="buty barbarzyńcy" quantity="[1,1]" probability="0.5"/>
+			<item value="wielki eliksir" quantity="[1,1]" probability="30.0"/>
+			<item value="hełm barbarzyńcy" quantity="[1,1]" probability="0.15"/>
+			<item value="bryłka złota" quantity="[1,1]" probability="3.35"/>
+		</drops>
+		<equips>
+		</equips>
+		<ai>
+			<says>
+				<noise state="idle follow fight" value="Ja zniszczyć ciebie!"/>
+			</says>
+			<profile name="offensive"/>
+			<profile name="human"/>
+			<profile name="patrolling"/>
+		</ai>
+	</creature>
+	
+		<creature name="król barbarzyńca">
+		<type class="human" subclass="barbarian_king" tileid="human_barbarian.png:6"/>
+		<description></description>
+		<attributes>
+			<atk value="691"/>
+			<def value="39"/>
+			<hp value="1200"/>
+			<speed value="1.0"/>
+			<size value="1,1"/>
+		</attributes>
+		<level value="168"/>
+		<experience value="3240"/>
+		<respawn value="1260"/>
+		<corpse name="humanoid"/>
+		<drops>
+			<item value="money" quantity="[60,100]" probability="100.0"/>
+			<item value="wielki eliksir" quantity="[1,2]" probability="60.0"/>
+			<item value="buty barbarzyńcy" quantity="[1,1]" probability="0.35"/>
+			<item value="hełm barbarzyńcy" quantity="[1,1]" probability="0.25"/>
+			<item value="bryłka złota" quantity="[1,5]" probability="1.35"/>
+		</drops>
+		<equips>
+		</equips>
+		<ai>
+			<profile name="offensive"/>
+			<profile name="human"/>
+		</ai>
+	</creature>
+	
+	
+	
+
+</creatures>

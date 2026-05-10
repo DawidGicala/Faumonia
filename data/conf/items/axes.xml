@@ -500,7 +500,7 @@
 		<description>Oto Topór Czerwonego Wędrowca. Jego ostrze wykuto tak ostre, że podobno potrafi przeciąć nawet zamarzniętą belkę z pracowni Mikołaja, czego Zawadiaka oczywiście spróbował, ku rozpaczy elfów. Czerwono-biała rękojeść nie tylko wygląda świątecznie, ale też rozgrzewa dłoń w najgorszej zamieci. To broń dla wojowników, którzy lubią, gdy każdy cios niesie w sobie odrobinę świątecznej energii #zima #2025</description>
 		<implementation class-name="games.stendhal.server.entity.item.Item"/>
 		<attributes>
-			<atk value="17"/>
+			<atk value="1"/>
 			<rate value="4"/>
 			<lifesteal value="0.025"/>
 			<minlevel value="20"/>
@@ -523,8 +523,8 @@
 		<description>Oto Dwustronny Topór Lodowego Wędrowcy. Jego ostrza powstały z kryształowych łusek pradawnych smoków, a każdy jego zamach pozostawia w powietrzu smużkę lodu, która nie topnieje przez całą zimę. To broń furii północy, gotowa rozłupać nawet mury Cytadeli Ciemności #zima #2025</description>
 		<implementation class-name="games.stendhal.server.entity.item.Item"/>
 		<attributes>
-			<atk value="61"/>
-			<rate value="7"/>
+			<atk value="1"/>
+			<rate value="4"/>
 			<lifesteal value="0.05"/>
 			<minlevel value="150"/>
 			<autobind value=""/>
@@ -546,8 +546,8 @@
 		<description>Oto Topór Demonicznego Wędrowca, którego ostrza powstały z rozdartych szczęk lodowych bestii; każdy zamach to głód, który wraca po więcej, a czerwień w jego oku rozbłyska mocniej z każdym oddechem wroga #zima #2025</description>
 		<implementation class-name="games.stendhal.server.entity.item.Item"/>
 		<attributes>
-			<atk value="72"/>
-			<rate value="5"/>
+			<atk value="1"/>
+			<rate value="4"/>
 			<lifesteal value="0.1"/>
 			<minlevel value="300"/>
 			<autobind value=""/>

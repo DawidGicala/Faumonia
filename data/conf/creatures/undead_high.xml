@@ -1,0 +1,339 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<creatures xmlns="stendhal" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="stendhal ../creatures.xsd ">
+
+		<creature name="licho">
+		<type class="undead" subclass="lich" tileid="undead_fallen.png:7"/>
+		<description>Oto licho obleczone w karmazyn. Twór zesłany na wieczną tułaczkę.</description>
+		<attributes>
+			<atk value="396"/>
+			<def value="21"/>
+			<hp value="400"/>
+			<speed value="1.0"/>
+			<size value="1,1"/>
+			<resistance value="100"/>
+			<visibility value="100"/>
+		</attributes>
+		<level value="80"/>
+		<experience value="1480"/>
+		<respawn value="1050"/>
+		<corpse name="humanoid"/>
+		<drops>
+			<item value="duży eliksir" quantity="[1,1]" probability="70.0"/>
+			<item value="money" quantity="[1,30]" probability="100.0"/>
+			<item value="płaszcz licha" quantity="[1,1]" probability="0.25"/>
+			<item value="miecz dusz" quantity="[1,1]" probability="0.005"/>
+			<item value="zwój do pałacu" quantity="[1,1]" probability="0.1"/>
+		</drops>
+		<equips>
+		</equips>
+		<abilities>
+			<damage type="fire"/>
+		</abilities>
+		<ai>
+			<profile name="offensive"/>
+			<profile name="human"/>
+			<profile name="heal" params="5,50"/>
+			<profile name="patrolling"/>
+		</ai>
+	</creature>
+
+	<creature name="wysokie licho">
+		<type class="undead" subclass="high_lich" tileid="undead_fallen.png:4"/>
+		<description>Oto przerażające wysokie licho, które gotowe jest na poszlachtowanie ciebie na wiele magicznych sposobów.</description>
+		<attributes>
+			<atk value="411"/>
+			<def value="23"/>
+			<hp value="350"/>
+			<speed value="1.0"/>
+			<size value="1,1"/>
+			<resistance value="100"/>
+			<visibility value="100"/>
+		</attributes>
+		<level value="84"/>
+		<experience value="1880"/>
+		<respawn value="1175"/>
+		<corpse name="humanoid"/>
+		<drops>
+			<item value="duży eliksir" quantity="[1,1]" probability="80.0"/>
+			<item value="money" quantity="[1,35]" probability="100.0"/>
+			<item value="płaszcz licha" quantity="[1,1]" probability="0.5"/>
+			<item value="miecz dusz" quantity="[1,1]" probability="0.01"/>
+			<item value="zwój do pałacu" quantity="[1,1]" probability="0.25"/>
+		</drops>
+		<equips>
+		</equips>
+		<abilities>
+			<damage type="fire"/>
+		</abilities>
+		<ai>
+			<profile name="offensive"/>
+			<profile name="human"/>
+			<profile name="heal" params="5,50"/>
+			<profile name="patrolling"/>
+		</ai>
+	</creature>
+
+<creature name="martwe licho">
+		<type class="undead" subclass="dead_lich" tileid="undead_fallen.png:0"/>
+		<description></description>
+		<attributes>
+			<atk value="424"/>
+			<def value="26"/>
+			<hp value="400"/>
+			<speed value="1.0"/>
+			<size value="1,1"/>
+			<resistance value="100"/>
+			<visibility value="100"/>
+		</attributes>
+		<level value="86"/>
+		<experience value="2030"/>
+		<respawn value="1425"/>
+		<corpse name="humanoid"/>
+		<drops>
+			<item value="duży eliksir" quantity="[1,2]" probability="80.0"/>
+			<item value="money" quantity="[1,43]" probability="100.0"/>
+			<item value="płaszcz licha" quantity="[1,1]" probability="1.15"/>
+			<item value="miecz dusz" quantity="[1,1]" probability="0.025"/>
+			<item value="zwój do pałacu" quantity="[1,1]" probability="0.5"/>
+		</drops>
+		<equips>
+		</equips>
+		<abilities>
+			<damage type="fire"/>
+		</abilities>
+		<ai>
+			<profile name="offensive"/>
+			<profile name="human"/>
+			<profile name="heal" params="5,50"/>
+			<profile name="patrolling"/>
+		</ai>
+	</creature>
+
+
+	<creature name="diabelski mnich">
+		<type class="undead" subclass="devil_monk" tileid="undead_fallen.png:8"/>
+		<description>Oto diabelski mnich. Jest wyznawcą diabelskiego kultu odprawiającego mroczne obrzędy.</description>
+		<attributes>
+			<atk value="1009"/>
+			<def value="31"/>
+			<hp value="4000"/>
+			<speed value="1.0"/>
+			<size value="2,1"/>
+			<resistance value="100"/>
+			<visibility value="100"/>
+		</attributes>
+		<level value="205"/>
+		<experience value="32000"/>
+		<respawn value="10500"/>
+		<corpse name="humanoid"/>
+		<drops>
+			<item value="money" quantity="[100,600]" probability="100.0"/>
+			<item value="krew magiczna" quantity="[1,1]" probability="100.0"/>
+			<item value="duży eliksir" quantity="[1,3]" probability="90.0"/>
+			<item value="wielki eliksir" quantity="[1,3]" probability="55.0"/>
+			<item value="młot wulkanów" quantity="[1,1]" probability="0.01"/>
+			<item value="kosa czarna" quantity="[1,1]" probability="0.25"/>
+			<item value="miecz dusz" quantity="[1,1]" probability="0.005"/>
+			<item value="demoniczny zwój" quantity="[1,1]" probability="10.0"/>
+		</drops>
+		<equips>
+		</equips>
+		<abilities>
+			<damage type="dark"/>
+			<susceptibility type="dark" value="0.8"/>
+			<susceptibility type="light" value="1.15"/>
+		</abilities>
+		<ai>
+			<profile name="offensive"/>
+			<profile name="human"/>
+			<profile name="lifesteal" params="0.05"/>
+			<profile name="patrolling"/>
+		</ai>
+	</creature>
+	
+	<creature name="panna wampir">
+		<type class="vampire" subclass="vampire_lord_bride" tileid="vampire.png:0"/>
+		<description>Oto panna wampir. Została wskrzeszona z zmarłych przez nikczemnego lorda wampira.</description>
+		<attributes>
+			<atk value="844"/>
+			<def value="4"/>
+			<hp value="6000"/>
+			<speed value="1.0"/>
+			<size value="1,1"/>
+		</attributes>
+		<level value="192"/>
+		<experience value="4140"/>
+		<respawn value="1330"/>
+		<corpse name="humanoid"/>
+		<drops>
+			<item value="money" quantity="[10,30]" probability="75.0"/>
+			<item value="antidotum" quantity="[1,5]" probability="70.0"/>
+			<item value="wielki eliksir" quantity="[1,2]" probability="60.0"/>
+			<item value="płaszcz wampirzy" quantity="[1,1]" probability="0.05"/>
+			<item value="wampirzy zwój" quantity="[1,1]" probability="5.0"/>
+			<item value="truchło wampira" quantity="[1,1]" probability="100.0"/>
+		</drops>
+		<equips>
+		</equips>
+		<abilities>
+			<damage type="dark"/>
+		</abilities>
+		<ai>
+			<profile name="offensive"/>
+			<profile name="lifesteal" params="0.5"/>
+			<profile name="human"/>
+			<profile name="heal" params="5,50"/>
+			<profile name="patrolling"/>
+		</ai>
+	</creature>
+
+	<creature name="wampirzyca">
+		<type class="vampire" subclass="vampirette" tileid="vampire.png:4"/>
+		<description>Oto wampirzyca. Strzeż sięjej ostrych zębów! Chce wyssać twoją krew i zmienić ciebie w wampira!</description>
+		<attributes>
+			<atk value="803"/>
+			<def value="13"/>
+			<hp value="990"/>
+			<speed value="1.0"/>
+			<size value="1,1"/>
+		</attributes>
+		<level value="174"/>
+		<experience value="3190"/>
+		<respawn value="860"/>
+		<corpse name="humanoid"/>
+		<drops>
+			<item value="money" quantity="[10,50]" probability="100.0"/>
+			<item value="antidotum" quantity="[1,2]" probability="30.0"/>
+			<item value="truchło wampira" quantity="[1,1]" probability="100.0"/>
+			<item value="płaszcz wampirzy" quantity="[1,1]" probability="0.01"/>
+			<item value="krwiopijca" quantity="[1,1]" probability="0.001"/>
+			<item value="wielki eliksir" quantity="[1,2]" probability="60.0"/>
+		</drops>
+		<equips>
+		</equips>
+		<abilities>
+			<damage type="dark"/>
+		</abilities>
+		<ai>
+			<profile name="offensive"/>
+			<profile name="lifesteal" params="0.8"/>
+			<profile name="human"/>
+			<profile name="heal" params="5,50"/>
+			<profile name="patrolling"/>
+		</ai>
+	</creature>
+	
+	<creature name="zła wampirzyca">
+		<type class="vampire" subclass="vampirette_evil" tileid="vampire.png:5"/>
+		<description>Oto zła wampirzyca. Jest bardzo agresywna! Chce wyssać twoją krew i zmienić ciebie w wampira!</description>
+		<attributes>
+			<atk value="823"/>
+			<def value="16"/>
+			<hp value="980"/>
+			<speed value="1.0"/>
+			<size value="1,1"/>
+		</attributes>
+		<level value="177"/>
+		<experience value="3240"/>
+		<respawn value="860"/>
+		<corpse name="humanoid"/>
+		<drops>
+			<item value="money" quantity="[10,50]" probability="100.0"/>
+			<item value="antidotum" quantity="[1,2]" probability="30.0"/>
+			<item value="truchło wampira" quantity="[1,1]" probability="100.0"/>
+			<item value="płaszcz wampirzy" quantity="[1,1]" probability="0.01"/>
+			<item value="krwiopijca" quantity="[1,1]" probability="0.001"/>
+			<item value="wielki eliksir" quantity="[1,2]" probability="60.0"/>
+			</drops>
+		<equips>
+		</equips>
+		<abilities>
+			<damage type="dark"/>
+		</abilities>
+		<ai>
+			<profile name="offensive"/>
+			<profile name="lifesteal" params="0.8"/>
+			<profile name="human"/>
+			<profile name="heal" params="5,50"/>
+			<profile name="patrolling"/>
+		</ai>
+	</creature>
+	
+	<creature name="wampir szaman">
+		<type class="vampire" subclass="vampirette_transformation" tileid="vampire.png:6"/>
+		<description>Oto wampir szaman. Jako czlowiek przez lata kształcił się na maga lecz został ugryziony... Uważaj może mieć wielką moc!</description>
+		<attributes>
+			<atk value="911"/>
+			<def value="5"/>
+			<hp value="3000"/>
+			<speed value="1.0"/>
+			<size value="1,1"/>
+		</attributes>
+		<level value="180"/>
+		<experience value="3280"/>
+		<respawn value="860"/>
+		<corpse name="humanoid"/>
+		<drops>
+			<item value="money" quantity="[10,50]" probability="100.0"/>
+			<item value="antidotum" quantity="[1,2]" probability="30.0"/>
+			<item value="truchło wampira" quantity="[1,1]" probability="100.0"/>
+			<item value="płaszcz wampirzy" quantity="[1,1]" probability="0.015"/>
+			<item value="krwiopijca" quantity="[1,1]" probability="0.0015"/>
+			<item value="wielki eliksir" quantity="[1,2]" probability="60.0"/>
+			<item value="magia mroku" quantity="[1,120]" probability="60.0"/>
+			<item value="magia światła" quantity="[1,79]" probability="25.0"/>
+			<item value="trójząb Trzygłowa" quantity="[1,1]" probability="1.0"/>
+			<item value="różdżka Strzyboga" quantity="[1,1]" probability="2.5"/>
+		</drops>
+		<equips>
+			<slot name="rhand" item="luk waga 712" quantity="1"/>
+		</equips>
+		<abilities>
+			<damage rangedType="dark"/>
+		</abilities>
+		<ai>
+			<profile name="archer"/>
+			<profile name="offensive"/>
+			<profile name="lifesteal" params="2.3"/>
+			<profile name="human"/>
+			<profile name="heal" params="5,50"/>
+		</ai>
+	</creature>
+
+	<creature name="lord wampir">
+		<type class="vampire" subclass="vampire_lord" tileid="vampire.png:2"/>
+		<description>Oto lord wampir. Strzeż się, bo chodzi mu tylko o twoją krew!</description>
+		<attributes>
+			<atk value="944"/>
+			<def value="14"/>
+			<hp value="4000"/>
+			<speed value="1.0"/>
+			<size value="1,1"/>
+		</attributes>
+		<level value="200"/>
+		<experience value="4290"/>
+		<respawn value="1900"/>
+		<corpse name="humanoid"/>
+		<drops>
+			<item value="money" quantity="[15,100]" probability="100.0"/>
+			<item value="wielki eliksir" quantity="[1,4]" probability="90.0"/>
+			<item value="mocne antidotum" quantity="[1,2]" probability="60.0"/>
+			<item value="płaszcz wampirzy" quantity="[1,1]" probability="0.5"/>
+			<item value="krwiopijca" quantity="[1,1]" probability="0.05"/>
+			<item value="truchło wampira" quantity="[1,1]" probability="100.0"/>
+			</drops>
+		<equips>
+		</equips>
+		<abilities>
+			<damage type="dark"/>
+		</abilities>
+		<ai>
+			<profile name="offensive"/>
+			<profile name="lifesteal" params="1"/>
+			<profile name="human"/>
+			<profile name="heal" params="5,50"/>
+		</ai>
+	</creature>
+	
+</creatures>

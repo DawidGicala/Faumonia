@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.0" orientation="orthogonal" renderorder="right-down" width="35" height="24" tilewidth="32" tileheight="32" nextobjectid="1">
+ <tileset firstgid="1" name="../../tileset/ground/ground_2.png" tilewidth="32" tileheight="32" tilecount="4" columns="4">
+  <image source="../../tileset/ground/ground_2.png" trans="ffffff" width="128" height="32"/>
+ </tileset>
+ <tileset firstgid="5" name="../../tileset/ground/indoor/grey_skull.png" tilewidth="32" tileheight="32" tilecount="8" columns="4">
+  <image source="../../tileset/ground/indoor/grey_skull.png" trans="ff00ff" width="128" height="64"/>
+ </tileset>
+ <tileset firstgid="13" name="../../tileset/building/wall/int_wall_pale.png" tilewidth="32" tileheight="32" tilecount="16" columns="2">
+  <image source="../../tileset/building/wall/int_wall_pale.png" trans="ff00ff" width="64" height="256"/>
+ </tileset>
+ <tileset firstgid="29" name="../../tileset/building/wall/int_wall_purple.png" tilewidth="32" tileheight="32" tilecount="20" columns="2">
+  <image source="../../tileset/building/wall/int_wall_purple.png" trans="ff00ff" width="64" height="320"/>
+ </tileset>
+ <tileset firstgid="49" name="../../tileset/building/entrance/pale_red_ns.png" tilewidth="32" tileheight="32" tilecount="36" columns="9">
+  <image source="../../tileset/building/entrance/pale_red_ns.png" trans="ff00ff" width="288" height="128"/>
+ </tileset>
+ <tileset firstgid="85" name="../../tileset/logic/collision.png" tilewidth="32" tileheight="32" tilecount="1" columns="1">
+  <image source="../../tileset/logic/collision.png" width="32" height="32"/>
+ </tileset>
+ <tileset firstgid="86" name="../../tileset/logic/protection.png" tilewidth="32" tileheight="32" tilecount="2" columns="2">
+  <image source="../../tileset/logic/protection.png" width="64" height="32"/>
+ </tileset>
+ <layer name="0_floor" width="35" height="24">
+  <data encoding="base64" compression="gzip">
+   H4sIAAAAAAAAC+3OoREAMAgEsBd0/5XZAUOPi4hPJSkYeAtcXFxcXFxcXK5c+FMDHulwkyANAAA=
+  </data>
+ </layer>
+ <layer name="1_terrain" width="35" height="24">
+  <data encoding="base64" compression="gzip">
+   H4sIAAAAAAAAC+3BAQ0AAADCoPdP7ewBFAAAADcqfde4IA0AAA==
+  </data>
+ </layer>
+ <layer name="2_object" width="35" height="24">
+  <data encoding="base64" compression="gzip">
+   H4sIAAAAAAAAC+3QuQ2AMBBEUTfAkXCk3KRABjQAZNj918IUgJG9kDEjvXClr1WKe1oOocAGOxzC++ymJYYeak8naDCC2w4iS0vp8L8vV7CFLWxhC1vYwha2vGxpofI0wAiT4LaxtKQQCMywwCq8Txz+9/ddW4NRFCANAAA=
+  </data>
+ </layer>
+ <layer name="objects" width="35" height="24">
+  <data encoding="base64" compression="gzip">
+   H4sIAAAAAAAAC+3BAQ0AAADCoPdP7ewBFAAAADcqfde4IA0AAA==
+  </data>
+ </layer>
+ <layer name="collision" width="35" height="24" opacity="0.29">
+  <data encoding="base64" compression="gzip">
+   H4sIAAAAAAAAC+3OwQkAQAgDwTRp/61cD6KHjwnsN0wlKanZz7GwsLCwsLCwTFg6bf3qXg+AdJLvIA0AAA==
+  </data>
+ </layer>
+ <layer name="protection" width="35" height="24" opacity="0.47">
+  <data encoding="base64" compression="gzip">
+   H4sIAAAAAAAAC+3DAQ0AAADCoKe0fxSLwMaqqaqq2gEwGB2sIA0AAA==
+  </data>
+ </layer>
+</map>

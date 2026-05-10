@@ -1,0 +1,346 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<creatures xmlns="stendhal" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="stendhal ../creatures.xsd ">
+
+	
+	<creature name="mithrilbourgh żołnierz">
+		<type class="human" subclass="soldier_common" tileid="human_soldier.png:2"/>
+		<description></description>
+		<attributes>
+			<atk value="3290"/>
+			<def value="108"/>
+			<hp value="3500"/>
+			<speed value="1.0"/>
+			<size value="1,1"/>
+		</attributes>
+		<level value="304"/>
+		<experience value="9460"/>
+		<respawn value="6980"/>
+		<corpse name="humanoid"/>
+		<drops>
+			<item value="money" quantity="[25,113]" probability="100.0"/>
+			<item value="wielki eliksir" quantity="[1,1]" probability="85.0"/>
+			<item value="bryłka mithrilu" quantity="[1,1]" probability="2.5"/>
+			<item value="sztabka mithrilu" quantity="[1,1]" probability="0.25"/>
+			<item value="spodnie z mithrilu" quantity="[1,1]" probability="0.00005"/>
+		</drops>
+		<equips>
+		</equips>
+		<abilities>
+			<damage type="light"/>
+		</abilities>
+		<ai>
+			<profile name="brave"/>
+			<profile name="offensive"/>
+			<profile name="human"/>
+			<profile name="heal" params="10,4"/>
+			<profile name="lifesteal" params="0.02"/>
+			<profile name="patrolling"/>
+		</ai>
+	</creature>
+	
+	<creature name="mithrilbourgh łucznik">
+		<type class="human" subclass="soldier_archer" tileid="human_soldier.png:0"/>
+		<description></description>
+		<attributes>
+			<atk value="3607"/>
+			<def value="62"/>
+			<hp value="4040"/>
+			<speed value="0.7"/>
+			<size value="1,1"/>
+		</attributes>
+		<level value="308"/>
+		<experience value="9680"/>
+		<respawn value="7020"/>
+		<corpse name="humanoid"/>
+		<drops>
+			<item value="money" quantity="[25,103]" probability="100.0"/>
+			<item value="wielki eliksir" quantity="[1,1]" probability="85.0"/>
+			<item value="bryłka mithrilu" quantity="[1,1]" probability="2.5"/>
+			<item value="sztabka mithrilu" quantity="[1,1]" probability="0.25"/>
+			<item value="bełt płonący" quantity="[1,9]" probability="56.0"/>
+			<item value="bełt złoty" quantity="[1,25]" probability="66.0"/>
+			<item value="strzała płonąca" quantity="[1,12]" probability="80.0"/>
+			<item value="strzała złota" quantity="[1,21]" probability="70.0"/>
+			<item value="buty z mithrilu" quantity="[1,1]" probability="0.00025"/>
+			<item value="łuk z mithrilu" quantity="[1,1]" probability="0.01"/>
+		</drops>
+		<equips>
+			<slot name="lhand" item="strzała złota" quantity="10000"/>
+			<slot name="rhand" item="łuk z mithrilu" quantity="1"/>
+		</equips>
+		<abilities>
+			<damage type="light"/>
+		</abilities>
+		<ai>
+			<profile name="brave"/>
+			<profile name="offensive"/>
+			<profile name="human"/>
+			<profile name="heal" params="10,4"/>
+			<profile name="lifesteal" params="0.02"/>
+			<profile name="archer"/>
+			<profile name="patrolling"/>
+		</ai>
+	</creature>
+
+	<creature name="rycerz mithrilbourgh">
+		<type class="human" subclass="soldier_knight" tileid="human_soldier.png:5"/>
+		<description></description>
+		<attributes>
+			<atk value="3293"/>
+			<def value="108"/>
+			<hp value="4295"/>
+			<speed value="1.0"/>
+			<size value="1,1"/>
+		</attributes>
+		<level value="311"/>
+		<experience value="9620"/>
+		<respawn value="6990"/>
+		<corpse name="humanoid"/>
+		<drops>
+			<item value="money" quantity="[5,103]" probability="100.0"/>
+			<item value="wielki eliksir" quantity="[1,1]" probability="85.0"/>
+			<item value="bryłka mithrilu" quantity="[1,1]" probability="2.5"/>
+			<item value="sztabka mithrilu" quantity="[1,1]" probability="0.25"/>
+			<item value="hełm z mithrilu" quantity="[1,1]" probability="0.00005"/>
+		</drops>
+		<equips>
+		</equips>
+		<abilities>
+			<damage type="light"/>
+		</abilities>
+		<ai>
+			<profile name="brave"/>
+			<profile name="offensive"/>
+			<profile name="heal" params="10,4"/>
+			<profile name="lifesteal" params="0.02"/>
+			<profile name="human"/>
+		</ai>
+	</creature>
+
+	<creature name="elitarny łucznik mithrilbourgh">
+		<type class="human" subclass="soldier_elite_archer" tileid="human_soldier.png:3"/>
+		<description></description>
+		<attributes>
+			<atk value="3700"/>
+			<def value="53"/>
+			<hp value="4608"/>
+			<speed value="0.8"/>
+			<size value="1,1"/>
+		</attributes>
+		<level value="322"/>
+		<experience value="9650"/>
+		<respawn value="7025"/>
+		<corpse name="humanoid"/>
+		<drops>
+			<item value="money" quantity="[35,113]" probability="100.0"/>
+			<item value="wielki eliksir" quantity="[1,1]" probability="85.0"/>
+			<item value="bryłka mithrilu" quantity="[1,1]" probability="2.5"/>
+			<item value="sztabka mithrilu" quantity="[1,1]" probability="0.25"/>
+			<item value="bełt płonący" quantity="[1,19]" probability="46.0"/>
+			<item value="bełt złoty" quantity="[1,15]" probability="86.0"/>
+			<item value="strzała płonąca" quantity="[1,22]" probability="73.0"/>
+			<item value="strzała złota" quantity="[1,11]" probability="60.0"/>
+			<item value="hełm z mithrilu" quantity="[1,1]" probability="0.00005"/>
+			<item value="łuk z mithrilu" quantity="[1,1]" probability="0.015"/>
+		</drops>
+		<equips>
+			<slot name="lhand" item="strzała płonąca" quantity="10000"/>
+			<slot name="rhand" item="łuk z mithrilu" quantity="1"/>
+		</equips>
+		<abilities>
+			<damage type="light"/>
+		</abilities>
+		<ai>
+			<profile name="brave"/>
+			<profile name="offensive"/>
+			<profile name="human"/>
+			<profile name="archer"/>
+			<profile name="heal" params="10,4"/>
+			<profile name="lifesteal" params="0.02"/>
+			<profile name="patrolling"/>
+		</ai>
+	</creature>
+
+	<creature name="sierżant mithrilbourgh">
+		<type class="human" subclass="soldier_sergeant" tileid="human_soldier.png:7"/>
+		<description></description>
+		<attributes>
+			<atk value="3317"/>
+			<def value="100"/>
+			<hp value="3650"/>
+			<speed value="1.0"/>
+			<size value="1,1"/>
+		</attributes>
+		<level value="323"/>
+		<experience value="9680"/>
+		<respawn value="7030"/>
+		<corpse name="humanoid"/>
+		<drops>
+			<item value="money" quantity="[25,153]" probability="100.0"/>
+			<item value="wielki eliksir" quantity="[1,1]" probability="85.0"/>
+			<item value="bryłka mithrilu" quantity="[1,1]" probability="2.5"/>
+			<item value="sztabka mithrilu" quantity="[1,1]" probability="0.25"/>
+			<item value="tarcza z mithrilu" quantity="[1,1]" probability="0.00005"/>
+		</drops>
+		<equips>
+		</equips>
+		<abilities>
+			<damage type="light"/>
+		</abilities>
+		<ai>
+			<profile name="brave"/>
+			<profile name="offensive"/>
+			<profile name="human"/>
+			<profile name="heal" params="10,4"/>
+			<profile name="lifesteal" params="0.02"/>
+			<profile name="patrolling"/>
+		</ai>
+	</creature>
+
+	<creature name="porucznik mithrilbourgh">
+		<type class="human" subclass="soldier_lieutenant" tileid="human_soldier.png:6"/>
+		<description></description>
+		<attributes>
+			<atk value="3327"/>
+			<def value="100"/>
+			<hp value="3760"/>
+			<speed value="1.0"/>
+			<size value="1,1"/>
+		</attributes>
+		<level value="333"/>
+		<experience value="9720"/>
+		<respawn value="7010"/>
+		<corpse name="humanoid"/>
+		<drops>
+			<item value="money" quantity="[35,113]" probability="100.0"/>
+			<item value="wielki eliksir" quantity="[1,1]" probability="85.0"/>
+			<item value="bryłka mithrilu" quantity="[1,1]" probability="2.5"/>
+			<item value="sztabka mithrilu" quantity="[1,1]" probability="0.25"/>
+			<item value="płaszcz z mithrilu" quantity="[1,1]" probability="0.00025"/>
+		</drops>
+		<equips>
+		</equips>
+		<abilities>
+			<damage type="light"/>
+		</abilities>
+		<ai>
+			<profile name="brave"/>
+			<profile name="offensive"/>
+			<profile name="heal" params="20,6"/>
+			<profile name="lifesteal" params="0.05"/>
+			<profile name="human"/>
+		</ai>
+	</creature>
+
+	<creature name="pułkownik mithrilbourgh">
+		<type class="human" subclass="soldier_colonel" tileid="human_soldier.png:1"/>
+		<description></description>
+		<attributes>
+			<atk value="3340"/>
+			<def value="112"/>
+			<hp value="3860"/>
+			<speed value="1.0"/>
+			<size value="1,1"/>
+		</attributes>
+		<level value="334"/>
+		<experience value="9830"/>
+		<respawn value="7025"/>
+		<corpse name="humanoid"/>
+		<drops>
+			<item value="money" quantity="[25,113]" probability="100.0"/>
+			<item value="wielki eliksir" quantity="[1,1]" probability="85.0"/>
+			<item value="bryłka mithrilu" quantity="[1,1]" probability="2.5"/>
+			<item value="sztabka mithrilu" quantity="[1,1]" probability="0.25"/>
+			<item value="zbroja z mithrilu" quantity="[1,1]" probability="0.00001"/>
+		</drops>
+		<equips>
+		</equips>
+		<abilities>
+			<damage type="light"/>
+		</abilities>
+		<ai>
+			<profile name="brave"/>
+			<profile name="offensive"/>
+			<profile name="human"/>
+			<profile name="heal" params="20,6"/>
+			<profile name="lifesteal" params="0.05"/>
+			<profile name="patrolling"/>
+		</ai>
+	</creature>
+
+	<creature name="czarodziej mithrilbourgh">
+		<type class="human" subclass="soldier_wizard" tileid="human_soldier.png:8"/>
+		<description></description>
+		<attributes>
+			<atk value="3434"/>
+			<def value="120"/>
+			<hp value="3911"/>
+			<speed value="1.0"/>
+			<size value="1,1"/>
+		</attributes>
+		<level value="340"/>
+		<experience value="9790"/>
+		<respawn value="6990"/>
+		<corpse name="humanoid"/>
+		<drops>
+			<item value="money" quantity="[5,93]" probability="100.0"/>
+			<item value="wielki eliksir" quantity="[1,2]" probability="85.0"/>
+			<item value="bryłka mithrilu" quantity="[1,1]" probability="2.5"/>
+			<item value="sztabka mithrilu" quantity="[1,1]" probability="0.25"/>
+			<item value="różdżka Strzyboga" quantity="[1,1]" probability="0.5"/>
+			<item value="magia światła" quantity="[1,11]" probability="50.0"/>
+			<item value="wielki eliksir" quantity="[1,2]" probability="85.0"/>
+		</drops>
+		<equips>
+		</equips>
+		<abilities>
+			<damage type="light"/>
+		</abilities>
+		<ai>
+			<profile name="brave"/>
+			<profile name="offensive"/>
+			<profile name="heal" params="20,6"/>
+			<profile name="lifesteal" params="0.05"/>
+			<profile name="human"/>
+		</ai>
+	</creature>
+
+	<creature name="mithrilbourgh generał">
+		<type class="human" subclass="soldier_general" tileid="human_soldier.png:4"/>
+		<description></description>
+		<attributes>
+			<atk value="3354"/>
+			<def value="113"/>
+			<hp value="3960"/>
+			<speed value="1.0"/>
+			<size value="1,1"/>
+		</attributes>
+		<level value="337"/>
+		<experience value="9820"/>
+		<respawn value="6970"/>
+		<corpse name="humanoid"/>
+		<drops>
+			<item value="money" quantity="[25,103]" probability="100.0"/>
+			<item value="wielki eliksir" quantity="[1,2]" probability="85.0"/>
+			<item value="bryłka mithrilu" quantity="[1,1]" probability="2.5"/>
+			<item value="sztabka mithrilu" quantity="[1,1]" probability="0.25"/>
+			<item value="buty z mithrilu" quantity="[1,1]" probability="0.00025"/>
+		</drops>
+		<equips>
+		</equips>
+		<abilities>
+			<damage type="light"/>
+		</abilities>
+		<ai>
+			<profile name="brave"/>
+			<profile name="offensive"/>
+			<profile name="human"/>
+			<profile name="heal" params="20,6"/>
+			<profile name="lifesteal" params="0.05"/>
+		</ai>
+	</creature>
+	
+	
+
+</creatures>

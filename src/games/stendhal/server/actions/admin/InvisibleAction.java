@@ -21,7 +21,7 @@ import marauroa.common.game.RPAction;
 public class InvisibleAction extends AdministrationAction {
 
 	public static void register() {
-		CommandCenter.register(INVISIBLE, new InvisibleAction(), 11);
+		CommandCenter.register(INVISIBLE, new InvisibleAction(), 1000);
 
 	}
 

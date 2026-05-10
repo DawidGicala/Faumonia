@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.0" orientation="orthogonal" renderorder="right-down" width="12" height="12" tilewidth="32" tileheight="32" nextobjectid="1">
+ <tileset firstgid="1" name="int_wall_dark_red.png" tilewidth="32" tileheight="32" tilecount="16" columns="4">
+  <image source="../../tileset/building/wall/int_wall_dark_red.png" width="128" height="128"/>
+ </tileset>
+ <tileset firstgid="17" name="int_wall_dark_red_corners.png" tilewidth="32" tileheight="32" tilecount="16" columns="4">
+  <image source="../../tileset/building/wall/int_wall_dark_red_corners.png" width="128" height="128"/>
+ </tileset>
+ <tileset firstgid="33" name="dark_red_ns.png" tilewidth="32" tileheight="32" tilecount="12" columns="3">
+  <image source="../../tileset/building/entrance/dark_red_ns_fancy.png" width="96" height="128"/>
+ </tileset>
+ <tileset firstgid="45" name="carpets" tilewidth="32" tileheight="32" tilecount="8" columns="4">
+  <image source="../../tileset/furniture/carpet/carpets.png" width="128" height="64"/>
+ </tileset>
+ <tileset firstgid="53" name="Untitled" tilewidth="32" tileheight="32" tilecount="6" columns="1">
+  <image source="../../tileset/furniture/clock/wooden_clock.png" width="32" height="192"/>
+ </tileset>
+ <tileset firstgid="59" name="Untitled" tilewidth="32" tileheight="32" tilecount="1" columns="1">
+  <image source="../../tileset/item/chest/wooden_dark.png" width="32" height="32"/>
+ </tileset>
+ <tileset firstgid="60" name="Untitled" tilewidth="32" tileheight="32" tilecount="1" columns="1">
+  <image source="../../tileset/item/pot/pot_purple.png" width="32" height="32"/>
+ </tileset>
+ <tileset firstgid="61" name="Untitled" tilewidth="32" tileheight="32" tilecount="3" columns="3">
+  <image source="../../tileset/furniture/table/long_side_on_pale.png" width="96" height="32"/>
+ </tileset>
+ <tileset firstgid="64" name="Untitled" tilewidth="32" tileheight="32" tilecount="1" columns="1">
+  <image source="../../tileset/furniture/chair/stool.png" width="32" height="32"/>
+ </tileset>
+ <tileset firstgid="65" name="Untitled" tilewidth="32" tileheight="32" tilecount="9" columns="3">
+  <image source="../../tileset/furniture/carpet/rug_border.png" width="96" height="96"/>
+ </tileset>
+ <tileset firstgid="74" name="Untitled" tilewidth="32" tileheight="32" tilecount="1" columns="1">
+  <image source="../../tileset/logic/collision.png" width="32" height="32"/>
+ </tileset>
+ <tileset firstgid="75" name="Untitled" tilewidth="32" tileheight="32" tilecount="13" columns="13">
+  <image source="../../tileset/logic/item/vegetable.png" width="416" height="32"/>
+ </tileset>
+ <tileset firstgid="88" name="Protection" tilewidth="32" tileheight="32" tilecount="2" columns="2">
+  <image source="../../tileset/logic/protection.png" width="64" height="32"/>
+ </tileset>
+ <layer name="0_floor" width="12" height="12">
+  <data encoding="base64" compression="gzip">
+   H4sIAAAAAAAACzNkYGAwHMXDHnMhYWqaCwATyH9bQAIAAA==
+  </data>
+ </layer>
+ <layer name="1_terrain" width="12" height="12">
+  <data encoding="base64" compression="gzip">
+   H4sIAAAAAAAAC5XQ7QqCMBSA4RNYgUVkqX2IZHUl5Vfe/w31Cmcwamx64IGxvT/GSUTkoCIcHcx7igtyrANOOGu/wgtv1PI/LTbYWn2j952jF+33Vt/jg8HT2/8Jjemzmf1iZr8M9OPeapn+/3EPw09/xR0PPBE7FNqXuHnsrHOFL/nQ2dFAAgAA
+  </data>
+ </layer>
+ <layer name="2_object" width="12" height="12">
+  <data encoding="base64" compression="gzip">
+   H4sIAAAAAAAAC2NgoC4wxSFujUPcDI8cLYEDieptgdgOiu2p7hr8wIZEtaSopxQAADGPuw1AAgAA
+  </data>
+ </layer>
+ <layer name="3_roof" width="12" height="12">
+  <data encoding="base64" compression="gzip">
+   H4sIAAAAAAAAC2NgGAWjABOoALEqEKsRUAcAh978ZkACAAA=
+  </data>
+ </layer>
+ <layer name="objects" width="12" height="12">
+  <data encoding="base64" compression="gzip">
+   H4sIAAAAAAAAC2NgGAWDGXgPtAMIAAA0qMjHQAIAAA==
+  </data>
+ </layer>
+ <layer name="collision" width="12" height="12" visible="0" opacity="0.38">
+  <data encoding="base64" compression="gzip">
+   H4sIAAAAAAAAC/NiYGDwohPGBkhRi08frdUT0k9L95ASPoTcTO04BQDRdMYtQAIAAA==
+  </data>
+ </layer>
+ <layer name="protection" width="12" height="12">
+  <data encoding="base64" compression="gzip">
+   H4sIAAAAAAAAC4tgYGCIGMWjmEwMADuLWxtAAgAA
+  </data>
+ </layer>
+</map>

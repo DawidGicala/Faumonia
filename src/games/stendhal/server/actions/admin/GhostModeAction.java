@@ -29,7 +29,7 @@ import marauroa.server.db.command.DBCommandQueue;
 public class GhostModeAction extends AdministrationAction {
 
 	public static void register() {
-		CommandCenter.register(GHOSTMODE, new GhostModeAction(), 10);
+		CommandCenter.register(GHOSTMODE, new GhostModeAction(), 1000);
 
 	}
 

@@ -830,7 +830,7 @@
 		<description>Oto Zbroja Czerwonego Wędrowca. Stworzono ją z grubego materiału wzmocnionego zaklęciami, dzięki którym nawet największa zamieć nie była w stanie zatrzymać jej właściciela. Futrzane obszycia nie tylko ogrzewają, ale też podobno mruczą, gdy w pobliżu pojawia się świąteczna magia. To pancerz idealny dla wojowników, którzy lubią wyglądać groźnie, a czuć się przytulnie #zima #2025</description>
 		<implementation class-name="games.stendhal.server.entity.item.Item"/>
 		<attributes>
-			<def value="20"/>
+			<def value="1"/>
 			<minlevel value="20"/>
 			<autobind value=""/>
 		</attributes>
@@ -850,7 +850,7 @@
 		<description>Oto Zbroja Lodowego Wędrowcy. Jej płyty powstały z kryształów zamrożonych przez sam oddech prastarego smoka, a złote runy oplatają powierzchnię niczym stalowe żyły pulsujące mocą. W chwili zagrożenia zbroja przywołuje wir śniegu, który otacza wojownika i odpiera ciosy niewidzialną tarczą zimy #zima #2025</description>
 		<implementation class-name="games.stendhal.server.entity.item.Item"/>
 		<attributes>
-			<def value="42"/>
+			<def value="1"/>
 			<minlevel value="150"/>
 			<autobind value=""/>
 		</attributes>
@@ -870,7 +870,7 @@
 		<description>Oto Zbroja Demonicznego Wędrowca, stworzona z pancerzy martwych potworów, które wciąż pragną walki; każdy jej fragment oddycha lodem i krwią, a wojownik ubrany w nią czuje, jak mrok szarpie za jego serce, domagając się kolejnej ofiary #zima #2025</description>
 		<implementation class-name="games.stendhal.server.entity.item.Item"/>
 		<attributes>
-			<def value="63"/>
+			<def value="1"/>
 			<minlevel value="300"/>
 			<autobind value=""/>
 		</attributes>

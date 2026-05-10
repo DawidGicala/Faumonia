@@ -623,7 +623,7 @@
 		<description>Oto Czapka Czerwonego Wędrowca. Należała do wędrowca, który przemierzał Faumonię, zostawiając w śniegu nie tylko ślady, lecz także drobne prezenty dla przypadkowych wojowników. Jej futrzany brzeg podobno ogrzewa nawet wtedy, gdy wiatr chce odgryźć uszy. Mówią, że czapka unosi się lekko, jakby wciąż chciała ruszyć dalej #zima #2025</description>
 		<implementation class-name="games.stendhal.server.entity.item.Item"/>
 		<attributes>
-			<def value="19"/>
+			<def value="1"/>
 			<minlevel value="20"/>
 			<autobind value=""/>
 		</attributes>
@@ -643,7 +643,7 @@
 		<description>Oto Hełm Lodowego Wędrowcy. Wykuty z lodowych kryształów, które przetrwały oddech Pradawnych Smoków, bije od niego chłód tak głęboki, że potrafi zamrozić echo własnego imienia. Złote runy chronią umysł przed szeptami mrozu, by wojownik zawsze pozostał panem swojej siły #zima #2025</description>
 		<implementation class-name="games.stendhal.server.entity.item.Item"/>
 		<attributes>
-			<def value="55"/>
+			<def value="1"/>
 			<minlevel value="150"/>
 			<autobind value=""/>
 		</attributes>
@@ -663,7 +663,7 @@
 		<description>Oto Hełm Demonicznego Wędrowca, wykuty z kości lodowych bestii, które nigdy naprawdę nie zginęły; czerwone oczy czuwają nawet wtedy, gdy wojownik śpi, a kto go nosi, przestaje uciekać przed mrozem, staje się nim #zima #2025</description>
 		<implementation class-name="games.stendhal.server.entity.item.Item"/>
 		<attributes>
-			<def value="81"/>
+			<def value="1"/>
 			<minlevel value="300"/>
 			<autobind value=""/>
 		</attributes>

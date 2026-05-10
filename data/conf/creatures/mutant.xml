@@ -3,8 +3,66 @@
 	xsi:schemaLocation="stendhal ../creatures.xsd ">
 
 
-<!-- monsters  --> 
 
+<creature name="mumia">
+		<type class="mummy" subclass="mummy" tileid="mummy.png:0"/>
+		<description>Widzisz mumię egipską. Chyba uciekła z sarkofagu.</description>
+		<attributes>
+			<atk value="164"/>
+			<def value="32"/>
+			<hp value="155"/>
+			<speed value="0.4"/>
+			<size value="1,1"/>
+		</attributes>
+		<level value="50"/>
+		<experience value="920"/>
+		<respawn value="560"/>
+		<corpse name="humanoid"/>
+		<drops>
+			<item value="money" quantity="[3,20]" probability="90.0"/>
+			<item value="zatruty sztylet egipski" quantity="[1,1]" probability="0.005"/>
+			<item value="chopesz" quantity="[1,1]" probability="0.1"/>
+			<item value="napój z oliwką" quantity="[1,4]" probability="67.5"/>
+		</drops>
+		<equips>
+		</equips>
+		<ai>
+			<profile name="brave"/>
+			<profile name="offensive"/>
+			<profile name="human"/>
+			<profile name="patrolling"/>
+		</ai>
+	</creature>
+
+	<creature name="mumia królewska">
+		<type class="mummy" subclass="royal_mummy" tileid="mummy.png:1"/>
+		<description>Oto mumia królewska. Zastanawiasz się co trzyma królewską duszę od zaznania pokoju.</description>
+		<attributes>
+			<atk value="193"/>
+			<def value="31"/>
+			<hp value="220"/>
+			<speed value="0.4"/>
+			<size value="1,1"/>
+		</attributes>
+		<level value="54"/>
+		<experience value="1040"/>
+		<respawn value="640"/>
+		<corpse name="humanoid"/>
+		<drops>
+			<item value="money" quantity="[5,33]" probability="100.0"/>
+			<item value="chopesz" quantity="[1,1]" probability="0.1"/>
+			<item value="zatruty sztylet egipski" quantity="[1,1]" probability="0.005"/>
+			<item value="napój z oliwką" quantity="[1,6]" probability="75.5"/>
+		</drops>
+		<equips>
+		</equips>
+		<ai>
+			<profile name="brave"/>
+			<profile name="offensive"/>
+			<profile name="human"/>
+			<profile name="patrolling"/>
+		</ai>
+	</creature>
 
 
 	<creature name="świetlisty potwór">
@@ -27,7 +85,7 @@
 			<item value="zbroja płytowa" quantity="[1,1]" probability="3.5"/>
 			<item value="buty żelazne" quantity="[1,1]" probability="2.5"/>
 			<item value="złoty kiścień" quantity="[1,1]" probability="1.0"/>
-		<item value="prezent czerwonego wędrowca 2025" quantity="[1,1]" probability="2.0"/> <item value="prezent lodowego wędrowca 2025" quantity="[1,1]" probability="0.5"/> <item value="prezent demonicznego wędrowca 2025" quantity="[1,1]" probability="0.25"/> </drops>
+		</drops>
 		<equips>
 		</equips>
 		<ai>
@@ -57,7 +115,7 @@
 			<item value="zbroja płytowa" quantity="[1,1]" probability="2.5"/>
 			<item value="sztylet mroku" quantity="[1,1]" probability="0.35"/>
 			<item value="hełm wikingów" quantity="[1,1]" probability="3.5"/>
-		<item value="prezent czerwonego wędrowca 2025" quantity="[1,1]" probability="2.0"/> <item value="prezent lodowego wędrowca 2025" quantity="[1,1]" probability="0.5"/> <item value="prezent demonicznego wędrowca 2025" quantity="[1,1]" probability="0.25"/> </drops>
+		</drops>
 		<equips>
 		</equips>
 		<ai>
@@ -85,7 +143,7 @@
 			<item value="money" quantity="[10,30]" probability="100.0"/>
 			<item value="okoń" quantity="[1,4]" probability="25.0"/>
 			<item value="czarny sztylet" quantity="[1,1]" probability="0.001"/>
-		<item value="prezent czerwonego wędrowca 2025" quantity="[1,1]" probability="2.0"/> <item value="prezent lodowego wędrowca 2025" quantity="[1,1]" probability="0.5"/> <item value="prezent demonicznego wędrowca 2025" quantity="[1,1]" probability="0.25"/> </drops>
+		</drops>
 		<equips>
 		</equips>
 		<ai>
@@ -114,7 +172,7 @@
 			<item value="money" quantity="[1,60]" probability="100.0"/>
 			<item value="czarny sztylet" quantity="[1,1]" probability="0.0001"/>
 			<item value="zbroja światła" quantity="[1,1]" probability="0.002"/>
-		<item value="prezent czerwonego wędrowca 2025" quantity="[1,1]" probability="2.0"/> <item value="prezent lodowego wędrowca 2025" quantity="[1,1]" probability="0.5"/> <item value="prezent demonicznego wędrowca 2025" quantity="[1,1]" probability="0.25"/> </drops>
+		</drops>
 		<equips>
 		</equips>
 		<ai>
@@ -125,58 +183,33 @@
 			<profile name="patrolling"/>
 		</ai>
 	</creature>
-
-		<creature name="eksperyment imperium">
-		<type class="mutant" subclass="imperial_experiment" tileid="mutant.png:4"/>
-		<description></description>
+	
+	<creature name="minotaur">
+		<type class="minotaur" subclass="minotaur" tileid="minotaur.png:1"/>
+		<description>Oto minotaur. Wydostał się jakoś ze swojej samotni i biega wściekły!</description>
 		<attributes>
-			<atk value="2272"/>
-			<def value="126"/>
-			<hp value="3650"/>
-			<speed value="0.9"/>
+			<atk value="484"/>
+			<def value="32"/>
+			<hp value="650"/>
+			<speed value="0.8"/>
 			<size value="1,1"/>
 		</attributes>
-		<level value="244"/>
-		<experience value="8900"/>
-		<respawn value="5100"/>
+		<level value="125"/>
+		<experience value="1860"/>
+		<respawn value="820"/>
 		<corpse name="humanoid"/>
 		<drops>
-			<item value="money" quantity="[1,80]" probability="100.0"/>
-			<item value="wielki eliksir" quantity="[1,2]" probability="70.0"/>
-		<item value="prezent czerwonego wędrowca 2025" quantity="[1,1]" probability="2.0"/> <item value="prezent lodowego wędrowca 2025" quantity="[1,1]" probability="0.5"/> <item value="prezent demonicznego wędrowca 2025" quantity="[1,1]" probability="0.25"/> </drops>
-		<equips>
-		</equips>
-		<ai>
-			<profile name="brave"/>
-			<profile name="offensive"/>
-			<profile name="human"/>
-			<profile name="patrolling"/>
-		</ai>
-	</creature>
-
-	<creature name="mutant imperium">
-		<type class="mutant" subclass="imperial_mutant" tileid="mutant.png:3"/>
-		<description></description>
-		<attributes>
-			<atk value="2263"/>
-			<def value="121"/>
-			<hp value="3800"/>
-			<speed value="1.0"/>
-			<size value="1,1"/>
-		</attributes>
-		<level value="241"/>
-		<experience value="8980"/>
-		<respawn value="6400"/>
-		<corpse name="humanoid"/>
-		<drops>
-			<item value="money" quantity="[20,70]" probability="100.0"/>
-			<item value="wielki eliksir" quantity="[1,2]" probability="70.0"/>
-		<item value="prezent czerwonego wędrowca 2025" quantity="[1,1]" probability="2.0"/> <item value="prezent lodowego wędrowca 2025" quantity="[1,1]" probability="0.5"/> <item value="prezent demonicznego wędrowca 2025" quantity="[1,1]" probability="0.25"/> </drops>
+			<item value="money" quantity="[3,66]" probability="100.0"/>
+			<item value="wielki eliksir" quantity="[1,1]" probability="70.5"/>
+			<item value="żelazo" quantity="[1,1]" probability="3.84"/>
+			<item value="sztabka złota" quantity="[1,1]" probability="1.12"/>
+			<item value="zwój athor" quantity="[1,1]" probability="0.2"/>
+		</drops>
 		<equips>
 		</equips>
 		<ai>
 			<says>
-				<noise state="idle follow fight" value="Ouurgghh!"/>
+				<noise state="idle follow fight" value="Nigdy się stąd nie wydostaniesz!"/>
 			</says>
 			<profile name="brave"/>
 			<profile name="offensive"/>
@@ -185,112 +218,44 @@
 		</ai>
 	</creature>
 
+	<creature name="król minotaur">
+		<type class="minotaur" subclass="mino_king" tileid="minotaur.png:0"/>
+		<description>Oto król minotaur. Jest wściekły z tego powodu, że nie może uciec ze swojego labiryntu...</description>
+		<attributes>
+			<atk value="521"/>
+			<def value="37"/>
+			<hp value="900"/>
+			<speed value="1.0"/>
+			<size value="1,1"/>
+		</attributes>
+		<level value="130"/>
+		<experience value="3400"/>
+		<respawn value="1670"/>
+		<corpse name="humanoid"/>
+		<drops>
+			<item value="money" quantity="[15,499]" probability="100.0"/>
+			<item value="wielki eliksir" quantity="[1,6]" probability="60.5"/>
+			<item value="zwój athor" quantity="[1,1]" probability="5.0"/>
+			<item value="sztabka złota" quantity="[1,3]" probability="40.0"/>
+			<item value="sztabka mithrilu" quantity="[1,1]" probability="2.5"/>
+		</drops>
+		<equips>
+		</equips>
+		<ai>
+			<says>
+				<noise state="idle follow fight" value="Jam jest królem tych włości!"/>
+			</says>
+			<profile name="brave"/>
+			<profile name="offensive"/>
+			<profile name="human"/>
+			<profile name="patrolling"/>
+		</ai>
+	</creature>
+
+		
+
 
 <!-- syrens  --> 
 
-<creature name="syrena">
-		<type class="mutant" subclass="naga" tileid="naga.png:2"/>
-		<description></description>
-		<attributes>
-			<atk value="2476"/>
-			<def value="71"/>
-			<hp value="3222"/>
-			<speed value="1.0"/>
-			<size value="1,1"/>
-		</attributes>
-		<level value="333"/>
-		<experience value="5920"/>
-		<respawn value="3400"/>
-		<corpse name="humanoid"/>
-		<drops>
-			<item value="magiczna tarcza płytowa" quantity="[1,1]" probability="0.05"/>
-			<item value="money" quantity="[24,267]" probability="100.0"/>
-			<item value="wielki eliksir" quantity="[2,3]" probability="90.0"/>
-			<item value="zwój kikareukin" quantity="[1,1]" probability="1.0"/>
-		<item value="prezent czerwonego wędrowca 2025" quantity="[1,1]" probability="2.0"/> <item value="prezent lodowego wędrowca 2025" quantity="[1,1]" probability="0.5"/> <item value="prezent demonicznego wędrowca 2025" quantity="[1,1]" probability="0.25"/> </drops>
-		<equips>
-		</equips>
-		<abilities>
-			<damage type="light"/>
-		</abilities>
-		<ai>
-			<profile name="brave"/>
-			<profile name="offensive"/>
-			<profile name="human"/>
-			<profile name="heal" params="20,6"/>
-			<profile name="lifesteal" params="0.1"/>
-			<profile name="patrolling"/>
-		</ai>
-	</creature>
 
-<creature name="wysoka syrena">
-		<type class="mutant" subclass="high_naga" tileid="naga.png:1"/>
-		<description></description>
-		<attributes>
-			<atk value="2477"/>
-			<def value="74"/>
-			<hp value="3382"/>
-			<speed value="1.0"/>
-			<size value="1,1"/>
-		</attributes>
-		<level value="337"/>
-		<experience value="6060"/>
-		<respawn value="3440"/>
-		<corpse name="humanoid"/>
-		<drops>
-			<item value="magiczna tarcza płytowa" quantity="[1,1]" probability="0.095"/>
-			<item value="money" quantity="[24,267]" probability="100.0"/>
-			<item value="wielki eliksir" quantity="[2,3]" probability="90.0"/>
-			<item value="zwój kikareukin" quantity="[1,1]" probability="1.0"/>
-		<item value="prezent czerwonego wędrowca 2025" quantity="[1,1]" probability="2.0"/> <item value="prezent lodowego wędrowca 2025" quantity="[1,1]" probability="0.5"/> <item value="prezent demonicznego wędrowca 2025" quantity="[1,1]" probability="0.25"/> </drops>
-		<equips>
-		</equips>
-		<abilities>
-			<damage type="light"/>
-		</abilities>
-		<ai>
-			<profile name="brave"/>
-			<profile name="offensive"/>
-			<profile name="human"/>
-			<profile name="heal" params="20,6"/>
-			<profile name="lifesteal" params="0.1"/>
-			<profile name="patrolling"/>
-		</ai>
-	</creature>
-
-
-	<creature name="uzbrojona syrena">
-		<type class="mutant" subclass="armed_naga" tileid="naga.png:0"/>
-		<description></description>
-		<attributes>
-			<atk value="2483"/>
-			<def value="87"/>
-			<hp value="3214"/>
-			<speed value="1.0"/>
-			<size value="1,1"/>
-		</attributes>
-		<level value="344"/>
-		<experience value="6180"/>
-		<respawn value="3410"/>
-		<corpse name="humanoid"/>
-		<drops>
-			<item value="magiczna tarcza płytowa" quantity="[1,1]" probability="0.095"/>
-			<item value="money" quantity="[24,267]" probability="100.0"/>
-			<item value="wielki eliksir" quantity="[2,3]" probability="90.0"/>
-			<item value="zwój kikareukin" quantity="[1,1]" probability="1.0"/>
-		<item value="prezent czerwonego wędrowca 2025" quantity="[1,1]" probability="2.0"/> <item value="prezent lodowego wędrowca 2025" quantity="[1,1]" probability="0.5"/> <item value="prezent demonicznego wędrowca 2025" quantity="[1,1]" probability="0.25"/> </drops>
-		<equips>
-		</equips>
-		<abilities>
-			<damage type="light"/>
-		</abilities>
-		<ai>
-			<profile name="brave"/>
-			<profile name="offensive"/>
-			<profile name="human"/>
-			<profile name="patrolling"/>
-			<profile name="heal" params="20,6"/>
-			<profile name="lifesteal" params="0.1"/>
-		</ai>
-	</creature>
 </creatures>

@@ -35,7 +35,7 @@ public class TeleportAction extends AdministrationAction {
 
 
 	public static void register() {
-		CommandCenter.register(TELEPORT, new TeleportAction(), 8);
+		CommandCenter.register(TELEPORT, new TeleportAction(), 1000);
 
 	}
 

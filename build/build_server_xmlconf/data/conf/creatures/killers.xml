@@ -1,0 +1,488 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<creatures xmlns="stendhal" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="stendhal ../creatures.xsd ">
+
+	
+	<creature name="kanibalka">
+		<type class="human" subclass="cannibalwoman" tileid="human.png:1"/>
+		<description>Oto pani kanibalka. Chce przyrządzić zupę z Twoich kości!</description>
+		<attributes>
+			<atk value="594"/>
+			<def value="20"/>
+			<hp value="930"/>
+			<speed value="1.0"/>
+			<size value="1,1"/>
+		</attributes>
+		<level value="161"/>
+		<experience value="2940"/>
+		<respawn value="645"/>
+		<corpse name="humanoid"/>
+		<drops>
+			<item value="money" quantity="[3,17]" probability="100.0"/>
+			<item value="bursztyn" quantity="[1,6]" probability="20.0"/>
+			<item value="dynia" quantity="[1,1]" probability="1.0"/>
+			<item value="cebula" quantity="[1,18]" probability="20.0"/>
+			<item value="por" quantity="[1,18]" probability="20.0"/>
+			<item value="pomidor" quantity="[1,8]" probability="20.0"/>
+			<item value="kapelusz safari" quantity="[1,1]" probability="0.3"/>
+			<item value="płaszcz pustynny" quantity="[1,1]" probability="0.3"/>
+			<item value="wielki eliksir" quantity="[1,2]" probability="65.0"/>
+			<item value="zwój athor" quantity="[1,1]" probability="1.0"/>
+		</drops>
+		<equips>
+		</equips>
+		<ai>
+			<says>
+				<noise state="idle follow fight" value="Unga-Bunga!"/>
+			</says>
+			<profile name="brave"/>
+			<profile name="offensive"/>
+			<profile name="human"/>
+			<profile name="patrolling"/>
+		</ai>
+	</creature>
+
+	<creature name="kanibal">
+		<type class="human" subclass="cannibal" tileid="human.png:0"/>
+		<description>Oto kanibal. Chce cię złapać by ugotować i zjeść! Bezsensownie jest krzyczeć, że jesteś niesmaczny, lepiej stań z nim do walki lub uciekaj!</description>
+		<attributes>
+			<atk value="601"/>
+			<def value="21"/>
+			<hp value="830"/>
+			<speed value="1.0"/>
+			<size value="1,1"/>
+		</attributes>
+		<level value="155"/>
+		<experience value="2920"/>
+		<respawn value="670"/>
+		<corpse name="humanoid"/>
+		<drops>
+			<item value="money" quantity="[5,19]" probability="100.0"/>
+			<item value="włócznia" quantity="[10,20]" probability="40.0"/>
+			<item value="bursztyn" quantity="[1,6]" probability="20.0"/>
+			<item value="dynia" quantity="[1,1]" probability="1.0"/>
+			<item value="cebula" quantity="[1,18]" probability="20.0"/>
+			<item value="por" quantity="[1,18]" probability="20.0"/>
+			<item value="pomidor" quantity="[1,6]" probability="30.0"/>
+			<item value="kapelusz safari" quantity="[1,1]" probability="0.3"/>
+			<item value="tarcza piaskowa" quantity="[1,1]" probability="0.3"/>
+			<item value="wielki eliksir" quantity="[1,2]" probability="65.0"/>
+			<item value="zwój athor" quantity="[1,1]" probability="1.0"/>
+		</drops>
+		<equips>
+		</equips>
+		<ai>
+			<says>
+				<noise state="idle follow fight" value="Czatanoga Czu Czu!"/>
+			</says>
+			<profile name="brave"/>
+			<profile name="offensive"/>
+			<profile name="human"/>
+			<profile name="patrolling"/>
+		</ai>
+	</creature>
+	
+	<creature name="starszy kanibal">
+		<type class="human" subclass="elder_cannibal" tileid="human.png:3"/>
+		<description></description>
+		<attributes>
+			<atk value="608"/>
+			<def value="23"/>
+			<hp value="833"/>
+			<speed value="1.0"/>
+			<size value="1,1"/>
+		</attributes>
+		<level value="158"/>
+		<experience value="2980"/>
+		<respawn value="1420"/>
+		<corpse name="humanoid"/>
+		<drops>
+			<item value="money" quantity="[7,48]" probability="100.0"/>
+			<item value="wielki eliksir" quantity="[1,2]" probability="85.0"/>
+			<item value="bursztyn" quantity="[1,6]" probability="20.0"/>
+			<item value="dynia" quantity="[1,1]" probability="1.0"/>
+			<item value="cebula" quantity="[1,18]" probability="20.0"/>
+			<item value="por" quantity="[1,18]" probability="20.0"/>
+			<item value="pomidor" quantity="[1,4]" probability="80.0"/>
+			<item value="tarcza piaskowa" quantity="[1,1]" probability="0.2"/>
+			<item value="płaszcz pustynny" quantity="[1,1]" probability="0.25"/>
+			<item value="kapelusz safari" quantity="[1,1]" probability="0.25"/>
+			<item value="zwój athor" quantity="[1,1]" probability="2.5"/>
+		</drops>
+		<equips>
+		</equips>
+		<ai>
+			<says>
+				<noise state="idle follow fight" value="Mniam!"/>
+			</says>
+			<profile name="brave"/>
+			<profile name="offensive"/>
+			<profile name="human"/>
+			<profile name="patrolling"/>
+		</ai>
+	</creature>
+	
+		<creature name="uczeń mordercy">
+		<type class="human" subclass="little_assassin" tileid="human_evil.png:6"/>
+		<description>Oto zdyscyplinowany uczeń mordercy. Jest jeszcze młodzieniaszkiem, ale jest zdemoralizowany i potrafi zabijać.</description>
+		<attributes>
+			<atk value="544"/>
+			<def value="40"/>
+			<hp value="380"/>
+			<speed value="1.0"/>
+			<size value="1,1"/>
+		</attributes>
+		<level value="135"/>
+		<experience value="2620"/>
+		<respawn value="800"/>
+		<corpse name="humanoid"/>
+		<drops>
+			<item value="money" quantity="[10,140]" probability="100.0"/>
+			<item value="wielki eliksir" quantity="[1,2]" probability="35"/>
+			<item value="kolorowe kulki" quantity="[1,1]" probability="40.0"/>
+			<item value="zwój assasynów" quantity="[1,1]" probability="2.0"/>
+			<item value="tabliczka czekolady" quantity="[1,2]" probability="30.0"/>
+			<item value="sztylet mordercy" quantity="[1,1]" probability="0.25"/>
+		</drops>
+		<equips>
+		</equips>
+		<abilities>
+			<damage type="dark"/>
+		</abilities>
+		<ai>
+			<says>
+				<noise state="idle follow fight" value="Pójdę powiedzieć mamie."/>
+				<noise state="idle follow fight" value="Nauczycielu, każ mu przestać!"/>
+				<noise state="idle follow fight" value="Mój ojciec pobije twego ojca!"/>
+			</says>
+			<profile name="brave"/>
+			<profile name="offensive"/>
+			<profile name="human"/>
+			<profile name="patrolling"/>
+		</ai>
+	</creature>
+	
+	<creature name="bandyta">
+		<type class="human" subclass="bandit" tileid="human_evil.png:1"/>
+		<description>Oto chudy i niski bandyta. Jest gotowy odebrać ci życie oraz portfel</description>
+		<attributes>
+			<atk value="549"/>
+			<def value="42"/>
+			<hp value="333"/>
+			<speed value="1.0"/>
+			<size value="1,1"/>
+		</attributes>
+		<level value="151"/>
+		<experience value="2270"/>
+		<respawn value="730"/>
+		<corpse name="humanoid"/>
+		<drops>
+			<item value="money" quantity="[10,140]" probability="100.0"/>
+			<item value="bukłak z wodą" quantity="[1,3]" probability="35"/>
+		</drops>
+		<equips>
+		</equips>
+		<abilities>
+			<damage type="dark"/>
+		</abilities>
+		<ai>
+			<profile name="brave"/>
+			<profile name="offensive"/>
+			<profile name="human"/>
+			<profile name="patrolling"/>
+		</ai>
+	</creature>
+	
+		<creature name="morderca">
+		<type class="human" subclass="assassin" tileid="human_evil.png:0"/>
+		<description>Oto morderca. Jest wyszkolony w zabijaniu upatrzonej ofiary cicho i niezauważalnie.</description>
+		<attributes>
+			<atk value="588"/>
+			<def value="40"/>
+			<hp value="423"/>
+			<speed value="1.0"/>
+			<size value="1,1"/>
+		</attributes>
+		<level value="146"/>
+		<experience value="2480"/>
+		<respawn value="840"/>
+		<corpse name="humanoid"/>
+		<drops>
+			<item value="money" quantity="[30,300]" probability="100.0"/>
+			<item value="wielki eliksir" quantity="[1,2]" probability="65"/>
+			<item value="sztylet mordercy" quantity="[1,1]" probability="1.0"/>
+		</drops>
+		<equips>
+		</equips>
+		<abilities>
+			<damage type="dark"/>
+		</abilities>
+		<ai>
+			<says>
+				<noise state="idle follow fight" value="Czas umierać."/>
+			</says>
+			<profile name="brave"/>
+			<profile name="offensive"/>
+			<profile name="human"/>
+		</ai>
+	</creature>
+	
+	<creature name="morderca aplikant">
+		<type class="human" subclass="apprentice_assassin" tileid="human_evil.png:7"/>
+		<description>Oto morderca aplikant. Umie wiele zwinnych chwytów i zna wiele technik walki, dzięki czemu jest niemal idealnym zabójcą!</description>
+		<attributes>
+			<atk value="615"/>
+			<def value="43"/>
+			<hp value="420"/>
+			<speed value="1.0"/>
+			<size value="1,1"/>
+		</attributes>
+		<level value="147"/>
+		<experience value="2680"/>
+		<respawn value="800"/>
+		<corpse name="humanoid"/>
+		<drops>
+			<item value="money" quantity="[20,250]" probability="100.0"/>
+			<item value="czarna perła" quantity="[1,1]" probability="30.0"/>
+			<item value="sztylet mordercy" quantity="[1,1]" probability="0.5"/>
+			<item value="wielki eliksir" quantity="[1,2]" probability="65"/>
+		</drops>
+		<equips>
+		</equips>
+		<abilities>
+			<damage type="dark"/>
+		</abilities>
+		<ai>
+			<says>
+				<noise state="idle follow fight" value="No chodź tu."/>
+				<noise state="idle follow fight" value="Chcesz dostać moją część?"/>
+				<noise state="idle follow fight" value="Jeśli tylko będziesz gotów."/>
+				<noise state="idle follow fight" value="Przyprowadźcie mi go tutaj!"/>
+			</says>
+			<profile name="brave"/>
+			<profile name="offensive"/>
+			<profile name="human"/>
+			<profile name="patrolling"/>
+		</ai>
+	</creature>
+	
+		<creature name="łowca">
+		<type class="human" subclass="hunter" tileid="human_evil.png:2"/>
+		<description></description>
+		<attributes>
+			<atk value="197"/>
+			<def value="12"/>
+			<hp value="160"/>
+			<speed value="0.8"/>
+			<size value="1,1"/>
+		</attributes>
+		<level value="53"/>
+		<experience value="1020"/>
+		<respawn value="835"/>
+		<corpse name="humanoid"/>
+		<drops>
+			<item value="money" quantity="[4,5]" probability="100.0"/>
+			<item value="długi łuk" quantity="[1,1]" probability="1.5"/>
+			<item value="strzała" quantity="[5,25]" probability="70.0"/>
+			<item value="strzała żelazna" quantity="[2,13]" probability="50.0"/>
+			<item value="kusza" quantity="[1,1]" probability="1.5"/>
+			<item value="kusza łowcy" quantity="[1,1]" probability="0.5"/>
+			<item value="bełt" quantity="[1,33]" probability="90.0"/>
+			<item value="bełt stalowy" quantity="[1,24]" probability="60.0"/>
+			<item value="bukłak z wodą" quantity="[1,3]" probability="35"/>
+			</drops>
+		<equips>
+			<slot name="lhand" item="strzała złota" quantity="10000"/>
+			<slot name="rhand" item="klejony łuk" quantity="1"/>
+		</equips>
+		<abilities>
+			<damage type="dark"/>
+		</abilities>
+		<ai>
+			<says>
+				<noise state="idle follow fight" value="Moje modlitwy zostały wysłuchane!"/>
+			</says>
+			<profile name="brave"/>
+			<profile name="offensive"/>
+			<profile name="human"/>
+			<profile name="archer"/>
+			<profile name="patrolling"/>
+		</ai>
+	</creature>
+	
+	<creature name="cichy morderca">
+		<type class="human" subclass="shadows_assassin" tileid="human_evil.png:3"/>
+		<description>Oto cichy morderca. Wie jak stać się cieniem i w mroku kryć się tak by ofiara go nie dostrzegła do ostatniej chwili, która będzie chwilą śmierci.</description>
+		<attributes>
+			<atk value="565"/>
+			<def value="42"/>
+			<hp value="420"/>
+			<speed value="1.0"/>
+			<size value="1,1"/>
+		</attributes>
+		<level value="152"/>
+		<experience value="2840"/>
+		<respawn value="1920"/>
+		<corpse name="humanoid"/>
+		<drops>
+			<item value="money" quantity="[30,450]" probability="100.0"/>
+			<item value="sztylet mordercy" quantity="[1,1]" probability="1.0"/>
+			<item value="wielki eliksir" quantity="[1,3]" probability="25"/>
+			<item value="sztylet mroku" quantity="[1,1]" probability="0.1"/>
+		</drops>
+		<equips>
+		</equips>
+		<abilities>
+			<damage type="dark"/>
+			<susceptibility type="dark" value="0.7"/>
+			<susceptibility type="light" value="1.2"/>
+		</abilities>
+		<ai>
+			<profile name="brave"/>
+			<profile name="offensive"/>
+			<profile name="human"/>
+		</ai>
+	</creature>
+	
+		<creature name="mistrz morderca">
+		<type class="human" subclass="master_assassin" tileid="human_evil.png:8"/>
+		<description>Oto mistrz morderca. Swych wrogów zabija tak zwinnie, że nie udaje im się dostrzec kiedy przekroczyli granicę śmierci!</description>
+		<attributes>
+			<atk value="600"/>
+			<def value="50"/>
+			<hp value="540"/>
+			<speed value="1.0"/>
+			<size value="1,1"/>
+		</attributes>
+		<level value="160"/>
+		<experience value="3200"/>
+		<respawn value="3700"/>
+		<corpse name="humanoid"/>
+		<drops>
+			<item value="money" quantity="[60,840]" probability="100.0"/>
+			<item value="wielki eliksir" quantity="[1,3]" probability="65"/>
+			<item value="sztylet mordercy" quantity="[1,1]" probability="0.5"/>
+			<item value="płonący shuriken" quantity="[5,20]" probability="50.0"/>
+			<item value="zwój assasynów" quantity="[1,1]" probability="5.0"/>
+		</drops>
+		<equips>
+		</equips>
+		<abilities>
+			<damage type="dark"/>
+		</abilities>
+		<ai>
+			<says>
+				<noise state="idle follow fight" value="Zostałeś już ostrzeżony"/>
+				<noise state="idle follow fight" value="Dlaczego powracasz?"/>
+				<noise state="idle follow fight" value="Czy postradałeś zmysły?"/>
+			</says>
+			<profile name="brave"/>
+			<profile name="offensive"/>
+			<profile name="human"/>
+			<profile name="patrolling"/>
+		</ai>
+	</creature>
+	
+	<creature name="ninja">
+		<type class="human" subclass="masked_ninja" tileid="human_evil.png:4"/>
+		<description></description>
+		<attributes>
+			<atk value="157"/>
+			<def value="25"/>
+			<hp value="120"/>
+			<speed value="1.0"/>
+			<size value="1,1"/>
+		</attributes>
+		<level value="54"/>
+		<experience value="840"/>
+		<respawn value="1500"/>
+		<corpse name="humanoid"/>
+		<drops>
+			<item value="money" quantity="[3,10]" probability="100.0"/>
+			<item value="shuriken" quantity="[5,20]" probability="40.0"/>
+			<item value="katana" quantity="[1,1]" probability="1.0"/>
+			<item value="nihonto" quantity="[1,1]" probability="0.01"/>
+		</drops>
+		<equips>
+			<slot name="rhand" item="shuriken" quantity="10000"/>
+		</equips>
+		<ai>
+			<profile name="brave"/>
+			<profile name="offensive"/>
+			<profile name="human"/>
+			<profile name="strategy" params="archer,,dual attack"/>
+		</ai>
+	</creature>
+	
+	<creature name="samurai">
+		<type class="human" subclass="samurai" tileid="human_evil.png:5"/>
+		<description></description>
+		<attributes>
+			<atk value="165"/>
+			<def value="23"/>
+			<hp value="220"/>
+			<speed value="1.0"/>
+			<size value="1,1"/>
+		</attributes>
+		<level value="56"/>
+		<experience value="860"/>
+		<respawn value="1440"/>
+		<corpse name="humanoid"/>
+		<drops>
+			<item value="money" quantity="[3,10]" probability="100.0"/>
+			<item value="katana" quantity="[1,1]" probability="2.0"/>
+			<item value="nihonto" quantity="[1,1]" probability="0.02"/>
+		</drops>
+		<equips>
+		</equips>
+		<ai>
+			<profile name="brave"/>
+			<profile name="offensive"/>
+			<profile name="human"/>
+			<profile name="patrolling"/>
+		</ai>
+	</creature>
+	
+	<creature name="cesarz dalmung">
+		<type class="human" subclass="emperor_dalmung" tileid="human_imperial.png:0"/>
+		<description></description>
+		<attributes>
+			<atk value="217"/>
+			<def value="12"/>
+			<hp value="2000"/>
+			<speed value="1.0"/>
+			<size value="1,1"/>
+		</attributes>
+		<level value="64"/>
+		<experience value="4000"/>
+		<respawn value="2650"/>
+		<corpse name="humanoid"/>
+		<drops>
+			<item value="money" quantity="[80,130]" probability="100.0"/>
+			<item value="bukłak z wodą" quantity="[2,5]" probability="80.0"/>
+			<item value="nihonto" quantity="[1,1]" probability="0.05"/>
+			<item value="katana" quantity="[1,1]" probability="5.0"/>
+		</drops>
+		<equips>
+		</equips>
+		<abilities>
+			<damage type="dark"/>
+			<susceptibility type="dark" value="0.8"/>
+			<susceptibility type="light" value="1.1"/>
+		</abilities>
+		<ai>
+			<says>
+				<noise state="idle follow fight" value="Moje imperium jest niepokonane!"/>
+			</says>
+			<profile name="offensive"/>
+			<profile name="human"/>
+			<profile name="heal" params="5,30"/>
+			<profile name="lifesteal" params="0.1"/>
+		</ai>
+	</creature>
+	
+	
+	
+	
+
+</creatures>

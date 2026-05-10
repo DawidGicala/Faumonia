@@ -530,7 +530,7 @@
 		<description>Oto Spodnie Czerwonego Wędrowca. Uszyto je z wyjątkowo trwałego materiału, który nie przemięka nawet po całym dniu w śniegu po kolana. Czerwone pasy i białe obszycia miały sprawiać, że wędrowca zawsze było widać w zamieci, choć bardziej wyglądał wtedy jak uciekający prezent. To idealne spodnie dla wojownika, który lubi ciepło i swobodę ruchu #zima #2025</description>
 		<implementation class-name="games.stendhal.server.entity.item.Item"/>
 		<attributes>
-			<def value="9"/>
+			<def value="1"/>
 			<minlevel value="20"/>
 			<autobind value=""/>
 		</attributes>
@@ -550,7 +550,7 @@
 		<description>Oto Spodnie Lodowego Wędrowcy. Tkane z nici zmrożonego smoczego jedwabiu, zapewniają zwinność nawet wtedy, gdy mróz próbuje skruszyć kości. Każdy ich ruch przywołuje delikatny pyłek śniegu, jakby wojownik poruszał się w objęciach samej zimy #zima #2025</description>
 		<implementation class-name="games.stendhal.server.entity.item.Item"/>
 		<attributes>
-			<def value="24"/>
+			<def value="1"/>
 			<minlevel value="150"/>
 			<autobind value=""/>
 		</attributes>
@@ -570,7 +570,7 @@
 		<description>Oto Spodnie Demonicznego Wędrowca, zszyte z twardych jak skała łusek kuzynów piekielnych wilków; poruszają się jakby miały własny cel, prowadząc wojownika tam, gdzie czekają krzyki i krew #zima #2025</description>
 		<implementation class-name="games.stendhal.server.entity.item.Item"/>
 		<attributes>
-			<def value="47"/>
+			<def value="1"/>
 			<minlevel value="300"/>
 			<autobind value=""/>
 		</attributes>

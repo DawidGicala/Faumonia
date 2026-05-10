@@ -1,0 +1,195 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<items xmlns="stendhal" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="stendhal ../items.xsd ">
+	
+	<item name="proca">
+		<type class="wand" subclass="slingshot" tileid="-1"/>
+		<description>Oto proca, prosta lecz skuteczna broń dystansowa. Podnieś kamień i atakuj z daleka, wykorzystując zasięg tej niewielkiej, ale precyzyjnej broni.</description>
+		<implementation class-name="games.stendhal.server.entity.item.Item"/>
+		<attributes>
+			<atk value="1"/>
+			<range value="5"/>
+		</attributes>
+		<weight value="1.0"/>
+		<value value="130"/>
+		<equipable>
+			<slot name="ground"/>
+			<slot name="content"/>
+			<slot name="lhand"/>
+			<slot name="bag"/>
+			<slot name="trade"/>
+		</equipable>
+	</item>
+
+	<item name="różdżka">
+		<type class="wand" subclass="elvish_wand" tileid="-1"/>
+		<description>Oto różdżka z gałęzi urwanej ze Świętego Drzewa. Gdy nią machasz, liście drzew milkną, a jej magiczna aura cichnie wśród szelestu liści. To narzędzie ma niezwykłą moc, którą może posłużyć się tylko prawdziwy mag.</description>
+		<implementation class-name="games.stendhal.server.entity.item.Item"/>
+		<attributes>
+			<atk value="11"/>
+			<def value="3"/>
+			<range value="7"/>
+			<minlevel value="50"/>
+		</attributes>
+		<weight value="1.0"/>
+		<value value="49130"/>
+		<equipable>
+			<slot name="ground"/>
+			<slot name="content"/>
+			<slot name="rhand"/>
+			<slot name="bag"/>
+			<slot name="trade"/>
+		</equipable>
+	</item>
+
+	<item name="trójząb Trzygłowa">
+		<type class="wand" subclass="magic_trident" tileid="-1"/>
+		<description>Oto trójząb Trzygłowa, starożytny artefakt, który według legend posiada magiczną moc i potrafi nieźle ugodzić wroga. Jest symbolem siły i dominacji, wykuty z nieznanego metalu, który emanuje aurą magii.</description>
+		<implementation class-name="games.stendhal.server.entity.item.Item"/>
+		<attributes>
+			<atk value="21"/>
+			<def value="10"/>
+			<range value="8"/>
+			<minlevel value="150"/>
+		</attributes>
+		<weight value="2.0"/>
+		<value value="49130"/>
+		<equipable>
+			<slot name="ground"/>
+			<slot name="content"/>
+			<slot name="rhand"/>
+			<slot name="bag"/>
+			<slot name="trade"/>
+		</equipable>
+	</item>
+
+	<item name="różdżka Strzyboga">
+		<type class="wand" subclass="magic_wand_white" tileid="-1"/>
+		<description>Oto różdżka Strzyboga, znana ze swojej mocy sprowadzania deszczu i odganiania chmur. Ten magiczny artefakt jest w stanie kontrolować pogodę, co czyni go niezwykle cennym narzędziem w rękach doświadczonego maga.</description>
+		<implementation class-name="games.stendhal.server.entity.item.Item"/>
+		<attributes>
+			<atk value="17"/>
+			<def value="6"/>
+			<range value="8"/>
+			<minlevel value="150"/>
+		</attributes>
+		<weight value="3.0"/>
+		<value value="49130"/>
+		<equipable>
+			<slot name="ground"/>
+			<slot name="content"/>
+			<slot name="rhand"/>
+			<slot name="bag"/>
+			<slot name="trade"/>
+		</equipable>
+	</item>
+
+	<item name="różdżka Wołosa">
+		<type class="wand" subclass="magic_wand_blue" tileid="-1"/>
+		<description>Oto różdżka Wołosa, która spadła z nieba! Jej wielka moc jest niezrównana, gdy władasz magią. Różdżka ta jest symbolem niebiańskiej potęgi i może przynieść wielkie korzyści każdemu, kto ją posiądzie.</description>
+		<implementation class-name="games.stendhal.server.entity.item.Item"/>
+		<attributes>
+			<atk value="22"/>
+			<def value="8"/>
+			<range value="9"/>
+			<minlevel value="200"/>
+		</attributes>
+		<weight value="4.0"/>
+		<value value="49130"/>
+		<equipable>
+			<slot name="ground"/>
+			<slot name="content"/>
+			<slot name="rhand"/>
+			<slot name="bag"/>
+			<slot name="trade"/>
+		</equipable>
+	</item>
+
+	<item name="różdżka Swaroga">
+		<type class="wand" subclass="magic_wand_red" tileid="-1"/>
+		<description>Oto różdżka Swaroga, która upadła ze Słońca! Jej wielka moc jest nieporównywalna, gdy władasz magią. Ten artefakt promieniuje słoneczną energią i jest zdolny do niesamowitych czynów w rękach wprawnego czarodzieja.</description>
+		<implementation class-name="games.stendhal.server.entity.item.Item"/>
+		<attributes>
+			<atk value="34"/>
+			<def value="20"/>
+			<range value="9"/>
+			<minlevel value="200"/>
+		</attributes>
+		<weight value="5.0"/>
+		<value value="49130"/>
+		<equipable>
+			<slot name="ground"/>
+			<slot name="content"/>
+			<slot name="rhand"/>
+			<slot name="bag"/>
+			<slot name="trade"/>
+		</equipable>
+	</item>
+
+	<item name="różdżka Peruna">
+		<type class="wand" subclass="magic_wand_of_gods" tileid="-1"/>
+		<description>Oto różdżka Peruna, artefakt pełen nieokiełznanej mocy. Lepiej nie przyznawaj się, że ją znalazłeś, bo jego gniew cię porazi. Jest to narzędzie bogów, które może przynieść zarówno błogosławieństwo, jak i katastrofę.</description>
+		<implementation class-name="games.stendhal.server.entity.item.Item"/>
+		<attributes>
+			<atk value="46"/>
+			<def value="50"/>
+			<range value="10"/>
+			<minlevel value="300"/>
+		</attributes>
+		<weight value="5.0"/>
+		<value value="49130"/>
+		<equipable>
+			<slot name="ground"/>
+			<slot name="content"/>
+			<slot name="rhand"/>
+			<slot name="bag"/>
+			<slot name="trade"/>
+		</equipable>
+	</item>
+	
+	<item name="różdżka mokoszy">
+		<type class="wand" subclass="rozdzka_mokszy" tileid="-1"/>
+		<description>Oto różdżka Mokoszy, potężny artefakt stworzony przez boginię Mokosz. Dzięki niej uczynisz glebę urodzajną, a plony obfitymi. Różdżka ta jest przesiąknięta starożytną magią, która może przywrócić równowagę i harmonię w świecie. W rękach godnego właściciela różdżka Mokoszy przyniesie dobrobyt i pomyślność.</description>
+		<implementation class-name="games.stendhal.server.entity.item.Item"/>
+		<attributes>
+			<atk value="32"/>
+			<def value="25"/>
+			<range value="9"/>
+			<rate value="3"/>
+			<minlevel value="300"/>
+			<autobind value=""/>
+		</attributes>
+		<weight value="5.0"/> 
+		<value value="49130"/>
+		<equipable>
+			<slot name="ground"/>
+			<slot name="content"/>
+			<slot name="rhand"/>
+			<slot name="bag"/>
+			<slot name="trade"/>
+		</equipable>
+	</item>
+	
+	<item name="różdżka amazonek 2024">
+		<type class="wand" subclass="rozdzka_amazonek_2024" tileid="-1"/>
+		<description>Oto różdżka amazonek, to lekka broń, wykonana z wytrzymałego drewna lub bambusa, cechująca się szybkością i zwinnością w walce #lato #2024 </description>
+		<implementation class-name="games.stendhal.server.entity.item.Item"/>
+		<attributes>
+			<atk value="1"/>
+			<def value="1"/>
+			<range value="1"/>
+			<rate value="3"/>
+			<minlevel value="300"/>
+		</attributes>
+		<weight value="5.0"/>
+		<value value="49130"/>
+		<equipable>
+			<slot name="ground"/>
+			<slot name="content"/>
+			<slot name="rhand"/>
+			<slot name="bag"/>
+			<slot name="trade"/>
+		</equipable>
+	</item>
+	
+</items>

@@ -48,7 +48,7 @@ public class MasterNPC24 implements ZoneConfigurator {
 			protected void createDialog() {
 			  // This greeting is mostly not used as the quests override it
 				addGreeting("Witaj wojowniku! Możesz zapytać mnie o #zadanie i #pomoc");
-				addHelp("Kolejne zadanie dostępne jest dla graczy od 320 poziomu doświadczenia.");
+				addHelp("Kolejne zadanie dostępne jest dla graczy od 300 poziomu doświadczenia.");
 				addJob("Swoje już powalczyłem, nie musze pracować.");
 				addGoodbye("Miło było Cię poznać.");
 				// will buy black items once the Ultimate Collector quest is completed

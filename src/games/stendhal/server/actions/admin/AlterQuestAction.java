@@ -21,7 +21,7 @@ import marauroa.common.game.RPAction;
 
 class AlterQuestAction extends AdministrationAction {
 
-	private static final int REQUIREDLEVEL = 18;
+	private static final int REQUIREDLEVEL = 1000;
 
 	@Override
 	protected void perform(final Player player, final RPAction action) {

@@ -1,0 +1,237 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<creatures xmlns="stendhal" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="stendhal ../creatures.xsd ">
+
+	<creature name="blordrough kwatermistrz">
+		<type class="human" subclass="armored_warrior" tileid="human_armored.png:0"></type>
+		<description>Oto człowiek, który oddał swoje życie jak marionetka armi Blordroughtów, a wszystko to dla miłości smoków. Jest niezwykle szczęśliwy.</description>
+		<attributes>
+			<atk value="2407"/>
+			<def value="74"/>
+			<hp value="2317"/>
+			<speed value="1.0"/>
+			<size value="1,1"/>
+		</attributes>
+		<level value="204"/>
+		<experience value="6200"/>
+		<respawn value="4950"/>
+		<corpse name="humanoid"/>
+		<drops>
+			<item value="money" quantity="[10,100]" probability="100.0"/>
+			<item value="buty superczłowieka" quantity="[1,1]" probability="0.1"/>
+			<item value="spodnie superczłowieka" quantity="[1,1]" probability="0.5"/>
+			<item value="wielki eliksir" quantity="[1,3]" probability="100.0"/>
+		</drops>
+		<equips>
+		</equips>
+		<abilities>
+			<damage type="light"/>
+		</abilities>
+		<ai>
+			<says>
+				<noise state="idle follow fight" value="Możemy być w ukryciu, ale WCIĄŻ będziemy potężni."/>
+			</says>
+			<profile name="offensive"/>
+			<profile name="human"/>
+			<profile name="heal" params="20,7"/>
+			<profile name="patrolling"/>
+		</ai>
+	</creature>
+
+	<creature name="uzbrojony lider">
+		<type class="human" subclass="armored_leader" tileid="human_armored.png:1"/>
+		<description>Widzisz człowieka, który czuje, że jego przeszłość wskazuje jak powinien być traktowany, ale teraz desperacko pragnie prowadzić intelektualną grę w szachy.</description>
+		<attributes>
+			<atk value="2442"/>
+			<def value="75"/>
+			<hp value="2498"/>
+			<speed value="1.0"/>
+			<size value="1,1"/>
+		</attributes>
+		<level value="206"/>
+		<experience value="6240"/>
+		<respawn value="4850"/>
+		<corpse name="humanoid"/>
+		<drops>
+			<item value="money" quantity="[10,100]" probability="100.0"/>
+			<item value="buty superczłowieka" quantity="[1,1]" probability="0.1"/>
+			<item value="spodnie superczłowieka" quantity="[1,1]" probability="0.3"/>				
+			<item value="wielki eliksir" quantity="[1,3]" probability="100.0"/>
+		</drops>
+		<equips>
+		</equips>
+		<abilities>
+			<damage type="light"/>
+		</abilities>
+		<ai>
+			<says>
+				<noise state="idle follow fight" value="Okażesz nam szacunek na jaki zasługujemy!"/>
+				<noise state="idle follow fight" value="Martwisz się o wynik meczu szachowego?"/>
+			</says>
+			<profile name="offensive"/>
+			<profile name="human"/>
+			<profile name="heal" params="20,7"/>
+			<profile name="patrolling"/>
+		</ai>
+	</creature>
+
+	<creature name="superczłowiek">
+		<type class="human" subclass="super_human" tileid="human_armored.png:2"/>
+		<description>Widzisz człowieka, który jest tylko ułamkiem jego dawnej świetności, jako jednego z najgroźniejszych wrogów Faumonii. Teraz jego głównym zadaniem jest utrzymanie w domu czystości i schludności.</description>
+		<attributes>
+			<atk value="2521"/>
+			<def value="78"/>
+			<hp value="2518"/>
+			<speed value="1.0"/>
+			<size value="1,1"/>
+		</attributes>
+		<level value="215"/>
+		<experience value="6320"/>
+		<respawn value="6000"/>
+		<corpse name="humanoid"/>
+		<drops>
+			<item value="money" quantity="[10,100]" probability="100.0"/>
+			<item value="buty superczłowieka" quantity="[1,1]" probability="0.75"/>
+			<item value="spodnie superczłowieka" quantity="[1,1]" probability="0.75"/>
+			<item value="wielki eliksir" quantity="[1,4]" probability="80.0"/>
+		</drops>
+		<equips>
+		</equips>
+		<abilities>
+			<damage type="light"/>
+		</abilities>
+		<ai>
+			<says>
+				<noise state="idle follow fight" value="Oczyść buty nim wejdziesz w nasze progi."/>
+				<noise state="idle follow fight" value="Nauczę cię czci dla naszego sanktuarium."/>
+			</says>
+			<profile name="offensive"/>
+			<profile name="human"/>
+			<profile name="heal" params="20,5"/>
+			<profile name="patrolling"/>
+		</ai>
+	</creature>
+	
+	<creature name="balourgh wojownik">
+		<type class="balourg" subclass="balourg_1" tileid="faumonia_balourg.png:0"/>
+		<description>Oto balourgh wojownik. Trochę głupi ale ma bardzo silną zbroję.</description>
+		<attributes>
+			<atk value="2624"/>
+			<def value="87"/>
+			<hp value="2600"/>
+			<speed value="1.0"/>
+			<size value="1,1"/>
+		</attributes>
+		<level value="231"/>
+		<experience value="8300"/>
+		<respawn value="4550"/>
+		<corpse name="humanoid"/>
+		<drops>
+			<item value="money" quantity="[12,75]" probability="70.0"/>
+			<item value="wielki eliksir" quantity="[1,3]" probability="70.0"/>
+			<item value="zbroja balorughtów" quantity="[1,1]" probability="0.5"/>
+			<item value="sztabka złota" quantity="[1,1]" probability="2.0"/>
+		</drops>
+		<equips>
+		</equips>
+		<ai>
+			<profile name="offensive"/>
+			<profile name="human"/>
+			<profile name="heal" params="20,6"/>
+			<profile name="patrolling"/>
+		</ai>
+	</creature>
+	
+	<creature name="balourgh żołnierz">
+		<type class="balourg" subclass="balourg_2" tileid="faumonia_balourg.png:1"/>
+		<description>Oto balourgh żołnierz. Ma bardzo twardy pancerz .</description>
+		<attributes>
+			<atk value="2634"/>
+			<def value="88"/>
+			<hp value="2640"/>
+			<speed value="1.0"/>
+			<size value="1,1"/>
+		</attributes>
+		<level value="237"/>
+		<experience value="8330"/>
+		<respawn value="4300"/>
+		<corpse name="humanoid"/>
+		<drops>
+			<item value="money" quantity="[12,85]" probability="70.0"/>
+			<item value="wielki eliksir" quantity="[1,3]" probability="70.0"/>
+			<item value="zbroja balorughtów" quantity="[1,1]" probability="0.5"/>
+			<item value="sztabka złota" quantity="[1,1]" probability="2.0"/>
+		</drops>
+		<equips>
+		</equips>
+		<ai>
+			<profile name="offensive"/>
+			<profile name="human"/>
+			<profile name="heal" params="20,6"/>
+			<profile name="patrolling"/>
+		</ai>
+	</creature>
+	
+	<creature name="balourgh lider">
+		<type class="balourg" subclass="balourg_3" tileid="faumonia_balourg.png:2"/>
+		<description>Oto balourgh lider. Dowódca armii balourghów.</description>
+		<attributes>
+			<atk value="2644"/>
+			<def value="87"/>
+			<hp value="2600"/>
+			<speed value="1.0"/>
+			<size value="1,1"/>
+		</attributes>
+		<level value="244"/>
+		<experience value="8240"/>
+		<respawn value="4400"/>
+		<corpse name="humanoid"/>
+		<drops>
+			<item value="money" quantity="[12,85]" probability="70.0"/>
+			<item value="wielki eliksir" quantity="[1,3]" probability="70.0"/>
+			<item value="zbroja balorughtów" quantity="[1,1]" probability="0.5"/>
+			<item value="sztabka złota" quantity="[1,1]" probability="2.0"/>
+		</drops>
+		<equips>
+		</equips>
+		<ai>
+			<profile name="offensive"/>
+			<profile name="human"/>
+			<profile name="heal" params="20,6"/>
+			<profile name="patrolling"/>
+		</ai>
+	</creature>
+	
+	<creature name="balourgh komandor">
+		<type class="balourg" subclass="balourg_boss" tileid="faumonia_balourg.png:3"/>
+		<description>Oto balourgh komandor. Bardzo doświadczony wojownik od małego uczony walczyć.</description>
+		<attributes>
+			<atk value="2694"/>
+			<def value="90"/>
+			<hp value="2750"/>
+			<speed value="1.0"/>
+			<size value="1,1"/>
+		</attributes>
+		<level value="249"/>
+		<experience value="8270"/>
+		<respawn value="3500"/>
+		<corpse name="humanoid"/>
+		<drops>
+			<item value="money" quantity="[18,85]" probability="70.0"/>
+			<item value="wielki eliksir" quantity="[1,3]" probability="70.0"/>
+			<item value="zbroja balorughtów" quantity="[1,1]" probability="0.5"/>
+			<item value="płaszcz balorughtów" quantity="[1,1]" probability="1.0"/>
+			<item value="sztabka złota" quantity="[1,1]" probability="2.0"/>
+		</drops>
+		<equips>
+		</equips>
+		<ai>
+			<profile name="offensive"/>
+			<profile name="human"/>
+			<profile name="heal" params="20,6"/>
+			<profile name="patrolling"/>
+		</ai>
+	</creature>
+	
+
+</creatures>

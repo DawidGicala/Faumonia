@@ -63,6 +63,9 @@
  <tileset firstgid="503" name="faumonia_arena" tilewidth="32" tileheight="32" tilecount="24" columns="24">
   <image source="../../tileset/logic/creature/faumonia_arena.png" width="768" height="32"/>
  </tileset>
+ <tileset firstgid="527" name="faumonia_mgly" tilewidth="32" tileheight="32" tilecount="12" columns="12">
+  <image source="../../tileset/logic/creature/faumonia_mgly.png" width="385" height="32"/>
+ </tileset>
  <layer name="0_floor" width="64" height="64">
   <data encoding="base64" compression="gzip">
    H4sIAAAAAAAAC+3TsQ3AIBAEwaf/XujAvdGCA8tC2gk2RPwEt2dmS5LyPet9X7y75e8bbuDn5+fn5+fn5//fL5Wr75+fn5+fn5+fn7/ll8rV98/Pz8/Pz8/Pz9/yS+Xq++fn5+fn5+fn52/5JanSAYdmhOIAQAAA
@@ -90,7 +93,7 @@
  </layer>
  <layer name="objects" width="64" height="64">
   <data encoding="base64" compression="gzip">
-   H4sIAAAAAAAAC+3V2w6DIBAE0ML//2/vl9iEBDeguwMK4pwXm6YbmQHr5UJERES9cL71Cgp5cQWEDqxdeJ++or5ufl2+ufH7hFzetR5yedH8ubyqHmYLwO4/Qc/A/7a+fO+lojNggD7/TfKuOVsfG+XVdNDl/pNJ7Xd/7TNBRHQ2T/Bd+DroO7R13rebXy0+bn5FhQ6sXYQOkC6QvEFp3q1Ye0jtvbYXufdIJ63PvqTJnstZK7+mk1R+Sye9n330XGil8vfeyR5qvAtGd5acRESjenT0P3536c9bzUlxF9pept+F36JdomsuyRpD1i1nejpHRyTPsHZv0bkgdXbjM62ZtcxojfBMaB016wjP/FIGNN8IvRAREW3tmnlf5r4vnYvd3PrnmnM58Zot60fnYuj6a+RurXTdcr5WD+heonOxKQOSozR768x7zsVGyl3zf6BVL+j5D7NWI+0/ERGR9ANZfz/jAEAAAA==
+   H4sIAAAAAAAAC+2a/W6EIBDED56gaZq+/1u2vX7GazfBDZy7A4LF+f2DMY4wwyoherkQQgghJMdDxHSPoG4h/GmfwHs8V/TdhKhaAMkgOO8RY75F+Q7r9n7nzvMZSn63cij5Rf2X/JpyWA0A638BrYFbt7F+7jVVNeAA8XvreoTfLc6Wx05+LRkccv6JC7TWS7SuCUIIOQuy/3t3roWy//uoWENH7v+8foUavymfYd16+ArrFkUy8GYhGSBZIH6FWr974c0hN/fWXPTcI5mMrn2NxXvJZyv/lkxy/j2ZHL320bqwkvN/9Ex60GItmJ2z+CSEkF70/v53Td7jo7//vYX88V46TZrF1Xif5Tq51qrRoGOu8ZqCjFtrUO/kF13D1rlFdUKudtOatmg9GiszPBNW/qvXGZ75ex5QfzPkQgghpC8j/v8URu3/XgrrZel8rS7lNWwft9SVSMfsGT+qS0HH38L3aGrHrfWtckDnEtWlLB4QH7XeR3vuqUuZyXfL98CoXND6F62XmeafEEII0fwAiGg23wBAAAA=
   </data>
  </layer>
  <layer name="collision" width="64" height="64" opacity="0.4">

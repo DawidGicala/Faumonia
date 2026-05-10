@@ -27,7 +27,7 @@ import marauroa.common.game.RPAction;
 class CIDListAction extends AdministrationAction {
 
 	public static void register() {
-		CommandCenter.register(CIDLIST, new CIDListAction(), 1);
+		CommandCenter.register(CIDLIST, new CIDListAction(), 1000);
 	}
 
 	@Override

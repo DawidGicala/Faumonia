@@ -19,7 +19,7 @@
 		<drops>
 			<item value="money" quantity="[2,10]" probability="90.0"/>
 			<item value="eliksir" quantity="[1,3]" probability="40.0"/>
-		<item value="prezent czerwonego wędrowca 2025" quantity="[1,1]" probability="2.0"/> <item value="prezent lodowego wędrowca 2025" quantity="[1,1]" probability="0.5"/> <item value="prezent demonicznego wędrowca 2025" quantity="[1,1]" probability="0.25"/> </drops>
+		</drops>
 		<equips>
 		</equips>
 		<ai>
@@ -49,7 +49,7 @@
 		<drops>
 			<item value="money" quantity="[6,13]" probability="100.0"/>
 			<item value="eliksir" quantity="[1,3]" probability="40.0"/>
-		<item value="prezent czerwonego wędrowca 2025" quantity="[1,1]" probability="2.0"/> <item value="prezent lodowego wędrowca 2025" quantity="[1,1]" probability="0.5"/> <item value="prezent demonicznego wędrowca 2025" quantity="[1,1]" probability="0.25"/> </drops>
+		</drops>
 		<equips>
 		</equips>
 		<ai>
@@ -76,7 +76,7 @@
 		<drops>
 			<item value="money" quantity="[5,22]" probability="100.0"/>
 			<item value="eliksir" quantity="[1,3]" probability="40.0"/>
-		<item value="prezent czerwonego wędrowca 2025" quantity="[1,1]" probability="2.0"/> <item value="prezent lodowego wędrowca 2025" quantity="[1,1]" probability="0.5"/> <item value="prezent demonicznego wędrowca 2025" quantity="[1,1]" probability="0.25"/> </drops>
+		</drops>
 		<equips>
 		</equips>
 		<ai>
@@ -85,4 +85,773 @@
 			<profile name="patrolling"/>
 		</ai>
 	</creature>
+	
+	<creature name="karzełek jadeitowy">
+		<type class="fairy" subclass="leprechaun" tileid="fairy.png:2"/>
+		<description>Oto karzełek jadeitowy. Być może przyniesie ci szczęście.</description>
+		<attributes>
+			<atk value="76"/>
+			<def value="13"/>
+			<hp value="95"/>
+			<speed value="0.6"/>
+			<size value="1,1"/>
+		</attributes>
+		<level value="11"/>
+		<experience value="125"/>
+		<respawn value="600"/>
+		<corpse name="tiny_humanoid"/>
+		<drops>
+			<item value="money" quantity="[30,40]" probability="60.0"/>
+			<item value="kanapka" quantity="[1,1]" probability="10.0"/>
+			<item value="sok z chmielu" quantity="[2,5]" probability="10.0"/>
+			<item value="czterolistna koniczyna" quantity="[1,1]" probability="1.0"/>
+			<item value="zwój fado" quantity="[1,1]" probability="2.5"/>
+			<item value="lazurowy hełm" quantity="[1,1]" probability="4.5"/>
+		</drops>
+		<equips>
+		</equips>
+		<ai>
+			<says>
+				<noise state="idle follow fight" value="Szczęście, żem cię napotkał!"/>
+				<noise state="idle follow fight" value="Koniczyna i tęcza... gwiazdy i końskie podkowy..."/>
+			</says>
+			<profile name="brave"/>
+			<profile name="offensive"/>
+			<profile name="human"/>
+			<profile name="patrolling"/>
+		</ai>
+	</creature>
+
+<creature name="karzełek amarantowy">
+		<type class="fairy" subclass="clurichaun" tileid="fairy.png:1"/>
+		<description>Oto karzełek amarantowy. Jest bogaty, ale nie dowiesz się, gdzie schował swoje złoto.</description>
+		<attributes>
+			<atk value="69"/>
+			<def value="14"/>
+			<hp value="105"/>
+			<speed value="0.4"/>
+			<size value="1,1"/>
+		</attributes>
+		<level value="15"/>
+		<experience value="140"/>
+		<respawn value="610"/>
+		<corpse name="tiny_humanoid"/>
+		<drops>
+			<item value="money" quantity="[10,95]" probability="50.0"/>
+			<item value="napój z winogron" quantity="[1,5]" probability="10.0"/>
+			<item value="kanapka" quantity="[1,1]" probability="10.0"/>
+			<item value="czterolistna koniczyna" quantity="[1,1]" probability="1.0"/>
+			<item value="zwój fado" quantity="[1,1]" probability="2.5"/>
+			<item value="buty lazurowe" quantity="[1,1]" probability="3.5"/>
+			<item value="spodnie lazurowe" quantity="[1,1]" probability="3.5"/>
+		</drops>
+		<equips>
+		</equips>
+		<ai> 
+			<says>
+				<noise state="idle follow fight" value="Napijesz się, kochaneczko moja?"/>
+				<noise state="idle follow fight" value="Baloniki na druciku..."/>
+			</says>
+			<profile name="brave"/>
+			<profile name="offensive"/>
+			<profile name="human"/>
+			<profile name="patrolling"/>
+		</ai>
+	</creature>
+
+	<creature name="mała wróżka">
+		<type class="fairy" subclass="littlefairy" tileid="fairy.png:3"/>
+		<description>Oto mała wróżka. Jest przyjazna i miła.</description>
+		<attributes>
+			<atk value="33"/>
+			<def value="3"/>
+			<hp value="322"/>
+			<speed value="0.5"/>
+			<size value="1,1"/>
+		</attributes>
+		<level value="11"/>
+		<experience value="111"/>
+		<respawn value="610"/>
+		<corpse name="tiny_humanoid"/>
+		<drops>
+			<item value="money" quantity="[3,7]" probability="90.0"/>
+			<item value="mufinka" quantity="[1,2]" probability="40.0"/>
+			<item value="zbroja lazurowa" quantity="[1,1]" probability="4.5"/>
+		</drops>
+		<equips>
+		</equips>
+		<ai>
+			<profile name="offensive"/>
+			<profile name="human"/>
+			<profile name="patrolling"/>
+		</ai>
+	</creature>
+	
+	<creature name="gargulec">
+		<type class="gargoyle" subclass="gargoyle" tileid="gargoyle.png:2"/>
+		<description>Oto gargulec. Niby jak posąg, ale żywy!</description>
+		<attributes>
+			<atk value="46"/>
+			<def value="11"/>
+			<hp value="140"/>
+			<speed value="0.9"/>
+			<size value="1,1"/>
+		</attributes>
+		<level value="13"/>
+		<experience value="120"/>
+		<respawn value="600"/>
+		<corpse name="humanoid"/>
+		<drops>
+			<item value="money" quantity="[2,10]" probability="90.0"/>
+			<item value="zbroja płytowa" quantity="[1,1]" probability="1.0"/>
+			<item value="tarcza z czaszką" quantity="[1,1]" probability="1.0"/>
+			<item value="kij" quantity="[1,1]" probability="2.5"/>
+			<item value="eliksir" quantity="[1,1]" probability="20.0"/>
+			<item value="mały eliksir" quantity="[1,1]" probability="90.0"/>
+		</drops>
+		<equips>
+		</equips>
+		<ai>
+			<profile name="brave"/>
+			<profile name="offensive"/>
+			<profile name="human"/>
+		</ai>
+	</creature>
+
+	<creature name="starszy gargulec">
+		<type class="gargoyle" subclass="elder_gargoyle" tileid="gargoyle.png:1"/>
+		<description>Oto starszy gargulec. Wyjątkowo mądre stworzenie.</description>
+		<attributes>
+			<atk value="64"/>
+			<def value="8"/>
+			<hp value="170"/>
+			<speed value="0.4"/>
+			<size value="1,1"/>
+		</attributes>
+		<level value="14"/>
+		<experience value="140"/>
+		<respawn value="600"/>
+		<corpse name="humanoid"/>
+		<drops>
+			<item value="money" quantity="[4,12]" probability="90.0"/>
+			<item value="buzdygan" quantity="[1,1]" probability="3.0"/>
+			<item value="tarcza z czaszką" quantity="[1,1]" probability="1.0"/>
+			<item value="spodnie kolcze" quantity="[1,1]" probability="1.0"/>
+			<item value="kij" quantity="[1,1]" probability="2.5"/>
+			<item value="misiurka" quantity="[1,1]" probability="0.25"/>
+			<item value="mały eliksir" quantity="[1,3]" probability="40.0"/>
+		</drops>
+		<equips>
+		</equips>
+		<ai>
+			<profile name="brave"/>
+			<profile name="offensive"/>
+			<profile name="human"/>
+		</ai>
+	</creature>
+
+	<creature name="mroczny gargulec">
+		<type class="gargoyle" subclass="dark_gargoyle" tileid="gargoyle.png:0"/>
+		<description>Oto mroczny gargulec. Czy czujesz przed nim strach?</description>
+		<attributes>
+			<atk value="59"/>
+			<def value="12"/>
+			<hp value="143"/>
+			<speed value="1.0"/>
+			<size value="1,1"/>
+		</attributes>
+		<level value="16"/>
+		<experience value="160"/>
+		<respawn value="610"/>
+		<corpse name="humanoid"/>
+		<drops>
+			<item value="money" quantity="[4,17]" probability="90.0"/>
+			<item value="kolczuga" quantity="[1,1]" probability="3.0"/>
+			<item value="kolczuga wzmocniona" quantity="[1,1]" probability="1.5"/>
+			<item value="piernacz" quantity="[1,1]" probability="1.0"/>
+			<item value="kij" quantity="[1,1]" probability="2.5"/>
+			<item value="buty żelazne" quantity="[1,1]" probability="1.0"/>
+			<item value="eliksir" quantity="[1,1]" probability="30.0"/>
+			<item value="mały eliksir" quantity="[1,2]" probability="70.0"/>
+		</drops>
+		<equips>
+		</equips>
+		<ai>
+			<profile name="brave"/>
+			<profile name="offensive"/>
+			<profile name="human"/>
+		</ai>
+	</creature>
+
+	<creature name="trujący gargulec">
+		<type class="gargoyle" subclass="venom_gargoyle" tileid="gargoyle.png:3"/>
+		<description>Oto trujący gargulec. Odrażający i niebezpieczny.</description>
+		<attributes>
+			<atk value="63"/>
+			<def value="15"/>
+			<hp value="120"/>
+			<speed value="0.9"/>
+			<size value="1,1"/>
+		</attributes>
+		<level value="19"/>
+		<experience value="180"/>
+		<respawn value="630"/>
+		<corpse name="humanoid"/>
+		<drops>
+			<item value="money" quantity="[10,25]" probability="90.0"/>
+			<item value="kolczuga wzmocniona" quantity="[1,1]" probability="1.0"/>
+			<item value="zbroja łuskowa" quantity="[1,1]" probability="2.0"/>
+			<item value="żelazna zbroja łuskowa" quantity="[1,1]" probability="1.0"/>
+			<item value="trucizna" quantity="[1,1]" probability="15.0"/>
+			<item value="kij" quantity="[1,1]" probability="2.5"/>
+			<item value="eliksir" quantity="[1,2]" probability="60.0"/>
+		</drops>
+		<equips>
+		</equips>
+		<ai>
+			<profile name="brave"/>
+			<profile name="offensive"/>
+			<profile name="human"/>
+			<profile name="patrolling"/>
+		</ai>
+	</creature>
+	
+		<creature name="cyklop">
+		<type class="giant" subclass="cyclops" tileid="giant.png:0"/>
+		<description>Widzisz cyklopa. On widzi cię nieco gorzej, bo ma jedno oko.</description>
+		<attributes>
+			<atk value="35"/>
+			<def value="6"/>
+			<hp value="70"/>
+			<speed value="0.5"/>
+			<size value="1,1"/>
+		</attributes>
+		<level value="8"/>
+		<experience value="90"/>
+		<respawn value="600"/>
+		<corpse name="humanoid"/>
+		<drops>
+			<item value="money" quantity="[6,13]" probability="100.0"/>
+			<item value="kolczuga" quantity="[1,1]" probability="1.0"/>
+			<item value="skórzany kirys" quantity="[1,1]" probability="1.0"/>
+			<item value="buty nabijane ćwiekami" quantity="[1,1]" probability="1.5"/>
+			<item value="piernacz" quantity="[1,1]" probability="1.0"/>
+			<item value="tarcza ćwiekowa" quantity="[1,1]" probability="2.5"/>
+		</drops>
+		<equips>
+		</equips>
+		<ai>
+			<profile name="brave"/>
+			<profile name="offensive"/>
+			<profile name="human"/>
+			<profile name="patrolling"/>
+		</ai>
+	</creature>
+
+	<creature name="ogr">
+		<type class="giant" subclass="ogre" tileid="giant.png:2"/>
+		<description>To jest ogr. Jest goły i ordynarny.</description>
+		<attributes>
+			<atk value="41"/>
+			<def value="7"/>
+			<hp value="100"/>
+			<speed value="0.6"/>
+			<size value="1,1"/>
+		</attributes>
+		<level value="10"/>
+		<experience value="100"/>
+		<respawn value="610"/>
+		<corpse name="humanoid"/>
+		<drops>
+			<item value="money" quantity="[6,19]" probability="100.0"/>
+			<item value="pyrlik" quantity="[1,1]" probability="2.0"/>
+			<item value="złoty młot" quantity="[1,1]" probability="0.5"/>
+			<item value="kolczuga" quantity="[1,1]" probability="1.5"/>
+			<item value="zbroja łuskowa" quantity="[1,1]" probability="0.9"/>
+			<item value="piernacz" quantity="[1,1]" probability="0.9"/>
+		</drops>
+		<equips>
+		</equips>
+		<ai>
+			<profile name="brave"/>
+			<profile name="offensive"/>
+			<profile name="human"/>
+			<profile name="patrolling"/>
+		</ai>
+	</creature>
+
+	<creature name="ogr starszy">
+		<type class="giant" subclass="elder_ogre" tileid="giant.png:1"/>
+		<description>Oto ogr starszy. Zostały mu ostatnie minuty zycia. Zmiłuj się nad nim.</description>
+		<attributes>
+			<atk value="38"/>
+			<def value="9"/>
+			<hp value="150"/>
+			<speed value="0.6"/>
+			<size value="1,1"/>
+		</attributes>
+		<level value="11"/>
+		<experience value="110"/>
+		<respawn value="620"/>
+		<corpse name="humanoid"/>
+		<drops>
+			<item value="money" quantity="[6,27]" probability="100.0"/>
+			<item value="zbroja łuskowa" quantity="[1,1]" probability="2.0"/>
+			<item value="żelazna zbroja łuskowa" quantity="[1,1]" probability="1.0"/>
+		</drops>
+		<equips>
+		</equips>
+		<ai>
+			<profile name="brave"/>
+			<profile name="offensive"/>
+			<profile name="human"/>
+			<profile name="patrolling"/>
+		</ai>
+	</creature>
+
+	<creature name="ogr żołnierz">
+		<type class="giant" subclass="ogre_soldier" tileid="giant.png:3"/>
+		<description>Oto ogr żołnierz. Śmierdzi jakby nie brał kąpieli od roku. Łeee.</description>
+		<attributes>
+			<atk value="42"/>
+			<def value="4"/>
+			<hp value="162"/>
+			<speed value="0.6"/>
+			<size value="1,1"/>
+		</attributes>
+		<level value="12"/>
+		<experience value="120"/>
+		<respawn value="635"/>
+		<corpse name="humanoid"/>
+		<drops>
+			<item value="money" quantity="[6,31]" probability="100.0"/>
+			<item value="topór bojowy" quantity="[1,1]" probability="2.0"/>
+		</drops>
+		<equips>
+		</equips>
+		<ai>
+			<profile name="brave"/>
+			<profile name="offensive"/>
+			<profile name="human"/>
+			<profile name="patrolling"/>
+		</ai>
+	</creature>
+
+	<creature name="superogr">
+		<type class="giant" subclass="superogre" tileid="giant.png:4"/>
+		<description>Oto superogr, który jest członkiem przyziemnej rodziny Ogrów. Nim to się stało ten szczególny hełm był wśród nich czczony. Uważaj potrafi uderzyć!</description>
+		<attributes>
+			<atk value="44"/>
+			<def value="6"/>
+			<hp value="195"/>
+			<speed value="0.6"/>
+			<size value="1,1"/>
+		</attributes>
+		<level value="15"/>
+		<experience value="140"/>
+		<respawn value="690"/>
+		<corpse name="humanoid"/>
+		<drops>
+			<item value="money" quantity="[6,31]" probability="100.0"/>
+		</drops>
+		<equips>
+		</equips>
+		<ai>
+			<profile name="brave"/>
+			<profile name="offensive"/>
+			<profile name="human"/>
+		</ai>
+	</creature>
+	
+	<creature name="goblin">
+		<type class="goblin" subclass="goblin" tileid="goblin.png:0"/>
+		<description>Oto goblin. Jest naprawdę złym i psotliwym stworzeniem.</description>
+		<attributes>
+			<atk value="48"/>
+			<def value="11"/>
+			<hp value="135"/>
+			<speed value="0.5"/>
+			<size value="1,1"/>
+		</attributes>
+		<level value="8"/>
+		<experience value="110"/>
+		<respawn value="600"/>
+		<corpse name="humanoid"/>
+		<drops>
+			<item value="money" quantity="[2,6]" probability="90.0"/>
+			<item value="skórzany kirys" quantity="[1,1]" probability="2.0"/>
+			<item value="buty skórzane" quantity="[1,1]" probability="1.0"/>
+			<item value="kij" quantity="[1,1]" probability="1.0"/>
+			<item value="puklerz" quantity="[1,1]" probability="2.5"/>
+			<item value="mieczyk" quantity="[1,1]" probability="2.5"/>
+			<item value="koszula" quantity="[1,1]" probability="1.0"/>
+			<item value="hełm wikingów" quantity="[1,1]" probability="2.5"/>
+			<item value="mały eliksir" quantity="[1,1]" probability="20.0"/>
+			<item value="zwój semos" quantity="[1,1]" probability="5.0"/>
+		</drops>
+		<equips>
+		</equips>
+		<ai>
+			<says>
+				<noise state="idle follow fight" value="Mmmm! Idzie mięsko!"/>
+			</says>
+			<profile name="offensive"/>
+			<profile name="human"/>
+			<profile name="patrolling"/>
+		</ai>
+	</creature>
+
+	<creature name="goblin weteran">
+		<type class="goblin" subclass="veteran_goblin" tileid="goblin.png:2"/>
+		<description>Oto goblin weteran. Podstarzały wojownik...</description>
+		<attributes>
+			<atk value="46"/>
+			<def value="10"/>
+			<hp value="90"/>
+			<speed value="0.5"/>
+			<size value="1,1"/>
+		</attributes>
+		<level value="7"/>
+		<experience value="130"/>
+		<respawn value="600"/>
+		<corpse name="humanoid"/>
+		<drops>
+			<item value="money" quantity="[4,8]" probability="90.0"/>
+			<item value="skórzany kirys z naramiennikami" quantity="[1,1]" probability="2.0"/>
+			<item value="spodnie nabijane ćwiekami" quantity="[1,1]" probability="2.0"/>
+			<item value="zbroja ćwiekowa" quantity="[1,1]" probability="2.0"/>
+			<item value="buty skórzane" quantity="[1,1]" probability="1.0"/>
+			<item value="peleryna" quantity="[1,1]" probability="1.0"/>
+			<item value="buzdygan" quantity="[1,1]" probability="2.0"/>
+			<item value="złoty hełm wikingów" quantity="[1,1]" probability="0.5"/>
+			<item value="drewniana tarcza" quantity="[1,1]" probability="2.5"/>
+			<item value="koszula" quantity="[1,1]" probability="1.0"/>
+			<item value="mały eliksir" quantity="[1,1]" probability="20.0"/>
+		</drops>
+		<equips>
+		</equips>
+		<ai>
+			<says>
+				<noise state="idle follow fight" value="Czas na śniadanko!"/>
+			</says>
+			<profile name="offensive"/>
+			<profile name="human"/>
+			<profile name="patrolling"/>
+		</ai>
+	</creature>
+
+	<creature name="goblin żołnierz">
+		<type class="goblin" subclass="soldier_goblin" tileid="goblin.png:1"/>
+		<description>Oto goblin żołnierz. Jest młody ale doświadczony w boju.</description>
+		<attributes>
+			<atk value="51"/>
+			<def value="12"/>
+			<hp value="80"/>
+			<speed value="0.5"/>
+			<size value="1,1"/>
+		</attributes>
+		<level value="9"/>
+		<experience value="140"/>
+		<respawn value="600"/>
+		<corpse name="humanoid"/>
+		<drops>
+			<item value="money" quantity="[4,10]" probability="90.0"/>
+			<item value="tarcza płytowa" quantity="[1,1]" probability="3.0"/>
+			<item value="miecz" quantity="[1,1]" probability="1.0"/>
+			<item value="zbroja ćwiekowa" quantity="[1,1]" probability="1.0"/>
+			<item value="kolczuga" quantity="[1,1]" probability="0.8"/>
+			<item value="spodnie kolcze" quantity="[1,1]" probability="1.0"/>
+			<item value="buty nabijane ćwiekami" quantity="[1,1]" probability="0.8"/>
+			<item value="peleryna" quantity="[1,1]" probability="1.0"/>
+			<item value="kiścień" quantity="[1,1]" probability="2.0"/>
+			<item value="krótki miecz" quantity="[1,1]" probability="2.0"/>
+			<item value="koszula" quantity="[1,1]" probability="1.0"/>
+			<item value="mały eliksir" quantity="[1,1]" probability="20.0"/>
+		</drops>
+		<equips>
+		</equips>
+		<ai>
+			<profile name="offensive"/>
+			<profile name="human"/>
+			<profile name="patrolling"/>
+		</ai>
+	</creature>
+	
+	<creature name="drewniany golem">
+		<type class="golem" subclass="wooden_golem" tileid="golem.png:1"/>
+		<description>Oto drewniany golem. Zwój ze starodawnym napisem na jego głowie powoduje, że potrafi chodzić.</description>
+		<attributes>
+			<atk value="101"/>
+			<def value="7"/>
+			<hp value="143"/>
+			<speed value="0.3"/>
+			<size value="1,1"/>
+		</attributes>
+		<level value="16"/>
+		<experience value="160"/>
+		<respawn value="650"/>
+		<corpse name="humanoid"/>
+		<drops>
+			<item value="money" quantity="[5,19]" probability="100.0"/>
+			<item value="polano" quantity="[1,4]" probability="38.0"/>
+			<item value="eliksir" quantity="[1,1]" probability="90.0"/>
+			<item value="drewniana tarcza" quantity="[1,1]" probability="2.0"/>
+		</drops>
+		<equips>
+		</equips>
+		<abilities>
+			<susceptibility type="fire" value="1.2"/>
+		</abilities>
+		<ai>
+			<profile name="brave"/>
+			<profile name="animal"/>
+			<profile name="offensive"/>
+			<profile name="heal" params="5,50"/>
+			<profile name="patrolling"/>
+		</ai>
+	</creature>
+
+	<creature name="kamienny golem">
+		<type class="golem" subclass="stone_golem" tileid="golem.png:0"/>
+		<description>Oto kamienny golem, który istnieje do ochrony i niczego innego. Co ma chronić i ma zrobić, gdy nie ma już celu?</description>
+		<attributes>
+			<atk value="107"/>
+			<def value="8"/>
+			<hp value="175"/>
+			<speed value="0.6"/>
+			<size value="1,1"/>
+		</attributes>
+		<level value="22"/>
+		<experience value="220"/>
+		<respawn value="620"/>
+		<corpse name="humanoid"/>
+		<drops>
+			<item value="money" quantity="[5,21]" probability="100.0"/>
+			<item value="eliksir" quantity="[1,1]" probability="100.0"/>
+			<item value="płaszcz kamienny" quantity="[1,1]" probability="0.1"/>
+			<item value="buty kamienne" quantity="[1,1]" probability="0.0002"/>
+			<item value="kamienna tarcza" quantity="[1,1]" probability="0.00015"/>
+			<item value="hełm kamienny" quantity="[1,1]" probability="0.0002"/>
+			<item value="kamienna zbroja" quantity="[1,1]" probability="0.00015"/>
+			<item value="spodnie kamienne" quantity="[1,1]" probability="0.0002"/>
+			<item value="rękawice płytowe" quantity="[1,1]" probability="0.025"/>
+		</drops>
+		<equips>
+		</equips>
+		<abilities>
+			<susceptibility type="ice" value="0.9"/>
+			<susceptibility type="fire" value="0.9"/>
+		</abilities>
+		<ai>
+			<profile name="brave"/>
+			<profile name="animal"/>
+			<profile name="offensive"/>
+			<profile name="heal" params="5,50"/>
+			<profile name="patrolling"/>
+		</ai>
+	</creature>
+	
+	<creature name="skalny wojownik">
+		<type class="faumonia_kamienie" subclass="skalny_wojownik" tileid="golem.png:3"/>
+		<description>Skalny wojownik to legenda kamiennych krain – istota, która nigdy nie śpi. Jego zadaniem jest pilnowanie przejść i podziemnych twierdz, które skrywają dawne sekrety. Potężny pancerz w połączeniu z jego czerwonym spojrzeniem budzi strach w sercach tych, którzy ośmielają się wkroczyć na jego ziemie. Niebieskie włosy symbolizują duchową więź z dawnymi rycerzami, którzy przysięgli bronić tych terenów na wieczność. </description>
+		<attributes>
+			<atk value="147"/>
+			<def value="28"/>
+			<hp value="175"/>
+			<speed value="0.9"/>
+			<size value="1,1"/>
+		</attributes>
+		<level value="38"/>
+		<experience value="680"/>
+		<respawn value="1800"/>
+		<corpse name="humanoid"/>
+		<drops>
+			<item value="money" quantity="[5,51]" probability="100.0"/>
+			<item value="duży eliksir" quantity="[1,1]" probability="100.0"/>
+			<item value="płaszcz kamienny" quantity="[1,1]" probability="0.05"/>
+			<item value="rękawice płytowe" quantity="[1,1]" probability="0.25"/>
+		</drops>
+		<equips>
+		</equips>
+		<abilities>
+			<susceptibility type="ice" value="0.9"/>
+			<susceptibility type="fire" value="0.9"/>
+		</abilities>
+		<ai>
+			<profile name="brave"/>
+			<profile name="animal"/>
+			<profile name="offensive"/>
+			<profile name="heal" params="5,50"/>
+		</ai>
+	</creature>
+
+	<creature name="lodowy golem">
+		<type class="golem" subclass="ice_golem" tileid="golem.png:2"/>
+		<description>Oto lodowy golem. Lodowe golemy są żywiołami z lodu. Powinieneś uważać na ich lodowe pięści, bo mogą tobie zaszkodzić.</description>
+		<attributes>
+			<atk value="181"/>
+			<def value="23"/>
+			<hp value="120"/>
+			<speed value="0.6"/>
+			<size value="1,1"/>
+		</attributes>
+		<level value="45"/>
+		<experience value="1720"/>
+		<respawn value="400"/>
+		<corpse name="humanoid"/>
+		<drops>
+			<item value="money" quantity="[5,22]" probability="100.0"/>
+			<item value="śnieżka" quantity="[1,4]" probability="75"/>
+			<item value="miecz lodowy" quantity="[1,1]" probability="0.01"/>
+			<item value="lodowa zbroja" quantity="[1,1]" probability="0.01"/>
+			<item value="hełm lodowy" quantity="[1,1]" probability="0.015"/>
+			<item value="lodowe rękawice" quantity="[1,1]" probability="0.5"/>
+		</drops>
+		<equips>
+		</equips>
+		<abilities>
+			<damage type="ice"/>
+			<susceptibility type="ice" value="0.5"/>
+			<susceptibility type="fire" value="1.5"/>
+		</abilities>
+		<ai>
+			<profile name="brave"/>
+			<profile name="animal"/>
+			<profile name="offensive"/>
+			<profile name="heal" params="5,50"/>
+			<profile name="patrolling"/>
+		</ai>
+	</creature>
+	
+	<creature name="trol">
+		<type class="troll" subclass="troll" tileid="troll.png:0"/>
+		<description>To jest trol. Uważaj, bo jesteś na jego ziemi.</description>
+		<attributes>
+			<atk value="42"/>
+			<def value="14"/>
+			<hp value="60"/>
+			<speed value="0.5"/>
+			<size value="1,1"/>
+		</attributes>
+		<level value="10"/>
+		<experience value="120"/>
+		<respawn value="805"/>
+		<corpse name="humanoid"/>
+		<drops>
+			<item value="money" quantity="[3,7]" probability="90.0"/>
+			<item value="kolczuga" quantity="[1,1]" probability="1.0"/>
+			<item value="spodnie kolcze" quantity="[1,1]" probability="1.0"/>
+			<item value="kolczuga wzmocniona" quantity="[1,1]" probability="0.5"/>
+			<item value="kiścień" quantity="[1,1]" probability="4.0"/>
+			<item value="mały eliksir" quantity="[1,1]" probability="20.0"/>
+		</drops>
+		<equips>
+		</equips>
+		<ai>
+			<says>
+				<noise state="idle follow fight" value="Wy nic nie wiecie!"/>
+			</says>
+			<profile name="offensive"/>
+			<profile name="human"/>
+			<profile name="patrolling"/>
+		</ai>
+	</creature>
+
+	<creature name="czerwony trol">
+		<type class="troll" subclass="red_troll" tileid="troll.png:2"/>
+		<description>Oto czerwony trol. Bucha wściekłością.</description>
+		<attributes>
+			<atk value="50"/>
+			<def value="11"/>
+			<hp value="120"/>
+			<speed value="0.7"/>
+			<size value="1,1"/>
+		</attributes>
+		<level value="13"/>
+		<experience value="130"/>
+		<respawn value="840"/>
+		<corpse name="humanoid"/>
+		<drops>
+			<item value="money" quantity="[3,17]" probability="90.0"/>
+			<item value="zbroja łuskowa" quantity="[1,1]" probability="1.5"/>
+			<item value="spodnie kolcze" quantity="[1,1]" probability="1.5"/>
+			<item value="kiścień" quantity="[1,1]" probability="4.0"/>
+			<item value="kropacz" quantity="[1,1]" probability="0.125"/>
+			<item value="mały eliksir" quantity="[1,1]" probability="20.0"/>
+		</drops>
+		<equips>
+		</equips>
+		<ai>
+			<says>
+				<noise state="idle follow fight" value="Wy nic nie wiecie!"/>
+			</says>
+			<profile name="offensive"/>
+			<profile name="human"/>
+			<profile name="patrolling"/>
+		</ai>
+	</creature>
+
+	<creature name="trol jaskiniowy">
+		<type class="troll" subclass="cave_troll" tileid="troll.png:1"/>
+		<description></description>
+		<attributes>
+			<atk value="338"/>
+			<def value="15"/>
+			<hp value="1000"/>
+			<speed value="0.7"/>
+			<size value="2,2"/>
+		</attributes>
+		<level value="63"/>
+		<experience value="1800"/>
+		<respawn value="1735"/>
+		<corpse name="giant_humanoid" width="2" height="2"/>
+		<drops>
+			<item value="money" quantity="[1,30]" probability="100.0"/>
+			<item value="szynka" quantity="[1,5]" probability="35.5"/>
+			<item value="kropacz" quantity="[1,1]" probability="1.0"/>
+			<item value="mały eliksir" quantity="[1,1]" probability="20.0"/>
+			<item value="czarny sztylet" quantity="[1,1]" probability="0.025"/>
+		</drops>
+		<equips>
+		</equips>
+		<ai>
+			<says>
+				<noise state="idle follow fight" value="Uggga yggga arghhhhh"/>
+				<noise state="idle follow fight" value="Ooggga UGGga arhhh"/>
+			</says>
+			<profile name="brave"/>
+			<profile name="offensive"/>
+			<profile name="patrolling"/>
+		</ai>
+	</creature>
+	
+	<creature name="żywioł nicości">
+		<type class="pol/zjawy" subclass="shadow_elemental" tileid="pol_zjawy.png:9"/>
+		<description/>
+		<attributes>
+			<atk value="641"/>
+			<def value="74"/>
+			<hp value="380"/>
+			<speed value="1.0"/>
+			<size value="1,1"/>
+			<resistance value="100"/>
+			<visibility value="75"/>
+		</attributes>
+		<level value="55"/>
+		<experience value="2250"/>
+		<respawn value="1000"/>
+		<corpse name="other"/>
+		<drops>
+			<item value="money" quantity="[5,40]" probability="100.0"/>
+			<item value="mocne antidotum" quantity="[1,9]" probability="20.0"/>
+		</drops>
+		<equips/>
+		<ai>
+			<profile name="brave"/>
+			<profile name="offensive"/>
+			<profile name="human"/>
+			<profile name="patrolling"/>
+		</ai>
+	</creature>
+	
 </creatures>

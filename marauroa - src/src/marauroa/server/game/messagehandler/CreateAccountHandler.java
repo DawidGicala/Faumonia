@@ -20,6 +20,8 @@ import marauroa.common.net.message.MessageC2SCreateAccount;
 import marauroa.common.net.message.MessageP2SCreateAccount;
 import marauroa.common.net.message.MessageS2CCreateAccountACK;
 import marauroa.common.net.message.MessageS2CCreateAccountNACK;
+import marauroa.server.game.db.AccountDAO;
+import marauroa.server.game.db.DAORegister;
 
 /**
  * This is a create account request. It just create the
@@ -55,6 +57,7 @@ class CreateAccountHandler extends MessageHandler {
 			String pasword = null;
 			String email = null;
 			String address = null;
+			boolean marketingConsent = false;
 
 			if (message instanceof MessageC2SCreateAccount) {
 				MessageC2SCreateAccount msg = (MessageC2SCreateAccount) message;
@@ -62,6 +65,7 @@ class CreateAccountHandler extends MessageHandler {
 				pasword = msg.getPassword();
 				email = msg.getEmail();
 				address = msg.getAddress().getHostAddress();
+				marketingConsent = msg.getMarketingConsent();
 			} else {
 				MessageP2SCreateAccount msg = (MessageP2SCreateAccount) message;
 				if ((msg.getCredentials() == null) || !(msg.getCredentials().equals(Configuration.getConfiguration().get("proxy_credentials")))) {
@@ -72,6 +76,7 @@ class CreateAccountHandler extends MessageHandler {
 				pasword = msg.getPassword();
 				email = msg.getEmail();
 				address = msg.getForwardedFor();
+				marketingConsent = false;
 			}
 
 			/*
@@ -80,6 +85,15 @@ class CreateAccountHandler extends MessageHandler {
 			 */
 			AccountResult val = rpMan.createAccount(username, pasword, email, address);
 			Result result = val.getResult();
+
+			if ((result == Result.OK_CREATED) && marketingConsent) {
+				try {
+					AccountDAO accountDAO = DAORegister.get().get(AccountDAO.class);
+					accountDAO.addMarketingConsent(username, email, address);
+				} catch (Exception e) {
+					logger.error("Unable to save marketing consent for account (" + username + ")", e);
+				}
+			}
 
 			if (result == Result.OK_CREATED) {
 				/*

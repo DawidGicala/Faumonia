@@ -1,0 +1,153 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<creatures xmlns="stendhal" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="stendhal ../creatures.xsd ">
+
+	<!-- risecia (spawning ados outside near the zoo and fado river) -->
+	
+		<creature name="gospodyni z kalavan">
+		<type class="human" subclass="kalavan_housewife" tileid="human_kalavan.png:2"/>
+		<description>Oto gospodyni z kalavan. Mieszka w mieście Kalavan i jest bardzo zła na wrednych ludzi, którzy chcą ukraść jej jedzenie z kuchni i zniszczyć jej piękny ogród!</description>
+		<attributes>
+			<atk value="124"/>
+			<def value="20"/>
+			<hp value="110"/>
+			<speed value="0.8"/>
+			<size value="1,1"/>
+		</attributes>
+		<level value="27"/>
+		<experience value="180"/>
+		<respawn value="650"/>
+		<corpse name="humanoid"/>
+		<drops>
+			<item value="money" quantity="[2,15]" probability="100.0"/>
+			<item value="dynia" quantity="[1,1]" probability="1.0"/>
+			<item value="marchew" quantity="[1,14]" probability="5.0"/>
+			<item value="zwój kalavan" quantity="[1,1]" probability="1.0"/>
+			<item value="butelka wody" quantity="[1,1]" probability="75.0"/>
+			<item value="buteleczka wody" quantity="[1,2]" probability="90.0"/>
+			<item value="sałata" quantity="[1,14]" probability="5.0"/>
+			<item value="pomidor" quantity="[1,14]" probability="5.0"/>
+			<item value="kapusta" quantity="[1,14]" probability="5.0"/>
+		</drops>
+		<equips>
+		</equips>
+		<ai>
+			<profile name="offensive"/>
+			<profile name="human"/>
+			<profile name="patrolling"/>
+		</ai>
+	</creature>
+
+	<creature name="kmieć z kalavan">
+		<type class="human" subclass="kalavan_peasant" tileid="human_kalavan.png:3"/>
+		<description>Oto kmieć z kalavan. Pracuje na polach w pobliżu miasta Kalavan. Jak tylko usłyszał o obcych w mieście to czym prędzej wrócił do miasta, aby pomóc mieszkańcom w walce z wrogami!</description>
+		<attributes>
+			<atk value="126"/>
+			<def value="21"/>
+			<hp value="120"/>
+			<speed value="0.9"/>
+			<size value="1,1"/>
+		</attributes>
+		<level value="28"/>
+		<experience value="190"/>
+		<respawn value="680"/>
+		<corpse name="humanoid"/>
+		<drops>
+			<item value="money" quantity="[3,10]" probability="100.0"/>
+			<item value="buty nabijane ćwiekami" quantity="[1,1]" probability="1.0"/>
+			<item value="kosa pordzewiała" quantity="[1,1]" probability="1.0"/>
+			<item value="pyrlik" quantity="[1,1]" probability="1.0"/>
+			<item value="zwój kalavan" quantity="[1,1]" probability="1.0"/>
+			<item value="marchew" quantity="[1,14]" probability="5.0"/>
+			<item value="szpinak" quantity="[1,14]" probability="5.0"/>
+			<item value="por" quantity="[1,14]" probability="5.0"/>
+			<item value="kalafior" quantity="[1,14]" probability="5.0"/>
+			<item value="butelka wody" quantity="[1,2]" probability="75.0"/>
+			<item value="buteleczka wody" quantity="[1,2]" probability="90.0"/>
+		</drops>
+		<equips>
+		</equips>
+		<ai>
+			<profile name="brave"/>
+			<profile name="offensive"/>
+			<profile name="human"/>
+			<profile name="patrolling"/>
+		</ai>
+	</creature>
+
+	<creature name="mądralińska z kalavan">
+		<type class="human" subclass="kalavan_wisewoman" tileid="human_kalavan.png:4"/>
+		<description>Oto mądralińska z kalavan. Zazwyczaj siedzi w swoim małym pokoju i robi ręczne robótki, ale teraz potrzebuje wrażeń!</description>
+		<attributes>
+			<atk value="137"/>
+			<def value="23"/>
+			<hp value="100"/>
+			<speed value="0.3"/>
+			<size value="1,1"/>
+		</attributes>
+		<level value="31"/>
+		<experience value="200"/>
+		<respawn value="690"/>
+		<corpse name="humanoid"/>
+		<drops>
+			<item value="money" quantity="[5,20]" probability="100.0"/>
+			<item value="mocne antidotum" quantity="[1,1]" probability="30.0"/>
+			<item value="dynia" quantity="[1,1]" probability="1.0"/>
+			<item value="kalafior" quantity="[1,14]" probability="5.0"/>
+			<item value="zwój kalavan" quantity="[1,1]" probability="1.0"/>
+			<item value="cebula" quantity="[1,14]" probability="5.0"/>
+			<item value="pomidor" quantity="[1,14]" probability="5.0"/>
+			<item value="cukinia" quantity="[1,14]" probability="5.0"/>
+			<item value="butelka wody" quantity="[1,1]" probability="95.0"/>
+			<item value="buteleczka wody" quantity="[1,4]" probability="60.0"/>
+		</drops>
+		<equips>
+		</equips>
+		<ai>
+			<profile name="brave"/>
+			<profile name="offensive"/>
+			<profile name="human"/>
+			<profile name="patrolling"/>
+		</ai>
+	</creature>
+
+	<creature name="mieszkaniec kalavan">
+		<type class="human" subclass="kalavan_citizen" tileid="human_kalavan.png:1"/>
+		<description>Oto mieszkaniec kalavan. Mieszka w mieście Kalavan i chroni je przed najeźdźcami!</description>
+		<attributes>
+			<atk value="140"/>
+			<def value="26"/>
+			<hp value="100"/>
+			<speed value="0.8"/>
+			<size value="1,1"/>
+		</attributes>
+		<level value="33"/>
+		<experience value="205"/>
+		<respawn value="710"/>
+		<corpse name="humanoid"/>
+		<drops>
+			<item value="money" quantity="[5,20]" probability="100.0"/>
+			<item value="topór" quantity="[1,1]" probability="1.0"/>
+			<item value="zwój kalavan" quantity="[1,1]" probability="2.0"/>
+			<item value="szpinak" quantity="[1,14]" probability="5.0"/>
+			<item value="sałata" quantity="[1,14]" probability="5.0"/>
+			<item value="cebula" quantity="[1,14]" probability="5.0"/>
+			<item value="butelka wody" quantity="[2,2]" probability="55.0"/>
+			<item value="buteleczka wody" quantity="[2,3]" probability="70.0"/>
+			<item value="brokuł" quantity="[1,14]" probability="5.0"/>
+		</drops>
+		<equips>
+		</equips>
+		<ai>
+			<profile name="brave"/>
+			<profile name="offensive"/>
+			<profile name="human"/>
+			<profile name="patrolling"/>
+		</ai>
+	</creature>
+
+
+
+
+
+</creatures>

@@ -1,0 +1,173 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<creatures xmlns="stendhal" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="stendhal ../creatures.xsd ">
+
+	<!-- risecia (spawning ados outside near the zoo and fado river) -->
+	
+	<creature name="risecia zbir">
+		<type class="human" subclass="risecia_thug" tileid="human.png:8"/>
+		<description>Oto risecia zbir. Trzymaj się od niego z daleka!</description>
+		<attributes>
+			<atk value="122"/>
+			<def value="18"/>
+			<hp value="90"/>
+			<speed value="0.7"/>
+			<size value="1,1"/>
+		</attributes>
+		<level value="22"/>
+		<experience value="190"/>
+		<respawn value="600"/>
+		<corpse name="humanoid"/>
+		<drops>
+			<item value="money" quantity="[3,20]" probability="90.0"/>
+			<item value="kolczuga" quantity="[1,1]" probability="0.5"/>
+			<item value="spodnie kolcze" quantity="[1,1]" probability="0.5"/>
+			<item value="kolczuga wzmocniona" quantity="[1,1]" probability="0.5"/>
+			<item value="kanapka" quantity="[1,1]" probability="20.0"/>
+			<item value="buty kolcze" quantity="[1,1]" probability="0.5"/>
+			<item value="peleryna" quantity="[1,1]" probability="0.5"/>
+			<item value="misiurka" quantity="[1,1]" probability="1.5"/>
+			<item value="krótki miecz" quantity="[1,1]" probability="2.5"/>
+			<item value="polano" quantity="[1,1]" probability="3.5"/>
+			<item value="eliksir" quantity="[1,1]" probability="35.0"/>
+		</drops>
+		<equips>
+		</equips>
+		<abilities>
+			<damage type="light"/>
+		</abilities>
+		<ai>
+			<profile name="brave"/>
+			<profile name="offensive"/>
+			<profile name="human"/>
+			<profile name="patrolling"/>
+		</ai>
+	</creature>
+
+	<creature name="risecia łucznik">
+		<type class="human" subclass="risecia_archer" tileid="human.png:5"/>
+		<description>Oto risecia łucznik. Jeden z wielu, którzy bronią swego dowódcę.</description>
+		<attributes>
+			<atk value="145"/>
+			<def value="3"/>
+			<hp value="85"/>
+			<speed value="0.6"/>
+			<size value="1,1"/>
+		</attributes>
+		<level value="24"/>
+		<experience value="210"/>
+		<respawn value="610"/>
+		<corpse name="humanoid"/>
+		<drops>
+			<item value="money" quantity="[2,15]" probability="100.0"/>
+			<item value="zbroja łuskowa" quantity="[1,1]" probability="0.5"/>
+			<item value="żelazna zbroja łuskowa" quantity="[1,1]" probability="0.5"/>
+			<item value="strzała" quantity="[4,18]" probability="80.0"/>
+			<item value="buty kolcze" quantity="[1,1]" probability="0.5"/>
+			<item value="drewniany łuk" quantity="[1,1]" probability="3.0"/>
+			<item value="kanapka" quantity="[1,1]" probability="20.0"/>
+			<item value="eliksir" quantity="[1,1]" probability="45.0"/>
+			<item value="polano" quantity="[1,1]" probability="3.5"/>
+		</drops>
+		<equips>
+			<slot name="rhand" item="luk waga 3" quantity="1"/>
+			<slot name="lhand" item="strzała" quantity="10000"/>
+		</equips>
+		<abilities>
+			<damage rangedType="light"/>
+		</abilities>
+		<ai>
+			<profile name="offensive"/>
+			<profile name="human"/>
+			<profile name="archer"/>
+			<profile name="patrolling"/>
+		</ai>
+	</creature>
+
+	<creature name="risecia z klingą">
+		<type class="human" subclass="risecia_swordsman" tileid="human.png:7"/>
+		<description>Oto risecia z klingą. Jego ostrze miecza zetnie Twoją głowę!</description>
+		<attributes>
+			<atk value="128"/>
+			<def value="17"/>
+			<hp value="110"/>
+			<speed value="0.8"/>
+			<size value="1,1"/>
+		</attributes>
+		<level value="27"/>
+		<experience value="230"/>
+		<respawn value="620"/>
+		<corpse name="humanoid"/>
+		<drops>
+			<item value="money" quantity="[3,25]" probability="100.0"/>
+			<item value="zbroja łuskowa" quantity="[1,1]" probability="0.5"/>
+			<item value="żelazna zbroja łuskowa" quantity="[1,1]" probability="0.5"/>
+			<item value="żelazny kirys z naramiennikami" quantity="[1,1]" probability="0.25"/>
+			<item value="buty żelazne" quantity="[1,1]" probability="0.5"/>
+			<item value="hełm kolczy" quantity="[1,1]" probability="0.5"/>
+			<item value="miecz" quantity="[1,1]" probability="0.5"/>
+			<item value="kanapka" quantity="[1,1]" probability="20.0"/>
+			<item value="eliksir" quantity="[1,1]" probability="75.0"/>
+			<item value="bułat" quantity="[1,1]" probability="0.05"/>
+			<item value="polano" quantity="[1,1]" probability="3.5"/>
+		</drops>
+		<equips>
+		</equips>
+		<abilities>
+			<damage type="light"/>
+		</abilities>
+		<ai>
+			<profile name="brave"/>
+			<profile name="offensive"/>
+			<profile name="human"/>
+			<profile name="patrolling"/>
+		</ai>
+	</creature>
+
+	<creature name="Falatheen szef Risecia">
+		<type class="human" subclass="risecia_leader" tileid="human.png:6"/>
+		<description>Oto Falatheen szef Risecia. Nie chce zginąć! Jego mali wojownicy chronią go przed napastnikami.</description>
+		<attributes>
+			<atk value="179"/>
+			<def value="16"/>
+			<hp value="250"/>
+			<speed value="0.9"/>
+			<size value="1,1"/>
+		</attributes>
+		<level value="30"/>
+		<experience value="480"/>
+		<respawn value="630"/>
+		<corpse name="humanoid"/>
+		<drops>
+			<item value="money" quantity="[10,40]" probability="70.0"/>
+			<item value="żelazna zbroja łuskowa" quantity="[1,1]" probability="1.0"/>
+			<item value="złota kolczuga" quantity="[1,1]" probability="1.0"/>
+			<item value="żelazny kirys z naramiennikami" quantity="[1,1]" probability="1.0"/>
+			<item value="buty kolcze" quantity="[1,1]" probability="1.0"/>
+			<item value="peleryna" quantity="[1,1]" probability="3.0"/>
+			<item value="misiurka" quantity="[1,1]" probability="1.0"/>
+			<item value="bułat" quantity="[1,1]" probability="0.5"/>
+			<item value="kanapka" quantity="[1,2]" probability="50.0"/>
+			<item value="eliksir" quantity="[1,2]" probability="95.0"/>
+			<item value="duży eliksir" quantity="[1,1]" probability="15.0"/>
+			<item value="katana" quantity="[1,1]" probability="4.44"/>
+			<item value="polano" quantity="[1,2]" probability="10.0"/>
+		</drops>
+		<equips>
+		</equips>
+		<abilities>
+			<damage type="light"/>
+		</abilities>
+		<ai>
+			<profile name="offensive"/>
+			<profile name="lifesteal" params="0.5"/>
+			<profile name="human"/>
+			<profile name="heal" params="5,50"/>
+		</ai>
+	</creature>
+
+
+
+
+
+</creatures>

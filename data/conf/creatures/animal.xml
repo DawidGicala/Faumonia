@@ -5,7 +5,173 @@
 
 <!-- low animals --> 
 
+<creature name="chmara much">
+		<type class="pol/owady" subclass="chmara_much" tileid="pol_owady.png:0"/>
+		<description>Oto muchy plujki. Przyciąga je smród padliny.</description>
+		<attributes>
+			<atk value="1"/>
+			<def value="1"/>
+			<hp value="5"/>
+			<speed value="0.7"/>
+			<size value="1,1"/>
+			<resistance value="25"/>
+		</attributes>
+		<level value="0"/>
+		<experience value="0"/>
+		<respawn value="159"/>
+		<corpse name="fly"/>
+		<drops/>
+		<equips/>
+		<ai>
+			<says>
+				<noise state="idle follow fight" value="Bzzzyy!"/>
+				<sound value="pol-buzz"/>
+			</says>
+			<profile name="animal"/>
+			<profile name="offensive"/>
+			<profile name="coward"/>
+			<profile name="patrolling"/>
+		</ai>
+	</creature>
 
+	<creature name="rój os">
+		<type class="pol/owady" subclass="roj_os" tileid="pol_owady.png:1"/>
+		<description>Osy żądlą boleśnie. Jeśli masz przy sobie odtrutkę to przeżyjesz.</description>
+		<attributes>
+			<atk value="15"/>
+			<def value="30"/>
+			<hp value="30"/>
+			<speed value="0.8"/>
+			<size value="1,1"/>
+			<resistance value="50"/>
+		</attributes>
+		<level value="0"/>
+		<experience value="5"/>
+		<respawn value="283"/>
+		<corpse name="fly"/>
+		<drops/>
+		<equips/>
+		<ai>
+			<says>
+				<noise state="idle follow fight" value="Bzzzzzzzzzzzz!"/>
+				<sound value="pol-buzz"/>
+			</says>
+			<profile name="animal"/>
+			<profile name="offensive"/>
+			<profile name="brave"/>
+			<profile name="patrolling"/>
+		</ai>
+	</creature>
+
+	<creature name="rój szerszeni">
+		<type class="pol/owady" subclass="roj_szerszeni" tileid="pol_owady.png:2"/>
+		<description>Jad szerszeni jest zabójczy. Mało kto przeżył ich atak.</description>
+		<attributes>
+			<atk value="45"/>
+			<def value="50"/>
+			<hp value="64"/>
+			<speed value="0.9"/>
+			<size value="1,1"/>
+		</attributes>
+		<level value="6"/>
+		<experience value="62"/>
+		<respawn value="904"/>
+		<corpse name="fly"/>
+		<drops/>
+		<equips/>
+		<ai>
+			<says>
+				<noise state="idle follow fight" value="Bżżżżżżżżż!"/>
+				<sound value="pol-buzz"/>
+			</says>
+			<profile name="heal" params="1,50"/>
+			<profile name="animal"/>
+			<profile name="offensive"/>
+			<profile name="brave"/>
+			<profile name="patrolling"/>
+		</ai>
+	</creature>
+
+	<creature name="motylek">
+		<type class="pol/owady" subclass="motylek" tileid="pol_owady.png:3"/>
+		<description>O! Popatrz! Leci motylek! Nie dosięgniesz go...</description>
+		<attributes>
+			<atk value="1"/>
+			<def value="22000"/>
+			<hp value="1"/>
+			<speed value="1.0"/>
+			<size value="1,1"/>
+			<resistance value="1"/>
+		</attributes>
+		<level value="1"/>
+		<experience value="1"/>
+		<respawn value="3000"/>
+		<corpse name="fly"/>
+		<drops/>
+		<equips/>
+		<ai>
+			<profile name="animal"/>
+			<profile name="offensive"/>
+			<profile name="coward"/>
+			<profile name="patrolling"/>
+		</ai>
+	</creature>
+	
+	<creature name="gołąbek">
+		<type class="pol/ptaki" subclass="golabek" tileid="pol_ptaki.png:0"/>
+		<description>Oto gołąbek co ma ostry dziobek. Pewnie domaga się okruszków!</description>
+		<attributes>
+			<atk value="3"/>
+			<def value="9"/>
+			<hp value="12"/>
+			<speed value="0.4"/>
+			<size value="1,1"/>
+			<resistance value="100"/>
+		</attributes>
+		<level value="1"/>
+		<experience value="8"/>
+		<respawn value="350"/>
+		<corpse name="corpse"/>
+		<drops>
+			<item value="udko" quantity="[1,1]" probability="80.0"/>
+			<item value="piórko" quantity="[1,1]" probability="90.0"/>
+			<item value="wisienka" quantity="[1,1]" probability="5.0"/>
+		</drops>
+		<equips/>
+		<ai>
+			<profile name="coward"/>
+			<profile name="animal"/>
+			<profile name="offensive"/>
+			<profile name="patrolling"/>
+		</ai>
+	</creature>
+
+	<creature name="jastrząb">
+		<type class="pol/ptaki" subclass="jastrzab" tileid="pol_ptaki.png:3"/>
+		<attributes>
+			<atk value="33"/>
+			<def value="49"/>
+			<hp value="127"/>
+			<speed value="0.8"/>
+			<size value="1,1"/>
+			<resistance value="100"/>
+		</attributes>
+		<level value="21"/>
+		<experience value="302"/>
+		<respawn value="499"/>
+		<corpse name="corpse"/>
+		<drops>
+			<item value="udko" quantity="[1,1]" probability="80.0"/>
+			<item value="spinka" quantity="[1,1]" probability="0.0001"/>
+			<item value="wisienka" quantity="[1,1]" probability="40.0"/>
+		</drops>
+		<equips/>
+		<ai>
+			<profile name="brave"/>
+			<profile name="offensive"/>
+			<profile name="patrolling"/>
+		</ai>
+	</creature>
 
 	<creature name="jeleń">
 		<type class="animal" subclass="reindeer" tileid="animal.png:9"/>
@@ -16,6 +182,7 @@
 			<hp value="20"/>
 			<speed value="1.0"/>
 			<size value="1,1"/>
+			<resistance value="100"/>
 		</attributes>
 		<level value="0"/>
 		<experience value="5"/>
@@ -26,7 +193,7 @@
 			<item value="szynka" quantity="[1,2]" probability="30.0"/>
 			<item value="antidotum" quantity="[1,1]" probability="5.0"/>
 			<item value="skóra jelenia" quantity="[1,1]" probability="5.0"/>
-		<item value="prezent czerwonego wędrowca 2025" quantity="[1,1]" probability="2.0"/> <item value="prezent lodowego wędrowca 2025" quantity="[1,1]" probability="0.5"/> <item value="prezent demonicznego wędrowca 2025" quantity="[1,1]" probability="0.25"/> </drops>
+		</drops>
 		<equips>
 		</equips>
 		<ai>
@@ -46,6 +213,7 @@
 			<hp value="10"/>
 			<speed value="0.5"/>
 			<size value="1,1"/>
+			<resistance value="100"/>
 		</attributes>
 		<level value="0"/>
 		<experience value="5"/>
@@ -53,7 +221,7 @@
 		<corpse name="small_animal"/>
 		<drops>
 			<item value="mięso z kraba" quantity="[1,1]" probability="100.0"/>
-		<item value="prezent czerwonego wędrowca 2025" quantity="[1,1]" probability="2.0"/> <item value="prezent lodowego wędrowca 2025" quantity="[1,1]" probability="0.5"/> <item value="prezent demonicznego wędrowca 2025" quantity="[1,1]" probability="0.25"/> </drops>
+		</drops>
 		<equips>
 		</equips>
 		<ai>
@@ -75,6 +243,7 @@
 			<hp value="40"/>
 			<speed value="0.5"/>
 			<size value="1,1"/>
+			<resistance value="100"/>
 		</attributes>
 		<level value="3"/>
 		<experience value="10"/>
@@ -83,7 +252,7 @@
 		<drops>
 			<item value="money" quantity="[2,6]" probability="60.0"/>
 			<item value="trucizna" quantity="[1,1]" probability="10.0"/>
-		<item value="prezent czerwonego wędrowca 2025" quantity="[1,1]" probability="2.0"/> <item value="prezent lodowego wędrowca 2025" quantity="[1,1]" probability="0.5"/> <item value="prezent demonicznego wędrowca 2025" quantity="[1,1]" probability="0.25"/> </drops>
+		</drops>
 		<equips>
 		</equips>
 		<ai>
@@ -105,6 +274,7 @@
 			<hp value="20"/>
 			<speed value="0.5"/>
 			<size value="1,1"/>
+			<resistance value="100"/>
 		</attributes>
 		<level value="1"/>
 		<experience value="20"/>
@@ -113,7 +283,7 @@
 		<drops>
 			<item value="mięso" quantity="[1,2]" probability="80.0"/>
 			<item value="truchło nietoperza" quantity="[1,1]" probability="100.0"/>
-		<item value="prezent czerwonego wędrowca 2025" quantity="[1,1]" probability="2.0"/> <item value="prezent lodowego wędrowca 2025" quantity="[1,1]" probability="0.5"/> <item value="prezent demonicznego wędrowca 2025" quantity="[1,1]" probability="0.25"/> </drops>
+		</drops>
 		<equips>
 		</equips>
 		<ai>
@@ -132,6 +302,7 @@
 			<hp value="25"/>
 			<speed value="0.5"/>
 			<size value="1,1"/>
+			<resistance value="100"/>
 		</attributes>
 		<level value="1"/>
 		<experience value="10"/>
@@ -139,7 +310,7 @@
 		<corpse name="small_winged"/>
 		<drops>
 			<item value="udko" quantity="[1,2]" probability="50.0"/>
-		<item value="prezent czerwonego wędrowca 2025" quantity="[1,1]" probability="2.0"/> <item value="prezent lodowego wędrowca 2025" quantity="[1,1]" probability="0.5"/> <item value="prezent demonicznego wędrowca 2025" quantity="[1,1]" probability="0.25"/> </drops>
+		</drops>
 		<equips>
 		</equips>
 		<ai>
@@ -163,6 +334,7 @@
 			<hp value="20"/>
 			<speed value="0.5"/>
 			<size value="1,1"/>
+			<resistance value="100"/>
 		</attributes>
 		<level value="1"/>
 		<experience value="10"/>
@@ -170,7 +342,7 @@
 		<corpse name="small_winged"/>
 		<drops>
 			<item value="udko" quantity="[1,2]" probability="40.0"/>
-		<item value="prezent czerwonego wędrowca 2025" quantity="[1,1]" probability="2.0"/> <item value="prezent lodowego wędrowca 2025" quantity="[1,1]" probability="0.5"/> <item value="prezent demonicznego wędrowca 2025" quantity="[1,1]" probability="0.25"/> </drops>
+		</drops>
 		<equips>
 		</equips>
 		<ai>
@@ -190,20 +362,21 @@
 		<type class="animal" subclass="penguin" tileid="animal.png:16"/>
 		<description>Oto mały i głupiutki pingwin.</description>
 		<attributes>
-			<atk value="36"/>
+			<atk value="1"/>
 			<def value="7"/>
 			<hp value="30"/>
 			<speed value="0.5"/>
 			<size value="1,1"/>
+			<resistance value="100"/>
 		</attributes>
 		<level value="1"/>
-		<experience value="20"/>
+		<experience value="10"/>
 		<respawn value="200"/>
 		<corpse name="small_animal"/>
 		<drops>
 			<item value="mięso" quantity="[2,4]" probability="60.0"/>
 			<item value="dorsz" quantity="[2,3]" probability="30.0"/>
-		<item value="prezent czerwonego wędrowca 2025" quantity="[1,1]" probability="2.0"/> <item value="prezent lodowego wędrowca 2025" quantity="[1,1]" probability="0.5"/> <item value="prezent demonicznego wędrowca 2025" quantity="[1,1]" probability="0.25"/> </drops>
+		</drops>
 		<equips>
 		</equips>
 		<ai>
@@ -226,6 +399,7 @@
 			<hp value="35"/>
 			<speed value="0.5"/>
 			<size value="1,1"/>
+			<resistance value="100"/>
 		</attributes>
 		<level value="2"/>
 		<experience value="20"/>
@@ -237,7 +411,7 @@
 			<item value="szynka" quantity="[1,2]" probability="30.0"/>
 			<item value="pomarańcza" quantity="[1,1]" probability="5.0"/>
 			<item value="banan" quantity="[1,1]" probability="25.0"/>
-		<item value="prezent czerwonego wędrowca 2025" quantity="[1,1]" probability="2.0"/> <item value="prezent lodowego wędrowca 2025" quantity="[1,1]" probability="0.5"/> <item value="prezent demonicznego wędrowca 2025" quantity="[1,1]" probability="0.25"/> </drops>
+		</drops>
 		<equips>
 		</equips>
 		<ai>
@@ -259,6 +433,7 @@
 			<hp value="50"/>
 			<speed value="0.5"/>
 			<size value="1,1"/>
+			<resistance value="100"/>
 		</attributes>
 		<level value="2"/>
 		<experience value="20"/>
@@ -266,7 +441,7 @@
 		<corpse name="animal"/>
 		<drops>
 			<item value="szynka" quantity="[1,1]" probability="70.0"/>
-		<item value="prezent czerwonego wędrowca 2025" quantity="[1,1]" probability="2.0"/> <item value="prezent lodowego wędrowca 2025" quantity="[1,1]" probability="0.5"/> <item value="prezent demonicznego wędrowca 2025" quantity="[1,1]" probability="0.25"/> </drops>
+		</drops>
 		<equips>
 		</equips>
 		<ai>
@@ -288,6 +463,7 @@
 			<hp value="35"/>
 			<speed value="0.5"/>
 			<size value="1,1"/>
+			<resistance value="100"/>
 		</attributes>
 		<level value="2"/>
 		<experience value="20"/>
@@ -298,7 +474,7 @@
 			<item value="mięso" quantity="[1,4]" probability="60.0"/>
 			<item value="kieł wilczy" quantity="[1,1]" probability="4.0"/>
 			<item value="pazury wilcze" quantity="[1,1]" probability="4.0"/>
-		<item value="prezent czerwonego wędrowca 2025" quantity="[1,1]" probability="2.0"/> <item value="prezent lodowego wędrowca 2025" quantity="[1,1]" probability="0.5"/> <item value="prezent demonicznego wędrowca 2025" quantity="[1,1]" probability="0.25"/> </drops>
+		</drops>
 		<equips>
 		</equips>
 		<ai>
@@ -320,6 +496,7 @@
 			<hp value="35"/>
 			<speed value="0.5"/>
 			<size value="1,1"/>
+			<resistance value="100"/>
 		</attributes>
 		<level value="2"/>
 		<experience value="20"/>
@@ -331,7 +508,7 @@
 			<item value="mięso" quantity="[1,4]" probability="60.0"/>
 			<item value="kieł wilczy" quantity="[1,1]" probability="100.0"/>
 			<item value="pazury wilcze" quantity="[1,5]" probability="100.0"/>
-		<item value="prezent czerwonego wędrowca 2025" quantity="[1,1]" probability="2.0"/> <item value="prezent lodowego wędrowca 2025" quantity="[1,1]" probability="0.5"/> <item value="prezent demonicznego wędrowca 2025" quantity="[1,1]" probability="0.25"/> </drops>
+		</drops>
 		<equips>
 		</equips>
 		<ai>
@@ -354,6 +531,7 @@
 			<hp value="35"/>
 			<speed value="0.8"/>
 			<size value="1,1"/>
+			<resistance value="100"/>
 		</attributes>
 		<level value="2"/>
 		<experience value="20"/>
@@ -361,7 +539,7 @@
 		<corpse name="animal"/>
 		<drops>
 			<item value="mięso" quantity="[1,4]" probability="60.0"/>
-		<item value="prezent czerwonego wędrowca 2025" quantity="[1,1]" probability="2.0"/> <item value="prezent lodowego wędrowca 2025" quantity="[1,1]" probability="0.5"/> <item value="prezent demonicznego wędrowca 2025" quantity="[1,1]" probability="0.25"/> </drops>
+		</drops>
 		<equips>
 		</equips>
 		<ai>
@@ -380,6 +558,7 @@
 			<hp value="35"/>
 			<speed value="0.5"/>
 			<size value="1,1"/>
+			<resistance value="100"/>
 		</attributes>
 		<level value="2"/>
 		<experience value="20"/>
@@ -389,7 +568,7 @@
 			<item value="money" quantity="[2,8]" probability="70.0"/>
 			<item value="bursztyn" quantity="[1,1]" probability="10.0"/>
 			<item value="szynka" quantity="[1,3]" probability="45.0"/>
-		<item value="prezent czerwonego wędrowca 2025" quantity="[1,1]" probability="2.0"/> <item value="prezent lodowego wędrowca 2025" quantity="[1,1]" probability="0.5"/> <item value="prezent demonicznego wędrowca 2025" quantity="[1,1]" probability="0.25"/> </drops>
+		</drops>
 		<equips>
 		</equips>
 		<ai>
@@ -411,6 +590,7 @@
 			<hp value="54"/>
 			<speed value="0.4"/>
 			<size value="1,1"/>
+			<resistance value="100"/>
 		</attributes>
 		<level value="2"/>
 		<experience value="20"/>
@@ -419,7 +599,7 @@
 		<drops>
 			<item value="mięso" quantity="[1,4]" probability="70.0"/>
 			<item value="szynka" quantity="[1,2]" probability="90.0"/>
-		<item value="prezent czerwonego wędrowca 2025" quantity="[1,1]" probability="2.0"/> <item value="prezent lodowego wędrowca 2025" quantity="[1,1]" probability="0.5"/> <item value="prezent demonicznego wędrowca 2025" quantity="[1,1]" probability="0.25"/> </drops>
+		</drops>
 		<equips>
 		</equips>
 		<ai>
@@ -441,6 +621,7 @@
 			<hp value="54"/>
 			<speed value="0.4"/>
 			<size value="1,1"/>
+			<resistance value="100"/>
 		</attributes>
 		<level value="2"/>
 		<experience value="30"/>
@@ -449,7 +630,7 @@
 		<drops>
 			<item value="mięso" quantity="[1,4]" probability="50.0"/>
 			<item value="szynka" quantity="[1,3]" probability="80.0"/>
-			<item value="prezent czerwonego wędrowca 2025" quantity="[1,1]" probability="2.0"/> <item value="prezent lodowego wędrowca 2025" quantity="[1,1]" probability="0.5"/> <item value="prezent demonicznego wędrowca 2025" quantity="[1,1]" probability="0.25"/> </drops>
+			</drops>
 		<equips>
 		</equips>
 		<ai>
@@ -471,6 +652,7 @@
 			<hp value="40"/>
 			<speed value="0.4"/>
 			<size value="1,1"/>
+			<resistance value="100"/>
 		</attributes>
 		<level value="4"/>
 		<experience value="40"/>
@@ -481,7 +663,7 @@
 			<item value="szynka" quantity="[1,3]" probability="30.0"/>
 			<item value="kieł niedźwiedzi" quantity="[1,1]" probability="3.0"/>
 			<item value="niedźwiedzie pazury" quantity="[1,1]" probability="3.0"/>
-		<item value="prezent czerwonego wędrowca 2025" quantity="[1,1]" probability="2.0"/> <item value="prezent lodowego wędrowca 2025" quantity="[1,1]" probability="0.5"/> <item value="prezent demonicznego wędrowca 2025" quantity="[1,1]" probability="0.25"/> </drops>
+		</drops>
 		<equips>
 		</equips>
 		<ai>
@@ -503,6 +685,7 @@
 			<hp value="45"/>
 			<speed value="0.5"/>
 			<size value="1,1"/>
+			<resistance value="100"/>
 		</attributes>
 		<level value="4"/>
 		<experience value="40"/>
@@ -513,7 +696,7 @@
 			<item value="szynka" quantity="[1,2]" probability="50.0"/>
 			<item value="stek" quantity="[1,2]" probability="30.0"/>
 			<item value="skóra lwa" quantity="[1,1]" probability="3.5"/>
-		<item value="prezent czerwonego wędrowca 2025" quantity="[1,1]" probability="2.0"/> <item value="prezent lodowego wędrowca 2025" quantity="[1,1]" probability="0.5"/> <item value="prezent demonicznego wędrowca 2025" quantity="[1,1]" probability="0.25"/> </drops>
+		</drops>
 		<equips>
 		</equips>
 		<ai>
@@ -535,6 +718,7 @@
 			<hp value="165"/>
 			<speed value="0.3"/>
 			<size value="1,1"/>
+			<resistance value="100"/>
 		</attributes>
 		<level value="5"/>
 		<experience value="50"/>
@@ -544,7 +728,7 @@
 			<item value="mięso" quantity="[1,10]" probability="100.0"/>
 			<item value="szynka" quantity="[2,8]" probability="70.0"/>
 			<item value="stek" quantity="[1,11]" probability="30.0"/>
-		<item value="prezent czerwonego wędrowca 2025" quantity="[1,1]" probability="2.0"/> <item value="prezent lodowego wędrowca 2025" quantity="[1,1]" probability="0.5"/> <item value="prezent demonicznego wędrowca 2025" quantity="[1,1]" probability="0.25"/> </drops>
+		</drops>
 		<equips>
 		</equips>
 		<ai>
@@ -567,6 +751,7 @@
 			<hp value="60"/>
 			<speed value="0.5"/>
 			<size value="1,1"/>
+			<resistance value="100"/>
 		</attributes>
 		<level value="5"/>
 		<experience value="50"/>
@@ -579,7 +764,7 @@
 			<item value="skóra tygrysa" quantity="[1,1]" probability="3.0"/>
 			<item value="kieł tygrysi" quantity="[1,1]" probability="5.0"/>
 			<item value="pazury tygrysie" quantity="[1,1]" probability="5.0"/>
-		<item value="prezent czerwonego wędrowca 2025" quantity="[1,1]" probability="2.0"/> <item value="prezent lodowego wędrowca 2025" quantity="[1,1]" probability="0.5"/> <item value="prezent demonicznego wędrowca 2025" quantity="[1,1]" probability="0.25"/> </drops>
+		</drops>
 		<equips>
 		</equips>
 		<ai>
@@ -601,6 +786,7 @@
 			<hp value="45"/>
 			<speed value="0.4"/>
 			<size value="1,1"/>
+			<resistance value="100"/>
 		</attributes>
 		<level value="8"/>
 		<experience value="80"/>
@@ -611,7 +797,7 @@
 			<item value="szynka" quantity="[2,4]" probability="40.0"/>
 			<item value="kieł niedźwiedzi" quantity="[1,1]" probability="5.0"/>
 			<item value="niedźwiedzie pazury" quantity="[1,1]" probability="5.0"/>
-		<item value="prezent czerwonego wędrowca 2025" quantity="[1,1]" probability="2.0"/> <item value="prezent lodowego wędrowca 2025" quantity="[1,1]" probability="0.5"/> <item value="prezent demonicznego wędrowca 2025" quantity="[1,1]" probability="0.25"/> </drops>
+		</drops>
 		<equips>
 		</equips>
 		<ai>
@@ -638,6 +824,7 @@
 			<hp value="60"/>
 			<speed value="0.3"/>
 			<size value="1,1"/>
+			<resistance value="100"/>
 		</attributes>
 		<level value="8"/>
 		<experience value="80"/>
@@ -647,7 +834,7 @@
 			<item value="money" quantity="[5,10]" probability="100.0"/>
 			<item value="buteleczka wody" quantity="[1,2]" probability="25.0"/>
 			<item value="antidotum" quantity="[1,1]" probability="50.0"/>
-		<item value="prezent czerwonego wędrowca 2025" quantity="[1,1]" probability="2.0"/> <item value="prezent lodowego wędrowca 2025" quantity="[1,1]" probability="0.5"/> <item value="prezent demonicznego wędrowca 2025" quantity="[1,1]" probability="0.25"/> </drops>
+		</drops>
 		<equips>
 		</equips>
 		<ai>
@@ -667,6 +854,7 @@
 			<hp value="75"/>
 			<speed value="0.4"/>
 			<size value="1,1"/>
+			<resistance value="100"/>
 		</attributes>
 		<level value="10"/>
 		<experience value="90"/>
@@ -675,7 +863,7 @@
 		<drops>
 			<item value="money" quantity="[5,10]" probability="100.0"/>
 			<item value="buteleczka wody" quantity="[1,2]" probability="25.0"/>
-		<item value="prezent czerwonego wędrowca 2025" quantity="[1,1]" probability="2.0"/> <item value="prezent lodowego wędrowca 2025" quantity="[1,1]" probability="0.5"/> <item value="prezent demonicznego wędrowca 2025" quantity="[1,1]" probability="0.25"/> </drops>
+		</drops>
 		<equips>
 		</equips>
 		<ai>
@@ -695,6 +883,7 @@
 			<hp value="130"/>
 			<speed value="0.5"/>
 			<size value="1,1"/>
+			<resistance value="100"/>
 		</attributes>
 		<level value="15"/>
 		<experience value="120"/>
@@ -704,7 +893,7 @@
 			<item value="money" quantity="[5,13]" probability="100.0"/>
 			<item value="buteleczka wody" quantity="[1,2]" probability="25.0"/>
 			<item value="sztylet mroku" quantity="[1,1]" probability="0.01"/>
-		<item value="prezent czerwonego wędrowca 2025" quantity="[1,1]" probability="2.0"/> <item value="prezent lodowego wędrowca 2025" quantity="[1,1]" probability="0.5"/> <item value="prezent demonicznego wędrowca 2025" quantity="[1,1]" probability="0.25"/> </drops>
+		</drops>
 		<equips>
 		</equips>
 		<ai>
@@ -724,6 +913,7 @@
 			<hp value="1290"/>
 			<speed value="0.5"/>
 			<size value="1,1"/>
+			<resistance value="100"/>
 		</attributes>
 		<level value="111"/>
 		<experience value="4580"/>
@@ -731,7 +921,7 @@
 		<corpse name="animal"/>
 		<drops>
 			<item value="mocne antidotum" quantity="[1,1]" probability="100.0"/>
-		<item value="prezent czerwonego wędrowca 2025" quantity="[1,1]" probability="2.0"/> <item value="prezent lodowego wędrowca 2025" quantity="[1,1]" probability="0.5"/> <item value="prezent demonicznego wędrowca 2025" quantity="[1,1]" probability="0.25"/> </drops>
+		</drops>
 		<equips>
 		</equips>
 		<ai>
@@ -757,6 +947,7 @@
 			<hp value="140"/>
 			<speed value="1.0"/>
 			<size value="1,1"/>
+			<resistance value="100"/>
 		</attributes>
 		<level value="20"/>
 		<experience value="280"/>
@@ -764,7 +955,7 @@
 		<corpse name="small_boneless"/>
 		<drops>
 			<item value="money" quantity="[10,20]" probability="75.0"/>
-		<item value="prezent czerwonego wędrowca 2025" quantity="[1,1]" probability="2.0"/> <item value="prezent lodowego wędrowca 2025" quantity="[1,1]" probability="0.5"/> <item value="prezent demonicznego wędrowca 2025" quantity="[1,1]" probability="0.25"/> </drops>
+		</drops>
 		<equips>
 		</equips>
 		<ai>
@@ -782,6 +973,7 @@
 			<hp value="80"/>
 			<speed value="0.5"/>
 			<size value="1,1"/>
+			<resistance value="100"/>
 		</attributes>
 		<level value="7"/>
 		<experience value="70"/>
@@ -790,7 +982,7 @@
 		<drops>
 			<item value="mięso" quantity="[1,2]" probability="80.0"/>
 			<item value="truchło nietoperza" quantity="[1,1]" probability="100.0"/>
-		<item value="prezent czerwonego wędrowca 2025" quantity="[1,1]" probability="2.0"/> <item value="prezent lodowego wędrowca 2025" quantity="[1,1]" probability="0.5"/> <item value="prezent demonicznego wędrowca 2025" quantity="[1,1]" probability="0.25"/> </drops>
+		</drops>
 		<equips>
 		</equips>
 		<ai>
@@ -809,6 +1001,7 @@
 			<hp value="100"/>
 			<speed value="0.6"/>
 			<size value="1,1"/>
+			<resistance value="100"/>
 		</attributes>
 		<level value="15"/>
 		<experience value="200"/>
@@ -816,7 +1009,7 @@
 		<corpse name="small_boneless"/>
 		<drops>
 			<item value="trucizna" quantity="[1,1]" probability="15.0"/>
-		<item value="prezent czerwonego wędrowca 2025" quantity="[1,1]" probability="2.0"/> <item value="prezent lodowego wędrowca 2025" quantity="[1,1]" probability="0.5"/> <item value="prezent demonicznego wędrowca 2025" quantity="[1,1]" probability="0.25"/> </drops>
+		</drops>
 		<equips>
 			<slot name="lhand" item="strzała żelazna" quantity="10000"/>
 			<slot name="rhand" item="drewniany łuk" quantity="1"/>
@@ -841,6 +1034,7 @@
 			<hp value="100"/>
 			<speed value="1.0"/>
 			<size value="1,1"/>
+			<resistance value="100"/>
 		</attributes>
 		<level value="25"/>
 		<experience value="400"/>
@@ -849,7 +1043,7 @@
 		<drops>
 			<item value="money" quantity="[10,35]" probability="100.0"/>
 			<item value="mocna trucizna" quantity="[1,1]" probability="10.0"/>
-		<item value="prezent czerwonego wędrowca 2025" quantity="[1,1]" probability="2.0"/> <item value="prezent lodowego wędrowca 2025" quantity="[1,1]" probability="0.5"/> <item value="prezent demonicznego wędrowca 2025" quantity="[1,1]" probability="0.25"/> </drops>
+		</drops>
 		<equips>
 		</equips>
 		<ai>
@@ -870,6 +1064,7 @@
 			<hp value="5000"/>
 			<speed value="1.0"/>
 			<size value="1,1"/>
+			<resistance value="100"/>
 		</attributes>
 		<level value="5"/>
 		<experience value="1000"/>
@@ -877,7 +1072,7 @@
 		<corpse name="small_boneless"/>
 		<drops>
 			<item value="dziub ptaka" quantity="[1,1]" probability="0.1"/>
-		<item value="prezent czerwonego wędrowca 2025" quantity="[1,1]" probability="2.0"/> <item value="prezent lodowego wędrowca 2025" quantity="[1,1]" probability="0.5"/> <item value="prezent demonicznego wędrowca 2025" quantity="[1,1]" probability="0.25"/> </drops>
+		</drops>
 		<equips>
 		</equips>
 		<ai>
@@ -885,6 +1080,380 @@
 			<profile name="offensive"/>
 			<profile name="human"/>
 			<profile name="heal" params="1,1"/>
+			<profile name="patrolling"/>
+		</ai>
+	</creature>
+	
+	<creature name="pisklak">
+		<type class="farm_animal" subclass="chick" tileid="farm_animal.png:2"/>
+		<description>Oto pisklę. Woli nie oddalać się od kokoszki.</description>
+		<attributes>
+			<atk value="32"/>
+			<def value="5"/>
+			<hp value="25"/>
+			<speed value="0.5"/>
+			<size value="1,1"/>
+			<resistance value="100"/>
+		</attributes>
+		<level value="1"/>
+		<experience value="5"/>
+		<respawn value="450"/>
+		<corpse name="small_winged"/>
+		<drops>
+			<item value="udko" quantity="[1,1]" probability="70.0"/>
+			<item value="jajo" quantity="[1,1]" probability="30.0"/>
+		</drops>
+		<equips>
+		</equips>
+		<ai>
+			<says>
+				<noise state="idle follow fight" value="pii piii"/>
+				<noise state="idle follow fight" value="pii piii pii"/>
+			</says>
+			<profile name="animal"/>
+			<profile name="patrolling"/>
+			<profile name="non offensive"/>
+			<profile name="coward"/>
+		</ai>
+	</creature>
+
+	<creature name="prosiak">
+		<type class="farm_animal" subclass="piglet" tileid="farm_animal.png:9"/>
+		<description>Oto prosię umorusane w błocie.</description>
+		<attributes>
+			<atk value="31"/>
+			<def value="7"/>
+			<hp value="25"/>
+			<speed value="0.6"/>
+			<size value="1,1"/>
+			<resistance value="100"/>
+		</attributes>
+		<level value="1"/>
+		<experience value="15"/>
+		<respawn value="450"/>
+		<corpse name="animal"/>
+		<drops>
+			<item value="szynka" quantity="[1,3]" probability="70.0"/>
+			<item value="kiełbasa wiejska" quantity="[1,9]" probability="60.0"/>
+			<item value="skóra zwierzęca" quantity="[1,1]" probability="16.0"/>
+		</drops>
+		<equips>
+		</equips>
+		<ai>
+			<says>
+				<noise state="idle follow fight" value="kwik"/>
+				<noise state="idle follow fight" value="kwik kwik"/>
+				<noise state="idle follow fight" value="chrum chrum"/>
+			</says>
+			<profile name="animal"/>
+			<profile name="patrolling"/>
+		</ai>
+	</creature>
+
+	<creature name="kokoszka">
+		<type class="farm_animal" subclass="hen" tileid="farm_animal.png:6"/>
+		<description>Oto kokoszka. Zrani cię jeśli zbliżysz się do jej piskląt.</description>
+		<attributes>
+			<atk value="29"/>
+			<def value="6"/>
+			<hp value="25"/>
+			<speed value="0.7"/>
+			<size value="1,1"/>
+			<resistance value="100"/>
+		</attributes>
+		<level value="1"/>
+		<experience value="5"/>
+		<respawn value="450"/>
+		<corpse name="small_winged"/>
+		<drops>
+			<item value="udko" quantity="[1,2]" probability="70.0"/>
+			<item value="jajo" quantity="[1,4]" probability="90.0"/>
+		</drops>
+		<equips>
+		</equips>
+		<ai>
+			<says>
+				<noise state="idle follow fight" value="piii piiii"/>
+				<noise state="idle follow fight" value="pii piiii piii"/>
+			</says>
+			<profile name="animal"/>
+			<profile name="patrolling"/>
+			<profile name="non offensive"/>
+		</ai>
+	</creature>
+
+	<creature name="baran">
+		<type class="farm_animal" subclass="ram" tileid="farm_animal.png:10"/>
+		<description>Oto baran. Oby nie wziął cię na rogi.</description>
+		<attributes>
+			<atk value="32"/>
+			<def value="7"/>
+			<hp value="50"/>
+			<speed value="0.5"/>
+			<size value="1,1"/>
+			<resistance value="100"/>
+		</attributes>
+		<level value="2"/>
+		<experience value="20"/>
+		<respawn value="450"/>
+		<corpse name="animal"/>
+		<drops>
+			<item value="mięso" quantity="[1,4]" probability="80.0"/>
+		</drops>
+		<equips>
+		</equips>
+		<ai>
+			<says>
+				<noise state="idle follow fight" value="Beeeeee"/>
+			</says>
+			<profile name="animal"/>
+			<profile name="offensive"/>
+		</ai>
+	</creature>
+
+	<creature name="bóbr">
+		<type class="farm_animal" subclass="beaver" tileid="farm_animal.png:0"/>
+		<description>Oto bóbr. Najlepszy budowniczy wśród zwierząt.</description>
+		<attributes>
+			<atk value="33"/>
+			<def value="8"/>
+			<hp value="35"/>
+			<speed value="0.6"/>
+			<size value="1,1"/>
+			<resistance value="100"/>
+		</attributes>
+		<level value="2"/>
+		<experience value="20"/>
+		<respawn value="450"/>
+		<corpse name="animal"/>
+		<drops>
+			<item value="mięso" quantity="[1,2]" probability="80.0"/>
+			<item value="polano" quantity="[1,2]" probability="20.0"/>
+		</drops>
+		<equips>
+		</equips>
+		<ai>
+			<profile name="animal"/>
+			<profile name="offensive"/>
+			<profile name="patrolling"/>
+		</ai>
+	</creature>
+
+	<creature name="krowa">
+		<type class="farm_animal" subclass="cow" tileid="farm_animal.png:3"/>
+		<description>Oto krowa. Daje pyszne mleko.</description>
+		<attributes>
+			<atk value="31"/>
+			<def value="9"/>
+			<hp value="30"/>
+			<speed value="0.3"/>
+			<size value="1,1"/>
+			<resistance value="100"/>
+		</attributes>
+		<level value="2"/>
+		<experience value="20"/>
+		<respawn value="450"/>
+		<corpse name="animal"/>
+		<drops>
+			<item value="mięso" quantity="[1,2]" probability="80.0"/>
+			<item value="mleko" quantity="[1,5]" probability="70.0"/>
+			<item value="skóra zwierzęca" quantity="[1,1]" probability="16.0"/>
+		</drops>
+		<equips>
+		</equips>
+		<ai>
+			<says>
+				<noise state="idle follow fight" value="Muuuu	muuuuuuu"/>
+				<noise state="idle follow fight" value="muuuuu"/>
+			</says>
+			<profile name="animal"/>
+		</ai>
+	</creature>
+
+	<creature name="koza">
+		<type class="farm_animal" subclass="goat" tileid="farm_animal.png:4"/>
+		<description>Oto koza. Jest zdziczała bo zamieszkuje góry.</description>
+		<attributes>
+			<atk value="32"/>
+			<def value="9"/>
+			<hp value="30"/>
+			<speed value="0.3"/>
+			<size value="1,1"/>
+			<resistance value="100"/>
+		</attributes>
+		<level value="2"/>
+		<experience value="20"/>
+		<respawn value="450"/>
+		<corpse name="animal"/>
+		<drops>
+			<item value="mięso" quantity="[1,4]" probability="80.0"/>
+		</drops>
+		<equips>
+		</equips>
+		<ai>
+			<profile name="animal"/>
+			<profile name="offensive"/>
+			<profile name="patrolling"/>
+		</ai>
+	</creature>
+
+	<creature name="gniady koń">
+		<type class="farm_animal" subclass="horse" tileid="farm_animal.png:7"/>
+		<description>Oto koń. Nie ujeździsz go z pewnością.</description>
+		<attributes>
+			<atk value="38"/>
+			<def value="8"/>
+			<hp value="30"/>
+			<speed value="1.0"/>
+			<size value="1,1"/>
+			<resistance value="100"/>
+		</attributes>
+		<level value="2"/>
+		<experience value="20"/>
+		<respawn value="450"/>
+		<corpse name="animal"/>
+		<drops>
+			<item value="mięso" quantity="[1,3]" probability="80.0"/>
+			<item value="stek" quantity="[1,2]" probability="20.0"/>
+		</drops>
+		<equips>
+		</equips>
+		<ai>
+			<says>
+				<noise state="idle follow fight" value="ihaaaaaahaa"/>
+				<noise state="idle follow fight" value="*patataj, patataj*"/>
+			</says>
+			<profile name="animal"/>
+			<profile name="non offensive"/>
+			<profile name="patrolling"/>
+		</ai>
+	</creature>
+
+	<creature name="siwy koń">
+		<type class="farm_animal" subclass="white_horse" tileid="farm_animal.png:11"/>
+		<description>Oto biały koń. Lubią paść się z innymi na łące.</description>
+		<attributes>
+			<atk value="30"/>
+			<def value="9"/>
+			<hp value="30"/>
+			<speed value="1.0"/>
+			<size value="1,1"/>
+			<resistance value="100"/>
+		</attributes>
+		<level value="2"/>
+		<experience value="20"/>
+		<respawn value="450"/>
+		<corpse name="animal"/>
+		<drops>
+			<item value="mięso" quantity="[1,3]" probability="80.0"/>
+			<item value="stek" quantity="[1,2]" probability="20.0"/>
+		</drops>
+		<equips>
+		</equips>
+		<ai>
+			<says>
+				<noise state="idle follow fight" value="niiihhaaa"/>
+				<noise state="idle follow fight" value="*patataj, patataj*"/>
+			</says>
+			<profile name="animal"/>
+			<profile name="non offensive"/>
+			<profile name="patrolling"/>
+		</ai>
+	</creature>
+
+	<creature name="byk">
+		<type class="farm_animal" subclass="bull" tileid="farm_animal.png:1"/>
+		<description>Oto byk! Lepiej zmykaj!</description>
+		<attributes>
+			<atk value="37"/>
+			<def value="9"/>
+			<hp value="35"/>
+			<speed value="0.9"/>
+			<size value="1,1"/>
+			<resistance value="100"/>
+		</attributes>
+		<level value="2"/>
+		<experience value="20"/>
+		<respawn value="450"/>
+		<corpse name="animal"/>
+		<drops>
+			<item value="mięso" quantity="[1,3]" probability="80.0"/>
+			<item value="skóra zwierzęca" quantity="[1,1]" probability="26.0"/>
+			<item value="stek" quantity="[1,4]" probability="20.0"/>
+		</drops>
+		<equips>
+		</equips>
+		<ai>
+			<says>
+				<noise state="idle follow fight" value="MUUUUUU!!!"/>
+			</says>
+			<profile name="animal"/>
+			<profile name="offensive"/>
+			<profile name="patrolling"/>
+		</ai>
+	</creature>
+
+	<creature name="żmija">
+		<type class="farm_animal" subclass="grass_snake" tileid="farm_animal.png:5"/>
+		<description>Oto żmija. Może cię boleśnie ukąsić.</description>
+		<attributes>
+			<atk value="38"/>
+			<def value="5"/>
+			<hp value="65"/>
+			<speed value="0.6"/>
+			<size value="1,1"/>
+			<resistance value="100"/>
+		</attributes>
+		<level value="3"/>
+		<experience value="30"/>
+		<respawn value="450"/>
+		<corpse name="small_boneless"/>
+		<drops>
+			<item value="money" quantity="[2,6]" probability="60.0"/>
+			<item value="trucizna" quantity="[1,1]" probability="10.0"/>
+		</drops>
+		<equips>
+		</equips>
+		<ai>
+			<says>
+				<noise state="idle follow fight" value="sssSSSsssss..."/>
+			</says>
+			<profile name="animal"/>
+			<profile name="offensive"/>
+			<profile name="patrolling"/>
+		</ai>
+	</creature>
+	
+	<creature name="krokodyl">
+		<type class="giant_animal" subclass="crocodile" tileid="giant_animal.png:0"/>
+		<description>Oto krokodyl. Nagle wyskakuje na brzeg z rzek i jezior.</description>
+		<attributes>
+			<atk value="122"/>
+			<def value="8"/>
+			<hp value="200"/>
+			<speed value="1.0"/>
+			<size value="2,2"/>
+			<resistance value="100"/>
+		</attributes>
+		<level value="15"/>
+		<experience value="180"/>
+		<respawn value="730"/>
+		<corpse name="huge_animal" width="2" height="2"/>
+		<drops>
+			<item value="money" quantity="[3,12]" probability="100.0"/>
+			<item value="mięso" quantity="[3,7]" probability="80.0"/>
+			<item value="szynka" quantity="[2,5]" probability="50.0"/>
+		</drops>
+		<equips>
+		</equips>
+		<ai>
+			<says>
+				<noise state="idle follow fight" value="Rrrrrrrrr"/>
+			</says>
+			<profile name="brave"/>
+			<profile name="animal"/>
+			<profile name="offensive"/>
+			<profile name="heal" params="5,150"/>
 			<profile name="patrolling"/>
 		</ai>
 	</creature>

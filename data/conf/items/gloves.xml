@@ -351,7 +351,7 @@
 		<implementation class-name="games.stendhal.server.entity.item.Item"/>
 		<attributes>
 			<atk value="1"/>
-			<def value="3"/>
+			<def value="1"/>
 			<minlevel value="20"/>
 			<autobind value=""/>
 		</attributes>
@@ -371,8 +371,8 @@
 		<description>Oto Rękawice Lodowego Wędrowcy. Wzmocnione czystym kryształem północy, pozwalają ujarzmić siłę zimy w gołych dłoniach. Ich dotyk potrafi zamrozić stal i uciszyć płomienie, a każdy chwyt wzmacnia potęgę wojownika, jakby sam mróz służył mu jako broń #zima #2025</description>
 		<implementation class-name="games.stendhal.server.entity.item.Item"/>
 		<attributes>
-			<atk value="2"/>
-			<def value="6"/>
+			<atk value="1"/>
+			<def value="1"/>
 			<minlevel value="150"/>
 			<autobind value=""/>
 		</attributes>
@@ -392,8 +392,8 @@
 		<description>Oto Rękawiczki Demonicznego Wędrowca, stworzone z lodowych kości i pazurów, które drżą z niecierpliwości przed kolejną walką; zaciskają się mocniej, gdy zbliża się wróg, jakby same chciały rozerwać gardło temu, kto odważy się stawić opór #zima #2025</description>
 		<implementation class-name="games.stendhal.server.entity.item.Item"/>
 		<attributes>
-			<atk value="3"/>
-			<def value="6"/>
+			<atk value="1"/>
+			<def value="1"/>
 			<minlevel value="300"/>
 			<autobind value=""/>
 		</attributes>

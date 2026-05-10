@@ -79,22 +79,22 @@ public class DeathmatchRecruiterNPC implements ZoneConfigurator {
 			@Override
 			protected void createDialog() {
 				addGreeting("Witam. Wyglądasz na niezłego wojownika.");
-				addJob("Zajmuje się rekrutacją do #deathmatchu w Ados.");
-				addHelp("Słyszałeś kiedyś o #deathmatchu w Ados?");
-				addQuest("Jeżeli jesteś odważny to możesz spróbować swoich sił w Ados na #deathmatchu.");
+				addJob("Zajmuję się rekrutacją do #deathmatchu w Ados.");
+				addHelp("Słyszałeś kiedyś o #deathmatchu w Ados? Jeśli chcesz sprawdzić, czy ktoś walczy teraz na arenie, zapytaj o #bohaterów.");
+				addQuest("Jeżeli jesteś odważny, możesz spróbować swoich sił w Ados na #deathmatchu.");
 				addOffer("Opowiem Ci o #deathmatchu w Ados.");
 				add(ConversationStates.ATTENDING, Arrays.asList("deathmatch", "deathmatchu"), null, ConversationStates.ATTENDING,
-				        "Wiele groźnych potworów będzie Cię atakować na arenie deathmatcha. Jest tylko dla prawdziwych #bohaterów.", null);
+				        "Wiele groźnych potworów będzie Cię atakować na arenie deathmatcha. Jest tylko dla prawdziwych #bohaterów. Jeśli chcesz wejść na arenę, powiedz #wyzwanie.", null);
 				// response to 'heroes' is defined in maps.quests.AdosDeathmatch 
 				// because we need here to know about who is in the deathmatch. The teleport action is done there also.
-				addGoodbye("Mam nadzieje, że spodoba się Tobie #Deathmatch w Ados!");
+				addGoodbye("Mam nadzieję, że spodoba Ci się #Deathmatch w Ados!");
 			}
 		};
 
 		npc.setEntityClass("youngsoldiernpc");
 		npc.setPosition(15, 26);
 		npc.initHP(100);
-		npc.setDescription("Oto Thonatus, rekrutuje na Deathmatch w Ados. Masz szczęście, że go tak szybko znalazłeś..");
+		npc.setDescription("Oto Thonatus, rekrutuje na Deathmatch w Ados. Masz szczęście, że go tak szybko znalazłeś.");
 		zone.add(npc);
 	}
 }

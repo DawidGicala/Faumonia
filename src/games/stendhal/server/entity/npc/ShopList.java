@@ -31,7 +31,7 @@ public final class ShopList {
 		shops.add("juhas", "zwój ados", 800);
 		shops.add("juhas", "zwój nalwor", 400);
 		shops.add("juhas", "zwój kirdneh", 400);
-		shops.add("juhas", "bilet turystyczny", 100000);
+		shops.add("juhas", "bilet turystyczny", 250000);
 
 		shops.add("buycheng", "bursztyn", 20);
 		shops.add("buycheng", "wielka perła", 1500);
@@ -227,18 +227,20 @@ public final class ShopList {
 		shops.add("sellstuff", "hełm wikingów", 150);
 		shops.add("sellstuff", "misiurka", 300);
 		//HagnurkNPC sprzedaje:
-		shops.add("sellbetterstuff1", "zbroja lazurowa", 3000);
-		shops.add("sellbetterstuff1", "buty lazurowe", 2000);
-		shops.add("sellbetterstuff1", "lazurowy hełm", 2500);
-		shops.add("sellbetterstuff1", "spodnie lazurowe", 2000);
-		shops.add("sellbetterstuff1", "lazurowa tarcza", 4000);
+		shops.add("sellbetterstuff1", "zbroja cieni", 3400);
+		shops.add("sellbetterstuff1", "buty cieni", 2800);
+		shops.add("sellbetterstuff1", "płaszcz cieni", 3200);
+		shops.add("sellbetterstuff1", "hełm cieni", 3000);
+		shops.add("sellbetterstuff1", "spodnie cieni", 2800);
+		shops.add("sellbetterstuff1", "tarcza cieni", 3400);
+		shops.add("sellbetterstuff1", "rękawice cieni", 6000);
 		//GulimoNPC sprzedaje:
-		shops.add("sellbetterstuff2", "zbroja cieni", 3400);
-		shops.add("sellbetterstuff2", "buty cieni", 2800);
-		shops.add("sellbetterstuff2", "płaszcz cieni", 3200);
-		shops.add("sellbetterstuff2", "hełm cieni", 3000);
-		shops.add("sellbetterstuff2", "spodnie cieni", 2800);
-		shops.add("sellbetterstuff2", "tarcza cieni", 3400);
+		shops.add("sellbetterstuff2", "hełm barbarzyńcy", 3800);
+		shops.add("sellbetterstuff2", "zbroja barbarzyńcy", 4200);
+		shops.add("sellbetterstuff2", "spodnie barbarzyńcy", 3400);
+		shops.add("sellbetterstuff2", "buty barbarzyńcy", 3600);
+		shops.add("sellbetterstuff2", "tarcza barbarzyńcy", 4400);
+		shops.add("sellbetterstuff2", "zbroja szamana barbarzyńców", 4600);
 
 		shops.add("sellrangedstuff", "drewniany łuk", 300);
 		shops.add("sellrangedstuff", "strzała", 5);
@@ -282,6 +284,15 @@ public final class ShopList {
 		shops.add("selltools", "misa do płukania złota", 230);
 		//LorettaNPC w podziemiach orril.dwarfmine kupuje:
 		shops.add("buyiron", "żelazo", 75);
+		shops.add("buyiron", "kapelusz zbójnicki", 5600);
+		shops.add("buyiron", "portki zbójnickie", 4400);
+		shops.add("buyiron", "kierpce zbójnickie", 4200);
+		shops.add("buyiron", "gorset zbójnicki", 6000);
+		shops.add("buyiron", "pas zbójecki", 80000);
+		shops.add("buyiron", "cucha zbójnicka", 4800);
+		shops.add("buyiron", "tarcza zbójnicka", 6400);
+		shops.add("buyiron", "złota ciupaga", 120000);
+		shops.add("buyiron", "ciupaga", 4000);
 
 		shops.add("buygrain", "kłos", 3);
 		//OgnirNPC sprzedaje:
@@ -451,9 +462,16 @@ public final class ShopList {
 		shops.add("buyelvish", "miecz elficki", 2000);
 		shops.add("buyelvish", "hełm elficki", 1200);
 		shops.add("buyelvish", "tarcza elficka", 1400);
-		shops.add("buyelvish", "miecz elfów ciemności", 5000);
 		shops.add("buyelvish", "płaszcz elficki", 1300);
 		shops.add("buyelvish", "zbroja elficka", 1400);
+		shops.add("buyelvish", "miecz elfów ciemności", 5000);
+		shops.add("buyelvish", "zbroja ciemności", 4600);
+		shops.add("buyelvish", "buty ciemności", 3200);
+		shops.add("buyelvish", "płaszcz ciemności", 3800);
+		shops.add("buyelvish", "elficki naszyjnik", 6000);
+		shops.add("buyelvish", "hełm ciemności", 3600);
+		shops.add("buyelvish", "tarcza ciemności", 4800);
+		shops.add("buyelvish", "spodnie ciemności", 3400);
 
 		// magic items or 'relics' (witch in magic city)
 		shops.add("buymagic", "miecz nieśmiertelnych", 20000);
@@ -463,7 +481,12 @@ public final class ShopList {
 		shops.add("buymagic", "magiczny hełm kolczy", 30000);
 
 		// red items (supplier in sedah city)
-		shops.add("buyred", "zbroja karmazynowa", 300);
+		shops.add("buyred", "różdżka", 800);
+		shops.add("buyred", "trójząb Trzygłowa", 2000);
+		shops.add("buyred", "różdżka Strzyboga", 3000);
+		shops.add("buyred", "różdżka Wołosa", 4000);
+		shops.add("buyred", "różdżka Swaroga", 8000);
+		shops.add("buyred", "różdżka Peruna", 40000);
 
 		// mainio items (despot in mithrilbourgh throne room)
 		shops.add("buymainio", "zbroja mainiocyjska", 11000);
@@ -538,6 +561,11 @@ public final class ShopList {
 		shops.add("buy4gnomes", "peleryna", 10);
 		shops.add("buy4gnomes", "drewniana tarcza", 10);
 		shops.add("buy4gnomes", "puklerz", 10);
+		shops.add("buy4gnomes", "zbroja lazurowa", 280);
+		shops.add("buy4gnomes", "buty lazurowe", 240);
+		shops.add("buy4gnomes", "lazurowy hełm", 260);
+		shops.add("buy4gnomes", "spodnie lazurowe", 180);
+		shops.add("buy4gnomes", "lazurowa tarcza", 280);
 		
 		// hotdog lady in athor)Sara BethNPC kupuje:
 		shops.add("buy4hotdogs", "paróweczka", 50);
@@ -627,6 +655,9 @@ public final class ShopList {
 		
 		// ados market AlexanderNPC kupuje:
 		shops.add("buyadosarmors", "zbroja żywiołów", 3000);
+		shops.add("buyadosarmors", "ogniste rękawice", 4800);
+		shops.add("buyadosarmors", "tarcza licha", 2400);
+		shops.add("buyadosarmors", "tarcza jednorożca", 8000);
 		
 		// Athor ferry KlaasNPC kupuje:
 		shops.add("buypoisons", "trucizna", 40);
@@ -727,6 +758,7 @@ public final class ShopList {
 		
 		shops.add("giantitems", "buty olbrzyma", 2500);
 		shops.add("giantitems", "hełm olbrzyma", 2500);
+		shops.add("giantitems", "spodnie pustynne", 3800);
 		
 		shops.add("furgo1", "statuetka aniołka", 500);
 		
@@ -734,11 +766,11 @@ public final class ShopList {
 		shops.add("startkasa", "drewniana tarcza", 30);
 		shops.add("startkasa", "skórzana zbroja łuskowa", 20);
 		shops.add("startkasa", "zbroja ćwiekowa", 40);
-		shops.add("startkasa", "skórzany hełm", 20);
+		shops.add("startkasa", "skórzany hełm", 15);
 		shops.add("startkasa", "peleryna", 10);
-		shops.add("startkasa", "skórzane spodnie", 20);
+		shops.add("startkasa", "skórzane spodnie", 15);
 		shops.add("startkasa", "spodnie kolcze", 100);
-		shops.add("startkasa", "buty skórzane", 20);
+		shops.add("startkasa", "buty skórzane", 10);
 		shops.add("startkasa", "buty kolcze", 80);
 		shops.add("startkasa", "butelka wody", 40);
 		shops.add("startkasa", "woda", 5);

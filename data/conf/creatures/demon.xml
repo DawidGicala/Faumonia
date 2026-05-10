@@ -23,7 +23,7 @@
 			<item value="magia płomieni" quantity="[1,45]" probability="30.0"/>
 			<item value="różdżka Swaroga" quantity="[1,1]" probability="0.01"/>
 			<item value="demoniczny zwój" quantity="[1,1]" probability="0.3"/>
-		<item value="prezent czerwonego wędrowca 2025" quantity="[1,1]" probability="2.0"/> <item value="prezent lodowego wędrowca 2025" quantity="[1,1]" probability="0.5"/> <item value="prezent demonicznego wędrowca 2025" quantity="[1,1]" probability="0.25"/> </drops>
+		</drops>
 		<equips>
 		</equips>
 		<abilities>
@@ -59,7 +59,7 @@
 			<item value="trucizna" quantity="[1,2]" probability="40.0"/>
 			<item value="miecz ognisty" quantity="[1,1]" probability="0.4"/>
 			<item value="demoniczny zwój" quantity="[1,1]" probability="0.25"/>
-		<item value="prezent czerwonego wędrowca 2025" quantity="[1,1]" probability="2.0"/> <item value="prezent lodowego wędrowca 2025" quantity="[1,1]" probability="0.5"/> <item value="prezent demonicznego wędrowca 2025" quantity="[1,1]" probability="0.25"/> </drops>
+		</drops>
 		<equips>
 		</equips>
 		<abilities>
@@ -94,7 +94,7 @@
 			<item value="magia płomieni" quantity="[10,70]" probability="50.0"/>
 			<item value="różdżka Swaroga" quantity="[1,1]" probability="0.035"/>
 			<item value="demoniczny zwój" quantity="[1,1]" probability="1.0"/>
-		<item value="prezent czerwonego wędrowca 2025" quantity="[1,1]" probability="2.0"/> <item value="prezent lodowego wędrowca 2025" quantity="[1,1]" probability="0.5"/> <item value="prezent demonicznego wędrowca 2025" quantity="[1,1]" probability="0.25"/> </drops>
+		</drops>
 		<equips>
 		</equips>
 		<abilities>
@@ -129,7 +129,7 @@
 			<item value="miecz ognisty" quantity="[1,1]" probability="1.0"/>
 			<item value="wielki eliksir" quantity="[1,2]" probability="40.0"/>
 			<item value="demoniczny zwój" quantity="[1,1]" probability="0.5"/>
-		<item value="prezent czerwonego wędrowca 2025" quantity="[1,1]" probability="2.0"/> <item value="prezent lodowego wędrowca 2025" quantity="[1,1]" probability="0.5"/> <item value="prezent demonicznego wędrowca 2025" quantity="[1,1]" probability="0.25"/> </drops>
+		</drops>
 		<equips>
 		</equips>
 		<abilities>
@@ -164,7 +164,7 @@
 			<item value="ogniste rękawice" quantity="[1,1]" probability="1.0"/>
 			<item value="czarny sztylet" quantity="[1,1]" probability="0.00025"/>
 			<item value="demoniczny zwój" quantity="[1,1]" probability="1.0"/>
-		<item value="prezent czerwonego wędrowca 2025" quantity="[1,1]" probability="2.0"/> <item value="prezent lodowego wędrowca 2025" quantity="[1,1]" probability="0.5"/> <item value="prezent demonicznego wędrowca 2025" quantity="[1,1]" probability="0.25"/> </drops>
+		</drops>
 		<equips>
 		</equips>
 		<abilities>

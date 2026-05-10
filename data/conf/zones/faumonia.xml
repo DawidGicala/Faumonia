@@ -616,7 +616,7 @@ Zadania u Mistrzów Gry przeprowadzą Cię przez całą grę, nie tylko przez po
 		
 		
 	</zone>
-	
+	<!--
 	<zone name="int_fado_tower_1" file="interiors/fado/tower_1.tmx">
 	<configurator class-name="games.stendhal.server.core.config.zone.NoTeleportIn"/>
 	<portal x="15" y="1" ref="tower_ba1">
@@ -683,6 +683,7 @@ Zadania u Mistrzów Gry przeprowadzą Cię przez całą grę, nie tylko przez po
 			<destination zone="int_fado_tower_6" ref="wieza7" />
 		</portal>
 	</zone>
+	-->
 	
 	<zone name="int_ados_collector_office" file="interiors/ados/int_ados_collector_office.tmx">
 	<configurator class-name="games.stendhal.server.core.config.zone.NoTeleportIn"/>

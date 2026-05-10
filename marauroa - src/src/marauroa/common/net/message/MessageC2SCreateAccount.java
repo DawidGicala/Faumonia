@@ -30,6 +30,9 @@ public class MessageC2SCreateAccount extends Message {
 	/** email address for whatever thing it may be needed. */
 	private String email;
 
+	/** marketing consent for email updates and events. */
+	private boolean marketingConsent;
+
 	/** Constructor for allowing creation of an empty message */
 	public MessageC2SCreateAccount() {
 		super(MessageType.C2S_CREATEACCOUNT, null);
@@ -50,10 +53,31 @@ public class MessageC2SCreateAccount extends Message {
 	 */
 	public MessageC2SCreateAccount(SocketChannel source, String username, String password,
 	        String email) {
+		this(source, username, password, email, false);
+	}
+
+	/**
+	 * Constructor with a TCP/IP source/destination of the message and username, password,
+	 * email and marketing consent associated to the account to be created.
+	 *
+	 * @param source
+	 *            The TCP/IP address associated to this message
+	 * @param username
+	 *            desired username
+	 * @param password
+	 *            desired password
+	 * @param email
+	 *            email of the player
+	 * @param marketingConsent
+	 *            true if player agreed to receive marketing emails
+	 */
+	public MessageC2SCreateAccount(SocketChannel source, String username, String password,
+	        String email, boolean marketingConsent) {
 		super(MessageType.C2S_CREATEACCOUNT, source);
 		this.username = username;
 		this.password = password;
 		this.email = email;
+		this.marketingConsent = marketingConsent;
 	}
 
 	/**
@@ -81,6 +105,14 @@ public class MessageC2SCreateAccount extends Message {
 	}
 
 	/**
+	 * Returns marketing consent status.
+	 * @return true if player agreed to receive marketing emails
+	 */
+	public boolean getMarketingConsent() {
+		return marketingConsent;
+	}
+
+	/**
 	 * This method returns a String that represent the object
 	 *
 	 * @return a string representing the object.
@@ -88,7 +120,7 @@ public class MessageC2SCreateAccount extends Message {
 	@Override
 	public String toString() {
 		return "Message (C2S CreateAccount) from (" + getAddress() + ") CONTENTS: (" + username
-		        + ";" + password + ";" + email + ")";
+		        + ";" + password + ";" + email + ";marketingConsent=" + marketingConsent + ")";
 	}
 
 	@Override
@@ -97,6 +129,7 @@ public class MessageC2SCreateAccount extends Message {
 		out.write(username);
 		out.write(password);
 		out.write(email);
+		out.write(marketingConsent ? 1 : 0);
 	}
 
 	@Override
@@ -105,6 +138,7 @@ public class MessageC2SCreateAccount extends Message {
 		username = in.readString();
 		password = in.readString();
 		email = in.readString();
+		marketingConsent = (in.readInt() == 1);
 
 		if (type != MessageType.C2S_CREATEACCOUNT) {
 			throw new IOException();
