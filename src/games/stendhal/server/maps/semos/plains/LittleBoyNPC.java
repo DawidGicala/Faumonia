@@ -67,17 +67,18 @@ public class LittleBoyNPC implements ZoneConfigurator {
 
 			@Override
 			public void createDialog() {
+                addReply("tematy", "Możemy porozmawiać o zabawie albo o parku. Chwilę tu jeszcze zostanę.");
 				// NOTE: These texts are only available after finishing the quest.
-				addGreeting();
-				addJob("Bawię się cały dzień.");
-				addHelp("Bądź ostrożny idąc na wschód. Tam są wilki!!");
-				addOffer("Hej nie oddam tobie mojego misia! Jest mój! *ściska*");
-				addGoodbye();
+				addGreeting("Witaj! Dobrze widzieć kogoś znajomego na tej wielkiej równinie.");
+				addJob("Najbardziej lubię się bawić i wymyślać przygody. Tylko te prawdziwe bywają straszniejsze niż moje zabawy, zwłaszcza kiedy w pobliżu są wilki.");
+				addHelp("Uważaj na park na wschód stąd. Między drzewami kręcą się wilki i lepiej nie podchodzić do nich bez przygotowania.");
+				addOffer("Nie prowadzę sklepu, ja tylko się bawię. Mój miś jest dla mnie ważniejszy niż monety.");
+				addGoodbye("Do widzenia! Uważaj na siebie po drodze.");
 			}
 	
 		};
 		npc.setEntityClass("plinknpc");
-		npc.setDescription("Widzisz młodego chłopca o imieniu Plink. On płacze i potrzebuje pomocy ...");
+		npc.setDescription("Widzisz Plinka, małego chłopca z równiny pod Semos. Co chwilę zerka w stronę parku.");
 		npc.setPosition(36, 108);
 		npc.initHP(100);
 		zone.add(npc);

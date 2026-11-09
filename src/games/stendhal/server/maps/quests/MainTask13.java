@@ -16,7 +16,7 @@ import games.stendhal.common.MathHelper;
 import games.stendhal.server.entity.npc.ChatAction;
 import games.stendhal.server.entity.npc.ConversationPhrases;
 import games.stendhal.server.entity.npc.ConversationStates;
-import games.stendhal.server.entity.npc.SpeakerNPC;
+import games.stendhal.server.core.rp.quest.MasterStage;
 import games.stendhal.server.entity.npc.action.EquipItemAction;
 import games.stendhal.server.entity.npc.action.IncreaseXPAction;
 import games.stendhal.server.entity.npc.action.MultipleActions;
@@ -59,7 +59,7 @@ public class MainTask13 extends AbstractQuest {
 	}
 	
 	private void step_1() {
-		final SpeakerNPC npc = npcs.get("Mistrz Faumonii XIII");
+		final MasterStage npc = MasterStage.register(13, this);
 
 		npc.add(ConversationStates.ATTENDING,
 				ConversationPhrases.QUEST_MESSAGES, 
@@ -74,6 +74,7 @@ public class MainTask13 extends AbstractQuest {
 		final Map<String, Pair<Integer, Integer>> toKill = new TreeMap<String, Pair<Integer, Integer>>();
 		toKill.put("gigantyczny krasnal", new Pair<Integer, Integer>(0,1));
 
+		npc.setHuntTargets(toKill);
 		final List<ChatAction> actions = new LinkedList<ChatAction>();
 		actions.add(new SetQuestAction(QUEST_SLOT, "start"));
 		actions.add(new StartRecordingKillsAction(QUEST_SLOT, 1, toKill));
@@ -100,7 +101,7 @@ public class MainTask13 extends AbstractQuest {
 
 	private void step_3() {
 
-		final SpeakerNPC npc = npcs.get("Mistrz Faumonii XIII");
+		final MasterStage npc = MasterStage.register(13, this);
 
 
 		final List<ChatAction> actions = new LinkedList<ChatAction>();
@@ -121,7 +122,7 @@ public class MainTask13 extends AbstractQuest {
 						new KilledForQuestCondition(QUEST_SLOT, 1)),
 				ConversationStates.ATTENDING, 
 				"Widze, że wykonałeś swoje trzynaste zadanie. Zatrudniłeś się jako płatny zabójca u Bate, przyniosłeś bronie Balduinowi oraz zabiłeś gigantycznego krasnala. "
-				+ "Zasługujesz na odznakę wojownika Faumonii trzynastego poziomu. Po nastepne główne zadanie powinieneś przyjść do Mistrza Faumonii XIV po przekroczeniu 110 poziomu doświadczenia. W międzyczasie możesz wykonać drugie zadanie u kolekcjonera Balduina, oferuje bardzo cenną nagrode.",
+				+ "Zasługujesz na odznakę wojownika Faumonii trzynastego poziomu. Po nastepne główne zadanie powinieneś przyjść do Mistrza Faumonii po przekroczeniu 110 poziomu doświadczenia. W międzyczasie możesz wykonać drugie zadanie u kolekcjonera Balduina, oferuje bardzo cenną nagrode.",
 				new MultipleActions(actions));
 
 				npc.add(ConversationStates.ATTENDING, 
@@ -158,7 +159,7 @@ public class MainTask13 extends AbstractQuest {
 		super.addToWorld();
 		fillQuestInfo(
 				"Wojownik Faumonii 13",
-				"Mistrz Faumonii XIII ma dla ciebie trzynaste główne zadanie które pomoże ci zostać wielkim wojownikiem Faumonii.",
+				"Mistrz Faumonii ma dla ciebie trzynaste główne zadanie które pomoże ci zostać wielkim wojownikiem Faumonii.",
 				false);
 		step_1();
 		step_2();
@@ -199,7 +200,7 @@ public class MainTask13 extends AbstractQuest {
 
 	@Override
 	public String getNPCName() {
-		return "Mistrz Faumonii XIII";
+		return MasterStage.NPC_NAME;
 	}
 	
 	@Override

@@ -67,8 +67,10 @@ public class BuyerNPC implements ZoneConfigurator {
 
 			@Override
 			protected void createDialog() {
+                addReply("wskazówki", "Potrzebuję 113 sztuk żelaza, 142 sztabek złota i 207 sztabek mithrilu. Żelazo odlewa Xoderos w Semos, a złoto Joshua w Ados; sprawdź u rzemieślników potrzebne surowce. Dostawy przyjmę partiami, więc nie musisz od razu zdobywać całej listy.");
+                addReply("tematy", "Możemy wrócić do twojej sprawy albo porozmawiać o czymś innym. Co chcesz wiedzieć?");
 				addGreeting("Witaj w sklepie dla Wojska Mithrilbourghtów.");
-				addJob("Jestem dumny, że jestem Kwatermistrzem Wojska Mithrilbourghtów. Mamy mnóstwo #amunicji. Jednak mamy braki w #butach i #hełmach.");
+				addJob("Pilnuję zaopatrzenia wojska Mithrilbourgh. Sprzedaję strzały i skupuję wybrane buty oraz hełmy, lecz równie ważne są dostawy metali do magazynu.");
 				addReply(Arrays.asList("boots", "butach", "buty"), "Wydaję stone boots regularnie, ale nasi żołnierze zawsze je gubią. Kupię każde dobre buty, które możesz zaoferować ( #offer ). Zobacz niebieską książkę, aby poznać cennik.");
 				addReply(Arrays.asList("helmets", "hełmach", "hełmy"), "Nie mam dobrego źródła, z którego mógłbym brać hełmy. Każdy, który mi zaoferujesz ( #trade ) będzie doceniony. W tym momencie mamy dość dla poruczników, a żadnego dla żołnierzy. W czerwonej książce znajdziesz szczegóły.");
 				addReply(Arrays.asList("ammunition", "amunicja"), "Sprzedaję arrows, wooden arrows są najtańsze, power arrows najdroższe. Na tablicy masz wszystkie ceny.");
@@ -80,7 +82,7 @@ public class BuyerNPC implements ZoneConfigurator {
 				addGoodbye("Dowidzenia.");
 			}
 		};
-		npc.setDescription("Oto Diehelm Brui, Kwatermistrz.");
+		npc.setDescription("Widzisz Diehelma Brui, kwatermistrza w Mithrilbourgh. Na jego twarzy widać skupienie człowieka, który liczy każdą sztukę zapasów.");
 		npc.setEntityClass("recruiter3npc");
 		npc.setPosition(10, 4);
 		npc.initHP(100);

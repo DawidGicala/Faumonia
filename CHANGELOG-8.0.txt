@@ -1,0 +1,78 @@
+﻿- Odświeżone zostały grafiki medali wojownika Faumonii.
+- Niektóre expowiska po wylogowaniu przenoszą do wejścia, aby ograniczyć kampienie w lokacjach (Piekło, Pustynia, Kikareukin, Smocza Grota, Głęboka Jaskinia na Dzikiej Wyspie, Jaskinia na Dzikiej Wyspie, Wieliczka, Malleus, Dragon Land, Marmurowa Jaskinia, Wieża Orril, Kopalnia Złota Orril)
+- Odświeżone zostały automatyczne komunikaty w grze.
+- Odświeżone zostało menu w kliencie.
+- Dodany został płaszcz pradawnych smoków (OBR: 56, LVL: 350)
+- Przebudowany został system rozmów z NPCami, dodane zostało nowe okno z klikalnymi odpowiedziami.
+- Rozbudowane zostały dialogi oraz opisy zadań, aby lepiej przedstawiały historie NPCów i cel wykonywanej misji.
+- Odpowiedzi w rozmowach są teraz dopasowane do aktualnego etapu zadania.
+- Dodane zostały grafiki przedmiotów, potworów oraz ikony oznaczające rodzaje odpowiedzi.
+- W rozmowach wyświetlane są wymagane przedmioty, postęp polowania oraz dokładne nagrody za ukończenie zadania.
+- Dodana została historia rozmowy oraz podgląd ostatniej odpowiedzi gracza.
+- Odpowiedzi wybierane w oknie rozmowy pojawiają się również na zwykłym chacie.
+- Zamknięcie okna rozmowy kończy rozmowę z NPCem, a pożegnanie NPCa automatycznie zamyka okno.
+- Dodany został sklep w oknie rozmowy, pokazujący grafiki przedmiotów, ceny, posiadane ilości oraz pieniądze gracza.
+- Poprawione zostały zabezpieczenia zakupów i skupu, między innymi przy pełnym plecaku, zmianie ceny oraz utracie dostępu do sklepu.
+- Dodane zostały ustawienia pozwalające wyłączyć automatyczne okno rozmowy, sklep w panelu oraz przywracanie podstawowego rozmiaru okna.
+- Wszyscy Mistrzowie Faumonii zostali połączeni w jednego NPCa, znajdującego się w domu Mistrzów w Semos.
+- Zmienione zostały nagrody doświadczenia u Mistrza Faumonii. Za nowo ukończony etap otrzymasz 2.5 razy ilość doświadczenia potrzebną do zdobycia kolejnego poziomu, liczoną od wymaganego poziomu zadania.
+- Dodany został Mistrz Faumonii XXV, dostępny od 320 poziomu po ukończeniu poprzedniego etapu.
+- Dodane zostało nowe zadanie u Faga na pokonanie wybranych śmierci oraz wielkich kostuch, wymagane do ukończenia Mistrza XXV.
+- Dodane zostało zadanie u Thyrona na przygotowanie okuć do wyprawy. Materiały przyjmuje Hogart, potrzebne jest 100 żelaza, 200 polan oraz 30 sztabek mithrilu.
+- Dodane zostały trzy obiekty do zbadania w ramach zadania Mistrza XXV. Po ukończeniu przygotowań należy odnaleźć ślady wyprawy, zdać raport i przynieść kieł złotej kostuchy.
+- Przebudowany został samouczek, dodany został przewodnik pokazujący aktualny cel, postęp oraz kierunek do kolejnego miejsca.
+- Ułatwione zostały zadania początkowe: Hayunn wymaga 1 wody, Mistrz I pokonania 3 szczurów i 1 szczura jaskiniowego, Sedro pokonania 1 gnoma i 1 panny gnom, a Soro przyniesienia 3 serów.
+- Przejście przez barierę startową wymaga ukończenia czterech zadań samouczka oraz zdobycia 5 poziomu. Dotychczasowi gracze zachowują dostęp.
+- Dodane zostały wskazówki dotyczące podstaw gry oraz korzystania z chatu globalnego. Przewodnik można zwinąć, wyłączyć i ponownie otworzyć.
+- Naprawiony został błąd walki, który pozwalał unikać odpowiedzi potwora przez wychodzenie z zasięgu i szybkie wracanie do walki.
+- Dodane zostało zadanie na wykonanie płaszcza pradawnych smoków u Terry’ego i Josephine. Zadanie wymaga 350 poziomu, ukończenia poszukiwania smoków oraz dostarczenia smoczych płaszczy i skór. Uszycie płaszcza trwa 24 godziny.
+- Dodane i zmienione zostały opłaty w złocie w wybranych zadaniach, przy wytwarzaniu i ulepszaniu ekwipunku oraz korzystaniu z usług NPCów.
+- Opłata w zadaniu "Korona dla króla" jest zależna od aktualnego poziomu gracza i wynosi maksymalnie 5 000 000 monet od 597 poziomu.
+- Dodane zostały opłaty za obywatelstwo: Semos - 500 monet, Fado - 1500 monet, Kirdneh i Nalwor - 2500 monet, Ados - 5000 monet.
+- Dodane zostały opłaty za licencje na połów ryb: pierwsza licencja kosztuje 500 monet, a druga 2500 monet.
+- Opłata za uzyskanie klucza do banku w Nalwor wynosi teraz 10 000 monet.
+- Zmieniona została opłata za korzystanie z Magicznego Banku na 100 000 monet za każde użycie.
+- Dodany został skup początkowych łupów u Mitera, pozwalający sprzedać część przedmiotów zdobywanych na początku gry.
+- Rozbudowane zostały opisy wybranych skór i przedmiotów, dodane zostały informacje o ich zastosowaniu, wytwarzaniu rękawic oraz miejscach sprzedaży.
+- Naprawione zostało zadanie na odnalezienie siedmiu aniołków, w tym zaliczanie spotkań, obsługa starszego postępu oraz odbiór nagrody.
+- Dodana została odznaka wojownika XXV, otrzymywana za ukończenie nowego etapu Mistrza Faumonii (ATK: 2, OBR: 34).
+- Zablokowane zostało teleportowanie do wnętrza domu Mistrza Faumonii. Wejście drzwiami oraz teleportowanie na zewnątrz pozostają dostępne.
+- Zmniejszona została szansa zdobycia Szczerbca z Wawela do 0,25%.
+- Poprawione zostały nieaktualne informacje u Mistrza Faumonii dotyczące ograniczenia dostępu do katakumb po przekroczeniu 200 poziomu.
+- Dodane zostały ostrzeżenia przy wejściu na arenę w Semos, informujące o zasadach walki między graczami oraz zakazie korzystania z botów.
+- Poprawione zostały opisy nagród u Staro i Orchiwalda, aby odpowiadały faktycznie otrzymywanym przedmiotom.
+- Poprawiona została oferta Tannara, który prawidłowo informuje o wykonywaniu rękawic ze skóry jelenia.
+- Poprawione zostały zabezpieczenia zadań przed ponownym pobraniem opłaty lub wydaniem nagrody po powtórzeniu odpowiedzi i przerwaniu rozmowy.
+- Poprawione zostały teksty w oknach logowania, rejestracji, wyboru postaci, ustawień, handlu oraz aktualizacji klienta.
+- Poprawiony został komunikat dotyczący czerwonej czaszki, który wyjaśnia jej konsekwencje oraz sposób zdjęcia piętna zabójcy.
+- Naprawiony został błąd u Wikarego, który pozwalał pobrać pieniądze za zdjęcie czaszki od postaci bez piętna zabójcy.
+- Poprawione zostały informacje i odliczanie u Io Flotto. NPC prawidłowo informuje o wymaganych dwóch dniach bez atakowania innych graczy oraz ponownie sprawdza warunki przed zdjęciem czaszki.
+- Poprawiona została rozmowa o datkach u Wikarego w Fado. NPC podaje sposób przekazania datku i prawidłowo informuje o nagrodzie w postaci tabliczki czekolady.
+- Poprawione zostały położenie i rozmiar okna rozmowy. Okno otwiera się na środku widoku mapy i pozostaje nad samouczkiem.
+- Lista odpowiedzi w rozmowie jest domyślnie zwinięta do pięciu propozycji. Pozostałe odpowiedzi można rozwinąć.
+- Poprawiona została czytelność długich list wymaganych przedmiotów. Składniki można przewijać w poziomie, bez ściskania ich nazw i ilości.
+- Usunięte zostały podkreślenia pod niebieskimi podpowiedziami w rozmowach i na chacie.
+- Dodana została informacja, gdy NPC nie rozpoznaje odpowiedzi wpisanej w oknie rozmowy.
+- Poprawiona została obsługa polskich pożegnań „do widzenia” i „do zobaczenia”, również podczas potwierdzania zakupu.
+- Poprawione zostały komunikaty po zakupie, które podają nazwę i liczbę kupionych przedmiotów, oraz informacja o braku miejsca w plecaku.
+- Poprawiona została czytelność samouczka. Dodane zostały ciemniejsze tło, wyraźniejszy nagłówek oraz krótkie instrukcje pokazujące, co kliknąć lub napisać.
+- Samouczek prowadzi krok po kroku przez rozmowy z Hayunnem, Miterem, Mistrzem Faumonii, Sedro i Soro, wskazuje dom Mistrza i zamyka się po przejściu bariery.
+- Woda potrzebna Hayunnowi znajduje się na początku oferty Mitera. Poprawione zostały też opisy odróżniające ją od butelki wody.
+- Nowe opłaty obejmują również rozpoczęte, ale nieukończone zadania. Ukończone wcześniej zadania nie wymagają ponownej zapłaty.
+- Dopracowane zostały wpisy w dzienniku zadań, aby dokładniej informowały o wykonanych krokach, przekazanych przedmiotach i kolejnym miejscu do odwiedzenia.
+- Dopracowane zostały odpowiedzi dotyczące pierwszego i kolejnego zlecenia, oddawania materiałów, oczekiwania oraz odbioru gotowego przedmiotu.
+- Poprawione zostały reakcje NPCów na brakujące materiały, częściowe dostawy i przedmioty oddane już wcześniej.
+- Odświeżone zostały rozmowy z rzemieślnikami i kolekcjonerami, między innymi Gloverem, Leatheronem, Alrakiem, Baldemarem, Ludwikiem i Andrzejem. Wypowiedzi lepiej nawiązują do ich pracy oraz wykonywanego zadania.
+- Rozbudowane zostały rozmowy z Adalbertem, Careną, Jefem i Amber, w tym reakcje na przyniesione pamiątki oraz przekazane wiadomości.
+- Dopracowane zostały dalsze rozmowy w zadaniach na płaszcze u Bario i Josephine oraz potwierdzenia przekazywania kolejnych materiałów Terry'emu.
+- Uporządkowane zostały dialogi w zadaniu na różdżkę Mokoszy u Samarona, Woy'tyka, Leandra i Ylrika. Wyraźniej wskazują kolejne części różdżki, potrzebne przedmioty i cel podróży.
+- Odświeżone zostały rozmowy u Wandy i w muzeum, dotyczące zbieranych przedmiotów, braków oraz oczekiwania na kolejne zlecenie.
+- Poprawiony został opis zadania Hackima i Xina, który nie wymaga już niepotrzebnego powrotu po odebraniu nagrody.
+- Soro uwzględnia ukończenie zadania Sedro i nie odsyła do wykonywania go ponownie.
+- Dopracowane zostały wyjaśnienia Sarziny dotyczące karmy, jej wpływu na łowienie i wydobycie oraz zmian jej poziomu.
+- Mistrz Faumonii otrzymał dokładniejsze wprowadzenia do wybranych prób oraz podsumowania nawiązujące do ukończonego etapu. W XXV odnosi się osobno do zbadanej lampy, tablicy i kotew.
+- Dodane zostały odrębne wypowiedzi siedmiu aniołków i jedenastu smoków, nawiązujące do miejsc ich pobytu.
+- Poprawione zostały opisy kła złotej kostuchy, części różdżki Mokoszy, paczki jedzenia, aranduli, flaszy oraz pamiątek Adalberta. Informacje o ich zastosowaniu odpowiadają obecnym zadaniom.
+- Dopracowane zostały opisy sztyletów żywiołów, smoczych płaszczy oraz kluczy do tawerny Semos i Wieliczki. Usunięte zostały nieaktualne informacje i opisy sugerujące nieistniejące działanie przedmiotów.
+- Dodana została wskazówka o naprawie zużytego pierścienia szmaragdowego u Ognira.
+- Uzupełnione zostały krótkie opisy wielkich kostuch i olbrzyma mistrza oraz poprawione literówki w wybranych opisach potworów.

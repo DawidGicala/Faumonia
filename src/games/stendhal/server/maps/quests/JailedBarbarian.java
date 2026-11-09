@@ -90,7 +90,7 @@ import org.apache.log4j.Logger;
 				ConversationPhrases.QUEST_MESSAGES, 
 				new QuestNotStartedCondition(QUEST_SLOT),
 				ConversationStates.QUEST_OFFERED, 
-				"Potrzebuję pomocy przy ucieczce z tego więzienia. Te wstrętne Amazonki! Czy możesz mi pomóc?",
+				"Nie zamierzam spędzić reszty życia w tej chacie na wyspie Amazon. Amazonki pilnują mnie, a do tego otaczają tymi okropnymi kwiatami. Pomożesz mi przygotować ucieczkę?",
 				null);
 							
 		npc.add(ConversationStates.ATTENDING,
@@ -104,7 +104,7 @@ import org.apache.log4j.Logger;
 		npc.add(ConversationStates.QUEST_OFFERED,
 				ConversationPhrases.YES_MESSAGES, null,
 				ConversationStates.ATTENDING,
-				"Dziękuję! Po pierwsze potrzebuję #kosy do wycięcia tych okropnych kwiatków. Tylko nie przynoś mi starej! Daj znać, gdy będziesz ją miał!",
+				"Zacznijmy od tych kwiatów, bo już nie mogę na nie patrzeć. Przynieś jedną #kosę, sprawną i zwyczajną, nie starą kosę. Powiedz, gdy będziesz ją mieć.",
 				new SetQuestAndModifyKarmaAction(QUEST_SLOT, "start", 10.0));
 
 		// Player says no, they've lost karma.
@@ -127,7 +127,7 @@ import org.apache.log4j.Logger;
 				new AndCondition(new QuestInStateCondition(QUEST_SLOT, "start"),
 				new PlayerHasItemWithHimCondition("kosa")),
 				ConversationStates.ATTENDING, 
-				"Dziękuję!! Pierwszą część mamy za sobą! Teraz mogę ściąć wszystkie te kwiatki! Zapytaj Princess Esclara dlaczego tutaj jestem! Sądzę, że coś powie, gdy podasz jej moje imię...",
+				"Dobra kosa, wreszcie zrobię tu trochę miejsca. Teraz idź do Princess Esclary na tej samej wyspie i zapytaj ją o #Lorenz. Chcę wiedzieć, co rozpowiada o moim uwięzieniu.",
 				new MultipleActions(reward));
 
 		npc.add(
@@ -151,7 +151,7 @@ import org.apache.log4j.Logger;
 		npc.add(ConversationStates.ATTENDING, "Lorenz",
 				new QuestInStateCondition(QUEST_SLOT, "capture"),
 				ConversationStates.ATTENDING,
-				"Chcesz wiedzieć dlaczego on tutaj jest? On i jego wstrętni przyjaciele kopali #tunel do naszej cudownej wyspy! Dlatego został uwięziony!",
+				"Lorenz i jego towarzysze kopali #tunel na naszą wyspę bez naszej zgody. Nie zamknęłyśmy go tu dla zabawy. Jeśli chcesz usłyszeć jego wersję, wróć do niego i zapytaj o tunel.",
 				new SetQuestAction(QUEST_SLOT, "princess"));
 		
 		npc.add(ConversationStates.ATTENDING, Arrays.asList("tunnel", "tunel"),
@@ -167,7 +167,7 @@ import org.apache.log4j.Logger;
 		npc.add(ConversationStates.ATTENDING, Arrays.asList("tunnel", "tunel"),
 				new QuestInStateCondition(QUEST_SLOT, "princess"),
 				ConversationStates.ATTENDING, 
-				"Co chce mnie doprowadzić do szaleństwa jak wszystkie te kwiatki! Robię się głodny. Przynieś #jajo dla mnie! Daj znać, gdy zdobędziesz.",
+				"A więc znów opowiada o tunelu. Nie mam teraz siły się spierać, bo burczy mi w brzuchu. Przynieś jedno #jajo, potem pomyślimy, co dalej.",
 				new SetQuestAction(QUEST_SLOT, "jajo"));	
 		
 		npc.add(ConversationStates.ATTENDING,
@@ -198,7 +198,7 @@ import org.apache.log4j.Logger;
 				new AndCondition(new QuestInStateCondition(QUEST_SLOT, "jajo"),
 						new PlayerHasItemWithHimCondition("jajo")),
 						ConversationStates.ATTENDING, 
-						"Dziękuję przyjacielu. Teraz musisz powiedzieć Princess Ylflia w Zamku Kalavan, że jestem tutaj #uwięziony. Pospiesz się!",
+						"To pomoże mi odzyskać siły. Udaj się teraz do Princess Ylflii w zamku Kalavan i powiedz, że Lorenz jest #uwięziony na wyspie Amazon. Może ona zechce o mnie pamiętać.",
 						new MultipleActions(reward));
 
 		npc.add(
@@ -234,10 +234,10 @@ import org.apache.log4j.Logger;
 		npc.add(ConversationStates.ATTENDING, Arrays.asList("jailed", "Lorenz", "uwięziony"),
 				new QuestInStateCondition(QUEST_SLOT, "jailed"),
 				ConversationStates.ATTENDING, 
-				"Och. Mój ojciec nie powinien wiedzieć o tym. Mam nadzieje, że Lorenz ma się dobrze! Dziękuję za wiadomość! Wyślij mu #pozdrowienia! Lepiej wróć do niego. Może potrzebować pomocy.",
+				"Lorenz jest uwięziony? Nie wspominaj o naszej rozmowie mojemu ojcu. Przekaż Lorenzowi moje #pozdrowienia i sprawdź, czy nie potrzebuje jeszcze pomocy.",
 				new SetQuestAction(QUEST_SLOT, "spoken"));
 
-		npc.add(ConversationStates.ATTENDING, Arrays.asList("greetings", "pozdrowienia"),
+		npc.add(ConversationStates.ATTENDING, Arrays.asList("spoken", "pozdrowienia"),
 				new QuestInStateCondition(QUEST_SLOT, "spoken"),
 				ConversationStates.ATTENDING, "Idź i przekaż Lorenz moje #pozdrowienia.",
 				null);
@@ -247,15 +247,15 @@ import org.apache.log4j.Logger;
 	private void step7() {
 	final SpeakerNPC npc = npcs.get("Lorenz");
 	
-		npc.add(ConversationStates.ATTENDING, Arrays.asList("greetings", "pozdrowienia"),
+		npc.add(ConversationStates.ATTENDING, Arrays.asList("spoken", "pozdrowienia"),
 				new QuestInStateCondition(QUEST_SLOT, "spoken"),
 				ConversationStates.ATTENDING, 
-				"Dziękuję przyjacielu. Teraz ostatnie zadanie! Przynieś mi zbroje barbarzyńską. Bez tego nie ucieknę stąd! Idź! Idź! I daj znać, gdy zdobędziesz #zbroję!",
+				"Dobrze wiedzieć, że Ylflia o mnie nie zapomniała. Do ucieczki brakuje mi już tylko zbroi barbarzyńcy. Przynieś ją i powiedz #zbroję; bez osłony daleko nie zajdę.",
 				new SetQuestAction(QUEST_SLOT, "armor"));
 		
 		npc.add(ConversationStates.ATTENDING,
 				ConversationPhrases.QUEST_MESSAGES, 
-				new QuestInStateCondition(QUEST_SLOT, "greetings"),
+				new QuestInStateCondition(QUEST_SLOT, "spoken"),
 				ConversationStates.ATTENDING,
 				"Teraz musisz porozmawiać z Princess Ylflia ... Mam nadzieję, że przesłała swoje najgorętsze #pozdrowienia...",
 				null);
@@ -278,7 +278,7 @@ import org.apache.log4j.Logger;
 				new AndCondition(new QuestInStateCondition(QUEST_SLOT, "armor"),
 						new PlayerHasItemWithHimCondition("zbroja barbarzyńcy")),
 						ConversationStates.ATTENDING, 
-						"To wszystko! Teraz jestem gotowy do mojej ucieczki! Oto coś dla Ciebie. Ukradłem Princess Esclara! Żeby tylko się nie dowiedziała. Teraz zostaw mnie!",
+						"Zbroja pasuje, mogę wreszcie przygotować ucieczkę. Weź część złota i mithrilu, które ukryłem przed Esclarą, jako zapłatę za wszystkie przysługi. O pochodzenie tych sztabek lepiej jej nie pytaj.",
 						new MultipleActions(reward));
 
 		npc.add(
@@ -301,7 +301,7 @@ import org.apache.log4j.Logger;
 		super.addToWorld();
 		fillQuestInfo(
 				"Uwięziony Barbarzyńca",
-				"Lorenz jest uwięzionym barbarzyńcą na Athor Island. Dowiesz się dlaczego jest tam więziony i czy mu jakoś pomożesz?",
+				"Lorenz jest więźniem Amazonek na wyspie Amazon. Pomóż mu przygotować ucieczkę i poznaj sprawę tunelu oraz jego znajomości z księżniczką Ylflią.",
 				true);
 		step1();
 		step2();
@@ -329,7 +329,7 @@ import org.apache.log4j.Logger;
 		if ("start".equals(questState)) {
 			return res;
 		} 
-		res.add("Lorenz chce abym udał się do Princess Esclara w zamku Kalavan z zapytaniem: 'dlaczego został pojmany'. Muszę powiedzieć jej jego imię aby jej przypomnieć.");
+		res.add("Lorenz chce abym udał się do Princess Esclara na wyspie Amazon z zapytaniem: 'dlaczego został pojmany'. Muszę powiedzieć jej jego imię aby jej przypomnieć.");
 		if ("capture".equals(questState)) {
 			return res;
 		} 
@@ -338,7 +338,7 @@ import org.apache.log4j.Logger;
 			return res;
 		}
 		res.add("Lorenz nagle zgłodniał i zażądał dostarczenia mu jajka. On jest naprawdę wybuchowy.");
-		if ("egg".equals(questState)) {
+		if ("jajo".equals(questState)) {
 			return res;
 		}
 		res.add("Teraz muszę powiedzieć Princess Ylflia, dlaczego Lorenz nie było tak długo ... Nie jestem nawet pewien, czy zna ją! Ale i tak muszę powiedzieć jej jego imię.");
@@ -353,7 +353,7 @@ import org.apache.log4j.Logger;
 		if ("armor".equals(questState)) {
 			return res;
 		}
-		res.add("Przyniosłem Lorenzowi zbroje! Dał mi zrabowane złoto i mithril Księżniczce.	W nagrodę za ukończenie zadania otrzymałem: 250.000 pkt doświadczenia, 30.000 pkt ataku, 40.000 pkt obrony, 100 pkt karmy, 30 sztabek złota i 10 sztabek mithrilu.");
+		res.add("Przyniosłem Lorenzowi zbroje! Dał mi zrabowane złoto i mithril Księżniczce.	W nagrodę za ukończenie zadania otrzymałem: 250.000 pkt doświadczenia, 30.000 pkt ataku, 40.000 pkt obrony, 100 pkt karmy, 33 sztabki złota i 12 sztabek mithrilu.");
 		if (isCompleted(player)) {
 			return res;
 		}

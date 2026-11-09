@@ -61,16 +61,17 @@ public class MayorNPC implements ZoneConfigurator {
 
 			@Override
 			protected void createDialog() {
+                games.stendhal.server.entity.npc.dialogue.HuntDialogueTopics.install(this);
 				addGreeting("Cześć. Musisz być odważny, aby stać przede mną.");
-				addJob("Masz czelność pytać, mały człowieczku?!");
-				addHelp("Cóż, może mógłbyś mi pomóc rozwiązać #problem.");
+				addJob("Nie każdy przybysz ma powód, żeby stawać przede mną. Jeśli jednak potrafisz dotrzymać umowy i zachować rozsądek w kryjówce mrocznych elfów, możemy porozmawiać o sprawie ważnej dla Nalwor.");
+				addHelp("Mam #problem, o którym nie zamierzam opowiadać każdemu przechodniowi. Jeśli potrafisz zachować dyskrecję, wysłuchaj szczegółów. Będzie potrzebna odwaga, ale także uważność przy szukaniu mojego amuletu.");
 				add(ConversationStates.ATTENDING, "problem", null, ConversationStates.ATTENDING,
 				        "Tutaj nie ma mrocznych elfów. Uwierz mi! Ja?! nie, nie, nie, Jestem dobrze opalony...", null);
 				addGoodbye("Żegnaj człowieczku.");
 			}
 		};
 
-		npc.setDescription("Oto królewski elf. Coś w nim wzbudza twój niepokój.");
+		npc.setDescription("Widzisz Maeriona, królewskiego elfa z Nalwor. Jego wyniosły spokój nie całkiem skrywa niepokój.");
 		npc.setEntityClass("elfmayornpc");
 		npc.setPosition(9, 23);
 		npc.initHP(100);

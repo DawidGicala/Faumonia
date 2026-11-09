@@ -15,7 +15,7 @@ package games.stendhal.server.maps.quests;
 import games.stendhal.common.grammar.Grammar;
 import games.stendhal.server.entity.npc.ConversationPhrases;
 import games.stendhal.server.entity.npc.ConversationStates;
-import games.stendhal.server.entity.npc.SpeakerNPC;
+import games.stendhal.server.core.rp.quest.MasterStage;
 import games.stendhal.server.entity.npc.action.DropRecordedItemAction;
 import games.stendhal.server.entity.npc.action.IncreaseKarmaAction;
 import games.stendhal.server.entity.npc.action.IncreaseAtkXPAction;
@@ -80,7 +80,7 @@ public class MainTask17 extends AbstractQuest {
 			res.add("Nie chce podjąć się głównego zadania na wojownika Faumonii");
 			return res;
 		}
-		res.add("Zanim Mistrz Faumonii XVII przyzna mi kolejne główne zadanie musze wykonać kilka zadań.	Powinienem nauczyć się posługiwać magią. W tym celu muszę odnaleźć Staro i wykonać dla niego zadanie, podobno lubi przesiadywać tawernie Fado.	Muszę poznać katakumby Semos i powalczyć z wampirami. W tym celu powinienem wybrać się do krasnala Hogarta, znajdującego się w kopalni Orril i wykonać dla niego zadanie. Mistrz poinformował mnie, żebym uważał gdyż nie będe w stanie wykonać tego zadania, jak przekrocze 200 poziom doświadczenia.");
+		res.add("Zanim Mistrz Faumonii przyzna mi kolejne główne zadanie musze wykonać kilka zadań.	Powinienem nauczyć się posługiwać magią. W tym celu muszę odnaleźć Staro i wykonać dla niego zadanie, podobno lubi przesiadywać tawernie Fado.	Muszę poznać katakumby Semos i powalczyć z wampirami. W tym celu powinienem wybrać się do krasnala Hogarta, znajdującego się w kopalni Orril i wykonać dla niego zadanie. Wejście do katakumb wymaga rozpoczęcia zadania Hogarta.");
 		if (!isCompleted(player)) {
 			res.add("Żeby ukończyć główne zadanie musze wybrac się do grabarza w semos Dane Takera, sporządzić eliksiry z wampirzego truchła i przynieść: " + Grammar.a_noun(player.getRequiredItemName(QUEST_SLOT,0)) + ".");
 		}
@@ -91,7 +91,7 @@ public class MainTask17 extends AbstractQuest {
 	}
 	
 	private void checkCollectingQuests() {
-		final SpeakerNPC npc = npcs.get("Mistrz Faumonii XVII");
+		final MasterStage npc = MasterStage.register(17, this);
 		
 		npc.add(
 		ConversationStates.IDLE,
@@ -124,14 +124,14 @@ public class MainTask17 extends AbstractQuest {
 			new QuestNotCompletedCondition(FIRST_QUEST_SLOT),
 					new QuestNotStartedCondition(QUEST_SLOT)),
 			ConversationStates.ATTENDING,
-			"Zanim przyznam ci kolejne główne zadanie, powinieneś poznać katakumby Semos i powalczyć z wampirami. W tym celu wybierz się do kopalnii w Orril, odnajdź kowala Hogarta i wykonaj dla niego zadanie na miecz wysysający życie. Spiesz się! Wstęp do katakumb ograniczony jest poziomem, nie dostaną się tam wojownicy po przekroczeniu 200 poziomu doświadczenia!",
+			"Zanim przyznam ci kolejne główne zadanie, powinieneś poznać katakumby Semos i powalczyć z wampirami. W tym celu wybierz się do kopalni Orril, odnajdź kowala Hogarta i rozpocznij jego zadanie na miecz wysysający życie. To pozwoli ci wejść do katakumb; przygotuj się do walki i dokończ jego prośbę.",
 			null);	
 			
 	}
 
 	private void requestItem() {
 		
-		final SpeakerNPC npc = npcs.get("Mistrz Faumonii XVII");
+		final MasterStage npc = MasterStage.register(17, this);
 		final Map<String,Integer> items = new HashMap<String, Integer>();
 		
 		items.put("wielki eliksir",63);
@@ -154,7 +154,7 @@ public class MainTask17 extends AbstractQuest {
 	}
 						
 	private void collectItem() {
-			final SpeakerNPC npc = npcs.get("Mistrz Faumonii XVII");
+			final MasterStage npc = MasterStage.register(17, this);
 			
 					npc.add(ConversationStates.IDLE,
 				ConversationPhrases.GREETING_MESSAGES,
@@ -195,7 +195,7 @@ public class MainTask17 extends AbstractQuest {
 	public void addToWorld() {
 		fillQuestInfo(
 				"Wojownik Faumonii 17",
-				"Mistrz Faumonii XVII ma dla ciebie siedemnaste główne zadanie które pomoże ci zostać wielkim wojownikiem Faumonii.",
+				"Mistrz Faumonii ma dla ciebie siedemnaste główne zadanie które pomoże ci zostać wielkim wojownikiem Faumonii.",
 				true);
 		
 		checkCollectingQuests();
@@ -216,7 +216,7 @@ public class MainTask17 extends AbstractQuest {
 
 	@Override
 	public String getNPCName() {
-		return "Mistrz Faumonii XVII";
+		return MasterStage.NPC_NAME;
 	}
 	
 	@Override

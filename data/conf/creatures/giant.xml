@@ -78,7 +78,7 @@
 
 	<creature name="olbrzym mistrz">
 		<type class="giant_human" subclass="master_giant" tileid="giant_human.png:9"/>
-		<description></description>
+		<description>Widzisz olbrzyma mistrza w czerwonym płaszczu. Spod ciemnych włosów obserwuje cię, mocno trzymając miecz.</description>
 		<attributes>
 			<atk value="950"/>
 			<def value="68"/>

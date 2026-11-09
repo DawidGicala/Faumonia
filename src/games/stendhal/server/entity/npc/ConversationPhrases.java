@@ -62,7 +62,8 @@ public class ConversationPhrases {
 			"nothing", "none", "no", "nie", "nic");
 
 	public static final List<String> GOODBYE_MESSAGES = Arrays.asList("bye", "goodbye",
-			"farewell", "cya", "adios", "dowidzenia", "żegnaj", "zegnaj", "bywaj",
+			"farewell", "cya", "adios", "dowidzenia", "do widzenia", "do zobaczenia",
+			"żegnaj", "zegnaj", "bywaj",
 			"nara", "tymczasem", "dobranoc", "na razie", "do jutra");
 
 	/** combine a string collection (list) with additional strings */

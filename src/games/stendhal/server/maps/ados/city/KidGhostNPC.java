@@ -71,10 +71,12 @@ public class KidGhostNPC implements ZoneConfigurator {
 
 			@Override
 		    protected void createDialog() {
+                games.stendhal.server.entity.npc.dialogue.JourneyDialogueTopics.install(this);
+                addGoodbye("Wróć kiedyś się pobawić. Do zobaczenia.");
 			    add(ConversationStates.IDLE,
 			    	ConversationPhrases.GREETING_MESSAGES,
 			    	new GreetingMatchesNameCondition(getName()), true,
-			    	ConversationStates.IDLE,
+			    	ConversationStates.ATTENDING,
 			    	null,
 			    	new ChatAction() {
 			    		public void fire(final Player player, final Sentence sentence, final EventRaiser npc) {
@@ -85,22 +87,22 @@ public class KidGhostNPC implements ZoneConfigurator {
 			    			final String[] npcDoneText = npcQuestText.split(":");
 			    			final String lookStr;
 							if (npcDoneText.length > 1) {
-								lookStr = npcDoneText[0];
+								lookStr = npcDoneText[0].toLowerCase(java.util.Locale.ROOT);
 							} else {
 								lookStr = "";
 							}
 			    			final String saidStr;
 							if (npcDoneText.length > 1) {
-								saidStr = npcDoneText[1];
+								saidStr = npcDoneText[1].toLowerCase(java.util.Locale.ROOT);
 							} else {
 								saidStr = "";
 							}
 			    			final List<String> list = Arrays.asList(lookStr.split(";"));
-						    if (list.contains(npc.getName()) || player.isQuestCompleted("find_ghosts")) {
+						    if (list.contains(npc.getName().toLowerCase(java.util.Locale.ROOT)) || player.isQuestCompleted("find_ghosts")) {
 								npc.say("Cześć. Cieszę się, że mnie pamiętasz. Przechadzam się tędy i czekam, aż ktoś się ze mną pobawi.");
 							} else {
 							    player.setQuest("find_ghosts", lookStr
-									    + ";" + npc.getName()
+									    + ";" + npc.getName().toLowerCase(java.util.Locale.ROOT)
 									    + ":" + saidStr);
 								npc.say("Cześć! Każdemu jest ciężko ze mną rozmawiać. Inne dzieci udają, że nie istnieję. Mam nadzieję, że mnie pamiętasz.");
 							    player.addXP(100);
@@ -111,7 +113,7 @@ public class KidGhostNPC implements ZoneConfigurator {
 			}
 		};
 
-		ghost.setDescription("Oto duch małego chłopca.");
+		ghost.setDescription("Widzisz Bena, ducha małego chłopca. Przechadza się po Ados, jakby wciąż czekał na towarzysza zabawy.");
 		ghost.setResistance(0);
 		ghost.setEntityClass("kid7npc");
 		// He is a ghost so he is see through

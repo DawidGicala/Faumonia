@@ -1,4 +1,6 @@
 package games.stendhal.server.maps.quests;
+
+import games.stendhal.server.entity.npc.action.DialogueRewardAction;
  
 import games.stendhal.common.grammar.Grammar;
 import games.stendhal.server.entity.npc.*;
@@ -43,6 +45,15 @@ import java.util.ArrayList;
  */
 public class FruitsForCoralia extends AbstractQuest {
 
+    public static java.util.Map<String,Integer> getRequiredItems() {
+        games.stendhal.server.util.ItemCollection items=new games.stendhal.server.util.ItemCollection();
+        items.addFromQuestStateString(NEEDED_ITEMS);
+        java.util.Map<String,Integer> result=new java.util.LinkedHashMap<String,Integer>();
+        for(java.util.Map.Entry<String,Integer> e:items.entrySet()) result.put(e.getKey(),e.getValue());
+        return java.util.Collections.unmodifiableMap(result);
+    }
+
+
 	
 	
 	/**
@@ -68,7 +79,7 @@ public class FruitsForCoralia extends AbstractQuest {
 	public void addToWorld() {
 		super.addToWorld();
 		fillQuestInfo("Owoce dla Coralii",
-				"Coralia kelnerka w Tawernie Ados poszukuje świeżych owoców do swojego egzotycznego kapelusza.",
+				"Coralia z tawerny Ados chce ozdobić swój kapelusz świeżymi owocami. Zapytaj, jakich potrzebuje, i pomóż jej skompletować barwną dekorację.",
 				true);
 		prepareQuestStep();
 		prepareBringingStep();
@@ -140,7 +151,7 @@ public class FruitsForCoralia extends AbstractQuest {
 				new QuestNotStartedCondition(QUEST_SLOT),
 				new QuestNotInStateCondition(QUEST_SLOT, "rejected")),
 			ConversationStates.QUEST_OFFERED,
-			"Czy byłbyś na tyle miły i przyniósłbyś dla mnie trochę świeżych owoców do mojego kapelusza? Byłabym wdzięczna!",
+			"Mój owocowy kapelusz zwykle przyciąga więcej spojrzeń niż tace z piwem. Niestety świeże ozdoby szybko więdną, a ja nie mogę zostawić gości i ruszyć na zbiory. Przyniesiesz mi owoce z listy?",
 			null);
 
 		npc.add(ConversationStates.ATTENDING,
@@ -149,7 +160,7 @@ public class FruitsForCoralia extends AbstractQuest {
 				new QuestNotStartedCondition(QUEST_SLOT),
 				new QuestNotInStateCondition(QUEST_SLOT, "rejected")),
 			ConversationStates.QUEST_OFFERED,
-			"Czy byłbyś na tyle miły i przyniósłbyś dla mnie trochę świeżych owoców do mojego kapelusza? Byłabym wdzięczna!",
+			"Mój owocowy kapelusz zwykle przyciąga więcej spojrzeń niż tace z piwem. Niestety świeże ozdoby szybko więdną, a ja nie mogę zostawić gości i ruszyć na zbiory. Przyniesiesz mi owoce z listy?",
 			null);
 			
 		// ask for quest again after rejected
@@ -227,8 +238,8 @@ public class FruitsForCoralia extends AbstractQuest {
 			ConversationStates.QUESTION_1,
 			null,
 			new MultipleActions(
-				new SetQuestAndModifyKarmaAction(QUEST_SLOT, NEEDED_ITEMS, 5.0),
-				new SayRequiredItemsFromCollectionAction(QUEST_SLOT, "To wspaniale! Chciałabym te świeże owoce: [items].")));
+				DialogueRewardAction.karma(new SetQuestAndModifyKarmaAction(QUEST_SLOT, NEEDED_ITEMS, 5.0)),
+				new SayRequiredItemsFromCollectionAction(QUEST_SLOT, "Potrzebuję świeżych owoców: [items]. Przyjmę je partiami, więc nie musisz dźwigać wszystkiego naraz. Możesz zapytać o dowolny owoc z listy, a podpowiem, gdzie go szukać.")));
 		
 		// reject quest response
 		npc.add(ConversationStates.QUEST_OFFERED,
@@ -236,7 +247,7 @@ public class FruitsForCoralia extends AbstractQuest {
 			null,
 			ConversationStates.ATTENDING,
 			"Ten egzotyczny kapelusz już się nie trzyma. Wiesz...",
-			new SetQuestAndModifyKarmaAction(QUEST_SLOT, "rejected", -5.0));
+			DialogueRewardAction.karma(new SetQuestAndModifyKarmaAction(QUEST_SLOT, "rejected", -5.0)));
 		
 		// meet again during quest
 		npc.add(ConversationStates.IDLE, 
@@ -303,6 +314,10 @@ public class FruitsForCoralia extends AbstractQuest {
 
 	private void prepareBringingStep() {
 		final SpeakerNPC npc = npcs.get("Coralia");
+        npc.add(ConversationStates.QUESTION_1, "przekaż", new QuestActiveCondition(QUEST_SLOT),
+            ConversationStates.QUESTION_2, null, new SayRequiredItemsFromCollectionAction(QUEST_SLOT,
+            "Sprawdźmy dostawę. Brakuje mi jeszcze: [items]. Możesz oddać część owoców, a resztę donieść później."));
+        
 		
 		// ask for required items
 		npc.add(ConversationStates.ATTENDING, 
@@ -338,11 +353,11 @@ public class FruitsForCoralia extends AbstractQuest {
 		// set up next step
 		ChatAction completeAction = new  MultipleActions(
 			new SetQuestAction(QUEST_SLOT, "done"),
-			new SayTextAction("Mój kapelusz jeszcze nigdy nie wyglądał tak wybornie! Bardzo ci dziękuję! Przyjmij tą nagrodę."),
-			new IncreaseXPAction(10000),
-			new IncreaseKarmaAction(50),
-			new EquipRandomAmountOfItemAction("naleśniki z polewą czekoladową", 1, 3),
-			new EquipRandomAmountOfItemAction("duży eliksir", 10, 30),
+			new SayTextAction("Teraz kapelusz znów wygląda tak, jak powinien! Dziękuję za każdą dostarczoną porcję owoców. Przyjmij naleśniki i duże eliksiry na drogę; jutro pewnie znów zacznę wypatrywać świeżych ozdób."),
+			DialogueRewardAction.xp(10000),
+			DialogueRewardAction.karma(new IncreaseKarmaAction(50)),
+			DialogueRewardAction.randomItem("naleśniki z polewą czekoladową", 1, 3),
+			DialogueRewardAction.randomItem("duży eliksir", 10, 30),
 			new SetQuestToTimeStampAction(QUEST_SLOT, 1)
 		);
 		

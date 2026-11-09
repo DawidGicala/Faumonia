@@ -63,12 +63,12 @@ public class ElementalDagger1 extends AbstractQuest {
 			new ChatAction() {
 				public void fire(final Player player, final Sentence sentence, final EventRaiser raiser) {
 					if (!player.hasQuest(QUEST_SLOT) || "rejected".equals(player.getQuest(QUEST_SLOT))) {
-						raiser.say("Specjalizuje się w wykuwaniu magicznych mieczy wzmocnionych przez magie żywiołów. Jesteś zainteresowany?");
+						raiser.say("Ogień może zahartować stal albo obrócić ją w pył. Wykuję dla ciebie sztylet żywiołów, jeśli dostarczysz materiały i dowiedziesz odwagi w walce z koboldem olbrzymim. Chcesz złożyć takie zamówienie?");
 					} else if (player.isQuestCompleted(QUEST_SLOT)) {
-						raiser.say("Przecież już dostałeś swój miecz...");
+						raiser.say("Sztylet żywiołów jest już w twoich rękach. Ogień zrobił swoje; teraz od ciebie zależy, jak wykorzystasz ostrze.");
 						raiser.setCurrentState(ConversationStates.ATTENDING);
 					} else {
-						raiser.say("Dlaczego zawracasz mi głowę skoro nie ukończyłeś zadania?");
+						raiser.say("Pamiętam nasze ustalenia i wszystkie przekazane materiały. Możesz teraz sprawdzić braki albo oddać kolejną część dostawy. Gdy zbierzesz wszystko i spełnisz warunek walki, rozpocznę pracę.");
 						raiser.setCurrentState(ConversationStates.ATTENDING);
 					}
 				}
@@ -79,15 +79,7 @@ public class ElementalDagger1 extends AbstractQuest {
 			ConversationStates.ATTENDING, null,
 			new ChatAction() {
 				public void fire(final Player player, final Sentence sentence, final EventRaiser raiser) {
-					raiser.say("Do wykucia miecza będę potrzebował kilku rzeczy: "
-						+ REQUIRED_IRON
-						+ " #żelaza, "
-						+ REQUIRED_WOOD
-						+ " #polan i "
-						+ REQUIRED_GOLD_BAR
-						+ " #sztabek #złota. Przyda mi sie też coś do jedzenia, przynieś mi "
-						+ REQUIRED_KIELBASA
-						+ " #kiełbasa #wiejska. Wróć, gdy będziesz je miał #dokładnie w tej kolejności! Jeżeli zapomnisz to powiedz #przypomnij");
+					raiser.say("Do wykucia sztyletu potrzebuję materiałów w tej kolejności: " + games.stendhal.server.core.rp.quest.JourneyQuestProgress.requirementsText(ElementalDagger1.this) + ". Możesz donosić je partiami; odłożę je do czasu zebrania kompletu. Pokonaj też kobolda olbrzymiego; sprawdzę to przed rozpoczęciem pracy.");
 					player.setQuest(QUEST_SLOT, "start;0;0;0;0");
 					player.addKarma(10);
 
@@ -145,7 +137,7 @@ public class ElementalDagger1 extends AbstractQuest {
 								neededIron -= amount;
 							}
 
-							raiser.say("Nie mogę wykuć bez "
+							raiser.say("Żelazo odłożę do pracy. Do kompletu brakuje: "
 								+ Grammar.quantityplnoun(
 										neededIron, "żelazo", "")
 								+ ".");
@@ -164,9 +156,9 @@ public class ElementalDagger1 extends AbstractQuest {
 								neededWoodLogs -= amount;
 							}
 
-							raiser.say("Jak możesz wymagać wykucia skoro nie masz "
+							raiser.say("Ogień potrzebuje opału. Do kompletu brakuje: "
 								+ Grammar.quantityplnoun(neededWoodLogs, "polano","")
-								+ " do ognia?");
+								+ ".");
 							missingSomething = true;
 						}
 					}
@@ -181,8 +173,8 @@ public class ElementalDagger1 extends AbstractQuest {
 								player.drop("sztabka złota", amount);
 								neededGoldBars -= amount;
 							}
-							raiser.say("Muszę wzbogacić broń żywiołow złotym kruszcem. Potrzebuję "
-									+ Grammar.quantityplnoun(neededGoldBars, "sztabka złota","one") + " więcej.");
+							raiser.say("Złoto połączę ze stalą. Do kompletu brakuje: "
+									+ Grammar.quantityplnoun(neededGoldBars, "sztabka złota","one") + ".");
 							missingSomething = true;
 						}
 					}
@@ -197,20 +189,130 @@ public class ElementalDagger1 extends AbstractQuest {
 								player.drop("kiełbasa wiejska", amount);
 								neededKielbasa -= amount;
 							}
-							raiser.say("kiełbasa wiejska to mój ulubiony smakołyk. Bez niego nie bede pracować. Potrzebuję  "
-								+ Grammar.quantityplnoun(neededKielbasa, "kiełbasa wiejska","one") + " wciąż.");
+							raiser.say("Kiełbasa wiejska to mój ulubiony przysmak. Brakuje mi jeszcze: "
+								+ Grammar.quantityplnoun(neededKielbasa, "kiełbasa wiejska","one") + ".");
 							missingSomething = true;
 						}
 					}
 
 					if (player.hasKilled("kobold olbrzymi") && !missingSomething) {
-						raiser.say("Przyniosłeś wszystko. Biorę się do wykuwania Twojego sztyletu. Wróć za "
+						raiser.say("Przyniosłeś wszystko. Biorę się do wykuwania twojego sztyletu. Wróć za "
 							+ REQUIRED_MINUTES
 							+ " minutę" + ", a będzie gotowy.");
 						player.setQuest(QUEST_SLOT, "forging;" + System.currentTimeMillis());
 					} else {
 						if (!player.hasKilled("kobold olbrzymi") && !missingSomething) {
-							raiser.say("Sztylet jest już gotowy.... lecz zanim dostaniesz swój sztylet, musisz udowodnić, że na niego zasługujesz. Pójdź zabić kobolda olbrzymiego!");
+							raiser.say("Materiały są już zebrane i nie musisz przynosić ich ponownie. Pozostało ci pokonać kobolda olbrzymiego. Wróć po zwycięstwie, wtedy przejdziemy do następnego etapu.");
+						}
+
+						player.setQuest(QUEST_SLOT,
+							"start;"
+							+ (REQUIRED_IRON - neededIron)
+							+ ";"
+							+ (REQUIRED_WOOD - neededWoodLogs)
+							+ ";"
+							+ (REQUIRED_GOLD_BAR - neededGoldBars)
+							+ ";"
+							+ (REQUIRED_KIELBASA - neededKielbasa));
+					}
+				}
+			});
+        // Reuse the native stage and its guards inside the current conversation.
+        npc.add(ConversationStates.ATTENDING, "materiały ognia",
+			new AndCondition(new games.stendhal.server.entity.npc.condition.AlwaysTrueCondition(),
+						new QuestStateStartsWithCondition(QUEST_SLOT, "start")),
+			ConversationStates.ATTENDING, null,
+			new ChatAction() {
+				public void fire(final Player player, final Sentence sentence, final EventRaiser raiser) {
+					final String[] tokens = player.getQuest(QUEST_SLOT).split(";");
+
+					int neededIron = REQUIRED_IRON
+							- Integer.parseInt(tokens[1]);
+					int neededWoodLogs = REQUIRED_WOOD
+							- Integer.parseInt(tokens[2]);
+					int neededGoldBars = REQUIRED_GOLD_BAR
+							- Integer.parseInt(tokens[3]);
+					int neededKielbasa = REQUIRED_KIELBASA
+							- Integer.parseInt(tokens[4]);
+					boolean missingSomething = false;
+
+					if (!missingSomething && (neededIron > 0)) {
+						if (player.isEquipped("żelazo", neededIron)) {
+							player.drop("żelazo", neededIron);
+							neededIron = 0;
+						} else {
+							final int amount = player.getNumberOfEquipped("żelazo");
+							if (amount > 0) {
+								player.drop("żelazo", amount);
+								neededIron -= amount;
+							}
+
+							raiser.say("Żelazo odłożę do pracy. Do kompletu brakuje: "
+								+ Grammar.quantityplnoun(
+										neededIron, "żelazo", "")
+								+ ".");
+							missingSomething = true;
+						}
+					}
+
+					if (!missingSomething && (neededWoodLogs > 0)) {
+						if (player.isEquipped("polano", neededWoodLogs)) {
+							player.drop("polano", neededWoodLogs);
+							neededWoodLogs = 0;
+						} else {
+							final int amount = player.getNumberOfEquipped("polano");
+							if (amount > 0) {
+								player.drop("polano", amount);
+								neededWoodLogs -= amount;
+							}
+
+							raiser.say("Ogień potrzebuje opału. Do kompletu brakuje: "
+								+ Grammar.quantityplnoun(neededWoodLogs, "polano","")
+								+ ".");
+							missingSomething = true;
+						}
+					}
+
+					if (!missingSomething && (neededGoldBars > 0)) {
+						if (player.isEquipped("sztabka złota", neededGoldBars)) {
+							player.drop("sztabka złota", neededGoldBars);
+							neededGoldBars = 0;
+						} else {
+							final int amount = player.getNumberOfEquipped("sztabka złota");
+							if (amount > 0) {
+								player.drop("sztabka złota", amount);
+								neededGoldBars -= amount;
+							}
+							raiser.say("Złoto połączę ze stalą. Do kompletu brakuje: "
+									+ Grammar.quantityplnoun(neededGoldBars, "sztabka złota","one") + ".");
+							missingSomething = true;
+						}
+					}
+
+					if (!missingSomething && (neededKielbasa > 0)) {
+						if (player.isEquipped("kiełbasa wiejska", neededKielbasa)) {
+							player.drop("kiełbasa wiejska", neededKielbasa);
+							neededKielbasa = 0;
+						} else {
+							final int amount = player.getNumberOfEquipped("kiełbasa wiejska");
+							if (amount > 0) {
+								player.drop("kiełbasa wiejska", amount);
+								neededKielbasa -= amount;
+							}
+							raiser.say("Kiełbasa wiejska to mój ulubiony przysmak. Brakuje mi jeszcze: "
+								+ Grammar.quantityplnoun(neededKielbasa, "kiełbasa wiejska","one") + ".");
+							missingSomething = true;
+						}
+					}
+
+					if (player.hasKilled("kobold olbrzymi") && !missingSomething) {
+						raiser.say("Przyniosłeś wszystko. Biorę się do wykuwania twojego sztyletu. Wróć za "
+							+ REQUIRED_MINUTES
+							+ " minutę" + ", a będzie gotowy.");
+						player.setQuest(QUEST_SLOT, "forging;" + System.currentTimeMillis());
+					} else {
+						if (!player.hasKilled("kobold olbrzymi") && !missingSomething) {
+							raiser.say("Materiały są już zebrane i nie musisz przynosić ich ponownie. Pozostało ci pokonać kobolda olbrzymiego. Wróć po zwycięstwie, wtedy przejdziemy do następnego etapu.");
 						}
 
 						player.setQuest(QUEST_SLOT,
@@ -229,7 +331,7 @@ public class ElementalDagger1 extends AbstractQuest {
 		npc.add(ConversationStates.IDLE, ConversationPhrases.GREETING_MESSAGES,
 			new AndCondition(new GreetingMatchesNameCondition(npc.getName()),
 						new QuestStateStartsWithCondition(QUEST_SLOT, "forging;")),
-			ConversationStates.IDLE, null, new ChatAction() {
+			ConversationStates.ATTENDING, null, new ChatAction() {
 				public void fire(final Player player, final Sentence sentence, final EventRaiser raiser) {
 
 					final String[] tokens = player.getQuest(QUEST_SLOT).split(";");
@@ -245,7 +347,39 @@ public class ElementalDagger1 extends AbstractQuest {
 						return;
 					}
 
-					raiser.say("Udowodniłeś, że zasługujesz na ten sztylet. Oto on!");
+					if (!games.stendhal.server.maps.quests.logic.QuestGoldFees.requirePaid(player, QUEST_SLOT, raiser)) { return; }
+                    raiser.say("Ostrze ostygło, ale zachowało moc ognia. Weź sztylet żywiołów; zdobyte materiały i pokonany kobold były potrzebne, by ukończyć tę pracę. Niech dobrze służy ci w drodze.");
+					player.addXP(50000);
+					player.addKarma(10);
+					final Item magicSword = SingletonRepository.getEntityManager().getItem("sztylet żywiołów");
+					magicSword.setBoundTo(player.getName());
+					player.equipOrPutOnGround(magicSword);
+					player.notifyWorldAboutChanges();
+					player.setQuest(QUEST_SLOT, "done");
+				}
+			});
+        // Reuse the native stage and its guards inside the current conversation.
+        npc.add(ConversationStates.ATTENDING, "materiały ognia",
+			new AndCondition(new games.stendhal.server.entity.npc.condition.AlwaysTrueCondition(),
+						new QuestStateStartsWithCondition(QUEST_SLOT, "forging;")),
+			ConversationStates.ATTENDING, null, new ChatAction() {
+				public void fire(final Player player, final Sentence sentence, final EventRaiser raiser) {
+
+					final String[] tokens = player.getQuest(QUEST_SLOT).split(";");
+					
+					final long delay = REQUIRED_MINUTES * MathHelper.MILLISECONDS_IN_ONE_MINUTE; 
+					final long timeRemaining = (Long.parseLong(tokens[1]) + delay)
+							- System.currentTimeMillis();
+
+					if (timeRemaining > 0L) {
+						raiser.say("Jeszcze nie skończyłem wykuwania sztyletu. Wróć za "
+							+ TimeUtil.approxTimeUntil((int) (timeRemaining / 1000L))
+							+ ".");
+						return;
+					}
+
+					if (!games.stendhal.server.maps.quests.logic.QuestGoldFees.requirePaid(player, QUEST_SLOT, raiser)) { return; }
+                    raiser.say("Ostrze ostygło, ale zachowało moc ognia. Weź sztylet żywiołów; zdobyte materiały i pokonany kobold były potrzebne, by ukończyć tę pracę. Niech dobrze służy ci w drodze.");
 					player.addXP(50000);
 					player.addKarma(10);
 					final Item magicSword = SingletonRepository.getEntityManager().getItem("sztylet żywiołów");
@@ -258,7 +392,7 @@ public class ElementalDagger1 extends AbstractQuest {
 
 		npc.add(ConversationStates.ATTENDING,
 			Arrays.asList("forge", "missing", "wykuj", "brakuje", "lista", "przypomnij"), 
-			new QuestStartedCondition(QUEST_SLOT),
+			new games.stendhal.server.entity.npc.condition.QuestStateStartsWithCondition(QUEST_SLOT, "start;"),
 			ConversationStates.ATTENDING,
 			null,
 			new ChatAction() {
@@ -310,7 +444,7 @@ public class ElementalDagger1 extends AbstractQuest {
 		super.addToWorld();
 		fillQuestInfo(
 				"Podstawowy Sztylet Żywiołów",
-				"Żywioł Ognia w mieście Fado wykuje dla ciebie miecz żywiołów",
+				"Żywioł Ognia w Fado potrafi wykuć sztylet żywiołów. Dowiedz się, jakich materiałów potrzebuje, i przygotuj je do wykonania ostrza.",
 				false);
 		step_1();
 		step_2();
@@ -324,39 +458,18 @@ public class ElementalDagger1 extends AbstractQuest {
 	
 	@Override
 	public List<String> getHistory(final Player player) {
-			final List<String> res = new ArrayList<String>();
-			if (!player.hasQuest(QUEST_SLOT)) {
-				return res;
-			}
-			final String questState = player.getQuest(QUEST_SLOT);
-			res.add("Spotkałem Żywioł Ognia w Fado.");
-			if (questState.equals("rejected")) {
-				res.add("Odmówiłem wykonania sztyletu żywiołów.");
-				return res;
-			} 
-			res.add("Aby wykuć miecz żywiołów, Żywioł Ognia potrzebuje: " + REQUIRED_IRON
-					+ " żelazo, "
-					+ REQUIRED_WOOD
-					+ " polana, "
-					+ REQUIRED_GOLD_BAR
-					+ " sztabki zlota i "
-					+ REQUIRED_KIELBASA
-					+ " kiełbasa wiejskay, dokładnie w tej kolejności.");
-			if(questState.startsWith("start") && !"start;15;26;12;6".equals(questState)){
-				res.add("Nie dostarczyłem wszystkiego. Żywioł Ognia powie mi co jeszcze potrzebuje.");
-			} else if ("start;15;26;12;6".equals(questState) || !questState.startsWith("start")) {
-				res.add("Dostarczyłem wszystko co potrzebne dla Żywioła Ognia.");
-			}
-			if("start;15;26;12;6".equals(questState) && !player.hasKilled("szczur")){
-				res.add("Aby zasłużyć na sztylet muszę zabić kobolda olbrzymiego. Powinienem go szukać w jaskiniach Semos-Ados oraz w podziemnym mieście Wofol.");
-			} 
-			if (questState.startsWith("forging")) {
-				res.add("Żywiołak wykuwa mi sztylet żywiołów.");
-			} 
-			if (isCompleted(player)) {
-				res.add("Za sztabki złota, kiełbasa wiejskay i pare innach drobiazgów zostałem nagrodzony sztyletem żywiołów.	W nagrodę za ukończenie zadania otrzymałem: 50.000 pkt doświadczenia, 10 pkt karmy i sztylet żywiołów.");
-			}
-			return res;	
+        final List<String> res = new ArrayList<String>();
+        if (!player.hasQuest(QUEST_SLOT)) return res;
+        res.add("Spotkałem Żywioł Ognia w Fado.");
+        games.stendhal.common.QuestProgress progress = games.stendhal.server.core.rp.quest.JourneyQuestProgress.read(this,player);
+        if (isCompleted(player)) { res.add("Otrzymałem sztylet żywiołów, 50000 XP postaci i 10 karmy."); return res; }
+        res.add(progress.getNextStep());
+        if (progress.getState()!=games.stendhal.common.QuestProgress.State.DECLINED) {
+            res.add("Materiały w kolejności dostaw: " + games.stendhal.server.core.rp.quest.JourneyQuestProgress.requirementsText(this) + ".");
+            for (games.stendhal.common.QuestProgress.Objective goal : progress.getObjectives())
+                if (goal.getCurrent()<goal.getRequired()) res.add(goal.getLabel()+" - pozostało: "+(goal.getRequired()-goal.getCurrent())+".");
+        }
+        return res;
 	}
 
  	// match to the min level of the elemental dagger
@@ -374,4 +487,14 @@ public class ElementalDagger1 extends AbstractQuest {
 	public String getRegion() {
 		return Region.FADO_CITY;
 	}
+
+    public static java.util.Map<String,Integer> getRequiredItems() {
+        java.util.Map<String,Integer> items=new java.util.LinkedHashMap<String,Integer>();
+        items.put("żelazo", REQUIRED_IRON);
+        items.put("polano", REQUIRED_WOOD);
+        items.put("sztabka złota", REQUIRED_GOLD_BAR);
+        items.put("kiełbasa wiejska", REQUIRED_KIELBASA);
+        return java.util.Collections.unmodifiableMap(items);
+    }
+
 }

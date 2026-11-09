@@ -66,8 +66,9 @@ public class GreeterNPC implements ZoneConfigurator {
 
 			@Override
 			protected void createDialog() {
+                games.stendhal.server.entity.npc.dialogue.HuntDialogueTopics.install(this);
 				addGreeting("Witam w skromnym domku albino elfów.");
-				addJob("Przechodziłem tędy, wiesz albino elfy często wędrują. Prowadzimy #koczowniczy tryb życia.");
+				addJob("Wędruję z moim ludem między lasami i dolinami. Nie mamy jednego domu, ale lubimy osiadać niedaleko mistycznych kamieni, zwłaszcza gdy zmienia się pora roku.");
 				addReply(Arrays.asList("koczowniczy", "normadic"), "Nie mamy stałego domu podróżujemy pomiędzy lasami i dolinami. Kiedy znajdujemy miejsce to osiedlamy się w nim. Lubimy to miejsce, ponieważ niedaleko są zabytkowe #kamienie.");
 				addReply(Arrays.asList("kamienie", "stones"), "Posiadają właściwości mistyczne. Lubimy być w pobliżu nich, gdy zmienia się pora roku.");
 				addHelp("Mógłbym sprzedać Ci zaczarowane zwoje, abyś mógł wrócić do Fado. Mam dojście do tanich zwojów.");
@@ -76,7 +77,7 @@ public class GreeterNPC implements ZoneConfigurator {
 			}
 		};
 
-		npc.setDescription("Oto Orchiwald albino elf.");
+		npc.setDescription("Widzisz Orchiwalda, wędrownego elfa albinosa. W skromnym obozie pilnuje ocalałych zapasów.");
 		npc.setEntityClass("albinoelf2npc");
 		npc.setPosition(3, 12);
 		npc.initHP(100);

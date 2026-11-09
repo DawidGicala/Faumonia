@@ -53,14 +53,16 @@ public class OldRatWomanNPC implements ZoneConfigurator {
 
 			@Override
 			protected void createDialog() {
+                addReply("wskazówki", "Szukaj Avalona, Cody'ego, Mariel i Opal w lochach Orril. Przywitaj się z każdym osobno, żeby potwierdzić, że nic mu nie jest. Potem wróć do mnie i przekaż wiadomości po imieniu; nie musisz znaleźć całej czwórki przed pierwszym powrotem.");
+                addReply("tematy", "Możemy wrócić do twojej sprawy albo porozmawiać o czymś innym. Co chcesz wiedzieć?");
 				addGreeting("Witaj.");
-				addJob("Nie zostawiaj moich dzieci na pastwę losu. Popatrz za nimi co jakiś czas.");
+				addJob("Najbardziej zajmuje mnie teraz bezpieczeństwo moich dzieci. Avalon, Cody, Mariel i Opal potrafią zgubić poczucie czasu, kiedy razem się bawią.");
 				addHelp("Nie mogę Ci w niczym pomóc.");
 				addGoodbye("Dowidzenia");
 				// remaining behaviour defined in games.stendhal.server.maps.quests.FindRatChildren
 			}
 		};
-		woman.setDescription("Widzisz człekoszczurzyce matkę. Wygląda na zatroskaną.");
+		woman.setDescription("Widzisz Agnus, zatroskaną matkę człekoszczurzych dzieci. Nasłuchuje każdego odgłosu dochodzącego z tuneli.");
 		
 
 		woman.setEntityClass("oldratwomannpc");

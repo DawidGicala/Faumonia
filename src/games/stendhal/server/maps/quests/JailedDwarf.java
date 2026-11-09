@@ -61,19 +61,43 @@ public class JailedDwarf extends AbstractQuest {
 				new AndCondition(new GreetingMatchesNameCondition(npc.getName()),
 						new QuestCompletedCondition(QUEST_SLOT)),
 				ConversationStates.ATTENDING,
-				"Cześć. Jak widzisz wciąż jestem zbyt zdenerwowany, aby wyjść ...",
+				"Krata nie jest już moim największym zmartwieniem, ale wciąż trudno mi zebrać odwagę do wyjścia. Dziękuję za klucz i za to, że tu wracasz. Mogę teraz porozmawiać z tobą o skupie ekwipunku.",
+				null);
+        // Reuse the native stage and its guards inside the current conversation.
+        npc.add(ConversationStates.ATTENDING, "klucz hunela",
+				new AndCondition(new games.stendhal.server.entity.npc.condition.AlwaysTrueCondition(),
+						new QuestCompletedCondition(QUEST_SLOT)),
+				ConversationStates.ATTENDING,
+				"Krata nie jest już moim największym zmartwieniem, ale wciąż trudno mi zebrać odwagę do wyjścia. Dziękuję za klucz i za to, że tu wracasz. Mogę teraz porozmawiać z tobą o skupie ekwipunku.",
 				null);
 
 		npc.add(ConversationStates.IDLE, ConversationPhrases.GREETING_MESSAGES,
 				new AndCondition(new GreetingMatchesNameCondition(npc.getName()),
 						new QuestNotCompletedCondition(QUEST_SLOT),
 						new NotCondition(new PlayerHasItemWithHimCondition("klucz do więzienia Kanmararn"))),
-				ConversationStates.IDLE,
-				"Pomocy! Duergars najechały na więzienie i zamknęły mnie tutaj! Powinienem być Strażnikiem! To chaos.",
+				ConversationStates.ATTENDING,
+				"Pomocy! Duergary opanowały więzienie i zamknęły mnie w celi, której sam miałem pilnować. Zdobądź klucz do więzienia Kanmararn i wróć z nim do mnie. Bez niego pozostanę po tej stronie krat.",
+				new SetQuestAction(QUEST_SLOT, "start"));
+        // Reuse the native stage and its guards inside the current conversation.
+        npc.add(ConversationStates.ATTENDING, "klucz hunela",
+				new AndCondition(new games.stendhal.server.entity.npc.condition.AlwaysTrueCondition(),
+						new QuestNotCompletedCondition(QUEST_SLOT),
+						new NotCondition(new PlayerHasItemWithHimCondition("klucz do więzienia Kanmararn"))),
+				ConversationStates.ATTENDING,
+				"Pomocy! Duergary opanowały więzienie i zamknęły mnie w celi, której sam miałem pilnować. Zdobądź klucz do więzienia Kanmararn i wróć z nim do mnie. Bez niego pozostanę po tej stronie krat.",
 				new SetQuestAction(QUEST_SLOT, "start"));
 
 		npc.add(ConversationStates.IDLE, ConversationPhrases.GREETING_MESSAGES,
 				new AndCondition(new GreetingMatchesNameCondition(npc.getName()),
+						new QuestNotCompletedCondition(QUEST_SLOT),
+						new PlayerHasItemWithHimCondition("klucz do więzienia Kanmararn")),
+				ConversationStates.ATTENDING,
+				"Masz klucz, aby mnie wypuścić! *mamrocze*  Errrr ... nie wygląda, aby było tam dla mnie bezpiecznie ... Chyba zostanę tutaj ... może ktoś #zaoferuje mi dobry ekwipunek ... ",
+				new MultipleActions(new SetQuestAction(QUEST_SLOT, "done"),
+						 			 new IncreaseXPAction(10000)));
+        // Reuse the native stage and its guards inside the current conversation.
+        npc.add(ConversationStates.ATTENDING, "klucz hunela",
+				new AndCondition(new games.stendhal.server.entity.npc.condition.AlwaysTrueCondition(),
 						new QuestNotCompletedCondition(QUEST_SLOT),
 						new PlayerHasItemWithHimCondition("klucz do więzienia Kanmararn")),
 				ConversationStates.ATTENDING,
@@ -87,7 +111,7 @@ public class JailedDwarf extends AbstractQuest {
 		super.addToWorld();
 		fillQuestInfo(
 				"Uwięziony Krasnal",
-				"Na dole Kanmararn znajdziesz przrażonego, uwięzionego w celi krasnala czekającego na odwiedziny. Powinien być strażnikiem, ale duergary napadły na więzienie. Może potrzebować zbroi do ucieczki.",
+				"Hunel miał strzec więzienia Kanmararn, lecz po napadzie duergarów sam trafił za kraty. Porozmawiaj z nim o ucieczce i pomóż zdobyć to, czego potrzebuje.",
 				true);
 		step_1();
 	}

@@ -14,7 +14,7 @@
 	
 	<item name="puklerz">
 		<type class="shield" subclass="buckler" tileid="-1"/>
-		<description>Puklerz to najprostsza tarcza. Może ochronić cię przed mieczami i maczugami, ale na silniejszą broń lepiej jej nie wystawiać.</description>
+		<description>Puklerz to najprostsza tarcza. Może ochronić cię przed mieczami i maczugami, ale na silniejszą broń lepiej jej nie wystawiać. Gdy wymienisz ten sprzęt na lepszy, niepotrzebny egzemplarz możesz sprzedać Miterowi w domku startowym w Semos.</description>
 		<implementation class-name="games.stendhal.server.entity.item.Item"/>
 		<attributes>
 			<def value="6"/>
@@ -33,7 +33,7 @@
 	
 	<item name="drewniana tarcza">
 		<type class="shield" subclass="wooden_shield" tileid="-1"/>
-		<description>Drewniana tarcza zrobiona jest z drogiego i ciężkiego drewna, ale wciąż może cię chronić.</description>
+		<description>Drewniana tarcza zrobiona jest z drogiego i ciężkiego drewna, ale wciąż może cię chronić. Gdy wymienisz ten sprzęt na lepszy, niepotrzebny egzemplarz możesz sprzedać Miterowi w domku startowym w Semos.</description>
 		<implementation class-name="games.stendhal.server.entity.item.Item"/>
 		<attributes>
 			<def value="7"/>
@@ -71,7 +71,7 @@
 	
 	<item name="tarcza ćwiekowa">
 		<type class="shield" subclass="studded_shield" tileid="-1"/>
-		<description>Oto tarcza ćwiekowa. Jest mała, ale dobra.</description>
+		<description>Oto tarcza ćwiekowa. Jest mała, ale dobra. Gdy wymienisz ten sprzęt na lepszy, niepotrzebny egzemplarz możesz sprzedać Miterowi w domku startowym w Semos.</description>
 		<implementation class-name="games.stendhal.server.entity.item.Item"/>
 		<attributes>
 			<def value="9"/>
@@ -168,7 +168,7 @@
 	
 	<item name="karmazynowa tarcza">
 		<type class="shield" subclass="red_shield" tileid="-1"/>
-		<description>Oto karmazynowa tarcza. Jest na niej sporo krwi po bestiach.</description>
+		<description>Oto karmazynowa tarcza. Jest na niej sporo krwi po bestiach. Niepotrzebny egzemplarz możesz sprzedać Xinowi Blance w tawernie Semos.</description>
 		<implementation class-name="games.stendhal.server.entity.item.Item"/>
 		<attributes>
 			<def value="15"/>
@@ -768,6 +768,89 @@
 			<slot name="trade"/>
 			<slot name="lhand"/>
 			<slot name="rhand"/>
+		</equipable>
+	</item>
+	
+	<item name="tarcza rocznicy 2026 1">
+		<type class="shield" subclass="rocznica_2026" tileid="-1"/>
+		<description>Oto Tarcza Młodego Strażnika Trzeciego Świtu. Na jej powierzchni widnieje znak trzech promieni, który przypomina obrońcom, że żaden mur nie utrzyma się bez odwagi. Ten przedmiot przeznaczono dla młodych obrońców, którzy jako pierwsi odpowiedzieli na wezwanie podczas Najazdu Trzeciego Świtu. #3 #rocznica #Faumonii #2026 Przedmiot utracił swą rocznicową moc.</description>
+		<implementation class-name="games.stendhal.server.entity.item.Item"/>
+		<attributes>
+			<def value="1"/>
+			<autobind value=""/>
+		</attributes>
+		<weight value="34.0"/>
+		<value value="518616"/>
+		<equipable>
+			<slot name="ground"/>
+			<slot name="content"/>
+			<slot name="lhand"/>
+			<slot name="rhand"/>
+			<slot name="bag"/>
+			<slot name="trade"/>
+		</equipable>
+	</item>
+
+	<item name="tarcza rocznicy 2026 2">
+		<type class="shield" subclass="rocznica_2026" tileid="-1"/>
+		<description>Oto Tarcza Doświadczonego Strażnika Trzeciego Świtu. Na jej powierzchni widnieje znak trzech promieni, który przypomina obrońcom, że żaden mur nie utrzyma się bez odwagi. Ten przedmiot przeznaczono dla wojowników, którzy przetrwali pierwsze uderzenie najeźdźców i stanęli do kolejnych walk. #3 #rocznica #Faumonii #2026 Przedmiot utracił swą rocznicową moc.</description>
+		<implementation class-name="games.stendhal.server.entity.item.Item"/>
+		<attributes>
+			<def value="1"/>
+			<minlevel value="100"/>
+			<autobind value=""/>
+		</attributes>
+		<weight value="34.0"/>
+		<value value="518616"/>
+		<equipable>
+			<slot name="ground"/>
+			<slot name="content"/>
+			<slot name="lhand"/>
+			<slot name="rhand"/>
+			<slot name="bag"/>
+			<slot name="trade"/>
+		</equipable>
+	</item>
+
+	<item name="tarcza rocznicy 2026 3">
+		<type class="shield" subclass="rocznica_2026" tileid="-1"/>
+		<description>Oto Tarcza Elitarnego Strażnika Trzeciego Świtu. Na jej powierzchni widnieje znak trzech promieni, który przypomina obrońcom, że żaden mur nie utrzyma się bez odwagi. Ten przedmiot przeznaczono dla elitarnych obrońców, którzy rozbili główne szeregi najeźdźców i ocalili mieszkańców krainy. #3 #rocznica #Faumonii #2026 Przedmiot utracił swą rocznicową moc.</description>
+		<implementation class-name="games.stendhal.server.entity.item.Item"/>
+		<attributes>
+			<def value="1"/>
+			<minlevel value="200"/>
+			<autobind value=""/>
+		</attributes>
+		<weight value="34.0"/>
+		<value value="518616"/>
+		<equipable>
+			<slot name="ground"/>
+			<slot name="content"/>
+			<slot name="lhand"/>
+			<slot name="rhand"/>
+			<slot name="bag"/>
+			<slot name="trade"/>
+		</equipable>
+	</item>
+
+	<item name="tarcza rocznicy 2026 4">
+		<type class="shield" subclass="rocznica_2026" tileid="-1"/>
+		<description>Oto Tarcza Legendarnego Strażnika Trzeciego Świtu. Na jej powierzchni widnieje znak trzech promieni, który przypomina obrońcom, że żaden mur nie utrzyma się bez odwagi. Ten przedmiot przeznaczono dla legendarnych wojowników, którzy stanęli naprzeciw najpotężniejszych bestii Najazdu Trzeciego Świtu. #3 #rocznica #Faumonii #2026 Przedmiot utracił swą rocznicową moc.</description>
+		<implementation class-name="games.stendhal.server.entity.item.Item"/>
+		<attributes>
+			<def value="1"/>
+			<minlevel value="300"/>
+			<autobind value=""/>
+		</attributes>
+		<weight value="34.0"/>
+		<value value="518616"/>
+		<equipable>
+			<slot name="ground"/>
+			<slot name="content"/>
+			<slot name="lhand"/>
+			<slot name="rhand"/>
+			<slot name="bag"/>
+			<slot name="trade"/>
 		</equipable>
 	</item>
 	

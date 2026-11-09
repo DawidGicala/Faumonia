@@ -43,10 +43,11 @@ public class Mage implements ZoneConfigurator {
 
 			@Override
 			protected void createDialog() {
+                games.stendhal.server.entity.npc.dialogue.CollectionDialogueTopics.install(this);
 				addGreeting("Witaj, jestem trenerem magów.");
 				addGoodbye("Żegnaj!");
 				addHelp("Jeśli wykonasz #zadanie, to odznaczę Cię rubinowym medalem, pod warunkiem że posiadasz szafirowy.");
-				addJob("Jeśli wykonasz #zadanie, to odznaczę Cię rubinowym medalem,  pod warunkiem że posiadasz szafirowy.");
+				addJob("Odpowiadam za magów i potrzebne im zapasy. Za wykonaną służbę mogę wymienić obsydianowy medal na szafirowy. Jeśli zechcesz starać się o dalsze odznaczenie, zachowaj go dla Majora Klykha.");
 				
 				add(
 				        ConversationStates.ATTENDING,
@@ -58,7 +59,7 @@ public class Mage implements ZoneConfigurator {
 			}
 		};
 
-		elemental3.setDescription("Oto dowódca magów Ados.");
+		elemental3.setDescription("Widzisz Trenera Magów z Ados. Spokojnie słucha meldunków, zanim oceni zasługi rozmówcy.");
 		elemental3.setEntityClass("mboss");
 		elemental3.setPosition(60, 29);
 		elemental3.setDirection(Direction.LEFT);

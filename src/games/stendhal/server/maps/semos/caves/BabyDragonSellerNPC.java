@@ -66,6 +66,7 @@ public class BabyDragonSellerNPC implements ZoneConfigurator {
 
 			@Override
 			protected void createDialog() {
+                games.stendhal.server.entity.npc.dialogue.CollectionDialogueTopics.install(this);
 				addGreeting(null, new ChatAction() {
 					public void fire(final Player player, final Sentence sentence, final EventRaiser raiser) {
 					    if (player.hasQuest(QUEST_SLOT)) {
@@ -120,7 +121,7 @@ public class BabyDragonSellerNPC implements ZoneConfigurator {
 					    }
 					}
 				    });
-				addJob("Hoduję smoki. Musisz mieć smocze jajo, z którego #wykluje się mały smok.");
+				addJob("Opiekuję się smokami od chwili, gdy #wykluje się młody ze smoczego jaja. Zbieram też skóry, kamienie i inne smocze okazy, żeby móc je porównywać. Każda nowa rzecz w kolekcji daje mi powód do następnych obserwacji.");
 				addQuest("Jeśli zdobędziesz mityczne jajo, zaopiekuję się nim aż #wykluje się z niego smok.");
 				addHelp("Jestem smoczym wychowawcą. Jeśli masz smocze jajo może coś się z niego #wykluje. Mogę Ci opowiedzieć jak #podróżować ze zwierzakiem i #dbać o niego. Jeśli przypadkiem spotkasz porzuconego smoka możesz go mieć na #własność.");
 				addGoodbye("Uważaj na giganty gdy będziesz stąd wychodził!");
@@ -137,7 +138,7 @@ public class BabyDragonSellerNPC implements ZoneConfigurator {
 		};
 
 		npc.setEntityClass("man_005_npc");
-		npc.setDescription("oto Terry. W wolnym czasie bawi się z małymi smokami.");
+		npc.setDescription("Widzisz Terrego wśród małych smoków. Z troską dogląda młodych, a z ciekawością ogląda smocze trofea.");
 		npc.setPosition(66, 8);
 		npc.initHP(100);
 		zone.add(npc);

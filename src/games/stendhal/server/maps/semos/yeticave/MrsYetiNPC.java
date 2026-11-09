@@ -74,6 +74,8 @@ public class MrsYetiNPC implements ZoneConfigurator {
 
 			@Override
 			protected void createDialog() {
+                addReply("wskazówki", "Salva Mattori mieszka w podziemnym mieście magów. Powiedz jej, że prosisz o eliksir miłości dla Mrs. Yeti. Jeśli postawi warunki, spełnij je i wróć do mnie z gotową miksturą.");
+                addReply("tematy", "Możemy wrócić do twojej sprawy albo porozmawiać o czymś innym. Co chcesz wiedzieć?");
 
 				final Map<String, Integer> items = new HashMap<String, Integer>();
 				items.put("płotka", BUYING_PRICE);
@@ -81,14 +83,14 @@ public class MrsYetiNPC implements ZoneConfigurator {
 				new SellerAdder().addSeller(this, new QuestCompletedSellerBehaviour(QUEST_SLOT, "Mam #zadanie dla Ciebie. Oddam ci wszystko tylko pomóż!", items));
 				// for quest see games.stendhal.server.maps.quest.HelpMrsYeti
 				addGreeting("Pozdrawiam, hmm dziwny cudzoziemiec!");
-				addJob("Idę na łowy po żywności, podczas gdy Pan Yeti ogląda, rzeźby ze śniegu.");
+				addJob("Zwykle dbam, żeby w domu było co zjeść, a Pan Yeti mógł zajmować się swoimi sprawami. Teraz nawet pełna spiżarnia nie cieszy mnie tak jak dawniej.");
 				addHelp("Bądź ostrożny wiele dziwnych stworzeń czyha w tych jaskiniach!");				
 				addGoodbye();
 			}
 		};
 
 		yetifemale.setEntityClass("yetifemalenpc");
-		yetifemale.setDescription("Oto Mrs. Yeti pani o białych włosach z dużymi stopami!");
+		yetifemale.setDescription("Widzisz Mrs. Yeti, białowłosą mieszkankę jaskini pod Semos. Mimo potężnej postury wygląda na przygnębioną.");
 		yetifemale.setPosition(102, 19);
 		yetifemale.initHP(100);
 		zone.add(yetifemale);

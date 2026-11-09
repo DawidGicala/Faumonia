@@ -12,6 +12,8 @@
  ***************************************************************************/
 package games.stendhal.server.maps.quests;
 
+import games.stendhal.server.entity.npc.action.DialogueRewardAction;
+
 import games.stendhal.server.entity.npc.ChatAction;
 import games.stendhal.server.entity.npc.ConversationPhrases;
 import games.stendhal.server.entity.npc.ConversationStates;
@@ -97,20 +99,20 @@ public class MedicineForTad extends AbstractQuest {
 		}
 		if (player.isQuestInState(QUEST_SLOT, "ilisa", "corpse&herbs",
 				"eliksir", "done")) {
-			res.add("Tad poprosił mnie o zaniesienie flaszy do Ilisa w świątyni w Semos.");
+			res.add("Tad poprosił mnie o zaniesienie flaszy do Ilisy w świątyni w Semos.");
 		}
 		if (player.isQuestInState(QUEST_SLOT, "corpse&herbs", "eliksir", "done")) {
-			res.add("Ilisa poprosiła mnie o dostarczenie zioła zwanego Arandula, które rośnie na górę od Semos w okolicy zagajnika.");
+			res.add("Ilisa poprosiła mnie o dostarczenie zioła zwanego arandula, które rośnie na północ od Semos.");
 		}
 		if ((questState.equals("corpse&herbs") && player.isEquipped("arandula"))
 				|| player.isQuestInState(QUEST_SLOT, "eliksir", "done")) {
-			res.add("Znalazłem trochę ziół Arandula i zaniosę je do ilisy.");
+			res.add("Znalazłem trochę aranduli i zaniosę ją do Ilisy.");
 		}
 		if (player.isQuestInState(QUEST_SLOT, "eliksir", "done")) {
-			res.add("Ilisa zrobiła silne lekarstwo, który pomoże Tadowi. Poprosiła mnie o przekazanie wiadomości mu że jest już gotowe.");
+			res.add("Ilisa przygotowała lekarstwo. Mam powiedzieć Tadowi, że jest gotowe i że powinien zgłosić się do niej osobiście.");
 		}
 		if (questState.equals("done")) {
-			res.add("Tad podziękował mi.	W nagrodę za ukończenie zadania otrzymałem: 800 pkt doświadczenia, 200 pkt ataku, 200 pkt obrony, płaszcz karmazynowy, tarczę królewską, miecz, 50 butelek wody i 10 zwoji semos");
+			res.add("Tad podziękował mi.	W nagrodę za ukończenie zadania otrzymałem: 900 pkt doświadczenia łącznie, 200 pkt ataku, 200 pkt obrony, płaszcz karmazynowy, tarczę królewską, miecz, 50 butelek wody i 10 zwojów Semos");
 		}
 		return res;
 	}
@@ -126,7 +128,7 @@ public class MedicineForTad extends AbstractQuest {
 				ConversationPhrases.QUEST_MESSAGES,
 				new QuestNotStartedCondition(QUEST_SLOT),
 				ConversationStates.QUEST_OFFERED, 
-				"Nie czuję się dobrze... Potrzebuję butelkę z lekarstwem. Czy możesz zdobyć dla mnie pustą #flaszę?",
+				"Ten kaszel nie daje mi spokoju, a sam ledwie mam siłę wyjść z hostelu. Ilisa zna się na lekarstwach, ale najpierw potrzebuję pustej #flaszy. Zdobędziesz ją dla mnie?",
 				null);
 
 		/** In case Quest has already been completed */
@@ -145,7 +147,7 @@ public class MedicineForTad extends AbstractQuest {
 		npc.add(ConversationStates.QUEST_OFFERED,
 				ConversationPhrases.YES_MESSAGES, null,
 				ConversationStates.ATTENDING, 
-				"Wspaniale! Proszę idź szybko jak możesz. *Apsiiik*",
+				"Dziękuję, naprawdę mi ulżyło. Margaret sprzedaje puste flasze w tawernie Semos. Kup jedną i pokaż mi ją, zanim zaniesiesz ją do uzdrowicielki.",
 				new SetQuestAction(QUEST_SLOT, "start"));
 
 		npc.add(ConversationStates.QUEST_OFFERED, ConversationPhrases.NO_MESSAGES, null,
@@ -155,7 +157,7 @@ public class MedicineForTad extends AbstractQuest {
 		npc.add(ConversationStates.QUEST_OFFERED,
 				"margaret", null,
 				ConversationStates.QUEST_OFFERED,
-				"Margaret jest kelnerką w tawernie. Idź ulicą w dół i w prawo. Pomożesz mi?",
+				"Margaret obsługuje tawernę w Semos. Zapytaj ją o ofertę i kup pustą flaszę, a potem pokaż ją mnie. Taki pojemnik będzie potrzebny na lekarstwo.",
 				null);
 
 		/** Remind player about the quest */
@@ -163,7 +165,7 @@ public class MedicineForTad extends AbstractQuest {
 				Arrays.asList("flasza", "flaszka", "flaszę"),
 				new AndCondition(new QuestInStateCondition(QUEST_SLOT, "start"), new NotCondition(new PlayerHasItemWithHimCondition("flasza"))),
 				ConversationStates.ATTENDING,
-				"*kaszlnięcie* Och... Potrzebuję lekarstwa! Wracaj szybko z flaszą od #Margaret.",
+				"Kaszel wciąż mnie męczy. Przynieś pustą flaszę od #Margaret z tawerny Semos; bez niej Ilisa nie przygotuje lekarstwa.",
 				null);
 
         /** Remind player about the quest */
@@ -171,12 +173,12 @@ public class MedicineForTad extends AbstractQuest {
                 ConversationPhrases.QUEST_MESSAGES,
                 new QuestInStateCondition(QUEST_SLOT, "start"),
                 ConversationStates.ATTENDING,
-                "*kaszlnięcie* Och... Potrzebuję lekarstwa! Wracaj szybko z flaszą od #Margaret.",
+                "Kaszel wciąż mnie męczy. Przynieś pustą flaszę od #Margaret z tawerny Semos; bez niej Ilisa nie przygotuje lekarstwa.",
                 null);
 
 		npc.add(ConversationStates.ATTENDING, "margaret", null,
 				ConversationStates.ATTENDING,
-				"Margaret jest kelnerką w tawernie, do której idzie się w prawo ulica.", null);
+				"Margaret obsługuje tawernę w Semos. Zapytaj ją o ofertę i kup pustą flaszę, a potem pokaż ją mnie. Taki pojemnik będzie potrzebny na lekarstwo.", null);
 	}
 
 	private void step_2() {
@@ -187,8 +189,8 @@ public class MedicineForTad extends AbstractQuest {
 		final SpeakerNPC npc = npcs.get("Tad");
 
 		final List<ChatAction> processStep = new LinkedList<ChatAction>();
-		processStep.add(new EquipItemAction("money", 10));
-		processStep.add(new IncreaseXPAction(100));
+		processStep.add(DialogueRewardAction.item("money", 10));
+		processStep.add(DialogueRewardAction.xp(100));
 		processStep.add(new SetQuestAction(QUEST_SLOT, "ilisa"));
 		
 		// staring the conversation the first time after getting a flask.
@@ -199,14 +201,23 @@ public class MedicineForTad extends AbstractQuest {
 						new QuestInStateCondition(QUEST_SLOT, "start"),
 						new PlayerHasItemWithHimCondition("flasza")),
 				ConversationStates.ATTENDING, 
-				"Dobrze, masz flaszę! Teraz potrzebuję, abyś wziął ją do #Ilisa... ona będzie widziała co robić.",
+				"Flasza wygląda dobrze, zachowaj ją w plecaku. Zanieś ją teraz Ilisie w świątyni Semos i powiedz, że chodzi o moje lekarstwo. Dorzucę dziesięć monet za fatygę.",
+				new MultipleActions(processStep));
+
+        // Same authoritative step, without requiring the player to leave and greet again.
+        npc.add(ConversationStates.ATTENDING, "lekarstwo tada",
+				new AndCondition(new games.stendhal.server.entity.npc.condition.AlwaysTrueCondition(),
+						new QuestInStateCondition(QUEST_SLOT, "start"),
+						new PlayerHasItemWithHimCondition("flasza")),
+				ConversationStates.ATTENDING, 
+				"Flasza wygląda dobrze, zachowaj ją w plecaku. Zanieś ją teraz Ilisie w świątyni Semos i powiedz, że chodzi o moje lekarstwo. Dorzucę dziesięć monet za fatygę.",
 				new MultipleActions(processStep));
 
 		// player said hi with flask on ground then picked it up and said flask
 		npc.add(ConversationStates.ATTENDING, Arrays.asList("flasza", "flaszka", "flaszę"),
                 new AndCondition(new QuestInStateCondition(QUEST_SLOT, "start"), new PlayerHasItemWithHimCondition("flasza")),
                 ConversationStates.ATTENDING,
-                "Dobrze, masz flaszę! Teraz potrzebuję, abyś wziął ją do #Ilisa... ona będzie widziała co robić.",
+                "Flasza wygląda dobrze, zachowaj ją w plecaku. Zanieś ją teraz Ilisie w świątyni Semos i powiedz, że chodzi o moje lekarstwo. Dorzucę dziesięć monet za fatygę.",
                 new MultipleActions(processStep));
 
 
@@ -218,19 +229,28 @@ public class MedicineForTad extends AbstractQuest {
 						new QuestInStateCondition(QUEST_SLOT, "ilisa"),
 						new PlayerHasItemWithHimCondition("flasza")),
 				ConversationStates.ATTENDING, 
-				"Dobrze, masz flaszę! Teraz potrzebuję, abyś wziął ją do #Ilisa... ona będzie widziała co robić.",
+				"Flasza wygląda dobrze, zachowaj ją w plecaku. Zanieś ją teraz Ilisie w świątyni Semos i powiedz, że chodzi o moje lekarstwo. Dorzucę dziesięć monet za fatygę.",
+				null);
+
+        // Same authoritative step, without requiring the player to leave and greet again.
+        npc.add(ConversationStates.ATTENDING, "lekarstwo tada",
+				new AndCondition(new games.stendhal.server.entity.npc.condition.AlwaysTrueCondition(),
+						new QuestInStateCondition(QUEST_SLOT, "ilisa"),
+						new PlayerHasItemWithHimCondition("flasza")),
+				ConversationStates.ATTENDING, 
+				"Flasza wygląda dobrze, zachowaj ją w plecaku. Zanieś ją teraz Ilisie w świątyni Semos i powiedz, że chodzi o moje lekarstwo. Dorzucę dziesięć monet za fatygę.",
 				null);
 
 		// another reminder incase player says task again
         npc.add(ConversationStates.ATTENDING, ConversationPhrases.QUEST_MESSAGES,
                 new QuestInStateCondition(QUEST_SLOT, "ilisa"),
                 ConversationStates.ATTENDING,
-                "Potrzebuję Ciebie, abyś wziął flaszę do #ilisa... ona będzie widziała co robić.",
+                "Zanieś pustą flaszę Ilisie w świątyni Semos. Powiedz jej, że przysyła cię Tad z hostelu. Ona będzie wiedziała, jakie lekarstwo przygotować.",
                 null);
 
 		npc.add(ConversationStates.ATTENDING, "ilisa", null,
 				ConversationStates.ATTENDING,
-				"Ilisa jest uzdrowicielką w świątyni w Semos. Znajdziesz ją obok tawerny Margaret.", null);
+				"Ilisa opiekuje się świątynią w Semos, niedaleko tawerny Margaret. Przywitaj się z nią i wspomnij o mnie. Pamiętaj, żeby zabrać flaszę, jeśli jeszcze jej nie oddałeś.", null);
 	}
 
 	private void step_4() {
@@ -241,11 +261,19 @@ public class MedicineForTad extends AbstractQuest {
 						new QuestInStateCondition(QUEST_SLOT, "ilisa"),
 						new NotCondition(new PlayerHasItemWithHimCondition("flasza"))),
 				ConversationStates.ATTENDING, 
-				"Lekarstwo dla #Tad? Nie powiedział Tobie, aby przynieść flaszę?", null);
+				"Tad nadal choruje? Pomogę mu, ale potrzebuję pustej flaszy na lekarstwo. Kup ją u Margaret w tawernie i przynieś tutaj.", null);
+
+        // Same authoritative step, without requiring the player to leave and greet again.
+        npc.add(ConversationStates.ATTENDING, "lekarstwo tada",
+				new AndCondition(new games.stendhal.server.entity.npc.condition.AlwaysTrueCondition(),
+						new QuestInStateCondition(QUEST_SLOT, "ilisa"),
+						new NotCondition(new PlayerHasItemWithHimCondition("flasza"))),
+				ConversationStates.ATTENDING, 
+				"Tad nadal choruje? Pomogę mu, ale potrzebuję pustej flaszy na lekarstwo. Kup ją u Margaret w tawernie i przynieś tutaj.", null);
 
 		final List<ChatAction> processStep = new LinkedList<ChatAction>();
 		processStep.add(new DropItemAction("flasza"));
-		processStep.add(new IncreaseXPAction(100));
+		processStep.add(DialogueRewardAction.xp(100));
 		processStep.add(new SetQuestAction(QUEST_SLOT, "corpse&herbs"));
 
 		npc.add(ConversationStates.IDLE, ConversationPhrases.GREETING_MESSAGES,
@@ -253,7 +281,16 @@ public class MedicineForTad extends AbstractQuest {
 						new QuestInStateCondition(QUEST_SLOT, "ilisa"),
 						new PlayerHasItemWithHimCondition("flasza")),
 				ConversationStates.ATTENDING, 
-				"Ach widzę, że masz flaszę. #Tad potrzebuje lekarstwa? Hmm... Potrzebuję kilku #ziół. Pomożesz?",
+				"Dziękuję, odłożę tę flaszę do przygotowania lekarstwa. Brakuje mi jeszcze jednej aranduli, zioła rosnącego na północ od Semos. Przynieś ją, a zajmę się resztą.",
+				new MultipleActions(processStep));
+
+        // Same authoritative step, without requiring the player to leave and greet again.
+        npc.add(ConversationStates.ATTENDING, "lekarstwo tada",
+				new AndCondition(new games.stendhal.server.entity.npc.condition.AlwaysTrueCondition(),
+						new QuestInStateCondition(QUEST_SLOT, "ilisa"),
+						new PlayerHasItemWithHimCondition("flasza")),
+				ConversationStates.ATTENDING, 
+				"Dziękuję, odłożę tę flaszę do przygotowania lekarstwa. Brakuje mi jeszcze jednej aranduli, zioła rosnącego na północ od Semos. Przynieś ją, a zajmę się resztą.",
 				new MultipleActions(processStep));
 
 		npc.add(
@@ -261,7 +298,7 @@ public class MedicineForTad extends AbstractQuest {
 				Arrays.asList("herb", "arandula", "yes", "ok", "tak", "dobrze", "ziół", "zioła"),
 //				new AndCondition(new QuestInStateCondition(QUEST_SLOT, "corpse&herbs"), new NotCondition(new PlayerHasItemWithHimCondition("arandula"))),
 				ConversationStates.ATTENDING,
-				"Na górę od Semos koło trzech wzgórz rośnie zioło zwane arandula. Oto rysunek, który narysowałam. Teraz już wiesz czego szukać. Wystarczy mi jedna sztuka. Jeśli dalej masz problem to skorzystaj z uprzejmości innych graczy. Napisz '/k wiadomość'",
+				"Arandula rośnie na północ od Semos, w okolicy trzech wzgórz. Przyjrzyj się rysunkowi, żeby rozpoznać zioło, i przynieś mi jedną sztukę. Nie musisz szukać innych składników do tego lekarstwa.",
 				new ExamineChatAction("arandula.png", "Ilisa rysuje", "Arandula"));
 
 		npc.add(
@@ -269,7 +306,7 @@ public class MedicineForTad extends AbstractQuest {
 				"tad",
 				null,
 				ConversationStates.ATTENDING,
-				"Potrzebuje silnego lekarstwa, aby się wyleczyć. Oferuje dobrą nagrodę temu kto mu pomoże.",
+				"Tad potrzebuje lekarstwa, które przygotuję tutaj, w świątyni. Najpierw muszę dostać flaszę, a później jedną arandulę. Gdy skończę, poproszę cię o przekazanie mu wiadomości.",
 				null);
 	}
 
@@ -283,9 +320,17 @@ public class MedicineForTad extends AbstractQuest {
 				ConversationStates.ATTENDING, 
 				"Masz przy sobie te #zioła do #lekarstwa?", null);
 
+        // Same authoritative step, without requiring the player to leave and greet again.
+        npc.add(ConversationStates.ATTENDING, "lekarstwo tada",
+				new AndCondition(new games.stendhal.server.entity.npc.condition.AlwaysTrueCondition(),
+						new QuestInStateCondition(QUEST_SLOT, "corpse&herbs"),
+						new NotCondition(new PlayerHasItemWithHimCondition("arandula"))),
+				ConversationStates.ATTENDING, 
+				"Masz przy sobie te #zioła do #lekarstwa?", null);
+
 		final List<ChatAction> processStep = new LinkedList<ChatAction>();
 		processStep.add(new DropItemAction("arandula"));
-		processStep.add(new IncreaseXPAction(200));
+		processStep.add(DialogueRewardAction.xp(200));
 		processStep.add(new SetQuestAction(QUEST_SLOT, "eliksir"));
 
 		npc.add(ConversationStates.IDLE, ConversationPhrases.GREETING_MESSAGES,
@@ -293,7 +338,16 @@ public class MedicineForTad extends AbstractQuest {
 						new QuestInStateCondition(QUEST_SLOT, "corpse&herbs"),
 						new PlayerHasItemWithHimCondition("arandula")),
 				ConversationStates.ATTENDING, 
-				"Dobrze! Dziękuję. Teraz wymieszam... szczypta tego... i kilka kropli... jest! Przekaż #Tadowi, żeby szybko po nie przyszedł. Chcę zobaczyć jak się ma.",
+				"To odpowiednie zioło. Przygotuję wyciąg i przeleję go do flaszy, którą przyniosłeś. Powiedz Tadowi, że lekarstwo jest gotowe i że chcę go zobaczyć osobiście.",
+				new MultipleActions(processStep));
+
+        // Same authoritative step, without requiring the player to leave and greet again.
+        npc.add(ConversationStates.ATTENDING, "lekarstwo tada",
+				new AndCondition(new games.stendhal.server.entity.npc.condition.AlwaysTrueCondition(),
+						new QuestInStateCondition(QUEST_SLOT, "corpse&herbs"),
+						new PlayerHasItemWithHimCondition("arandula")),
+				ConversationStates.ATTENDING, 
+				"To odpowiednie zioło. Przygotuję wyciąg i przeleję go do flaszy, którą przyniosłeś. Powiedz Tadowi, że lekarstwo jest gotowe i że chcę go zobaczyć osobiście.",
 				new MultipleActions(processStep));
 
 		npc.add(ConversationStates.ATTENDING, Arrays.asList("eliksir",
@@ -312,14 +366,14 @@ public class MedicineForTad extends AbstractQuest {
                 null);
 
 		final List<ChatAction> processStep = new LinkedList<ChatAction>();
-		processStep.add(new IncreaseXPAction(500));
-		processStep.add(new IncreaseAtkXPAction(200));
-		processStep.add(new IncreaseDefXPAction(200));
-		processStep.add(new EquipItemAction("płaszcz karmazynowy", 1, true));
-		processStep.add(new EquipItemAction("butelka wody", 50, true));
-		processStep.add(new EquipItemAction("zwój semos", 10, true));
-		processStep.add(new EquipItemAction("tarcza królewska", 1, true));
-		processStep.add(new EquipItemAction("miecz", 1, true));
+		processStep.add(DialogueRewardAction.xp(500));
+		processStep.add(DialogueRewardAction.attackXP(200));
+		processStep.add(DialogueRewardAction.defenseXP(200));
+		processStep.add(DialogueRewardAction.item("płaszcz karmazynowy", 1, true));
+		processStep.add(DialogueRewardAction.item("butelka wody", 50, true));
+		processStep.add(DialogueRewardAction.item("zwój semos", 10, true));
+		processStep.add(DialogueRewardAction.item("tarcza królewska", 1, true));
+		processStep.add(DialogueRewardAction.item("miecz", 1, true));
 		processStep.add(new SetQuestAction(QUEST_SLOT, "done"));
 		
 		// note Ilisa is spelled with a small i here because I
@@ -327,7 +381,14 @@ public class MedicineForTad extends AbstractQuest {
 		npc.add(ConversationStates.IDLE, ConversationPhrases.GREETING_MESSAGES,
 				new AndCondition(new GreetingMatchesNameCondition(npc.getName()),
 						new QuestInStateCondition(QUEST_SLOT, "eliksir")),
-				ConversationStates.ATTENDING, "Dziękuję!!! Idę porozmawiać z #Ilisa tak szybko jak tylko mogę. Trzymaj w nagrodę moją tarczę i płaszcz. Lata temu dostałem je od samego króla ale jeszcze powinny dobrze służyć. Weź też zapas wody i kilka map Semos. Dzięki nim wrócisz do miasta bez zbędnego chodzenia.",
+				ConversationStates.ATTENDING, "To najlepsza wiadomość, jaką dziś usłyszałem. Zaraz zgłoszę się do Ilisy; w podziękowaniu przyjmij tarczę, płaszcz, miecz i zapasy na drogę. Zwoje Semos pozwolą ci wrócić do miasta, gdy wyprawa zaprowadzi cię daleko.",
+				new MultipleActions(processStep));
+
+        // Same authoritative step, without requiring the player to leave and greet again.
+        npc.add(ConversationStates.ATTENDING, "lekarstwo tada",
+				new AndCondition(new games.stendhal.server.entity.npc.condition.AlwaysTrueCondition(),
+						new QuestInStateCondition(QUEST_SLOT, "eliksir")),
+				ConversationStates.ATTENDING, "To najlepsza wiadomość, jaką dziś usłyszałem. Zaraz zgłoszę się do Ilisy; w podziękowaniu przyjmij tarczę, płaszcz, miecz i zapasy na drogę. Zwoje Semos pozwolą ci wrócić do miasta, gdy wyprawa zaprowadzi cię daleko.",
 				new MultipleActions(processStep));
 	
 		/*
@@ -341,14 +402,14 @@ public class MedicineForTad extends AbstractQuest {
         		new AndCondition(new QuestStartedCondition(QUEST_SLOT),
         					     new QuestNotCompletedCondition(QUEST_SLOT)),
                 ConversationStates.IDLE,
-                "Dowidzenia. Nie zapomnij sprawdzić Tada.  Mam nadzieje, że czuję się lepiej.",
+                "Do widzenia. Zajrzyj do Tada, jeśli będziesz w pobliżu hostelu. Mam nadzieję, że czuje się już lepiej.",
                 null);
 
         npc.add(ConversationStates.ATTENDING, 
         		ConversationPhrases.GOODBYE_MESSAGES,
         		new QuestNotStartedCondition(QUEST_SLOT),
                 ConversationStates.IDLE,
-                "Żegnaj. Spotkałeś Tada w hostelu? Jeżeli będziesz miał okazję to proszę zaglądnij do niego. Słyszałam, że nie czuje się najlepiej. Hostel możesz znaleść w wiosce Semos nad Bankiem.",
+                "Do widzenia. Jeśli będziesz przy hostelu w Semos, zajrzyj do Tada. Słyszałam, że źle się czuje; hostel znajdziesz nad bankiem.",
                 null);
 
 	}
@@ -358,7 +419,7 @@ public class MedicineForTad extends AbstractQuest {
 		super.addToWorld();
 		fillQuestInfo(
 				"Lekarstwo dla Tada",
-				"Tad chłopiec w hostelu Semos, potrzebuje pomocy w zdobyciu lekarstwa.",
+				"Tad z hostelu w Semos potrzebuje lekarstwa. Porozmawiaj z chłopcem, a następnie poproś Ilisę w świątyni o pomoc w jego przygotowaniu.",
 				false);
 		step_1();
 		step_2();

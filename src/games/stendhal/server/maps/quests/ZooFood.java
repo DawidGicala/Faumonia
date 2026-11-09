@@ -12,6 +12,8 @@
  ***************************************************************************/
 package games.stendhal.server.maps.quests;
 
+import games.stendhal.server.entity.npc.action.DialogueRewardAction;
+
 import games.stendhal.common.MathHelper;
 import games.stendhal.common.grammar.Grammar;
 import games.stendhal.server.entity.npc.ChatAction;
@@ -118,21 +120,57 @@ public class ZooFood extends AbstractQuest {
 		return res;
 	}
 
+	public static Map<String,Integer> getRequiredItems() {
+final Map<String,Integer> items = new HashMap<String, Integer>();		
+		items.put("szynka",10); 
+		items.put("mięso",15);
+		items.put("zboże",20);
+		items.put("sałata",10);
+		items.put("pieczarka",8);
+		items.put("marchew",10);
+		items.put("szpinak",7);
+		items.put("jabłko",10);
+		items.put("płotka",3);
+return java.util.Collections.unmodifiableMap(items);
+}
+
 	private void step_1() {
 		final SpeakerNPC npc = npcs.get("Katinka");
+        npc.add(ConversationStates.ATTENDING, ConversationPhrases.QUEST_MESSAGES,
+            new QuestStateStartsWithCondition(QUEST_SLOT,"start;"), ConversationStates.ATTENDING,null,
+            new SayRequiredItemAction(QUEST_SLOT,1,"Nasza umowa nadal obowiązuje. Potrzebuję [item] w jednej dostawie. Gdy zbierzesz całość, porozmawiamy o przekazaniu karmy."));
+
 
         // Player has never done the zoo quest
 		npc.add(ConversationStates.IDLE, ConversationPhrases.GREETING_MESSAGES,
 				new AndCondition(new GreetingMatchesNameCondition(npc.getName()),
 						new QuestNotStartedCondition(QUEST_SLOT)),
 				ConversationStates.ATTENDING,
-				"Witam w schronisku dla dzikich zwierząt w Ados! Mamy wiele zwierząt do wykarmienia. Potrzebujemy pomocy... mam dla ciebie #zadanie do zrobienia.",
+				"Witaj w schronisku w Ados. Każde z naszych zwierząt je co innego, a zapasy wciąż topnieją. Jeśli możesz pomóc z jedną dostawą, zapytaj o #zadanie.",
+				null
+		);
+
+        // Same authoritative step, without requiring the player to leave and greet again.
+        npc.add(ConversationStates.ATTENDING, "karma dla zwierząt",
+				new AndCondition(new games.stendhal.server.entity.npc.condition.AlwaysTrueCondition(),
+						new QuestNotStartedCondition(QUEST_SLOT)),
+				ConversationStates.ATTENDING,
+				"Witaj w schronisku w Ados. Każde z naszych zwierząt je co innego, a zapasy wciąż topnieją. Jeśli możesz pomóc z jedną dostawą, zapytaj o #zadanie.",
 				null
 		);
 
         // Player returns within one week of completing quest
 		npc.add(ConversationStates.IDLE, ConversationPhrases.GREETING_MESSAGES,
 				new AndCondition(new GreetingMatchesNameCondition(npc.getName()),
+						new QuestCompletedCondition(QUEST_SLOT), 
+						new NotCondition(new TimePassedCondition(QUEST_SLOT, 1, DELAY))),
+                ConversationStates.ATTENDING, "Witam ponownie w schronisku dla dzikich zwierząt w Ados! Jeszcze raz dziękuję za uratowanie naszych zwierząt!",
+				null
+		);
+
+        // Same authoritative step, without requiring the player to leave and greet again.
+        npc.add(ConversationStates.ATTENDING, "karma dla zwierząt",
+				new AndCondition(new games.stendhal.server.entity.npc.condition.AlwaysTrueCondition(),
 						new QuestCompletedCondition(QUEST_SLOT), 
 						new NotCondition(new TimePassedCondition(QUEST_SLOT, 1, DELAY))),
                 ConversationStates.ATTENDING, "Witam ponownie w schronisku dla dzikich zwierząt w Ados! Jeszcze raz dziękuję za uratowanie naszych zwierząt!",
@@ -148,32 +186,32 @@ public class ZooFood extends AbstractQuest {
                 + " Nasze zwierzęta są znowu głodne, pomożesz ponownie?",
                 null);
 
+        // Same authoritative step, without requiring the player to leave and greet again.
+        npc.add(ConversationStates.ATTENDING, "karma dla zwierząt",
+				new AndCondition(new games.stendhal.server.entity.npc.condition.AlwaysTrueCondition(),
+						new QuestCompletedCondition(QUEST_SLOT), 
+						new TimePassedCondition(QUEST_SLOT, 1, DELAY)),
+				ConversationStates.QUEST_OFFERED, "Witam ponownie w schronisku dla dzikich zwierząt w Ados. "
+                + " Nasze zwierzęta są znowu głodne, pomożesz ponownie?",
+                null);
+
 
         // Player has never done the zoo quest, player asks what the task was
 		npc.add(ConversationStates.ATTENDING, ConversationPhrases.QUEST_MESSAGES,
-				new QuestNotCompletedCondition(QUEST_SLOT), 
+				new games.stendhal.server.entity.npc.condition.OrCondition(new QuestNotStartedCondition(QUEST_SLOT), new QuestInStateCondition(QUEST_SLOT, "rejected")), 
 				ConversationStates.QUEST_OFFERED, "Nasze zwierzęta sę głodne. Potrzebujemy więcej " +
 						"jedzenia do ich wykarmienia. Pomożesz nam?",
 				null);
 
-	    final Map<String,Integer> items = new HashMap<String, Integer>();		
-		items.put("szynka",10); 
-		items.put("mięso",15);
-		items.put("zboże",20);
-		items.put("sałata",10);
-		items.put("pieczarka",8);
-		items.put("marchew",10);
-		items.put("szpinak",7);
-		items.put("jabłko",10);
-		items.put("płotka",3);
+	    final Map<String,Integer> items = getRequiredItems();
 		
         // Player has done quest before and agrees to help again
 		npc.add(ConversationStates.QUEST_OFFERED, ConversationPhrases.YES_MESSAGES,
 				null,
 				ConversationStates.ATTENDING, null,
-                new MultipleActions(new SetQuestAndModifyKarmaAction(QUEST_SLOT, "start;", 2.0),
+                new MultipleActions(DialogueRewardAction.karma(new SetQuestAndModifyKarmaAction(QUEST_SLOT, "start;", 2.0)),
 				new StartRecordingRandomItemCollectionAction(QUEST_SLOT, 1, items, "Dziękuję! Proszę" 
-                + " przynieś [item] lub tyle ile dasz rady."))
+                + " przynieś [item] w jednej dostawie. Zachowam dla ciebie to zamówienie, dopóki go nie zrealizujesz."))
 		);
 
 
@@ -181,7 +219,7 @@ public class ZooFood extends AbstractQuest {
 		npc.add(ConversationStates.QUEST_OFFERED, ConversationPhrases.NO_MESSAGES, 
 				null,
 				ConversationStates.ATTENDING, "Och... Chyba będziemy musieli nakarmić je jeleniami...",
-				new SetQuestAndModifyKarmaAction(QUEST_SLOT, "rejected", -5.0)
+				DialogueRewardAction.karma(new SetQuestAndModifyKarmaAction(QUEST_SLOT, "rejected", -5.0))
 		);
 		
         // Player returns within one week of completing quest
@@ -208,7 +246,16 @@ public class ZooFood extends AbstractQuest {
 				ConversationStates.QUEST_ITEM_BROUGHT,
 				"Witaj ponownie! Czy przyniosłeś nam "
 						+ Grammar.quantityplnoun(REQUIRED_HAM, "szynka") + "?",
-			new SetQuestAction(QUEST_SLOT,"start;ham=10"));
+			new SetQuestAction(QUEST_SLOT,"start;szynka=10"));
+
+        // Same authoritative step, without requiring the player to leave and greet again.
+        npc.add(ConversationStates.ATTENDING, "karma dla zwierząt",
+				new AndCondition(new games.stendhal.server.entity.npc.condition.AlwaysTrueCondition(),
+						new QuestInStateCondition(QUEST_SLOT, "start")),
+				ConversationStates.QUEST_ITEM_BROUGHT,
+				"Witaj ponownie! Czy przyniosłeś nam "
+						+ Grammar.quantityplnoun(REQUIRED_HAM, "szynka") + "?",
+			new SetQuestAction(QUEST_SLOT,"start;szynka=10"));
 
 		// player returns while quest is active
 		npc.add(ConversationStates.IDLE, ConversationPhrases.GREETING_MESSAGES,
@@ -218,29 +265,38 @@ public class ZooFood extends AbstractQuest {
 				null,
 				new SayRequiredItemAction(QUEST_SLOT, 1, "Witaj ponownie! Czy przyniosłeś nam [item]?"));
 
+        // Same authoritative step, without requiring the player to leave and greet again.
+        npc.add(ConversationStates.ATTENDING, "karma dla zwierząt",
+				new AndCondition(new games.stendhal.server.entity.npc.condition.AlwaysTrueCondition(),
+						new QuestStateStartsWithCondition(QUEST_SLOT, "start;")),
+				ConversationStates.QUEST_ITEM_BROUGHT,
+				null,
+				new SayRequiredItemAction(QUEST_SLOT, 1, "Witaj ponownie! Czy przyniosłeś nam [item]?"));
+
 		final List<ChatAction> actions = new LinkedList<ChatAction>();
 		actions.add(new DropRecordedItemAction(QUEST_SLOT,1));
-		actions.add(new SetQuestAndModifyKarmaAction(QUEST_SLOT, "done;1", 5.0));
+		actions.add(DialogueRewardAction.karma(new SetQuestAndModifyKarmaAction(QUEST_SLOT, "done;1", 5.0)));
 		actions.add(new SetQuestToTimeStampAction(QUEST_SLOT, 1));
-		actions.add(new IncreaseXPAction(2000));
-		actions.add(new IncreaseAtkXPAction(1000));
-		actions.add(new IncreaseDefXPAction(1000));
+		actions.add(DialogueRewardAction.xp(2000));
+		actions.add(DialogueRewardAction.attackXP(1000));
+		actions.add(DialogueRewardAction.defenseXP(1000));
+        actions.add(DialogueRewardAction.access("Opieka i sklep Dr. Feelgooda przez tydzień"));
 	
 		npc.add(ConversationStates.QUEST_ITEM_BROUGHT,
 			ConversationPhrases.YES_MESSAGES, 
 			new PlayerHasRecordedItemWithHimCondition(QUEST_SLOT,1),
-			ConversationStates.ATTENDING, "Dziękuję! Uratowałeś nasze rzadkie zwierzęta.",
+			ConversationStates.ATTENDING, "Dziękuję, rozdzielę dostawę między zwierzęta i uzupełnię zapasy. Przez najbliższy tydzień Dr. Feelgood będzie mógł leczyć twoje zwierzęta i udostępni ci swoją ofertę. Przyjmij także nagrodę za tę pomoc.",
 			new MultipleActions(actions));
 
         npc.add(ConversationStates.QUEST_ITEM_BROUGHT,
         		ConversationPhrases.YES_MESSAGES,
         		new NotCondition(new PlayerHasRecordedItemWithHimCondition(QUEST_SLOT,1)),
         		ConversationStates.ATTENDING, null,
-        		new SayRequiredItemAction(QUEST_SLOT, 1, "*westchnienie* SPECCJALNIE powiedziałam, że potrzebujemy [item]!")
+        		new SayRequiredItemAction(QUEST_SLOT, 1, "W tej dostawie potrzeba: [item]. Przynieś całą zamówioną ilość, bo muszę od razu rozdzielić karmę między zwierzęta. Zachowaj to, co już udało ci się zebrać.")
         		);
 
 		npc.add(ConversationStates.QUEST_ITEM_BROUGHT, ConversationPhrases.NO_MESSAGES, null,
-				ConversationStates.ATTENDING, "Pospiesz się! Te rzadkie zwierzęta umierają z głodu!",
+				ConversationStates.ATTENDING, "Zwierzęta czekają na obiecaną dostawę. Przynieś całą zamówioną ilość, abym mógł rozdzielić zapasy między podopiecznych.",
 				null);
 	}
 
@@ -252,12 +308,31 @@ public class ZooFood extends AbstractQuest {
 				new AndCondition(new GreetingMatchesNameCondition(npc.getName()),
 						new QuestCompletedCondition(QUEST_SLOT), 
 						new NotCondition(new TimePassedCondition(QUEST_SLOT, 1, DELAY))),
-			ConversationStates.ATTENDING, "Cześć! Teraz zwierzęta mają wystarczająco dużo jedzenia. Już nie chorują tak łatwo i mam czas na inne rzeczy. W czym mogę pomóc?",
+			ConversationStates.ATTENDING, "Dzięki twojej dostawie mam chwilę, żeby zająć się także innymi pacjentami. Przez tydzień po pomocy Katince możesz korzystać z mojej oferty i leczenia zwierząt. Powiedz, czego potrzebujesz.",
+				null
+		);
+
+        // Same authoritative step, without requiring the player to leave and greet again.
+        npc.add(ConversationStates.ATTENDING, "karma dla zwierząt",
+				new AndCondition(new games.stendhal.server.entity.npc.condition.AlwaysTrueCondition(),
+						new QuestCompletedCondition(QUEST_SLOT), 
+						new NotCondition(new TimePassedCondition(QUEST_SLOT, 1, DELAY))),
+			ConversationStates.ATTENDING, "Dzięki twojej dostawie mam chwilę, żeby zająć się także innymi pacjentami. Przez tydzień po pomocy Katince możesz korzystać z mojej oferty i leczenia zwierząt. Powiedz, czego potrzebujesz.",
 				null
 		);
 
 		npc.add(ConversationStates.IDLE, ConversationPhrases.GREETING_MESSAGES,
 				new AndCondition(new GreetingMatchesNameCondition(npc.getName()),
+						new OrCondition(new QuestNotCompletedCondition(QUEST_SLOT),
+								new AndCondition(new QuestCompletedCondition(QUEST_SLOT), new TimePassedCondition(QUEST_SLOT, 1, DELAY))
+						)),
+				ConversationStates.IDLE, "Przepraszam, ale nie mogę teraz rozmawiać. Wszystkie zwierzęta są chore ponieważ nie mają jedzenia. Nie chciałbyś się rozejrzeć?",
+				null
+		);
+
+        // Same authoritative step, without requiring the player to leave and greet again.
+        npc.add(ConversationStates.ATTENDING, "karma dla zwierząt",
+				new AndCondition(new games.stendhal.server.entity.npc.condition.AlwaysTrueCondition(),
 						new OrCondition(new QuestNotCompletedCondition(QUEST_SLOT),
 								new AndCondition(new QuestCompletedCondition(QUEST_SLOT), new TimePassedCondition(QUEST_SLOT, 1, DELAY))
 						)),
@@ -271,7 +346,7 @@ public class ZooFood extends AbstractQuest {
 		super.addToWorld();
 		fillQuestInfo(
 				"Jedzenie dla Zoo",
-				"Zwierzęta w zoo są głodne! Muszę dostarczyć im coś do jedzenia!",
+				"Katinka opiekuje się zwierzętami w schronisku pod Ados. Przyjmij zamówienie na karmę i przynieś wskazane jedzenie, aby jej podopiecznym nie zabrakło zapasów.",
 				true);
 		step_1();
 		step_2();

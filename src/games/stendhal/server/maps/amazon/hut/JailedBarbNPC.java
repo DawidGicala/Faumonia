@@ -66,8 +66,9 @@ public class JailedBarbNPC implements ZoneConfigurator {
 
 			@Override
 			protected void createDialog() {
+                games.stendhal.server.entity.npc.dialogue.JourneyDialogueTopics.install(this);
 				addGreeting("Kwiatki, kwiatki. Wszędzie te wstrętne kwiatki!");
-				addJob("Należę do #straży ukrywającego się króla! Ups zbyt dużo informacji dla Ciebie!");
+				addJob("Należę do straży ukrywającego się króla. Więcej nie powinienem zdradzać, zwłaszcza w tym miejscu. Na razie wystarczy, że wiesz, iż mam zamiar wydostać się z tej kwiecistej pułapki.");
 				addReply(Arrays.asList("straży", "guard"),"Hm powiedziałem. Nic Ci nie powiem!");
 				addHelp("Zabij tyle Amazonek ile tylko możesz. Próbują mnie wpędzić w obłęd z tymi głupimi kwiatkami.");
 				addOffer("Nie mam nic do zaoferowania!");
@@ -78,7 +79,7 @@ public class JailedBarbNPC implements ZoneConfigurator {
 		JailedBarbNPC.setEntityClass("jailedbarbariannpc");
 		JailedBarbNPC.setPosition(11, 12);
 		JailedBarbNPC.initHP(100);
-		JailedBarbNPC.setDescription("Widzisz uwięzionego barbarzyńce Lorenza. Co on zrobił amazonkom?");
+		JailedBarbNPC.setDescription("Widzisz Lorenza, barbarzyńcę więzionego przez Amazonki. Z niezadowoleniem przygląda się kwiatom wokół swojej celi.");
 		zone.add(JailedBarbNPC);
 	}
 }

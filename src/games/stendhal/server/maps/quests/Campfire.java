@@ -12,6 +12,8 @@
  ***************************************************************************/
 package games.stendhal.server.maps.quests;
 
+import games.stendhal.server.entity.npc.action.DialogueRewardAction;
+
 import games.stendhal.common.Rand;
 import games.stendhal.common.parser.Sentence;
 import games.stendhal.server.core.engine.SingletonRepository;
@@ -114,10 +116,10 @@ public class Campfire extends AbstractQuest {
 			res.add("Znalazłem 10 polan potrzebnych do rozpalenia ogniska");
 		}
 		if (isCompleted(player)) {
-			res.add("Dałem Sally polana. Dała mi trochę jedzenia. Dostałem także 50 pd");
+			res.add("Dałem Sally dziesięć polan. Nagroda: 10 sztuk mięsa lub szynki, 500 XP postaci, 500 XP ataku, 500 XP obrony i 10 karmy.");
 		}
 		if(isRepeatable(player)){
-			res.add("Sally's potrzebuje ponownie polan.");
+			res.add("Mogę ponownie zapytać Sally o drewno do ogniska.");
 		} 
 		return res;
 	}
@@ -133,7 +135,7 @@ public class Campfire extends AbstractQuest {
 			new AndCondition(new GreetingMatchesNameCondition(npc.getName()),
 					new QuestInStateCondition(QUEST_SLOT, "start"), new PlayerHasItemWithHimCondition("polano", REQUIRED_WOOD)),
 			ConversationStates.QUEST_ITEM_BROUGHT, 
-			"Witaj znowu! Masz te 10 polan, o które wcześniej Cię pytałam?",
+			"Dobrze, że jesteś! Ognisko wciąż się trzyma, ale zapas drewna szybko maleje. Czy oddasz mi teraz obiecane dziesięć polan?",
 			null);
 
 		//player returns without promised wood
@@ -142,7 +144,7 @@ public class Campfire extends AbstractQuest {
 		    new	AndCondition(new GreetingMatchesNameCondition(npc.getName()),
 					new QuestInStateCondition(QUEST_SLOT, "start"), new NotCondition(new PlayerHasItemWithHimCondition("polano", REQUIRED_WOOD))),
 			ConversationStates.ATTENDING, 
-			"Już wróciłeś? Nie zapomnij, że obiecałeś mi zebrać dziesięć polan dla mnie!",
+			"Witaj z powrotem. Wciąż czekam na dziesięć polan, żeby podtrzymać ognisko. Drewna szukaj w lesie na północ stąd; ja przez ten czas dopilnuję żaru.",
 			null);
 
 		// first chat of player with sally
@@ -150,7 +152,7 @@ public class Campfire extends AbstractQuest {
 			ConversationPhrases.GREETING_MESSAGES,
 			new AndCondition(new GreetingMatchesNameCondition(npc.getName()),
 					new QuestNotStartedCondition(QUEST_SLOT)),
-			ConversationStates.ATTENDING, "Cześć! Potrzebuję małej #przysługi ... ",
+			ConversationStates.ATTENDING, "Cześć, przysiądź na chwilę przy ognisku. Pilnuję pieczenia, ale drewna zaczyna brakować. Przydałaby mi się drobna #przysługa.",
 			null);
 
 		// player who is rejected or 'done' but waiting to start again, returns
@@ -160,7 +162,7 @@ public class Campfire extends AbstractQuest {
 					new QuestNotInStateCondition(QUEST_SLOT, "start"),
 					new QuestStartedCondition(QUEST_SLOT)),
 			ConversationStates.ATTENDING,
-			"Witaj ponownie!", 
+			"Witaj ponownie, dobrze znów cię widzieć przy ognisku. Odpocznij chwilę, jeśli droga dała ci się we znaki.", 
 			null);
 		
 		// if they ask for quest while on it, remind them
@@ -168,7 +170,7 @@ public class Campfire extends AbstractQuest {
 			ConversationPhrases.QUEST_MESSAGES, 
 			new QuestInStateCondition(QUEST_SLOT, "start"),
 			ConversationStates.ATTENDING,
-			"Już mi obiecałeś, że przyniesiesz drewno! Dziesięć kawałków, pamiętasz?",
+			"Potrzebuję obiecanych dziesięciu polan. Pozbieraj je w lesie na północ stąd i przynieś wszystkie razem. Za pomoc odłożę dla ciebie część jedzenia z ogniska.",
 			null);
 
 		// first time player asks/ player had rejected
@@ -176,7 +178,7 @@ public class Campfire extends AbstractQuest {
 				ConversationPhrases.QUEST_MESSAGES,
 				new QuestNotStartedCondition(QUEST_SLOT),
 				ConversationStates.QUEST_OFFERED, 
-				"Potrzebuję więcej drewna, aby podtrzymać ognisko. Nie mogę pójść po nie i zostawić ogniska bez opieki! Czy mógłbyś pójść do lasu i zdobyć trochę dla mnie? Potrzebuję dziesięciu kawałków.",
+				"Ognisko przygasa, a nie mogę zostawić pieczenia bez opieki. W lesie na północ stąd znajdziesz drewno - potrzebuję dziesięciu polan. Przyniesiesz je w zamian za trochę jedzenia na drogę?",
 				null);
 		
 		// player returns - enough time has passed
@@ -184,7 +186,7 @@ public class Campfire extends AbstractQuest {
 				ConversationPhrases.QUEST_MESSAGES,
 				new AndCondition(new QuestNotInStateCondition(QUEST_SLOT, "start"), new QuestStartedCondition(QUEST_SLOT), new TimePassedCondition(QUEST_SLOT,REQUIRED_MINUTES)),
 				ConversationStates.QUEST_OFFERED, 
-				"Moje ognisko znowu potrzebuje drewna! Czy mógłbyś pójść do lasu i zdobyć trochę dla mnie? Potrzebuję dziesięciu kawałków.",
+				"Poprzedni zapas drewna już się wypalił, a na żarze czeka kolejna porcja jedzenia. Potrzebuję znów dziesięciu polan z lasu na północ stąd. Pomożesz mi jeszcze raz?",
 				null);
 
 		// player returns - enough time has passed
@@ -193,14 +195,14 @@ public class Campfire extends AbstractQuest {
 				new AndCondition(new QuestNotInStateCondition(QUEST_SLOT, "start"), new QuestStartedCondition(QUEST_SLOT), new NotCondition(new TimePassedCondition(QUEST_SLOT,REQUIRED_MINUTES))),
 				ConversationStates.ATTENDING, 
 				null,
-				new SayTimeRemainingAction(QUEST_SLOT,REQUIRED_MINUTES,"Dziękuję, ale drewno, które mi ostatnio przyniosłeś wystarczy na"));
+				new SayTimeRemainingAction(QUEST_SLOT,REQUIRED_MINUTES,"Dziękuję, zapas z ostatniej wyprawy jeszcze wystarcza. Odpocznij, zanim znów ruszysz po drewno. Kolejnej pomocy będę potrzebowała za"));
 
 		// player is willing to help
 		npc.add(ConversationStates.QUEST_OFFERED,
 			ConversationPhrases.YES_MESSAGES,
 			null,
 			ConversationStates.ATTENDING,
-			"Dobrze. Drewno możesz znaleźć w lesie na północ stąd. Wróć, gdy będziesz mieć dziesięć polan!",
+			"Świetnie, teraz mogę spokojnie dopilnować jedzenia. Szukaj leżącego drewna w lesie na północ stąd i przynieś dziesięć polan naraz. Będę czekać przy tym ognisku.",
 			new SetQuestAndModifyKarmaAction(QUEST_SLOT, "start", 5.0));
 
 		// player is not willing to help
@@ -208,7 +210,7 @@ public class Campfire extends AbstractQuest {
 			ConversationPhrases.NO_MESSAGES,
 			null,
 			ConversationStates.ATTENDING,
-			"Jak mam upiec całe to mięso? Może powinnam nakarmić nim zwierzęta...",
+			"Szkoda, przydałaby mi się pomoc przy zbieraniu drewna. Spróbuję jeszcze trochę podtrzymać ogień tym, co zostało. Jeśli zmienisz zdanie, wiesz, gdzie mnie znaleźć.",
 			new SetQuestAndModifyKarmaAction(QUEST_SLOT, "rejected", -5.0));
 	}
 
@@ -218,11 +220,11 @@ public class Campfire extends AbstractQuest {
 		
 		final List<ChatAction> reward = new LinkedList<ChatAction>();
 		reward.add(new DropItemAction("polano", REQUIRED_WOOD));
-		reward.add(new IncreaseXPAction(500));
-		reward.add(new IncreaseAtkXPAction(500));
-		reward.add(new IncreaseDefXPAction(500));
+		reward.add(DialogueRewardAction.xp(500));
+		reward.add(DialogueRewardAction.attackXP(500));
+		reward.add(DialogueRewardAction.defenseXP(500));
 		reward.add(new SetQuestToTimeStampAction(QUEST_SLOT));
-		reward.add(new IncreaseKarmaAction(10));
+		reward.add(DialogueRewardAction.karma(new IncreaseKarmaAction(10)));
 		reward.add(new ChatAction() {
 			public void fire(final Player player, final Sentence sentence, final EventRaiser npc) {
 				String rewardClass;
@@ -231,10 +233,12 @@ public class Campfire extends AbstractQuest {
 				} else {
 					rewardClass = "szynka";
 				}
-				npc.say("Dziękuję! Weź trochę " + rewardClass + "!");
+				npc.say("O, z takim zapasem ognisko szybko nie zgaśnie. Odłożyłam dla ciebie jedzenie na drogę: " + rewardClass + " - " + REQUIRED_WOOD + ". Dziękuję za pomoc i odpocznij chwilę, zanim wyruszysz dalej.");
 				final StackableItem reward = (StackableItem) SingletonRepository.getEntityManager().getItem(rewardClass);
 				reward.setQuantity(REQUIRED_WOOD);
-				player.equipOrPutOnGround(reward);
+				int before = player.getNumberOfEquipped(rewardClass);
+                player.equipOrPutOnGround(reward);
+                DialogueRewardAction.recordItem(player, npc, reward, before, REQUIRED_WOOD);
 				player.notifyWorldAboutChanges();
 			}
 		});
@@ -250,7 +254,7 @@ public class Campfire extends AbstractQuest {
 			ConversationPhrases.YES_MESSAGES, 
 			new NotCondition(new PlayerHasItemWithHimCondition("polano", REQUIRED_WOOD)),
 			ConversationStates.ATTENDING, 
-			"Hej! Gdzie położyłeś drewno?",
+			"Nie widzę już całych dziesięciu polan. Sprawdź, czy niczego nie odłożono po drodze, i przynieś komplet. Poczekam przy ognisku.",
 			null);
 
 		// player had wood but said it is not for sally
@@ -259,7 +263,7 @@ public class Campfire extends AbstractQuest {
 			ConversationPhrases.NO_MESSAGES,
 			null,
 			ConversationStates.ATTENDING,
-			"Och... cóż mam nadzieję, że szybko znajdziesz. Ognisko zaczyna przygasać!",
+			"Dobrze, zostawmy drewno na razie w twoim plecaku. Kiedy zechcesz je przekazać, powiedz mi o polanach. Będę tutaj pilnować ognia.",
 			null);
 	}
 
@@ -272,6 +276,14 @@ public class Campfire extends AbstractQuest {
 				true);
 		prepareRequestingStep();
 		prepareBringingStep();
+        SpeakerNPC npc = npcs.get("Sally");
+        npc.add(ConversationStates.ATTENDING, "polano",
+            new AndCondition(new QuestInStateCondition(QUEST_SLOT, "start"), new PlayerHasItemWithHimCondition("polano", REQUIRED_WOOD)),
+            ConversationStates.QUEST_ITEM_BROUGHT,
+            "Widzę, że udało ci się nazbierać drewna. Czy mam wziąć dziesięć polan na ognisko? Odłożę dla ciebie jedzenie na dalszą drogę.", null);
+        npc.add(ConversationStates.ATTENDING, "wskazówki", new QuestInStateCondition(QUEST_SLOT, "start"), ConversationStates.ATTENDING,
+            "Polana leżą w lesie na północ od mojego obozowiska przy rzece Orril. Pozbieraj dziesięć i przynieś je razem, żebym miała zapas do pieczenia. Wróć tutaj i powiedz o polanach - nie trzeba znów przyjmować zadania.", null);
+
 	}
 
 	@Override

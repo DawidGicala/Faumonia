@@ -43,14 +43,15 @@ public class KowalLudwikNPC implements ZoneConfigurator {
 
 			@Override
 			protected void createDialog() {
+                games.stendhal.server.entity.npc.dialogue.JourneyDialogueTopics.install(this);
 				addGreeting("Witaj, wojowniku. Patrząc na Ciebie widzę... potencjał.");
 				addGoodbye("Nie każdy jest gotów na prawdziwe ulepszenie.");
 				addHelp("Słyszałeś o ciupadze z wąsem? Nie? To dobrze. To broń dla nielicznych.");
-				addJob("Nie zawsze byłem kowalem. Ale odkąd pamiętam – ulepszałem to, czego inni nawet nie potrafili utrzymać w rękach.");
+				addJob("Nie zawsze byłem kowalem, ale od dawna zajmuję się ulepszaniem broni. Złota ciupaga wymaga dobrego materiału i cierpliwej pracy. Jeśli chodzi ci o dodatkowy wąs, omówmy konkretne zamówienie.");
 
 				add(
 					ConversationStates.ATTENDING,
-					Arrays.asList("ciupaga", "ulepsz", "zadanie", "dwa wąsy", "wąsy"),
+					Arrays.asList("ciupaga", "ulepsz", "dwa wąsy", "wąsy"),
 					null,
 					ConversationStates.ATTENDING,
 					"Jeśli przyszedłeś tu z myślą o wyjątkowej broni... być może trafiłeś dobrze. Ale najpierw #zadanie. Dopiero potem porozmawiamy o wąsach.",
@@ -58,7 +59,7 @@ public class KowalLudwikNPC implements ZoneConfigurator {
 			}
 		};
 
-		KowalLudwikNPC.setDescription("Ludwik – milczący kowal o spojrzeniu jak topniejący lód. Podobno potrafi zmienić zwykłą ciupagę w coś... niepokojąco potężnego.");
+		KowalLudwikNPC.setDescription("Widzisz Ludwika, kowala ze zbójeckiej wioski. Ocenia twoją broń rzeczowym, uważnym spojrzeniem.");
 		KowalLudwikNPC.setEntityClass("npc_flisak2");
 		KowalLudwikNPC.setPosition(3, 10);
 		KowalLudwikNPC.setDirection(Direction.DOWN);

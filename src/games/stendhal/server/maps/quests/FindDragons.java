@@ -11,6 +11,7 @@
  *                                                                         *
  ***************************************************************************/
 package games.stendhal.server.maps.quests;
+import games.stendhal.server.entity.npc.action.DialogueRewardAction;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -64,11 +65,29 @@ public class FindDragons extends AbstractQuest {
 		return left < 0;
 	}
 
-	static class DragonNPC extends SpeakerNPC {
+	    private static String meetingWords(String name) {
+        switch (name) {
+            case "Gorath": return "Pod Ados nie jesteś jedynym silnym przybyszem; Superczłowieków lepiej nie lekceważyć.";
+            case "Velmord": return "W tej smoczej jaskini wreszcie znalazłeś rozmówcę. Podejdź, skoro chcesz rozmawiać.";
+            case "Saphiron": return "Góry Semos zaprowadziły cię aż do mnie. Nie kończy się na nich jednak twoja droga.";
+            case "Ardavyr": return "Dzika wyspa potrafi zatrzymać nieuważnego wędrowca na dłużej. Dobrze, że dotarłeś do mnie.";
+            case "Kharion": return "Jaskinia Kikareukin nie każdemu pozwala spokojnie przejść. Tutaj możesz na chwilę przystanąć.";
+            case "Morthax": return "W tunelu Amazonek znalazłeś kolejnego z nas. Zapamiętaj drogę powrotną.";
+            case "Dravok": return "Nazwa smoczej wyspy nie jest przypadkowa. Teraz możesz powiedzieć, że spotkałeś tu także mnie.";
+            case "Ignathar": return "Dotarłeś do piekła, by ze mną porozmawiać. Po spotkaniu nadal czeka cię droga powrotna.";
+            case "Faldurion": return "Wielka jaskinia Fado skrywa więcej niż przeciwników. Witaj wędrowcze, odnalazłeś mnie.";
+            case "Nalthar": return "Tunele pod Nalwor to ziemia mrocznych elfów. Poruszaj się uważnie także po naszej rozmowie.";
+            case "Atherion": return "Na zachodzie Athor kończy się ten fragment twojej drogi. Witaj, skoro już mnie odnalazłeś.";
+            default: return "Witaj, dobrze cię spotkać.";
+        }
+    }
+
+    static class DragonNPC extends SpeakerNPC {
 		public DragonNPC(final String name, final int x, final int y) {
 			super(name);
 
 			setEntityClass("dragonNPC");
+            setDescription("Widzisz smoka o imieniu "+name+". Spokojnie obserwuje drogę, którą nadchodzą wędrowcy.");
 			setPosition(x, y);
 			initHP(100);
 
@@ -87,9 +106,11 @@ public class FindDragons extends AbstractQuest {
 
 		@Override
 		protected void createDialog() {
+                games.stendhal.server.entity.npc.dialogue.JourneyDialogueTopics.install(this);
+            addJob("Jedenastu z nas zamieszkuje odległe zakątki Faumonii. Odnajdź każdego i porozmawiaj z nim; na końcu tej wyprawy czeka płaszcz ze smoczych łusek. Mogę wskazać miejsca, w których warto szukać pozostałych.");
 			add(ConversationStates.IDLE, ConversationPhrases.GREETING_MESSAGES,
 				new GreetingMatchesNameCondition(getName()), true,
-				ConversationStates.IDLE, null,
+				ConversationStates.ATTENDING, null,
 				new ChatAction() {
 					@Override
 					public void fire(final Player player, final Sentence sentence, final EventRaiser raiser) {
@@ -104,22 +125,22 @@ public class FindDragons extends AbstractQuest {
 
 						if (list.contains(raiser.getName())) {
 							if (left > -1) {
-								raiser.say("Tego smoka już odnalazłeś. Poszukaj pozostałych, a zostaniesz wynagrodzony!");
+								raiser.say("Już się znamy. Odszukaj pozostałych spośród jedenastu smoków, z którymi jeszcze nie rozmawiałeś. Lista miejsc poszukiwań pomoże ci zaplanować dalszą drogę.");
 							} else {
 								raiser.say("Znalazłeś wszystkie smoki. Nagroda jest już w Twoich rękach.");
 							}
 						} else {
 							player.setQuest(QUEST_SLOT, npcDoneText + ";"
 									+ raiser.getName());
-							player.heal();
+							DialogueRewardAction.healing((p, text, n) -> { p.heal(); }).fire(player,sentence,raiser);
 
 							if (left > 0) {
-								raiser.say("Witaj! Mnie już odnalazłeś. Poszukaj jeszcze "
+								raiser.say(meetingWords(raiser.getName()) + " Poszukaj jeszcze "
 												+ (DRAGONS_TO_FIND - list.size())
-												+ " z moich braci. Żegnaj!");
+												+ " z moich braci. Zapamiętaj to miejsce i ruszaj dalej; każde nowe spotkanie przybliża cię do końca wyprawy.");
 								player.addXP((DRAGONS_TO_FIND - left + 1) * 500);
 							} else {
-								raiser.say("Udowodniłeś, że jesteś godny smoczej nagrody!");
+								raiser.say("Odnalezienie całej jedenastki wymagało długiej podróży przez Faumonię. Przyjmij płaszcz ze smoczych łusek na znak, że ta wyprawa dobiegła końca. Niech ten płaszcz przypomina ci o spotkaniach z nami.");
 
 								final Item item = SingletonRepository.getEntityManager()
 									.getItem("płaszcz ze smoczych łusek");
@@ -141,7 +162,7 @@ public class FindDragons extends AbstractQuest {
 		fillHistoryMap();
 		fillQuestInfo(
 			"Poszukiwanie Smoków",
-			"Odnajdź wszystkie 11 smoków rozsianych po krainie Faumonii.",
+			"Jedenaście smoków zamieszkuje różne zakątki Faumonii. Odnajdź je i porozmawiaj z każdym; samo dotarcie w ich okolice nie kończy poszukiwań.",
 			false);
 
 		StendhalRPZone zone;
@@ -230,4 +251,8 @@ public class FindDragons extends AbstractQuest {
 	public String getName() {
 		return "Poszukiwanie Smoków";
 	}
+
+    public static List<String> getMeetingNames(){return java.util.Collections.unmodifiableList(Arrays.asList("Gorath","Velmord","Saphiron","Ardavyr","Kharion","Morthax","Dravok","Ignathar","Faldurion","Nalthar","Atherion"));}
+    public static String getMeetingHint(){return "Odszukaj smoki: Gorath przy Superczłowiekach pod Ados, Velmord w smoczej jaskini, Saphiron w górach Semos, Ardavyr na dzikiej wyspie, Kharion w Kikareukin, Morthax w tunelu Amazonek, Dravok na smoczej wyspie, Ignathar w piekle, Faldurion w wielkiej jaskini Fado, Nalthar w tunelach drowów Nalwor, Atherion na zachodzie Athor.";}
+
 }

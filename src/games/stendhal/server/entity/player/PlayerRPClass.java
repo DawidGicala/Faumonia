@@ -145,12 +145,17 @@ public class PlayerRPClass {
 		player.addRPEvent(Events.GROUP_CHANGE, Definition.PRIVATE);
 		player.addRPEvent(Events.GROUP_INVITE, Definition.PRIVATE);
 		player.addRPEvent(Events.PROGRESS_STATUS_CHANGE, Definition.PRIVATE);
+		player.addRPEvent(games.stendhal.common.NpcDialogueSnapshot.EVENT, Definition.PRIVATE);
+        player.addRPEvent(games.stendhal.common.TutorialGuideSnapshot.EVENT, Definition.PRIVATE);
 
 		// Maps
 		player.addAttribute("source_usage", Type.MAP, Definition.HIDDEN);
 
 		// client menu override
 		player.addAttribute("menu", Type.STRING, Definition.VOLATILE);
+
+		// Keep the legacy text attribute for saved characters; events need a distinct name.
+		player.addRPEvent(Events.PLAYER_DIALOGUE_TEXT, Definition.VOLATILE);
 	}
 
 }

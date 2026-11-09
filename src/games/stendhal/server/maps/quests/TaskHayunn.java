@@ -12,6 +12,8 @@
  ***************************************************************************/
 package games.stendhal.server.maps.quests;
 
+import games.stendhal.server.entity.npc.action.DialogueRewardAction;
+
 import games.stendhal.common.grammar.Grammar;
 import games.stendhal.server.entity.npc.ChatAction;
 import games.stendhal.server.entity.npc.ConversationPhrases;
@@ -47,6 +49,15 @@ import java.util.Map;
 
 public class TaskHayunn extends AbstractQuest {
 
+    public static java.util.Map<String,Integer> getRequiredItems() {
+        games.stendhal.server.util.ItemCollection items=new games.stendhal.server.util.ItemCollection();
+        items.addFromQuestStateString(NEEDED_ITEMS);
+        java.util.Map<String,Integer> result=new java.util.LinkedHashMap<String,Integer>();
+        for(java.util.Map.Entry<String,Integer> e:items.entrySet()) result.put(e.getKey(),e.getValue());
+        return java.util.Collections.unmodifiableMap(result);
+    }
+
+
 	public static final String QUEST_SLOT = "task_hayunn";
 
 	/**
@@ -60,7 +71,7 @@ public class TaskHayunn extends AbstractQuest {
 		if (!player.hasQuest(QUEST_SLOT)) {
 			return res;
 		}
-		res.add("Hayunn poprosił mnie o kupienie butelki wody. Powinienem porozmawiać z Miterem i napisać #'kupie woda' a następnie #tak");
+		res.add("Hayunn poprosił mnie o jedną wodę. Powinienem przywitać się z Miterem w tym samym domku, wybrać ofertę, kupić 1 wodę za 5 monet i potwierdzić zakup.");
 		final String questState = player.getQuest(QUEST_SLOT);
 		if ("rejected".equals(questState)) {
 			res.add("Nie chcę pomóc ukończyć samouczka u Hayunna.");
@@ -83,28 +94,28 @@ public class TaskHayunn extends AbstractQuest {
 					new QuestNotStartedCondition(QUEST_SLOT),
 					new NotCondition(new QuestInStateCondition(QUEST_SLOT,"rejected"))),
 			ConversationStates.QUESTION_1, 
-			"Chce abyś nauczył się rozmawiać z NPCami. Napisz #tak aby kontynuować.", null);
+			"Zaschło mi w gardle. Przyniesiesz mi butelkę wody od Mitera? Przy okazji pokażę ci, jak robić zakupy i załatwiać sprawy z mieszkańcami.", null);
 
 		npc.add(ConversationStates.ATTENDING, 
 			ConversationPhrases.QUEST_MESSAGES,
 			new QuestInStateCondition(QUEST_SLOT,"rejected"),
 			ConversationStates.QUEST_OFFERED, 
-			"Chce abyś nauczył się rozmawiać z NPCami. Napisz #tak aby kontynuować.", null);
+			"Zaschło mi w gardle. Przyniesiesz mi butelkę wody od Mitera? Przy okazji pokażę ci, jak robić zakupy i załatwiać sprawy z mieszkańcami.", null);
 
 		npc.add(
 			ConversationStates.QUESTION_1,
 			ConversationPhrases.YES_MESSAGES,
 			new QuestNotStartedCondition(QUEST_SLOT),
 			ConversationStates.ATTENDING,
-			"Świetnie, chce abyś podszedł do Mitera i kupił dla mnie wodę. Niektóre wiadomości oznaczone są #niebieskim kolorem - zazwyczaj powinieneś napisać to aby kontynuować rozmowę. Jeśli zgadzasz się mi pomóc napisz: #ok",
+			"Miter stoi w tym samym domku. Podejdź do niego, napisz „cześć” i zapytaj o ofertę. Niebieskie słowa możesz klikać, a odpowiedź wybrać z listy lub wpisać samodzielnie. Powiedz #ok, a przypomnę ci, co kupić.",
 			null);
 
 		npc.add(
 			ConversationStates.ATTENDING,
-			Arrays.asList("ok", "ser", "zadanie"),
+			Arrays.asList("ok", "ser"),
 			new QuestNotStartedCondition(QUEST_SLOT),
 			ConversationStates.QUEST_OFFERED,
-			"Na sam początek rozgrywki otrzymałeś 5 złotych monet - masz je we swoim plecaku. Idź do Mitera i kup od niego wodę pisząc #'kupie woda' a następnie #tak. Jeśli rozumiesz i chcesz kontynuować napisz: #tak",
+			"Kup u Mitera jedną butelkę wody za 5 monet. Zapytaj o #ofertę, wybierz wodę i potwierdź zakup. Przyniesiesz mi ją?",
 			null);
 
 		npc.add(
@@ -113,16 +124,16 @@ public class TaskHayunn extends AbstractQuest {
 			null,
 			ConversationStates.ATTENDING,
 			null,
-			new MultipleActions(new SetQuestAndModifyKarmaAction(QUEST_SLOT, NEEDED_ITEMS, 5.0),
-								new SayRequiredItemsFromCollectionAction(QUEST_SLOT, "Świetnie! Proszę przynieś mi: [items].")));
+			new MultipleActions(DialogueRewardAction.karma(new SetQuestAndModifyKarmaAction(QUEST_SLOT, NEEDED_ITEMS, 5.0)),
+								new SayRequiredItemsFromCollectionAction(QUEST_SLOT, "Dziękuję! Potrzebuję: [items]. Kup butelkę u Mitera i wróć do mnie.")));
 
 		npc.add(
 			ConversationStates.QUEST_OFFERED,
 			ConversationPhrases.NO_MESSAGES,
 			null,
 			ConversationStates.ATTENDING,
-			"Ech... lepiej jakbyś to zrobił.",
-			new SetQuestAndModifyKarmaAction(QUEST_SLOT, "rejected", -5.0));
+			"Dobrze, wróć, kiedy będziesz mieć chwilę.",
+			DialogueRewardAction.karma(new SetQuestAndModifyKarmaAction(QUEST_SLOT, "rejected", -5.0)));
 
 	}
 
@@ -133,33 +144,33 @@ public class TaskHayunn extends AbstractQuest {
 				new AndCondition(new GreetingMatchesNameCondition(npc.getName()),
 						new QuestActiveCondition(QUEST_SLOT)),
 				ConversationStates.ATTENDING,
-				"Witaj ponownie. Czy przyniosłeś mi butelkę wody od Mitera? Powinieneś z nią porozmawiać i napisać #'kupie woda' a następnie tak Jeśli przyniosłeś, napisz #tak ",
+				"Witaj ponownie! Masz już wodę od Mitera? Jeśli nie wiesz, jak ją kupić, chętnie podpowiem.",
 				null);
 
 		/* player asks what exactly is missing (says ingredients) */
-		npc.add(ConversationStates.ATTENDING, "tak", null,
+		npc.add(ConversationStates.ATTENDING, "tak", new QuestActiveCondition(QUEST_SLOT),
 				ConversationStates.QUESTION_2, null,
-				new SayRequiredItemsFromCollectionAction(QUEST_SLOT, "Potrzebuję [items]. Czy masz ze sobą? Jeśli masz napisz #tak"));
+				new SayRequiredItemsFromCollectionAction(QUEST_SLOT, "Brakuje mi jeszcze: [items]. Jeśli masz wodę, wybierz ją z odpowiedzi poniżej albo napisz #woda."));
 
 		npc.add(ConversationStates.ATTENDING, 
 				ConversationPhrases.QUEST_MESSAGES,
 				new QuestActiveCondition(QUEST_SLOT),
 			ConversationStates.QUESTION_2, 
-			null, new SayRequiredItemsFromCollectionAction(QUEST_SLOT, "Potrzebuję [items]. Czy masz to? Jeśli masz napisz #tak"));		
+			null, new SayRequiredItemsFromCollectionAction(QUEST_SLOT, "Brakuje mi jeszcze: [items]. Jeśli masz wodę, wybierz ją z odpowiedzi poniżej albo napisz #woda."));		
 
 		/* player says he has a required item with him (says yes) */
 		npc.add(ConversationStates.QUESTION_2,
 				ConversationPhrases.YES_MESSAGES, null,
-				ConversationStates.QUESTION_2, "Dobrze, a #co #dokładnie masz? Napisz #woda aby kontynuować.",
+				ConversationStates.QUESTION_2, "Świetnie! Wybierz oddanie butelki z odpowiedzi poniżej albo napisz #woda.",
 				null);
 
 		ChatAction completeAction = new  MultipleActions(
 				new SetQuestAction(QUEST_SLOT, "done"),
-				new SayTextAction("Wspaniale! Ukończyłes samouczek i poznałeś podstawy rozmów z NPCami. Pamiętaj, że jeśli czegoś nie wiesz to zawsze możesz napisać #/k #wiadomość aby uzyskać pomoc na chacie globalnym. Jak już wyjdziesz, powinieneś wybrać się do czerwonego domku po prawej, spotkasz tam Mistrza Faumonii który nauczy cie kolejnych rzeczy. Czas abyś trochę powalczył... ruszaj zwiedzać krainę Faumonii!"),
-				new IncreaseXPAction(200),
-				new IncreaseAtkXPAction(50),
-				new IncreaseDefXPAction(50),
-				new IncreaseKarmaAction(10)
+				new SayTextAction("Dziękuję, właśnie tego potrzebowałem. Wiesz już, jak porozmawiać z mieszkańcem, zrobić zakupy i oddać obiecany przedmiot. Teraz odwiedź Mistrza Faumonii w czerwonym domu i przyjmij jego pierwszą próbę; przewodnik wskaże ci drogę."),
+				DialogueRewardAction.xp(200),
+				DialogueRewardAction.attackXP(50),
+				DialogueRewardAction.defenseXP(50),
+				DialogueRewardAction.karma(new IncreaseKarmaAction(10))
 				);
 
 		/* add triggers for the item names */
@@ -194,7 +205,7 @@ public class TaskHayunn extends AbstractQuest {
 		npc.add(ConversationStates.ATTENDING, ConversationPhrases.NO_MESSAGES,
 				new QuestActiveCondition(QUEST_SLOT),
 				ConversationStates.ATTENDING,
-				"Ech.. szkoda... Musisz wybrać się do Mitera i napisać #'kupie woda' a nastepnie #tak", 
+				"Nie ma pośpiechu. Kup wodę u Mitera i wróć, kiedy będziesz ją mieć.", 
 				null);
 
 		/* player says he didn't bring any items to different question */
@@ -202,7 +213,7 @@ public class TaskHayunn extends AbstractQuest {
 				ConversationPhrases.NO_MESSAGES,
 				new QuestActiveCondition(QUEST_SLOT),
 				ConversationStates.ATTENDING,
-				"Ech.. szkoda... Musisz wybrać się do Mitera i napisać #'kupie woda' a nastepnie #tak", null);
+				"Nie ma pośpiechu. Kup wodę u Mitera i wróć, kiedy będziesz ją mieć.", null);
 
     /* says quest and quest can't be started nor is active*/
 		npc.add(ConversationStates.ATTENDING, 

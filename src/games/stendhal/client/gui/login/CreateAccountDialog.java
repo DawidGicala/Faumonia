@@ -136,7 +136,7 @@ public class CreateAccountDialog extends JDialog {
 
 		// createAccountButton
 		createAccountButton = new JButton();
-		createAccountButton.setText("Utwórz Konto");
+		createAccountButton.setText("Utwórz konto");
 		createAccountButton.setMnemonic(KeyEvent.VK_U);
 		this.rootPane.setDefaultButton(createAccountButton);
 		createAccountButton.addActionListener(new ActionListener() {
@@ -208,7 +208,7 @@ public class CreateAccountDialog extends JDialog {
 		contentPane.add(createAccountButton);
 
 		// CreateAccountDialog
-		this.setTitle("Utwórz Nowe Konto");
+		this.setTitle("Utwórz nowe konto");
 		this.setResizable(false);
 		this.pack();
 
@@ -254,8 +254,8 @@ public class CreateAccountDialog extends JDialog {
 			port = Integer.parseInt(serverPortField.getText());
 		} catch (final Exception ex) {
 			JOptionPane.showMessageDialog(getOwner(),
-					"Niewłaściwy numer portu. Spróbuj ponownie.",
-					"Niewłaściwy Port", JOptionPane.WARNING_MESSAGE);
+					"Nieprawidłowy numer portu. Sprawdź go i spróbuj ponownie.",
+					"Nieprawidłowy port", JOptionPane.WARNING_MESSAGE);
 			return;
 		}
 		finalPort = port;
@@ -275,8 +275,8 @@ public class CreateAccountDialog extends JDialog {
 					setEnabled(true);
 					JOptionPane.showMessageDialog(
 							getOwner(),
-							"Nie można się połączyć z serwerem w celu utworzenia konta. Serwer może nie działać, a jeśli korzystasz z innego serwera "
-							+ "to sprawdź czy poprawnie wpisałeś nazwę i numer portu.");
+							"Nie można połączyć się z serwerem, aby utworzyć konto. "
+							+ "Sprawdź adres serwera, port i połączenie z internetem.");
 
 					logger.error(ex, ex);
 					return;
@@ -328,14 +328,14 @@ public class CreateAccountDialog extends JDialog {
 					setEnabled(true);
 					JOptionPane.showMessageDialog(
 							owner,
-							"Nie można się połączyć z serwerem w celu utworzenia konta. Serwer może nie działać lub mogłeś wprowadzić niewłaściwą nazwę serwera i numer portu.",
-							"Błąd Tworzenia Konta", JOptionPane.ERROR_MESSAGE);
+							"Nie można połączyć się z serwerem, aby utworzyć konto. Sprawdź adres serwera, port i połączenie z internetem.",
+							"Błąd tworzenia konta", JOptionPane.ERROR_MESSAGE);
 				} catch (final InvalidVersionException e) {
 					progressBar.cancel();
 					setEnabled(true);
 					JOptionPane.showMessageDialog(
 							owner,
-							"Uruchomiłeś starszą wersję FaumoniaOnline. Proszę zaktualizuj swoją wersje",
+							"Ta wersja klienta nie jest zgodna z serwerem. Pobierz aktualną wersję gry.",
 							"Starsza wersja", JOptionPane.ERROR_MESSAGE);
 				} catch (final BannedAddressException e) {
 					progressBar.cancel();
@@ -366,8 +366,8 @@ public class CreateAccountDialog extends JDialog {
 
 		if (!password.equals(passwordretype)) {
 			JOptionPane.showMessageDialog(owner,
-					"Hasła nie pasują do siebie. Powtórz oba hasła.",
-					"Hasło nie pasuje", JOptionPane.WARNING_MESSAGE);
+					"Wpisane hasła różnią się. Wprowadź to samo hasło w obu polach.",
+					"Hasła nie są zgodne", JOptionPane.WARNING_MESSAGE);
 			return false;
 		}
 
@@ -375,7 +375,7 @@ public class CreateAccountDialog extends JDialog {
 		if (!valPass) {
 			if (badPasswordReason != null) {
 				final int i = JOptionPane.showOptionDialog(owner, badPasswordReason,
-						"Niewłaściwe Hasło", JOptionPane.YES_NO_OPTION,
+						"Słabe hasło", JOptionPane.YES_NO_OPTION,
 						JOptionPane.WARNING_MESSAGE, null, null, 1);
 
 				if (i == JOptionPane.NO_OPTION) {
@@ -389,10 +389,10 @@ public class CreateAccountDialog extends JDialog {
 		final String email = (emailField.getText()).trim();
 		if (!validateEmail(email)) {
 			final String warning = badEmailReason
-					+ "Adres email jest tylko dla administratorów, aby mogli sprawdzić własciciela konta.\n"
-					+ "Jeżeli nie chcesz podać to nie będziesz mógł zmienić hasła do konta. Na przykład:\n"
-					+ "- Zapomniałeś hasło.\n"
-					+ "- Inny gracz w jakiś sposób zdobył twoje hasło i zmienił je.\n"
+					+ "Poprawny adres e-mail pomaga zweryfikować właściciela konta.\n"
+					+ "Bez niego odzyskanie dostępu do konta może być trudniejsze, np. gdy:\n"
+					+ "- zapomnisz hasła;\n"
+					+ "- ktoś przejmie konto i zmieni hasło.\n"
 					+ "Czy chcesz kontynuować?";
 
 			final int i = JOptionPane.showOptionDialog(owner, warning, badEmailTitle,
@@ -409,13 +409,13 @@ public class CreateAccountDialog extends JDialog {
 
 	private boolean validateEmail(final String email) {
 		if (email.length() == 0) {
-			badEmailTitle = "Adres email jest pusty";
-			badEmailReason = "Nie wprowadziłeś adresu email.\n";
+			badEmailTitle = "Brak adresu e-mail";
+			badEmailReason = "Nie podano adresu e-mail.\n";
 			return false;
 		} else {
 			if (!email.contains("@") || !email.contains(".") || (email.length() <= 5)) {
-				badEmailTitle = "Błędny adres email?";
-				badEmailReason = "Adres email, który wpisałeś jest prawdopodobnie błędny.\n";
+				badEmailTitle = "Sprawdź adres e-mail";
+				badEmailReason = "Wpisany adres e-mail wygląda na nieprawidłowy.\n";
 				return false;
 			}
 		}
@@ -459,7 +459,7 @@ public class CreateAccountDialog extends JDialog {
 				allNumbers = false;
 			}
 			if (allNumbers) {
-				badPasswordReason = "W swoim haśle użyłeś tylko liczb. To nie jest bezpieczna metoda.\n"
+				badPasswordReason = "Hasło zawiera wyłącznie cyfry, przez co łatwiej je odgadnąć.\n"
 						+ " Czy chcesz użyć tego hasła?";
 			}
 
@@ -503,13 +503,13 @@ public class CreateAccountDialog extends JDialog {
 			}
 
 			if (hasUsername) {
-				badPasswordReason = "W haśle użyłeś imienia wojownika lub jest do niej podobna. To jest kiepskie zabezpieczenie konta.\n"
+				badPasswordReason = "Hasło zawiera login lub jego część, przez co łatwiej je odgadnąć.\n"
 						+ " Jesteś pewien, że chcesz użyć tego hasła?";
 				return false;
 			}
 
 		} else {
-			final String text = "Hasło, które wprowadziłeś jest za krótkie. Musi się składać z minimum 6 znaków.";
+			final String text = "Hasło jest za krótkie. Wpisz co najmniej 6 znaków.";
 			if (isVisible()) {
 				JOptionPane.showMessageDialog(getOwner(), text);
 			} else {

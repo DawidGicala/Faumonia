@@ -60,16 +60,18 @@ public class BBQGrillmasterNPC implements ZoneConfigurator {
 
 			@Override
 			protected void createDialog() {
+                addReply("wskazówki", "W starej kopalni Semos można szukać węgla. Potrzebuję dwudziestu pięciu sztuk w jednej dostawie, bo ten grill szybko pożera opał. Gdy zbierzesz całość, wróć do mnie i wspomnij o węglu.");
+                addReply("tematy", "Możemy wrócić do twojej sprawy albo porozmawiać o czymś innym. Co chcesz wiedzieć?");
 				addGreeting("Hej! Wspaniały dzień na grilla?");
 				addHelp("Niestety steki nie są jeszcze gotowe... Jeżeli jesteś głodny i nie możesz czekać to może przejrzysz oferty przy wyjściu jak na przykład oferty Blacksheep koło chatek rybackich w Ados lub możesz popłynąć promem do Athor, aby zdobyć trochę przekąsek..."); 
-				addJob("Jestem mistrzem grilla jak widzisz. Kocham zapach świeżo zgrilowanego mięsa!");
+				addJob("Grillowanie to praca dla cierpliwych: za mało żaru i mięso pozostanie surowe, za dużo i cały zapas się zmarnuje. Dlatego tak trudno mi odejść choćby na chwilę.");
 				addOffer("Mam nadzieje, że moje steki będą wkrótce gotowe. Bądź cierpliwy lub spróbuj przedtem innych przysmaków.");
 				addGoodbye("Życzę miłego dnia! Zawsze podtrzymuj ogień!");
 				
 			}
 		};
 
-		npc.setDescription("Oto Haunchy Meatoch. Otoczony jest miłym zapachem świeżo zgrilowanego mięsa.");
+		npc.setDescription("Widzisz Haunchy'ego Meatocha, mistrza grilla na rynku w Ados. Pilnuje żaru, nie spuszczając oka ze skwierczącego mięsa.");
 		npc.setEntityClass("bbqgrillmasternpc");
 		npc.setPosition(14, 25);
 		npc.setDirection(Direction.RIGHT);

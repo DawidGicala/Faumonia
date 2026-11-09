@@ -16,7 +16,7 @@ import games.stendhal.common.MathHelper;
 import games.stendhal.server.entity.npc.ChatAction;
 import games.stendhal.server.entity.npc.ConversationPhrases;
 import games.stendhal.server.entity.npc.ConversationStates;
-import games.stendhal.server.entity.npc.SpeakerNPC;
+import games.stendhal.server.core.rp.quest.MasterStage;
 import games.stendhal.server.entity.npc.action.EquipItemAction;
 import games.stendhal.server.entity.npc.action.IncreaseXPAction;
 import games.stendhal.server.entity.npc.action.MultipleActions;
@@ -58,7 +58,7 @@ public class MainTask11 extends AbstractQuest {
 	}
 	
 	private void step_1() {
-		final SpeakerNPC npc = npcs.get("Mistrz Faumonii XI");
+		final MasterStage npc = MasterStage.register(11, this);
 
 		npc.add(ConversationStates.ATTENDING,
 				ConversationPhrases.QUEST_MESSAGES, 
@@ -73,6 +73,7 @@ public class MainTask11 extends AbstractQuest {
 		final Map<String, Pair<Integer, Integer>> toKill = new TreeMap<String, Pair<Integer, Integer>>();
 		toKill.put("rycerz śmierci", new Pair<Integer, Integer>(0,20));
 
+		npc.setHuntTargets(toKill);
 		final List<ChatAction> actions = new LinkedList<ChatAction>();
 		actions.add(new SetQuestAction(QUEST_SLOT, "start"));
 		actions.add(new StartRecordingKillsAction(QUEST_SLOT, 1, toKill));
@@ -99,7 +100,7 @@ public class MainTask11 extends AbstractQuest {
 
 	private void step_3() {
 
-		final SpeakerNPC npc = npcs.get("Mistrz Faumonii XI");
+		final MasterStage npc = MasterStage.register(11, this);
 
 
 		final List<ChatAction> actions = new LinkedList<ChatAction>();
@@ -119,7 +120,7 @@ public class MainTask11 extends AbstractQuest {
 						new KilledForQuestCondition(QUEST_SLOT, 1)),
 				ConversationStates.ATTENDING, 
 				"Widze, że wykonałeś swoje jedenaste zadanie. Pomogłeś krasnalowi Bario i zdobyłeś cenne rękawice oraz zabiłeś 20 rycerzy śmierci. "
-				+ "Zasługujesz na odznakę wojownika Faumonii jedenastego poziomu. Po nastepne główne zadanie powinieneś przyjść do Mistrza Faumonii XII po przekroczeniu 80 poziomu doświadczenia. W międzyczasie możesz wykonać zadanie na ulepszenie swojego sztyletu żywiołów. W tym celu powinieneś porozmawiać z Żywiołakiem Wody stacjonującym na molo w Ados.",
+				+ "Zasługujesz na odznakę wojownika Faumonii jedenastego poziomu. Po nastepne główne zadanie powinieneś przyjść do Mistrza Faumonii po przekroczeniu 80 poziomu doświadczenia. W międzyczasie możesz wykonać zadanie na ulepszenie swojego sztyletu żywiołów. W tym celu powinieneś porozmawiać z Żywiołakiem Wody stacjonującym na molo w Ados.",
 				new MultipleActions(actions));
 
 				npc.add(ConversationStates.ATTENDING, 
@@ -147,7 +148,7 @@ public class MainTask11 extends AbstractQuest {
 		super.addToWorld();
 		fillQuestInfo(
 				"Wojownik Faumonii 11",
-				"Mistrz Faumonii XI ma dla ciebie jedenaste główne zadanie które pomoże ci zostać wielkim wojownikiem Faumonii.",
+				"Mistrz Faumonii ma dla ciebie jedenaste główne zadanie które pomoże ci zostać wielkim wojownikiem Faumonii.",
 				false);
 		step_1();
 		step_2();
@@ -188,7 +189,7 @@ public class MainTask11 extends AbstractQuest {
 
 	@Override
 	public String getNPCName() {
-		return "Mistrz Faumonii XI";
+		return MasterStage.NPC_NAME;
 	}
 	
 	@Override

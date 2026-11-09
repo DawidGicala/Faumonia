@@ -12,6 +12,8 @@
  ***************************************************************************/
 package games.stendhal.server.maps.quests;
 
+import games.stendhal.server.entity.npc.action.DialogueRewardAction;
+
 import games.stendhal.common.Rand;
 import games.stendhal.common.grammar.Grammar;
 import games.stendhal.common.parser.Sentence;
@@ -99,7 +101,7 @@ public class CoalForHaunchy extends AbstractQuest {
 				Arrays.asList("węgiel","węgla"),
 				null,
 				ConversationStates.QUEST_OFFERED,
-				"Węgiel nie jest łatwo znaleść. Normalnie możesz go znaleść pod ziemią, ale może będziesz miał szczęście i znajdziesz w tunelach starej kopalni Semos...",
+				"Węgla szukaj pod ziemią, między innymi w starej kopalni Semos. Potrzebuję dwudziestu pięciu sztuk, żeby utrzymać równy żar w grillu. Polana nie zastąpią mi tej dostawy.",
 				null);
 
         // player has completed the quest (doesn't happen here)
@@ -130,14 +132,14 @@ public class CoalForHaunchy extends AbstractQuest {
 		npc.add(ConversationStates.QUEST_OFFERED,
 				ConversationPhrases.YES_MESSAGES, null,
 				ConversationStates.ATTENDING,
-				"Dziękuję! Jeżeli znalazłeś 25 kawałków to powiedz mi #węgiel to będę widział, że masz. Będę wtedy pewien, że będę mógł ci dać pyszną nagrodę.",
-				new SetQuestAndModifyKarmaAction(QUEST_SLOT, "start", 10.0));
+				"Nazbieraj dwadzieścia pięć sztuk węgla i przynieś je wszystkie razem. Gdy wrócisz, powiedz #węgiel, a od razu sprawdzę dostawę. Odwdzięczę się porcją steków z grilla.",
+				DialogueRewardAction.karma(new SetQuestAndModifyKarmaAction(QUEST_SLOT, "start", 10.0)));
 
 		// Player says no, they've lost karma.
 		npc.add(ConversationStates.QUEST_OFFERED,
 				ConversationPhrases.NO_MESSAGES, null, ConversationStates.IDLE,
 				"Oh nie ważne. Myślałem, że kochasz grillowane steki jak ja. Żegnaj.",
-				new SetQuestAndModifyKarmaAction(QUEST_SLOT, "rejected", -10.0));
+				DialogueRewardAction.karma(new SetQuestAndModifyKarmaAction(QUEST_SLOT, "rejected", -10.0)));
 	}
 
 	/*
@@ -161,19 +163,19 @@ public class CoalForHaunchy extends AbstractQuest {
 				null,
 				new MultipleActions(
 						new DropItemAction("węgiel",25), 
-						new IncreaseXPAction(5000),
-						new IncreaseAtkXPAction(2000),
-						new IncreaseDefXPAction(2000),
+						DialogueRewardAction.xp(5000),
+						DialogueRewardAction.attackXP(2000),
+						DialogueRewardAction.defenseXP(2000),
 						new ChatAction() {
 							public void fire(final Player player,
 									final Sentence sentence,
 									final EventRaiser npc) {
 								int grilledsteakAmount = Rand.rand(20) + 1;
-								new EquipItemAction("grillowany stek", grilledsteakAmount, true).fire(player, sentence, npc);
+								DialogueRewardAction.item("grillowany stek", grilledsteakAmount, true).fire(player, sentence, npc);
 								npc.say("Dziękuję!! Przyjmij te " + Grammar.thisthese(grilledsteakAmount) + " " +
 										Grammar.quantityNumberStrNoun(grilledsteakAmount, "grillowany stek") + " z mojego grilla!");
-								new SetQuestAndModifyKarmaAction(getSlotName(), "waiting;" 
-										+ System.currentTimeMillis(), 10.0).fire(player, sentence, npc);
+								DialogueRewardAction.karma(new SetQuestAndModifyKarmaAction(getSlotName(), "waiting;" 
+										+ System.currentTimeMillis(), 10.0)).fire(player, sentence, npc);
 							}
 						}));
 
@@ -182,7 +184,7 @@ public class CoalForHaunchy extends AbstractQuest {
 				ConversationStates.ATTENDING, triggers,
 				new AndCondition(new QuestInStateCondition(QUEST_SLOT, "start"), new NotCondition(new PlayerHasItemWithHimCondition("węgiel",25))),
 				ConversationStates.ATTENDING,
-				"Nie masz wystaczającej ilości węgla. Proszę idź i wydobądź kilka kawałków.",
+				"Do tej dostawy potrzeba dwudziestu pięciu sztuk węgla. Zachowaj zebrane kawałki i donieś resztę; dopiero wtedy zabiorę cały zapas. Węgla możesz szukać w starej kopalni Semos.",
 				null);
 
 		npc.add(
@@ -198,7 +200,7 @@ public class CoalForHaunchy extends AbstractQuest {
 		super.addToWorld();
 		fillQuestInfo(
 				"Węgiel dla Haunchy",
-				"Haunchy Meatoch boi się o swój ogień w grillu. Czy zapas węgla wystarczy nim jego steki będą gotowe czy będzie potrzebowal więcej?",
+				"Haunchy Meatoch pilnuje grilla na rynku w Ados, lecz kończy mu się węgiel. Przynieś zapas, zanim żar zgaśnie pod przygotowywanymi stekami.",
 				true);
 		offerQuestStep();
 		bringCoalStep();

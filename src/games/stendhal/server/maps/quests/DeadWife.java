@@ -61,16 +61,16 @@ public class DeadWife extends AbstractQuest {
 		if (!player.hasQuest(QUEST_SLOT)) {
 			return res;
 		}
-		res.add("");
+		res.add("Adalbert z Kirdneh prosi o odzyskanie pamiątek po żonie: krwawej sukni i krwawej obrączki.");
 		final String questState = player.getQuest(QUEST_SLOT);
 		if ("rejected".equals(questState)) {
-			res.add("");
+			res.add("Nie podejmuję się jeszcze szukania pamiątek. Mogę wrócić do Adalberta.");
 		} else if (!"done".equals(questState)) {
 			final ItemCollection missingItems = new ItemCollection();
 			missingItems.addFromQuestStateString(questState);
-			res.add(" " + Grammar.enumerateCollection(missingItems.toStringList()) + ".");
+			res.add("Do odzyskania pozostało: " + Grammar.enumerateCollection(missingItems.toStringList()) + ".");
 		} else {
-			res.add("");
+			res.add("Oddałem obie pamiątki. Adalbert przekazał mi krwawy pierścień oraz 25000 XP postaci, 5000 XP ataku, 5000 XP obrony i 10 karmy.");
 		}
 		return res;
 	}
@@ -85,20 +85,20 @@ public class DeadWife extends AbstractQuest {
 					new QuestNotStartedCondition(QUEST_SLOT),
 					new NotCondition(new QuestInStateCondition(QUEST_SLOT,"rejected"))),
 			ConversationStates.QUESTION_1, 
-			"Hej, szukasz zadania? ", null);
+			"Przyszedłeś zapytać, czy potrzebuję pomocy? Nie chodzi o zwykłe zamówienie. Chciałbym odzyskać pamiątki po mojej żonie.", null);
 
 		npc.add(ConversationStates.ATTENDING, 
 			ConversationPhrases.QUEST_MESSAGES,
 			new QuestInStateCondition(QUEST_SLOT,"rejected"),
 			ConversationStates.QUEST_OFFERED, 
-			"Hej, chcesz mi pomóc?", null);
+			"Niełatwo prosić obcego o tak osobistą przysługę. Chodzi o rzeczy mojej zmarłej żony, jedyne pamiątki, jakie mogą po niej pozostać. Zechcesz mnie wysłuchać?", null);
 
 		npc.add(
 			ConversationStates.QUESTION_1,
 			ConversationPhrases.YES_MESSAGES,
 			new QuestNotStartedCondition(QUEST_SLOT),
 			ConversationStates.ATTENDING,
-			"Chciałbyś mi #pomóc w odzyskaniu rzeczy mojej żony?",
+			"Dziękuję, że chcesz mnie wysłuchać. Moja żona nie wróciła z ostatniej podróży i trudno mi pogodzić się z tym, że nie zostało po niej nic osobistego. Jeśli możesz mi #pomóc, opowiem o jej rzeczach.",
 			null);
 
 		npc.add(
@@ -106,15 +106,15 @@ public class DeadWife extends AbstractQuest {
 			ConversationPhrases.NO_MESSAGES,
 			new QuestNotStartedCondition(QUEST_SLOT),
 			ConversationStates.ATTENDING,
-			"Jestem Adalbert, wdowiec. Moja żona zmarła w górach Semos i nie mam po niej żadnej pamiątki. Może chciałbyś mi #pomóc?",
+			"Nazywam się Adalbert. Moja żona zginęła podczas wyprawy w góry Semos, a ja nie mam nawet drobiazgu, który mógłbym po niej zachować. Jeśli możesz mi #pomóc, opowiem, czego szukam.",
 			null);
 
 		npc.add(
 			ConversationStates.ATTENDING,
-			Arrays.asList("żona", "pomóc", "zadanie"),
+			Arrays.asList("żona", "pomóc"),
 			new QuestNotStartedCondition(QUEST_SLOT),
 			ConversationStates.QUEST_OFFERED,
-			"Moja żona udała się na podróż w góry Semos i została zabita przez duchy. Mógłbyś przynieść mi jej rzeczy, które po niej zostały?",
+			"Moja żona wyruszyła w góry Semos i nie wróciła po spotkaniu z duchami. Szukam jej krwawej sukni i krwawej obrączki; nie mają dla mnie ceny, są po prostu jej. Spróbujesz odnaleźć te dwie pamiątki?",
 			null);
 
 		npc.add(
@@ -124,7 +124,7 @@ public class DeadWife extends AbstractQuest {
 			ConversationStates.ATTENDING,
 			null,
 			new MultipleActions(new SetQuestAndModifyKarmaAction(QUEST_SLOT, NEEDED_ITEMS, 5.0),
-								new SayRequiredItemsFromCollectionAction(QUEST_SLOT, "Dziękuję! Przynieś mi rzeczy mojej żony: [items].")));
+								new SayRequiredItemsFromCollectionAction(QUEST_SLOT, "Dziękuję, że chcesz spróbować. Brakuje mi jeszcze: [items]. Możesz przynieść każdą pamiątkę osobno; nie zapomnę, co już zostało odzyskane.")));
 
 		npc.add(
 			ConversationStates.QUEST_OFFERED,
@@ -143,11 +143,11 @@ public class DeadWife extends AbstractQuest {
 				new AndCondition(new GreetingMatchesNameCondition(npc.getName()),
 						new QuestActiveCondition(QUEST_SLOT)),
 				ConversationStates.ATTENDING,
-				"Witaj. Czy masz to o co #prosiłem?",
+				"Witaj ponownie. Każdy powrót z gór daje mi odrobinę nadziei. Czy udało się odnaleźć coś, o co #prosiłem?",
 				null);
 
 		/* player asks what exactly is missing (says ingredients) */
-		npc.add(ConversationStates.ATTENDING, "prosiłem", null,
+		npc.add(ConversationStates.ATTENDING, "prosiłem", new QuestActiveCondition(QUEST_SLOT),
 				ConversationStates.QUESTION_2, null,
 				new SayRequiredItemsFromCollectionAction(QUEST_SLOT, "Potrzebuję [items]. Czy masz może coś z tych rzeczy ze sobą?"));
 
@@ -165,7 +165,7 @@ public class DeadWife extends AbstractQuest {
 
 		ChatAction completeAction = new  MultipleActions(
 				new SetQuestAction(QUEST_SLOT, "done"),
-				new SayTextAction("Dziękuję! Proszę przyjmij ten skromny podarek, dostałem go w spadku od mojego ojca..."),
+				new SayTextAction("To jej rzeczy. Po tylu dniach czekania wreszcie mogę coś po niej zachować. Przyjmij krwawy pierścień po moim ojcu; chcę w ten sposób podziękować ci za pomoc."),
 				new IncreaseXPAction(25000),
 				new IncreaseAtkXPAction(5000),
 				new IncreaseDefXPAction(5000),
@@ -196,8 +196,8 @@ public class DeadWife extends AbstractQuest {
 					ConversationStates.QUESTION_2, null,
 					new CollectRequestedItemsAction(
 							itemName, QUEST_SLOT,
-							"Dobra, masz coś jeszcze?"," " +
-							Grammar.quantityplnoun(entry.getValue(), itemName) + " już przyniosłeś dla mnie, ale dziękuję i tak.",
+							("krwawa suknia".equals(itemName) ? "Poznaję tę suknię. Dziękuję, że udało ci się ją odnaleźć. Masz też obrączkę?" : "To jej obrączka. Zachowam ją przy sobie. Udało ci się odnaleźć także suknię?"),
+                            "Tę pamiątkę już mi przyniosłeś. Jest u mnie, nie musisz szukać drugiej.",
 							completeAction, ConversationStates.ATTENDING));
 		}
 
@@ -205,7 +205,7 @@ public class DeadWife extends AbstractQuest {
 		npc.add(ConversationStates.ATTENDING, ConversationPhrases.NO_MESSAGES,
 				new QuestActiveCondition(QUEST_SLOT),
 				ConversationStates.ATTENDING,
-				"Dobrze i daj mi znać jeśli mogę ci kiedyś #pomóc..", 
+				"Rozumiem. Jeśli odnajdziesz którąś z pamiątek, przynieś ją do mnie.", 
 				null);
 
 		/* player says he didn't bring any items to different question */
@@ -213,7 +213,7 @@ public class DeadWife extends AbstractQuest {
 				ConversationPhrases.NO_MESSAGES,
 				new QuestActiveCondition(QUEST_SLOT),
 				ConversationStates.ATTENDING,
-				"Daj mi znać jeśli mogę pomóc w czymkolwiek innym.", null);
+				"Poczekam. Nie musisz przynosić obu pamiątek naraz.", null);
 
     /* says quest and quest can't be started nor is active*/
 		npc.add(ConversationStates.ATTENDING, 
@@ -229,7 +229,7 @@ public class DeadWife extends AbstractQuest {
 		super.addToWorld();
 		fillQuestInfo(
 				"Przedmioty dla Adalberta",
-				"",
+				"Adalbert z Kirdneh stracił żonę podczas jej wyprawy w góry Semos. Pomóż mu odzyskać dwie pamiątki: krwawą suknię i krwawą obrączkę.",
 				true);
 		prepareRequestingStep();
 		prepareBringingStep();
@@ -264,4 +264,13 @@ public class DeadWife extends AbstractQuest {
 	public String getNPCName() {
 		return "Adalbert";
 	}
+
+    public static java.util.Map<String,Integer> getRequiredItems(){
+        games.stendhal.server.util.ItemCollection original=new games.stendhal.server.util.ItemCollection();
+        original.addFromQuestStateString(NEEDED_ITEMS);
+        java.util.Map<String,Integer> items=new java.util.LinkedHashMap<String,Integer>();
+        for(java.util.Map.Entry<String,Integer> e:original.entrySet())items.put(e.getKey(),e.getValue());
+        return java.util.Collections.unmodifiableMap(items);
+    }
+
 }

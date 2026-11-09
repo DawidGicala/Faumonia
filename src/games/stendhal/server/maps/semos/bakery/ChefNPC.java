@@ -80,8 +80,10 @@ public class ChefNPC implements ZoneConfigurator  {
 
 			@Override
 			public void createDialog() {
-				addJob("Jam jest tutejszym piekarzem. Jedną z usług jakie prowadzę na tym terenie jest produkcja placków o niezwykłej nazwie #pizza . Zanim rozpętała się tu wojna, a oddziały z Ados zablokowały drogi wielu było chętnych na te smaczne placki. Ale dzięki temu mam więcej czasu na produkcję kanapek dla naszych drogich klientów, którzy chwalą sobie ich smak!");
-				addHelp("Jeśli chcesz zarobić trochę dukatów wyświadcz mi #przysługę i dostarcz to ciasto co zwą #pizza . Moja siostra #Sally robiła to do tej pory, ale teraz jest gdzieś na biwaku.");
+                games.stendhal.server.entity.npc.dialogue.JourneyDialogueTopics.install(this);
+                addReply("tematy", "Możemy wrócić do twojej sprawy albo porozmawiać o czymś innym. Co chcesz wiedzieć?");
+				addJob("Prowadzę piekarnię i przygotowuję kanapki oraz pizzę. Kiedyś Sally pomagała mi z dostawami, ale teraz biwakuje nad rzeką Orril. Potrzebuję więc kogoś, kto zna drogi i nie pozwoli wystygnąć zamówieniu.");
+				addHelp("Potrzebuję kogoś, kto dostarczy #pizzę, zanim wystygnie. Kiedyś zajmowała się tym moja siostra #Sally, ale teraz biwakuje nad rzeką Orril. Zapytaj o #przysługę, a sprawdzę, kto czeka na zamówienie.");
 				addReply("chleb", "Tym w naszej firmie zajmuje się Erna. Podejdź do niej i porozmawiaj.");
 				addReply("ser",
 				"Z serem mamy spore trudności, bo mieliśmy niedawno plagę szczurów. Zastanawia mnie jak te wstrętne szkodniki zabrały wszystko ze sobą? Dlatego do kanapek dodajemy oscypek z mleka naszych owiec.");
@@ -117,7 +119,7 @@ public class ChefNPC implements ZoneConfigurator  {
 			}};
 			npc.setPosition(15, 3);
 			npc.setEntityClass("chefnpc");
-			npc.setDescription("Oto Leander. Jego praca daje mu piękny zapach.");
+			npc.setDescription("Widzisz Leandra, piekarza z Semos. Pachnie świeżym ciastem i sprawdza kolejne zamówienia na pizzę.");
 			zone.add(npc);		
 	}
 }

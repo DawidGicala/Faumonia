@@ -77,7 +77,7 @@ import java.util.Map;
  * REPETITIONS:
  * <ul><li> once a week</ul>
  */
-public class WeeklyCollectorQuest extends AbstractQuest {
+public class WeeklyCollectorQuest extends AbstractQuest implements games.stendhal.server.core.rp.quest.NativeCollectionDetails {
 
 	private static final String QUEST_SLOT = "weekly_collector";
 	
@@ -129,8 +129,7 @@ public class WeeklyCollectorQuest extends AbstractQuest {
 		// common place to get the start quest actions as we can both starts it and abort and start again
 		
 		final List<ChatAction> actions = new LinkedList<ChatAction>();
-		actions.add(new StartRecordingRandomItemCollectionAction(QUEST_SLOT,0,items,"Chcę, mieć wszystkie rzadkie przedmioty w tej krainie! Dostarcz mi [item]"
-				+ " i powiedz #'załatwione', gdy przyniesiesz."));	
+		actions.add(new StartRecordingRandomItemCollectionAction(QUEST_SLOT, 0, items, "Każdy rzadki przedmiot ma u mnie własne miejsce, lecz kolekcja wciąż ma luki. Tym razem szukam [item]. Przynieś ten konkretny okaz i zgłoś #zakończone, a przygotuję zapłatę."));	
 		actions.add(new SetQuestToTimeStampAction(QUEST_SLOT, 1));
 		
 		return new MultipleActions(actions);
@@ -138,60 +137,61 @@ public class WeeklyCollectorQuest extends AbstractQuest {
 	
 	private void getQuest() {
 		final SpeakerNPC npc = npcs.get("Wandy");
-		npc.add(ConversationStates.ATTENDING, ConversationPhrases.QUEST_MESSAGES,
-				new AndCondition(new QuestActiveCondition(QUEST_SLOT),
-								 new NotCondition(new TimePassedCondition(QUEST_SLOT,1,expireDelay))), 
-				ConversationStates.ATTENDING,
-				null,
-				new SayRequiredItemAction(QUEST_SLOT,0,"Już masz zadanie przyniesienia mi [item]"
-						+ ". Powiedz #zakończone jeżeli będziesz miał  ze sobą."));
+		npc.add(ConversationStates.ATTENDING,
+            ConversationPhrases.QUEST_MESSAGES,
+            new AndCondition(new QuestActiveCondition(QUEST_SLOT),
+								 new NotCondition(new TimePassedCondition(QUEST_SLOT,1,expireDelay))),
+            ConversationStates.ATTENDING,
+            null,
+            new SayRequiredItemAction(QUEST_SLOT, 0, "W mojej kolekcji wciąż brakuje tego okazu: [item]. Przynieś go i powiedz #zakończone; nowe poszukiwania ustalimy później."));
 		
-		npc.add(ConversationStates.ATTENDING, ConversationPhrases.QUEST_MESSAGES,
-				new AndCondition(new QuestActiveCondition(QUEST_SLOT),
-								 new TimePassedCondition(QUEST_SLOT,1,expireDelay)), 
-				ConversationStates.ATTENDING,
-				null,
-				new SayRequiredItemAction(QUEST_SLOT,0,"Już masz zadanie przyniesienia mi [item]"
-						+ ". Powiedz #zakończone jeżeli będziesz miał  ze sobą. Być może teraz ten przedmiot występuje rzadko. Mogę dać Tobie #inne zadanie lub możesz wrócić z tym, o które prosiłem Cię wcześniej."));
+		npc.add(ConversationStates.ATTENDING,
+            ConversationPhrases.QUEST_MESSAGES,
+            new AndCondition(new QuestActiveCondition(QUEST_SLOT),
+								 new TimePassedCondition(QUEST_SLOT,1,expireDelay)),
+            ConversationStates.ATTENDING,
+            null,
+            new SayRequiredItemAction(QUEST_SLOT, 0, "Wciąż szukam [item], ale rozumiem, że trudno trafić na niektóre okazy. Możemy wybrać #inne zlecenie albo pozostać przy obecnym; gotową dostawę zgłoś słowem #zakończone."));
 	
-		npc.add(ConversationStates.ATTENDING, ConversationPhrases.QUEST_MESSAGES,
-				new AndCondition(new QuestCompletedCondition(QUEST_SLOT),
-								 new NotCondition(new TimePassedCondition(QUEST_SLOT,1,delay))), 
-				ConversationStates.ATTENDING,
-				null,
-				new SayTimeRemainingAction(QUEST_SLOT,1, delay, "Na razie nic nie potrzebuje. Wróć za "));
+		npc.add(ConversationStates.ATTENDING,
+            ConversationPhrases.QUEST_MESSAGES,
+            new AndCondition(new QuestCompletedCondition(QUEST_SLOT),
+								 new NotCondition(new TimePassedCondition(QUEST_SLOT,1,delay))),
+            ConversationStates.ATTENDING,
+            null,
+            new SayTimeRemainingAction(QUEST_SLOT,1, delay, "Obecne znalezisko ma już miejsce w kolekcji. O następnym porozmawiamy za "));
 		
 		
 		final List<ChatAction> actions = new LinkedList<ChatAction>();
-		actions.add(new StartRecordingRandomItemCollectionAction(QUEST_SLOT,0,items,"Chcę, mieć wszystkie rzadkie przedmioty w tej krainie! Proszę przynieś [item]"
-				+ " i powiedz #zakończone, gdy przyniesiesz."));
+		actions.add(new StartRecordingRandomItemCollectionAction(QUEST_SLOT, 0, items, "Każdy rzadki przedmiot ma u mnie własne miejsce, lecz kolekcja wciąż ma luki. Tym razem szukam [item]. Przynieś ten konkretny okaz i zgłoś #zakończone, a przygotuję zapłatę."));
 		actions.add(new SetQuestToTimeStampAction(QUEST_SLOT, 1));
 		
-		npc.add(ConversationStates.ATTENDING, ConversationPhrases.QUEST_MESSAGES,
-				new OrCondition(new QuestNotStartedCondition(QUEST_SLOT),
+		npc.add(ConversationStates.ATTENDING,
+            ConversationPhrases.QUEST_MESSAGES,
+            new OrCondition(new QuestNotStartedCondition(QUEST_SLOT),
 								new AndCondition(new QuestCompletedCondition(QUEST_SLOT),
-												 new TimePassedCondition(QUEST_SLOT,1,delay))), 
-				ConversationStates.ATTENDING,
-				null,
-				startQuestAction());
+												 new TimePassedCondition(QUEST_SLOT,1,delay))),
+            ConversationStates.ATTENDING,
+            null,
+            startQuestAction());
 	}
 	
 	private void completeQuest() {
 		final SpeakerNPC npc = npcs.get("Wandy");
 		
 		npc.add(ConversationStates.ATTENDING,
-				ConversationPhrases.FINISH_MESSAGES,
-				new QuestNotStartedCondition(QUEST_SLOT),
-				ConversationStates.ATTENDING, 
-				"Nie pamiętam, abym dawał Tobie #zadanie.",
-				null);
+            ConversationPhrases.FINISH_MESSAGES,
+            new QuestNotStartedCondition(QUEST_SLOT),
+            ConversationStates.ATTENDING,
+            "Nie pamiętam, abym dawał Tobie #zadanie.",
+            null);
 		
 		npc.add(ConversationStates.ATTENDING,
-				ConversationPhrases.FINISH_MESSAGES,
-				new QuestCompletedCondition(QUEST_SLOT),
-				ConversationStates.ATTENDING, 
-				"Już ukończyłeś ostatnie zadanie, które Ci dałem.",
-				null);
+            ConversationPhrases.FINISH_MESSAGES,
+            new QuestCompletedCondition(QUEST_SLOT),
+            ConversationStates.ATTENDING,
+            "Już ukończyłeś ostatnie zadanie, które Ci dałem.",
+            null);
 		
 		final List<ChatAction> actions = new LinkedList<ChatAction>();
 		actions.add(new DropRecordedItemAction(QUEST_SLOT,0));
@@ -210,26 +210,25 @@ public class WeeklyCollectorQuest extends AbstractQuest {
 				goldamount = 100 * Rand.roll1D6();
 				money.setQuantity(goldamount);
 				player.equipOrPutOnGround(money);
-				raiser.say("Wspaniale! Oto " + Integer.toString(goldamount) + " money na pokrycie wydatków.");
+				raiser.say("Właśnie takiego uzupełnienia potrzebowała moja kolekcja. Dziękuję za wytrwałość w poszukiwaniach. Pokryję ustalone wydatki. Otrzymujesz " + goldamount + " monet.");
 			}
 		});
 		
 		npc.add(ConversationStates.ATTENDING,
-				ConversationPhrases.FINISH_MESSAGES, 
-				new AndCondition(new QuestActiveCondition(QUEST_SLOT),
+            ConversationPhrases.FINISH_MESSAGES,
+            new AndCondition(new QuestActiveCondition(QUEST_SLOT),
 								 new PlayerHasRecordedItemWithHimCondition(QUEST_SLOT,0)),
-				ConversationStates.ATTENDING, 
-				null,
-				new MultipleActions(actions));
+            ConversationStates.ATTENDING,
+            null,
+            new MultipleActions(actions));
 		
 		npc.add(ConversationStates.ATTENDING,
-				ConversationPhrases.FINISH_MESSAGES,
-				new AndCondition(new QuestActiveCondition(QUEST_SLOT),
+            ConversationPhrases.FINISH_MESSAGES,
+            new AndCondition(new QuestActiveCondition(QUEST_SLOT),
 								 new NotCondition(new PlayerHasRecordedItemWithHimCondition(QUEST_SLOT,0))),
-				ConversationStates.ATTENDING, 
-				null,
-				new SayRequiredItemAction(QUEST_SLOT,0,"Nie masz ze sobą [item]"
-						+ " Zdobądź i powiedz wtedy #zakończone."));
+            ConversationStates.ATTENDING,
+            null,
+            new SayRequiredItemAction(QUEST_SLOT, 0, "Nie masz jeszcze całego uzgodnionego zestawu: [item]. Przyjmę go razem, żeby uzupełnić tę część kolekcji. Wróć z kompletem i powiedz #zakończone."));
 		
 	}
 	
@@ -237,27 +236,27 @@ public class WeeklyCollectorQuest extends AbstractQuest {
 		final SpeakerNPC npc = npcs.get("Wandy");
 		
 		npc.add(ConversationStates.ATTENDING,
-				ConversationPhrases.ABORT_MESSAGES,
-				new AndCondition(new QuestActiveCondition(QUEST_SLOT),
-						 		 new TimePassedCondition(QUEST_SLOT,1,expireDelay)), 
-				ConversationStates.ATTENDING, 
-				null, 
-				startQuestAction());
+            ConversationPhrases.ABORT_MESSAGES,
+            new AndCondition(new QuestActiveCondition(QUEST_SLOT),
+						 		 new TimePassedCondition(QUEST_SLOT,1,expireDelay)),
+            ConversationStates.ATTENDING,
+            null,
+            startQuestAction());
 		
 		npc.add(ConversationStates.ATTENDING,
-				ConversationPhrases.ABORT_MESSAGES,
-				new AndCondition(new QuestActiveCondition(QUEST_SLOT),
-						 		 new NotCondition(new TimePassedCondition(QUEST_SLOT,1,expireDelay))), 
-				ConversationStates.ATTENDING, 
-				"Nie minęło tak dużo czasu od rozpoczęcia zadania. Nie powinieneś się tak szybko poddawać.", 
-				null);
+            ConversationPhrases.ABORT_MESSAGES,
+            new AndCondition(new QuestActiveCondition(QUEST_SLOT),
+						 		 new NotCondition(new TimePassedCondition(QUEST_SLOT,1,expireDelay))),
+            ConversationStates.ATTENDING,
+            "Jeszcze poczekajmy z wyborem innego okazu. Obecna prośba pozostaje aktualna.",
+            null);
 		
 		npc.add(ConversationStates.ATTENDING,
-				ConversationPhrases.ABORT_MESSAGES,
-				new QuestNotActiveCondition(QUEST_SLOT),
-				ConversationStates.ATTENDING, 
-				"Obawiam się, że jeszcze nie dałem Tobie #zadania.", 
-				null);
+            ConversationPhrases.ABORT_MESSAGES,
+            new QuestNotActiveCondition(QUEST_SLOT),
+            ConversationStates.ATTENDING,
+            "Obawiam się, że jeszcze nie dałem Tobie #zadania.",
+            null);
 		
 	}
 
@@ -268,47 +267,15 @@ public class WeeklyCollectorQuest extends AbstractQuest {
 	
 	@Override
 	public List<String> getHistory(final Player player) {
-		final List<String> res = new ArrayList<String>();
-		if (!player.hasQuest(QUEST_SLOT)) {
-			return res;
-		}
-		res.add("Spotkałem Wandego w jednym z budynków stolicy.");
-		final String questState = player.getQuest(QUEST_SLOT);
-		if ("rejected".equals(questState)) {
-			res.add("Nie chcę pomóc Wandemu.");
-			return res;
-		}
-		res.add("Chcę pomóc Wandemu i przynieść coś wartościowego.");
-		if (player.hasQuest(QUEST_SLOT) && !player.isQuestCompleted(QUEST_SLOT)) {
-			String questItem = player.getRequiredItemName(QUEST_SLOT,0);
-			int amount = player.getRequiredItemQuantity(QUEST_SLOT,0);
-			if (!player.isEquipped(questItem, amount)) {
-				res.add(String.format("Zostałem poproszony, aby przynieść " +Grammar.quantityplnoun(amount, questItem, "") + " do Wandego w Ados."));
-			} else {
-				res.add(String.format("Mam " + Grammar.quantityplnoun(amount, questItem, "a") + " dla Wandego w Ados. Muszę to im zanieść."));
-			}
-		}
-		if (isRepeatable(player)) {
-			res.add("Zaniosłem wartościowy przedmiot do Wandya i zlecił mi znalezienie następnego.");
-		} else if (isCompleted(player)) {
-			res.add("Pomogłem Wandemu. Wróce do Wandego za tydzień i przyniose mu kolejny przedmiot.");
-		}
-		// add to history how often player helped Wandy so far
-		final int repetitions = player.getNumberOfRepetitions(getSlotName(), 2);
-		if (repetitions > 0) {
-			res.add("Przyniosłem już "
-					+ Grammar.quantityplnoun(repetitions, "") + " przedmiotów Wandemu.");
-		}
-
-		return res;
-	}
+        return games.stendhal.server.core.rp.quest.CollectionQuestProgress.history(this, player);
+    }
 	
 	@Override
 	public void addToWorld() {
 		super.addToWorld();
 		fillQuestInfo(
 				"Wandy potrzebuje pomocy!",
-				"Wandy, kolekcjoner w Ados, zbiera rzadkie przedmioty i potrzebuje mojej pomocy raz na tydzień.",
+				"Wandy z Ados szuka rzadkich przedmiotów do kolekcji. Uzgodnij z nim konkretny okaz; po wykonaniu zlecenia kolejne będzie dostępne po tygodniu.",
 				true);
 		buildItemsMap();
 		
@@ -343,4 +310,11 @@ public class WeeklyCollectorQuest extends AbstractQuest {
 	public String getNPCName() {
 		return "Wandy";
 	}
+
+
+    public String getCollectionKind(){return "random";}
+    public java.util.Map<String,Integer> getCollectionItems(){return new java.util.TreeMap<String,Integer>(items);}
+    public String getCollectionHint(){return "Liczy się tylko przedmiot i ilość zapisane w aktualnym zamówieniu. Przynieś całą dostawę i zgłoś jej zakończenie. Kolejne zlecenie oraz wymiana trudnego zamówienia są dostępne po upływie odpowiedniego czasu.";}
+    public int getCollectionWait(){return delay;} public int getCollectionExpiry(){return expireDelay;}
+
 }

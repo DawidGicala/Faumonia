@@ -64,6 +64,7 @@ public class BlacksmithNPC implements ZoneConfigurator  {
 
 			@Override
 			public void createDialog() {
+                addReply("tematy", "Mogę opowiedzieć o mojej pracy, odlać żelazo lub pokazać narzędzia. Jest też sprawa mojego brata Joshui, jeśli o niego pytasz.");
 				addReply("polano",
 				"Potrzebuję drewna do utrzymania ognia w palenisku. Znajdziesz wiele leżących kłód w lasach dookoła miasta.");
 
@@ -79,9 +80,9 @@ public class BlacksmithNPC implements ZoneConfigurator  {
 				addReply(Arrays.asList("bobbin", "szpulka do maszyny", "szpulka"),"#Handluję narzędziami, ale nie mam szpulek. Są dla mnie zbyt skomplikowane do zrobienia. Spróbuj u krasnali.");
 				addReply(Arrays.asList("oil", "can of oil", "olejek"),"Rybacy nas w to zaopatrują.");
 
-				addHelp("Jeśli przyniesiesz mi #polano i #'rudę żelaza', mogę odlać dla Ciebie sztabę żelaza. Możesz zanieść ją do krasnoludów. Dobrze płacą za taką zdobycz. Powiedz tylko #odlej.");
-				addJob("Witaj. Niestety z powodu trwającej wojny nie wolno mi sprzedawać broni nikomu spoza grona oficjalnych wojskowych. Mogę odlać dla Ciebie żelazo, a może interesuję Cię moja #oferta specjalna? Powiedz tylko #odlej.");
-				addGoodbye();
+				addHelp("Na jedną sztabę żelaza potrzebuję jednego polana i jednej rudy żelaza. Przynieś oba materiały, powiedz #odlej i daj mi pięć minut na pracę. Drewno zbierzesz w okolicznych lasach, a rudy szukaj w górach na zachód od Orril, przy kopalni krasnoludów.");
+				addJob("Jestem kowalem i przy dobrej robocie nie uznaję drogi na skróty. Z powodu wojny broń mogę sprzedawać tylko wojskowym, ale dla podróżnych mam narzędzia i odlewam żelazo. Zapytaj o #ofertę albo powiedz #odlej.");
+				addGoodbye("Do widzenia. Niech narzędzia dobrze ci służą.");
 				new SellerAdder().addSeller(this, new SellerBehaviour(SingletonRepository.getShopList().get("selltools")));
 
 		// Xoderos casts iron if you bring him wood and iron ore.
@@ -93,13 +94,13 @@ public class BlacksmithNPC implements ZoneConfigurator  {
 				 Arrays.asList("cast", "odlej"), "żelazo", requiredResources, 5 * 60);
 
 				new ProducerAdder().addProducer(this, behaviour,
-				"Witaj! Przykro mi to mówić, ale z powodu trwającej wojny nie wolno mi sprzedawać broni nikomu spoza grona oficjalnych wojskowych. Mogę odlać dla Ciebie żelazo, a może interesuję Cię moja #oferta specjalna? Powiedz tylko #odlej.");
+				"Witaj w kuźni. Broń jest teraz zarezerwowana dla wojskowych, ale mogę pokazać narzędzia z mojej #oferty albo odlać żelazo z twoich materiałów. Jeśli chodzi o odlew, powiedz #odlej.");
 
 
 			}};
 			npc.setPosition(23, 12);
 			npc.setEntityClass("blacksmithnpc");
-			npc.setDescription("Oto Xoderos, silny kowal Semos.");
+			npc.setDescription("Widzisz Xoderosa, krzepkiego kowala z Semos. Nawet podczas rozmowy zerka na palenisko, pilnując żaru.");
 			zone.add(npc);
 	}
 }

@@ -52,6 +52,7 @@ public class UrzednikFadoNPC implements ZoneConfigurator {
 
 			@Override
 			protected void createDialog() {
+                games.stendhal.server.entity.npc.dialogue.CollectionDialogueTopics.install(this);
 
 				final Map<String, Integer> items = new HashMap<String, Integer>();
 				items.put("zwój fado", BUYING_PRICE);
@@ -59,14 +60,14 @@ public class UrzednikFadoNPC implements ZoneConfigurator {
 				new SellerAdder().addSeller(this, new QuestCompletedSellerBehaviour(QUEST_SLOT, "Sprzedaje zwoje do miasta tylko zasłużonym mieszkańcom Fado.", items));
 				// for quest see games.stendhal.server.maps.quest.HelpMrsYeti
 				addGreeting("Dzień dobry. Witaj w mieście Fado.");
-				addJob("Aktualnie nie mamy żadnego zadania urzędowego. Mieszkańcy miasta Fado często potrzebują kogoś do pomocy, powinieneś zapytać ich o #zadanie.");
+				addJob("Sprawdzam, kto pomógł mieszkańcom Fado i zasługuje na oficjalne uznanie. Po zakończeniu wymaganych spraw pozostaje jeszcze jedna dostawa. Zasłużonym mieszkańcom sprzedaję zwoje do naszego miasta.");
 				addHelp("Miasto Fado znajduje się na południowym-wschodzie Faumonii zaraz za rzeką.");				
 				addGoodbye();
 			}
 		};
 
 		Urzędnik.setEntityClass("urzednikfadonpc");
-		Urzędnik.setDescription("Oto Urzędnik Fado. Powinieneś z nim porozmawiać i zapytać o zadanie.");
+		Urzędnik.setDescription("Widzisz urzędnika Fado. Uważnie słucha spraw mieszkańców i sprawdza ich zasługi dla miasta.");
 		Urzędnik.setPosition(12, 24);
 		Urzędnik.initHP(100);
 		zone.add(Urzędnik);

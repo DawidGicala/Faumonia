@@ -59,6 +59,8 @@ public class SheepSellerNPC implements ZoneConfigurator {
 
 			@Override
 			protected void createDialog() {
+                addReply("wskazówki", "Owca je czerwone jagody z krzewów brusznicy i trawę. Zostań obok niej, dopóki nie osiągnie wagi 100; wagę sprawdzisz przez Zobacz, a przy zmianie mapy trzymaj ją blisko siebie. Potem zaprowadź ją ścieżką na wschód do Sato i przekaż jako prezent, zamiast sprzedawać.");
+                addReply("tematy", "Możemy wrócić do twojej sprawy albo porozmawiać o czymś innym. Co chcesz wiedzieć?");
 				class SheepSellerBehaviour extends SellerBehaviour {
 					SheepSellerBehaviour(final Map<String, Integer> items) {
 						super(items);
@@ -93,7 +95,7 @@ public class SheepSellerNPC implements ZoneConfigurator {
 				items.put("sheep", BUYING_PRICE);
 
 				addGreeting();
-				addJob("Pracuję jako sprzedawca owiec.");
+				addJob("Sprzedaję owce i pomagam nowym opiekunom nauczyć się z nimi podróżować. Stado wymaga cierpliwości: najpierw nakarm zwierzę, dopiero potem myśl o zysku.");
 				addHelp("Sprzedaję owce. Aby kupić jedną wystarczy powiedzieć mi #buy #sheep. Jeżeli jesteś nowym w tym interesie to mogę Ci powiedzieć jak #podróżować z owcą, jak się nią #opiekować i powiem Ci, gdzie możesz ją #sprzedać. Jeżeli znajdziesz dziką owcę to możesz ją #przygarnąć.");
 				addGoodbye();
 				new SellerAdder().addSeller(this, new SheepSellerBehaviour(items));
@@ -109,7 +111,7 @@ public class SheepSellerNPC implements ZoneConfigurator {
 		};
 
 		npc.setEntityClass("sellernpc");
-		npc.setDescription("Nishiya patroluje ścieżki szukając owiec. Możesz kupić jedną od niego.");
+		npc.setDescription("Widzisz Nishiyę, opiekuna owiec z Semos. Krąży przy stadzie, wypatrując niesfornych jagniąt.");
 		npc.setPosition(33, 44);
 		npc.initHP(100);
 		zone.add(npc);

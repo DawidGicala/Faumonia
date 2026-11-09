@@ -72,27 +72,27 @@ import org.apache.log4j.Logger;
 				ConversationPhrases.QUEST_MESSAGES, 
 				new QuestNotStartedCondition(QUEST_SLOT),
 				ConversationStates.QUEST_OFFERED, 
-				"Na świecie istnieją trzy magiczne części, z których można stworzyć niezwykle potężną różdżkę. Te artefakty są ukryte w różnych zakątkach świata i tylko najodważniejsi zdołają je odnaleźć. Jeśli jesteś zainteresowany i chcesz podjąć się tego wyzwania, napisz #tak",
+				"Badam różdżkę Mokoszy. Do jej przywrócenia potrzebne są trzy części: uszkodzona różdżka, magiczny katalizator i kryształ mocy. Znam pierwszy trop; jeśli chcesz ruszyć ich śladem, powiedz #tak.",
 				null);
 
 		npc.add(ConversationStates.ATTENDING,
 				ConversationPhrases.QUEST_MESSAGES, 
 				new QuestCompletedCondition(QUEST_SLOT),
 				ConversationStates.ATTENDING,
-				"Gratulacje! Udało Ci się zdobyć potężną różdżkę. Pamiętaj, że z wielką mocą wiąże się wielka odpowiedzialność. Uważaj na siebie!",
+				"Różdżka Mokoszy jest już złożona. Woy'tyk i Ylrik pomogli odzyskać części, a ty dostarczyłeś wszystko do ich połączenia. Dobrze było doprowadzić tę pracę do końca.",
 				null);
 
 
 		npc.add(ConversationStates.QUEST_OFFERED,
 				ConversationPhrases.YES_MESSAGES, null,
 				ConversationStates.ATTENDING,
-				"Znam lokalizację tylko jednej z tych części - znajduje się ona na wyspie Athor. Tamtejszy czarodziej #Woy'Tyk będzie w stanie Cię poprowadzić. Powiedz mu po prostu #różdżka, a on wskaże Ci drogę. Dzięki tej części powinieneś być w stanie zlokalizować pozostałe dwie. Ruszaj bez zwłoki i nie trać czasu!",
+				"Pierwszy trop prowadzi do Woy'tyka na wyspie Athor. Porozmawiaj z nim o #różdżce; on zna los jednego z jej fragmentów. Dopiero gdy zbierzesz części, będziemy mogli ocenić, co jest potrzebne do ich połączenia.",
 				new SetQuestAndModifyKarmaAction(QUEST_SLOT, "start", 10.0));
 
 		// Player says no, they've lost karma.
 		npc.add(ConversationStates.QUEST_OFFERED,
 				ConversationPhrases.NO_MESSAGES, null, ConversationStates.IDLE,
-				"Szkoda, że nie chcesz podjąć się tego wyzwania i zdobyć tak potężnej różdżki. To Twoja strata, ale może kiedyś zmienisz zdanie.",
+				"Rozumiem. Odnalezienie części zajmie trochę czasu. Jeśli zechcesz się tym zająć, wróć, a wskażę ci pierwszy trop.",
 				new SetQuestAndModifyKarmaAction(QUEST_SLOT, "rejected", -10.0));
 	}
 
@@ -101,22 +101,22 @@ import org.apache.log4j.Logger;
 
 		npc.add(ConversationStates.ATTENDING, Arrays.asList("kawałek", "różdżka"),
 				new QuestInStateCondition(QUEST_SLOT, "start"),
-				ConversationStates.ATTENDING, "Skąd wiesz o tej potężnej broni? Nieważne... posiadam tę różdżkę, ale niestety jest uszkodzona. Jednak za jej pomocą można odnaleźć dwie pozostałe części, które przywrócą jej dawny blask. Aby udowodnić, że jesteś godzien tej różdżki, musisz przynieść mieszkańcom Wyspy Athor trochę #jedzenia. W Semos znajduje się piekarnia prowadzona przez #Leandera - on powinien pomóc Ci z tym zadaniem. Powiedz mu po prostu #jedzenie",
+				ConversationStates.ATTENDING, "Mam uszkodzoną różdżkę, której szukasz. Zanim ci ją oddam, pomóż zaopatrzyć mieszkańców Athor w jedzenie. Porozmawiaj z Leanderem w piekarni Semos o jedzeniu; przygotuje paczkę, którą przyniesiesz do mnie.",
 				new SetQuestAction(QUEST_SLOT, "first"));
 
 		npc.add(
 			ConversationStates.ATTENDING, Arrays.asList("jedzenia","jedzenie","przynieś"),
-			new NotCondition(new QuestInStateCondition(QUEST_SLOT, "first")),
+			new AndCondition(new games.stendhal.server.entity.npc.condition.OrCondition(new QuestInStateCondition(QUEST_SLOT, "first"), new QuestInStateCondition(QUEST_SLOT, "first1")), new NotCondition(new PlayerHasItemWithHimCondition("paczka jedzenia"))),
 			
 			ConversationStates.ATTENDING,
 			"Zanim dostaniesz tę różdżkę, musisz przynieść tubylcom trochę jedzenia. Pomoże Ci w tym #Leander w Semos. Powiedz mu po prostu #jedzenie.",
-			new SetQuestAction(QUEST_SLOT, "first1"),
+			null,
 			null);
 
 		npc.add(ConversationStates.ATTENDING, Arrays.asList("jedzenie","gotowe","przyniesione"),
 				new AndCondition(new QuestInStateCondition(QUEST_SLOT, "first1"),
 				new PlayerHasItemWithHimCondition("paczka jedzenia")),
-				ConversationStates.ATTENDING, "Bardzo dobrze! Teraz przynieś mi jeszcze dziesięć zwykłych różdżek - chcę nauczyć dzieci na Athor posługiwania się magią. Będę też potrzebował trochę magii - 2500 magii ziemi i 2000 magii ognia wystarczy. Powiedz #gotowe, jak wrócisz.",
+				ConversationStates.ATTENDING, "Jedzenie trafi do mieszkańców Athor, dziękuję. Do nauki młodych potrzebuję jeszcze 10 zwykłych różdżek, 2500 jednostek magii ziemi i 2000 jednostek magii płomieni. Gdy zbierzesz komplet, powiedz #gotowe.",
 				new MultipleActions(new SetQuestAction(QUEST_SLOT, "first2"), new DropItemAction("paczka jedzenia")));
 
 		npc.add(ConversationStates.ATTENDING, Arrays.asList("gotowe","przyniesione"),
@@ -150,7 +150,7 @@ import org.apache.log4j.Logger;
 																  new PlayerHasItemWithHimCondition("magia ziemi",2500),
 																  new PlayerHasItemWithHimCondition("magia płomieni", 2000),
 																  new PlayerHasItemWithHimCondition("różdżka", 10)))),
-				ConversationStates.ATTENDING, "Przynieś mi dziesięć zwykłych różdżek, 2500 jednostek magii ziemi i 2000 jednostek magii płomieni - chcę nauczyć dzieci na Athor posługiwania się magią. Pamiętaj, że magia ziemi i magii płomieni są kluczowe do naszego sukcesu. Gdy będziesz miał wszystko, wróć do mnie i powiedz #gotowe. Dzięki!", null);
+				ConversationStates.ATTENDING, "Przynieś mi dziesięć zwykłych różdżek, 2500 jednostek magii ziemi i 2000 jednostek magii płomieni - chcę nauczyć dzieci na Athor posługiwania się magią. Zwykłe różdżki posłużą dzieciom do ćwiczeń, a zapas magii do nauki. Gdy będziesz miał wszystko, wróć do mnie i powiedz #gotowe. Dzięki!", null);
 
 
 	}
@@ -160,13 +160,13 @@ import org.apache.log4j.Logger;
 	final SpeakerNPC npc = npcs.get("Leander");
 		npc.add(ConversationStates.ATTENDING, "jedzenie",
 				new QuestInStateCondition(QUEST_SLOT, "first"),
-				ConversationStates.ATTENDING, "Jak to na Athor nie ma wystarczająco jedzenia? Oczywiście, że przygotuję dla nich racje żywnościowe, ale nie mam odpowiedniej ilości składników. Sam załatwię trochę, ale Ty musisz przynieść mi 60 sztuk mięsa z kraba. To powinno załatwić sprawę. ",
+				ConversationStates.ATTENDING, "Przygotuję jedzenie dla mieszkańców Athor, ale brakuje mi mięsa z kraba. Przynieś 60 sztuk; resztą zajmę się w piekarni. Gotową paczkę zaniesiesz Woy'tykowi.",
 				new SetQuestAndModifyKarmaAction(QUEST_SLOT, "first1", 1.0));
 
 		npc.add(ConversationStates.ATTENDING, Arrays.asList("mięso", "jedzenie"),
 				new AndCondition(new QuestInStateCondition(QUEST_SLOT, "first1"),
 				new PlayerHasItemWithHimCondition("mięso z kraba",60)),
-				ConversationStates.ATTENDING, "Świetnie, widzę, że przyniosłeś 60 sztuk mięsa z kraba. Okej, przygotowałem paczkę z #jedzeniem. Teraz zanieś ją na Athor. Mieszkańcy będą Ci wdzięczni za pomoc. ",
+				ConversationStates.ATTENDING, "Mięso z kraba jest, mogę skończyć przygotowania. Oto paczka z jedzeniem dla mieszkańców Athor. Zanieś ją Woy'tykowi i powiedz #jedzenie.",
 				new MultipleActions(new SetQuestAndModifyKarmaAction(QUEST_SLOT, "first1", 1.0), new DropItemAction("mięso z kraba",60), new EquipItemAction("paczka jedzenia",1)));
 
 	}
@@ -191,13 +191,13 @@ import org.apache.log4j.Logger;
 		npc.add(ConversationStates.ATTENDING, questTrigger,
 				new AndCondition(new QuestInStateCondition(QUEST_SLOT, "gotfirstpiece"),
 								 new PlayerHasItemWithHimCondition("uszkodzona różdżka")),
-				ConversationStates.ATTENDING, "Masz uszkodzoną różdżkę? To oznacza, że znasz Woy'tyka. Słuchaj, posiadam magiczny katalizator oraz kryształ mocy, czyli elementy potrzebne do naprawienia tej różdżki. Jednak nie ma nic za darmo. Ostatnio na wschód od Kirdneh pojawiła się plaga ptaków. Są one bardzo silne i sami nie dajemy im rady. Idź i przynieś nam 40 muchomorów - tym sposobem je wytrujemy. Ja w międzyczasie popatrzę, co da się zrobić z tą różdżką. Jak wrócisz, powiedz #różdżka", 
+				ConversationStates.ATTENDING, "Widzę uszkodzoną różdżkę od Woy'tyka. Mam pasujący do niej katalizator i kryształ mocy, ale w zamian potrzebuję 40 muchomorów: ptaki na wschód od Kirdneh stały się dla nas utrapieniem i chcemy je wytruć. Gdy wrócisz z muchomorami, powiedz #różdżka.", 
 				new MultipleActions(tookpotionactions));
 
 		npc.add(ConversationStates.ATTENDING, questTrigger,
 				new AndCondition(new QuestInStateCondition(QUEST_SLOT, "ptaszory"),
 								 new PlayerHasItemWithHimCondition("muchomor",40)),
-				ConversationStates.ATTENDING, "Widzę, że masz muchomory. Doskonale! Oto obiecane części różdżki: magiczny katalizator i kryształ mocy. Wróć teraz do osoby, która wykona dla Ciebie taką różdżkę. Samaron na pewno posiada takie umiejętności. Powiedz mu #różdżka",new MultipleActions(
+				ConversationStates.ATTENDING, "To cały zapas muchomorów, o który prosiłem. Weź obiecany magiczny katalizator i kryształ mocy; uszkodzoną różdżkę też zachowaj. Zanieś wszystkie trzy części Samaronowi i powiedz #różdżka.",new MultipleActions(
 				new DropItemAction("muchomor", 40),
 				new EquipItemAction("magiczny katalizator", 1),
 				new EquipItemAction("kryształ mocy", 1),
@@ -207,7 +207,7 @@ import org.apache.log4j.Logger;
 
 		npc.add(ConversationStates.ATTENDING, questTrigger,
 				new AndCondition(new QuestInStateCondition(QUEST_SLOT, "ptaszory"),
-				new NotCondition(new PlayerHasItemWithHimCondition("muchomory",40))),
+				new NotCondition(new PlayerHasItemWithHimCondition("muchomor",40))),
 				ConversationStates.ATTENDING, "Przynieś najpierw 40 muchomorów, które obiecałeś. Potrzebujemy ich, aby poradzić sobie z plagą ptaków.",
 				null);
 		npc.add(
@@ -239,7 +239,7 @@ import org.apache.log4j.Logger;
 								 new PlayerHasItemWithHimCondition("magiczny katalizator", 1),
 								 new PlayerHasItemWithHimCondition("kryształ mocy", 1)),
 			ConversationStates.ATTENDING,
-			"Znalazłeś wszystkie trzy części! To niesamowite! Daj mi je, zacznę je studiować. Kryształ mocy zostaw na razie przy sobie - przyniesiesz mi go później. Teraz przynieś mi jeszcze diament, 1000 jednostek magii deszczu, 500 jednostek magii mroku, 250 jednostek magii światła oraz pazur zielonego, czarnego i złotego smoka. Potrzebuję również podstawę różdżki... może to być różdżka Swaroga. Bez tych składników nie będę w stanie złożyć różdżki w całość. Kiedy zdobędziesz wszystkie materiały, wróć do mnie i powiedz #różdżka",
+			"Mam już uszkodzoną różdżkę i katalizator; kryształ mocy zachowaj na końcowe łączenie. Przynieś komplet do końcowego łączenia.\nMateriały: magia deszczu - 1000; magia mroku - 500; magia światła - 250; diament - 1; pazur zielonego smoka - 1; pazur czarnego smoka - 3; pazur złotego smoka - 4; różdżka Swaroga - 1; kryształ mocy - 1.",
 			new MultipleActions(actions));
 	
 		final List<ChatAction> actions2 = new LinkedList<ChatAction>();
@@ -256,7 +256,7 @@ import org.apache.log4j.Logger;
 		actions2.add(new SetQuestAction(QUEST_SLOT, "done"));
 
 	npc.add(ConversationStates.ATTENDING, Arrays.asList("różdżka","gotowe","przyniesione"),
-								new AndCondition(
+								new AndCondition(new QuestInStateCondition(QUEST_SLOT, "killing"),
 								 new PlayerHasItemWithHimCondition("magia światła", 250),
 								 new PlayerHasItemWithHimCondition("magia deszczu", 1000),
 								 new PlayerHasItemWithHimCondition("magia mroku", 500),
@@ -264,11 +264,26 @@ import org.apache.log4j.Logger;
 								 new PlayerHasItemWithHimCondition("kryształ mocy", 1),
 								 new PlayerHasItemWithHimCondition("diament", 1),
 								 new PlayerHasItemWithHimCondition("pazur zielonego smoka", 1),
-								 new PlayerHasItemWithHimCondition("pazur czarnego smoka", 1),
-								 new PlayerHasItemWithHimCondition("pazur złotego smoka", 1)
+								 new PlayerHasItemWithHimCondition("pazur czarnego smoka", 3),
+								 new PlayerHasItemWithHimCondition("pazur złotego smoka", 4)
 								 ),
-				ConversationStates.ATTENDING, "Widzę, że masz wszystkie potrzebne materiały: diament, magia deszczu, magia mroku, magia światła oraz pazury zielonego, czarnego i złotego smoka, a także różdżkę Swaroga. To naprawdę imponujące! Poczekaj chwilę, zabiorę się za składanie... Gotowe! Proszę, oto Twoja różdżka. Wykorzystaj jej moc mądrze. ",
-				new MultipleActions(actions2));
+				ConversationStates.ATTENDING, "Wszystkie części i składniki są na miejscu, mogę dokończyć łączenie. Oto różdżka Mokoszy, owoc twojej drogi przez Athor, Semos i Kirdneh. Korzystaj z niej rozważnie; bez pomocy spotkanych ludzi nie powstałaby w tej postaci.",
+				new games.stendhal.server.entity.npc.action.QuestFeeAction(QUEST_SLOT, new MultipleActions(actions2)));
+        npc.add(ConversationStates.ATTENDING, "różdżka",
+            new AndCondition(new QuestInStateCondition(QUEST_SLOT,"killing"), new NotCondition(new AndCondition(new QuestInStateCondition(QUEST_SLOT, "killing"),
+								 new PlayerHasItemWithHimCondition("magia światła", 250),
+								 new PlayerHasItemWithHimCondition("magia deszczu", 1000),
+								 new PlayerHasItemWithHimCondition("magia mroku", 500),
+								 new PlayerHasItemWithHimCondition("różdżka Swaroga", 1),
+								 new PlayerHasItemWithHimCondition("kryształ mocy", 1),
+								 new PlayerHasItemWithHimCondition("diament", 1),
+								 new PlayerHasItemWithHimCondition("pazur zielonego smoka", 1),
+								 new PlayerHasItemWithHimCondition("pazur czarnego smoka", 3),
+								 new PlayerHasItemWithHimCondition("pazur złotego smoka", 4)
+								 ))),
+            ConversationStates.ATTENDING,
+            "Jeszcze nie mam pełnego zestawu do połączenia części. Zachowaj składniki, dopóki nie zbierzesz całości.\nPełna lista: magia deszczu - 1000; magia mroku - 500; magia światła - 250; diament - 1; pazur zielonego smoka - 1; pazur czarnego smoka - 3; pazur złotego smoka - 4; różdżka Swaroga - 1; kryształ mocy - 1.", null);
+
 	}
 
 	
@@ -277,7 +292,7 @@ import org.apache.log4j.Logger;
 		super.addToWorld();
 		fillQuestInfo(
 				"Magiczna Różdżka",
-				"Znajdź trzy części magicznej różdżki, aby stworzyć niezwykle potężny artefakt. Te magiczne części są ukryte w różnych zakątkach świata. Aby je odnaleźć, musisz podjąć się wielu wyzwań i pokonać liczne przeszkody. Tylko najodważniejsi i najzręczniejsi zdołają ukończyć to zadanie i zdobyć różdżkę Mokoszy, która może przeważyć szalę w każdej bitwie.",
+				"Samaron bada różdżkę Mokoszy, której trzy części trafiły w różne strony świata. Poznaj wskazówki maga, odnajdź fragmenty i przygotuj składniki potrzebne do ich połączenia.",
 				true);
 		Start();
 		Pierwszy();
@@ -304,7 +319,7 @@ import org.apache.log4j.Logger;
 				return res;
 			} 
 			if ("first".equals(questState)) {
-				res.add("Woy'tyk zlecił mi przyniesienie jedzenia dla mieszkańców Athor, aby udowodnić swoją wartość. Muszę znaleźć Leandera w Semos, który mi pomoże.");
+				res.add("Woy'tyk potrzebuje jedzenia dla mieszkańców Athor. Muszę znaleźć Leandera w Semos, który mi pomoże.");
 				return res;
 			} 
 			if ("first1".equals(questState)) {
@@ -312,7 +327,7 @@ import org.apache.log4j.Logger;
 				return res;
 			} 
 			if ("first2".equals(questState)) {
-				res.add("Woy'tyk chce, żebym przyniósł 10 różdżek i magie dla mieszkańców Athor. Potrzebuję 2500 jednostek magii ziemi i 2000 jednostek magii ognia.");
+				res.add("Woy'tyk chce, żebym przyniósł 10 różdżek i magie dla mieszkańców Athor. Potrzebuję 2500 jednostek magii ziemi i 2000 jednostek magii płomieni.");
 				return res;
 			} 
 			if ("gotfirstpiece".equals(questState)) {
@@ -325,11 +340,11 @@ import org.apache.log4j.Logger;
 				res.add("Powinienem wrócić do Samarona z magicznym katalizatorem, kryształem mocy i uszkodzoną różdżką, aby mógł kontynuować swoje badania.");
 				return res;
 			} if ("killing".equals(questState)) {
-				res.add("Samaron potrzebuje jeszcze diament, 1000 jednostek magii deszczu, 500 jednostek magii mroku, 250 jednostek magii światła oraz pazur zielonego, czarnego i złotego smoka, aby złożyć różdżkę w całość.");
+				res.add("Samaron potrzebuje jeszcze: diamentu, 1000 jednostek magii deszczu, 500 jednostek magii mroku, 250 jednostek magii światła, 1 pazur zielonego smoka, 3 pazury czarnego smoka, 4 pazury złotego smoka, różdżkę Swaroga i kryształ mocy, aby złożyć różdżkę w całość.");
 				return res;
 			} 
 			if ("done".equals(questState)) {
-				res.add("Pomogłem Samoronowi i dostałem potężną różdżkę.	W nagrodę za ukończenie zadania otrzymałem: 10.000 pkt doświadczenia i różdżkę Mokszy.");
+				res.add("Pomogłem Samaronowi i dostałem potężną różdżkę.	W nagrodę za ukończenie zadania otrzymałem: 10.000 pkt doświadczenia i różdżkę Mokoszy.");
 				return res;
 			} 
 			final List<String> debug = new ArrayList<String>();

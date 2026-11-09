@@ -69,8 +69,9 @@ public class CloaksCollectorNPC implements ZoneConfigurator {
 
 			@Override
 			protected void createDialog() {
-				addJob("Tutaj jest całkiem wysokie bezrobocie.");
-				addHelp("Słyszałam pogłoski, że miasto elfów leży na południowy-zachód stąd w głębokim lesie. Miejscowi nazywają go Nalwor.");
+                games.stendhal.server.entity.npc.dialogue.CollectionDialogueTopics.install(this);
+				addJob("Na razie moim największym zajęciem jest unikanie krasnali i walka z chłodem. Ta beczka piwa przyniosła mi więcej kłopotów, niż się spodziewałem. Przyda się ktoś, kto może swobodnie chodzić po powierzchni.");
+				addHelp("Słyszałem, że w głębokim lesie na południowy zachód stąd leży Nalwor, miasto elfów. Może podczas wyprawy trafisz na płaszcze, których szukam. Najpierw zapytaj o moją listę, bo nie każdy ochroni mnie przed tym chłodem.");
 				addGoodbye();
 				// remaining behaviour is defined in maps.quests.CloaksForBario.
 			}
@@ -79,7 +80,7 @@ public class CloaksCollectorNPC implements ZoneConfigurator {
 		npc.setEntityClass("beardmannpc");
 		npc.setPosition(4, 47);
 		npc.initHP(100);
-		npc.setDescription("Oto Bario. Jego twarz jest nieco niebieska i kolana mu drżą.");
+		npc.setDescription("Widzisz Bario skulonego z zimna. Sina twarz i drżące kolana zdradzają, że kryjówka daje mu niewiele ciepła.");
 		zone.add(npc);
 	}
 }

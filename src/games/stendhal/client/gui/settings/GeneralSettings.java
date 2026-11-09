@@ -13,6 +13,7 @@ package games.stendhal.client.gui.settings;
 
 import games.stendhal.client.ClientSingletonRepository;
 import games.stendhal.client.gui.chatlog.EventLine;
+import games.stendhal.client.gui.dialogue.NpcDialogueController;
 import games.stendhal.client.gui.layout.SBoxLayout;
 import games.stendhal.client.gui.layout.SLayout;
 import games.stendhal.client.gui.styled.Style;
@@ -78,37 +79,60 @@ class GeneralSettings {
 		
 		// click mode
 		JCheckBox clickModeToggle = SettingsComponentFactory.createSettingsToggle(DOUBLE_CLICK_PROPERTY, "false",
-				"Tryb podwójnego klikania", "Poruszanie i atak za pomocą podwójnego kliknięcia. Jeżeli nie zaznaczony to domyślnym jest pojedyńcze kliknięcie.");
+				"Tryb podwójnego klikania", "Poruszaj się i atakuj podwójnym kliknięciem. Po wyłączeniu tej opcji wystarczy pojedyncze kliknięcie.");
 		page.add(clickModeToggle);
+
+		JCheckBox npcDialogueToggle = SettingsComponentFactory.createSettingsToggle(
+				NpcDialogueController.AUTO_OPEN_PROPERTY, "true", "Automatycznie otwieraj rozmowy z NPC",
+				"<html>Pokazuje panel przy rozpoczęciu rozmowy z NPC.<br>"
+				+ "Po wyłączeniu możesz korzystać z czatu lub przycisku Rozmowa.<br>"
+				+ "Zmiana obowiązuje od następnej rozmowy.</html>");
+		page.add(npcDialogueToggle);
+		page.add(SettingsComponentFactory.createSettingsToggle(
+				NpcDialogueController.AUTO_SIZE_PROPERTY, "true", "Automatycznie dopasowuj wysokość okna rozmowy",
+				"<html>Dopasowuje wysokość okna do treści rozmowy.<br>"
+				+ "Po wyłączeniu okno zapamiętuje rozmiar ustawiony przez Ciebie,<br>"
+				+ "także po ponownym uruchomieniu gry.</html>"));
+		page.add(SettingsComponentFactory.createSettingsToggle(
+				NpcDialogueController.SHOP_ENABLED_PROPERTY, "true", "Pokazuj sklep w oknie rozmowy",
+				"<html>Po zapytaniu o ofertę pokazuje przedmioty, ceny i wybór ilości.<br>"
+				+ "Po wyłączeniu nadal możesz handlować przez zwykły czat.</html>"));
 		
-		// blood
+		JCheckBox guideToggle = SettingsComponentFactory.createSettingsToggle(
+                games.stendhal.client.gui.tutorial.TutorialGuideController.ENABLED, "true",
+                "Pokazuj przewodnik dla nowych graczy",
+                "Pokazuje podpowiedzi i znacznik celu. Po wyłączeniu tej opcji nadal możesz otworzyć Przewodnik przyciskiem przy czacie.");
+        guideToggle.addActionListener(e -> javax.swing.SwingUtilities.invokeLater(() -> games.stendhal.client.gui.tutorial.TutorialGuideController.get().settingsChanged()));
+        page.add(guideToggle);
+
+        // blood
 		JCheckBox showBloodToggle = SettingsComponentFactory.createSettingsToggle(GAMESCREEN_BLOOD, "true",
-				"Pokaż krew i zwłoki", "Pokazuje plamy krwi podczas uderzenia w walce i zwłoki.");
+				"Pokaż krew i zwłoki", "Pokazuje krew i zwłoki po walce.");
 		page.add(showBloodToggle);
 		
 		// raising corpses
 		JCheckBox autoRaiseToggle = SettingsComponentFactory.createSettingsToggle(GAMESCREEN_AUTORAISECORPSE, "true",
-				"Auto sprawdzanie zwłok", "Automatycznie otwiera okno zwłok potwora, z którego możesz wziąść swój łup");
+				"Automatycznie otwieraj zwłoki", "Otwiera okno zwłok pokonanego potwora, aby można było wziąć łup.");
 		page.add(autoRaiseToggle);
 		
 		// show healing messages
 		JCheckBox showHealingToggle = SettingsComponentFactory.createSettingsToggle(HEALING_MESSAGE_PROPERTY, "false",
-				"Pokaż wiadomości o leczeniu", "Pokazuje wiadomości o leczeniu w oknie rozmowy");
+				"Pokazuj komunikaty o leczeniu", "Pokazuje komunikaty o leczeniu na czacie.");
 		page.add(showHealingToggle);
 		
 		// show poison messages
 		JCheckBox showPoisonToggle = SettingsComponentFactory.createSettingsToggle(POISON_MESSAGE_PROPERTY, "false",
-										"Pokaż wiadomości o zatruciu", "Pokazuje wiadomości o zatruciu w oknie rozmowy");
+										"Pokazuj komunikaty o zatruciu", "Pokazuje komunikaty o zatruciu na czacie.");
 		page.add(showPoisonToggle);
 		
 		// show damage messages
 		JCheckBox showDamageToggle = SettingsComponentFactory.createSettingsToggle(DAMAGE_MESSAGE_PROPERTY, "false",
-										"Pokaż wiadomości o obrażeniach", "Pokazuje wiadomości o obrażeniach w oknie rozmowy");
+										"Pokazuj komunikaty o obrażeniach", "Pokazuje komunikaty o obrażeniach na czacie.");
 		page.add(showDamageToggle);
 
 		// Lighting effects
 		JCheckBox mapColoring = SettingsComponentFactory.createSettingsToggle(MAP_COLOR_PROPERTY, "true",
-				"Efekty światła", "Pokaż nocne światła i inne kolorowe efekty");
+				"Efekty światła", "Pokazuje nocne oświetlenie i barwne efekty na mapie.");
 		page.add(mapColoring);
 		// Coloring setting needs a map change to take an effect, so we need to
 		// inform the player about the delayed effect.
@@ -116,15 +140,15 @@ class GeneralSettings {
 			@Override
 			public void itemStateChanged(ItemEvent e) {
 				boolean enabled = (e.getStateChange() == ItemEvent.SELECTED);
-				String tmp = enabled ? "enabled" : "disabled";
+				String tmp = enabled ? "włączone" : "wyłączone";
 				String msg = "Efekty świetlne są teraz " + tmp
-					+ ". Możliwe, że musisz zmienić mapę lub przelogować się, aby zadziałały.";
+					+ ". Zmiana może wymagać przejścia na inną mapę lub ponownego zalogowania.";
 				ClientSingletonRepository.getUserInterface().addEventLine(new EventLine("", msg, NotificationType.CLIENT));
 			}
 		});
 		
 		final JCheckBox scaleScreenToggle = SettingsComponentFactory.createSettingsToggle(SCALE_SCREEN_PROPERTY,
-				"true", "Skaluj widok do rozmiaru okna", "<html>Jeśli znaznczony to okno gry będzie skalowane do dostępnego miejsca,<br>w przeciwnym wypadku będzie użyty domyślny rozmiar.</html>");
+				"true", "Skaluj widok do rozmiaru okna", "<html>Dopasowuje widok gry do dostępnego miejsca w oknie.<br>Po wyłączeniu używa domyślnego rozmiaru widoku.</html>");
 		page.add(scaleScreenToggle);
 		page.add(createFontSizeSelector());
 		page.add(createFontSelector(), SBoxLayout.constraint(SLayout.EXPAND_X));
@@ -143,7 +167,7 @@ class GeneralSettings {
 		
 		// Fill the selector, and set current size as the selection
 		int current = WtWindowManager.getInstance().getPropertyInt(FONT_SIZE_PROPERTY, DEFAULT_FONT_SIZE);
-		selector.addItem("default (12)");
+		selector.addItem("Domyślny (12)");
 		for (int size = 8; size <= 20; size += 2) {
 			Integer obj = size;
 			selector.addItem(obj);
@@ -156,7 +180,7 @@ class GeneralSettings {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				Object selected = selector.getSelectedItem();
-				if ("default (12)".equals(selected)) {
+				if ("Domyślny (12)".equals(selected)) {
 					selected = "12";
 				}
 				WtWindowManager.getInstance().setProperty(FONT_SIZE_PROPERTY, selected.toString());
@@ -192,7 +216,7 @@ class GeneralSettings {
 		}
 		
 		JCheckBox fontToggle = new JCheckBox("Własna czcionka");
-		fontToggle.setToolTipText("Ustawia domyślną czcionkę dla dziennika podróży i osiągnięć");
+		fontToggle.setToolTipText("Pozwala wybrać czcionkę dziennika zadań i osiągnięć.");
 		fontBox.add(fontToggle);
 		
 		JComponent fontRow = SBoxLayout.createContainer(SBoxLayout.HORIZONTAL, pad);

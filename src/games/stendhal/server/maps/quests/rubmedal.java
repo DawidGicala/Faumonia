@@ -65,7 +65,7 @@ import java.util.List;
  * <li> None.
  * </ul>
  */
-public class rubmedal extends AbstractQuest {
+public class rubmedal extends AbstractQuest implements games.stendhal.server.core.rp.quest.NativeCollectionDetails {
 	private static final int REQUIRED_IRON = 1;
 
 	private static final int REQUIRED_GOLD_BAR = 40;
@@ -87,49 +87,46 @@ public class rubmedal extends AbstractQuest {
 		final SpeakerNPC npc = npcs.get("Trener Magów");
 
 		npc.add(ConversationStates.ATTENDING,
-			ConversationPhrases.QUEST_MESSAGES, null,
-			ConversationStates.QUEST_OFFERED, null,
-			new ChatAction() {
+            ConversationPhrases.QUEST_MESSAGES,
+            null,
+            ConversationStates.QUEST_OFFERED,
+            null,
+            new ChatAction() {
 				public void fire(final Player player, final Sentence sentence, final EventRaiser raiser) {
+                    if (!dialogueRewardAvailable(raiser)) return;
 					if (!player.hasQuest(QUEST_SLOT) || "rejected".equals(player.getQuest(QUEST_SLOT))) {
-						raiser.say("Nasze wojsko potrzebuję zapasów. Chcesz nam pomóc?");
+						raiser.say("Nawet oddział magów potrzebuje solidnego zaopatrzenia, nie samych zaklęć. Przygotuję szafirowy medal w zamian za obsydianowe odznaczenie, wskazane materiały i dowód pokonania złotej śmierci. Podejmiesz się tej służby?");
 					} else if (player.isQuestCompleted(QUEST_SLOT)) {
-						raiser.say("Już przyniosłeś nam to co potrzebowaliśmy.");
+						raiser.say("Szafirowy medal należy już do ciebie. Jeśli zechcesz starać się o kolejne odznaczenie, zachowaj go dla Majora Klykha.");
 						raiser.setCurrentState(ConversationStates.ATTENDING);
 					} else {
-						raiser.say("Dlaczego zawracasz mi głowę?");
+						raiser.say("Mam u siebie przekazane materiały. Uzupełnij to, czego jeszcze brakuje, i dopilnuj próby walki; dopiero wtedy przygotuję medal.");
 						raiser.setCurrentState(ConversationStates.ATTENDING);
 					}
 				}
 			});
 
 		npc.add(ConversationStates.QUEST_OFFERED,
-			ConversationPhrases.YES_MESSAGES, null,
-			ConversationStates.ATTENDING, null,
-			new ChatAction() {
+            ConversationPhrases.YES_MESSAGES,
+            new games.stendhal.server.entity.npc.condition.QuestNotStartedCondition(QUEST_SLOT),
+            ConversationStates.ATTENDING,
+            null,
+            new ChatAction() {
 				public void fire(final Player player, final Sentence sentence, final EventRaiser raiser) {
-					raiser.say("Będę potrzebował kilku rzeczy: "
-						+ REQUIRED_IRON
-						+ " pazur niebieskiego smoka "
-						+ REQUIRED_WOOD
-						+ " obsydianowego medalu "
-						+ REQUIRED_GOLD_BAR
-						+ " sztabek mithrilu"
-						+ REQUIRED_GIANT_HEART
-						+ " serc olbrzyma. Wróć, gdy będziesz je miał w tej kolejności! Jeżeli zapomnisz to powiedz #przypomnij");
+                    if (!dialogueRewardAvailable(raiser)) return;
+					raiser.say("Dziękuję. Przyjmuję materiały kolejno: " + games.stendhal.server.core.rp.quest.CollectionQuestProgress.itemText(rubmedal.this.getCollectionItems()) + ". Wcześniejsze wpłaty zachowam, a pełne warunki przypomnę na twoją prośbę.");
 					player.setQuest(QUEST_SLOT, "start;0;0;0;0");
 					player.addKarma(10);
 
 				}
 			});
 
-		npc.add(
-			ConversationStates.QUEST_OFFERED,
-			ConversationPhrases.NO_MESSAGES,
-			null,
-			ConversationStates.IDLE,
-			"Och, naprawdę nie chcesz nam pomóc?",
-			new SetQuestAndModifyKarmaAction(QUEST_SLOT, "rejected", -10.0));
+		npc.add(ConversationStates.QUEST_OFFERED,
+            ConversationPhrases.NO_MESSAGES,
+            null,
+            ConversationStates.ATTENDING,
+            "Rozumiem. Nie przyjmuję zamówienia bez twojej zgody. Wróć, jeśli zdecydujesz się pomóc.",
+            new SetQuestAndModifyKarmaAction(QUEST_SLOT, "rejected", -10.0));
 	}
 
 	private void step_2() {
@@ -140,12 +137,127 @@ public class rubmedal extends AbstractQuest {
 
 		final SpeakerNPC npc = npcs.get("Trener Magów");
 
-		npc.add(ConversationStates.IDLE, ConversationPhrases.GREETING_MESSAGES,
-			new AndCondition(new GreetingMatchesNameCondition(npc.getName()),
+		npc.add(ConversationStates.IDLE,
+            ConversationPhrases.GREETING_MESSAGES,
+            new AndCondition(new GreetingMatchesNameCondition(npc.getName()),
 						new QuestStateStartsWithCondition(QUEST_SLOT, "start")),
-			ConversationStates.ATTENDING, null,
-			new ChatAction() {
+            ConversationStates.ATTENDING,
+            null,
+            new ChatAction() {
 				public void fire(final Player player, final Sentence sentence, final EventRaiser raiser) {
+                    if (!dialogueRewardAvailable(raiser)) return;
+					final String[] tokens = player.getQuest(QUEST_SLOT).split(";");
+
+					int neededIron = REQUIRED_IRON
+							- Integer.parseInt(tokens[1]);
+					int neededWoodLogs = REQUIRED_WOOD
+							- Integer.parseInt(tokens[2]);
+					int neededGoldBars = REQUIRED_GOLD_BAR
+							- Integer.parseInt(tokens[3]);
+					int neededGiantHearts = REQUIRED_GIANT_HEART
+							- Integer.parseInt(tokens[4]);
+					boolean missingSomething = false;
+
+					if (!missingSomething && (neededIron > 0)) {
+						if (player.isEquipped("pazur niebieskiego smoka", neededIron)) {
+							player.drop("pazur niebieskiego smoka", neededIron);
+							neededIron = 0;
+						} else {
+							final int amount = player.getNumberOfEquipped("pazur niebieskiego smoka");
+							if (amount > 0) {
+								player.drop("pazur niebieskiego smoka", amount);
+								neededIron -= amount;
+							}
+
+							raiser.say("Potrzebujemy "
+								+ Grammar.quantityplnoun(
+										neededIron, "pazur niebieskiego smoka", "")
+								+ ".");
+							missingSomething = true;
+						}
+					}
+
+					if (!missingSomething && (neededWoodLogs > 0)) {
+						if (player.isEquipped("obsydianowy medal", neededWoodLogs)) {
+							player.drop("obsydianowy medal", neededWoodLogs);
+							neededWoodLogs = 0;
+						} else {
+							final int amount = player.getNumberOfEquipped("obsydianowy medal");
+							if (amount > 0) {
+								player.drop("obsydianowy medal", amount);
+								neededWoodLogs -= amount;
+							}
+
+							raiser.say("Nie mam jak cię awansować bez "
+								+ Grammar.quantityplnoun(neededWoodLogs, "obsydianowy medal","")
+								+ ".");
+							missingSomething = true;
+						}
+					}
+
+					if (!missingSomething && (neededGoldBars > 0)) {
+						if (player.isEquipped("sztabka mithrilu", neededGoldBars)) {
+							player.drop("sztabka mithrilu", neededGoldBars);
+							neededGoldBars = 0;
+						} else {
+							final int amount = player.getNumberOfEquipped("sztabka mithrilu");
+							if (amount > 0) {
+								player.drop("sztabka mithrilu", amount);
+								neededGoldBars -= amount;
+							}
+							raiser.say("Potrzebujemy materiały do zbroji. Przynieś "
+									+ Grammar.quantityplnoun(neededGoldBars, "sztabka mithrilu","one") + " więcej.");
+							missingSomething = true;
+						}
+					}
+
+					if (!missingSomething && (neededGiantHearts > 0)) {
+						if (player.isEquipped("serce olbrzyma", neededGiantHearts)) {
+							player.drop("serce olbrzyma", neededGiantHearts);
+							neededGiantHearts = 0;
+						} else {
+							final int amount = player.getNumberOfEquipped("serce olbrzyma");
+							if (amount > 0) {
+								player.drop("serce olbrzyma", amount);
+								neededGiantHearts -= amount;
+							}
+							raiser.say("Potrzebujemy serc olbrzyma do wytwarzania mikstur. Nadal potrzebujemy  "
+								+ Grammar.quantityplnoun(neededGiantHearts, "serce olbrzyma","one") + " wciąż.");
+							missingSomething = true;
+						}
+					}
+
+					if (player.hasKilled("złota śmierć") && !missingSomething) {
+						raiser.say("Przyniosłeś wszystko. Za niedługo zostaniesz odznaczony. Wróć za  "
+							+ REQUIRED_MINUTES
+							+ " minutę" + ", a będzie gotowy.");
+						player.setQuest(QUEST_SLOT, "forging;" + System.currentTimeMillis());
+					} else {
+						if (!player.hasKilled("złota śmierć") && !missingSomething) {
+							raiser.say("Zanim dostanisz medal zabij złotą śmierć");
+						}
+
+						player.setQuest(QUEST_SLOT,
+							"start;"
+							+ (REQUIRED_IRON - neededIron)
+							+ ";"
+							+ (REQUIRED_WOOD - neededWoodLogs)
+							+ ";"
+							+ (REQUIRED_GOLD_BAR - neededGoldBars)
+							+ ";"
+							+ (REQUIRED_GIANT_HEART - neededGiantHearts));
+					}
+				}
+			});
+        // Resume the native stage without changing its guards or actions.
+        npc.add(ConversationStates.ATTENDING, "dostawa",
+            new AndCondition(new games.stendhal.server.entity.npc.condition.AlwaysTrueCondition(),
+						new QuestStateStartsWithCondition(QUEST_SLOT, "start")),
+            ConversationStates.ATTENDING,
+            null,
+            new ChatAction() {
+				public void fire(final Player player, final Sentence sentence, final EventRaiser raiser) {
+                    if (!dialogueRewardAvailable(raiser)) return;
 					final String[] tokens = player.getQuest(QUEST_SLOT).split(";");
 
 					int neededIron = REQUIRED_IRON
@@ -250,11 +362,15 @@ public class rubmedal extends AbstractQuest {
 				}
 			});
 
-		npc.add(ConversationStates.IDLE, ConversationPhrases.GREETING_MESSAGES,
-			new AndCondition(new GreetingMatchesNameCondition(npc.getName()),
+		npc.add(ConversationStates.IDLE,
+            ConversationPhrases.GREETING_MESSAGES,
+            new AndCondition(new GreetingMatchesNameCondition(npc.getName()),
 						new QuestStateStartsWithCondition(QUEST_SLOT, "forging;")),
-			ConversationStates.IDLE, null, new ChatAction() {
+            ConversationStates.ATTENDING,
+            null,
+            new ChatAction() {
 				public void fire(final Player player, final Sentence sentence, final EventRaiser raiser) {
+                    if (!dialogueRewardAvailable(raiser)) return;
 
 					final String[] tokens = player.getQuest(QUEST_SLOT).split(";");
 					
@@ -269,7 +385,42 @@ public class rubmedal extends AbstractQuest {
 						return;
 					}
 
-					raiser.say("Proszę bardzo, oto Twoje odznaczenie.");
+					raiser.say("Przyjmij szafirowy medal za pomoc magom. Odznaczenie zastępuje obsydianowe i jest świadectwem zakończonej służby. Major Klykh może wyznaczyć ci następne zadanie, jeśli zechcesz pójść dalej.");
+					player.addXP(5000000);
+					player.addatk_xp(50000);
+					player.adddef_xp(60000);
+					player.addKarma(300);
+					final Item magicSword = SingletonRepository.getEntityManager().getItem("szafirowy medal");
+					magicSword.setBoundTo(player.getName());
+					player.equipOrPutOnGround(magicSword);
+					player.notifyWorldAboutChanges();
+					player.setQuest(QUEST_SLOT, "done");
+				}
+			});
+        // Resume the native stage without changing its guards or actions.
+        npc.add(ConversationStates.ATTENDING, "dostawa",
+            new AndCondition(new games.stendhal.server.entity.npc.condition.AlwaysTrueCondition(),
+						new QuestStateStartsWithCondition(QUEST_SLOT, "forging;")),
+            ConversationStates.ATTENDING,
+            null,
+            new ChatAction() {
+				public void fire(final Player player, final Sentence sentence, final EventRaiser raiser) {
+                    if (!dialogueRewardAvailable(raiser)) return;
+
+					final String[] tokens = player.getQuest(QUEST_SLOT).split(";");
+					
+					final long delay = REQUIRED_MINUTES * MathHelper.MILLISECONDS_IN_ONE_MINUTE; 
+					final long timeRemaining = (Long.parseLong(tokens[1]) + delay)
+							- System.currentTimeMillis();
+
+					if (timeRemaining > 0L) {
+						raiser.say("Musisz jeszcze poczekać. Wróć za "
+							+ TimeUtil.approxTimeUntil((int) (timeRemaining / 1000L))
+							+ ".");
+						return;
+					}
+
+					raiser.say("Przyjmij szafirowy medal za pomoc magom. Odznaczenie zastępuje obsydianowe i jest świadectwem zakończonej służby. Major Klykh może wyznaczyć ci następne zadanie, jeśli zechcesz pójść dalej.");
 					player.addXP(5000000);
 					player.addatk_xp(50000);
 					player.adddef_xp(60000);
@@ -283,12 +434,13 @@ public class rubmedal extends AbstractQuest {
 			});
 
 		npc.add(ConversationStates.ATTENDING,
-			Arrays.asList("odznaczenie", "missing", "medal", "brakuje", "lista", "przypomnij"), 
-			new QuestStartedCondition(QUEST_SLOT),
-			ConversationStates.ATTENDING,
-			null,
-			new ChatAction() {
+            Arrays.asList("odznaczenie", "missing", "medal", "brakuje", "lista", "przypomnij"),
+            new QuestStateStartsWithCondition(QUEST_SLOT, "start;"),
+            ConversationStates.ATTENDING,
+            null,
+            new ChatAction() {
 				public void fire(final Player player, final Sentence sentence, final EventRaiser raiser) {
+                    if (!dialogueRewardAvailable(raiser)) return;
 					final String[] tokens = player.getQuest(QUEST_SLOT).split(";");
 
 					final int neededIron = REQUIRED_IRON
@@ -307,28 +459,31 @@ public class rubmedal extends AbstractQuest {
 				}
 			});
 
-		npc.add(
-			ConversationStates.ANY,
-			"pazur niebieskiego smoka",
-			null,
-			ConversationStates.ATTENDING,
-			"Wyrwij niebieskiemu smoku pazur z jego stopy.",
-			null);
+		npc.add(ConversationStates.ANY,
+            "pazur niebieskiego smoka",
+            null,
+            ConversationStates.ATTENDING,
+            "Wyrwij niebieskiemu smoku pazur z jego stopy.",
+            null);
 
-		npc.add(ConversationStates.ANY, "obsydianowy medal", null,
-				ConversationStates.ATTENDING,
-				"Musisz udowodnić, że pomogłeś Trenerowi Łuczników.", null);
-		npc.add(ConversationStates.ANY, "mithril", null,
-				ConversationStates.ATTENDING,
-				"Kowal w Ados może dla Ciebie odlać bryłki mithrilu w sztabki mithrilu.",
-				null);
-		npc.add(
-			ConversationStates.ANY,
-			Arrays.asList("giant","olbrzyma", "olbrzym"),
-			null,
-			ConversationStates.ATTENDING,
-			"Są starodawne legendy o olbrzymach żyjących w górach na północ od Semos i Ados.",
-			null);
+		npc.add(ConversationStates.ANY,
+            "obsydianowy medal",
+            null,
+            ConversationStates.ATTENDING,
+            "Musisz udowodnić, że pomogłeś Trenerowi Łuczników.",
+            null);
+		npc.add(ConversationStates.ANY,
+            "mithril",
+            null,
+            ConversationStates.ATTENDING,
+            "Kowal w Ados może dla Ciebie odlać bryłki mithrilu w sztabki mithrilu.",
+            null);
+		npc.add(ConversationStates.ANY,
+            Arrays.asList("giant","olbrzyma", "olbrzym"),
+            null,
+            ConversationStates.ATTENDING,
+            "Są starodawne legendy o olbrzymach żyjących w górach na północ od Semos i Ados.",
+            null);
 	}
 
 	@Override
@@ -350,41 +505,8 @@ public class rubmedal extends AbstractQuest {
 	
 	@Override
 	public List<String> getHistory(final Player player) {
-			final List<String> res = new ArrayList<String>();
-			if (!player.hasQuest(QUEST_SLOT)) {
-				return res;
-			}
-			final String questState = player.getQuest(QUEST_SLOT);
-			res.add("Spotkałem Trenera Magów w twierdzy Ados.");
-			if (questState.equals("rejected")) {
-				res.add("Nie pomogę Trenerowi Magów.");
-				return res;
-			} 
-			res.add("Trener Magów poprosił mnie abym przyniósł mu: " + REQUIRED_IRON
-					+ " pazur niebieskiego smoka, "
-					+ REQUIRED_WOOD
-					+ " obsydianowy medal, "
-					+ REQUIRED_GOLD_BAR
-					+ " sztabki mithrilu i "
-					+ REQUIRED_GIANT_HEART
-					+ " serc olbrzyma, dokładnie w tej kolejności.");
-			// yes, yes. this is the most horrible quest code and so you get a horrible quest history. 
-			if(questState.startsWith("start") && !"start;15;26;12;6".equals(questState)){
-				res.add("Nie dostarczyłem wszystkiego. Trener Magów powie mi czego jeszcze potrzebuje.");
-			} else if ("start;15;26;12;6".equals(questState) || !questState.startsWith("start")) {
-				res.add("Dostarczyłem wszystko co potrzebne dla Trenera Magów.");
-			}
-			if("start;15;26;12;6".equals(questState) && !player.hasKilled("złota śmierć")){
-				res.add("Aby zasłużyć na odznakę muszę zabić złotą śmierć.");
-			} 
-			if (questState.startsWith("forging")) {
-				res.add("Muszę poczekać na swoją odznakę.");
-			} 
-			if (isCompleted(player)) {
-				res.add("Pomogłem Trenerowi Magów i dostałem szafirową odznakę.");
-			}
-			return res;	
-	}
+        return games.stendhal.server.core.rp.quest.CollectionQuestProgress.history(this, player);
+    }
 
  	// match to the min level of the immortal sword
 	@Override
@@ -401,4 +523,23 @@ public class rubmedal extends AbstractQuest {
 	public String getRegion() {
 		return Region.ADOS_CITY;
 	}
+
+
+    public String getCollectionKind(){return "sequence";}
+    public java.util.Map<String,Integer> getCollectionItems(){java.util.Map<String,Integer> m=new java.util.LinkedHashMap<String,Integer>(); m.put("pazur niebieskiego smoka",REQUIRED_IRON);m.put("obsydianowy medal",REQUIRED_WOOD);m.put("sztabka mithrilu",REQUIRED_GOLD_BAR);m.put("serce olbrzyma",REQUIRED_GIANT_HEART);return m;}
+    public String getCollectionHint(){return "Trener Magów potrzebuje obsydianowego medalu, materiałów z listy i dowodu pokonania złotej śmierci. Oddajesz poprzedni medal, aby otrzymać szafirowy. Przygotowanie trwa dobę.";}
+    public String getCollectionKill(){return "złota śmierć";}
+public boolean getCollectionSolo(){return false;}
+public int getCollectionWait(){return REQUIRED_MINUTES;}
+
+
+    // This legacy item is absent in the current world data. Never consume materials
+    // or pay partial XP while the final reward cannot be created.
+    private boolean dialogueRewardAvailable(EventRaiser raiser) {
+        if (SingletonRepository.getEntityManager().getItem("szafirowy medal") != null) return true;
+        raiser.setCurrentState(ConversationStates.ATTENDING);
+        raiser.say("Nie mogę wydać tego odznaczenia. Zachowaj pozostałe materiały.");
+        return false;
+    }
+
 }

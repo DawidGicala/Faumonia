@@ -12,6 +12,8 @@
  ***************************************************************************/
 package games.stendhal.server.maps.quests;
 
+import games.stendhal.server.entity.npc.action.DialogueRewardAction;
+
 import games.stendhal.common.MathHelper;
 import games.stendhal.common.parser.Sentence;
 import games.stendhal.server.core.engine.SingletonRepository;
@@ -132,7 +134,15 @@ public class FishSoupForHughie extends AbstractQuest {
 			new AndCondition(new GreetingMatchesNameCondition(npc.getName()),
 					new QuestInStateCondition(QUEST_SLOT, "start"), new PlayerHasItemWithHimCondition("zupa rybna")),
 			ConversationStates.QUEST_ITEM_BROUGHT, 
-			"Hej, widzę, że masz zupę rybną, czy ona jest dla Hugiego?",
+			"Przynosisz zupę rybną? Pachnie dobrze, Hughie powinien wreszcie coś zjeść. Czy mogę wziąć tę porcję dla niego?",
+			null);
+
+        // Same authoritative step, without requiring the player to leave and greet again.
+        npc.add(ConversationStates.ATTENDING, "zupa dla hughiego",
+			new AndCondition(new games.stendhal.server.entity.npc.condition.AlwaysTrueCondition(),
+					new QuestInStateCondition(QUEST_SLOT, "start"), new PlayerHasItemWithHimCondition("zupa rybna")),
+			ConversationStates.QUEST_ITEM_BROUGHT, 
+			"Przynosisz zupę rybną? Pachnie dobrze, Hughie powinien wreszcie coś zjeść. Czy mogę wziąć tę porcję dla niego?",
 			null);
 
 		//player returns without promised fish soup
@@ -141,7 +151,15 @@ public class FishSoupForHughie extends AbstractQuest {
 			new AndCondition(new GreetingMatchesNameCondition(npc.getName()),
 					new QuestInStateCondition(QUEST_SLOT, "start"), new NotCondition(new PlayerHasItemWithHimCondition("zupa rybna"))),
 			ConversationStates.ATTENDING, 
-			"Już wróciłeś? Hugie jest coraz bardziej chory! Nie zapomnij o zupie rybnej dla niego, bardzo Cię proszę! Obiecuję, że sowicie Cię wynagrodzę!",
+			"Cieszę się, że wracasz, ale nadal potrzebuję porcji zupy rybnej. Florence Boullabaisse gotuje ją na rynku w Ados po otrzymaniu składników. Zamów zupę u niej i przynieś mi gotowy posiłek dla Hughiego.",
+			null);
+
+        // Same authoritative step, without requiring the player to leave and greet again.
+        npc.add(ConversationStates.ATTENDING, "zupa dla hughiego",
+			new AndCondition(new games.stendhal.server.entity.npc.condition.AlwaysTrueCondition(),
+					new QuestInStateCondition(QUEST_SLOT, "start"), new NotCondition(new PlayerHasItemWithHimCondition("zupa rybna"))),
+			ConversationStates.ATTENDING, 
+			"Cieszę się, że wracasz, ale nadal potrzebuję porcji zupy rybnej. Florence Boullabaisse gotuje ją na rynku w Ados po otrzymaniu składników. Zamów zupę u niej i przynieś mi gotowy posiłek dla Hughiego.",
 			null);
 
 		// first chat of player with Anastasia
@@ -152,10 +170,26 @@ public class FishSoupForHughie extends AbstractQuest {
 			ConversationStates.ATTENDING, "Witam, naprawdę może mi pomóc, proszę.",
 			null);
 
+        // Same authoritative step, without requiring the player to leave and greet again.
+        npc.add(ConversationStates.ATTENDING, "zupa dla hughiego",
+			new AndCondition(new games.stendhal.server.entity.npc.condition.AlwaysTrueCondition(),
+					new QuestNotStartedCondition(QUEST_SLOT)),
+			ConversationStates.ATTENDING, "Witam, naprawdę może mi pomóc, proszę.",
+			null);
+
 		// player who is rejected or 'done' but waiting to start again, returns
 		npc.add(ConversationStates.IDLE, 
 			ConversationPhrases.GREETING_MESSAGES,
 			new AndCondition(new GreetingMatchesNameCondition(npc.getName()),
+					new QuestNotInStateCondition(QUEST_SLOT, "start"),
+					new QuestStartedCondition(QUEST_SLOT)),
+			ConversationStates.ATTENDING,
+			"Witaj ponownie.", 
+			null);
+
+        // Same authoritative step, without requiring the player to leave and greet again.
+        npc.add(ConversationStates.ATTENDING, "zupa dla hughiego",
+			new AndCondition(new games.stendhal.server.entity.npc.condition.AlwaysTrueCondition(),
 					new QuestNotInStateCondition(QUEST_SLOT, "start"),
 					new QuestStartedCondition(QUEST_SLOT)),
 			ConversationStates.ATTENDING,
@@ -175,7 +209,7 @@ public class FishSoupForHughie extends AbstractQuest {
 				ConversationPhrases.QUEST_MESSAGES,
 				new QuestNotStartedCondition(QUEST_SLOT),
 				ConversationStates.QUEST_OFFERED, 
-				"Mój biedny chłopak jest chory, a lekarstwa, które mu podaję, nie działają! Proszę, przyniesiesz dla niego zupę rybną?",
+				"Hughie znowu leży z gorączką, a ja nie chcę zostawiać go samego. Słyszałam o pożywnej zupie rybnej Florence i chciałabym podać mu porcję, kiedy się obudzi. Przyniesiesz ją dla niego?",
 				null);
 		
 		// player returns - enough time has passed
@@ -200,7 +234,7 @@ public class FishSoupForHughie extends AbstractQuest {
 			null,
 			ConversationStates.ATTENDING,
 			"Dziękuję! Możesz poprosić Florence Bouillabaisse, aby ci ugotowała zupę rybną. Myślę, że znajdziesz ją na targu w Ados. ",
-			new SetQuestAndModifyKarmaAction(QUEST_SLOT, "start", 2.0));
+			DialogueRewardAction.karma(new SetQuestAndModifyKarmaAction(QUEST_SLOT, "start", 2.0)));
 
 		// player is not willing to help
 		npc.add(ConversationStates.QUEST_OFFERED,
@@ -208,7 +242,7 @@ public class FishSoupForHughie extends AbstractQuest {
 			null,
 			ConversationStates.ATTENDING,
 			"Nie, proszę! On jest naprawdę bardzo chory.",
-			new SetQuestAndModifyKarmaAction(QUEST_SLOT, "rejected", -5.0));
+			DialogueRewardAction.karma(new SetQuestAndModifyKarmaAction(QUEST_SLOT, "rejected", -5.0)));
 	}
 
 	private void prepareBringingStep() {
@@ -217,10 +251,10 @@ public class FishSoupForHughie extends AbstractQuest {
 		
 		final List<ChatAction> reward = new LinkedList<ChatAction>();
 		reward.add(new DropItemAction("zupa rybna"));
-		reward.add(new IncreaseXPAction(10000));
+		reward.add(DialogueRewardAction.xp(10000));
 		reward.add(new SetQuestToTimeStampAction(QUEST_SLOT));
-		reward.add(new IncreaseKarmaAction(25));
-		reward.add(new EquipItemAction("wielki eliksir",50));
+		reward.add(DialogueRewardAction.karma(new IncreaseKarmaAction(25)));
+		reward.add(DialogueRewardAction.item("wielki eliksir",50));
 		reward.add(new ChatAction() {
 			public void fire(final Player player, final Sentence sentence, final EventRaiser npc) {
 				final Item soup = SingletonRepository.getEntityManager()
@@ -237,7 +271,7 @@ public class FishSoupForHughie extends AbstractQuest {
 		npc.add(ConversationStates.QUEST_ITEM_BROUGHT,
 			ConversationPhrases.YES_MESSAGES, 
 			new PlayerHasItemWithHimCondition("zupa rybna"),
-			ConversationStates.ATTENDING, "Dziękuję! Jestem Ci niesamowicie wdzięczna za Twoją przysługę. Nakarmię Hughiego, gdy się obudzi. Proszę, weź te mikstury - Hughiemu nie pomagają i tak.",
+			ConversationStates.ATTENDING, "Dziękuję, odłożę tę porcję przy Hughim i nakarmię go, kiedy się obudzi. Za twoją pomoc przygotowałam pięćdziesiąt wielkich eliksirów. Mam nadzieję, że posłużą ci podczas dalszych wypraw.",
 			new MultipleActions(reward));
 
 		//player said the fish soup was for her but has dropped it from his bag or hands
@@ -263,7 +297,7 @@ public class FishSoupForHughie extends AbstractQuest {
 		super.addToWorld();
 		fillQuestInfo(
 				"Zupa Rybna dla Hughie", 
-				"Syn Anastasii, Hugie, jest chory i potrzebuje czegoś, co go wyleczy.", 
+				"Anastasia czuwa przy chorym synu w gospodarstwie pod Ados. Hughie potrzebuje porcji zupy rybnej, która pomoże mu odzyskać siły.", 
 				true);
 		prepareRequestingStep();
 		prepareBringingStep();

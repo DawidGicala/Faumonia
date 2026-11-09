@@ -46,7 +46,7 @@ public abstract class AbstractQuest implements IQuest {
 	 */
 	public void fillQuestInfo(final String name, final String description, boolean repeatable) {
 		questInfo.setName(name);
-		questInfo.setDescription(description);
+		questInfo.setDescription(description + games.stendhal.server.maps.quests.logic.QuestGoldFees.catalogueDescription(getSlotName()));
 		questInfo.setRepeatable(repeatable);
 		questInfo.setSuggestedMinLevel(this.getMinLevel());
 	}

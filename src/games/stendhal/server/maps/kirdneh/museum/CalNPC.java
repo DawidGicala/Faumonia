@@ -57,8 +57,9 @@ public class CalNPC implements ZoneConfigurator {
 
 			@Override
 			protected void createDialog() {
+                games.stendhal.server.entity.npc.dialogue.HuntDialogueTopics.install(this);
 				addGreeting("Witaj przybyszu.");
-				addJob("Na razie niczego nie potrzebuje.");
+				addJob("Zbieram wiadomości o dalekich miejscach i ludziach, którzy potrafią do nich dotrzeć. Szczególnie interesuje mnie wyspa Amazon; potrzebuję kogoś, kto wróci stamtąd z czymś więcej niż opowieścią o niebezpieczeństwach.");
 				addQuest("Na razie niczego nie potrzebuje.");
 				final Map<String, Integer> offerings = new HashMap<String, Integer>();
 				addGoodbye("Żegnaj przybyszu.");
@@ -68,7 +69,7 @@ public class CalNPC implements ZoneConfigurator {
 		barman.setEntityClass("writernpc");
 		barman.setPosition(4, 3);
 		barman.initHP(100);
-		barman.setDescription("Oto Cal. Wygląda staro.");
+		barman.setDescription("Widzisz Cala, starszego podróżnika w muzeum Kirdneh. Odległe wyspy najwyraźniej interesują go bardziej niż spokojne miejskie ulice.");
 		zone.add(barman);
 	}
 }

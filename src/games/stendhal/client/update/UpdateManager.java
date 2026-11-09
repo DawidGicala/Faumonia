@@ -306,7 +306,7 @@ public class UpdateManager {
 		final HttpClient httpClient = new HttpClient(serverFolder + file, true);
 		httpClient.setProgressListener(updateProgressBar);
 		if (!httpClient.fetchFile(jarFolder + file)) {
-			UpdateGUIDialogs.messageBox("Podczas pobierania aktualizacji wystąpił błąd w pliku " + file);
+			UpdateGUIDialogs.messageBox("Nie udało się pobrać pliku aktualizacji: " + file);
 			return false;
 		}
 		try {
@@ -314,11 +314,11 @@ public class UpdateManager {
 			final int shouldSize = Integer.parseInt(updateProp.getProperty("file-size." + file, ""));
 			String signature = updateProp.getProperty("file-signature." + file);
 			if ((fileObj.length() != shouldSize) || !SignatureVerifier.get().checkSignature(jarFolder + file, signature)) {
-				UpdateGUIDialogs.messageBox("Podczas pobierania aktualizacji wystąpił błąd..\r\nSygnatura "
+				UpdateGUIDialogs.messageBox("Nie udało się zweryfikować pliku aktualizacji: "
 						+ file
-						+ " różni się.\r\nNasz ma "
+						+ " - podpis lub rozmiar nie zgadza się.\r\nPobrany rozmiar w bajtach: "
 						+ fileObj.length()
-						+ ", a powinien mieć "
+						+ ", oczekiwany: "
 						+ shouldSize);
 				updateProgressBar.dispose();
 				return false;

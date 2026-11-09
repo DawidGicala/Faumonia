@@ -40,15 +40,16 @@ public class WoytykNPC implements ZoneConfigurator {
 		final SpeakerNPC npc = new SpeakerNPC("Woy'tyk") {
 			@Override
 			public void createDialog() {
+                games.stendhal.server.entity.npc.dialogue.JourneyDialogueTopics.install(this);
 				addGreeting("Witaj wędrowcze. Znajdujesz się na egzotycznej wyspię Athor, gdzie magia jest wszechobecna. Jeśli szukasz potężnych artefaktów, wypowiedz słowo #różdżka, a może będę mógł Ci pomóc.");
-				addJob("Jestem czarodziejem, który zamieszkuje tę wyspę. Znam jej zakątki i tajemnice, które skrywa. Moim celem jest poszukiwanie i ochrona starożytnych artefaktów.");
+				addJob("Mieszkam na Athor i zajmuję się magią. Zanim poświęcę czas starym artefaktom, chcę zadbać o mieszkańców i młodych uczących się czarów. Jedzenie i pomoce do nauki bywają tutaj równie potrzebne jak wiedza z ksiąg.");
 				addHelp("Mogę Ci pomóc, ale najpierw musisz udowodnić swoją wartość. Mieszkańcy wyspy potrzebują jedzenia. Powiedz słowo #jedzenie, a powiem Ci, co należy zrobić.");
 				addGoodbye("Powodzenia na Twojej drodze, wędrowcze. Uważaj na siebie na tej wyspie.");
 			}
 
 		};
 		npc.setPosition(79, 107);
-		npc.setDescription("Przed Tobą stoi Woy'tyk, czarodziej zamieszkujący egzotyczną wyspę Athor. Jego oczy zdradzają mądrość i doświadczenie, a jego otoczenie emanuje aurą magii i tajemniczości. Woy'tyk zna sekrety tej wyspy i jest gotów podzielić się nimi z tymi, którzy są tego godni.");
+		npc.setDescription("Widzisz Woy'tyka, czarodzieja z Athor. Interesują go zarówno dawne artefakty, jak i codzienne potrzeby mieszkańców wyspy.");
 		npc.setEntityClass("wotyknpc");
 		zone.add(npc);
 	}

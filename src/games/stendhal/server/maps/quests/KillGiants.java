@@ -48,7 +48,7 @@ import java.util.List;
 
 import marauroa.common.Pair;
 
-public class KillGiants extends AbstractQuest {
+public class KillGiants extends AbstractQuest implements games.stendhal.server.core.rp.quest.NativeHuntDetails {
 
 	private static final String QUEST_SLOT = "kill_giants";
 	protected HashMap<String, Pair<Integer, Integer>> creaturestokill = new HashMap<String, Pair<Integer,Integer>>();
@@ -74,19 +74,19 @@ public class KillGiants extends AbstractQuest {
 		final SpeakerNPC npc = npcs.get("Rade");
 
 		npc.add(ConversationStates.ATTENDING,
-				ConversationPhrases.QUEST_MESSAGES, 
-				new QuestNotStartedCondition(QUEST_SLOT),
-				ConversationStates.QUEST_OFFERED,
-				"Jakiś czas temu byłem na wycieczce w jaskini na południu od miasta... niestety zostałem zaatakowany i ledwo wróciłem. To były jakieś olbrzymy! Chce żebyś je zabił, podejmiesz się tego wyzwania?",
-				null);
+                ConversationPhrases.QUEST_MESSAGES,
+                new QuestNotStartedCondition(QUEST_SLOT),
+                ConversationStates.QUEST_OFFERED,
+                "Wybrałem się do jaskini na południe od Fado i ledwo z niej wróciłem. Olbrzymy nie zostawiły mi wiele czasu na podziwianie widoków. Pomożesz sprawić, żeby następny wędrowiec miał więcej szczęścia?",
+                null);
 
 		npc.add(ConversationStates.ATTENDING,
-				ConversationPhrases.QUEST_MESSAGES, 
-				new AndCondition(new QuestStateStartsWithCondition(QUEST_SLOT,"done"),
+                ConversationPhrases.QUEST_MESSAGES,
+                new AndCondition(new QuestStateStartsWithCondition(QUEST_SLOT,"done"),
 						 new TimePassedCondition(QUEST_SLOT, 1, MathHelper.MINUTES_IN_ONE_WEEK*2)),
-				ConversationStates.QUEST_OFFERED,
-				"Na tą chwile olbrzymy przestały mnie niepokoić. Dziękuje za pomoc!",
-				null);
+                ConversationStates.QUEST_OFFERED,
+                "Z jaskini znów docierają niepokojące wieści o olbrzymach. Znasz już drogę; zechcesz jeszcze raz się nimi zająć?",
+                null);
 
 
 		final List<ChatAction> actions = new LinkedList<ChatAction>();
@@ -95,18 +95,18 @@ public class KillGiants extends AbstractQuest {
 
 		
 		npc.add(ConversationStates.QUEST_OFFERED,
-				ConversationPhrases.YES_MESSAGES,
-				null,
-				ConversationStates.ATTENDING,
-				"Dziękuję! Jaskinia znajduje się na południe od tego miasta. Odnajdź siedlisko olbrzymów i zabij: 30 olbrzymów, 15 olbrzymów starszych oraz 10 olbrzymów mistrzów",
-				new MultipleActions(actions));
+                ConversationPhrases.YES_MESSAGES,
+                null,
+                ConversationStates.ATTENDING,
+                "Jaskini szukaj na południe od Fado. Musisz zmierzyć się ze zwykłymi olbrzymami, starszymi i mistrzami; tych ostatnich lepiej nie lekceważyć." + "\nCele: " + games.stendhal.server.core.rp.quest.HuntQuestProgress.targetText(this,null) + ".",
+                new MultipleActions(actions));
 
-		npc.add(ConversationStates.QUEST_OFFERED, 
-				ConversationPhrases.NO_MESSAGES, 
-				null,
-				ConversationStates.ATTENDING,
-				"Co za szkoda... Może kiedyś zmienisz zdanie i mi pomożesz.",
-				new SetQuestAction(QUEST_SLOT, 0, "rejected"));
+		npc.add(ConversationStates.QUEST_OFFERED,
+                ConversationPhrases.NO_MESSAGES,
+                null,
+                ConversationStates.ATTENDING,
+                "Rozumiem twoją ostrożność. Sam przekonałem się, jak szybko zwykła wycieczka może skończyć się ucieczką.",
+                new SetQuestAction(QUEST_SLOT, 0, "rejected"));
 	}
 
 	private void step_2() {
@@ -144,23 +144,23 @@ public class KillGiants extends AbstractQuest {
 		LinkedList<String> triggers = new LinkedList<String>();
 		triggers.addAll(ConversationPhrases.FINISH_MESSAGES);
 		triggers.addAll(ConversationPhrases.QUEST_MESSAGES);		
-		npc.add(ConversationStates.ATTENDING, 
-				triggers,
-				new AndCondition(
+		npc.add(ConversationStates.ATTENDING,
+                triggers,
+                new AndCondition(
 						new QuestInStateCondition(QUEST_SLOT, 0, "start"),
 						new KilledForQuestCondition(QUEST_SLOT, 1)),
-				ConversationStates.ATTENDING, 
-				"Bardzo dziękuję! Proszę przyjmij ten dziwny zwój oraz zupę rybną.",
-				new MultipleActions(actions));
+                ConversationStates.ATTENDING,
+                "Nareszcie mogę myśleć o tamtej jaskini bez dreszczu. Przyjmij zwój, skrzynie i zupę rybną; zasłużyłeś na posiłek po takiej wyprawie.",
+                new MultipleActions(actions));
 
-		npc.add(ConversationStates.ATTENDING, 
-				triggers,
-				new AndCondition(
+		npc.add(ConversationStates.ATTENDING,
+                triggers,
+                new AndCondition(
 						new QuestInStateCondition(QUEST_SLOT, 0, "start"),
 						new NotCondition(new KilledForQuestCondition(QUEST_SLOT, 1))),
-				ConversationStates.ATTENDING, 
-				"Proszę pomóż mi i zabij te olbrzymy!",
-				null);
+                ConversationStates.ATTENDING,
+                null,
+                (p, sentence, raiser) -> raiser.say("Zostały jeszcze olbrzymy z mojej listy. Sprawdź ich odmiany, a oszczędzisz sobie niepotrzebnych walk." + "\n" + games.stendhal.server.core.rp.quest.HuntQuestProgress.progressText(KillGiants.this,p)));
 	}
 
 	@Override
@@ -168,7 +168,7 @@ public class KillGiants extends AbstractQuest {
 		super.addToWorld();
 		fillQuestInfo(
 				"Zabij Olbrzymy",
-				"Rade znajdujący się w mieście Fado potrzebuje kogoś kto rozprawi się olbrzymami. Zdecydowałem się podjąć tego zadania!",
+				"Rade ledwo wrócił z jaskini na południe od Fado. Prosi o pokonanie olbrzymów, ich starszych i mistrzów, aby kolejni wędrowcy mieli bezpieczniejszą drogę.",
 				false);
 		step_1();
 		step_2();
@@ -177,24 +177,8 @@ public class KillGiants extends AbstractQuest {
 	
 	@Override
 	public List<String> getHistory(final Player player) {
-			final List<String> res = new ArrayList<String>();
-			if (!player.hasQuest(QUEST_SLOT)) {
-				return res;
-			}
-			if (!isCompleted(player)) {
-				res.add("Musze zabić: 30 olbrzymów, 15 olbrzymów starszych i 10 olbrzymów mistrzów.");
-			} else if(isRepeatable(player)){
-				res.add("Olbrzymy zostały przepędzone.");
-			} else {
-				res.add("Zabiłem olbrzymy i Rade czuje się już spokojny.	W nagrodę za ukończenie zadania otrzymałem: 100.000 pkt doświadczenia, zwój olbrzymów i kilka zup rybnych.");
-			}
-			int repetitions = player.getNumberOfRepetitions(getSlotName(), 2);
-			if (repetitions > 2) {
-				res.add("Pomogłem Yandiemu "
-						+ Grammar.quantityplnoun(repetitions, "razy") + ".");
-			}
-			return res;
-	}
+        return games.stendhal.server.core.rp.quest.HuntQuestProgress.history(this,player);
+    }
 
 
 	@Override
@@ -223,4 +207,11 @@ public class KillGiants extends AbstractQuest {
 	public String getRegion() {
 		return Region.FADO_CITY;
 	}
+
+    @Override public java.util.Map<String, Pair<Integer,Integer>> getDialogueHuntTargets(Player player) {
+        return java.util.Collections.unmodifiableMap(new java.util.TreeMap<String,Pair<Integer,Integer>>(creaturestokill));
+    }
+    @Override public int getDialogueHuntTotal(Player player) { return 0; }
+    @Override public int getDialogueKillIndex() { return 1; }
+    @Override public String getDialogueHuntHint(Player player) { return "Rade wskazał jaskinię na południe od miasta. Szukaj tam olbrzymów, starszych olbrzymów i mistrzów; każdy rodzaj ma własny licznik."; }
 }

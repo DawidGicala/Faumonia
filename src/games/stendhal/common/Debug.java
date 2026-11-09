@@ -26,7 +26,7 @@ public class Debug {
 
 	/** version. */
 	// Note: This line is updated by build.xml using a regexp so be sure to adjust it in case you modify this line.
-	public static final String VERSION = "7.0";
+	public static final String VERSION = "8.0";
 
 	/** pre release suffix */
 	// Note: This line is updated by build.xml using a regexp so be sure to adjust it in case you modify this line.

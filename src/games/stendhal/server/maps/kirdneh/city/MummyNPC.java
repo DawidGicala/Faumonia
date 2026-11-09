@@ -54,8 +54,9 @@ public class MummyNPC implements ZoneConfigurator {
 
 			@Override
 			protected void createDialog() {
+                addReply("tematy", "Możemy wrócić do twojej sprawy albo porozmawiać o czymś innym. Co chcesz wiedzieć?");
 				//Greeting message in quest given (ChocolateForElisabeth)
-				addJob("Jestem pełno etatową matką i kocham to.");
+				addJob("Opiekuję się Elisabeth i staram się, żeby mogła bawić się spokojnie. Chętnie porozmawiam, ale nigdzie nie pójdę bez córki.");
 				addHelp("Słyszałam, że pare #domów w pobliżu wciąż jest na sprzedaż.");
 				addReply(Arrays.asList("houses", "domów"), "Są ogromne! Mój przyjaciel jest właścicielem jednego i zaprrosił mnie parę razy.");
 				addOffer("Przykro mi, ale nie mam żadnych #ofert dla Ciebie.");
@@ -73,7 +74,7 @@ public class MummyNPC implements ZoneConfigurator {
 		npc.setEntityClass("mothernpc");
 		npc.setPosition(84, 9);
 		npc.initHP(100);
-		npc.setDescription("Oto Carey. Opiekuje się swoją córką Elisabeth.");
+		npc.setDescription("Widzisz Carey odpoczywającą na ławce w Kirdneh. Nawet podczas rozmowy nie traci z oczu Elisabeth.");
 		zone.add(npc);
 	}
 }

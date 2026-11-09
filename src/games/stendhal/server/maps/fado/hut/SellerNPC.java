@@ -38,8 +38,9 @@ public class SellerNPC implements ZoneConfigurator {
 			
 			@Override
 			public void createDialog() {
+                addReply("tematy", "Możemy wrócić do twojej sprawy albo porozmawiać o czymś innym. Co chcesz wiedzieć?");
 				addGreeting();
-				addJob("Wytwarzam mikstury i antidota, aby #zaoferować je wojownikom.");
+				addJob("Przygotowuję mikstury i antidota dla podróżnych. Obserwuję też, jak ich uczynki zmieniają karmę - nawet niewielka przysługa potrafi zostawić dobry ślad.");
 				addHelp("Możesz wziąć przygotowane przeze mnie lekarstwo na podróż. Zapytaj mnie o #ofertę.");
 				addGoodbye();
 			}
@@ -58,7 +59,7 @@ public class SellerNPC implements ZoneConfigurator {
 		npc.setPosition(3, 5);
 		npc.setEntityClass("wizardwomannpc");
 		npc.setDirection(Direction.DOWN);
-		npc.setDescription("Widzisz Sarzine. Jest uzdrowicielką i wiele wie o twej karmie.");
+		npc.setDescription("Widzisz Sarzinę, uzdrowicielkę z Fado. Wśród flaszek i ziół znajduje czas także na rozmowy o karmie.");
 		zone.add(npc);
 	}
 

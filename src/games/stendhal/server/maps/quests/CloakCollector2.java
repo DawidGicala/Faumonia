@@ -59,7 +59,7 @@ import java.util.List;
  * <p>
  * REPETITIONS: - None.
  */
-public class CloakCollector2 extends AbstractQuest {
+public class CloakCollector2 extends AbstractQuest implements games.stendhal.server.core.rp.quest.NativeCollectionDetails {
 
     private static final List<String> NEEDEDCLOAKS2 = Arrays.asList("płaszcz karmazynowy", "płaszcz cieni", "płaszcz xenocyjski",
 								       "płaszcz elficki", "płaszcz chaosu", "płaszcz mainiocyjski", "płaszcz balorughtów", "płaszcz wampirzy",
@@ -107,25 +107,35 @@ public class CloakCollector2 extends AbstractQuest {
 
 		// player says hi before starting the quest
 		npc.add(ConversationStates.IDLE,
-				ConversationPhrases.GREETING_MESSAGES,
-				new AndCondition(new GreetingMatchesNameCondition(npc.getName()),
+            ConversationPhrases.GREETING_MESSAGES,
+            new AndCondition(new GreetingMatchesNameCondition(npc.getName()),
 					new ChatCondition() {
 						public boolean fire(final Player player, final Sentence sentence, final Entity entity) {
 							return !player.hasQuest(QUEST_SLOT) && player.isQuestCompleted(OLD_QUEST);
 						}
 					}),
-				ConversationStates.QUEST_2_OFFERED,
-				"Witaj ponownie przybyszu! Doszły mnie słuchy o nowych płaszczach, i żałuję że poprzednio Cię o nie nie poprosiłam...ale nie przepadałam za nimi."+
-				"Obawiam się, że moja #kolekcja jest niekompletna...",
-				null);
+            ConversationStates.QUEST_2_OFFERED,
+            "Witaj ponownie! Pierwsza kolekcja wygląda pięknie, ale usłyszałam o kolejnych płaszczach, których jeszcze nie mam. Pomożesz mi uzupełnić drugą listę?",
+            null);
+        // Resume the native stage without changing its guards or actions.
+        npc.add(ConversationStates.ATTENDING, "druga kolekcja",
+            new AndCondition(new games.stendhal.server.entity.npc.condition.AlwaysTrueCondition(),
+					new ChatCondition() {
+						public boolean fire(final Player player, final Sentence sentence, final Entity entity) {
+							return !player.hasQuest(QUEST_SLOT) && player.isQuestCompleted(OLD_QUEST);
+						}
+					}),
+            ConversationStates.QUEST_2_OFFERED,
+            "Witaj ponownie! Pierwsza kolekcja wygląda pięknie, ale usłyszałam o kolejnych płaszczach, których jeszcze nie mam. Pomożesz mi uzupełnić drugą listę?",
+            null);
 
 		// player asks what cloaks are needed
-		npc.add(ConversationStates.QUEST_2_OFFERED, 
-				Arrays.asList("collection", "kolekcja"), 
-				null,
-				ConversationStates.QUEST_2_OFFERED, 
-				null,
-				new ChatAction() {
+		npc.add(ConversationStates.QUEST_2_OFFERED,
+            Arrays.asList("collection", "kolekcja"),
+            null,
+            ConversationStates.QUEST_2_OFFERED,
+            null,
+            new ChatAction() {
 					public void fire(final Player player, final Sentence sentence, final EventRaiser entity) {
 						final List<String> needed2 = missingcloaks2(player, true);
 						entity.say("Brakuje "
@@ -142,13 +152,13 @@ public class CloakCollector2 extends AbstractQuest {
 				});
 		// player says yes
 		npc.add(ConversationStates.QUEST_2_OFFERED,
-				ConversationPhrases.YES_MESSAGES, 
-				null,
-				ConversationStates.IDLE, 
-				null, 
-				new ChatAction() {
+            ConversationPhrases.YES_MESSAGES,
+            new games.stendhal.server.entity.npc.condition.QuestNotStartedCondition(QUEST_SLOT),
+            ConversationStates.ATTENDING,
+            null,
+            new ChatAction() {
 					public void fire(final Player player, final Sentence sentence, final EventRaiser entity) {
-						entity.say("Wspaniale! Jestem teraz szczęśliwa! Dowidzenia!");
+						entity.say("Wspaniale, zaczynamy drugą kolekcję! Przynoś po jednym brakującym płaszczu, w dowolnej kolejności. Każdy nowy okaz uzupełni moją kolekcję.");
 						player.setQuest(QUEST_SLOT, "");
 						player.addKarma(5.0);
 					}
@@ -160,14 +170,14 @@ public class CloakCollector2 extends AbstractQuest {
 				});
 
 		// player is not willing to help
-		npc.add(ConversationStates.QUEST_2_OFFERED, 
-				ConversationPhrases.NO_MESSAGES, 
-				null,
-				ConversationStates.QUEST_2_OFFERED, 
-				null, 
-				new ChatAction() {
+		npc.add(ConversationStates.QUEST_2_OFFERED,
+            ConversationPhrases.NO_MESSAGES,
+            new games.stendhal.server.entity.npc.condition.QuestNotStartedCondition(QUEST_SLOT),
+            ConversationStates.ATTENDING,
+            null,
+            new ChatAction() {
 					public void fire(final Player player, final Sentence sentence, final EventRaiser entity) {
-						entity.say("Och ... nie jesteś zbyt przyjazny. Powiedziałeś tak?");
+						entity.say("Rozumiem, to kolejna długa wyprawa po płaszcze. Nie musisz od razu się decydować; wróć, kiedy zechcesz rozpocząć poszukiwania.");
 						player.addKarma(-5.0);
 					}
 
@@ -185,16 +195,16 @@ public class CloakCollector2 extends AbstractQuest {
 		// it will still work for red (red_spotted is the subclass), black dragon (black), 
 		// golden, mainio (primary coloured), chaos (multicoloured).
 		for(final String itemName : NEEDEDCLOAKS2) {
-			npc.add(ConversationStates.QUEST_2_OFFERED, 
-				itemName, 
-				null,
-				ConversationStates.QUEST_2_OFFERED, 
-				null,
-				new ChatAction() {
+			npc.add(ConversationStates.QUEST_2_OFFERED,
+            itemName,
+            null,
+            ConversationStates.QUEST_2_OFFERED,
+            null,
+            new ChatAction() {
 					public void fire(final Player player, final Sentence sentence, final EventRaiser raiser) {
 						Expression obj = sentence.getObject(0);
 						if (obj!=null && !obj.getNormalized().equals(itemName)) {
-							raiser.say("I don't know " + obj.getOriginal() + ". Can you name me another cloak please?");
+							raiser.say("Nie rozpoznaję tej nazwy. Wybierz konkretny płaszcz z listy, a wyjaśnię, którego egzemplarza szukam.");
 						} else {
 							final Item item = SingletonRepository.getEntityManager().getItem(itemName);
 							StringBuilder stringBuilder = new StringBuilder();
@@ -207,7 +217,7 @@ public class CloakCollector2 extends AbstractQuest {
 							}
 						
 							stringBuilder.append(". Przepraszam, ale to mi nie pomaga! Znajdziesz je wszystkie?");
-							raiser.say(stringBuilder.toString());
+							raiser.say("Szukam właśnie tego egzemplarza: " + itemName + ". Inny płaszcz o podobnym kolorze nie zastąpi go w kolekcji. Przynieś go, kiedy trafisz na właściwy okaz.");
 						}
 					}
 
@@ -227,20 +237,27 @@ public class CloakCollector2 extends AbstractQuest {
 		final SpeakerNPC npc = npcs.get("Josephine");
 
 		// player returns while quest is still active
-		npc.add(
-				ConversationStates.IDLE,
-				ConversationPhrases.GREETING_MESSAGES,
-				new AndCondition(new GreetingMatchesNameCondition(npc.getName()),
+		npc.add(ConversationStates.IDLE,
+            ConversationPhrases.GREETING_MESSAGES,
+            new AndCondition(new GreetingMatchesNameCondition(npc.getName()),
 						new QuestActiveCondition(QUEST_SLOT)),
-				ConversationStates.QUESTION_2,
-				"Witaj z powrotem! Przyniosłeś ze sobą jakieś #płaszcze?", null);
+            ConversationStates.QUESTION_2,
+            "Witaj z powrotem! Przyniosłeś ze sobą jakieś #płaszcze?",
+            null);
+        // Resume the native stage without changing its guards or actions.
+        npc.add(ConversationStates.ATTENDING, "druga kolekcja",
+            new AndCondition(new games.stendhal.server.entity.npc.condition.AlwaysTrueCondition(),
+						new QuestActiveCondition(QUEST_SLOT)),
+            ConversationStates.QUESTION_2,
+            "Witaj z powrotem! Przyniosłeś ze sobą jakieś #płaszcze?",
+            null);
 		// player asks what exactly is missing
-		npc.add(ConversationStates.QUESTION_2, 
-				Arrays.asList("cloaks", "płaszcze"), 
-				null,
-				ConversationStates.QUESTION_2, 
-				null,
-				new ChatAction() {
+		npc.add(ConversationStates.QUESTION_2,
+            Arrays.asList("cloaks", "płaszcze"),
+            null,
+            ConversationStates.QUESTION_2,
+            null,
+            new ChatAction() {
 					public void fire(final Player player, final Sentence sentence, final EventRaiser entity) {
 						final List<String> needed2 = missingcloaks2(player, true);
 						entity.say("Chcę "
@@ -257,23 +274,25 @@ public class CloakCollector2 extends AbstractQuest {
 				});
 		// player says he has a required cloak with him
 		npc.add(ConversationStates.QUESTION_2,
-				ConversationPhrases.YES_MESSAGES, 
-				null,
-				ConversationStates.QUESTION_2,
-				"Ooo! Jakie #płaszcze mi przyniosłeś?", 
-				null);
+            ConversationPhrases.YES_MESSAGES,
+            null,
+            ConversationStates.QUESTION_2,
+            "Ooo! Jakie #płaszcze mi przyniosłeś?",
+            null);
 
 		for(final String itemName : NEEDEDCLOAKS2) {
 			npc.add(ConversationStates.QUESTION_2,
-				itemName,
-				null,
-				ConversationStates.QUESTION_2,
-				null,
-				new ChatAction() {
+            itemName,
+            null,
+            ConversationStates.QUESTION_2,
+            null,
+            new ChatAction() {
 					public void fire(final Player player, final Sentence sentence, final EventRaiser entity) {
 						List<String> missing = missingcloaks2(player, false);
 
 						if (missing.contains(itemName)) {
+                            if (missing.size()==1 && player.isEquipped(itemName)
+                                    && !games.stendhal.server.maps.quests.logic.QuestGoldFees.requirePaid(player, QUEST_SLOT, entity)) { return; }
 							if (player.drop(itemName)) {
 								// register cloak as done
 								final String doneText = player.getQuest(QUEST_SLOT);
@@ -284,7 +303,7 @@ public class CloakCollector2 extends AbstractQuest {
 
 								if (missing.isEmpty()) {
 									rewardPlayer(player);
-									entity.say("Och, jej! Jesteś bardzo miły. Mogę się założyć, że masz wspaniałą Karmę! Słuchaj chcę Cię nagrodzić czymś specjalnym, ale jeszcze nie jest to gotowe. Mógłbyś przyjść za jakiś czas i przypomnieć mi. Nie chcę zapomnieć!");
+									entity.say("Druga kolekcja jest już kompletna! Przyjmij buty zabójcy w podziękowaniu za wszystkie poszukiwania. Płaszcze zostaną u mnie, a te buty niech dobrze służą ci w drodze.");
 									player.setQuest(QUEST_SLOT, "done;rewarded");
 									final Item boots = SingletonRepository.getEntityManager().getItem("buty zabójcy");
 									boots.setBoundTo(player.getName());
@@ -311,44 +330,60 @@ public class CloakCollector2 extends AbstractQuest {
 			});
 		}
 
-		npc.add(ConversationStates.ATTENDING, 
-				ConversationPhrases.NO_MESSAGES,
-				new ChatCondition() {
+		npc.add(ConversationStates.ATTENDING,
+            ConversationPhrases.NO_MESSAGES,
+            new ChatCondition() {
 					public boolean fire(final Player player, final Sentence sentence, final Entity entity) {
 						return !player.isQuestCompleted(QUEST_SLOT);
 					}
-				}, 
-				ConversationStates.ATTENDING,
-				"Dobrze. Jeżeli potrzebujesz pomocy to powiedz.", 
-				null);
+				},
+            ConversationStates.ATTENDING,
+            "Dobrze. Jeżeli potrzebujesz pomocy to powiedz.",
+            null);
 
 		// player says he didn't bring any cloaks to different question
-		npc.add(ConversationStates.QUESTION_2, 
-				ConversationPhrases.NO_MESSAGES,
-				new ChatCondition() {
+		npc.add(ConversationStates.QUESTION_2,
+            ConversationPhrases.NO_MESSAGES,
+            new ChatCondition() {
 					public boolean fire(final Player player, final Sentence sentence, final Entity entity) {
 						return !player.isQuestCompleted(QUEST_SLOT);
 					}
-				}, ConversationStates.ATTENDING, "Dobrze w takim razie wróć później.",
-				null);
+				},
+            ConversationStates.ATTENDING,
+            "Dobrze w takim razie wróć później.",
+            null);
 
 		// player returns after finishing the quest but not rewarded
-		npc.add(ConversationStates.IDLE, 
-				ConversationPhrases.GREETING_MESSAGES,
-				new AndCondition(new GreetingMatchesNameCondition(npc.getName()),
-						new QuestInStateCondition(QUEST_SLOT, "done")), 
-				ConversationStates.ATTENDING,
-				"Och! Nie nagrodziłam Ciebie za ponowną pomoc! Weź te buty. Sądzę, że są wspaniałe, ale nie pasują na mnie :(", 
-				new MultipleActions(new EquipItemAction("buty zabójcy", 1, true), new SetQuestAction(QUEST_SLOT, "done;rewarded")));
+		npc.add(ConversationStates.IDLE,
+            ConversationPhrases.GREETING_MESSAGES,
+            new AndCondition(new GreetingMatchesNameCondition(npc.getName()),
+						new QuestInStateCondition(QUEST_SLOT, "done")),
+            ConversationStates.ATTENDING,
+            "Zebrałeś już wszystkie płaszcze z drugiej listy. Pozostał jeszcze mój podarunek: buty zabójcy. Mnie nie pasują, a tobie mogą się przydać w drodze.",
+            new games.stendhal.server.entity.npc.action.QuestFeeAction(QUEST_SLOT, new MultipleActions(new EquipItemAction("buty zabójcy", 1, true), new SetQuestAction(QUEST_SLOT, "done;rewarded"))));
+        // Resume the native stage without changing its guards or actions.
+        npc.add(ConversationStates.ATTENDING, "druga kolekcja",
+            new AndCondition(new games.stendhal.server.entity.npc.condition.AlwaysTrueCondition(),
+						new QuestInStateCondition(QUEST_SLOT, "done")),
+            ConversationStates.ATTENDING,
+            "Zebrałeś już wszystkie płaszcze z drugiej listy. Pozostał jeszcze mój podarunek: buty zabójcy. Mnie nie pasują, a tobie mogą się przydać w drodze.",
+            new games.stendhal.server.entity.npc.action.QuestFeeAction(QUEST_SLOT, new MultipleActions(new EquipItemAction("buty zabójcy", 1, true), new SetQuestAction(QUEST_SLOT, "done;rewarded"))));
 	
 		//		 player returns after finishing the quest and was rewarded
-		npc.add(ConversationStates.IDLE, 
-				ConversationPhrases.GREETING_MESSAGES,
-				new AndCondition(new GreetingMatchesNameCondition(npc.getName()),
-						new QuestInStateCondition(QUEST_SLOT, "done;rewarded")), 
-				ConversationStates.ATTENDING,
-				"Jeszcze raz dziękuję za okazaną pomoc! Płaszcze wyglądają wspaniale!",
-				null);
+		npc.add(ConversationStates.IDLE,
+            ConversationPhrases.GREETING_MESSAGES,
+            new AndCondition(new GreetingMatchesNameCondition(npc.getName()),
+						new QuestInStateCondition(QUEST_SLOT, "done;rewarded")),
+            ConversationStates.ATTENDING,
+            "Jeszcze raz dziękuję za okazaną pomoc! Płaszcze wyglądają wspaniale!",
+            null);
+        // Resume the native stage without changing its guards or actions.
+        npc.add(ConversationStates.ATTENDING, "druga kolekcja",
+            new AndCondition(new games.stendhal.server.entity.npc.condition.AlwaysTrueCondition(),
+						new QuestInStateCondition(QUEST_SLOT, "done;rewarded")),
+            ConversationStates.ATTENDING,
+            "Jeszcze raz dziękuję za okazaną pomoc! Płaszcze wyglądają wspaniale!",
+            null);
 	}
 
 	@Override
@@ -359,7 +394,7 @@ public class CloakCollector2 extends AbstractQuest {
 		step_3();
 		fillQuestInfo(
 				"Płaszcze dla Kolekcjonera II",
-				"Josephine potrzebuję więcej płaszczy!",
+				"Po pierwszej kolekcji Josephine chce obejrzeć kolejne, rzadsze płaszcze. Ustal nową listę i przynoś brakujące egzemplarze; to druga kolekcja, niezależna od pierwszej.",
 				false);
 	}
 	
@@ -377,17 +412,8 @@ public class CloakCollector2 extends AbstractQuest {
 	
 	@Override
 	public List<String> getHistory(final Player player) {
-			final List<String> res = new ArrayList<String>();
-			if (!player.hasQuest(QUEST_SLOT)) {
-				return res;
-			}
-			if (!isCompleted(player)) {
-				res.add("Muszę zebrać więcej płaszczy dla Josephine. Wciąż muszę " + Grammar.enumerateCollection(missingcloaks2(player, false)) + " zebrać.");
-			} else {
-				res.add("Mam wszystkie płaszcze jakie Josephine chciała, a ona dała mi wspaniałe buty mordercy.	W nagrodę za ukończenie zadania otrzymałem: 1.000.000 pkt doświadczenia, 200.000 pkt obrony, 100.000 pkt ataku, 100 pkt karmy i buty zabójcy.");
-			}
-			return res;
-	}
+        return games.stendhal.server.core.rp.quest.CollectionQuestProgress.history(this, player);
+    }
 	
 	// The previous quest likely requires at least this level. 
 	// When adding the hint check, remember to check if the CloakCollector quest is completed.
@@ -404,4 +430,11 @@ public class CloakCollector2 extends AbstractQuest {
 	public String getNPCName() {
 		return "Josephine";
 	}
+
+
+
+    public String getCollectionKind(){return "list";}
+    public java.util.Map<String,Integer> getCollectionItems(){java.util.Map<String,Integer> m=new java.util.LinkedHashMap<String,Integer>();for(String n:NEEDEDCLOAKS2)m.put(n,1);return m;}
+    public String getCollectionHint(){return "Josephine chce uzupełnić drugą kolekcję płaszczy. Przynoś brakujące egzemplarze w dowolnej kolejności; już oddane nie są potrzebne ponownie. Za ukończenie kolekcji otrzymasz buty zabójcy.";}
+    
 }

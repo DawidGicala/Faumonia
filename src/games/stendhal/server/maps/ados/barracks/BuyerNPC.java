@@ -64,11 +64,12 @@ public class BuyerNPC implements ZoneConfigurator {
 
 			@Override
 			protected void createDialog() {
+                games.stendhal.server.entity.npc.dialogue.CollectionDialogueTopics.install(this);
 				addGreeting("Pozdrawiam. Przyszedłeś zaciągnąć się do wojska?");
 				addReply(ConversationPhrases.YES_MESSAGES, "Ha! Cóż nie pozwolę Ci zapisać się do wojska, ale możesz nam #zaoferować jakąś zbroję...");
 				addReply(ConversationPhrases.NO_MESSAGES, "Dobrze! I tak nigdy nie chciałbyś się tutaj dostać.");
-				addJob("Poszukuję broni. Brakuje nam jej tutaj. Posiadamy dużo amunicji a mało zbroi. Widzę, że masz ze sobą jakąś zbroję, którą mógłbyś nam #zaoferować.");
-				addHelp("Skupuję zbroje jeżeli coś masz to #zaoferuj mi to.");
+				addJob("Dbam o wyposażenie oddziału w koszarach. Amunicji mamy sporo, za to przyda się broń i zbroje, które możesz nam #zaoferować. Osobno odłożyłem też oznaczone zamówienie dla Phalka.");
+				addHelp("Jeśli przywozisz broń lub zbroje, możesz mi je #zaoferować. Na tablicy znajdziesz rzeczy potrzebne oddziałowi i ceny skupu; sprzedaję też strzały na dalszą drogę.");
 				addOffer("Spójrz na tablicę, aby zobaczyć czego nam brakuje i ile za to płacimy. Sprzedaję również różne strzały.");
 				addQuest("O, dziękuję, ale niczego już nie potrzebuję.");
 				new BuyerAdder().addBuyer(this, new BuyerBehaviour(shops.get("buyrare3")), false);
@@ -77,7 +78,7 @@ public class BuyerNPC implements ZoneConfigurator {
 			}
 		};
 
-		npc.setDescription("Oto Mrotho, strzeże baraków w Ados.");
+		npc.setDescription("Widzisz Mrotho pilnującego koszar Ados. Ogląda przyniesioną broń z uwagą doświadczonego zaopatrzeniowca.");
 		npc.setEntityClass("barracksbuyernpc");
 		npc.setPosition(45, 49);
 		npc.initHP(500);

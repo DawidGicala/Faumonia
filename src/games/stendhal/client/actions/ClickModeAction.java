@@ -38,9 +38,9 @@ public class ClickModeAction implements SlashAction {
 		doubleClick = !doubleClick;
 		WtWindowManager.getInstance().setProperty("ui.doubleclick", Boolean.toString(doubleClick));
 		if (doubleClick) {
-			ClientSingletonRepository.getUserInterface().addEventLine(new StandardEventLine("Tryb klikania jest teraz ustawiony na podwójne klikanie."));
+			ClientSingletonRepository.getUserInterface().addEventLine(new StandardEventLine("Tryb klikania: podwójne kliknięcie."));
 		} else {
-			ClientSingletonRepository.getUserInterface().addEventLine(new StandardEventLine("Tryb klikania jest teraz ustawiony na pojedyńcze klikanie."));
+			ClientSingletonRepository.getUserInterface().addEventLine(new StandardEventLine("Tryb klikania: pojedyncze kliknięcie."));
 		}
 		return true;
 	}

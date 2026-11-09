@@ -12,6 +12,8 @@
  ***************************************************************************/
 package games.stendhal.server.maps.quests;
 
+import games.stendhal.server.entity.npc.action.DialogueRewardAction;
+
 import games.stendhal.common.grammar.Grammar;
 import games.stendhal.common.parser.Sentence;
 import games.stendhal.server.core.engine.SingletonRepository;
@@ -60,6 +62,7 @@ import marauroa.common.game.IRPZone;
  * @author Vanessa Julius and Krupi (idea)
  */
 public class FishSoup extends AbstractQuest {
+    public static java.util.List<String> getRequiredItems() { return java.util.Collections.unmodifiableList(NEEDED_FOOD); }
 
 	private static final List<String> NEEDED_FOOD = Arrays.asList("pokolec",
 			"dorsz", "palia alpejska", "płotka", "błazenek", "cebula", "makrela",
@@ -107,7 +110,7 @@ public class FishSoup extends AbstractQuest {
 	 * Serves the soup as a reward for the given player.
 	 * @param player to be rewarded
 	 */
-	private void placeSoupFor(final Player player) {
+	private void placeSoupFor(final Player player, final EventRaiser npc) {
 		final Item soup = SingletonRepository.getEntityManager()
 				.getItem("zupa rybna");
 		final IRPZone zone = SingletonRepository.getRPWorld().getZone("0_ados_city_n2");
@@ -119,6 +122,7 @@ public class FishSoup extends AbstractQuest {
 		// base HP. soup is already persistent so it will last.
 		soup.put("amount", player.getBaseHP());
 		zone.add(soup);
+        DialogueRewardAction.recordItem(player, npc, soup, player.getNumberOfEquipped(soup.getName()), 1);
 	}
 
 	private void step_1() {
@@ -131,7 +135,16 @@ public class FishSoup extends AbstractQuest {
 			new AndCondition(new GreetingMatchesNameCondition(npc.getName()),
 					new QuestNotStartedCondition(QUEST_SLOT)),
 			ConversationStates.INFORMATION_1,
-			"Część i witam na rynku w Ados! Mam coś naprawdę smacznego dla Ciebie. Chciałbyś #zobaczyć?",
+			"Witaj na rynku w Ados! Wśród tego zgiełku pilnuję garnka zupy rybnej, mojego ulubionego specjału. Chcesz #zobaczyć, co trzeba do niej zebrać?",
+			null);
+
+        // Same authoritative step, without requiring the player to leave and greet again.
+        npc.add(
+			ConversationStates.ATTENDING, "zupa rybna",
+			new AndCondition(new games.stendhal.server.entity.npc.condition.AlwaysTrueCondition(),
+					new QuestNotStartedCondition(QUEST_SLOT)),
+			ConversationStates.INFORMATION_1,
+			"Witaj na rynku w Ados! Wśród tego zgiełku pilnuję garnka zupy rybnej, mojego ulubionego specjału. Chcesz #zobaczyć, co trzeba do niej zebrać?",
 			null);
 
 		// player returns after finishing the quest (it is repeatable) after the
@@ -146,11 +159,31 @@ public class FishSoup extends AbstractQuest {
 			"Witaj ponownie. Wróciłeś po mój specjał zupę rybną?",
 			null);
 
+        // Same authoritative step, without requiring the player to leave and greet again.
+        npc.add(
+			ConversationStates.ATTENDING, "zupa rybna",
+			new AndCondition(new games.stendhal.server.entity.npc.condition.AlwaysTrueCondition(),
+					new QuestCompletedCondition(QUEST_SLOT),
+					new TimePassedCondition(QUEST_SLOT, 1, REQUIRED_MINUTES)),  
+			ConversationStates.QUEST_OFFERED,
+			"Witaj ponownie. Wróciłeś po mój specjał zupę rybną?",
+			null);
+
 		// player returns after finishing the quest (it is repeatable) before
 		// the time as finished
 		npc.add(ConversationStates.IDLE,
 				ConversationPhrases.GREETING_MESSAGES,
 				new AndCondition(new GreetingMatchesNameCondition(npc.getName()),
+						new QuestCompletedCondition(QUEST_SLOT),
+						new NotCondition(new TimePassedCondition(QUEST_SLOT, 1, REQUIRED_MINUTES))), 
+				ConversationStates.ATTENDING, 
+				null,
+				new SayTimeRemainingAction(QUEST_SLOT, 1, REQUIRED_MINUTES , "Przykro mi, ale muszę umyć mój garnek nim zacznę gotować moją zupę dla Ciebie. Wróć za ")
+			);
+
+        // Same authoritative step, without requiring the player to leave and greet again.
+        npc.add(ConversationStates.ATTENDING, "zupa rybna",
+				new AndCondition(new games.stendhal.server.entity.npc.condition.AlwaysTrueCondition(),
 						new QuestCompletedCondition(QUEST_SLOT),
 						new NotCondition(new TimePassedCondition(QUEST_SLOT, 1, REQUIRED_MINUTES))), 
 				ConversationStates.ATTENDING, 
@@ -195,7 +228,7 @@ public class FishSoup extends AbstractQuest {
 		npc.add(ConversationStates.QUEST_OFFERED,
 			ConversationPhrases.YES_MESSAGES, null,
 			ConversationStates.QUESTION_1, 
-			"Dokonałeś dobrego wyboru i założe się, że nie będziesz rozczarowany. Masz wszystko czego potrzebuję?",
+			"Dobrze, przygotuję garnek. Możesz donosić ryby i warzywa partiami; zapamiętam, co już dostałam. Gdy zbierzesz wszystkie składniki, porcja zupy będzie czekać na stole na rynku.",
 			new SetQuestAction(QUEST_SLOT, ""));
 
 		// player is not willing to help
@@ -210,8 +243,8 @@ public class FishSoup extends AbstractQuest {
 			Arrays.asList("pokolec","dorsz", "palia alpejska", "płotka", "błazenek", "makrela", "okoń"),
 			null,
 			ConversationStates.QUEST_OFFERED,
-			"Są różne miejsca połowów w Faumoni. Jeżęli chcesz wiedzieć gdzie możesz znaleść każdy z rodzjów ryby" +
-			" to zajrzyj do biblioteki w Ados. Przyniesiesz mi składniki?",
+			"Każdy gatunek ryby ma swoje łowiska. Jeśli chcesz wiedzieć, gdzie ich szukać," +
+			" zajrzyj do biblioteki w Ados. Zbierzesz składniki do mojego przepisu?",
 			null);
 
 		// players asks about the ingredients individually
@@ -245,6 +278,16 @@ public class FishSoup extends AbstractQuest {
 			ConversationStates.IDLE,
 			ConversationPhrases.GREETING_MESSAGES,
 			new AndCondition(new GreetingMatchesNameCondition(npc.getName()),
+					new QuestStartedCondition(QUEST_SLOT),
+					new NotCondition(new QuestStateStartsWithCondition(QUEST_SLOT, "done"))),
+			ConversationStates.QUESTION_1,
+			"Witaj z powrotem! Mam nadzieje, że zdobyłeś jakieś #składniki na zupę rybną lub #wszystkie.",
+			null);
+
+        // Same authoritative step, without requiring the player to leave and greet again.
+        npc.add(
+			ConversationStates.ATTENDING, "zupa rybna",
+			new AndCondition(new games.stendhal.server.entity.npc.condition.AlwaysTrueCondition(),
 					new QuestStartedCondition(QUEST_SLOT),
 					new NotCondition(new QuestStateStartsWithCondition(QUEST_SLOT, "done"))),
 			ConversationStates.QUESTION_1,
@@ -290,9 +333,9 @@ public class FishSoup extends AbstractQuest {
 								if (!missing.isEmpty()) {
 									npc.say("Dziękuję bardzo! Co jeszcze przyniosłeś?");
 								} else {
-									player.addKarma(5.0);
-									player.addXP(50);
-									placeSoupFor(player);
+									DialogueRewardAction.karma(new games.stendhal.server.entity.npc.action.IncreaseKarmaAction(5.0)).fire(player, null, npc);
+									DialogueRewardAction.xp(50).fire(player, null, npc);
+									placeSoupFor(player, npc);
 									player.healPoison();
 									npc.say("Zupa dla Ciebie jest na stole na rynku. Uleczy Ciebie. "
 											+ "Mój magiczny sposób gotowania zupy daje też trochę karmy.");
@@ -366,15 +409,15 @@ public class FishSoup extends AbstractQuest {
 							+ Grammar.enumerateCollection(missing)
 							+ ". Dostaniesz złą karmę jeżeli nadal będziesz popełniał błędy takie jak ten!");
 			// to fix bug [ 2517439 ] 
-			player.addKarma(-5.0);
+			DialogueRewardAction.karma(new games.stendhal.server.entity.npc.action.IncreaseKarmaAction(-5.0)).fire(player, null, npc);
 			return;
 		} else {
 			// you get less XP if you did it the lazy way
 			// and no karma
-			player.addXP(30);
-			placeSoupFor(player);
+			DialogueRewardAction.xp(30).fire(player, null, npc);
+			placeSoupFor(player, npc);
 			player.healPoison();
-			npc.say("Zupa dla Ciebie jest na stole na rynku. Uleczy cię. Powiedz mi jeżeli mógłbym jeszcze w czymś pomóc.");
+			npc.say("Gotowa porcja czeka na stole na rynku i jest przeznaczona dla ciebie. Zjedz ją, kiedy będziesz potrzebować pożywnego posiłku, albo zachowaj na drogę. Daj mi chwilę na umycie garnka przed kolejnym gotowaniem.");
 			player.setQuest(QUEST_SLOT, "done;"
 					+ System.currentTimeMillis());
 			player.notifyWorldAboutChanges();
@@ -387,7 +430,7 @@ public class FishSoup extends AbstractQuest {
 		super.addToWorld();
 		fillQuestInfo(
 				"Zupa Rybna",
-				"Spróbuj zdobyć wszystkie składniki, które potrzebuję do zdrowej i smacznej zupy rybnej Florence Boullabaisse.",
+				"Florence Boullabaisse na rynku w Ados zna przepis na zupę rybną. Zapytaj o składniki i dostarcz właściwe gatunki ryb; kucharka nie zastępuje jednego drugim.",
 				false);
 		step_1();
 		step_2();

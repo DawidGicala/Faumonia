@@ -69,7 +69,7 @@ import java.util.Map;
  * REPETITIONS:
  * <li> once a day
  */
-public class DailyItemQuest extends AbstractQuest {
+public class DailyItemQuest extends AbstractQuest implements games.stendhal.server.core.rp.quest.NativeCollectionDetails {
 
 	private static final String QUEST_SLOT = "daily_item";
 	
@@ -208,8 +208,7 @@ public class DailyItemQuest extends AbstractQuest {
 		// common place to get the start quest actions as we can both starts it and abort and start again
 		
 		final List<ChatAction> actions = new LinkedList<ChatAction>();
-		actions.add(new StartRecordingRandomItemCollectionAction(QUEST_SLOT,0,items,"Ados potrzebuje zapasów. Zdobądź [item]"
-				+ " i powiedz #załatwione, gdy przyniesiesz."));	
+		actions.add(new StartRecordingRandomItemCollectionAction(QUEST_SLOT, 0, items, "Sprawy Ados to także codzienne dostawy dla mieszkańców. W tym zamówieniu potrzebuję [item]. Przynieś wskazaną ilość i powiedz #zakończone, a zapiszę twoją pomoc."));	
 		actions.add(new SetQuestToTimeStampAction(QUEST_SLOT, 1));
 		
 		return new MultipleActions(actions);
@@ -217,57 +216,59 @@ public class DailyItemQuest extends AbstractQuest {
 	
 	private void getQuest() {
 		final SpeakerNPC npc = npcs.get("Mayor Chalmers");
-		npc.add(ConversationStates.ATTENDING, ConversationPhrases.QUEST_MESSAGES,
-				new AndCondition(new QuestActiveCondition(QUEST_SLOT),
-								 new NotCondition(new TimePassedCondition(QUEST_SLOT,1,expireDelay))), 
-				ConversationStates.ATTENDING,
-				null,
-				new SayRequiredItemAction(QUEST_SLOT,0,"Już dostałeś zadanie by przynieść [item]"
-						+ ". Powiedz #załatwione jeżeli przyniesiesz!"));
+		npc.add(ConversationStates.ATTENDING,
+            ConversationPhrases.QUEST_MESSAGES,
+            new AndCondition(new QuestActiveCondition(QUEST_SLOT),
+								 new NotCondition(new TimePassedCondition(QUEST_SLOT,1,expireDelay))),
+            ConversationStates.ATTENDING,
+            null,
+            new SayRequiredItemAction(QUEST_SLOT, 0, "Twoje zamówienie pozostaje aktualne: [item]. Nie musisz pytać o nowe zadanie, przynieś tę dostawę i powiedz #zakończone."));
 		
-		npc.add(ConversationStates.ATTENDING, ConversationPhrases.QUEST_MESSAGES,
-				new AndCondition(new QuestActiveCondition(QUEST_SLOT),
-								 new TimePassedCondition(QUEST_SLOT,1,expireDelay)), 
-				ConversationStates.ATTENDING,
-				null,
-				new SayRequiredItemAction(QUEST_SLOT,0,"Jesteś na etapie poszukiwania [item]"
-						+ " powiedz #załatwione, jak przyniesiesz. Być może nie ma tych przedmiotów! Możesz przynieść #inny przedmiot jeżeli chcesz lub wróć z tym, o który cię na początku prosiłem."));
+		npc.add(ConversationStates.ATTENDING,
+            ConversationPhrases.QUEST_MESSAGES,
+            new AndCondition(new QuestActiveCondition(QUEST_SLOT),
+								 new TimePassedCondition(QUEST_SLOT,1,expireDelay)),
+            ConversationStates.ATTENDING,
+            null,
+            new SayRequiredItemAction(QUEST_SLOT, 0, "Nadal czekam na [item]. Poszukiwania trwają już dość długo, więc mogę przyjąć prośbę o #inne zamówienie; możesz też dokończyć obecne. Dostarczony komplet zgłoś słowem #zakończone."));
 	
-		npc.add(ConversationStates.ATTENDING, ConversationPhrases.QUEST_MESSAGES,
-				new AndCondition(new QuestCompletedCondition(QUEST_SLOT),
-								 new NotCondition(new TimePassedCondition(QUEST_SLOT,1,delay))), 
-				ConversationStates.ATTENDING,
-				null,
-				new SayTimeRemainingAction(QUEST_SLOT,1, delay, "Możesz dostać tylko jedno zadanie dziennie. Proszę wróć za"));
+		npc.add(ConversationStates.ATTENDING,
+            ConversationPhrases.QUEST_MESSAGES,
+            new AndCondition(new QuestCompletedCondition(QUEST_SLOT),
+								 new NotCondition(new TimePassedCondition(QUEST_SLOT,1,delay))),
+            ConversationStates.ATTENDING,
+            null,
+            new SayTimeRemainingAction(QUEST_SLOT,1, delay, "Możesz dostać tylko jedno zadanie dziennie. Proszę wróć za"));
 
 		
 		
 		
-		npc.add(ConversationStates.ATTENDING, ConversationPhrases.QUEST_MESSAGES,
-				new OrCondition(new QuestNotStartedCondition(QUEST_SLOT),
+		npc.add(ConversationStates.ATTENDING,
+            ConversationPhrases.QUEST_MESSAGES,
+            new OrCondition(new QuestNotStartedCondition(QUEST_SLOT),
 								new AndCondition(new QuestCompletedCondition(QUEST_SLOT),
-												 new TimePassedCondition(QUEST_SLOT,1,delay))), 
-				ConversationStates.ATTENDING,
-				null,
-				startQuestAction());
+												 new TimePassedCondition(QUEST_SLOT,1,delay))),
+            ConversationStates.ATTENDING,
+            null,
+            startQuestAction());
 	}
 	
 	private void completeQuest() {
 		final SpeakerNPC npc = npcs.get("Mayor Chalmers");
 		
 		npc.add(ConversationStates.ATTENDING,
-				ConversationPhrases.FINISH_MESSAGES, 
-				new QuestNotStartedCondition(QUEST_SLOT),
-				ConversationStates.ATTENDING, 
-				"Obawiam się, że jeszcze nie dałem tobie #zadania.",
-				null);
+            ConversationPhrases.FINISH_MESSAGES,
+            new QuestNotStartedCondition(QUEST_SLOT),
+            ConversationStates.ATTENDING,
+            "Obawiam się, że jeszcze nie dałem tobie #zadania.",
+            null);
 		
 		npc.add(ConversationStates.ATTENDING,
-				ConversationPhrases.FINISH_MESSAGES, 
-				new QuestCompletedCondition(QUEST_SLOT),
-				ConversationStates.ATTENDING, 
-				"Już ukończyłeś ostatnie zadanie, które ci dałem.",
-				null);
+            ConversationPhrases.FINISH_MESSAGES,
+            new QuestCompletedCondition(QUEST_SLOT),
+            ConversationStates.ATTENDING,
+            "Już ukończyłeś ostatnie zadanie, które ci dałem.",
+            null);
 		
 		final List<ChatAction> actions = new LinkedList<ChatAction>();
 		actions.add(new DropRecordedItemAction(QUEST_SLOT,0));
@@ -281,21 +282,20 @@ public class DailyItemQuest extends AbstractQuest {
 		actions.add(new IncreaseDefXPAction(2500));
 		
 		npc.add(ConversationStates.ATTENDING,
-				ConversationPhrases.FINISH_MESSAGES,
-				new AndCondition(new QuestActiveCondition(QUEST_SLOT),
+            ConversationPhrases.FINISH_MESSAGES,
+            new AndCondition(new QuestActiveCondition(QUEST_SLOT),
 								 new PlayerHasRecordedItemWithHimCondition(QUEST_SLOT,0)),
-				ConversationStates.ATTENDING, 
-				"Dobra robota! Pozwól sobie podziękować w imieniu obywateli Ados!",
-				new MultipleActions(actions));
+            ConversationStates.ATTENDING,
+            "W imieniu mieszkańców Ados dziękuję za dostawę. To kolejna sprawa, której nie trzeba już odkładać na jutro. Przyjmij zapłatę za swoją pomoc.",
+            new MultipleActions(actions));
 		
 		npc.add(ConversationStates.ATTENDING,
-				ConversationPhrases.FINISH_MESSAGES,
-				new AndCondition(new QuestActiveCondition(QUEST_SLOT),
+            ConversationPhrases.FINISH_MESSAGES,
+            new AndCondition(new QuestActiveCondition(QUEST_SLOT),
 								 new NotCondition(new PlayerHasRecordedItemWithHimCondition(QUEST_SLOT,0))),
-				ConversationStates.ATTENDING, 
-				null,
-				new SayRequiredItemAction(QUEST_SLOT,0,"Jeszcze nie przyniosłeś [item]"
-						+ ". Idź i zdobądź, a wtedy wróć i powiedz #załatwione jak skończysz."));
+            ConversationStates.ATTENDING,
+            null,
+            new SayRequiredItemAction(QUEST_SLOT, 0, "Do pełnej dostawy brakuje ci jeszcze: [item]. Nie zabieram części zamówienia; wróć z całym kompletem i powiedz #zakończone."));
 
 	}
 	
@@ -303,28 +303,28 @@ public class DailyItemQuest extends AbstractQuest {
 		final SpeakerNPC npc = npcs.get("Mayor Chalmers");
 		
 		npc.add(ConversationStates.ATTENDING,
-				ConversationPhrases.ABORT_MESSAGES,
-				new AndCondition(new QuestActiveCondition(QUEST_SLOT),
-						 		 new TimePassedCondition(QUEST_SLOT,1,expireDelay)), 
-				ConversationStates.ATTENDING, 
-				null, 
-				// start quest again immediately
+            ConversationPhrases.ABORT_MESSAGES,
+            new AndCondition(new QuestActiveCondition(QUEST_SLOT),
+						 		 new TimePassedCondition(QUEST_SLOT,1,expireDelay)),
+            ConversationStates.ATTENDING,
+            null,
+            // start quest again immediately
 				startQuestAction());
 		
 		npc.add(ConversationStates.ATTENDING,
-				ConversationPhrases.ABORT_MESSAGES,
-				new AndCondition(new QuestActiveCondition(QUEST_SLOT),
-						 		 new NotCondition(new TimePassedCondition(QUEST_SLOT,1,expireDelay))), 
-				ConversationStates.ATTENDING, 
-				"Nie minęło zbyt wiele czasu, od rozpoczęcia zadania. Nie pozwolę Tobie poddać się tak szybko.", 
-				null);
+            ConversationPhrases.ABORT_MESSAGES,
+            new AndCondition(new QuestActiveCondition(QUEST_SLOT),
+						 		 new NotCondition(new TimePassedCondition(QUEST_SLOT,1,expireDelay))),
+            ConversationStates.ATTENDING,
+            "Nie minęło zbyt wiele czasu, od rozpoczęcia zadania. Nie pozwolę Tobie poddać się tak szybko.",
+            null);
 		
 		npc.add(ConversationStates.ATTENDING,
-				ConversationPhrases.ABORT_MESSAGES,
-				new QuestNotActiveCondition(QUEST_SLOT),
-				ConversationStates.ATTENDING, 
-				"Obawiam się, że jeszcze nie dałem tobie #zadania.", 
-				null);
+            ConversationPhrases.ABORT_MESSAGES,
+            new QuestNotActiveCondition(QUEST_SLOT),
+            ConversationStates.ATTENDING,
+            "Obawiam się, że jeszcze nie dałem tobie #zadania.",
+            null);
 		
 	}
 
@@ -335,48 +335,15 @@ public class DailyItemQuest extends AbstractQuest {
 	
 	@Override
 	public List<String> getHistory(final Player player) {
-		final List<String> res = new ArrayList<String>();
-		if (!player.hasQuest(QUEST_SLOT)) {
-			return res;
-		}
-		res.add("Spotkałem burmistrza Mayor Chalmers w Ratuszu Ados");
-		final String questState = player.getQuest(QUEST_SLOT);
-		if ("rejected".equals(questState)) {
-			res.add("Nie chę pomóc Ados.");
-			return res;
-		}
-
-		res.add("Chcę pomóc Ados.");
-		if (player.hasQuest(QUEST_SLOT) && !player.isQuestCompleted(QUEST_SLOT)) {
-			String questItem = player.getRequiredItemName(QUEST_SLOT,0);
-			int amount = player.getRequiredItemQuantity(QUEST_SLOT,0);
-			if (!player.isEquipped(questItem, amount)) {
-				res.add(("Zostałem poproszony o przyniesienie "
-						+ Grammar.quantityplnoun(amount, questItem, "") + ", aby pomóc Ados. Nie mam tego jeszcze."));
-			} else {
-				res.add(("Znalazłem "
-						+ Grammar.quantityplnoun(amount, questItem, "") + " do pomocy Ados i muszę je dostarczyć."));
-			}
-		}
-		int repetitions = player.getNumberOfRepetitions(getSlotName(), 2);
-		if (repetitions > 0) {
-			res.add("Pomogłem Ados z dostawami "
-					+ Grammar.quantityplnoun(repetitions, "razy") + " do tej pory.");
-		}
-		if (isRepeatable(player)) {
-            res.add("Dostarczyłem ostatni przedmiot do burmistrza i teraz Ados znów potrzebuje zapasów.");
-		} else if (isCompleted(player)){
-			res.add("Dostarczyłem ostatni przedmiot do burmistrza i odebrałem moją nagrodę w ciągu 24 godzin.");
-		}
-		return res;
-	}
+        return games.stendhal.server.core.rp.quest.CollectionQuestProgress.history(this, player);
+    }
 
 	@Override
 	public void addToWorld() {
 		super.addToWorld();
 		fillQuestInfo(
 				"Dzienne Zadanie na Przedmiot",
-				"Mayor Chalmers potrzebuje zapasów dla miasta Ados.",
+				"Burmistrz Chalmers organizuje zaopatrzenie mieszkańców Ados. Zapytaj o dzisiejsze zamówienie i przynieś wskazany przedmiot.",
 				true);
 		
 		buildItemsMap();
@@ -411,4 +378,12 @@ public class DailyItemQuest extends AbstractQuest {
 	public String getNPCName() {
 		return "Mayor Chalmers";
 	}
+
+
+
+    public String getCollectionKind(){return "random";}
+    public java.util.Map<String,Integer> getCollectionItems(){return new java.util.TreeMap<String,Integer>(items);}
+    public String getCollectionHint(){return "Liczy się tylko przedmiot i ilość zapisane w aktualnym zamówieniu. Przynieś całą dostawę i zgłoś jej zakończenie. Kolejne zlecenie oraz wymiana trudnego zamówienia są dostępne po upływie odpowiedniego czasu.";}
+    public int getCollectionWait(){return delay;} public int getCollectionExpiry(){return expireDelay;}
+
 }

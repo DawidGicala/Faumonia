@@ -214,7 +214,7 @@ public class Bootstrap {
 			} catch (final SecurityException e) {
 				throw e;
 			} catch (final Exception e) {
-				unexpectedErrorHandling("State: UpdateManager\r\n", e);
+				unexpectedErrorHandling("Etap: aktualizacja gry\r\n", e);
 			}
 		}
 
@@ -227,7 +227,7 @@ public class Bootstrap {
 			} catch (final IOException e) {
 				JOptionPane.showMessageDialog(
 					null,
-					new SelectableLabel("Wystąpił błąd podczas pobierania aktualizacji. Nie można zapisać bootProperties"));
+					new SelectableLabel("Nie udało się zapisać ustawień aktualizacji. Sprawdź, czy masz prawo zapisu w folderze gry i wolne miejsce na dysku."));
 			}
 		}
 
@@ -244,7 +244,7 @@ public class Bootstrap {
 				final Method method = clazz.getMethod("main", args.getClass());
 				method.invoke(null, (Object) args);
 			} catch (final Throwable e) {
-				unexpectedErrorHandling("State: in game\r\n", e);
+				unexpectedErrorHandling("Etap: uruchamianie gry\r\n", e);
 			}
 
 		}
@@ -300,9 +300,9 @@ public class Bootstrap {
 
 				final int res = JOptionPane.showConfirmDialog(
 						null,
-						new SelectableLabel("Sorry an error occurred because of inconsistent code signing.\r\n"
-						+ "Delete update files so that they are downloaded again after you restart " + ClientGameConfiguration.get("GAME_NAME") + "?\r\n"
-						+ "Note: This exception can occur if you include signed jars into a self build client."),
+						new SelectableLabel("Nie udało się zweryfikować podpisów plików gry.\r\n"
+						+ "Czy wyczyścić pobrane aktualizacje, aby pobrać je ponownie po następnym uruchomieniu " + ClientGameConfiguration.get("GAME_NAME") + "?\r\n"
+						+ "Jeśli problem się powtarza, pobierz pełną, aktualną paczkę klienta."),
 						ClientGameConfiguration.get("GAME_NAME"), JOptionPane.YES_NO_OPTION,
 						JOptionPane.QUESTION_MESSAGE);
 				if (res == JOptionPane.YES_OPTION) {
@@ -324,7 +324,7 @@ public class Bootstrap {
 			} catch (final Exception err) {
 				err.printStackTrace(System.err);
 				JOptionPane.showMessageDialog(null,
-						new SelectableLabel("Something nasty happened while trying to start your self build client: "
+						new SelectableLabel("Nie udało się uruchomić klienta. Zgłoś administracji poniższy błąd: "
 								+ err));
 			}
 		}
@@ -352,7 +352,7 @@ public class Bootstrap {
 			final int res = JOptionPane.showConfirmDialog(
 					null,
 					new SelectableLabel(message
-					+ " Wystąpił błąd z powodu niewłaściwego stanu aktualizacji. Usunąłeś pliki aktualizacji i pobrałeś je ponownie po zrestartowaniu " + ClientGameConfiguration.get("GAME_NAME") +"?"),
+					+ " Pliki gry są niezgodne lub niekompletne. Czy wyczyścić pobrane aktualizacje i pobrać je ponownie po następnym uruchomieniu " + ClientGameConfiguration.get("GAME_NAME") +"?"),
 					ClientGameConfiguration.get("GAME_NAME"), JOptionPane.YES_NO_OPTION,
 					JOptionPane.QUESTION_MESSAGE);
 			if (res == JOptionPane.YES_OPTION) {
@@ -377,7 +377,7 @@ public class Bootstrap {
 		try {
 			saveBootProp();
 		} catch (final IOException e1) {
-			JOptionPane.showMessageDialog(null, new SelectableLabel("Could not write jar.properties"));
+			JOptionPane.showMessageDialog(null, new SelectableLabel("Nie udało się zapisać ustawień aktualizacji. Sprawdź uprawnienia do folderu gry i wolne miejsce na dysku."));
 		}
 	}
 

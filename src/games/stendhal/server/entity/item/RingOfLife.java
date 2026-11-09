@@ -64,7 +64,7 @@ public class RingOfLife extends Ring {
 	public String describe() {
 		String text;
 		if (isBroken()) {
-			text = "Oto pierścień szmaragdowy. Kamień stracił blask i nie posiada mocy.";
+			text = "Oto uszkodzony pierścień szmaragdowy. Kamień stracił blask i nie zapewnia już ochrony. O naprawę zapytaj Ognira, jubilera w Fado.";
 		} else {
 			text = "Oto pierścień szmaragdowy. Noś go, a uchroni Cię przed konsekwencjami związanymi ze śmiercią.";
 		}

@@ -10,7 +10,6 @@
  *   (at your option) any later version.                                   *
  *                                                                         *
  ***************************************************************************/
-
 package games.stendhal.client.gui;
 
 import games.stendhal.client.actions.SlashAction;
@@ -40,93 +39,82 @@ import javax.swing.JSeparator;
 import javax.swing.SwingConstants;
 
 /**
- * The panel where you can adjust your settings.
+ * Main client menu.
  */
 class SettingsPanel extends JButton {
-	/** Extra padding for 
-	/** Empty space above and below the separators in the popup menu */
+
+	/** Empty space above and below the separators in the popup menu. */
 	private static final int SEPARATOR_MARGIN = 8;
-	
-	/**
-	 * Creates a new instance of SettingsPanel.
-	 */
+
 	SettingsPanel() {
 		setText("Menu");
 		setIcon(createArrowIcon(true));
 		setSelectedIcon(createArrowIcon(false));
-		// Don't steal focus from the game screen
 		setFocusable(false);
-	
-		// JMenu is not flexible enough for custom layout management.
-		final JPopupMenu menu = new JPopupMenu();
 
-		/*
-		 * JPopupMenu is unable to cope with nested components, so we need to
-		 * use a complicated layout manager. GroupLayout could in principle
-		 * produce the the desired layout, but any changes to the menu structure
-		 * would have global effects, so to spare the sanity of anyone adding
-		 * new menu items, we use GridBag and hope for the best.  
-		 */
-		GridBagLayout layout = new GridBagLayout();
+		final JPopupMenu menu = new JPopupMenu();
+		final GridBagLayout layout = new GridBagLayout();
 		menu.setLayout(layout);
-		GridBagConstraints c = new GridBagConstraints();
-		
-		// Accounts
+		final GridBagConstraints c = new GridBagConstraints();
+
 		Column column = new Column(menu, c);
-		createAccountsMenu(column);
-		
+		createFaumoniaMenu(column);
+
 		addSeparator(menu, c);
-		
+
+		column = new Column(menu, c);
+		createGameDatabaseMenu(column);
+
+		addSeparator(menu, c);
+
+		column = new Column(menu, c);
+		createLevelingMenu(column);
+
+		addSeparator(menu, c);
+
+		column = new Column(menu, c);
+		createQuestsMenu(column);
+
+		addSeparator(menu, c);
+
 		column = new Column(menu, c);
 		createToolsMenu(column);
-		
+
 		addActionListener(new ActionListener() {
 			@Override
-			public void actionPerformed(ActionEvent e) {
-				// Place the menu right justified to the button
-				menu.show(SettingsPanel.this, getWidth() - menu.getPreferredSize().width, getHeight());
+			public void actionPerformed(final ActionEvent e) {
+				menu.show(SettingsPanel.this,
+						getWidth() - menu.getPreferredSize().width,
+						getHeight());
 			}
 		});
-		/*
-		 * Menu is its own component root, so it needs to be registered to
-		 * listening font size changes.
-		 */
+
 		WindowUtils.watchFontSize(menu);
 	}
-	
-	/**
-	 * Add a column separator.
-	 * 
-	 * @param container
-	 * @param c
-	 */
-	private void addSeparator(JComponent container, GridBagConstraints c) {
+
+	private void addSeparator(final JComponent container, final GridBagConstraints c) {
 		c.gridy = 0;
 		c.gridx++;
 		c.gridheight = GridBagConstraints.REMAINDER;
-		JComponent separator = new JSeparator(SwingConstants.VERTICAL);
-		// Add a bit empty space to top and bottom
-		Insets tmpInsets = c.insets;
+
+		final JComponent separator = new JSeparator(SwingConstants.VERTICAL);
+		final Insets tmpInsets = c.insets;
 		c.insets = new Insets(SEPARATOR_MARGIN, 0, SEPARATOR_MARGIN, 0);
 		container.add(separator, c);
-		// Reset to default
+
 		c.gridheight = 1;
 		c.insets = tmpInsets;
 	}
-	
-	/**
-	 * Create arrow icon for the menu button.
-	 * 
-	 * @param etched <code>true</code> if the arrow should be drawn as an etched
-	 * image. If <code>false</code> the arrow will be drawn as a raised image
-	 *  
-	 * @return arrow icon
-	 */
-	private Icon createArrowIcon(boolean etched) {
-		BufferedImage image = new BufferedImage(16, 16, BufferedImage.TYPE_INT_ARGB);
-		Graphics2D g = image.createGraphics();
-		Color highLight, shadow;
-		Style style = StyleUtil.getStyle();
+
+	private Icon createArrowIcon(final boolean etched) {
+		final BufferedImage image =
+				new BufferedImage(16, 16, BufferedImage.TYPE_INT_ARGB);
+		final Graphics2D g = image.createGraphics();
+
+		final Color highLight;
+		final Color shadow;
+		final Style style = StyleUtil.getStyle();
+
 		if (style != null) {
 			highLight = style.getHighLightColor();
 			shadow = style.getShadowColor();
@@ -134,7 +122,9 @@ class SettingsPanel extends JButton {
 			highLight = Color.WHITE;
 			shadow = Color.BLACK;
 		}
-		Color nwColor, seColor;
+
+		final Color nwColor;
+		final Color seColor;
 		if (etched) {
 			nwColor = shadow;
 			seColor = highLight;
@@ -142,120 +132,117 @@ class SettingsPanel extends JButton {
 			nwColor = highLight;
 			seColor = shadow;
 		}
+
 		g.setColor(nwColor);
-		g.drawPolyline(new int[] { 7, 0, 13}, new int[] { 11, 4, 4}, 3);
+		g.drawPolyline(new int[] { 7, 0, 13 }, new int[] { 11, 4, 4 }, 3);
 		g.setColor(seColor);
 		g.drawLine(7, 11, 14, 4);
 		g.dispose();
-		
+
 		return new ImageIcon(image);
 	}
-	
+
 	/**
-	 * Create the account control submenu.
-	 * 
-	 * @param column
+	 * Official Faumonia links.
 	 */
-	private void createAccountsMenu(Column column) {
-		JComponent label = createMenuTitle("Świat gry");
-		column.addComponent(label);
-		
-		JMenuItem item = createMenuItem("Spis expowisk", "expowiska");
-		column.addComponent(item);
-		item = createMenuItem("Bestariusz", "potwory");
-		column.addComponent(item);
-		item = createMenuItem("Przedmioty", "przedmioty");
-		column.addComponent(item);
-		item = createMenuItem("Atlas Map", "mapy");
-		column.addComponent(item);
-		item = createMenuItem("Spis expowisk", "expowiska");
-		column.addComponent(item);
-		item = createMenuItem("Zadania", "zadania");
-		column.addComponent(item);
-		item = createMenuItem("NPCe", "npce");
-		column.addComponent(item);
-		item = createMenuItem("Sklepy", "sklepy");
-		column.addComponent(item);
-	}
-	
-	
-		
-	/**
-	 * Create the tools submenu.
-	 * 
-	 * @param column
-	 */
-	private void createToolsMenu(Column column) {
-		JComponent label = createMenuTitle("Narzędzia");
-		column.addComponent(label);
-		
-		JMenuItem item = createMenuItem("Dziennik zadań", "travellog");
-		column.addComponent(item);
-		item = createMenuItem("Ustawienia", "settings");
-		column.addComponent(item);
-		item = createMenuItem("Wojownicy Online", "who");
-		column.addComponent(item);
-		item = createMenuItem("Komendy", "help");
-		column.addComponent(item);
+	private void createFaumoniaMenu(final Column column) {
+		column.addComponent(createMenuTitle("Faumonia"));
+
+		column.addComponent(createMenuItem("Strona główna", "faumonia_www"));
+		column.addComponent(createMenuItem("Aktualności", "aktualnosci"));
+		column.addComponent(createMenuItem("Poradniki", "poradniki"));
+		column.addComponent(createMenuItem("Discord", "faumonia_discord"));
+		column.addComponent(createMenuItem("Hall of Fame", "hall_of_fame"));
+		column.addComponent(createMenuItem("Zasłużeni", "zasluzeni"));
 	}
 
-	
 	/**
-	 * Create title for a sumbenu.
-	 * 
-	 * @param title title string
-	 * @return component with the title
+	 * Main game database pages.
 	 */
-	private JComponent createMenuTitle(String title) {
-		JLabel label = new JLabel(title);
+	private void createGameDatabaseMenu(final Column column) {
+		column.addComponent(createMenuTitle("Baza gry"));
+
+		column.addComponent(createMenuItem("Potwory", "potwory"));
+		column.addComponent(createMenuItem("Przedmioty", "przedmioty"));
+		column.addComponent(createMenuItem("Sklepy", "sklepy"));
+		column.addComponent(createMenuItem("Atlas map", "mapy"));
+		column.addComponent(createMenuItem("Wszystkie expowiska", "expowiska"));
+		column.addComponent(createMenuItem("Wszystkie zadania", "zadania"));
+	}
+
+	/**
+	 * Direct links to leveling guides.
+	 */
+	private void createLevelingMenu(final Column column) {
+		column.addComponent(createMenuTitle("Expowiska"));
+
+		column.addComponent(createMenuItem("Poziomy 0-20", "exp_0_20"));
+		column.addComponent(createMenuItem("Poziomy 20-60", "exp_20_60"));
+		column.addComponent(createMenuItem("Poziomy 60-120", "exp_60_120"));
+		column.addComponent(createMenuItem("Poziomy 120-200", "exp_120_200"));
+		column.addComponent(createMenuItem("Poziomy 200-300", "exp_200_300"));
+		column.addComponent(createMenuItem("Poziomy 300+", "exp_300_plus"));
+	}
+
+	/**
+	 * Direct links to the most useful quest lists.
+	 */
+	private void createQuestsMenu(final Column column) {
+		column.addComponent(createMenuTitle("Zadania"));
+
+		column.addComponent(createMenuItem("Mistrzowie Gry", "quest_masters"));
+		column.addComponent(createMenuItem("Miasto Semos", "quest_semos"));
+		column.addComponent(createMenuItem("Stolica Ados", "quest_ados"));
+		column.addComponent(createMenuItem("Południowe miasta", "quest_south"));
+		column.addComponent(createMenuItem("Odnawialne - potwory", "quest_repeatable"));
+		column.addComponent(createMenuItem("Najsilniejsze przedmioty", "quest_best_items"));
+	}
+
+	/**
+	 * Internal client tools.
+	 */
+	private void createToolsMenu(final Column column) {
+		column.addComponent(createMenuTitle("Narzędzia"));
+
+		column.addComponent(createMenuItem("Dziennik zadań", "travellog"));
+		column.addComponent(createMenuItem("Ustawienia", "settings"));
+		column.addComponent(createMenuItem("Wojownicy Online", "who"));
+		column.addComponent(createMenuItem("Komendy", "help"));
+	}
+
+	private JComponent createMenuTitle(final String title) {
+		final JLabel label = new JLabel(title);
 		label.setBorder(BorderFactory.createEmptyBorder(5, 4, 10, 0));
 		return label;
 	}
-	
-	/**
-	 * Create a menu item.
-	 * 
-	 * @param name title of the menu item
-	 * @param action SlashAction name
-	 * @return menu item
-	 */
-	private JMenuItem createMenuItem(String name, String action) {
-		JMenuItem item = new VariableWidthMenuItem(name);
+
+	private JMenuItem createMenuItem(final String name, final String action) {
+		final JMenuItem item = new VariableWidthMenuItem(name);
 		item.addActionListener(new CommandActionListener(action));
 		item.setBorder(null);
 		return item;
 	}
-	
-	/**
-	 * Listener for menu actions.
-		 */
+
 	private static class CommandActionListener implements ActionListener {
 		private final SlashAction action;
-		
-		/**
-		 * Create a CommandActionListener.
-		 * 
-		 * @param identifier SlashAction name
-		 */
-		public CommandActionListener(String identifier) {
+
+		CommandActionListener(final String identifier) {
 			action = SlashActionRepository.get(identifier);
 		}
-		
+
 		@Override
-		public void actionPerformed(ActionEvent e) {
-			action.execute(null, null);
+		public void actionPerformed(final ActionEvent e) {
+			if (action != null) {
+				action.execute(null, null);
+			}
 		}
 	}
-	
-	/**
-	 * A workaround for a design flaw in swing menu items. BasicMenuItemUI tries
-	 * to force all menu items to the same width, instead of doing that properly
-	 * in the menu layout manager. So this JMenuItem stores the preferred size
-	 * before it gets knowledge about other items in the menu.
-	 */
+
 	private static class VariableWidthMenuItem extends JMenuItem {
-		Dimension pref;
-		VariableWidthMenuItem(String name) {
+		private static final long serialVersionUID = 1L;
+		private final Dimension pref;
+
+		VariableWidthMenuItem(final String name) {
 			super(name);
 			pref = super.getPreferredSize();
 		}
@@ -266,36 +253,19 @@ class SettingsPanel extends JButton {
 		}
 	}
 
-	/**
-	 * A helper class for filling the grid in top down order. An object that
-	 * represents the next column given a constraints object that has been used
-	 * for the previous columns.
-	 */
 	private static class Column {
-		final JComponent container;
-		final GridBagConstraints c;
-		
-		/**
-		 * Create a new ColumnHelper.
-		 * 
-		 * @param container parent component 
-		 * @param c constraints object to be used, and which will be modified
-		 * 	for subsequent uses
-		 */
-		Column(JComponent container, GridBagConstraints c) {
+		private final JComponent container;
+		private final GridBagConstraints c;
+
+		Column(final JComponent container, final GridBagConstraints c) {
 			this.container = container;
-			this.c = c; 
+			this.c = c;
 			c.gridy = 0;
 			c.gridx++;
 			c.fill = GridBagConstraints.BOTH;
 		}
-		
-		/**
-		 * Add a component to the colum.
-		 * 
-		 * @param component
-		 */
-		void addComponent(JComponent component) {
+
+		void addComponent(final JComponent component) {
 			container.add(component, c);
 			c.gridy++;
 		}

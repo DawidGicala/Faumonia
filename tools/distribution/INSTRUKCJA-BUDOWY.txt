@@ -1,0 +1,36 @@
+PACZKI KLIENTA FAUMONII 8.0
+
+1. Zbuduj klienta i serwer targetami Ant dist_client_binary,
+   dist_client_starter oraz dist_server_binary. Korzystaj ze swiezego
+   katalogu buildroot i zgodnych bibliotek projektu. Nie uzywaj
+   dzialajacego klienta ani serwera jako katalogu roboczego kompilacji.
+
+2. Przygotuj paczki i instalator:
+   python tools/distribution/prepare.py --build "KATALOG-Z-PACZKAMI-ANT"
+          --work "NOWY-KATALOG-ROBOCZY" --output "KATALOG-WYNIKOWY" --version 8.0
+   Powyzsza komenda jest jednym poleceniem. Sciezki zawierajace spacje
+   nalezy ujac w cudzyslowy.
+
+   Skrypt wymaga Pythona 3 i Inno Setup 6 w standardowym katalogu.
+   Przy ponownym wydaniu uzyj nowego katalogu roboczego i wynikowego.
+   Nie usuwa on istniejacych paczek ani poprzedniej instalacji gry.
+
+3. Wyniki:
+   Faumonia-8.0-Windows-Setup.exe - instalator bez Javy.
+   Faumonia-8.0-JAR.zip - klient z bibliotekami dla Windows/Java.
+   Faumonia-8.0-macOS.zip - klient z launcherem Start.command dla Maca.
+
+4. Sprawdz pliki JAR, wersje w manifestach, uruchomienie, zawartosc
+   archiwow oraz instalacje do osobnego katalogu. Nie publikuj bazy,
+   server.ini, logow, kont ani katalogow testowych.
+
+   Instalator ma techniczny parametr /FAUMONIATEST=1. W polaczeniu z
+   /CURRENTUSER i /DIR=pelna-sciezka-do-osobnego-katalogu pozwala testowac
+   dokladnie ten sam EXE bez skrotow i rejestracji deinstalatora.
+   Nie pomijaj /DIR i nie wskazuj istniejacej instalacji uzytkownika.
+
+5. Paczka macOS wymaga osobnego testu na Macu. Kontrola skladni Bash
+   ani poprawne dzialanie JAR-a w Windows nie sa testem macOS.
+
+Przy kolejnej wersji zaktualizuj takze naglowki README-Windows.txt
+i README-Mac.txt. Ikona logo.ico pochodzi z poprzedniej paczki Faumonii.

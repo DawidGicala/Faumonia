@@ -39,14 +39,15 @@ public class SausidNPC implements ZoneConfigurator {
 
 			@Override
 			protected void createDialog() {
+                games.stendhal.server.entity.npc.dialogue.HuntDialogueTopics.install(this);
 				addGreeting("Psst.... nie mów głośno, żeby nikt nie usłyszał...");
 				addGoodbye("Żegnaj... pamiętaj, aby nic nie mówić o naszej rozmowie...");
-				addHelp("Cicho! nie mów tak głośno...");
-				addJob("Potrzebuje pomocy z kilkoma przerażającymi stworami...");
+				addHelp("Ciszej, proszę. Jeśli chcesz mi pomóc, zapytaj o #zadanie, a wyjaśnię, z którymi stworami mam kłopot. Nie potrzebuję do tej rozmowy całej karczmy.");
+				addJob("Mam kłopot z kilkoma stworami, ale nie chcę robić z tego przedstawienia dla całej karczmy. Jeśli umiesz dotrzymać słowa, możemy spokojnie ustalić szczegóły wyprawy.");
 			}
 		};
 
-		SausidNPC.setDescription("Oto Sausid – tajemniczy mieszkaniec Fado. Pamiętaj, aby nie mówić głośno w jego obecności.");
+		SausidNPC.setDescription("Widzisz Sausida w karczmie Fado. Ścisza głos, kiedy rozmowa schodzi na jego sprawy.");
 		SausidNPC.setEntityClass("carenpc");
 		SausidNPC.setPosition(11, 6);
 		SausidNPC.setDirection(Direction.DOWN);

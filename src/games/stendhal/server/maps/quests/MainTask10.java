@@ -16,7 +16,7 @@ import games.stendhal.common.MathHelper;
 import games.stendhal.server.entity.npc.ChatAction;
 import games.stendhal.server.entity.npc.ConversationPhrases;
 import games.stendhal.server.entity.npc.ConversationStates;
-import games.stendhal.server.entity.npc.SpeakerNPC;
+import games.stendhal.server.core.rp.quest.MasterStage;
 import games.stendhal.server.entity.npc.action.EquipItemAction;
 import games.stendhal.server.entity.npc.action.IncreaseXPAction;
 import games.stendhal.server.entity.npc.action.MultipleActions;
@@ -58,7 +58,7 @@ public class MainTask10 extends AbstractQuest {
 	}
 	
 	private void step_1() {
-		final SpeakerNPC npc = npcs.get("Mistrz Faumonii X");
+		final MasterStage npc = MasterStage.register(10, this);
 
 		npc.add(ConversationStates.ATTENDING,
 				ConversationPhrases.QUEST_MESSAGES, 
@@ -80,6 +80,7 @@ public class MainTask10 extends AbstractQuest {
 		toKill.put("dżin", new Pair<Integer, Integer>(0,10));
 		toKill.put("licho", new Pair<Integer, Integer>(0,10));
 
+		npc.setHuntTargets(toKill);
 		final List<ChatAction> actions = new LinkedList<ChatAction>();
 		actions.add(new SetQuestAction(QUEST_SLOT, "start"));
 		actions.add(new StartRecordingKillsAction(QUEST_SLOT, 1, toKill));
@@ -106,7 +107,7 @@ public class MainTask10 extends AbstractQuest {
 
 	private void step_3() {
 
-		final SpeakerNPC npc = npcs.get("Mistrz Faumonii X");
+		final MasterStage npc = MasterStage.register(10, this);
 
 
 		final List<ChatAction> actions = new LinkedList<ChatAction>();
@@ -126,7 +127,7 @@ public class MainTask10 extends AbstractQuest {
 						new KilledForQuestCondition(QUEST_SLOT, 1)),
 				ConversationStates.ATTENDING, 
 				"Widze, że wykonałeś swoje dziesiąte zadanie. Odnalazłeś aniołki, pokonałeś żywiołaki i licha. Zdobytą magię zachowaj lub sprzedaj komuś, jest bardzo cenna."
-				+ "Zasługujesz na odznakę wojownika Faumonii dziesiątego poziomu. Po nastepne główne zadanie powinieneś przyjść do Mistrza Faumonii XI po przekroczeniu 75 poziomu doświadczenia.",
+				+ "Zasługujesz na odznakę wojownika Faumonii dziesiątego poziomu. Po nastepne główne zadanie powinieneś przyjść do Mistrza Faumonii po przekroczeniu 75 poziomu doświadczenia.",
 				new MultipleActions(actions));
 
 				npc.add(ConversationStates.ATTENDING, 
@@ -154,7 +155,7 @@ public class MainTask10 extends AbstractQuest {
 		super.addToWorld();
 		fillQuestInfo(
 				"Wojownik Faumonii 10",
-				"Mistrz Faumonii X ma dla ciebie dziesiąte główne zadanie które pomoże ci zostać wielkim wojownikiem Faumonii.",
+				"Mistrz Faumonii ma dla ciebie dziesiąte główne zadanie które pomoże ci zostać wielkim wojownikiem Faumonii.",
 				false);
 		step_1();
 		step_2();
@@ -195,7 +196,7 @@ public class MainTask10 extends AbstractQuest {
 
 	@Override
 	public String getNPCName() {
-		return "Mistrz Faumonii X";
+		return MasterStage.NPC_NAME;
 	}
 	
 	@Override

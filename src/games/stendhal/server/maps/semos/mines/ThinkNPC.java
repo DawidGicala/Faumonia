@@ -43,12 +43,14 @@ public class ThinkNPC implements ZoneConfigurator {
 
 			@Override
 			protected void createDialog() {
+                games.stendhal.server.entity.npc.dialogue.HuntDialogueTopics.install(this);
+                addJob("Nasza społeczność potrzebuje miejsca do rozwoju, ale dalsze tunele zajmują oddziały chaosu. Zanim sprowadzimy tam ludzi do pracy, ktoś musi osłabić ich armię.");
 				addGreeting("Witaj. Z czym przybywasz?");
 				addGoodbye("Na razie.");
 			}
 		};
 
-		elemental.setDescription("Oto Think.");
+		elemental.setDescription("Widzisz Thinka w podziemiach Semos. Uważnie wypatruje podróżników wracających z tuneli chaosu.");
 		elemental.setEntityClass("blacklordnpc");
 		elemental.setPosition(5, 118);
 		elemental.setDirection(Direction.RIGHT);

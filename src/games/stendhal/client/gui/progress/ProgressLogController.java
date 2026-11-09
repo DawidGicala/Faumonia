@@ -15,6 +15,7 @@ import games.stendhal.client.StendhalClient;
 import games.stendhal.client.entity.User;
 import games.stendhal.common.constants.Actions;
 import games.stendhal.common.grammar.Grammar;
+import games.stendhal.common.QuestProgress;
 
 import java.awt.Component;
 import java.util.List;
@@ -99,10 +100,18 @@ public class ProgressLogController {
 	 * @param details paragraphs
 	 */
 	public void showDescription(final String category, final String item, final String description, final String information, final List<String> details) {
+		showDescription(category, item, description, information, details, null, false);
+	}
+
+	public void showDescription(final String category, final String item, final String description,
+			final String information, final List<String> details, final QuestProgress progress, final boolean passive) {
 		SwingUtilities.invokeLater(new Runnable() {
 			public void run() {
-				getProgressLog().setPageContent(category, item, description, information, details);
-				showWindow();
+				if (passive && (progressLog == null || !progressLog.acceptsRefresh(category, item))) {
+					return;
+				}
+				getProgressLog().setPageContent(category, item, description, information, details, progress, passive);
+				if (!passive) { showWindow(); }
 			}
 		});
 	}
@@ -142,8 +151,18 @@ public class ProgressLogController {
 		 * @param data the value of dataKey, if set
 		 */
 		public void fire(String data) {
+			send(data, false);
+		}
+
+		@Override
+		public void refresh(String data) {
+			send(data, true);
+		}
+
+		private void send(String data, boolean passive) {
 			RPAction action = new RPAction();
 			action.put("type", Actions.PROGRESS_STATUS);
+			if (passive) { action.put("passive", "1"); }
 			if (progressType != null) {
 				action.put("progress_type", progressType);
 			}

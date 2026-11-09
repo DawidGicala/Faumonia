@@ -43,10 +43,11 @@ public class Best implements ZoneConfigurator {
 
 			@Override
 			protected void createDialog() {
+                games.stendhal.server.entity.npc.dialogue.CollectionDialogueTopics.install(this);
 				addGreeting("Witaj, jestem dowódcą tej jednostki.");
 				addGoodbye("Żegnaj!");
 				addHelp("Jeśli wykonasz #zadanie, to odznaczę Cię obsydianowym medalem, pod warunkiem że posiadasz rubinowy.");
-				addJob("Jeśli wykonasz #zadanie, to odznaczę Cię obsydianowym medalem, pod warunkiem że posiadasz rubinowy.");
+				addJob("Pilnuję gotowości obrońców zamku Ados. Diamentowy medal przyznaję po dostarczeniu zaopatrzenia, przekazaniu szafirowego odznaczenia i wykazaniu pokonania Smoka Wawelskiego. To zobowiązanie, do którego warto się przygotować.");
 				
 				add(
 				        ConversationStates.ATTENDING,
@@ -58,7 +59,7 @@ public class Best implements ZoneConfigurator {
 			}
 		};
 
-		elemental1.setDescription("Oto dowódca jednostki obronnej zamku Ados.");
+		elemental1.setDescription("Widzisz Majora Klykha, dowódcę obrony zamku Ados. Z jego postawy przebija wieloletnie doświadczenie.");
 		elemental1.setEntityClass("najlepszy");
 		elemental1.setPosition(60, 9);
 		elemental1.setDirection(Direction.LEFT);

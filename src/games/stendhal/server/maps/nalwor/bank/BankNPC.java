@@ -58,8 +58,9 @@ public class BankNPC implements ZoneConfigurator {
 
 			@Override
 			protected void createDialog() {
+                games.stendhal.server.entity.npc.dialogue.CollectionDialogueTopics.install(this);
 				addGreeting("Pozdrawiam. Jeżeli potrzebujesz #pomocy to pytaj.");
-				addJob("Pracuję tutaj w banku.");
+				addJob("Pilnuję depozytów w banku Nalwor. Klient powierza nam dorobek, dlatego wymagam dokładności także od osób przewożących przesyłki. Pomoc Lorithien to dobra okazja, żeby wykazać się rzetelnością.");
 				addHelp("Pokój ma dwie skrzynie należące do tego banku i dwie skrzynie należące do banku w Semos.");
 				addGoodbye("Dowidzenia młodzieńcze.");
 				//remaining behaviour defined in Take Gold for Grafindle quest
@@ -68,7 +69,7 @@ public class BankNPC implements ZoneConfigurator {
 
 		oldnpc.setDirection(Direction.DOWN);
 		oldnpc.setEntityClass("elfbankeroldnpc");
-		oldnpc.setDescription("Oto Grafindle, który pracuje w banku Nalwor.");
+		oldnpc.setDescription("Widzisz Grafindla, starszego bankiera Nalwor. Każdą rozmowę o depozytach prowadzi z cierpliwą ostrożnością.");
 		oldnpc.setPosition(13, 17);
 		oldnpc.initHP(100);
 		zone.add(oldnpc);
@@ -94,16 +95,17 @@ public class BankNPC implements ZoneConfigurator {
 
 			@Override
 			protected void createDialog() {
+                games.stendhal.server.entity.npc.dialogue.CollectionDialogueTopics.install(this);
 				addGreeting("Witam w banku Nalwor. Jestem tutaj, aby #pomóc.");
 				addHelp("Klienci mogą u mnie zdeponować swoje przedmioty w skrzyniach w tym pokoiku znajdującym się za mną. Dwie skrzynie po prawej są administrowane przez Semos.");
 				addOffer("Mogę Ci #pomóc.");
-				addJob("Pomagam klientom banku: elfom, a nawet ludziom.");
+				addJob("Pomagam klientom banku, zarówno elfom, jak i przybyszom. Nie mogę opuszczać posterunku, więc niektóre dostawy muszę powierzyć innym. Każdy przyjęty egzemplarz zapisuję, żeby nic nie zginęło w rozliczeniu.");
 				addQuest("Niczego nie potrzebuję. Dziękuję.");
 				addGoodbye("Dowidzenia. Dziękuje za twój czas.");
 			}
 		};
 
-		ladynpc.setDescription("Oto piękna elfka w pięknej sukni.");
+		ladynpc.setDescription("Widzisz Nnyddion, elfkę doglądającą banku Nalwor. Z uwagą obserwuje klientów i skrzynie depozytowe.");
 		ladynpc.setEntityClass("elfbankladynpc");
 		ladynpc.setDirection(Direction.DOWN);
 		ladynpc.setPosition(17, 31);

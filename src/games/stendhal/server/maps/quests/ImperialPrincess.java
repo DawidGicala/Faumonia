@@ -122,7 +122,7 @@ public class ImperialPrincess extends AbstractQuest {
 				new QuestNotStartedCondition(QUEST_SLOT),
 				ConversationStates.ATTENDING, 
 				"Nie mogę uwolnić więźniów w piwnicy, ale mogę zrobić jedną rzecz. Złagodzić im ból. " +
-				"Potrzebuję #ziół do tego.",
+				"W piwnicach Kalavan przebywają jeńcy, których rany nikt zbyt chętnie nie opatruje. Chcę im ulżyć, lecz brakuje mi #ziół i lekarstw. Jeśli pomożesz, dobrze zapamiętam tę przysługę.",
 				null);
 
 		npc.add(ConversationStates.ATTENDING,
@@ -176,7 +176,7 @@ public class ImperialPrincess extends AbstractQuest {
 				null,
 				ConversationStates.ATTENDING,
 				"Dziękuję! Musimy być subtelni w tej sprawie. Nie chcę, aby naukowcy coś podejrzewali i wtrącili się. " +
-				"Gdy wrócisz ze składnikami to powiedz mi hasło #zioła.",
+				"Ustalona lista pozostaje taka sama, nawet jeśli w czasie wyprawy zdobędziesz kolejne poziomy. Zbierz cały komplet ziół, eliksirów i antidotum, a przy powrocie powiedz #zioła. Wtedy będę mogła zająć się rannymi.",
 				new ChatAction() {
 					public void fire(final Player player, final Sentence sentence, final EventRaiser raiser) {
 						// store the current level in case it increases before
@@ -296,15 +296,29 @@ public class ImperialPrincess extends AbstractQuest {
 		npc.add(ConversationStates.IDLE, ConversationPhrases.GREETING_MESSAGES,
 			new AndCondition(new GreetingMatchesNameCondition(npc.getName()),
 					new QuestInStateCondition(QUEST_SLOT, "recommended")),  
-			ConversationStates.IDLE,
-			"Pozdrawiam! Moja cudowna córka poprosiła mnie o przyznanie Tobie obywatelstwa miasta Kalavan. Rozpatrywanie zostało zakończone. Teraz wybacz mi, że wrócę do mojego posiłku. Dowidzenia.",
+			ConversationStates.ATTENDING,
+			"Moja córka opowiedziała mi o twojej pomocy przy lekarstwach dla jeńców. Jej polecenie wystarczy, abym nadał ci obywatelstwo Kalavan. Od tej chwili możesz korzystać z praw przysługujących obywatelom.",
+			new MultipleActions(new IncreaseXPAction(500), new SetQuestAction(QUEST_SLOT, "done")));
+        // Reuse the native stage and its guards inside the current conversation.
+        npc.add(ConversationStates.ATTENDING, "polecenie księżniczki",
+			new AndCondition(new games.stendhal.server.entity.npc.condition.AlwaysTrueCondition(),
+					new QuestInStateCondition(QUEST_SLOT, "recommended")),  
+			ConversationStates.ATTENDING,
+			"Moja córka opowiedziała mi o twojej pomocy przy lekarstwach dla jeńców. Jej polecenie wystarczy, abym nadał ci obywatelstwo Kalavan. Od tej chwili możesz korzystać z praw przysługujących obywatelom.",
 			new MultipleActions(new IncreaseXPAction(500), new SetQuestAction(QUEST_SLOT, "done")));
 
 		/** If you aren't in the condition to speak to him (not completed quest, or already spoke) the King will dismiss you */
 		npc.add(ConversationStates.IDLE, ConversationPhrases.GREETING_MESSAGES,
 			new AndCondition(new GreetingMatchesNameCondition(npc.getName()),
 					new QuestNotInStateCondition(QUEST_SLOT, "recommended")),  
-			ConversationStates.IDLE, 
+			ConversationStates.ATTENDING, 
+			"Zostaw mnie! Nie widzisz, że próbuję jeść?",
+			null);
+        // Reuse the native stage and its guards inside the current conversation.
+        npc.add(ConversationStates.ATTENDING, "polecenie księżniczki",
+			new AndCondition(new games.stendhal.server.entity.npc.condition.AlwaysTrueCondition(),
+					new QuestNotInStateCondition(QUEST_SLOT, "recommended")),  
+			ConversationStates.ATTENDING, 
 			"Zostaw mnie! Nie widzisz, że próbuję jeść?",
 			null);
 	}
@@ -314,7 +328,7 @@ public class ImperialPrincess extends AbstractQuest {
 		super.addToWorld();
 		fillQuestInfo(
 				"Obywatelstwo Kalavan",
-				"Jeżeli chcesz dostać oficjalne obywatelstwo miasta Kalavan to najpierw musisz zapytać o pozwolenie króla nim porozmawiasz z jego córką Princess Ylflia...",
+				"Pomóż księżniczce Ylflii zdobyć lekarstwa dla jeńców w Kalavan. Gdy poleci cię swojemu ojcu, porozmawiaj z królem Cozartem o obywatelstwie.",
 				true);
 		step_1();
 		step_2();

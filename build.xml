@@ -90,12 +90,12 @@
 			replace="out.println(&quot;server_version=${version}&quot;);"
 			byline="true"/>
 		<replaceregexp file="runserver.bat"
-			match="STENDHAL_VERSION=.*"
-			replace="STENDHAL_VERSION=${version}"
+			match="FAUMONIAONLINE_VERSION=[^&quot;]*"
+			replace="FAUMONIAONLINE_VERSION=${version}"
 			byline="true"/>
 		<replaceregexp file="runserver.sh"
-			match="STENDHAL_VERSION ?= ?&quot;.*&quot;"
-			replace="STENDHAL_VERSION=&quot;${version}&quot;"
+			match="FAUMONIAONLINE_VERSION ?= ?&quot;.*&quot;"
+			replace="FAUMONIAONLINE_VERSION=&quot;${version}&quot;"
 			byline="true"/>
 		<!-- Update location of resources -->
 		<replaceregexp file="${src}/games/stendhal/client/update/game-default.properties"
@@ -245,7 +245,7 @@
 		<jar jarfile="${lib}/${server_jarname}" basedir="${build_server}">
 			<manifest>
 				<attribute name="Main-Class" value="games.stendhal.server.StendhalServer"/>
-				<attribute name="Class-path" value=". marauroa.jar ${maps_jarname} ${xmlconf_jarname} ${maps_jarname} commons-lang.jar log4j.jar groovy.jar ${mysqldriver_jarname} mysql.jar h2.jar"/>
+				<attribute name="Class-path" value="${maps_jarname} ${xmlconf_jarname} marauroa.jar commons-lang.jar log4j.jar groovy.jar simple.jar ${mysqldriver_jarname} h2.jar data/script/ data/conf/ ./"/>
 			</manifest>
 		</jar>
 		<chmod file="${lib}/${server_jarname}" perm="+x"/>
@@ -584,6 +584,7 @@
 		<copy todir="${buildroot}/FaumoniaOnline-server-${version}" file="${commons_lang_jar}"/>
 		<copy todir="${buildroot}/FaumoniaOnline-server-${version}" file="${log4j_jar}"/>
 		<copy todir="${buildroot}/FaumoniaOnline-server-${version}" file="${h2_jar}"/>
+		<copy todir="${buildroot}/FaumoniaOnline-server-${version}" file="${mysqldriver_jar}"/>
 		<copy todir="${buildroot}/FaumoniaOnline-server-${version}" file="${lib}/${server_jarname}"/>
 		<copy todir="${buildroot}/FaumoniaOnline-server-${version}" file="${lib}/${maps_jarname}"/>
 		<copy todir="${buildroot}/FaumoniaOnline-server-${version}" file="${lib}/${xmlconf_jarname}"/>
@@ -620,12 +621,13 @@
 
 		<copy tofile="${buildroot}/FaumoniaOnline-${version}/lib/FaumoniaOnline-starter.jar" file="${lib}/${client_starter_jarname}"/>
 		<copy tofile="${buildroot}/FaumoniaOnline-${version}/FaumoniaOnline.jar" file="${lib}/${client_jarname}"/>
+		<copy todir="${buildroot}/FaumoniaOnline-${version}" file="runclient-local.bat"/>
 		<copy tofile="${buildroot}/FaumoniaOnline-${version}/lib/log4j.jar" file="${log4j_jar}"/>
 		<copy tofile="${buildroot}/FaumoniaOnline-${version}/lib/marauroa.jar" file="${marauroa_jar}"/>
 		<copy tofile="${buildroot}/FaumoniaOnline-${version}/lib/jorbis.jar" file="${jorbis_jar}"/>
-		<copy tofile="${buildroot}/FaumoniaOnline-${version}/lib/FaumoniaOnline-sound-data-7.0.jar" file="${lib}/${client_sound_data}"/>
-		<copy tofile="${buildroot}/FaumoniaOnline-${version}/lib/FaumoniaOnline-music-data-7.0.jar" file="${lib}/${client_music_data}"/>
-		<copy tofile="${buildroot}/FaumoniaOnline-${version}/lib/FaumoniaOnline-data-7.0.jar" file="${lib}/${client_data}"/>
+		<copy tofile="${buildroot}/FaumoniaOnline-${version}/lib/${client_sound_data}" file="${lib}/${client_sound_data}"/>
+		<copy tofile="${buildroot}/FaumoniaOnline-${version}/lib/${client_music_data}" file="${lib}/${client_music_data}"/>
+		<copy tofile="${buildroot}/FaumoniaOnline-${version}/lib/${client_data}" file="${lib}/${client_data}"/>
 		<copy todir="${buildroot}/FaumoniaOnline-${version}/lib">
 			<fileset dir="libs">
 				<include name="*.txt"/>
@@ -638,7 +640,9 @@
 		</copy>
 		<touch file="${buildroot}/FaumoniaOnline-${version}/log/FaumoniaOnline.txt"/>
 		<copy todir="${buildroot}/FaumoniaOnline-${version}" file="README.txt"/>
-		<copy todir="${buildroot}/FaumoniaOnline-${version}" file=".hotspotrc"/>
+		<copy todir="${buildroot}/FaumoniaOnline-${version}">
+			<fileset dir="." includes=".hotspotrc"/>
+		</copy>
 		<zip destfile="${buildroot}/FaumoniaOnline-FULL-${version}.zip">
 			<zipfileset dir="${buildroot}/FaumoniaOnline-${version}" excludes="${client_jarname}"/>
 			<zipfileset dir="${buildroot}/FaumoniaOnline-${version}" includes="${client_jarname}" filemode="755"/>
@@ -649,7 +653,7 @@
 
 	<target name="dist_client_starter" depends="client_build">
 		<mkdir dir="${buildroot}/FaumoniaOnline-${version}"/>
-		<copy todir="${buildroot}/FaumoniaOnline-${version}" file="lib/${client_starter_jarname}"/>
+		<copy todir="${buildroot}/FaumoniaOnline-${version}" file="${lib}/${client_starter_jarname}"/>
 		<copy todir="${buildroot}/FaumoniaOnline-${version}/lib">
 			<fileset dir="libs">
 				<include name="*.txt"/>
@@ -661,7 +665,9 @@
 			<fileset dir="." includes="LICENSE.txt"/>
 		</copy>
 		<copy todir="${buildroot}/FaumoniaOnline-${version}" file="README.txt"/>
-		<copy todir="${buildroot}/FaumoniaOnline-${version}" file=".hotspotrc"/>
+		<copy todir="${buildroot}/FaumoniaOnline-${version}">
+			<fileset dir="." includes=".hotspotrc"/>
+		</copy>
 		<zip destfile="${buildroot}/FaumoniaOnline-starter-${version}.zip">
 			<zipfileset dir="${buildroot}/FaumoniaOnline-${version}" excludes="${client_starter_jarname}"/>
 			<zipfileset dir="${buildroot}/FaumoniaOnline-${version}" includes="${client_starter_jarname}" filemode="755"/>
@@ -684,6 +690,9 @@
 		<copy todir="${buildroot}/FaumoniaOnline-${version}-src/tests">
 			<fileset dir="tests"/>
 		</copy>
+		<copy todir="${buildroot}/FaumoniaOnline-${version}-src/tools">
+			<fileset dir="tools" excludes="**/__pycache__/**"/>
+		</copy>
 
 		<copy todir="${buildroot}/FaumoniaOnline-${version}-src/data">
 			<fileset dir="data">
@@ -702,20 +711,24 @@
 
 		<copy todir="${buildroot}/FaumoniaOnline-${version}-src" file="build.xml"/>
 		<copy todir="${buildroot}/FaumoniaOnline-${version}-src" file="build.ant.properties"/>
+		<copy todir="${buildroot}/FaumoniaOnline-${version}-src" file="pol.jnlp"/>
 
 		<copy todir="${buildroot}/FaumoniaOnline-${version}-src" file="README.txt"/>
 		<copy todir="${buildroot}/FaumoniaOnline-${version}-src" file="COPYING.txt"/>
 		<copy todir="${buildroot}/FaumoniaOnline-${version}-src" file="LICENSE.txt"/>
 		<copy todir="${buildroot}/FaumoniaOnline-${version}-src" file="runserver.bat"/>
 		<copy todir="${buildroot}/FaumoniaOnline-${version}-src" file="runserver.sh"/>
-		<copy todir="${buildroot}/FaumoniaOnline-${version}-src" file=".hotspotrc"/>
+		<copy todir="${buildroot}/FaumoniaOnline-${version}-src" file="runclient-local.bat"/>
+		<copy todir="${buildroot}/FaumoniaOnline-${version}-src">
+			<fileset dir="." includes=".hotspotrc"/>
+		</copy>
 		<copy todir="${buildroot}/FaumoniaOnline-${version}-src/lib">
 			<fileset dir="libs">
 				<include name="*.txt"/>
 				<include name="*.html"/>
 			</fileset>
 		</copy>
-		<copy todir="${buildroot}/FaumoniaOnline-server-${version}-src/doc">
+		<copy todir="${buildroot}/FaumoniaOnline-${version}-src/doc">
 			<fileset dir="doc"/>
 			<fileset dir="." includes="LICENSE.txt"/>
 		</copy>
@@ -729,7 +742,7 @@
 		<delete dir="${buildroot}/FaumoniaOnline-${version}-src"/>
 	</target>
 
-	<target name="compile_FaumoniaOnlinetools" description="compiles the FaumoniaOnline build tools">
+	<target name="compile_FaumoniaOnlinetools" depends="server_build,client_build" description="compiles the FaumoniaOnline build tools">
 		<mkdir dir="${build_FaumoniaOnlinetools}"/>
 
 		<javac srcdir="${src}" destdir="${build_FaumoniaOnlinetools}" source="1.8" target="1.8" debug="${javac.debug}" debuglevel="${javac.debuglevel}" deprecation="${javac.deprecation}" includeantruntime="true">
@@ -747,6 +760,9 @@
 				<pathelement path="${tiled_jar}"/>
 				<pathelement path="${jorbis_jar}"/>
 				<pathelement path="${swinglayout_jar}"/>
+				<pathelement path="${build_client}"/>
+				<pathelement path="${build_server}"/>
+				<pathelement path="${build_server_maps}"/>
 			</classpath>
 		</javac>
 	</target>

@@ -16,7 +16,7 @@ import games.stendhal.common.MathHelper;
 import games.stendhal.server.entity.npc.ChatAction;
 import games.stendhal.server.entity.npc.ConversationPhrases;
 import games.stendhal.server.entity.npc.ConversationStates;
-import games.stendhal.server.entity.npc.SpeakerNPC;
+import games.stendhal.server.core.rp.quest.MasterStage;
 import games.stendhal.server.entity.npc.action.EquipItemAction;
 import games.stendhal.server.entity.npc.action.IncreaseXPAction;
 import games.stendhal.server.entity.npc.action.MultipleActions;
@@ -52,20 +52,21 @@ public class MainTask1 extends AbstractQuest {
 	}
 	
 	private void step_1() {
-		final SpeakerNPC npc = npcs.get("Mistrz Faumonii I");
+		final MasterStage npc = MasterStage.register(1, this);
 
 		npc.add(ConversationStates.ATTENDING,
 				ConversationPhrases.QUEST_MESSAGES, 
 				new QuestNotStartedCondition(QUEST_SLOT),
 				ConversationStates.QUEST_OFFERED,
-				"Jesteś tutaj nowy. Jeśli tylko chcesz to wyszkolę cie na najwiekszego wojownika Faumonii i naucze podstaw gry. "
+				"Jesteś tutaj nowy. Jeśli tylko chcesz to pomogę ci poznać podstawy walki i przygotować się do dalszej drogi. "
 				+ "Jesteś zainteresowany?",
 				null);
 
 		final Map<String, Pair<Integer, Integer>> toKill = new TreeMap<String, Pair<Integer, Integer>>();
-		toKill.put("szczur", new Pair<Integer, Integer>(0,10));
-		toKill.put("szczur jaskiniowy", new Pair<Integer, Integer>(0,5));
+		toKill.put("szczur", new Pair<Integer, Integer>(0,3));
+		toKill.put("szczur jaskiniowy", new Pair<Integer, Integer>(0,1));
 
+		npc.setHuntTargets(toKill);
 		final List<ChatAction> actions = new LinkedList<ChatAction>();
 		actions.add(new SetQuestAction(QUEST_SLOT, "start"));
 		actions.add(new StartRecordingKillsAction(QUEST_SLOT, 1, toKill));
@@ -74,7 +75,7 @@ public class MainTask1 extends AbstractQuest {
 				ConversationPhrases.YES_MESSAGES,
 				null,
 				ConversationStates.ATTENDING,
-				"Doskonale. Rozejrzyj się po okolicy i poznaj startowe miasto Semos. Jest to miasto w którym spotkasz wielu innych graczy. Pamiętaj, że zawsze możesz skorzystać z chatu globalnego i zapytać o to co cie trapi. W tym celu wpisz komende #/k #wiadomość. Twoje pierwsze zadanie polega na pokonaniu kilku potworów, wszystkie znajdziesz w okolicy. #Zabij #10 #szczurów #i #5 #szczurów #jaskiniowych. Jeśli nie wiesz gdzie znaleźć jakiegoś potwora to skorzystaj z chatu globalnego lub porozmawiaj ze Starkadem w banku Semos. Pamiętaj, że zawsze możesz sprawdzić status swojego zadania klikając w #Menu w prawym górnym rogu, a następnie #Dziennik #Zadań. W podobny sposób możesz sprawdzić mape całej krainy klikając w #Atlas #Map",
+				"Przyjmuję cię na pierwszą próbę. Pokonaj 3 szczury i 1 szczura jaskiniowego, a potem wróć do mnie po odznakę. Znajdziesz je w jaskini pod tym domem; niebieskie wejście jest na południe od budynku.",
 				new MultipleActions(actions));
 
 		npc.add(ConversationStates.QUEST_OFFERED, 
@@ -92,7 +93,7 @@ public class MainTask1 extends AbstractQuest {
 
 	private void step_3() {
 
-		final SpeakerNPC npc = npcs.get("Mistrz Faumonii I");
+		final MasterStage npc = MasterStage.register(1, this);
 
 
 		final List<ChatAction> actions = new LinkedList<ChatAction>();
@@ -110,7 +111,7 @@ public class MainTask1 extends AbstractQuest {
 						new KilledForQuestCondition(QUEST_SLOT, 1)),
 				ConversationStates.ATTENDING, 
 				"Widze, że wykonałeś swoje pierwsze zadanie i zabiłeś potwory. "
-				+ "Zasługujesz na odznakę wojownika Faumonii pierwszego poziomu, zwiększy ona twoją obronę. Teraz czas opuścić wioskę startową, w tym celu spełnij ostatnie wymagania, ukończ samouczek i wybierz się na zwiedzanie Faumonii!. Po nastepne główne zadanie powinieneś przyjść do Mistrza Faumonii II po przekroczeniu 5 poziomu doświadczenia.",
+				+ "Zasługujesz na odznakę wojownika Faumonii pierwszego poziomu, zwiększy ona twoją obronę. Teraz czas opuścić wioskę startową, w tym celu spełnij ostatnie wymagania, ukończ samouczek i wybierz się na zwiedzanie Faumonii!. Po nastepne główne zadanie powinieneś przyjść do Mistrza Faumonii po przekroczeniu 5 poziomu doświadczenia.",
 				new MultipleActions(actions));
 
 		npc.add(ConversationStates.ATTENDING, 
@@ -120,7 +121,7 @@ public class MainTask1 extends AbstractQuest {
 						new NotCondition(new KilledForQuestCondition(QUEST_SLOT, 1))),
 				ConversationStates.ATTENDING, 
 				"Powinieneś rozglądnać się po okolicy i poznać miasto Semos. Jeśli będziesz miał w czymś problem koniecznie odwiedź bank i porozmawiaj z tamtejszymi graczami lub skorzystaj z globalnego chatu wpisująć #/k #wiadomość. "
-				+ "Twoje pierwsze zadanie polega na pokonaniu kilku potworów, wszystkie znajdziesz w okolicy. Zabij: 10 szczurów i 5 szczurów jaskiniowych a następnie wróć do mnie.",
+				+ "Twoje pierwsze zadanie polega na pokonaniu kilku potworów, wszystkie znajdziesz w okolicy. Zabij: 3 szczury i 1 szczura jaskiniowego a następnie wróć do mnie.",
 				null);
 	}
 
@@ -129,7 +130,7 @@ public class MainTask1 extends AbstractQuest {
 		super.addToWorld();
 		fillQuestInfo(
 				"Wojownik Faumonii 1",
-				"Mistrz Faumonii I ma dla ciebie pierwsze główne zadanie które pomoże ci zostać wielkim wojownikiem Faumonii.",
+				"Mistrz Faumonii ma dla ciebie pierwsze główne zadanie które pomoże ci zostać wielkim wojownikiem Faumonii.",
 				false);
 		step_1();
 		step_2();
@@ -143,7 +144,7 @@ public class MainTask1 extends AbstractQuest {
 				return res;
 			}
 			if (!isCompleted(player)) {
-				res.add("Powinienem rozglądnąć się po Semos i zabić: 10 szczurów i 5 szczurów jaskiniowych.	Podobno Starkad w banku Semos pomoże mi znaleźć wszystkie potwory.	Zostałem poinformowany, że korzystając z globalnego chatu otrzymam pomoc od innych graczy, moge to zrobić przy pomocy komendy '/k wiadomość'");
+				res.add("Powinienem rozglądnąć się po Semos i zabić: 3 szczury i 1 szczura jaskiniowego.	Podobno Starkad w banku Semos pomoże mi znaleźć wszystkie potwory.	Zostałem poinformowany, że korzystając z globalnego chatu otrzymam pomoc od innych graczy, moge to zrobić przy pomocy komendy '/k wiadomość'");
 			} else if(isRepeatable(player)){
 				res.add("Błąd gry. Zgłoś go administracji.");
 			} else {
@@ -170,7 +171,7 @@ public class MainTask1 extends AbstractQuest {
 
 	@Override
 	public String getNPCName() {
-		return "Mistrz Faumonii I";
+		return MasterStage.NPC_NAME;
 	}
 	
 	@Override

@@ -4,10 +4,10 @@
  ***************************************************************************
  ***************************************************************************
  *                                                                         *
- *   This program is free software; you can redistribute it and/or modify  *
- *   it under the terms of the GNU General Public License as published by  *
- *   the Free Software Foundation; either version 2 of the License, or     *
- *   (at your option) any later version.                                   *
+ *   This program is free software; you can redistribute it and/or modify   *
+ *   it under the terms of the GNU General Public License as published by   *
+ *   the Free Software Foundation; either version 2 of the License, or      *
+ *   (at your option) any later version.                                    *
  *                                                                         *
  ***************************************************************************/
 package games.stendhal.server.maps.quests;
@@ -20,7 +20,7 @@ import games.stendhal.server.entity.npc.ChatCondition;
 import games.stendhal.server.entity.npc.ConversationPhrases;
 import games.stendhal.server.entity.npc.ConversationStates;
 import games.stendhal.server.entity.npc.EventRaiser;
-import games.stendhal.server.entity.npc.SpeakerNPC;
+import games.stendhal.server.core.rp.quest.MasterStage;
 import games.stendhal.server.entity.npc.action.DropItemAction;
 import games.stendhal.server.entity.npc.action.EquipItemAction;
 import games.stendhal.server.entity.npc.action.MultipleActions;
@@ -102,6 +102,46 @@ public class MainTask24 extends AbstractQuest {
 		}
 	}
 
+	private static class FindDragonsCompletedCondition implements ChatCondition {
+		public boolean fire(final Player player, final Sentence sentence, final Entity npc) {
+			if (!player.hasQuest(DRAGONS)) {
+				return false;
+			}
+
+			final String questState = player.getQuest(DRAGONS);
+
+			if (questState == null || questState.trim().isEmpty()) {
+				return false;
+			}
+
+			if ("done".equals(questState)) {
+				return true;
+			}
+
+			final String[] parts = questState.split(";");
+			int found = 0;
+
+			for (final String part : parts) {
+				if (part != null && !part.trim().isEmpty()) {
+					found++;
+				}
+			}
+
+			return found >= 11;
+		}
+	}
+
+	private static class MainTaskNotStartedOrRejectedCondition implements ChatCondition {
+		public boolean fire(final Player player, final Sentence sentence, final Entity npc) {
+			if (!player.hasQuest(QUEST_SLOT)) {
+				return true;
+			}
+
+			final String questState = player.getQuest(QUEST_SLOT);
+			return "rejected".equals(questState);
+		}
+	}
+
 	private static class PlayerHasRequiredClawCondition implements ChatCondition {
 		public boolean fire(final Player player, final Sentence sentence, final Entity npc) {
 			final RequiredClaw claw = getRequiredClaw(player);
@@ -142,7 +182,7 @@ public class MainTask24 extends AbstractQuest {
 	}
 
 	private void checkRequiredQuests() {
-		final SpeakerNPC npc = npcs.get("Mistrz Faumonii XXIV");
+		final MasterStage npc = MasterStage.register(24, this);
 
 		npc.add(
 			ConversationStates.IDLE,
@@ -150,7 +190,7 @@ public class MainTask24 extends AbstractQuest {
 			new AndCondition(
 				new GreetingMatchesNameCondition(npc.getName()),
 				new LevelGreaterThanCondition(299),
-				new QuestNotStartedCondition(QUEST_SLOT)),
+				new MainTaskNotStartedOrRejectedCondition()),
 			ConversationStates.ATTENDING,
 			"Witaj, mam dla ciebie główne #zadanie dwudziestego-czwartego poziomu.",
 			null);
@@ -160,8 +200,8 @@ public class MainTask24 extends AbstractQuest {
 			Arrays.asList("główne zadanie", "zadanie", "główne", "task"),
 			new AndCondition(
 				new LevelGreaterThanCondition(299),
-				new QuestNotCompletedCondition(DRAGONS),
-				new QuestNotStartedCondition(QUEST_SLOT)),
+				new NotCondition(new FindDragonsCompletedCondition()),
+				new MainTaskNotStartedOrRejectedCondition()),
 			ConversationStates.ATTENDING,
 			"Zanim przyznam ci kolejne główne zadanie, musisz odnaleźć wszystkie smoki rozsiane po krainie Faumonii. Wróć do mnie, gdy ukończysz to wyzwanie.",
 			null);
@@ -172,22 +212,22 @@ public class MainTask24 extends AbstractQuest {
 			new AndCondition(
 				new LevelGreaterThanCondition(299),
 				new QuestNotCompletedCondition(CLOAKS_COLLECTOR_2),
-				new QuestNotStartedCondition(QUEST_SLOT)),
+				new MainTaskNotStartedOrRejectedCondition()),
 			ConversationStates.ATTENDING,
 			"Zanim przyznam ci kolejne główne zadanie, musisz ukończyć drugą kolekcję płaszczy i zdobyć buty zabójcy. Wróć do mnie, gdy Josephine uzna twoją pracę za zakończoną.",
 			null);
 	}
 
 	private void offerQuest() {
-		final SpeakerNPC npc = npcs.get("Mistrz Faumonii XXIV");
+		final MasterStage npc = MasterStage.register(24, this);
 
 		npc.add(
 			ConversationStates.ATTENDING,
 			Arrays.asList("główne zadanie", "zadanie", "główne", "task"),
 			new AndCondition(
-				new QuestNotStartedCondition(QUEST_SLOT),
+				new MainTaskNotStartedOrRejectedCondition(),
 				new LevelGreaterThanCondition(299),
-				new QuestCompletedCondition(DRAGONS),
+				new FindDragonsCompletedCondition(),
 				new QuestCompletedCondition(CLOAKS_COLLECTOR_2)),
 			ConversationStates.QUEST_OFFERED,
 			"Widzę, że odnalazłeś smoki i zdobyłeś buty zabójcy. To nie są już zadania dla zwykłych wojowników. Został ostatni dowód twojej siły. Jesteś gotowy?",
@@ -211,7 +251,7 @@ public class MainTask24 extends AbstractQuest {
 	}
 
 	private void collectItem() {
-		final SpeakerNPC npc = npcs.get("Mistrz Faumonii XXIV");
+		final MasterStage npc = MasterStage.register(24, this);
 
 		npc.add(
 			ConversationStates.IDLE,
@@ -261,7 +301,7 @@ public class MainTask24 extends AbstractQuest {
 	public void addToWorld() {
 		fillQuestInfo(
 			"Wojownik Faumonii 24",
-			"Mistrz Faumonii XXIV ma dla ciebie dwudzieste-czwarte główne zadanie, które sprawdzi twoją wytrwałość, odwagę i gotowość na dalszą drogę wojownika Faumonii.",
+			"Mistrz Faumonii ma dla ciebie dwudzieste-czwarte główne zadanie, które sprawdzi twoją wytrwałość, odwagę i gotowość na dalszą drogę wojownika Faumonii.",
 			true);
 
 		checkRequiredQuests();
@@ -291,7 +331,7 @@ public class MainTask24 extends AbstractQuest {
 
 			final RequiredClaw claw = getRequiredClaw(player);
 			if (claw != null) {
-				res.add("Mistrz Faumonii XXIV poprosił mnie, abym przyniósł: " + claw.amount + " x " + claw.name + ".");
+				res.add("Mistrz Faumonii poprosił mnie, abym przyniósł: " + claw.amount + " x " + claw.name + ".");
 			}
 		} else {
 			res.add("Ukończyłem dwudzieste-czwarte zadanie od Mistrza Faumonii i otrzymałem odznakę wojownika Faumonii dwudziestego-czwartego poziomu.");
@@ -307,7 +347,7 @@ public class MainTask24 extends AbstractQuest {
 
 	@Override
 	public int getMinLevel() {
-		return 299;
+		return 300;
 	}
 
 	@Override
@@ -317,7 +357,7 @@ public class MainTask24 extends AbstractQuest {
 
 	@Override
 	public String getNPCName() {
-		return "Mistrz Faumonii XXIV";
+		return MasterStage.NPC_NAME;
 	}
 
 	@Override

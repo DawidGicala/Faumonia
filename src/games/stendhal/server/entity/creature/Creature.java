@@ -149,6 +149,9 @@ public class Creature extends NPC {
 	private int targetY;
 	
 	private final int attackTurn = Rand.rand(5);
+	// An elapsed attack opportunity stays ready while the target is out of reach.
+	// This belongs to the creature, not the shared strategy or its current target.
+	private long nextAttackAttempt = Long.MIN_VALUE;
 
 	private boolean isIdle; 
 
@@ -472,6 +475,19 @@ public class Creature extends NPC {
 	
 	public boolean isAttackTurn(final int turn) {
 		return ((turn + attackTurn) % getAttackRate() == 0);
+	}
+
+	/** Consume one eligible attempt, including a miss. Call only after range/LOS checks. */
+	public boolean tryAttackTurn(final int turn, final int interval, final int phase) {
+		final int rate = Math.max(1, interval);
+		if (nextAttackAttempt == Long.MIN_VALUE) {
+			nextAttackAttempt = (long) turn + Math.floorMod(phase - turn, rate);
+		}
+		if ((long) turn < nextAttackAttempt) {
+			return false;
+		}
+		nextAttackAttempt = (long) turn + rate;
+		return true;
 	}
 
 

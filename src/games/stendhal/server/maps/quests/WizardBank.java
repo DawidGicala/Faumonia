@@ -71,7 +71,7 @@ public class WizardBank extends AbstractQuest implements LoginListener {
 	private static final int TIME = 60 * 5;
 
 	// Cost to access chests
-	private static final int COST = 1000;
+	private static final int COST = 100000;
 
 	// "static" data
 	private StendhalRPZone zone = null;

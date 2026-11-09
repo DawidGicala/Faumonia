@@ -59,18 +59,21 @@ public class BowAndArrowSellerNPC implements ZoneConfigurator {
 
 			@Override
 			protected void createDialog() {
-				addGreeting();
-				addJob("Sprzedaję łuki i strzały.");
-				addHelp("Sprzedaję różne przedmioty. Zapytaj mnie jaka jest najnowsza #oferta.");
-				new SellerAdder().addSeller(this, new SellerBehaviour(shops.get("sellrangedstuff")));
-				addGoodbye();
+				addReply("tematy", "Jasne, odłożę na chwilę robotę. Możemy porozmawiać o łucznictwie, wrócić do mojej prośby albo obejrzeć towar.");
+				addGreeting("Witaj. Właśnie doglądam łuków i strzał, ale na rozmowę znajdę chwilę. Czego potrzebujesz?");
+				addJob("Wyrabiam i sprzedaję łuki oraz strzały. Lubię tę pracę, bo przy łuku liczy się każdy szczegół: drewno, cięciwa i staranne wykończenie. Jeśli coś jest zrobione byle jak, łucznik odczuje to przy pierwszym strzale.");
+				addHelp("Jeśli wybierasz się z łukiem w drogę, sprawdź, czy masz odpowiedni zapas strzał. Dobry łuk sam za ciebie nie trafi, ale bez strzał niewiele zdziałasz. Zapytaj o moją #ofertę, a pokażę ci, co przygotowałem.");
+				String offer = "Łuk i strzały powinny dobrze służyć w drodze. Sprzedaję " + games.stendhal.common.grammar.Grammar.enumerateCollection(shops.get("sellrangedstuff").keySet()) + ". Obejrzyj spokojnie i wybierz, czego potrzebujesz.";
+				addOffer(offer); addReply(java.util.Arrays.asList("sklep", "shop"), offer);
+				new SellerAdder().addSeller(this, new SellerBehaviour(shops.get("sellrangedstuff")), false);
+				addGoodbye("Do zobaczenia. Niech cię ręka nie zawiedzie, gdy przyjdzie napiąć cięciwę.");
 			}
 		};
 
 		ouchit.setEntityClass("weaponsellernpc");
 		ouchit.setPosition(21, 3);
 		ouchit.initHP(100);
-		ouchit.setDescription("Oto Ouchit. Łucznictwo jest jego pasją.");
+		ouchit.setDescription("Widzisz Ouchita, wytwórcę łuków i strzał. O swoim rzemiośle mówi z wyraźną pasją.");
 		zone.add(ouchit);
 	}
 }

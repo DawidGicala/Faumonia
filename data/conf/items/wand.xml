@@ -149,7 +149,7 @@
 	
 	<item name="różdżka mokoszy">
 		<type class="wand" subclass="rozdzka_mokszy" tileid="-1"/>
-		<description>Oto różdżka Mokoszy, potężny artefakt stworzony przez boginię Mokosz. Dzięki niej uczynisz glebę urodzajną, a plony obfitymi. Różdżka ta jest przesiąknięta starożytną magią, która może przywrócić równowagę i harmonię w świecie. W rękach godnego właściciela różdżka Mokoszy przyniesie dobrobyt i pomyślność.</description>
+		<description>Oto różdżka Mokoszy, związana w opowieściach z boginią urodzaju. Samaron przywraca ją z odnalezionych części i zgromadzonych składników magicznych. To broń dla wprawnego użytkownika magii.</description>
 		<implementation class-name="games.stendhal.server.entity.item.Item"/>
 		<attributes>
 			<atk value="32"/>

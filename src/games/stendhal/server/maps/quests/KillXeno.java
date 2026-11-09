@@ -50,7 +50,7 @@ import java.util.List;
 
 import marauroa.common.Pair;
 
-public class KillXeno extends AbstractQuest {
+public class KillXeno extends AbstractQuest implements games.stendhal.server.core.rp.quest.NativeHuntDetails {
 
 	private static final String QUEST_SLOT = "kill_xenos";
 	protected HashMap<String, Pair<Integer, Integer>> creaturestokill = new HashMap<String, Pair<Integer,Integer>>();
@@ -78,19 +78,19 @@ public class KillXeno extends AbstractQuest {
 		final SpeakerNPC npc = npcs.get("Natan");
 
 		npc.add(ConversationStates.ATTENDING,
-				ConversationPhrases.QUEST_MESSAGES, 
-				new QuestNotStartedCondition(QUEST_SLOT),
-				ConversationStates.QUEST_OFFERED,
-				"Te potwory z dreamscape nie dają mi spokoju... potrzebuję kogoś, kto pomoże mi się z nimi uporać. Czy możesz mi pomóc w tej misji?",
-				null);
+                ConversationPhrases.QUEST_MESSAGES,
+                new QuestNotStartedCondition(QUEST_SLOT),
+                ConversationStates.QUEST_OFFERED,
+                "Nawet kiedy zasypiam, nie uwalniam się od stworzeń z krainy snów. Xenocium i ich towarzysze przynoszą tam coraz większy niepokój. Pomożesz mi się z nimi uporać?",
+                null);
 
 		npc.add(ConversationStates.ATTENDING,
-				ConversationPhrases.QUEST_MESSAGES, 
-				new AndCondition(new QuestStateStartsWithCondition(QUEST_SLOT,"done"),
+                ConversationPhrases.QUEST_MESSAGES,
+                new AndCondition(new QuestStateStartsWithCondition(QUEST_SLOT,"done"),
 						 new TimePassedCondition(QUEST_SLOT, 1, MathHelper.MINUTES_IN_ONE_WEEK*2)),
-				ConversationStates.QUEST_OFFERED,
-				"Magiczna kraina snów znów jest atakowana przez te przerażające istoty. Czy mógłbyś mi pomóc i stawić im czoło raz jeszcze?",
-				null);
+                ConversationStates.QUEST_OFFERED,
+                "Niepokój znów wrócił do krainy snów. Czy możesz jeszcze raz stawić czoło tym stworzeniom?",
+                null);
 
 		npc.add(ConversationStates.ATTENDING,
 				ConversationPhrases.QUEST_MESSAGES,
@@ -106,18 +106,18 @@ public class KillXeno extends AbstractQuest {
 
 		
 		npc.add(ConversationStates.QUEST_OFFERED,
-				ConversationPhrases.YES_MESSAGES,
-				null,
-				ConversationStates.ATTENDING,
-				"Dziękuję! Udaj się i zabij 40 xenocium, 40 necrosophia i 10 kasarkutominubat. To one przynoszą niepokój do naszej krainy.",
-				new MultipleActions(actions));
+                ConversationPhrases.YES_MESSAGES,
+                null,
+                ConversationStates.ATTENDING,
+                "Wyrusz do krainy snów i odszukaj wszystkie trzy rodzaje przeciwników. Kasarkutominubat spotyka się rzadziej na mojej liście, ale bez nich nie zakończymy wyprawy." + "\nCele: " + games.stendhal.server.core.rp.quest.HuntQuestProgress.targetText(this,null) + ".",
+                new MultipleActions(actions));
 
-		npc.add(ConversationStates.QUEST_OFFERED, 
-				ConversationPhrases.NO_MESSAGES, 
-				null,
-				ConversationStates.ATTENDING,
-				"Szkoda... Mam nadzieję, że kiedyś zmienisz zdanie i zdecydujesz się pomóc",
-				new SetQuestAction(QUEST_SLOT, 0, "rejected"));
+		npc.add(ConversationStates.QUEST_OFFERED,
+                ConversationPhrases.NO_MESSAGES,
+                null,
+                ConversationStates.ATTENDING,
+                "Rozumiem, każdy ma własne troski. Wróć do mnie, jeśli znajdziesz siły na tę wyprawę.",
+                new SetQuestAction(QUEST_SLOT, 0, "rejected"));
 	}
 
 	private void step_2() {
@@ -161,23 +161,23 @@ public class KillXeno extends AbstractQuest {
 		LinkedList<String> triggers = new LinkedList<String>();
 		triggers.addAll(ConversationPhrases.FINISH_MESSAGES);
 		triggers.addAll(ConversationPhrases.QUEST_MESSAGES);		
-		npc.add(ConversationStates.ATTENDING, 
-				triggers,
-				new AndCondition(
+		npc.add(ConversationStates.ATTENDING,
+                triggers,
+                new AndCondition(
 						new QuestInStateCondition(QUEST_SLOT, 0, "start"),
 						new KilledForQuestCondition(QUEST_SLOT, 1)),
-				ConversationStates.ATTENDING, 
-				"Dziękuję Ci! Teraz nasza kraina snów jest bezpieczna.",
-				new MultipleActions(actions));
+                ConversationStates.ATTENDING,
+                "Dziękuję, ta wiadomość pozwala mi wreszcie odetchnąć. Przygotowałem pieniądze i skrzynie; niech następna droga zaprowadzi cię w spokojniejsze miejsce.",
+                new MultipleActions(actions));
 
-		npc.add(ConversationStates.ATTENDING, 
-				triggers,
-				new AndCondition(
+		npc.add(ConversationStates.ATTENDING,
+                triggers,
+                new AndCondition(
 						new QuestInStateCondition(QUEST_SLOT, 0, "start"),
 						new NotCondition(new KilledForQuestCondition(QUEST_SLOT, 1))),
-				ConversationStates.ATTENDING, 
-				"Proszę, pomóż mi zwalczyć te okropne istoty z dreamscape!",
-				null);
+                ConversationStates.ATTENDING,
+                null,
+                (p, sentence, raiser) -> raiser.say("W krainie snów wciąż zostały stworzenia z mojej listy. Sprawdźmy brakujące odmiany, zanim ponownie tam ruszysz." + "\n" + games.stendhal.server.core.rp.quest.HuntQuestProgress.progressText(KillXeno.this,p)));
 	}
 
 	@Override
@@ -185,7 +185,7 @@ public class KillXeno extends AbstractQuest {
 		super.addToWorld();
 		fillQuestInfo(
 				"Zabij potwory z krainy snów",
-				"Potwory w krainie snów dreamscape sprawiają problemy. Może powinienem pomóc w ich zwalczaniu.",
+				"Natana nie opuszczają koszmary o stworzeniach z krainy snów. Przyjmij jego zlecenie i staw czoło przeciwnikom, których wymieni.",
 				false);
 		step_1();
 		step_2();
@@ -194,24 +194,8 @@ public class KillXeno extends AbstractQuest {
 	
 	@Override
 	public List<String> getHistory(final Player player) {
-			final List<String> res = new ArrayList<String>();
-			if (!player.hasQuest(QUEST_SLOT)) {
-				return res;
-			}
-			if (!isCompleted(player)) {
-				res.add("Muszę zabić 40 xenocium, 40 necrosophia i 10 kasarkutominubat, aby wykonać zadanie od Natana.");
-			} else if(isRepeatable(player)){
-				res.add("Teraz po 2 tygodniach powinienem sprawdzić, czy kraina snów znów nie potrzebuje mojej pomocy!");
-			} else {
-				res.add("Pokonałem potwory z dreamscape i teraz kraina snów jest bezpieczna. 	Jako nagrodę otrzymałem: 200,000 pkt doświadczenia oraz pare skrzyń ze skarbami.");
-			}
-			int repetitions = player.getNumberOfRepetitions(getSlotName(), 2);
-			if (repetitions > 0) {
-				res.add("Pomogłem Natanowi "
-						+ Grammar.quantityplnoun(repetitions, "razy") + ".");
-			}
-			return res;
-	}
+        return games.stendhal.server.core.rp.quest.HuntQuestProgress.history(this,player);
+    }
 
 
 	@Override
@@ -240,4 +224,11 @@ public class KillXeno extends AbstractQuest {
 	public String getRegion() {
 		return Region.SEMOS_CITY;
 	}
+
+    @Override public java.util.Map<String, Pair<Integer,Integer>> getDialogueHuntTargets(Player player) {
+        return java.util.Collections.unmodifiableMap(new java.util.TreeMap<String,Pair<Integer,Integer>>(creaturestokill));
+    }
+    @Override public int getDialogueHuntTotal(Player player) { return 0; }
+    @Override public int getDialogueKillIndex() { return 1; }
+    @Override public String getDialogueHuntHint(Player player) { return "Udaj się do krainy snów. Potrzeba 40 xenocium, 40 necrosophia i 10 kasarkutominubat; Natan sprawdza każdy z trzech rodzajów osobno."; }
 }

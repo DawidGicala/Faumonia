@@ -58,21 +58,22 @@ public class GossipNPC implements ZoneConfigurator {
 
 			@Override
 			protected void createDialog() {
-				addGreeting("Cześć!");
-				addJob("Hm, nie wiem co masz na myśli. Teraz czekam na moją mamę, aż wróci ze #sklepów.");
-				addHelp("Mam nowiny o bazarze.");
+                addReply("tematy", "Możemy porozmawiać o mamie albo o mieście. Ja zostanę tutaj, żeby wiedziała, gdzie mnie szukać.");
+				addGreeting("Cześć. Zatrzymasz się na chwilę? Dobrze mieć z kim porozmawiać.");
+				addJob("Jeszcze nie pracuję, jestem na to za mały. Czekam tutaj na mamę, Amber, i patrzę, kto przechodzi przez miasto. Ostatnio wypatruję jej częściej niż kogokolwiek innego.");
+				addHelp("Nie znam wszystkich dróg, ale mogę opowiedzieć ci o mamie. Jeśli chcesz mi pomóc, zapytaj o #zadanie. Najbardziej zależy mi na wiadomości, że jest bezpieczna.");
 				addOffer("Nie sprzedaję, ja czekam tylko na mamę. Mam #nowiny jeżeli chcesz wiedzieć.");
 				addQuest("Co? Nie rozumiem Cię.");
 				addReply(Arrays.asList("news", "nowiny"), "Paru sprzedawców będzie wkrótce na bazarze! Będzie fajnie, a na razie jest tutaj pusto.");
 				addReply(Arrays.asList("shops", "sklepów"), "Tak, ona wyjechała z miasteczka. Jedynie co tutaj mamy to kwiaciarkę! Są #nowiny, że będziemy mieli własny bazar ...");
-				addGoodbye("Żegnaj.");
+				addGoodbye("Do widzenia. Dzięki za chwilę rozmowy.");
 			}
 		};
 
 		npc.setEntityClass("kid6npc");
 		npc.setPosition(114, 67);
 		npc.initHP(100);
-		npc.setDescription("Oto Jef. Wygląda jak by czekał na kogoś.");
+		npc.setDescription("Widzisz Jefa, chłopca czekającego w Kirdneh. Wypatruje znajomej twarzy wśród przechodniów.");
 		zone.add(npc);
 	}
 }

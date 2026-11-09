@@ -60,7 +60,7 @@ public class GhostNPC implements ZoneConfigurator {
 			}
 		};
 
-		ghost.setDescription("Oto duch mężczyzny. Wygląda na to, że zginął w walce.");
+		ghost.setDescription("Widzisz Gorana, ducha mężczyzny w podziemiach Orril. Ślady dawnej walki wciąż nadają jego postaci niespokojny wygląd.");
 		ghost.setResistance(0);
 		ghost.setEntityClass("deadmannpc");
 		// he is a ghost so he is see through

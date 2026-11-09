@@ -43,10 +43,11 @@ public class ElementalNPC implements ZoneConfigurator {
 
 			@Override
 			protected void createDialog() {
+                games.stendhal.server.entity.npc.dialogue.JourneyDialogueTopics.install(this);
 				addGreeting("Witaj, jestem ognistym żywiołem.");
 				addGoodbye("Na razie.");
 				addHelp("Mógłbym Ci pomóc w zdobyciu #specjalnego sztyletu.");
-				addJob("Kiedyś byłem szanowanym kowalem na całą Faumonie.");
+				addJob("Kiedyś znano mnie jako dobrego kowala. Teraz ogień jest częścią mnie, ale nadal pamiętam, jak prowadzić metal pod młotem. Mogę wykorzystać tę wiedzę do stworzenia sztyletu żywiołów.");
 				
 				add(
 				        ConversationStates.ATTENDING,
@@ -58,7 +59,7 @@ public class ElementalNPC implements ZoneConfigurator {
 			}
 		};
 
-		elemental.setDescription("Oto Żywioł Ognia. Czujesz przerażający gorąc stojąc w jego pobliżu.");
+		elemental.setDescription("Widzisz Żywioł Ognia z Fado. Żar bijący z jego postaci przypomina otwarte palenisko kuźni.");
 		elemental.setEntityClass("koreknpc1");
 		elemental.setPosition(103, 75);
 		elemental.setDirection(Direction.DOWN);

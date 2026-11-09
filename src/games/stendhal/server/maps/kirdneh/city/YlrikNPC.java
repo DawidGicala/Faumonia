@@ -40,8 +40,9 @@ public class YlrikNPC implements ZoneConfigurator {
 		final SpeakerNPC npc = new SpeakerNPC("Ylrik") {
 			@Override
 			public void createDialog() {
+                games.stendhal.server.entity.npc.dialogue.JourneyDialogueTopics.install(this);
 				addGreeting("Witaj, podróżniku! Widzę, że masz w sobie ducha przygody. Co Cię sprowadza do naszego miasta?");
-				addJob("Jestem czarodziejem zamieszkującym to miejsce. Mimo wyglądu wojownika, moją pasją jest gotowanie. Lubię łączyć magię z kulinariami.");
+				addJob("Zajmuję się magią, choć wygląd potrafi zmylić moich rozmówców. Poza tym lubię gotować i sprawdzać, do czego nadają się zebrane składniki. Ostatnio sporo uwagi zabiera mi problem z uciążliwymi ptakami.");
 				addHelp("Na tę chwilę nie mamy nic do omówienia, ale może następnym razem będę mógł Ci pomóc. Jeśli lubisz wyzwania, możesz spróbować swoich sił na ptakach na zachodzie. Są dość uciążliwe.");
 				addGoodbye("Żegnaj, wędrowcze. Niech Twoja podróż będzie bezpieczna i pełna przygód.");
 			}
@@ -50,7 +51,7 @@ public class YlrikNPC implements ZoneConfigurator {
 		new SellerAdder().addSeller(npc, new SellerBehaviour(SingletonRepository.getShopList().get("healing")));
 		new HealerAdder().addHealer(npc, 0);
 		npc.setPosition(120, 92);
-		npc.setDescription("Przed Tobą stoi Ylrik, czarodziej o wyglądzie wojownika, siedzący obok słynnego muzeum w południowym mieście Kirdneh. Jego muskularna sylwetka kontrastuje z jego magicznymi zdolnościami. Powietrze wokół niego wypełnia zapach świeżo przygotowanego jedzenia, zdradzając jego zamiłowanie do gotowania.");
+		npc.setDescription("Widzisz Ylrika z Kirdneh. Wygląda na wojownika, lecz chętniej mówi o magii i gotowaniu.");
 		npc.setEntityClass("ylriknpc");
 		zone.add(npc);
 	}

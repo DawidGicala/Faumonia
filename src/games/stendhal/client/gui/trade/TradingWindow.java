@@ -19,7 +19,6 @@ import games.stendhal.client.gui.SlotGrid;
 import games.stendhal.client.gui.layout.SBoxLayout;
 import games.stendhal.client.gui.layout.SLayout;
 import games.stendhal.common.TradeState;
-import games.stendhal.common.grammar.Grammar;
 
 import java.awt.Color;
 import java.awt.event.ActionEvent;
@@ -60,7 +59,7 @@ class TradingWindow extends InternalManagedWindow {
 	 * @param controller controller to use for the trade operations
 	 */
 	public TradingWindow(final TradingController controller) {
-		super("trade", "Trading");
+		super("trade", "Handel");
 		this.controller = controller;
 		
 		final int padding = SBoxLayout.COMMON_PADDING;
@@ -73,13 +72,13 @@ class TradingWindow extends InternalManagedWindow {
 		 * Create the trading partner's side
 		 */
 		JComponent partnerColumn = SBoxLayout.createContainer(SBoxLayout.VERTICAL, padding);
-		partnersOfferLabel = new JLabel("Biuro partnera");
+		partnersOfferLabel = new JLabel("Oferta drugiego gracza");
 		partnersOfferLabel.setAlignmentX(CENTER_ALIGNMENT);
 		partnerColumn.add(partnersOfferLabel);
 		partnerSlots = new SlotGrid(2, 2);
 		partnerColumn.add(partnerSlots);
 		
-		partnerOfferStatus = new JLabel("Zmieniam");
+		partnerOfferStatus = new JLabel("Edycja oferty");
 		partnerOfferStatus.setAlignmentX(CENTER_ALIGNMENT);
 		partnerColumn.add(partnerOfferStatus);
 		
@@ -111,7 +110,7 @@ class TradingWindow extends InternalManagedWindow {
 		myColumn.add(mySlots);
 		slotRow.add(myColumn);
 		
-		myOfferStatus = new JLabel("Zmieniam");
+		myOfferStatus = new JLabel("Edycja oferty");
 		myOfferStatus.setAlignmentX(CENTER_ALIGNMENT);
 		myColumn.add(myOfferStatus);
 		
@@ -159,7 +158,7 @@ class TradingWindow extends InternalManagedWindow {
 	 */
 	void setPartnerName(String name) {
 		setTitle("Handel z " + name);
-		partnersOfferLabel.setText("Oferta " + Grammar.suffix_s(name));
+		partnersOfferLabel.setText("Oferta gracza: " + name);
 	}
 	
 	/**
@@ -194,15 +193,15 @@ class TradingWindow extends InternalManagedWindow {
 			break;
 		case MAKING_OFFERS:
 			indicator.setForeground(Color.GRAY);
-			indicator.setText("Zmieniam");
+			indicator.setText("Edycja oferty");
 			break;
 		case LOCKED:
 			indicator.setForeground(Color.WHITE);
-			indicator.setText("Zaoferowałes");
+			indicator.setText("Oferta gotowa");
 			break;
 		case DEAL_WAITING_FOR_OTHER_DEAL:
 			indicator.setForeground(Color.GREEN);
-			indicator.setText("ZAAKCEPTOWANE");
+			indicator.setText("Zaakceptowano");
 			break;
 		default:
 				

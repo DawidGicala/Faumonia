@@ -83,7 +83,7 @@ npc.add(ConversationStates.ATTENDING,
 				ConversationPhrases.QUEST_MESSAGES, 
 				new QuestNotStartedCondition(QUEST_SLOT),
 				ConversationStates.QUEST_OFFERED, 
-				"Napiłabym się drinka, powinien być egzotyczny. Czy możesz mi go przynieść?",
+				"Tutejszy upał potrafi znużyć nawet mnie. Mam ochotę na napój z oliwką, ten egzotyczny, który tak lubię. Przyniesiesz mi jedną porcję?",
 				null);
 npc.add(ConversationStates.ATTENDING,
 		ConversationPhrases.QUEST_MESSAGES,
@@ -96,7 +96,7 @@ npc.add(ConversationStates.ATTENDING,
 		ConversationPhrases.QUEST_MESSAGES,
 		new AndCondition(new TimePassedCondition(QUEST_SLOT, 1, REQUIRED_MINUTES), new QuestStateStartsWithCondition(QUEST_SLOT, "drinking;")),
 		ConversationStates.QUEST_OFFERED,
-		"Ostatni napój, który mi kupiłeś był wspaniały. Przyniesiesz mi następny?",
+		"Minęło już trochę czasu i znów mam ochotę na ten smak. Poprzedni napój z oliwką bardzo mi odpowiadał. Przyniesiesz kolejną porcję?",
 		null);
 
 npc.add(ConversationStates.ATTENDING,
@@ -109,14 +109,14 @@ npc.add(ConversationStates.ATTENDING,
 		npc.add(ConversationStates.ATTENDING,
 				ConversationPhrases.QUEST_MESSAGES, null,
 				ConversationStates.ATTENDING,
-				"Kocham te egzotyczne napoje ale zapomniałam nazwę mojego ulubionego.",
+				"Chodzi mi o napój z oliwką. Nie przynoś dowolnego trunku, bo właśnie ten smak mam dzisiaj w pamięci. Gdy go zdobędziesz, porozmawiamy o #napoju.",
 				null);
 
 // Player agrees to get the drink
 		npc.add(ConversationStates.QUEST_OFFERED,
 				ConversationPhrases.YES_MESSAGES, null,
 				ConversationStates.ATTENDING,
-				"Dziękuję! Jeżeli go znajdziesz to powiedz #napój a będę wiedziała, że go masz. W zamian dam Ci nagrodę.",
+				"Będę czekała tutaj, w mojej chacie na wyspie Amazon. Przynieś jedną porcję napoju z oliwką i powiedz #napój. Odwdzięczę ci się zapasem tarty z nadzieniem rybnym.",
 				new SetQuestAndModifyKarmaAction(QUEST_SLOT, "start", 10.0));
 
 		// Player says no, they've lost karma.
@@ -159,7 +159,7 @@ npc.add(ConversationStates.ATTENDING,
 			ConversationStates.ATTENDING, triggers,
 			new AndCondition(new QuestInStateCondition(QUEST_SLOT, "start"), new NotCondition(new PlayerHasItemWithHimCondition("napój z oliwką"))),
 			ConversationStates.ATTENDING,
-			"Nie masz napoju z oliwką. Idź i lepiej dostarcz mi go!",
+			"Nie widzę przy tobie napoju z oliwką. Tylko o taką porcję prosiłam; inny trunek jej nie zastąpi. Wróć, gdy ją zdobędziesz.",
 			null);
 
 		npc.add(
@@ -175,7 +175,7 @@ npc.add(ConversationStates.ATTENDING,
 		super.addToWorld();
 		fillQuestInfo(
 				"Amazon Princess",
-				"Spragniona księżniczka chce pić.",
+				"Księżniczka Esclara z wyspy Amazonek jest spragniona. Dowiedz się, na jaki napój ma ochotę, i przynieś go do jej siedziby.",
 				true);
 		offerQuestStep();
 		bringCocktailStep();

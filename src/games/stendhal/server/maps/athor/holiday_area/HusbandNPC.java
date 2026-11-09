@@ -43,8 +43,9 @@ public class HusbandNPC implements ZoneConfigurator  {
 	
 			@Override
 			public void createDialog() {
+                games.stendhal.server.entity.npc.dialogue.HuntDialogueTopics.install(this);
 				addGreeting("Cześć!");
-				addJob("Jestem woźnicą, ale na tej wyspie nie ma powozów!");
+				addJob("Na co dzień jestem woźnicą, ale tutaj nie ma nawet powozów. Przyjechałem z Jane odpocząć; szkoda tylko, że potwory w podziemiach tak skutecznie ograniczają nasze wycieczki.");
 				addHelp("Nie próbuj rozmawiać z moją żoną, jest bardzo nieśmiała.");
 				addGoodbye("Dowidzenia!");
 			}
@@ -52,7 +53,7 @@ public class HusbandNPC implements ZoneConfigurator  {
 		};
 		npc.setPosition(27, 44);
 		npc.setEntityClass("swimmer5npc");
-		npc.setDescription ("Oto John na plaży. Wypoczywa na plaży wraz ze swoją żoną Jane.");
+		npc.setDescription ("Widzisz Johna odpoczywającego na plaży Athor z żoną Jane. Chętnie zamieniłby leżenie na piasku na zwiedzanie wyspy.");
 		npc.setDirection(Direction.DOWN);
 		zone.add(npc);		
 	}

@@ -12,6 +12,14 @@
  ***************************************************************************/
 package games.stendhal.server.maps.quests;
 
+import games.stendhal.server.entity.npc.dialogue.NpcDialogueService;
+
+import games.stendhal.common.NpcDialogueSnapshot.Reward;
+
+import games.stendhal.server.entity.npc.action.DecreaseKarmaAction;
+
+import games.stendhal.server.entity.npc.action.SetQuestAndModifyKarmaAction;
+
 import games.stendhal.common.grammar.Grammar;
 import games.stendhal.server.entity.npc.ConversationPhrases;
 import games.stendhal.server.entity.npc.ConversationStates;
@@ -75,7 +83,23 @@ public class ElvishArmor extends AbstractQuest implements
 
 	private void setupAbstractQuest() {
 		final BringListOfItemsQuest concreteQuest = this;
-		bringItems = new BringListOfItemsQuestLogic(concreteQuest);
+		bringItems = new BringListOfItemsQuestLogic(concreteQuest) {
+            @Override protected void acceptQuest() {
+                getNPC().add(ConversationStates.QUEST_OFFERED, ConversationPhrases.YES_MESSAGES, null,
+                    ConversationStates.ATTENDING, respondToQuestAcception(),
+                    new SetQuestAndModifyKarmaAction(QUEST_SLOT, "", getKarmaDiffForQuestResponse()));
+            }
+            @Override protected void rejectQuest() {
+                getNPC().add(ConversationStates.QUEST_OFFERED, ConversationPhrases.NO_MESSAGES, null,
+                    ConversationStates.ATTENDING, respondToQuestRefusal(),
+                    new DecreaseKarmaAction(getKarmaDiffForQuestResponse()));
+            }
+            @Override protected void playerDoesNotWantToGiveItems() {
+                getNPC().add(new ConversationStates[] {ConversationStates.ATTENDING, ConversationStates.QUESTION_1},
+                    ConversationPhrases.NO_MESSAGES, null, ConversationStates.ATTENDING,
+                    respondToPlayerSayingHeHasNoItems(java.util.Collections.<String>emptyList()), null);
+            }
+        };
 		bringItems.addToWorld();
 	}
 
@@ -84,7 +108,7 @@ public class ElvishArmor extends AbstractQuest implements
 		super.addToWorld();
 		fillQuestInfo(
 				"Zbroja Elficka",
-				"Lupos elf Albinos chce zdobyć więdze o produkcji elfickiego ekwipunku. Pyta młodych podróżnych o przyniesienie kilku próbek.",
+				"Lupos, rzemieślnik elfów albinosów, bada wyroby zielonych elfów. Potrzebuje sześciu różnych części elfickiego rynsztunku.",
 				true);
 		offerSteps();
 		setupAbstractQuest();
@@ -115,86 +139,83 @@ public class ElvishArmor extends AbstractQuest implements
 	}
 
 	public String welcomeBeforeStartingQuest() {
-		return "Witaj wędrowcze, widzę że przyszedłeś z bardzo daleka. "
-			+ "Interesuję się każdym kto widział naszych pobratymców, zielonych elfów z Nalwor. Pilnują swoich #sekretów";
+		return "Witaj, podróżniku. W tej pracowni próbuję zrozumieć kunszt zielonych elfów z Nalwor, lecz same opowieści nie wystarczą. Może pomożesz mi poznać kilka ich #sekretów?";
 	}
 
 	public String respondToQuest() {
-		return "Nie chcą ujawnić wiedzy jak stworzyć zieloną zbroję, tarcze i inne. Wolą je nazywać elfiszami. "
-			+ "Zastanawiam się czy przybysz taki jak ty mógłby mi przynieść dowolny elfisz?";
+		return "Elficka zbroja jest lekka i starannie wykonana, ale nie znam wszystkich tajników jej produkcji. Potrzebuję sześciu różnych części #rynsztunku, po jednej z każdego rodzaju, żeby porównać ich wykonanie. Zechcesz zbierać dla mnie te próbki?";
 	}
 
 	public String respondToQuestAcception() {
-		return "Sekrety zielonych elfów w końcu byłyby nareszcie nasze! Przynieś mi wszystkie elfisze jakie znajdziesz. Dobrze Cię wynagrodzę!";
+		return "Znakomicie, wreszcie będę mógł zbadać prawdziwe wyroby zamiast polegać na pogłoskach. Potrzebuję elfickiej zbroi, spodni, butów, miecza, płaszcza i tarczy; możesz przynosić je pojedynczo. Zapytaj o #rynsztunku, a przypomnę, których części jeszcze brakuje.";
 	}
 
 	public String respondToQuestRefusal() {
-		return "Widzę, że jesteś niechętny do pomocy.";
+		return "Rozumiem, zdobycie takiego kompletu wymaga czasu i ostrożności. Nie będę cię zatrzymywał. Jeśli kiedyś zechcesz pomóc w badaniach, wróć do mnie.";
 	}
 
 	public String welcomeDuringActiveQuest() {
-		return "Witam! Mam nadzieję, że dobrze Ci idzie poszukiwanie elfiszowego #rynsztunku?";
+		return "Witaj ponownie. Przygotowałem miejsce na kolejne próbki, a dostarczone części już odłożyłem do badań. Porozmawiajmy o #rynsztunku, jeśli udało ci się zdobyć coś nowego.";
 	}
 
 	// this one not actually used here
 	public String firstAskForMissingItems(final List<String> missingItems) {
-		return "Słyszałem opisy "
-								+ Grammar.quantityplnoun(missingItems.size(), "item", "a")
-								+ " są to: "
-								+ Grammar.enumerateCollection(missingItems)
-								+ ". Przyniesiesz mi je?";
+		return "Do badań brakuje mi jeszcze: " + Grammar.enumerateCollection(missingItems) + ". Potrzebuję po jednej sztuce każdego rodzaju. Możesz przekazać części, które masz teraz, a po resztę wrócić później.";
 	}
 
 	public String askForMissingItems(final List<String> missingItems) {
-		return "Słyszałem opisy "
-								+ Grammar.quantityplnoun(missingItems.size(), "item", "a")
-								+ " są to: "
-								+ Grammar.enumerateCollection(missingItems)
-								+ ". Obrabowałeś kogoś?";
+		return "Do badań brakuje mi jeszcze: " + Grammar.enumerateCollection(missingItems) + ". Potrzebuję po jednej sztuce każdego rodzaju. Możesz przekazać części, które masz teraz, a po resztę wrócić później.";
 	}
 
 	public String askForItemsAfterPlayerSaidHeHasItems() {
-		return "Wyśmienicie! Jaki #rynsztunek zrabowałeś?";
+		return "Doskonale, przyjrzyjmy się znaleziskom. Wskaż część #rynsztunku, którą chcesz przekazać. Wezmę po jednej sztuce, a każdą dostawę zapamiętam.";
 	}
 
 	public String respondToItemBrought() {
-		return "Doskonała robota. Zrabowałeś coś jeszcze?";
+		return "Dziękuję, tę część mogę już porównać z pozostałymi próbkami. Nie musisz przynosić jej drugi raz. Masz przy sobie jeszcze coś z brakującego rynsztunku?";
 	}
 
 
 	public String respondToLastItemBrought() {
-		return "Zbadam to! Elfy Albinosy mają dług wdzięczności wobec Ciebie.";
+		return "To ostatnia brakująca część - mam już cały komplet do badań. Dzięki tobie mogę wreszcie porównać kunszt zielonych elfów z naszym. Od teraz będę również skupował od ciebie wybrane wyroby; zapytaj o moją #ofertę.";
 	}
 								
 	public String respondToOfferOfNotExistingItem(final String itemName) {
-		return "Kłamca! Nie masz "
-										+ Grammar.a_noun(itemName)
-										+ " ze sobą.";
+		return "Nie widzę przy tobie przedmiotu: " + itemName + ". Sprawdź plecak i wróć, gdy będziesz go mieć ze sobą.";
 	}
 	public String respondToOfferOfNotMissingItem() {
-		return "Już mi przyniosłeś ten elfisz rynsztunek.";
+		return "Tę część już mi przekazano i leży wśród próbek. Zachowaj następny egzemplarz dla siebie. Do zakończenia badań potrzebuję tylko brakujących rodzajów rynsztunku.";
 	}
 
 	public String respondToOfferOfNotNeededItem() {
-		return	"Nie sądzę, aby to był fragment elfisz zbroi...";
+		return "Ten przedmiot nie należy do sześciu próbek, których potrzebuję. Zbieram elficką zbroję, spodnie, buty, miecz, płaszcz i tarczę. Możemy ponownie wrócić do #rynsztunku, żeby sprawdzić braki.";
 	}
 
 	public String respondToPlayerSayingHeHasNoItems(final List<String> missingItems) {
-		return "Rozumiem, że zielone elfy dobrze się chronią. Jeżeli mógłbym coś innego dla Ciebie zrobić to powiedz.";
+		return "Nic nie szkodzi, badania wymagają cierpliwości. Przekazane próbki mam już u siebie. Wróć z następną częścią, kiedy ją zdobędziesz. Nie ryzykuj niepotrzebnie dla pośpiechu.";
 	}
 
 	public String respondToQuestAfterItHasAlreadyBeenCompleted() {
-		return "Jestem teraz zajęty badaniem właściwości elfickich części zbroi, które mi przyniosłeś. To intrygujące. Dopóki nie będę ich produkował to będę je skupywał od Ciebie."
-         + "Liczę na twoje zangażowanie."; 
+		return "Komplet do badań jest już u mnie, a twoja pomoc bardzo przyspieszyła pracę. Nie potrzebuję kolejnej takiej dostawy w ramach zadania. Jeśli masz dodatkowy ekwipunek, zapytaj o moją #ofertę skupu.";
 	}
 
 	public void rewardPlayer(final Player player) {
-		player.addKarma(20.0);
-		player.addXP(20000);
+		double karmaBefore = player.getKarma();
+        int xpBefore = player.getXP();
+        player.addKarma(20.0);
+        player.addXP(20000);
+        if (player.getXP() > xpBefore) {
+            NpcDialogueService.reward(getNPC(), player, new Reward("XP postaci", "gui/dialogue/xp", player.getXP() - xpBefore, false));
+        }
+        if (player.getKarma() > karmaBefore) {
+            NpcDialogueService.reward(getNPC(), player, new Reward("Karma", "gui/dialogue/karma", player.getKarma() - karmaBefore, false));
+        }
+        // The caller marks this quest done immediately afterwards, unlocking the existing buyer.
+        NpcDialogueService.reward(getNPC(), player, new Reward("Skup u Luposa", "gui/dialogue/unlock", 1, false));
 	}
 
 	public String welcomeAfterQuestIsCompleted() {
-		return "Pozdrawiam stary przyjacielu.";
+		return "Witaj, dobrze znów cię widzieć w pracowni. Nadal porównuję części, które mi przyniesiono. Jeśli masz kolejny ekwipunek na sprzedaż, możemy omówić moją #ofertę.";
 	}
 
 	// the bring list of items quest doesn't include this logic:
@@ -211,7 +232,7 @@ public class ElvishArmor extends AbstractQuest implements
 				ConversationPhrases.OFFER_MESSAGES,
 				new QuestCompletedCondition(QUEST_SLOT),
 				ConversationStates.ATTENDING,
-				"Jeżeli znajdziesz więcej elfiszów to będę wdzięczny gdybyś mógł mi je #sprzedać. Kupię elficką: zbroję, spodnie, buty, płaszcz lub miecz. Kupiłbym także miecz elfów ciemności jeżeli będziesz miał.",
+				"Dzięki dostarczonym próbkom wiem już, którym wyrobom warto się przyglądać. Możesz mi #sprzedać przedmioty z oferty skupu; za każdą sztukę podam cenę przed potwierdzeniem. Zachowaj to, czego nadal używasz w podróży.",
 				null);
 
 
@@ -220,7 +241,7 @@ public class ElvishArmor extends AbstractQuest implements
 				ConversationPhrases.OFFER_MESSAGES,
 				new QuestActiveCondition(QUEST_SLOT),
 				ConversationStates.ATTENDING,
-				"Nie sądzę, abym mógł Tobie zaufać ... ", null);
+				"Najpierw potrzebuję kompletu próbek do badań. Kiedy zakończymy zadanie, otworzę dla ciebie skup wybranych wyrobów. Na razie porozmawiajmy o brakującym #rynsztunku.", null);
 	}
 
 

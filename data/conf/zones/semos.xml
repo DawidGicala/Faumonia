@@ -1779,6 +1779,16 @@ Podstawowe komendy w grze znajdziesz pod komendą #/help
 	</zone>
 	
 	<zone name="int_semos_training_house" file="interiors/semos/training_house.tmx">
+        <entity x="35" y="29">
+            <implementation class-name="games.stendhal.server.entity.mapstuff.sign.Sign"/>
+            <attribute name="text">UWAGA - ARENA! Gracze są sprawdzani pod kątem używania botów. Za bota grozi permanentny ban. To miejsce walki na śmierć i życie: zabicie innego gracza na arenie nie jest karane przez administrację. Pilnuj swojej postaci; wchodzisz na własne ryzyko.</attribute>
+        </entity>
+        <entity x="0" y="0">
+            <implementation class-name="games.stendhal.server.entity.mapstuff.area.MessagingArea">
+                <parameter name="coversZone">true</parameter>
+                <parameter name="enterMessage">UWAGA - ARENA! Gracze są sprawdzani pod kątem używania botów. Za bota grozi permanentny ban. To miejsce walki na śmierć i życie: zabicie innego gracza na arenie nie jest karane przez administrację. Pilnuj swojej postaci; wchodzisz na własne ryzyko.</parameter>
+            </implementation>
+        </entity>
 		
 	<portal x="36" y="30" ref="t2">
 			<destination zone="int_semos_skill_house" ref="t1" />
@@ -2409,16 +2419,7 @@ Podstawowe komendy w grze znajdziesz pod komendą #/help
 		
 		<portal x="66" y="44" ref="tutorial1b">
 			<destination zone="0_semos_city" ref="tutorial1a"/>
-			<implementation class-name="games.stendhal.server.entity.mapstuff.portal.LevelCheckingPortal">
-				<parameter name="minimum-level">5</parameter>
-				<parameter name="rejected">Aby przejść dalej musisz ukończyć szybki samouczek. Jeżeli czegoś nie wiesz, napisz #/k #wiadomość, aby poprosić innych wojowników o pomoc.
-
-Przejście dalej wymaga od Ciebie ukończenia 1 zadania u Mistrza Gry na pokonanie kilku szczurów oraz osiągnięcia przynajmniej 5 poziomu. Najszybszym sposobem na zdobycie 7 poziomu jest wykonanie zadania u Soro który wymaga przyniesienia zapasu sera - znajdziesz go na prawo od czerwonego domku Mistrzów Gry. Możesz również powalczyć z gnomami, przechodząc przez niebieski tunel pod czerwonym domkiem Mistrzów Gry. Jeżeli jeszcze tego nie zrobiłeś, wykonaj ekspresowe zadanie u Hayunn`a w domku startowym.
-
-Zadania u Mistrzów Gry przeprowadzą Cię przez całą grę, nie tylko przez początkowy samouczek. Dlatego wybierz się do Mistrza Gry w czerwonym budynku, rozpocznij zadanie i kontynuuj je w dowolnej chwili przez całą grę. Jest to idealny sposób na poznanie całej krainy Faumonii.
-
-#Jeżeli #nie #wiesz #co #teraz #robić #udaj #się #do #Mistrza #Gry #w #czerwonym #domku #i #wykonaj #zadania. </parameter>
-			</implementation>
+			<implementation class-name="games.stendhal.server.entity.mapstuff.portal.NewcomerPortal" />
 			<attribute name="hidden"/>
 		</portal>
 		
@@ -2433,16 +2434,7 @@ Zadania u Mistrzów Gry przeprowadzą Cię przez całą grę, nie tylko przez po
 		
 		<portal x="66" y="45" ref="tutorial2b">
 			<destination zone="0_semos_city" ref="tutorial2a"/>
-			<implementation class-name="games.stendhal.server.entity.mapstuff.portal.LevelCheckingPortal">
-				<parameter name="minimum-level">5</parameter>
-				<parameter name="rejected">Aby przejść dalej musisz ukończyć szybki samouczek. Jeżeli czegoś nie wiesz, napisz #/k #wiadomość, aby poprosić innych wojowników o pomoc.
-
-Przejście dalej wymaga od Ciebie ukończenia 1 zadania u Mistrza Gry na pokonanie kilku szczurów oraz osiągnięcia przynajmniej 5 poziomu. Najszybszym sposobem na zdobycie 7 poziomu jest wykonanie zadania u Soro który wymaga przyniesienia zapasu sera - znajdziesz go na prawo od czerwonego domku Mistrzów Gry. Możesz również powalczyć z gnomami, przechodząc przez niebieski tunel pod czerwonym domkiem Mistrzów Gry. Jeżeli jeszcze tego nie zrobiłeś, wykonaj ekspresowe zadanie u Hayunn`a w domku startowym.
-
-Zadania u Mistrzów Gry przeprowadzą Cię przez całą grę, nie tylko przez początkowy samouczek. Dlatego wybierz się do Mistrza Gry w czerwonym budynku, rozpocznij zadanie i kontynuuj je w dowolnej chwili przez całą grę. Jest to idealny sposób na poznanie całej krainy Faumonii.
-
-#Jeżeli #nie #wiesz #co #teraz #robić #udaj #się #do #Mistrza #Gry #w #czerwonym #domku #i #wykonaj #zadania. </parameter>
-			</implementation>
+			<implementation class-name="games.stendhal.server.entity.mapstuff.portal.NewcomerPortal" />
 			<attribute name="hidden"/>
 		</portal>
 		
@@ -2457,16 +2449,7 @@ Zadania u Mistrzów Gry przeprowadzą Cię przez całą grę, nie tylko przez po
 		
 		<portal x="66" y="46" ref="tutorial3b">
 			<destination zone="0_semos_city" ref="tutorial3a"/>
-			<implementation class-name="games.stendhal.server.entity.mapstuff.portal.LevelCheckingPortal">
-				<parameter name="minimum-level">5</parameter>
-				<parameter name="rejected">Aby przejść dalej musisz ukończyć szybki samouczek. Jeżeli czegoś nie wiesz, napisz #/k #wiadomość, aby poprosić innych wojowników o pomoc.
-
-Przejście dalej wymaga od Ciebie ukończenia 1 zadania u Mistrza Gry na pokonanie kilku szczurów oraz osiągnięcia przynajmniej 5 poziomu. Najszybszym sposobem na zdobycie 7 poziomu jest wykonanie zadania u Soro który wymaga przyniesienia zapasu sera - znajdziesz go na prawo od czerwonego domku Mistrzów Gry. Możesz również powalczyć z gnomami, przechodząc przez niebieski tunel pod czerwonym domkiem Mistrzów Gry. Jeżeli jeszcze tego nie zrobiłeś, wykonaj ekspresowe zadanie u Hayunn`a w domku startowym.
-
-Zadania u Mistrzów Gry przeprowadzą Cię przez całą grę, nie tylko przez początkowy samouczek. Dlatego wybierz się do Mistrza Gry w czerwonym budynku, rozpocznij zadanie i kontynuuj je w dowolnej chwili przez całą grę. Jest to idealny sposób na poznanie całej krainy Faumonii.
-
-#Jeżeli #nie #wiesz #co #teraz #robić #udaj #się #do #Mistrza #Gry #w #czerwonym #domku #i #wykonaj #zadania. </parameter>
-			</implementation>
+			<implementation class-name="games.stendhal.server.entity.mapstuff.portal.NewcomerPortal" />
 			<attribute name="hidden"/>
 		</portal>
 		
@@ -2481,16 +2464,7 @@ Zadania u Mistrzów Gry przeprowadzą Cię przez całą grę, nie tylko przez po
 		
 		<portal x="66" y="47" ref="tutorial4b">
 			<destination zone="0_semos_city" ref="tutorial4a"/>
-			<implementation class-name="games.stendhal.server.entity.mapstuff.portal.LevelCheckingPortal">
-				<parameter name="minimum-level">5</parameter>
-				<parameter name="rejected">Aby przejść dalej musisz ukończyć szybki samouczek. Jeżeli czegoś nie wiesz, napisz #/k #wiadomość, aby poprosić innych wojowników o pomoc.
-
-Przejście dalej wymaga od Ciebie ukończenia 1 zadania u Mistrza Gry na pokonanie kilku szczurów oraz osiągnięcia przynajmniej 5 poziomu. Najszybszym sposobem na zdobycie 7 poziomu jest wykonanie zadania u Soro który wymaga przyniesienia zapasu sera - znajdziesz go na prawo od czerwonego domku Mistrzów Gry. Możesz również powalczyć z gnomami, przechodząc przez niebieski tunel pod czerwonym domkiem Mistrzów Gry. Jeżeli jeszcze tego nie zrobiłeś, wykonaj ekspresowe zadanie u Hayunn`a w domku startowym.
-
-Zadania u Mistrzów Gry przeprowadzą Cię przez całą grę, nie tylko przez początkowy samouczek. Dlatego wybierz się do Mistrza Gry w czerwonym budynku, rozpocznij zadanie i kontynuuj je w dowolnej chwili przez całą grę. Jest to idealny sposób na poznanie całej krainy Faumonii.
-
-#Jeżeli #nie #wiesz #co #teraz #robić #udaj #się #do #Mistrza #Gry #w #czerwonym #domku #i #wykonaj #zadania. </parameter>
-			</implementation>
+			<implementation class-name="games.stendhal.server.entity.mapstuff.portal.NewcomerPortal" />
 			<attribute name="hidden"/>
 		</portal>
 
@@ -3223,30 +3197,8 @@ dorsz - 4
 	</zone>
 	
 	<zone name="int_semos_master_house" file="interiors/semos/master_house.tmx">
-	<configurator class-name="games.stendhal.server.maps.semos.masterhouse.MasterNPC1"/>
-	<configurator class-name="games.stendhal.server.maps.semos.masterhouse.MasterNPC2"/>
-	<configurator class-name="games.stendhal.server.maps.semos.masterhouse.MasterNPC3"/>
-	<configurator class-name="games.stendhal.server.maps.semos.masterhouse.MasterNPC4"/>
-	<configurator class-name="games.stendhal.server.maps.semos.masterhouse.MasterNPC5"/>
-	<configurator class-name="games.stendhal.server.maps.semos.masterhouse.MasterNPC6"/>
-	<configurator class-name="games.stendhal.server.maps.semos.masterhouse.MasterNPC7"/>
-	<configurator class-name="games.stendhal.server.maps.semos.masterhouse.MasterNPC8"/>
-	<configurator class-name="games.stendhal.server.maps.semos.masterhouse.MasterNPC9"/>
-	<configurator class-name="games.stendhal.server.maps.semos.masterhouse.MasterNPC10"/>
-	<configurator class-name="games.stendhal.server.maps.semos.masterhouse.MasterNPC11"/>
-	<configurator class-name="games.stendhal.server.maps.semos.masterhouse.MasterNPC12"/>
-	<configurator class-name="games.stendhal.server.maps.semos.masterhouse.MasterNPC13"/>
-	<configurator class-name="games.stendhal.server.maps.semos.masterhouse.MasterNPC14"/>
-	<configurator class-name="games.stendhal.server.maps.semos.masterhouse.MasterNPC15"/>
-	<configurator class-name="games.stendhal.server.maps.semos.masterhouse.MasterNPC16"/>
-	<configurator class-name="games.stendhal.server.maps.semos.masterhouse.MasterNPC17"/>
-	<configurator class-name="games.stendhal.server.maps.semos.masterhouse.MasterNPC18"/>
-	<configurator class-name="games.stendhal.server.maps.semos.masterhouse.MasterNPC19"/>
-	<configurator class-name="games.stendhal.server.maps.semos.masterhouse.MasterNPC20"/>
-	<configurator class-name="games.stendhal.server.maps.semos.masterhouse.MasterNPC21"/>
-	<configurator class-name="games.stendhal.server.maps.semos.masterhouse.MasterNPC22"/>
-	<configurator class-name="games.stendhal.server.maps.semos.masterhouse.MasterNPC23"/>
-	<configurator class-name="games.stendhal.server.maps.semos.masterhouse.MasterNPC24"/>
+		<configurator class-name="games.stendhal.server.core.config.zone.NoTeleportIn"/>
+	<configurator class-name="games.stendhal.server.maps.semos.masterhouse.MasterNPC"/>
 	
 		<portal x="14" y="1" ref="d1">
 			<destination zone="0_semos_city" ref="u1" />
@@ -3269,8 +3221,8 @@ dorsz - 4
 		<portal x="17" y="5" ref="master2a">
 			<destination zone="int_semos_master_house" ref="master2b" />
 			<implementation
-				class-name="games.stendhal.server.entity.mapstuff.portal.KeyedPortal">
-				<parameter name="key">odznaka wojownika I</parameter>
+				class-name="games.stendhal.server.entity.mapstuff.portal.QuestCompletedPortal">
+				<parameter name="quest">main_task_1</parameter>
 				<parameter name="rejected">Aby przejść przez te drzwi musisz ukończyć zadanie na wojownika Faumonii pierwszego poziomu.</parameter>
 			</implementation>
 		</portal>
@@ -3281,8 +3233,8 @@ dorsz - 4
 		<portal x="11" y="16" ref="master3a">
 			<destination zone="int_semos_master_house" ref="master3b" />
 			<implementation
-				class-name="games.stendhal.server.entity.mapstuff.portal.KeyedPortal">
-				<parameter name="key">odznaka wojownika II</parameter>
+				class-name="games.stendhal.server.entity.mapstuff.portal.QuestCompletedPortal">
+				<parameter name="quest">main_task_2</parameter>
 				<parameter name="rejected">Aby przejść przez te drzwi musisz ukończyć zadanie na wojownika Faumonii drugiego poziomu.</parameter>
 			</implementation>
 		</portal>
@@ -3293,8 +3245,8 @@ dorsz - 4
 		<portal x="17" y="16" ref="master4a">
 			<destination zone="int_semos_master_house" ref="master4b" />
 			<implementation
-				class-name="games.stendhal.server.entity.mapstuff.portal.KeyedPortal">
-				<parameter name="key">odznaka wojownika III</parameter>
+				class-name="games.stendhal.server.entity.mapstuff.portal.QuestCompletedPortal">
+				<parameter name="quest">main_task_3</parameter>
 				<parameter name="rejected">Aby przejść przez te drzwi musisz ukończyć zadanie na wojownika Faumonii trzeciego poziomu.</parameter>
 			</implementation>
 		</portal>
@@ -3305,8 +3257,8 @@ dorsz - 4
 		<portal x="11" y="27" ref="master5a">
 			<destination zone="int_semos_master_house" ref="master5b" />
 			<implementation
-				class-name="games.stendhal.server.entity.mapstuff.portal.KeyedPortal">
-				<parameter name="key">odznaka wojownika IV</parameter>
+				class-name="games.stendhal.server.entity.mapstuff.portal.QuestCompletedPortal">
+				<parameter name="quest">main_task_4</parameter>
 				<parameter name="rejected">Aby przejść przez te drzwi musisz ukończyć zadanie na wojownika Faumonii czwartego poziomu.</parameter>
 			</implementation>
 		</portal>
@@ -3317,8 +3269,8 @@ dorsz - 4
 		<portal x="17" y="27" ref="master6a">
 			<destination zone="int_semos_master_house" ref="master6b" />
 			<implementation
-				class-name="games.stendhal.server.entity.mapstuff.portal.KeyedPortal">
-				<parameter name="key">odznaka wojownika V</parameter>
+				class-name="games.stendhal.server.entity.mapstuff.portal.QuestCompletedPortal">
+				<parameter name="quest">main_task_5</parameter>
 				<parameter name="rejected">Aby przejść przez te drzwi musisz ukończyć zadanie na wojownika Faumonii piątego poziomu.</parameter>
 			</implementation>
 		</portal>
@@ -3329,8 +3281,8 @@ dorsz - 4
 		<portal x="11" y="38" ref="master7a">
 			<destination zone="int_semos_master_house" ref="master7b" />
 			<implementation
-				class-name="games.stendhal.server.entity.mapstuff.portal.KeyedPortal">
-				<parameter name="key">odznaka wojownika VI</parameter>
+				class-name="games.stendhal.server.entity.mapstuff.portal.QuestCompletedPortal">
+				<parameter name="quest">main_task_6</parameter>
 				<parameter name="rejected">Aby przejść przez te drzwi musisz ukończyć zadanie na wojownika Faumonii szóstego poziomu.</parameter>
 			</implementation>
 		</portal>
@@ -3341,8 +3293,8 @@ dorsz - 4
 		<portal x="17" y="38" ref="master8a">
 			<destination zone="int_semos_master_house" ref="master8b" />
 			<implementation
-				class-name="games.stendhal.server.entity.mapstuff.portal.KeyedPortal">
-				<parameter name="key">odznaka wojownika VII</parameter>
+				class-name="games.stendhal.server.entity.mapstuff.portal.QuestCompletedPortal">
+				<parameter name="quest">main_task_7</parameter>
 				<parameter name="rejected">Aby przejść przez te drzwi musisz ukończyć zadanie na wojownika Faumonii siódmego poziomu.</parameter>
 			</implementation>
 		</portal>
@@ -3350,23 +3302,14 @@ dorsz - 4
 			<destination zone="int_semos_master_house" ref="master8a" />
 		</portal>
 		
-		<portal x="17" y="38" ref="master8a">
-			<destination zone="int_semos_master_house" ref="master8b" />
-			<implementation
-				class-name="games.stendhal.server.entity.mapstuff.portal.KeyedPortal">
-				<parameter name="key">odznaka wojownika VII</parameter>
-				<parameter name="rejected">Aby przejść przez te drzwi musisz ukończyć zadanie na wojownika Faumonii siódmego poziomu.</parameter>
-			</implementation>
-		</portal>
-		<portal x="20" y="38" ref="master9b">
-			<destination zone="int_semos_master_house" ref="master9a" />
-		</portal>
+		
+		
 		
 		<portal x="11" y="49" ref="master9a">
 			<destination zone="int_semos_master_house" ref="master9b" />
 			<implementation
-				class-name="games.stendhal.server.entity.mapstuff.portal.KeyedPortal">
-				<parameter name="key">odznaka wojownika VIII</parameter>
+				class-name="games.stendhal.server.entity.mapstuff.portal.QuestCompletedPortal">
+				<parameter name="quest">main_task_8</parameter>
 				<parameter name="rejected">Aby przejść przez te drzwi musisz ukończyć zadanie na wojownika Faumonii ósmego poziomu.</parameter>
 			</implementation>
 		</portal>
@@ -3377,8 +3320,8 @@ dorsz - 4
 		<portal x="17" y="49" ref="master10a">
 			<destination zone="int_semos_master_house" ref="master10b" />
 			<implementation
-				class-name="games.stendhal.server.entity.mapstuff.portal.KeyedPortal">
-				<parameter name="key">odznaka wojownika IX</parameter>
+				class-name="games.stendhal.server.entity.mapstuff.portal.QuestCompletedPortal">
+				<parameter name="quest">main_task_9</parameter>
 				<parameter name="rejected">Aby przejść przez te drzwi musisz ukończyć zadanie na wojownika Faumonii dziewiątego poziomu.</parameter>
 			</implementation>
 		</portal>
@@ -3389,8 +3332,8 @@ dorsz - 4
 		<portal x="11" y="60" ref="master11a">
 			<destination zone="int_semos_master_house" ref="master11b" />
 			<implementation
-				class-name="games.stendhal.server.entity.mapstuff.portal.KeyedPortal">
-				<parameter name="key">odznaka wojownika X</parameter>
+				class-name="games.stendhal.server.entity.mapstuff.portal.QuestCompletedPortal">
+				<parameter name="quest">main_task_10</parameter>
 				<parameter name="rejected">Aby przejść przez te drzwi musisz ukończyć zadanie na wojownika Faumonii dziesiątego poziomu.</parameter>
 			</implementation>
 		</portal>
@@ -3401,8 +3344,8 @@ dorsz - 4
 		<portal x="17" y="60" ref="master12a">
 			<destination zone="int_semos_master_house" ref="master12b" />
 			<implementation
-				class-name="games.stendhal.server.entity.mapstuff.portal.KeyedPortal">
-				<parameter name="key">odznaka wojownika XI</parameter>
+				class-name="games.stendhal.server.entity.mapstuff.portal.QuestCompletedPortal">
+				<parameter name="quest">main_task_11</parameter>
 				<parameter name="rejected">Aby przejść przez te drzwi musisz ukończyć zadanie na wojownika Faumonii jedenastego poziomu.</parameter>
 			</implementation>
 		</portal>
@@ -3413,8 +3356,8 @@ dorsz - 4
 		<portal x="11" y="71" ref="master13a">
 			<destination zone="int_semos_master_house" ref="master13b" />
 			<implementation
-				class-name="games.stendhal.server.entity.mapstuff.portal.KeyedPortal">
-				<parameter name="key">odznaka wojownika XII</parameter>
+				class-name="games.stendhal.server.entity.mapstuff.portal.QuestCompletedPortal">
+				<parameter name="quest">main_task_12</parameter>
 				<parameter name="rejected">Aby przejść przez te drzwi musisz ukończyć zadanie na wojownika Faumonii dwunastego poziomu.</parameter>
 			</implementation>
 		</portal>
@@ -3425,8 +3368,8 @@ dorsz - 4
 		<portal x="17" y="71" ref="master14a">
 			<destination zone="int_semos_master_house" ref="master14b" />
 			<implementation
-				class-name="games.stendhal.server.entity.mapstuff.portal.KeyedPortal">
-				<parameter name="key">odznaka wojownika XIII</parameter>
+				class-name="games.stendhal.server.entity.mapstuff.portal.QuestCompletedPortal">
+				<parameter name="quest">main_task_13</parameter>
 				<parameter name="rejected">Aby przejść przez te drzwi musisz ukończyć zadanie na wojownika Faumonii trzynastego poziomu.</parameter>
 			</implementation>
 		</portal>
@@ -3437,8 +3380,8 @@ dorsz - 4
 		<portal x="11" y="82" ref="master15a">
 			<destination zone="int_semos_master_house" ref="master15b" />
 			<implementation
-				class-name="games.stendhal.server.entity.mapstuff.portal.KeyedPortal">
-				<parameter name="key">odznaka wojownika XIV</parameter>
+				class-name="games.stendhal.server.entity.mapstuff.portal.QuestCompletedPortal">
+				<parameter name="quest">main_task_14</parameter>
 				<parameter name="rejected">Aby przejść przez te drzwi musisz ukończyć zadanie na wojownika Faumonii czternastego poziomu.</parameter>
 			</implementation>
 		</portal>
@@ -3449,8 +3392,8 @@ dorsz - 4
 		<portal x="17" y="82" ref="master16a">
 			<destination zone="int_semos_master_house" ref="master16b" />
 			<implementation
-				class-name="games.stendhal.server.entity.mapstuff.portal.KeyedPortal">
-				<parameter name="key">odznaka wojownika XV</parameter>
+				class-name="games.stendhal.server.entity.mapstuff.portal.QuestCompletedPortal">
+				<parameter name="quest">main_task_15</parameter>
 				<parameter name="rejected">Aby przejść przez te drzwi musisz ukończyć zadanie na wojownika Faumonii pietnastego poziomu.</parameter>
 			</implementation>
 		</portal>
@@ -3461,8 +3404,8 @@ dorsz - 4
 		<portal x="11" y="93" ref="master17a">
 			<destination zone="int_semos_master_house" ref="master17b" />
 			<implementation
-				class-name="games.stendhal.server.entity.mapstuff.portal.KeyedPortal">
-				<parameter name="key">odznaka wojownika XVI</parameter>
+				class-name="games.stendhal.server.entity.mapstuff.portal.QuestCompletedPortal">
+				<parameter name="quest">main_task_16</parameter>
 				<parameter name="rejected">Aby przejść przez te drzwi musisz ukończyć zadanie na wojownika Faumonii szesnastego poziomu.</parameter>
 			</implementation>
 		</portal>
@@ -3474,8 +3417,8 @@ dorsz - 4
 		<portal x="17" y="93" ref="master18a">
 			<destination zone="int_semos_master_house" ref="master18b" />
 			<implementation
-				class-name="games.stendhal.server.entity.mapstuff.portal.KeyedPortal">
-				<parameter name="key">odznaka wojownika XVII</parameter>
+				class-name="games.stendhal.server.entity.mapstuff.portal.QuestCompletedPortal">
+				<parameter name="quest">main_task_17</parameter>
 				<parameter name="rejected">Aby przejść przez te drzwi musisz ukończyć zadanie na wojownika Faumonii siedemnastego poziomu.</parameter>
 			</implementation>
 		</portal>
@@ -3488,8 +3431,8 @@ dorsz - 4
 		<portal x="11" y="104" ref="master19a">
 			<destination zone="int_semos_master_house" ref="master19b" />
 			<implementation
-				class-name="games.stendhal.server.entity.mapstuff.portal.KeyedPortal">
-				<parameter name="key">odznaka wojownika XVIII</parameter>
+				class-name="games.stendhal.server.entity.mapstuff.portal.QuestCompletedPortal">
+				<parameter name="quest">main_task_18</parameter>
 				<parameter name="rejected">Aby przejść przez te drzwi musisz ukończyć zadanie na wojownika Faumonii osiemnastego poziomu.</parameter>
 			</implementation>
 		</portal>
@@ -3500,8 +3443,8 @@ dorsz - 4
 		<portal x="17" y="104" ref="master20a">
 			<destination zone="int_semos_master_house" ref="master20b" />
 			<implementation
-				class-name="games.stendhal.server.entity.mapstuff.portal.KeyedPortal">
-				<parameter name="key">odznaka wojownika XIX</parameter>
+				class-name="games.stendhal.server.entity.mapstuff.portal.QuestCompletedPortal">
+				<parameter name="quest">main_task_19</parameter>
 				<parameter name="rejected">Aby przejść przez te drzwi musisz ukończyć zadanie na wojownika Faumonii dziewiętnastego poziomu.</parameter>
 			</implementation>
 		</portal>
@@ -3512,8 +3455,8 @@ dorsz - 4
 		<portal x="11" y="115" ref="master21a">
 			<destination zone="int_semos_master_house" ref="master21b" />
 			<implementation
-				class-name="games.stendhal.server.entity.mapstuff.portal.KeyedPortal">
-				<parameter name="key">odznaka wojownika XX</parameter>
+				class-name="games.stendhal.server.entity.mapstuff.portal.QuestCompletedPortal">
+				<parameter name="quest">main_task_20</parameter>
 				<parameter name="rejected">Aby przejść przez te drzwi musisz ukończyć zadanie na wojownika Faumonii dwudziestego poziomu.</parameter>
 			</implementation>
 		</portal>
@@ -3524,8 +3467,8 @@ dorsz - 4
 		<portal x="17" y="115" ref="master22a">
 			<destination zone="int_semos_master_house" ref="master22b" />
 			<implementation
-				class-name="games.stendhal.server.entity.mapstuff.portal.KeyedPortal">
-				<parameter name="key">odznaka wojownika XXI</parameter>
+				class-name="games.stendhal.server.entity.mapstuff.portal.QuestCompletedPortal">
+				<parameter name="quest">main_task_21</parameter>
 				<parameter name="rejected">Aby przejść przez te drzwi musisz ukończyć zadanie na wojownika Faumonii dwudziestego-pierwszego poziomu.</parameter>
 			</implementation>
 		</portal>
@@ -3536,8 +3479,8 @@ dorsz - 4
 		<portal x="11" y="126" ref="master23a">
 			<destination zone="int_semos_master_house" ref="master23b" />
 			<implementation
-				class-name="games.stendhal.server.entity.mapstuff.portal.KeyedPortal">
-				<parameter name="key">odznaka wojownika XXII</parameter>
+				class-name="games.stendhal.server.entity.mapstuff.portal.QuestCompletedPortal">
+				<parameter name="quest">main_task_22</parameter>
 				<parameter name="rejected">Aby przejść przez te drzwi musisz ukończyć zadanie na wojownika Faumonii dwudziestego-drugiego poziomu.</parameter>
 			</implementation>
 		</portal>
@@ -3548,8 +3491,8 @@ dorsz - 4
 		<portal x="17" y="126" ref="master24a">
 			<destination zone="int_semos_master_house" ref="master24b" />
 			<implementation
-				class-name="games.stendhal.server.entity.mapstuff.portal.KeyedPortal">
-				<parameter name="key">odznaka wojownika XXIII</parameter>
+				class-name="games.stendhal.server.entity.mapstuff.portal.QuestCompletedPortal">
+				<parameter name="quest">main_task_23</parameter>
 				<parameter name="rejected">Aby przejść przez te drzwi musisz ukończyć zadanie na wojownika Faumonii dwudziestego-trzeciego poziomu.</parameter>
 			</implementation>
 		</portal>
@@ -3560,8 +3503,8 @@ dorsz - 4
 		<portal x="11" y="137" ref="master25a">
 			<destination zone="int_semos_master_house" ref="master25b" />
 			<implementation
-				class-name="games.stendhal.server.entity.mapstuff.portal.KeyedPortal">
-				<parameter name="key">odznaka wojownika XXIV</parameter>
+				class-name="games.stendhal.server.entity.mapstuff.portal.QuestCompletedPortal">
+				<parameter name="quest">main_task_24</parameter>
 				<parameter name="rejected">Aby przejść przez te drzwi musisz ukończyć zadanie na wojownika Faumonii dwudziestego-czwartego poziomu.</parameter>
 			</implementation>
 		</portal>
@@ -3572,8 +3515,8 @@ dorsz - 4
 		<portal x="17" y="137" ref="master26a">
 			<destination zone="int_semos_master_house" ref="master26b" />
 			<implementation
-				class-name="games.stendhal.server.entity.mapstuff.portal.KeyedPortal">
-				<parameter name="key">odznaka wojownika XXV</parameter>
+				class-name="games.stendhal.server.entity.mapstuff.portal.QuestCompletedPortal">
+				<parameter name="quest">main_task_25</parameter>
 				<parameter name="rejected">Aby przejść przez te drzwi musisz ukończyć zadanie na wojownika Faumonii dwudziestego-piątego poziomu.</parameter>
 			</implementation>
 		</portal>
@@ -3584,8 +3527,8 @@ dorsz - 4
 		<portal x="11" y="148" ref="master27a">
 			<destination zone="int_semos_master_house" ref="master27b" />
 			<implementation
-				class-name="games.stendhal.server.entity.mapstuff.portal.KeyedPortal">
-				<parameter name="key">odznaka wojownika XXVI</parameter>
+				class-name="games.stendhal.server.entity.mapstuff.portal.QuestCompletedPortal">
+				<parameter name="quest">main_task_26</parameter>
 				<parameter name="rejected">Aby przejść przez te drzwi musisz ukończyć zadanie na wojownika Faumonii dwudziestego-szóstego poziomu.</parameter>
 			</implementation>
 		</portal>
@@ -3596,8 +3539,8 @@ dorsz - 4
 		<portal x="17" y="148" ref="master28a">
 			<destination zone="int_semos_master_house" ref="master28b" />
 			<implementation
-				class-name="games.stendhal.server.entity.mapstuff.portal.KeyedPortal">
-				<parameter name="key">odznaka wojownika XXVII</parameter>
+				class-name="games.stendhal.server.entity.mapstuff.portal.QuestCompletedPortal">
+				<parameter name="quest">main_task_27</parameter>
 				<parameter name="rejected">Aby przejść przez te drzwi musisz ukończyć zadanie na wojownika Faumonii dwudziestego-siódmego poziomu.</parameter>
 			</implementation>
 		</portal>
@@ -3608,8 +3551,8 @@ dorsz - 4
 		<portal x="11" y="159" ref="master29a">
 			<destination zone="int_semos_master_house" ref="master29b" />
 			<implementation
-				class-name="games.stendhal.server.entity.mapstuff.portal.KeyedPortal">
-				<parameter name="key">odznaka wojownika XXVIII</parameter>
+				class-name="games.stendhal.server.entity.mapstuff.portal.QuestCompletedPortal">
+				<parameter name="quest">main_task_28</parameter>
 				<parameter name="rejected">Aby przejść przez te drzwi musisz ukończyć zadanie na wojownika Faumonii dwudziestego-ósmego poziomu.</parameter>
 			</implementation>
 		</portal>
@@ -3620,8 +3563,8 @@ dorsz - 4
 		<portal x="17" y="159" ref="master30a">
 			<destination zone="int_semos_master_house" ref="master30b" />
 			<implementation
-				class-name="games.stendhal.server.entity.mapstuff.portal.KeyedPortal">
-				<parameter name="key">odznaka wojownika XXIX</parameter>
+				class-name="games.stendhal.server.entity.mapstuff.portal.QuestCompletedPortal">
+				<parameter name="quest">main_task_29</parameter>
 				<parameter name="rejected">Aby przejść przez te drzwi musisz ukończyć zadanie na wojownika Faumonii dwudziestego-dziewiątego poziomu.</parameter>
 			</implementation>
 		</portal>

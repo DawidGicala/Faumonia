@@ -26,6 +26,19 @@ public final class ShopList {
 	static {
 		final ShopList shops = ShopList.get();
 		
+		// Miter buys surplus starter equipment; all prices are below retail.
+		shops.add("miterbuyback", "maczuga", 1);
+		shops.add("miterbuyback", "sztylecik", 1);
+		shops.add("miterbuyback", "peleryna", 2);
+		shops.add("miterbuyback", "skórzana zbroja", 5);
+		shops.add("miterbuyback", "skórzane spodnie", 3);
+		shops.add("miterbuyback", "skórzany hełm", 3);
+		shops.add("miterbuyback", "buty skórzane", 2);
+		shops.add("miterbuyback", "drewniana tarcza", 6);
+		shops.add("miterbuyback", "puklerz", 4);
+		shops.add("miterbuyback", "tarcza ćwiekowa", 8);
+		shops.add("miterbuyback", "hełm nabijany ćwiekami", 5);
+
 		shops.add("juhas", "zwój semos", 400);
 		shops.add("juhas", "zwój fado", 400);
 		shops.add("juhas", "zwój ados", 800);

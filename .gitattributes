@@ -1,0 +1,6 @@
+# Preserve executable script line endings across Windows and macOS/Linux.
+*.sh text eol=lf
+*.command text eol=lf
+*.bat text eol=crlf
+*.cmd text eol=crlf
+*.iss text eol=crlf

@@ -38,14 +38,15 @@ public class WaltNPC implements ZoneConfigurator {
 
 			@Override
 			protected void createDialog() {
+                games.stendhal.server.entity.npc.dialogue.HuntDialogueTopics.install(this);
 				addGreeting("Witaj, jak Ci mija dzień? Widziałeś te sfory pająków które ostatnio się zalęgły?");
 				addGoodbye("Dowidzenia, dziękuje za rozmowę.");
-				addHelp("Ta pajęcza sfora bywa problematyczna. Mój syn bardzo obawia się pajęczaków.");
-				addJob("Przydałaby mi się mała pomoc z tymi pajęczakami...");
+				addHelp("Mój syn boi się pająków, a ostatnio coraz trudniej go uspokoić. Jeśli chcesz pomóc, zapytaj o #zadanie - wskażę pajęczaki, z którymi trzeba się rozprawić.");
+				addJob("Najbardziej zajmuje mnie teraz bezpieczeństwo rodziny. Syn boi się pajęczaków, a ja nie chcę, żeby każdy jego spacer kończył się strachem. Jeśli chcesz pomóc, porozmawiajmy o zadaniu.");
 			}
 		};
 
-		WaltNPC.setDescription("Walt – milczący kowal o spojrzeniu jak topniejący lód. Podobno potrafi zmienić zwykłą ciupagę w coś... niepokojąco potężnego.");
+		WaltNPC.setDescription("Widzisz Walta z Ados. Zamiast patrzeć na przechodniów, co chwilę spogląda w stronę, z której mogą nadejść pająki.");
 		WaltNPC.setEntityClass("shopnpc2");
 		WaltNPC.setPosition(112, 73);
 		WaltNPC.setDirection(Direction.DOWN);

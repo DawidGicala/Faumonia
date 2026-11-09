@@ -52,6 +52,7 @@ public class UrzednikKirdnehNPC implements ZoneConfigurator {
 
 			@Override
 			protected void createDialog() {
+                games.stendhal.server.entity.npc.dialogue.CollectionDialogueTopics.install(this);
 
 				final Map<String, Integer> items = new HashMap<String, Integer>();
 				items.put("zwój kirdneh", BUYING_PRICE);
@@ -59,14 +60,14 @@ public class UrzednikKirdnehNPC implements ZoneConfigurator {
 				new SellerAdder().addSeller(this, new QuestCompletedSellerBehaviour(QUEST_SLOT, "Sprzedaje zwoje do miasta tylko zasłużonym mieszkańcom Kirdneh.", items));
 				// for quest see games.stendhal.server.maps.quest.HelpMrsYeti
 				addGreeting("Dzień dobry. Witaj w urzędzie miasta Kirdneh.");
-				addJob("Aktualnie nie mamy żadnego zadania urzędowego. Mieszkańcy miasta Kirdneh często potrzebują kogoś do pomocy, powinieneś zapytać ich o #zadanie.");
+				addJob("Sprawdzam, kto pomógł mieszkańcom Kirdneh i zasługuje na oficjalne uznanie. Po zakończeniu wymaganych spraw pozostaje jeszcze jedna dostawa. Zasłużonym mieszkańcom sprzedaję zwoje do naszego miasta.");
 				addHelp("Miasto Kirdneh znajduje się w południowej części Faumonii w pobliżu lasu.");				
 				addGoodbye();
 			}
 		};
 
 		Urzednik.setEntityClass("urzednikkirdnehnpc");
-		Urzednik.setDescription("Oto Urzędnik Kirdneh. Powinieneś z nim porozmawiać i zapytać o zadanie.");
+		Urzednik.setDescription("Widzisz urzędnika Kirdneh. Uważnie słucha spraw mieszkańców i sprawdza ich zasługi dla miasta.");
 		Urzednik.setPosition(8, 3);
 		Urzednik.initHP(100);
 		zone.add(Urzednik);

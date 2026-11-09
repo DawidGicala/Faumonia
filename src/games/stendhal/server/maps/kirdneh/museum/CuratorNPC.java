@@ -59,12 +59,13 @@ public class CuratorNPC implements ZoneConfigurator {
 
 			@Override
 			protected void createDialog() {
+                games.stendhal.server.entity.npc.dialogue.CollectionDialogueTopics.install(this);
 				addGreeting("Witam w Muzeum Kirdneh.");
-				addJob("Jestem kuratorem tego muzeum. Oznacza to, że ja organizuję wystawy i szukam nowych #eksponatów.");
-				addHelp("To miejsce jest na rzadkie artefakty i specjalne #eksponaty.");
+				addJob("Opiekuję się muzeum Kirdneh i przygotowuję wystawy. Nowe eksponaty pomagają opowiedzieć o miejscach, których wielu mieszkańców nigdy nie odwiedzi. Dlatego zlecam podróżnikom poszukiwanie konkretnych okazów.");
+				addHelp("Nasze #eksponaty pokazują, jak różnorodna jest Faumonia. Szukam konkretnych okazów do wystawy, dlatego przed wyprawą zapytaj o #zadanie. Powiem ci, jakiego przedmiotu właśnie potrzebujemy.");
 				addReply(Arrays.asList("exhibits", "eksponaty", "eksponatów"),"Być może będziesz mieć dryg do wyszukiwania przedmiotów i chciałbyś zrobić #zadanie dla mnie.");
 				// remaining behaviour defined in games.stendhal.server.maps.quests.WeeklyItemQuest
-				addGoodbye("Dowidzenia. Miło się z tobą rozmawiało.");
+				addGoodbye("Do zobaczenia. Zajrzyj jeszcze do naszych eksponatów, zanim ruszysz dalej.");
 			}
 			
 			protected void onGoodbye(RPEntity player) {
@@ -76,7 +77,7 @@ public class CuratorNPC implements ZoneConfigurator {
 		npc.setPosition(2, 38);
 		npc.setDirection(Direction.RIGHT);
 		npc.initHP(100);
-		npc.setDescription("Oto Hazel, kustosz muzeum Kirdneh.");
+		npc.setDescription("Widzisz Hazel, kustoszkę muzeum Kirdneh. Między eksponatami porusza się z troską o każdy szczegół wystawy.");
 		zone.add(npc);
 	}
 }

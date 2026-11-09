@@ -52,15 +52,16 @@ public class HousewifeNPC implements ZoneConfigurator {
 
 			@Override
 			protected void createDialog() {
-				addGreeting("Witaj młody bohaterze.");
-				addJob("Jestem gospodynią domową.");
-				addHelp("Uwielbiam pomagać dla Landera. Jego kanapki są wspaniałe! Czy wiesz, że szuka pomocnika?");
-				addGoodbye();
+                addReply("tematy", "Możemy wrócić do sprawy piwnicy albo porozmawiać o domu i zapasach. Miotłę na razie mam pod ręką.");
+				addGreeting("Witaj, wejdź śmiało. Tylko zerknij pod nogi - wolę nie mieć niespodziewanych gości przy zapasach.");
+				addJob("Dbam o ten dom i pilnuję, żeby zapasy się nie marnowały. Z kurzem poradzę sobie miotłą, ale szczury to zupełnie inna sprawa. Na sam szelest za schodami robi mi się nieswojo.");
+                addHelp("Zajrzyj do Leandera w piekarni, jeśli chcesz przygotować kanapki na drogę. Potrzebuje chleba, sera, szynki i sałaty, a z takich zapasów potrafi zrobić porządny posiłek. Ja lubię mieć jedzenie pod ręką, o ile szkodniki nie dobiorą się do niego pierwsze.");
+				addGoodbye("Do widzenia. I uważaj, co biega pod nogami!");
 			}
 		};
 
 		npc.setEntityClass("welcomernpc");
-		npc.setDescription("Oto Eonna. Jest wspaniałą gospodynią domową, która panicznie boi się szczurów!");
+		npc.setDescription("Widzisz Eonnę, gospodynię z domu obok piekarni w Semos. Miotłę trzyma z gotowością, która wiele mówi o jej stosunku do szczurów.");
 		npc.setPosition(4, 13);
 		npc.initHP(100);
 		zone.add(npc);

@@ -43,12 +43,14 @@ public class JJNPC implements ZoneConfigurator {
 
 			@Override
 			protected void createDialog() {
+                games.stendhal.server.entity.npc.dialogue.HuntDialogueTopics.install(this);
+                addJob("Zajmuję się wsparciem naszej armii przeciw madaramom. Dobrze przygotowany najemnik potrafi osłabić ich oddziały, zanim problem dotrze pod miejskie mury.");
 				addGreeting("Witaj.");
 				addGoodbye("Na razie.");
 			}
 		};
 
-		elemental.setDescription("Oto JJ. Wygląda na doświadczonego żołnierza.");
+		elemental.setDescription("Widzisz JJ w koszarach Ados. Doświadczony żołnierz słucha uważnie i odpowiada konkretnie.");
 		elemental.setEntityClass("oldheronpc");
 		elemental.setPosition(45, 38);
 		elemental.setDirection(Direction.DOWN);

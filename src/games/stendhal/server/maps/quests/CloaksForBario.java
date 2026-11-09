@@ -74,7 +74,7 @@ import java.util.List;
  * <li> None.</li>
  * </ul>
  */
-public class CloaksForBario extends AbstractQuest {
+public class CloaksForBario extends AbstractQuest implements games.stendhal.server.core.rp.quest.NativeCollectionDetails {
 
 	private static final int REQUIRED_CLOAKS = 10;
 
@@ -89,51 +89,61 @@ public class CloaksForBario extends AbstractQuest {
 		final SpeakerNPC npc = npcs.get("Bario");
 
 		// player says hi before starting the quest
-		npc.add(
-				ConversationStates.IDLE,
-				ConversationPhrases.GREETING_MESSAGES,
-				new AndCondition(new GreetingMatchesNameCondition(npc.getName()),
+		npc.add(ConversationStates.IDLE,
+            ConversationPhrases.GREETING_MESSAGES,
+            new AndCondition(new GreetingMatchesNameCondition(npc.getName()),
 						new QuestNotStartedCondition(QUEST_SLOT)),
-				ConversationStates.ATTENDING,
-				"Hej! Jak się tutaj dostałeś? Co zrobiłeś? Ha. Cóż jestem Bario. Przypuszczam, że nie zrobiłbyś dla mnie drobnego #'zadania'.",
-				null);
+            ConversationStates.ATTENDING,
+            "Hej, ciszej! Jestem Bario i wolę, żeby krasnale nie wiedziały, gdzie się zaszyłem. Skoro już tu jesteś, może pomożesz mi z pewnym zimnym kłopotem?",
+            null);
+        // Resume the native stage without changing its guards or actions.
+        npc.add(ConversationStates.ATTENDING,
+            "dostawa",
+            new AndCondition(new games.stendhal.server.entity.npc.condition.AlwaysTrueCondition(),
+						new QuestNotStartedCondition(QUEST_SLOT)),
+            ConversationStates.ATTENDING,
+            "Hej, ciszej! Jestem Bario i wolę, żeby krasnale nie wiedziały, gdzie się zaszyłem. Skoro już tu jesteś, może pomożesz mi z pewnym zimnym kłopotem?",
+            null);
 
 		// player is willing to help
 		npc.add(ConversationStates.ATTENDING,
-				ConversationPhrases.QUEST_MESSAGES,
-				new QuestNotStartedCondition(QUEST_SLOT),
-				ConversationStates.QUEST_OFFERED, 
-				"Nigdy nie zamierzam wyjść na górę, ponieważ ukradłem beczkę piwa należącą do krasnali. Tutaj jest strasznie zimno... Pomożesz mi?",
-				null);
+            ConversationPhrases.QUEST_MESSAGES,
+            new QuestNotStartedCondition(QUEST_SLOT),
+            ConversationStates.QUEST_OFFERED,
+            "Ukradłem krasnalom beczkę piwa i teraz nie śpieszę się wracać na górę. Tutaj jednak chłód wciska się w każdą szczelinę. Przyniesiesz mi płaszcze, żebym nie zamarzł w tej kryjówce?",
+            null);
 
 		// player should already be getting cloaks
 		npc.add(ConversationStates.ATTENDING,
-				ConversationPhrases.QUEST_MESSAGES,
-				new QuestActiveCondition(QUEST_SLOT),
-				ConversationStates.ATTENDING,
-				"Obiecałeś, że przyniesiesz mi lazurowe płaszcze elfickie. Pamiętasz?",
-				null);
+            ConversationPhrases.QUEST_MESSAGES,
+            new QuestActiveCondition(QUEST_SLOT),
+            ConversationStates.ATTENDING,
+            "Pod tymi płaszczami robi się już cieplej, ale wciąż czuję chłód. Przynieś resztę lazurowych płaszczy elfickich, a może wreszcie przestanę szczękać zębami.",
+            null);
 
 		// player has already finished the quest
 		npc.add(ConversationStates.ATTENDING,
-				ConversationPhrases.QUEST_MESSAGES,
-				new QuestCompletedCondition(QUEST_SLOT),
-				ConversationStates.ATTENDING,
-				"Nie mam żadnego zadania dla Ciebie.", null);
+            ConversationPhrases.QUEST_MESSAGES,
+            new QuestCompletedCondition(QUEST_SLOT),
+            ConversationStates.ATTENDING,
+            "Nie mam żadnego zadania dla Ciebie.",
+            null);
 
 		// player is willing to help
 		npc.add(ConversationStates.QUEST_OFFERED,
-				ConversationPhrases.YES_MESSAGES, null,
-				ConversationStates.ATTENDING,
-				"Super! Potrzebuję lazurowych płaszczy elfickich jeżeli chcę przeżyć zimę. Przynieś mi dziesięć, a dam Ci nagrodę. Powinieneś szukać ich u mieszkańców miasta Nalwor.",
-				new SetQuestAndModifyKarmaAction(QUEST_SLOT, Integer.toString(REQUIRED_CLOAKS), 5.0));
+            ConversationPhrases.YES_MESSAGES,
+            new games.stendhal.server.entity.npc.condition.QuestNotStartedCondition(QUEST_SLOT),
+            ConversationStates.ATTENDING,
+            "Potrzebuję dziesięciu lazurowych płaszczy elfickich, takich jak te spotykane w Nalwor. Przynoś je po jednym; każda kolejna warstwa osłoni mnie od chłodu. Za pełną dostawę oddam ci przygotowany ekwipunek i zapasy.",
+            new SetQuestAndModifyKarmaAction(QUEST_SLOT, Integer.toString(REQUIRED_CLOAKS), 5.0));
 
 		// player is not willing to help
-		npc.add(ConversationStates.QUEST_OFFERED, 
-				ConversationPhrases.NO_MESSAGES, null,
-				ConversationStates.ATTENDING,
-				"Och nie... Będę miał kłopoty...",
-				new SetQuestAndModifyKarmaAction(QUEST_SLOT, "rejected", -5.0));
+		npc.add(ConversationStates.QUEST_OFFERED,
+            ConversationPhrases.NO_MESSAGES,
+            new games.stendhal.server.entity.npc.condition.QuestNotStartedCondition(QUEST_SLOT),
+            ConversationStates.ATTENDING,
+            "Och nie... Będę miał kłopoty...",
+            new SetQuestAndModifyKarmaAction(QUEST_SLOT, "rejected", -5.0));
 	}
 
 	private void step_2() {
@@ -144,39 +154,63 @@ public class CloaksForBario extends AbstractQuest {
 		final SpeakerNPC npc = npcs.get("Bario");
 
 		// player returns while quest is still active
-		npc.add(ConversationStates.IDLE, ConversationPhrases.GREETING_MESSAGES,
-				new AndCondition(new GreetingMatchesNameCondition(npc.getName()),
+		npc.add(ConversationStates.IDLE,
+            ConversationPhrases.GREETING_MESSAGES,
+            new AndCondition(new GreetingMatchesNameCondition(npc.getName()),
 						new QuestActiveCondition(QUEST_SLOT)),
-				ConversationStates.QUESTION_1, null,
-				new ChatAction() {
+            ConversationStates.QUESTION_1,
+            null,
+            new ChatAction() {
 					public void fire(final Player player, final Sentence sentence, final EventRaiser raiser) {
-						raiser.say("Witaj znowu! Wciąż potrzebuję "
-							+ player.getQuest(QUEST_SLOT)
-							+ " lazurowy płaszcz elficki "
-							+ Grammar.plnoun(
-									MathHelper.parseInt(player.getQuest(QUEST_SLOT)),
-									"cloak") + ". Masz jakiś dla mnie?");
+						raiser.say("Brakuje mi jeszcze lazurowych płaszczy elfickich: " + player.getQuest(QUEST_SLOT) + ". Tymi, które przyniosłeś wcześniej, już się okryłem. Oddasz mi teraz kolejny?");
+					}
+				});
+        // Resume the native stage without changing its guards or actions.
+        npc.add(ConversationStates.ATTENDING,
+            "dostawa",
+            new AndCondition(new games.stendhal.server.entity.npc.condition.AlwaysTrueCondition(),
+						new QuestActiveCondition(QUEST_SLOT)),
+            ConversationStates.QUESTION_1,
+            null,
+            new ChatAction() {
+					public void fire(final Player player, final Sentence sentence, final EventRaiser raiser) {
+						raiser.say("Brakuje mi jeszcze lazurowych płaszczy elfickich: " + player.getQuest(QUEST_SLOT) + ". Tymi, które przyniosłeś wcześniej, już się okryłem. Oddasz mi teraz kolejny?");
 					}
 				});
 
 		// player returns after finishing the quest
-		npc.add(ConversationStates.IDLE, ConversationPhrases.GREETING_MESSAGES,
-				new AndCondition(new GreetingMatchesNameCondition(npc.getName()),
+		npc.add(ConversationStates.IDLE,
+            ConversationPhrases.GREETING_MESSAGES,
+            new AndCondition(new GreetingMatchesNameCondition(npc.getName()),
 						new QuestCompletedCondition(QUEST_SLOT)),
-				ConversationStates.ATTENDING,
-				"Witaj! Jeszcze raz dziękuję za te płaszcze.", null);
+            ConversationStates.ATTENDING,
+            "Witaj! Jeszcze raz dziękuję za te płaszcze.",
+            null);
+        // Resume the native stage without changing its guards or actions.
+        npc.add(ConversationStates.ATTENDING,
+            "dostawa",
+            new AndCondition(new games.stendhal.server.entity.npc.condition.AlwaysTrueCondition(),
+						new QuestCompletedCondition(QUEST_SLOT)),
+            ConversationStates.ATTENDING,
+            "Witaj! Jeszcze raz dziękuję za te płaszcze.",
+            null);
 
 		// player says he doesn't have any blue elf cloaks with him
-		npc.add(ConversationStates.QUESTION_1, ConversationPhrases.NO_MESSAGES, null,
-				ConversationStates.ATTENDING, "Niedobrze.", null);
+		npc.add(ConversationStates.QUESTION_1,
+            ConversationPhrases.NO_MESSAGES,
+            null,
+            ConversationStates.ATTENDING,
+            "Niedobrze.",
+            null);
 
 		// player says he has a blue elf cloak with him but he needs to bring more than one still
 		// could also have used GreaterThanCondition for Quest State but this is okay, note we can only get to question 1 if we were active
 		npc.add(ConversationStates.QUESTION_1,
-				ConversationPhrases.YES_MESSAGES, 
-				new AndCondition(new QuestNotInStateCondition(QUEST_SLOT, "1"), new PlayerHasItemWithHimCondition("lazurowy płaszcz elficki")),
-				ConversationStates.QUESTION_1, null,
-				new MultipleActions(
+            ConversationPhrases.YES_MESSAGES,
+            new AndCondition(new QuestNotInStateCondition(QUEST_SLOT, "1"), new PlayerHasItemWithHimCondition("lazurowy płaszcz elficki")),
+            ConversationStates.QUESTION_1,
+            null,
+            new MultipleActions(
 						new DropItemAction("lazurowy płaszcz elficki"),
 						new ChatAction() {
 							public void fire(final Player player, final Sentence sentence, final EventRaiser raiser) {
@@ -186,9 +220,7 @@ public class CloaksForBario extends AbstractQuest {
 
 								player.setQuest(QUEST_SLOT,
 										Integer.toString(toBring));
-								raiser.say("Bardzo dziękuję! Masz więcej? Wciąż potrzebuję "
-										+ Grammar.quantityplnoun(toBring,
-												"cloak", "jeden") + ".");
+								raiser.say("Przyjmuję ten egzemplarz i odliczam go od dostawy. Pozostało: " + toBring + ". Chcesz przekazać kolejną sztukę?");
 
 							}
 						}));
@@ -210,18 +242,18 @@ public class CloaksForBario extends AbstractQuest {
 		reward.add(new SetQuestAction(QUEST_SLOT, "done"));
 		reward.add(new IncreaseKarmaAction(25));
 		npc.add(ConversationStates.QUESTION_1,
-				ConversationPhrases.YES_MESSAGES, 
-				new AndCondition(new QuestInStateCondition(QUEST_SLOT, "1"), new PlayerHasItemWithHimCondition("lazurowy płaszcz elficki")),
-				ConversationStates.ATTENDING,
-				"Dziękuję bardzo! Mam teraz odpowiednio dużo płaszczy, aby przetrwać zimę. Weź tę eliksiry, ekwipunek i moje najlepsze rękawice jako nagrodę.",
-				new MultipleActions(reward));
+            ConversationPhrases.YES_MESSAGES,
+            new AndCondition(new QuestInStateCondition(QUEST_SLOT, "1"), new PlayerHasItemWithHimCondition("lazurowy płaszcz elficki")),
+            ConversationStates.ATTENDING,
+            "Teraz mam dość płaszczy, żeby przetrwać ten chłód. Przyjmij moje rękawice, złoty ekwipunek i eliksiry w podziękowaniu. I jeśli ktoś zapyta o beczkę piwa, najlepiej zmień temat.",
+            new games.stendhal.server.entity.npc.action.QuestFeeAction(QUEST_SLOT, new MultipleActions(reward)));
 		
 		npc.add(ConversationStates.QUESTION_1,
-				ConversationPhrases.YES_MESSAGES, 
-				new NotCondition(new PlayerHasItemWithHimCondition("lazurowy płaszcz elficki")),
-				ConversationStates.ATTENDING, 
-				"Naprawdę? Nie widzę żadnego...", 
-				null);
+            ConversationPhrases.YES_MESSAGES,
+            new NotCondition(new PlayerHasItemWithHimCondition("lazurowy płaszcz elficki")),
+            ConversationStates.ATTENDING,
+            "Naprawdę? Nie widzę żadnego...",
+            null);
 	}
 
 	@Override
@@ -233,28 +265,14 @@ public class CloaksForBario extends AbstractQuest {
 		step_3();
 		fillQuestInfo(
 				"Płaszcze dla Bario",
-				"Bario, potrzebuję płaszczy aby ogrzać się.",
+				"Bario ukrywa się w chłodnych podziemiach Ados i marznie coraz bardziej. Dowiedz się, jakich płaszczy potrzebuje, i pomóż mu osłonić się przed zimnem.",
 				false);
 	}
 	
 	@Override
 	public List<String> getHistory(final Player player) {
-		final List<String> res = new ArrayList<String>();
-		if (!player.hasQuest(QUEST_SLOT)) {
-			return res;
-		}
-		res.add("Spotkałem zmarźniętego krasnala, który ukrywa się pod ziemią w Ados Outside, w okolicach stołecznego zoo. Poprosił mnie, żebym przyniósł mu 10 lazurowych płaszczy elfickich. Powinienem szukać ich w mieście Nalwor.");
-		final String questState = player.getQuest(QUEST_SLOT);
-		if (questState.equals("rejected")) {
-			res.add("Nie chcę, pomóc Bario..");
-		} else if (!questState.equals("done")) {
-			int cloaks = MathHelper.parseIntDefault(player.getQuest(QUEST_SLOT),  REQUIRED_CLOAKS);
-			res.add("Muszę przynieść Bario " + Grammar.quantityplnoun(cloaks, "lazurowy płaszcz elficki", "one") + "." );
-		} else {
-			res.add("Bario dał mi ekwipunek i bardzo cenne rękawice w zamian za płaszcze! 	W nagrodę za ukończenie zadania otrzymałem: 50.000 pkt doświadczenia, 10.000 pkt ataku, 10.000 pkt obrony, 25 pkt karmy, złoty hełm, złotą zbroję, złote spodnie, buty złote, złotą tarczę, złoty płaszcz, rękawice bario i 100 dużych eliksirów");
-		}
-		return res;
-	}
+        return games.stendhal.server.core.rp.quest.CollectionQuestProgress.history(this, player);
+    }
 	
 	@Override
 	public String getName() {
@@ -269,4 +287,11 @@ public class CloaksForBario extends AbstractQuest {
 	public String getNPCName() {
 		return "Bario";
 	}
+
+
+
+    public String getCollectionKind(){return "count";}
+    public java.util.Map<String,Integer> getCollectionItems(){return games.stendhal.server.core.rp.quest.JourneyQuestProgress.items("lazurowy płaszcz elficki",REQUIRED_CLOAKS);}
+    public String getCollectionHint(){return "Bario potrzebuje dziesięciu lazurowych płaszczy elfickich. Przyjmuje po jednym egzemplarzu, a przekazane płaszcze pozostają odliczone. Inny rodzaj płaszcza nie zastąpi zamówienia.";}
+    
 }

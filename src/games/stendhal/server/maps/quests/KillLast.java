@@ -71,7 +71,7 @@ import marauroa.common.Pair;
  * </ul>
  */
 
-public class KillLast extends AbstractQuest {
+public class KillLast extends AbstractQuest implements games.stendhal.server.core.rp.quest.NativeHuntDetails {
 
 	private static final String QUEST_SLOT = "kill_last";
 	private static final int WEEK_IN_MINUTES = MathHelper.MINUTES_IN_ONE_HOUR * 24 * 7 * 8;
@@ -85,55 +85,47 @@ public class KillLast extends AbstractQuest {
 		final SpeakerNPC npc = npcs.get("Fag");
 
 		npc.add(ConversationStates.ATTENDING,
-				ConversationPhrases.QUEST_MESSAGES, 
-				new QuestNotStartedCondition(QUEST_SLOT),
-				ConversationStates.QUEST_OFFERED,
-				"Mam dla ciebie wyzwanie prawdziwego wojownika. "
-				+ "Zainteresowany?",
-				null);
+                ConversationPhrases.QUEST_MESSAGES,
+                new QuestNotStartedCondition(QUEST_SLOT),
+                ConversationStates.QUEST_OFFERED,
+                "Prawdziwe wyzwanie zaczyna się tam, gdzie sam widok przeciwnika każe zawrócić. Mam dla ciebie wyprawę przeciw wielkim kostuchom i najgroźniejszym odmianom śmierci. Chcesz poznać własne granice?",
+                null);
 
 		npc.add(ConversationStates.ATTENDING,
-				ConversationPhrases.QUEST_MESSAGES, 
-				new AndCondition(new QuestStateStartsWithCondition(QUEST_SLOT,"done"),
+                ConversationPhrases.QUEST_MESSAGES,
+                new AndCondition(new QuestStateStartsWithCondition(QUEST_SLOT,"done"),
 						 new TimePassedCondition(QUEST_SLOT, 1, WEEK_IN_MINUTES)),
-				ConversationStates.QUEST_OFFERED,
-				"Błąd gry. Zgłoś go administracji.",
-				null);
+                ConversationStates.QUEST_OFFERED,
+                "Minął czas odpoczynku między próbami. Jeśli nadal szukasz wyzwania, powierzam ci tę samą listę groźnych przeciwników.",
+                null);
 
 		npc.add(ConversationStates.ATTENDING,
-				ConversationPhrases.QUEST_MESSAGES, 
-				new AndCondition(new QuestStateStartsWithCondition(QUEST_SLOT,"done"),
+                ConversationPhrases.QUEST_MESSAGES,
+                new AndCondition(new QuestStateStartsWithCondition(QUEST_SLOT,"done"),
 						 new NotCondition(new TimePassedCondition(QUEST_SLOT, 1, WEEK_IN_MINUTES))),
-				ConversationStates.ATTENDING,
-				"Juz niczego nie potrzebuje.",
-				null);
+                ConversationStates.ATTENDING,
+                "Tę próbę masz już za sobą. Kolejna będzie możliwa po ośmiu tygodniach od jej rozliczenia.",
+                null);
 
-		final Map<String, Pair<Integer, Integer>> toKill = new TreeMap<String, Pair<Integer, Integer>>();
-		toKill.put("kostucha wielka",new Pair<Integer, Integer>(0,20));
-		toKill.put("kostucha różowa wielka",new Pair<Integer, Integer>(0,20));
-		toKill.put("kostucha złota wielka",new Pair<Integer, Integer>(0,10));
-		toKill.put("czarna śmierć",new Pair<Integer, Integer>(0,20));
-		toKill.put("srebrna śmierć",new Pair<Integer, Integer>(0,10));
-		toKill.put("złota śmierć",new Pair<Integer, Integer>(0,5));
+		final Map<String, Pair<Integer, Integer>> toKill = getDialogueHuntTargets(null);
 
 		final List<ChatAction> actions = new LinkedList<ChatAction>();
 		actions.add(new SetQuestAction(QUEST_SLOT, "start"));
 		actions.add(new StartRecordingKillsAction(QUEST_SLOT, 1, toKill));
 		
 		npc.add(ConversationStates.QUEST_OFFERED,
-				ConversationPhrases.YES_MESSAGES,
-				null,
-				ConversationStates.ATTENDING,
-				"Doskonale. Idź i zabij: 20 kostuch wielkich, 20 kostuch różowych wielkich, 10 kostuch złotych wielkich, 20 czarnych śmierci, 10 srebrnych śmierci i 5 złotych śmierci.",
-				new MultipleActions(actions));
+                ConversationPhrases.YES_MESSAGES,
+                null,
+                ConversationStates.ATTENDING,
+                "Nie pomyl zwykłych kostuch z wielkimi. Każda odmiana ma własny cel, a złota śmierć wieńczy tę listę; wróć dopiero z kompletnym meldunkiem." + "\nCele: " + games.stendhal.server.core.rp.quest.HuntQuestProgress.targetText(this,null) + ".",
+                new MultipleActions(actions));
 
-		npc.add(ConversationStates.QUEST_OFFERED, 
-				ConversationPhrases.NO_MESSAGES, 
-				null,
-				ConversationStates.ATTENDING,
-				"Trudno. "
-				+ "Może ktoś inny mi pomoże. ",
-				new SetQuestAction(QUEST_SLOT, "rejected"));
+		npc.add(ConversationStates.QUEST_OFFERED,
+                ConversationPhrases.NO_MESSAGES,
+                null,
+                ConversationStates.ATTENDING,
+                "Rozsądny wojownik wie, kiedy odłożyć walkę. Wróć do mnie, gdy będziesz przygotowany.",
+                new SetQuestAction(QUEST_SLOT, "rejected"));
 	}
 
 	private void step_2() {
@@ -167,25 +159,23 @@ public class KillLast extends AbstractQuest {
 		LinkedList<String> triggers = new LinkedList<String>();
 		triggers.addAll(ConversationPhrases.FINISH_MESSAGES);
 		triggers.addAll(ConversationPhrases.QUEST_MESSAGES);		
-		npc.add(ConversationStates.ATTENDING, 
-				triggers,
-				new AndCondition(
+		npc.add(ConversationStates.ATTENDING,
+                triggers,
+                new AndCondition(
 						new QuestInStateCondition(QUEST_SLOT, 0, "start"),
 						new KilledForQuestCondition(QUEST_SLOT, 1)),
-				ConversationStates.ATTENDING, 
-				"Widzę, że w końcu zabiłeś potwory "
-				+ "troche to trwało...",
-				new MultipleActions(actions));
+                ConversationStates.ATTENDING,
+                "Próba została ukończona, a twoje zwycięstwa mówią więcej niż przechwałki. Bilet śmierci, zwoje i skrzynie należą do ciebie; korzystaj z nich równie rozważnie, jak z broni.",
+                new MultipleActions(actions));
 				
-		npc.add(ConversationStates.ATTENDING, 
-				triggers,
-				new AndCondition(
+		npc.add(ConversationStates.ATTENDING,
+                triggers,
+                new AndCondition(
 						new QuestInStateCondition(QUEST_SLOT, 0, "start"),
 						new NotCondition(new KilledForQuestCondition(QUEST_SLOT, 1))),
-				ConversationStates.ATTENDING, 
-				"Jeszcze nie zabiłeś wszystkich potworów. "
-				+ "Idź i zabij: 20 kostuch wielkich, 20 kostuch różowych wielkich, 10 kostuch złotych wielkich, 20 czarnych śmierci, 10 srebrnych śmierci i 5 złotych śmierci.",
-				null);
+                ConversationStates.ATTENDING,
+                null,
+                (p, sentence, raiser) -> raiser.say("Próba nadal trwa. Sprawdź dokładne odmiany przeciwników, bo podobna nazwa nie oznacza tego samego celu." + "\n" + games.stendhal.server.core.rp.quest.HuntQuestProgress.progressText(KillLast.this,p)));
 	}
 
 	@Override
@@ -193,7 +183,7 @@ public class KillLast extends AbstractQuest {
 		super.addToWorld();
 		fillQuestInfo(
 				"Wyzwanie Wojownika",
-				"Fag, mieszkający w namiocie na pustyni szuka kogoś kto zabije hordę potworów.",
+				"Fag przy pustynnej piramidzie szuka doświadczonego wojownika do dużego polowania. To jego rozległa próba walki, odrębna od krótkiego zwiadu przed wyprawą Mistrza XXV.",
 				false);
 		step_1();
 		step_2();
@@ -202,19 +192,8 @@ public class KillLast extends AbstractQuest {
 	
 	@Override
 	public List<String> getHistory(final Player player) {
-			final List<String> res = new ArrayList<String>();
-			if (!player.hasQuest(QUEST_SLOT)) {
-				return res;
-			}
-			if (!isCompleted(player)) {
-				res.add("Muszę zabić: 20 kostuch wielkich, 20 kostuch różowych wielkich, 10 kostuch złotych wielkich, 20 czarnych śmierci, 10 srebrnych śmierci i 5 złotych śmierci.");
-			} else if(isRepeatable(player)){
-				res.add("Na tą chwilę niczego więcej nie potrzebuję. Wróć w przyszłości.");
-			} else {
-				res.add("Pomogłem Fagowi i zabiłem potwory.	W nagrodę za ukończenie zadania otrzymałem: 5.000.000 pkt doświadczenia, 60.000 pkt ataku, 80.000 pkt obrony, bilet śmierci, anielski zwój i smoczy zwój.");
-			}
-			return res;
-	}
+        return games.stendhal.server.core.rp.quest.HuntQuestProgress.history(this,player);
+    }
 
 
 	@Override
@@ -248,4 +227,18 @@ public class KillLast extends AbstractQuest {
 		return Region.SEMOS_SURROUNDS;
 	}
 	
+
+    @Override public java.util.Map<String, Pair<Integer,Integer>> getDialogueHuntTargets(Player player) {
+        final Map<String, Pair<Integer, Integer>> toKill = new TreeMap<String, Pair<Integer, Integer>>();
+		toKill.put("kostucha wielka",new Pair<Integer, Integer>(0,20));
+		toKill.put("kostucha różowa wielka",new Pair<Integer, Integer>(0,20));
+		toKill.put("kostucha złota wielka",new Pair<Integer, Integer>(0,10));
+		toKill.put("czarna śmierć",new Pair<Integer, Integer>(0,20));
+		toKill.put("srebrna śmierć",new Pair<Integer, Integer>(0,10));
+		toKill.put("złota śmierć",new Pair<Integer, Integer>(0,5));
+        return java.util.Collections.unmodifiableMap(toKill);
+    }
+    @Override public int getDialogueHuntTotal(Player player) { return 0; }
+    @Override public int getDialogueKillIndex() { return 1; }
+    @Override public String getDialogueHuntHint(Player player) { return "Fag wymaga trzech odmian wielkich kostuch oraz czarnej, srebrnej i złotej śmierci. Liczą się dokładnie te odmiany; mniejsze kostuchy nie zastąpią wielkich."; }
 }

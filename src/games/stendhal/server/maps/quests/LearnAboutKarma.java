@@ -12,6 +12,8 @@
  ***************************************************************************/
 package games.stendhal.server.maps.quests;
 
+import games.stendhal.server.entity.npc.action.DialogueRewardAction;
+
 import games.stendhal.common.parser.Sentence;
 import games.stendhal.server.entity.npc.ChatAction;
 import games.stendhal.server.entity.npc.ConversationPhrases;
@@ -87,7 +89,7 @@ public class LearnAboutKarma extends AbstractQuest {
 			ConversationPhrases.QUEST_MESSAGES, 
 			new QuestNotCompletedCondition(QUEST_SLOT),
 			ConversationStates.QUEST_OFFERED, 
-			"Czy jesteś tym, który lubi pomagać innym?", null);
+			"Mieszam lekarstwa, ale nie każdą ranę leczy zawartość flaszy. Uczynki również zostawiają po sobie ślad, który nazywamy karmą. Starasz się pomagać innym?", null);
 
 		npc.add(ConversationStates.ATTENDING,
 			ConversationPhrases.QUEST_MESSAGES,
@@ -101,22 +103,22 @@ public class LearnAboutKarma extends AbstractQuest {
 		npc.add(ConversationStates.QUEST_OFFERED,
 			ConversationPhrases.YES_MESSAGES, null,
 			ConversationStates.ATTENDING,
-			"Wyśmienicie! Musi cię otaczać dobra #karma.",
+			"Dobrze słyszeć, że dostrzegasz cudze kłopoty. Pokażę ci wskaźnik karmy, żebyś mógł obserwować, jak zmieniają ją twoje uczynki. Jeśli chcesz, wyjaśnię ci teraz, co oznacza #karma.",
 			new MultipleActions(
-					new IncreaseKarmaAction(5.0), 
+					DialogueRewardAction.karma(new IncreaseKarmaAction(5.0)), 
 					new SetQuestAction(QUEST_SLOT, "done"),
-					new EnableFeatureAction("karma_indicator")));
+					DialogueRewardAction.unlock("karma_indicator", "Wskaźnik karmy")));
 
 		// player is not willing to help other people
 		// player gets a little karma removed
 		npc.add(ConversationStates.QUEST_OFFERED,
 			ConversationPhrases.NO_MESSAGES, null,
 			ConversationStates.ATTENDING,
-			"Wiedziałam ... pewnie otacza cię zła #karma.",
+			"Taka odpowiedź także ma swoje następstwa: tracisz dziesięć punktów karmy. Pokażę ci jednak jej wskaźnik, żebyś mógł śledzić własne wybory. O działanie karmy możesz zapytać mnie w każdej chwili.",
 			new MultipleActions(
 					new DecreaseKarmaAction(10.0), 
 					new SetQuestAction(QUEST_SLOT, "done"),
-					new EnableFeatureAction("karma_indicator")));
+					DialogueRewardAction.unlock("karma_indicator", "Wskaźnik karmy")));
 
 		// player wants to know what karma is
 		npc.add(
@@ -124,9 +126,9 @@ public class LearnAboutKarma extends AbstractQuest {
 			"karma",
 			null,
 			ConversationStates.QUESTION_1,
-			"Gdy robisz dobre rzeczy dla innych takie jak #zadania dostajesz dobrą karmę. Dobra karma oznacza, że " 
-			+ " będzie ci się powodzić w bitwach, w łowieniu ryb, poszukiwaniu złota i drogocennych kamieni. " 
-			+ " Chcesz wiedzieć jaką masz teraz karmę?",
+			"Pomaganie mieszkańcom może poprawić twoją karmę. Dobra karma sprzyja powodzeniu, " 
+			+ "na przykład podczas łowienia ryb i szukania złota, ale nie gwarantuje sukcesu. Część tego szczęścia zużywa się przy takich próbach, więc wskaźnik może zmieniać się także między zadaniami. " 
+			+ "Chcesz wiedzieć, jaką masz teraz karmę?",
 			null);
 
 		// player wants to know what his own karma is
@@ -164,7 +166,7 @@ public class LearnAboutKarma extends AbstractQuest {
 		
 		npc.add(ConversationStates.QUESTION_1, ConversationPhrases.QUEST_MESSAGES,
 				null, ConversationStates.QUESTION_1,
-				"Jeśli popytasz o zadania tu i tam, wypełnisz je, wówczas twoja karma urośnie. Chcesz wiedzieć jaką masz teraz karmę?", null);
+				"Jeśli popytasz o zadania tu i tam, wypełnisz je, wówczas twoja karma urośnie.Chcesz wiedzieć, jaką masz teraz karmę?", null);
 	}
 
 	@Override
@@ -172,7 +174,7 @@ public class LearnAboutKarma extends AbstractQuest {
 		super.addToWorld();
 		fillQuestInfo(
 				"Nauka o Karmie", 
-				"Sarzina nauczy mnie o Karmie.", 
+				"Sarzina wyjaśnia, jak uczynki wpływają na karmę. Wysłuchaj jej i zapytaj, co potrafi powiedzieć o twojej postaci.", 
 				false);
 		step1();
 	}

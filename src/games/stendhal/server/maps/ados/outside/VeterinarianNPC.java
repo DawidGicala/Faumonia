@@ -22,6 +22,7 @@ import games.stendhal.server.core.pathfinder.FixedPath;
 import games.stendhal.server.core.pathfinder.Node;
 import games.stendhal.server.entity.creature.DomesticAnimal;
 import games.stendhal.server.entity.npc.ChatAction;
+import games.stendhal.server.entity.npc.ChatCondition;
 import games.stendhal.server.entity.npc.ConversationStates;
 import games.stendhal.server.entity.npc.EventRaiser;
 import games.stendhal.server.entity.npc.ShopList;
@@ -67,14 +68,24 @@ public class VeterinarianNPC implements ZoneConfigurator {
 
 			@Override
 			protected void createDialog() {
+                addReply("tematy", "Możemy wrócić do twojej sprawy albo porozmawiać o czymś innym. Co chcesz wiedzieć?");
 				//Behaviours.addHelp(this,
 				//				   "...");
 
 				add(ConversationStates.ATTENDING, Arrays.asList("heal", "ulecz"), null, ConversationStates.ATTENDING, null, new HealPetsAction());
 
-				addJob("Jestem weterynarzem.");
+				addJob("Zajmuję się zdrowiem zwierząt, które trafiają do schroniska. Gdy mają dość jedzenia, łatwiej zadbać o resztę; dlatego tak cenię pomoc udzielaną Katince.");
 				
 				new SellerAdder().addSeller(this, new SellerBehaviour(shops.get("healing")) {
+					@Override
+					public ChatCondition getTransactionCondition() {
+						return (player, sentence, speaker) -> hasCurrentAccess(player);
+					}
+
+					@Override
+					public ChatAction getRejectedTransactionAction() {
+						return (player, sentence, speaker) -> speaker.say("Najpierw pomóż Katince nakarmić zwierzęta. Z mojej oferty możesz korzystać przez tydzień po dostawie.");
+					}
 
 					@Override
 					public int getUnitPrice(final String item) {
@@ -92,8 +103,14 @@ public class VeterinarianNPC implements ZoneConfigurator {
 		npc.setPosition(53, 28);
 		//npc.setDirection(Direction.DOWN);
 		npc.initHP(100);
-		npc.setDescription("Oto Dr. Feelgood. Jest ekspertem w swoim zawodzie.");
+		npc.setDescription("Widzisz doktora Feelgooda, weterynarza schroniska pod Ados. Ostrożnie ogląda stan swoich zwierzęcych pacjentów.");
 		zone.add(npc);
+	}
+
+	public static boolean hasCurrentAccess(final Player player) {
+		return player.isQuestCompleted("zoo_food")
+				&& !new games.stendhal.server.entity.npc.condition.TimePassedCondition("zoo_food", 1,
+						games.stendhal.common.MathHelper.MINUTES_IN_ONE_WEEK).fire(player, null, null);
 	}
 	
 	/**
@@ -101,6 +118,10 @@ public class VeterinarianNPC implements ZoneConfigurator {
 	 */
 	private static class HealPetsAction implements ChatAction {
 		public void fire(Player player, Sentence sentence, EventRaiser npc) {
+			if (!hasCurrentAccess(player)) {
+				npc.say("Najpierw pomóż Katince nakarmić zwierzęta. Z mojej pomocy możesz korzystać przez tydzień po dostawie.");
+				return;
+			}
 			List<DomesticAnimal> healed = new LinkedList<DomesticAnimal>();
 			
 			for (DomesticAnimal pet : player.getAnimals()) {

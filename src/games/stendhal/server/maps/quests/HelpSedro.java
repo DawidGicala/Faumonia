@@ -19,6 +19,9 @@ import games.stendhal.server.entity.npc.ConversationPhrases;
 import games.stendhal.server.entity.npc.ConversationStates;
 import games.stendhal.server.entity.npc.EventRaiser;
 import games.stendhal.server.entity.npc.SpeakerNPC;
+import games.stendhal.server.entity.npc.action.DialogueHintContextAction;
+import games.stendhal.server.entity.npc.action.DialogueNarrationAction;
+import games.stendhal.server.entity.npc.action.DialogueRewardAction;
 import games.stendhal.server.entity.npc.action.EquipItemAction;
 import games.stendhal.server.entity.npc.action.IncreaseXPAction;
 import games.stendhal.server.entity.npc.action.IncreaseAtkXPAction;
@@ -53,7 +56,7 @@ public class HelpSedro extends AbstractQuest {
 	private static final int KILLS_INDEX = 1;
 	private static final int WEEK_IN_MINUTES = MathHelper.MINUTES_IN_ONE_HOUR * 999 * 999;
 
-	private static final String QUEST_REQUIREMENTS_TEXT = "5 #szczurów, 3 #szczury #jaskiniowe, 1 #gnoma oraz 1 #pannę #gnom";
+	private static final String QUEST_REQUIREMENTS_TEXT = "1 #gnoma oraz 1 #pannę #gnom";
 
 	@Override
 	public String getSlotName() {
@@ -64,13 +67,13 @@ public class HelpSedro extends AbstractQuest {
 		final String killData = player.getQuest(QUEST_SLOT, KILLS_INDEX);
 
 		if (killData == null) {
-			return "nie mam jeszcze zapisanego postępu zadania";
+			return "nie można teraz wyświetlić postępu polowania; zgłoś problem administracji";
 		}
 
 		final List<String> tokens = Arrays.asList(killData.split(","));
 
 		if ((tokens.size() % 5) != 0) {
-			return "nie mogę odczytać postępu zadania";
+			return "nie można teraz wyświetlić postępu polowania; zgłoś problem administracji";
 		}
 
 		final StringBuilder progress = new StringBuilder();
@@ -132,6 +135,15 @@ public class HelpSedro extends AbstractQuest {
 
 	private void step_1() {
 		final SpeakerNPC npc = npcs.get("Sedro");
+		npc.add(ConversationStates.IDLE, ConversationPhrases.GREETING_MESSAGES,
+				new AndCondition(new games.stendhal.server.entity.npc.condition.GreetingMatchesNameCondition(npc.getName()),
+						new QuestStateStartsWithCondition(QUEST_SLOT, "start;")),
+				ConversationStates.ATTENDING, "Witaj ponownie. Jak idzie walka z potworami? Możemy omówić postęp zadania albo miejsca poszukiwań.", null);
+		npc.add(ConversationStates.IDLE, ConversationPhrases.GREETING_MESSAGES,
+				new AndCondition(new games.stendhal.server.entity.npc.condition.GreetingMatchesNameCondition(npc.getName()),
+						new QuestStateStartsWithCondition(QUEST_SLOT, "done"),
+						new NotCondition(new TimePassedCondition(QUEST_SLOT, 1, WEEK_IN_MINUTES))),
+				ConversationStates.ATTENDING, "Dobrze cię widzieć. Dzięki twojej pomocy jest teraz spokojniej. Na razie nie potrzebuję dalszej pomocy.", null);
 
 		npc.add(ConversationStates.ATTENDING,
 				ConversationPhrases.QUEST_MESSAGES,
@@ -139,16 +151,16 @@ public class HelpSedro extends AbstractQuest {
 						new QuestNotStartedCondition(QUEST_SLOT),
 						new QuestInStateCondition(QUEST_SLOT, "rejected")),
 				ConversationStates.QUEST_OFFERED,
-				"Poszukuje kogoś kto mi pomoże i pozabija trochę potworów. Wszystkie znajdują się w pobliżu. Mógłbym to zrobić sam ale ze względu na wiek... sam wiesz.. "
-				+ "Jeżeli chcesz mi pomóc napisz #tak.",
-				null);
+				"Gnomy z pobliskiej jaskini dają nam się we znaki. Sam bym się nimi zajął, ale nogi nie nadążają już za dobrymi chęciami. "
+				+ "Pomożesz mi zaprowadzić trochę spokoju? W podzięce przygotuję dla ciebie ekwipunek na początek wędrówki.",
+				new DialogueNarrationAction("Sedro opiera dłonie na kolanach."));
 
 		npc.add(ConversationStates.ATTENDING,
 				ConversationPhrases.QUEST_MESSAGES,
 				new AndCondition(new QuestStateStartsWithCondition(QUEST_SLOT, "done"),
 						 new TimePassedCondition(QUEST_SLOT, 1, WEEK_IN_MINUTES)),
 				ConversationStates.QUEST_OFFERED,
-				"Kolejny raz szukam kogoś kto pozabija trochę potworów. Może znów mi pomożesz?",
+				"Potwory znów dają nam się we znaki. Pomożesz mi jeszcze raz? Jak poprzednio, odwdzięczę się ekwipunkiem.",
 				null);
 
 		npc.add(ConversationStates.ATTENDING,
@@ -156,12 +168,10 @@ public class HelpSedro extends AbstractQuest {
 				new AndCondition(new QuestStateStartsWithCondition(QUEST_SLOT, "done"),
 						 new NotCondition(new TimePassedCondition(QUEST_SLOT, 1, WEEK_IN_MINUTES))),
 				ConversationStates.ATTENDING,
-				"Na ten moment minął problem z potworami. Dziekuje, nie potrzebuje twojej pomocy. Powinieneś wybrać się do Mistrza Faumonii mieszkającego w tym czerwonym domku za mną, nauczy cię on podstaw gry i zleci trochę zadań.",
+				"Przez jakiś czas powinno być spokojniej i to także twoja zasługa. Na razie nie potrzebuję dalszej pomocy. Odpocznij i zadbaj o siebie przed kolejną wyprawą.",
 				null);
 
 		final Map<String, Pair<Integer, Integer>> creaturesToKill = new TreeMap<String, Pair<Integer, Integer>>();
-		creaturesToKill.put("szczur", new Pair<Integer, Integer>(0, 5));
-		creaturesToKill.put("szczur jaskiniowy", new Pair<Integer, Integer>(0, 3));
 		creaturesToKill.put("gnom", new Pair<Integer, Integer>(0, 1));
 		creaturesToKill.put("panna gnom", new Pair<Integer, Integer>(0, 1));
 
@@ -173,44 +183,60 @@ public class HelpSedro extends AbstractQuest {
 				ConversationPhrases.YES_MESSAGES,
 				null,
 				ConversationStates.ATTENDING,
-				"Dziękuję! Zabij " + QUEST_REQUIREMENTS_TEXT + ". "
-				+ "#Szczury znajdziesz w #mieście oraz w #podziemiach. "
-				+ "#Gnomy czekają w #jaskini pod domkiem startowym oraz w #wiosce na północny-wschód od miasta #Semos. "
-				+ "Jeżeli nie wiesz gdzie iść, porozmawiaj ze #Starkadem w #banku. "
-				+ "Stan zadania sprawdzisz przez #Menu oraz #Dziennik #Zadań.",
+				"Dziękuję. Trzeba pokonać " + QUEST_REQUIREMENTS_TEXT + ". "
+				+ "Jeśli potrzebujesz wskazówek, zapytaj mnie, gdzie szukać.",
 				new MultipleActions(actions));
 
 		npc.add(ConversationStates.QUEST_OFFERED,
 				ConversationPhrases.NO_MESSAGES,
 				null,
 				ConversationStates.ATTENDING,
-				"Co za szkoda... Może kiedyś zmienisz zdanie i pomożesz starcowi... "
-				+ "Może poradze sobie sam.. ",
+				"Rozumiem. Gdyby dobre chęci wystarczały, już byłoby po sprawie. Wróć, jeśli zmienisz zdanie.",
 				new SetQuestAction(QUEST_SLOT, "rejected"));
 	}
 
 	private void step_2() {
-		/* Player has to kill the creatures */
+		final SpeakerNPC npc = npcs.get("Sedro");
+		npc.add(ConversationStates.ATTENDING, "wskazówki", null, ConversationStates.ATTENDING,
+				"Wejdź do jaskini niebieskim wejściem pod czerwonym domem Mistrza. W bocznych komorach spotkasz gnoma i pannę gnom; pokonaj po jednym z każdego rodzaju. Atakuj pojedynczo i pilnuj zapasu jedzenia.",
+				new DialogueHintContextAction("sedro_general"));
+		npc.add(ConversationStates.ATTENDING, "szczury", null, ConversationStates.ATTENDING,
+				"Szczury spotkasz w Semos i pod ziemią. Wejścia do podziemi szukaj pośrodku miasta. Tam rozejrzyj się także za szczurami jaskiniowymi.",
+				new DialogueHintContextAction("sedro_rats"));
+		npc.add(ConversationStates.ATTENDING, "podziemia", null, ConversationStates.ATTENDING,
+				"Niebieskie wejście do jaskini znajdziesz pod czerwonym domem Mistrza w Semos. W bocznych komorach szukaj gnoma i panny gnom - do mojego zadania potrzebujesz po jednym z każdego rodzaju.", null);
+		npc.add(ConversationStates.ATTENDING, "gnomy", null, ConversationStates.ATTENDING,
+				"Gnomów szukaj w bocznych komorach jaskini pod czerwonym domem Mistrza. Niebieskie wejście znajduje się na południe od tego domu. Pamiętaj, że w mojej prośbie chodzi o gnoma i pannę gnom, po jednym z każdego rodzaju. Nie wdawaj się w walkę z całą gromadą naraz.",
+				new DialogueHintContextAction("sedro_gnomes"));
+		npc.add(ConversationStates.ATTENDING, "wioska", null, ConversationStates.ATTENDING,
+				"Wejdź do jaskini pod czerwonym domem Mistrza i rozejrzyj się w bocznych komorach. Do mojego zadania nie musisz przekraczać bariery.", null);
+		npc.add(ConversationStates.ATTENDING, "Starkad", null, ConversationStates.ATTENDING,
+				"Starkad przebywa w banku w Semos. Bank znajdziesz w zielonym budynku na lewo od fontanny w centrum miasta.", null);
+		npc.add(ConversationStates.ATTENDING, "dziennik", null, ConversationStates.ATTENDING,
+				"Otwórz Menu i wybierz Dziennik Zadań. Tam sprawdzisz, ile potworów pozostało do pokonania.", null);
+		npc.add(ConversationStates.ATTENDING, "przedmioty", null, ConversationStates.ATTENDING,
+				"Kliknij przedmiot prawym przyciskiem myszy i wybierz 'zobacz'. Statystyki znajdziesz też w Menu, pod hasłem Lista przedmiotów.", null);
 	}
 
 	private void step_3() {
 		final SpeakerNPC npc = npcs.get("Sedro");
 
 		final List<ChatAction> actions = new LinkedList<ChatAction>();
-		actions.add(new EquipItemAction("zwój semos", 10));
-		actions.add(new EquipItemAction("eliksir", 10));
-		actions.add(new EquipItemAction("duży eliksir", 5));
-		actions.add(new EquipItemAction("butelka wody", 20));
-		actions.add(new EquipItemAction("sztylecik", 1));
-		actions.add(new EquipItemAction("maczeta", 1));
-		actions.add(new EquipItemAction("pałasz", 1));
-		actions.add(new EquipItemAction("drewniana tarcza", 1));
-		actions.add(new EquipItemAction("mięso", 50));
-		actions.add(new IncreaseXPAction(500));
-		actions.add(new IncreaseAtkXPAction(500));
-		actions.add(new IncreaseDefXPAction(500));
+		actions.add(DialogueRewardAction.item("zwój semos", 10));
+		actions.add(DialogueRewardAction.item("eliksir", 10));
+		actions.add(DialogueRewardAction.item("duży eliksir", 5));
+		actions.add(DialogueRewardAction.item("butelka wody", 20));
+		actions.add(DialogueRewardAction.item("sztylecik", 1));
+		actions.add(DialogueRewardAction.item("maczeta", 1));
+		actions.add(DialogueRewardAction.item("pałasz", 1));
+		actions.add(DialogueRewardAction.item("drewniana tarcza", 1));
+		actions.add(DialogueRewardAction.item("mięso", 50));
+		actions.add(DialogueRewardAction.xp(500));
+		actions.add(DialogueRewardAction.attackXP(500));
+		actions.add(DialogueRewardAction.defenseXP(500));
 		actions.add(new SetQuestAction(QUEST_SLOT, "done;1"));
 		actions.add(new SetQuestToTimeStampAction(QUEST_SLOT, 1));
+		actions.add(new DialogueNarrationAction("Sedro z ulgą kiwa głową."));
 
 		final LinkedList<String> triggers = new LinkedList<String>();
 		triggers.addAll(ConversationPhrases.FINISH_MESSAGES);
@@ -222,8 +248,7 @@ public class HelpSedro extends AbstractQuest {
 						new QuestInStateCondition(QUEST_SLOT, 0, "start"),
 						new KilledForQuestCondition(QUEST_SLOT, KILLS_INDEX)),
 				ConversationStates.ATTENDING,
-				"Widzę, że zabiłeś potwory. Mam nadzieje, że przez jakiś czas będzie z nimi spokój. "
-				+ "Proszę przyjmij te przedmioty, na pewno pomogą ci na poczatku rozgrywki. Jeśli nie wiesz co robi dany przedmiot kliknij na niego prawym przyciskiem myszy następnie 'zobacz'. Statystyki wszystkich przedmiotów dostępnych w grze możesz sprawdzić klikając w #Menu w prawym górnym rogu ekranu a następnie #Lista #przedmiotów.",
+				"Dobra robota, dotrzymałeś słowa. Może teraz przez jakiś czas będzie spokojniej, a ja nie będę musiał martwić się o każdego przechodnia. Przyjmij przygotowany ekwipunek i zapasy na dalszą drogę - niech dobrze ci służą.",
 				new MultipleActions(actions));
 
 		npc.add(ConversationStates.ATTENDING,
@@ -235,12 +260,9 @@ public class HelpSedro extends AbstractQuest {
 				null,
 				new ChatAction() {
 					public void fire(final Player player, final Sentence sentence, final EventRaiser raiser) {
-						raiser.say("Proszę pomóż mi. W dalszym ciągu nie zabiłeś wszystkich potworów. "
+						raiser.say("Nie wszystkie potwory zostały jeszcze pokonane. "
 								+ "Postęp: " + getKillProgress(player) + ". "
-								+ "#Szczury znajdziesz w #mieście oraz w #podziemiach. "
-								+ "#Gnomy czekają w #jaskini pod domkiem startowym oraz w #wiosce na północny-wschód od #Semos. "
-								+ "Jeżeli nie wiesz gdzie iść, porozmawiaj ze #Starkadem w #banku. "
-								+ "Stan zadania sprawdzisz przez #Menu oraz #Dziennik #Zadań.");
+								+ "Chcesz, żebym przypomniał ci, gdzie szukać?");
 					}
 				});
 	}
@@ -250,7 +272,7 @@ public class HelpSedro extends AbstractQuest {
 		super.addToWorld();
 		fillQuestInfo(
 				"Pomóż Sedro",
-				"Sedro szuka kogoś kto mu pomoże i pozabija trochę potworów.",
+				"Sedro potrzebuje pomocy z gnomem i panną gnom w jaskini pod domem Mistrza w Semos.",
 				false);
 		step_1();
 		step_2();
@@ -271,13 +293,13 @@ public class HelpSedro extends AbstractQuest {
 		}
 
 		if (!isCompleted(player)) {
-			res.add("Muszę zabić 5 szczurów, 3 szczury jaskiniowe, 1 gnoma oraz 1 pannę gnom.");
+			res.add("Muszę zabić 1 gnoma oraz 1 pannę gnom.");
 
 			if (player.isQuestInState(QUEST_SLOT, 0, "start")) {
-				res.add("Mój obecny postęp: " + getKillProgress(player) + ".");
+				res.add("Mój obecny postęp: " + getKillProgress(player).replace("#", "") + ".");
 			}
 
-			res.add("Szczury znajdę w mieście oraz w podziemiach po środku miasta Semos. Gnomy czekają na mnie w jaskini pod domkiem startowym oraz w swojej wiosce na północny-wschod od miasta Semos. Może powinienem porozmawiać ze spacerującym w banku Starkadem. Podobno bank znajdę w zielonym budynku na lewo od fontanny w centrum miasta. Dowiedziałem się, że zawsze mogę poprosić o pomoc innych graczy. W takiej sytuacji mam pisać #/k #wiadomość.");
+			res.add("Jeśli potrzebuję wskazówek, mogę poprosić o nie Sedro. Mogę też poszukać towarzystwa innych graczy, pisząc na czacie /k wiadomość.");
 		} else if (isRepeatable(player)) {
 			res.add("Teraz po czasie powinienem znowu odwiedzić Sedro. Może znów potrzebuje pomocy, w końcu ma już troche lat...");
 		} else {

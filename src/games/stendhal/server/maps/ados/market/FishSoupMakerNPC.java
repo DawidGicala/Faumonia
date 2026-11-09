@@ -55,18 +55,20 @@ public class FishSoupMakerNPC implements ZoneConfigurator {
 
 			@Override
 			protected void createDialog() {
+                addReply("wskazówki", "Informacje o miejscach połowu poszczególnych ryb znajdziesz w bibliotece Ados. Cebulę i por zbierzesz w Fado, a pomidory oraz czosnek kupisz od Sue w ogrodach Kalavan. Potrzebuję po jednej sztuce każdego składnika z przepisu; możesz donosić je partiami.");
+                addReply("tematy", "Możemy wrócić do twojej sprawy albo porozmawiać o czymś innym. Co chcesz wiedzieć?");
 				//addGreeting();
-				addHelp("Mogę ugotować pyszną zupę rybną. Jeżeli nie lubisz ryb to mogę cię zapoznać z moją przyjaciółką Old Mother Helena w Fado. Robi najlepsze zupy warzywne w całym Faiumoni!");
+				addHelp("Mogę ugotować zupę rybną, jeśli przyniesiesz potrzebne składniki. Jeśli wolisz warzywa, odwiedź moją przyjaciółkę Old Mother Helenę w Fado. Każda z nas ma własny przepis i żadna nie lubi, gdy myli się jej garnek z cudzym.");
 
 				addQuest("Nie mam dla Ciebie zadań, ale mogę zaoferować świeżo ugotowaną zupę rybną na twoje podróże."); 
-				addJob("Jestem wyspecjalizowany w zupach. Moją ulubioną zupą jest fish soup, ale lubię także inne...");
-				addOffer("Jeżeli jesteś naprawdę głodny lub potrzebyjesz jedzenia na swoje podróże to mogę ugotować tobie smaczną zupę rybną, ale dopiero, gdy przyniesze potrzebne produkty wg receptury.");
+				addJob("Specjalizuję się w zupach, a rybna jest moją dumą. Każda ryba wnosi inny smak, dlatego nie zastępuję jednego gatunku drugim. Jeśli wolisz warzywa, moja przyjaciółka Helena gotuje w Fado.");
+				addOffer("Mogę ugotować zupę rybną na twoją podróż. Najpierw poznaj przepis i przynieś składniki; każda ryba i każde warzywo mają w nim swoje miejsce.");
 				addGoodbye("Życzę miłego pobytu na rynku w Ados!");
 				addEmotionReply("cuddle", "cuddle");
 			}
 		};
 
-		npc.setDescription("Oto Florence Boullabaisse. Jest doskonałym szefem od zup.");
+		npc.setDescription("Widzisz Florence Boullabaisse, kucharkę na rynku w Ados. Pilnuje garnka zupy rybnej z uwagą godną alchemika.");
 		npc.setEntityClass("fishsoupmakernpc");
 		npc.setPosition(63, 14);
 		npc.setDirection(Direction.RIGHT);

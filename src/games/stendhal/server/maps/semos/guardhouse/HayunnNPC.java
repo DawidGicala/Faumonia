@@ -40,7 +40,10 @@ public class HayunnNPC implements ZoneConfigurator {
 		final SpeakerNPC npc = new SpeakerNPC("Hayunn") {
 			@Override
 			public void createDialog() {
-				addGreeting("Witaj, jestem Hayunn. Zanim stąd wyjdziesz powinieneś nauczyć się podstaw gry. Wykonaj dla mnie szybkie zadanie. W tym celu napisz #zadanie");
+                addReply("wskazówki", "Miter jest tutaj, w domku startowym. Kup od niego jedną wodę, potwierdzając cenę, i przynieś ją w plecaku. Wybierz potem przekazanie dostawy i wskaż wodę.");
+                addJob("Pomagam przybyszom stawiać pierwsze kroki w Faumonii. Zaczynam od drobnych przysług, bo przy nich najłatwiej poznać mieszkańców i ich zwyczaje.");
+                addReply("tematy", "Możemy wrócić do twojej sprawy albo porozmawiać o czymś innym. Co chcesz wiedzieć?");
+				addGreeting("Witaj, jestem Hayunn. Zanim wyruszysz poza Semos, pokażę ci, jak załatwiać sprawy z mieszkańcami i korzystać ze sklepu. Wybierz #zadanie - zaczniemy od drobnej przysługi.");
 				addEmotionReply("hugs", "hugs");
 				addGoodbye();
 			}
@@ -58,7 +61,7 @@ public class HayunnNPC implements ZoneConfigurator {
 		};
 
 		npc.setPosition(4, 9);
-		npc.setDescription("Widzisz przyjaznego Hayunna. Wygląda on na kogoś bardzo doświadczonego. Przywitaj się pisząc #cześć");
+		npc.setDescription("Widzisz Hayunna, doświadczonego przewodnika nowych przybyszów. Cierpliwie obserwuje, czy każdy potrafi odnaleźć się w Semos.");
 		npc.setEntityClass("oldheronpc");
 		zone.add(npc);
 	}

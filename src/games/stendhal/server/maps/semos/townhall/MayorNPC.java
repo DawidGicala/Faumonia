@@ -51,15 +51,16 @@ public class MayorNPC implements ZoneConfigurator {
 
 			@Override
 			protected void createDialog() {
+                games.stendhal.server.entity.npc.dialogue.CollectionDialogueTopics.install(this);
 				addGreeting("Witam obywatelu! Potrzebujesz #pomocy?");
-				addJob("Jestem burmistrzem miasta Semos.");
-				addHelp("W Semos spotkasz wielu ludzi, którzy zaoferują Tobie pomoc w różnych dziedzinach.");
+				addJob("Jestem burmistrzem Semos i odpowiadam za problemy, z którymi przychodzą mieszkańcy. Meldunki o potworach przekazuję wojownikom gotowym wyruszyć poza bezpieczne ulice. Każde ukończone polowanie to jedna troska mniej.");
+				addHelp("Mieszkańcy przynoszą mi wieści o potworach zagrażających okolicy. Zapytaj o #zadanie, jeśli możesz wyruszyć na polowanie. Przed drogą ustalimy cel, żebyś wiedział, z czym wrócić do ratusza.");
 				addGoodbye("Życzę miłego dnia i miłego pobytu!");
 			}
 		};
 
 		npc.setEntityClass("mayornpc");
-		npc.setDescription("Oto burmistrz Semos, Mayor Sakhs, idzie w twoją stronę. Zdaje się, że jest zdenerwowany...");
+		npc.setDescription("Widzisz Sakhsa, burmistrza Semos. Niepokój w jego spojrzeniu znika dopiero, gdy słyszy o załatwionej sprawie.");
 		npc.setPosition(13, 3);
 		npc.initHP(100);
 		zone.add(npc);

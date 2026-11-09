@@ -62,12 +62,12 @@ public class ElementalDagger2 extends AbstractQuest {
 			new ChatAction() {
 				public void fire(final Player player, final Sentence sentence, final EventRaiser raiser) {
 					if (!player.hasQuest(QUEST_SLOT) || "rejected".equals(player.getQuest(QUEST_SLOT))) {
-						raiser.say("Specjalizuje się w ulepszaniu sztyletów żywiołów. Jesteś zainteresowany?");
+						raiser.say("Żywioł Ognia nadał twojemu sztyletowi kształt; ja mogę wzbogacić go mocą wody. Potrzebuję podstawowego sztyletu, materiałów i zwycięstwa nad błękitnym smokiem. Chcesz ulepszyć tę broń?");
 					} else if (player.isQuestCompleted(QUEST_SLOT)) {
-						raiser.say("Przecież już dostałeś swój miecz...");
+						raiser.say("Ulepszony sztylet został już przekazany. Ogień i woda spotkały się w jednym ostrzu; kolejne zamówienie nie jest potrzebne.");
 						raiser.setCurrentState(ConversationStates.ATTENDING);
 					} else {
-						raiser.say("Dlaczego zawracasz mi głowę skoro nie ukończyłeś swojego zadania?");
+						raiser.say("Pamiętam nasze ustalenia i wszystkie przekazane materiały. Możesz teraz sprawdzić braki albo oddać kolejną część dostawy. Gdy zbierzesz wszystko i spełnisz warunek walki, rozpocznę pracę.");
 						raiser.setCurrentState(ConversationStates.ATTENDING);
 					}
 				}
@@ -78,15 +78,7 @@ public class ElementalDagger2 extends AbstractQuest {
 			ConversationStates.ATTENDING, null,
 			new ChatAction() {
 				public void fire(final Player player, final Sentence sentence, final EventRaiser raiser) {
-					raiser.say("Będę potrzebował kilku rzeczy: "
-						+ REQUIRED_IRON
-						+ " żelaza, "
-						+ REQUIRED_WOOD
-						+ " polan, "
-						+ REQUIRED_ELEMENTAL
-						+ " sztyletu żywiołów i jakiegoś odpowiedniego kamienia... niech bedzie "
-						+ REQUIRED_SAPPHIRE
-						+ " #szafir. Wróć, gdy będziesz je miał #dokładnie w tej kolejności! Jeżeli zapomnisz to powiedz #przypomnij");
+					raiser.say("Ulepszenie twojego sztyletu wymaga następujących rzeczy: " + games.stendhal.server.core.rp.quest.JourneyQuestProgress.requirementsText(ElementalDagger2.this) + ". Możesz donosić je partiami; odłożę je do czasu zebrania kompletu. Pokonaj też błękitnego smoka, zanim rozpocznę ulepszanie ostrza.");
 					player.setQuest(QUEST_SLOT, "start;0;0;0;0");
 					player.addKarma(10);
 
@@ -104,7 +96,7 @@ public class ElementalDagger2 extends AbstractQuest {
 		npc.addReply(Arrays.asList("exact", "dokładnie"),
 			"Żywioły nie lubią, gdy coś jest nieuporządkowane...");
 		npc.addReply(Arrays.asList("szafirów", "szafiry"),
-			"szafiry są mi potrzebne do przelania energii w ten sztylet.");
+			"Szafiry są potrzebne do przelania mocy wody w sztylet. Ostrze już istnieje; moim zadaniem jest je wzmocnić.");
 	}
 
 	private void step_2() {
@@ -144,7 +136,7 @@ public class ElementalDagger2 extends AbstractQuest {
 								neededIron -= amount;
 							}
 
-							raiser.say("Nie mogę wykuć bez "
+							raiser.say("Żelazo posłuży do wzmocnienia ostrza. Brakuje jeszcze: "
 								+ Grammar.quantityplnoun(
 										neededIron, "żelazo", "")
 								+ ".");
@@ -163,9 +155,9 @@ public class ElementalDagger2 extends AbstractQuest {
 								neededWoodLogs -= amount;
 							}
 
-							raiser.say("Jak możesz wymagać wykucia skoro nie masz "
+							raiser.say("Przy ulepszaniu wykorzystam też drewno. Brakuje jeszcze: "
 								+ Grammar.quantityplnoun(neededWoodLogs, "polano","")
-								+ " do ognia?");
+								+ ".");
 							missingSomething = true;
 						}
 					}
@@ -180,7 +172,7 @@ public class ElementalDagger2 extends AbstractQuest {
 								player.drop("sztylet żywiołów", amount);
 								neededElemental -= amount;
 							}
-							raiser.say("Muszę najpierw mieć podstawowy"
+							raiser.say("Potrzebuję też ostrza wykutego przez Żywioł Ognia: "
 									+ Grammar.quantityplnoun(neededElemental, "sztylet żywiołów","") + " .");
 							missingSomething = true;
 						}
@@ -196,20 +188,130 @@ public class ElementalDagger2 extends AbstractQuest {
 								player.drop("szafir", amount);
 								neededEmerald -= amount;
 							}
-							raiser.say("Potrzebuje szafiru by przelać moc w sztylet.  "
+							raiser.say("Szafiry pozwolą mi przelać moc wody w ostrze. Brakująca liczba szafirów: "
 								+ Grammar.quantityplnoun(neededEmerald, "","") + "");
 							missingSomething = true;
 						}
 					}
 
 					if (player.hasKilled("błękitny smok") && !missingSomething) {
-						raiser.say("Przyniosłeś wszystko. Biorę się do wykuwania Twojego sztyletu. Wróć za "
+						raiser.say("Materiały są już u mnie. Teraz połączę szafiry z mocą wody i wzmocnię twoje ostrze. Wróć za "
 							+ REQUIRED_MINUTES
 							+ " minutę" + ", a będzie gotowy.");
 						player.setQuest(QUEST_SLOT, "forging;" + System.currentTimeMillis());
 					} else {
 						if (!player.hasKilled("błękitny smok") && !missingSomething) {
-							raiser.say("Na pewno sam posiadłeś ten szafir? Żywioły nie wykonuja broni dla tchórzy! Idz i zabij błękitnego smoka, zanim oddam ci twój sztylet!");
+							raiser.say("Materiały są już zebrane i nie musisz przynosić ich ponownie. Pozostało ci pokonać błękitnego smoka. Wróć po zwycięstwie, wtedy przejdziemy do następnego etapu.");
+						}
+
+						player.setQuest(QUEST_SLOT,
+							"start;"
+							+ (REQUIRED_IRON - neededIron)
+							+ ";"
+							+ (REQUIRED_WOOD - neededWoodLogs)
+							+ ";"
+							+ (REQUIRED_ELEMENTAL - neededElemental)
+							+ ";"
+							+ (REQUIRED_SAPPHIRE - neededEmerald));
+					}
+				}
+			});
+        // Reuse the native stage and its guards inside the current conversation.
+        npc.add(ConversationStates.ATTENDING, "materiały wody",
+			new AndCondition(new games.stendhal.server.entity.npc.condition.AlwaysTrueCondition(),
+						new QuestStateStartsWithCondition(QUEST_SLOT, "start")),
+			ConversationStates.ATTENDING, null,
+			new ChatAction() {
+				public void fire(final Player player, final Sentence sentence, final EventRaiser raiser) {
+					final String[] tokens = player.getQuest(QUEST_SLOT).split(";");
+
+					int neededIron = REQUIRED_IRON
+							- Integer.parseInt(tokens[1]);
+					int neededWoodLogs = REQUIRED_WOOD
+							- Integer.parseInt(tokens[2]);
+					int neededElemental = REQUIRED_ELEMENTAL
+							- Integer.parseInt(tokens[3]);
+					int neededEmerald = REQUIRED_SAPPHIRE
+							- Integer.parseInt(tokens[4]);
+					boolean missingSomething = false;
+
+					if (!missingSomething && (neededIron > 0)) {
+						if (player.isEquipped("żelazo", neededIron)) {
+							player.drop("żelazo", neededIron);
+							neededIron = 0;
+						} else {
+							final int amount = player.getNumberOfEquipped("żelazo");
+							if (amount > 0) {
+								player.drop("żelazo", amount);
+								neededIron -= amount;
+							}
+
+							raiser.say("Żelazo posłuży do wzmocnienia ostrza. Brakuje jeszcze: "
+								+ Grammar.quantityplnoun(
+										neededIron, "żelazo", "")
+								+ ".");
+							missingSomething = true;
+						}
+					}
+
+					if (!missingSomething && (neededWoodLogs > 0)) {
+						if (player.isEquipped("polano", neededWoodLogs)) {
+							player.drop("polano", neededWoodLogs);
+							neededWoodLogs = 0;
+						} else {
+							final int amount = player.getNumberOfEquipped("polano");
+							if (amount > 0) {
+								player.drop("polano", amount);
+								neededWoodLogs -= amount;
+							}
+
+							raiser.say("Przy ulepszaniu wykorzystam też drewno. Brakuje jeszcze: "
+								+ Grammar.quantityplnoun(neededWoodLogs, "polano","")
+								+ ".");
+							missingSomething = true;
+						}
+					}
+
+					if (!missingSomething && (neededElemental > 0)) {
+						if (player.isEquipped("sztylet żywiołów", neededElemental)) {
+							player.drop("sztylet żywiołów", neededElemental);
+							neededElemental = 0;
+						} else {
+							final int amount = player.getNumberOfEquipped("sztylet żywiołów");
+							if (amount > 0) {
+								player.drop("sztylet żywiołów", amount);
+								neededElemental -= amount;
+							}
+							raiser.say("Potrzebuję też ostrza wykutego przez Żywioł Ognia: "
+									+ Grammar.quantityplnoun(neededElemental, "sztylet żywiołów","") + " .");
+							missingSomething = true;
+						}
+					}
+
+					if (!missingSomething && (neededEmerald > 0)) {
+						if (player.isEquipped("szafir", neededEmerald)) {
+							player.drop("szafir", neededEmerald);
+							neededEmerald = 0;
+						} else {
+							final int amount = player.getNumberOfEquipped("szafir");
+							if (amount > 0) {
+								player.drop("szafir", amount);
+								neededEmerald -= amount;
+							}
+							raiser.say("Szafiry pozwolą mi przelać moc wody w ostrze. Brakująca liczba szafirów: "
+								+ Grammar.quantityplnoun(neededEmerald, "","") + "");
+							missingSomething = true;
+						}
+					}
+
+					if (player.hasKilled("błękitny smok") && !missingSomething) {
+						raiser.say("Materiały są już u mnie. Teraz połączę szafiry z mocą wody i wzmocnię twoje ostrze. Wróć za "
+							+ REQUIRED_MINUTES
+							+ " minutę" + ", a będzie gotowy.");
+						player.setQuest(QUEST_SLOT, "forging;" + System.currentTimeMillis());
+					} else {
+						if (!player.hasKilled("błękitny smok") && !missingSomething) {
+							raiser.say("Materiały są już zebrane i nie musisz przynosić ich ponownie. Pozostało ci pokonać błękitnego smoka. Wróć po zwycięstwie, wtedy przejdziemy do następnego etapu.");
 						}
 
 						player.setQuest(QUEST_SLOT,
@@ -228,7 +330,7 @@ public class ElementalDagger2 extends AbstractQuest {
 		npc.add(ConversationStates.IDLE, ConversationPhrases.GREETING_MESSAGES,
 			new AndCondition(new GreetingMatchesNameCondition(npc.getName()),
 						new QuestStateStartsWithCondition(QUEST_SLOT, "forging;")),
-			ConversationStates.IDLE, null, new ChatAction() {
+			ConversationStates.ATTENDING, null, new ChatAction() {
 				public void fire(final Player player, final Sentence sentence, final EventRaiser raiser) {
 
 					final String[] tokens = player.getQuest(QUEST_SLOT).split(";");
@@ -244,7 +346,39 @@ public class ElementalDagger2 extends AbstractQuest {
 						return;
 					}
 
-					raiser.say("Skończyłem wykuwanie twojej broni. Oto ona!");
+					if (!games.stendhal.server.maps.quests.logic.QuestGoldFees.requirePaid(player, QUEST_SLOT, raiser)) { return; }
+                    raiser.say("Woda dopełniła moc, którą niosło już twoje ostrze. Odbierz ulepszony sztylet żywiołów; szafir znalazł w nim swoje miejsce. Dalsze próby zależą teraz od ciebie.");
+					player.addXP(100000);
+					player.addKarma(20);
+					final Item magicSword = SingletonRepository.getEntityManager().getItem("ulepszony sztylet żywiołów");
+					magicSword.setBoundTo(player.getName());
+					player.equipOrPutOnGround(magicSword);
+					player.notifyWorldAboutChanges();
+					player.setQuest(QUEST_SLOT, "done");
+				}
+			});
+        // Reuse the native stage and its guards inside the current conversation.
+        npc.add(ConversationStates.ATTENDING, "materiały wody",
+			new AndCondition(new games.stendhal.server.entity.npc.condition.AlwaysTrueCondition(),
+						new QuestStateStartsWithCondition(QUEST_SLOT, "forging;")),
+			ConversationStates.ATTENDING, null, new ChatAction() {
+				public void fire(final Player player, final Sentence sentence, final EventRaiser raiser) {
+
+					final String[] tokens = player.getQuest(QUEST_SLOT).split(";");
+					
+					final long delay = REQUIRED_MINUTES * MathHelper.MILLISECONDS_IN_ONE_MINUTE; 
+					final long timeRemaining = (Long.parseLong(tokens[1]) + delay)
+							- System.currentTimeMillis();
+
+					if (timeRemaining > 0L) {
+						raiser.say("Jeszcze nie skończyłem ulepszania twojego sztyletu. Wróć za "
+							+ TimeUtil.approxTimeUntil((int) (timeRemaining / 1000L))
+							+ ".");
+						return;
+					}
+
+					if (!games.stendhal.server.maps.quests.logic.QuestGoldFees.requirePaid(player, QUEST_SLOT, raiser)) { return; }
+                    raiser.say("Woda dopełniła moc, którą niosło już twoje ostrze. Odbierz ulepszony sztylet żywiołów; szafir znalazł w nim swoje miejsce. Dalsze próby zależą teraz od ciebie.");
 					player.addXP(100000);
 					player.addKarma(20);
 					final Item magicSword = SingletonRepository.getEntityManager().getItem("ulepszony sztylet żywiołów");
@@ -257,7 +391,7 @@ public class ElementalDagger2 extends AbstractQuest {
 
 		npc.add(ConversationStates.ATTENDING,
 			Arrays.asList("forge", "missing", "wykuj", "brakuje", "lista", "przypomnij"), 
-			new QuestStartedCondition(QUEST_SLOT),
+			new games.stendhal.server.entity.npc.condition.QuestStateStartsWithCondition(QUEST_SLOT, "start;"),
 			ConversationStates.ATTENDING,
 			null,
 			new ChatAction() {
@@ -309,7 +443,7 @@ public class ElementalDagger2 extends AbstractQuest {
 		super.addToWorld();
 		fillQuestInfo(
 				"Ulepszony Sztylet Żywiołów",
-				"Żywioł Wody w Ados ulepszy dla ciebie miecz żywiołów. Musisz tylko przynieść mu pare minerałów",
+				"Żywioł Wody w Ados potrafi ulepszyć sztylet żywiołów. Przynieś dotychczasowe ostrze i wskazane składniki; bez nich nie można rozpocząć pracy.",
 				false);
 		step_1();
 		step_2();
@@ -323,39 +457,18 @@ public class ElementalDagger2 extends AbstractQuest {
 	
 	@Override
 	public List<String> getHistory(final Player player) {
-			final List<String> res = new ArrayList<String>();
-			if (!player.hasQuest(QUEST_SLOT)) {
-				return res;
-			}
-			final String questState = player.getQuest(QUEST_SLOT);
-			res.add("Spotkałem Żywioł Wody w Ados.");
-			if (questState.equals("rejected")) {
-				res.add("Odmowiłem wykonania ulepszonego sztyletu żywiołów.");
-				return res;
-			} 
-			res.add("Aby ulepszyć mój sztylet żywiołów, Żywioł Wody potrzebuje: " + REQUIRED_IRON
-					+ " żelazo, "
-					+ REQUIRED_WOOD
-					+ " polana, "
-					+ REQUIRED_ELEMENTAL
-					+ " sztyletu żywiołów i "
-					+ REQUIRED_SAPPHIRE
-					+ " szafir, dokładnie w tej kolejności.");
-			if(questState.startsWith("start") && !"start;15;26;12;6".equals(questState)){
-				res.add("Nie zrobiłem wszystkiego. Żywioł Wody powie mi co jeszcze potrzebuje.");
-			} else if ("start;15;26;12;6".equals(questState) || !questState.startsWith("start")) {
-				res.add("Dostarczyłem wszystko co potrzebne dla Żywiołu Wody.");
-			}
-			if("start;15;26;12;6".equals(questState) && !player.hasKilled("błekitny smok")){
-				res.add("Aby udowodnić, że sam zdobyłem szafir muszę zabić błękitnego smoka.");
-			} 
-			if (questState.startsWith("forging")) {
-				res.add("Żywioł Wody ulepsza mi mój miecz.");
-			} 
-			if (isCompleted(player)) {
-				res.add("Za szafir i pare innach drobiazgów Żywioł Wody ulepszył mój sztylet żywiołów.	W nagrodę za ukończenie zadania otrzymałem: 100.000 pkt doświadczenie, 20 pkt karmy i ulepszony sztylet żywiołów.");
-			}
-			return res;	
+        final List<String> res = new ArrayList<String>();
+        if (!player.hasQuest(QUEST_SLOT)) return res;
+        res.add("Spotkałem Żywioł Wody w Ados.");
+        games.stendhal.common.QuestProgress progress = games.stendhal.server.core.rp.quest.JourneyQuestProgress.read(this,player);
+        if (isCompleted(player)) { res.add("Otrzymałem ulepszony sztylet żywiołów, 100000 XP postaci i 20 karmy."); return res; }
+        res.add(progress.getNextStep());
+        if (progress.getState()!=games.stendhal.common.QuestProgress.State.DECLINED) {
+            res.add("Materiały w kolejności dostaw: " + games.stendhal.server.core.rp.quest.JourneyQuestProgress.requirementsText(this) + ".");
+            for (games.stendhal.common.QuestProgress.Objective goal : progress.getObjectives())
+                if (goal.getCurrent()<goal.getRequired()) res.add(goal.getLabel()+" - pozostało: "+(goal.getRequired()-goal.getCurrent())+".");
+        }
+        return res;
 	}
 
 	@Override
@@ -372,4 +485,14 @@ public class ElementalDagger2 extends AbstractQuest {
 	public String getRegion() {
 		return Region.ADOS_CITY;
 	}
+
+    public static java.util.Map<String,Integer> getRequiredItems() {
+        java.util.Map<String,Integer> items=new java.util.LinkedHashMap<String,Integer>();
+        items.put("żelazo", REQUIRED_IRON);
+        items.put("polano", REQUIRED_WOOD);
+        items.put("sztylet żywiołów", REQUIRED_ELEMENTAL);
+        items.put("szafir", REQUIRED_SAPPHIRE);
+        return java.util.Collections.unmodifiableMap(items);
+    }
+
 }

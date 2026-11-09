@@ -277,6 +277,7 @@ public class stendhal {
 				j2DClient locclient = new j2DClient(client, userContext);
 				perceptionDispatch.register(locclient.getPerceptionListener());
 				locclient.startGameLoop();
+                games.stendhal.client.gui.tutorial.TutorialGuideController.get().uiReady();
 			}
 		});
 	}

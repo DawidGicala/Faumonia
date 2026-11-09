@@ -190,7 +190,11 @@ public class StendhalRPRuleProcessor implements IRPRuleProcessor {
 	@Override
 	public boolean checkGameVersion(final String game, final String version) {
 		try {
-			if (!game.equals(Configuration.getConfiguration().get("server_typeGame", "FaumoniaOnline"))) {
+			String configuredGame = Configuration.getConfiguration().get("server_typeGame", "FaumoniaOnline");
+			// Released clients use "faumonia"; older generated INIs use "FaumoniaOnline".
+			boolean faumoniaAlias = ("faumonia".equalsIgnoreCase(game) || "faumoniaonline".equalsIgnoreCase(game))
+					&& ("faumonia".equalsIgnoreCase(configuredGame) || "faumoniaonline".equalsIgnoreCase(configuredGame));
+			if (!game.equalsIgnoreCase(configuredGame) && !faumoniaAlias) {
 				logger.warn("Client for game " + game + " is trying to login to server for game " 
 						+ Configuration.getConfiguration().get("server_typeGame", "stendhal") 
 						+ ", as defined in server configuration file (usually server.ini) with key server_typeGame (defaults to \"stendhal\" if not present).");

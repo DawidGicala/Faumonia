@@ -12,6 +12,8 @@
  ***************************************************************************/
 package games.stendhal.server.maps.quests;
 
+import games.stendhal.server.entity.npc.action.DialogueRewardAction;
+
 import games.stendhal.common.grammar.Grammar;
 import games.stendhal.server.entity.npc.ChatAction;
 import games.stendhal.server.entity.npc.ConversationPhrases;
@@ -46,6 +48,15 @@ import java.util.List;
 import java.util.Map;
 
 public class ResourceForDiehelm extends AbstractQuest {
+
+    public static java.util.Map<String,Integer> getRequiredItems() {
+        games.stendhal.server.util.ItemCollection items=new games.stendhal.server.util.ItemCollection();
+        items.addFromQuestStateString(NEEDED_ITEMS);
+        java.util.Map<String,Integer> result=new java.util.LinkedHashMap<String,Integer>();
+        for(java.util.Map.Entry<String,Integer> e:items.entrySet()) result.put(e.getKey(),e.getValue());
+        return java.util.Collections.unmodifiableMap(result);
+    }
+
 
 	public static final String QUEST_SLOT = "resource_for_diehelm";
 
@@ -113,7 +124,7 @@ public class ResourceForDiehelm extends AbstractQuest {
 			Arrays.asList("surowce", "resource", "surowców"),
 			new QuestNotStartedCondition(QUEST_SLOT),
 			ConversationStates.QUEST_OFFERED,
-			"Mam pewne braki i potrzebuje kilku surowców. Może mi pomożesz?",
+			"Armia zużywa surowce szybciej, niż dostawcy uzupełniają magazyn. Potrzebuję żelaza oraz sztabek złota i mithrilu, dokładnie według spisu. Podejmiesz się zebrania dostawy?",
 			null);
 
 		npc.add(
@@ -122,8 +133,8 @@ public class ResourceForDiehelm extends AbstractQuest {
 			null,
 			ConversationStates.ATTENDING,
 			null,
-			new MultipleActions(new SetQuestAndModifyKarmaAction(QUEST_SLOT, NEEDED_ITEMS, 5.0),
-								new SayRequiredItemsFromCollectionAction(QUEST_SLOT, "Jak miło! Proszę przynieś mi te składniki: [items].")));
+			new MultipleActions(DialogueRewardAction.karma(new SetQuestAndModifyKarmaAction(QUEST_SLOT, NEEDED_ITEMS, 5.0)),
+								new SayRequiredItemsFromCollectionAction(QUEST_SLOT, "Zapisuję zamówienie: [items]. Przyjmę surowce partiami i odliczę każdą dostarczoną sztukę. Wróć do mnie, gdy będziesz mieć choć część ładunku.")));
 
 		npc.add(
 			ConversationStates.QUEST_OFFERED,
@@ -131,15 +142,9 @@ public class ResourceForDiehelm extends AbstractQuest {
 			null,
 			ConversationStates.ATTENDING,
 			"Ech... Cóż, niedobrze... Taka twoja wola.",
-			new SetQuestAndModifyKarmaAction(QUEST_SLOT, "rejected", -5.0));
+			DialogueRewardAction.karma(new SetQuestAndModifyKarmaAction(QUEST_SLOT, "rejected", -5.0)));
 
-		npc.add(
-			ConversationStates.ATTENDING,
-			"surowce",
-			null,
-			ConversationStates.ATTENDING,
-			"Mithril, żelazo, polano i takie tam...",
-			new ExamineChatAction("araula.png", "Diehelm Brui's drawing", "Arandula"));
+		
 
 	}
 
@@ -154,7 +159,7 @@ public class ResourceForDiehelm extends AbstractQuest {
 				null);
 
 		/* player asks what exactly is missing (says ingredients) */
-		npc.add(ConversationStates.ATTENDING, "surowce", null,
+		npc.add(ConversationStates.ATTENDING, "surowce", new QuestActiveCondition(QUEST_SLOT),
 				ConversationStates.QUESTION_2, null,
 				new SayRequiredItemsFromCollectionAction(QUEST_SLOT, "Potrzebuję [items]. Czy masz coś ze sobą?"));
 
@@ -170,15 +175,15 @@ public class ResourceForDiehelm extends AbstractQuest {
 				ConversationStates.QUESTION_2, "Dobrze, a co jeszcze masz?",
 				null);
 
-		ChatAction completeAction = new  MultipleActions(
+		ChatAction completeAction = new games.stendhal.server.entity.npc.action.QuestFeeAction(QUEST_SLOT, new  MultipleActions(
 				new SetQuestAction(QUEST_SLOT, "done"),
-				new SayTextAction("Dziękuje! Przyjmij ode mnie ten klucz za swoją pomoc."),
-				new IncreaseXPAction(1000000),
-				new IncreaseAtkXPAction(200000),
-				new IncreaseDefXPAction(250000),
-				new IncreaseKarmaAction(100),
-				new EquipItemAction("klucz do więzienia", 1)
-				);
+				new SayTextAction("Zgadza się, magazyn otrzymał wszystkie zamówione surowce. To była duża dostawa, a twoja wytrwałość zasługuje na uznanie. Przyjmij obiecaną nagrodę oraz klucz do więzienia."),
+				DialogueRewardAction.xp(1000000),
+				DialogueRewardAction.attackXP(200000),
+				DialogueRewardAction.defenseXP(250000),
+				DialogueRewardAction.karma(new IncreaseKarmaAction(100)),
+				DialogueRewardAction.item("klucz do więzienia", 1)
+				));
 
 		/* add triggers for the item names */
 		final ItemCollection items = new ItemCollection();
@@ -236,7 +241,7 @@ public class ResourceForDiehelm extends AbstractQuest {
 		super.addToWorld();
 		fillQuestInfo(
 				"Surowce dla Diehelm Brui",
-				"Sprzedawca w mieście mithrilbourgh potrzebuje kilku rzeczy. Może powinienem przynieść jej surowce, których potrzebuje?",
+				"Diehelm Brui uzupełnia zapasy surowców w Mithrilbourgh. Ustal z nim listę potrzebnych materiałów; możesz przynosić je stopniowo, podczas kolejnych wizyt.",
 				true);
 		prepareRequestingStep();
 		prepareBringingStep();

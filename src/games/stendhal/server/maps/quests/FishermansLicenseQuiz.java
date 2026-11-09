@@ -79,8 +79,12 @@ public class FishermansLicenseQuiz extends AbstractQuest {
 
 	private int currentSpeciesNo;
 
-	private static StendhalRPZone zone = SingletonRepository.getRPWorld().getZone(
-			"int_ados_fishermans_hut_west");
+	private StendhalRPZone quizZone() { return SingletonRepository.getRPWorld().getZone("int_ados_fishermans_hut_west"); }
+	private static FishermansLicenseQuiz activeQuiz;
+	public static Item displayedFish(SpeakerNPC npc, Player player) {
+		return activeQuiz != null && "Santiago".equals(npc.getName()) && npc.getAttending() == player
+			&& npc.getEngine().getCurrentState() == ConversationStates.QUESTION_1 ? activeQuiz.fishOnTable : null;
+	}
 
 	private Item fishOnTable;
 
@@ -111,7 +115,7 @@ public class FishermansLicenseQuiz extends AbstractQuest {
 	public void cleanUpTable() {
 		if (fishOnTable != null) {
 			try {
-				zone.remove(fishOnTable);
+				quizZone().remove(fishOnTable);
 			} catch (final RPObjectNotFoundException e) {
 				// The item timed out, or an admin destroyed it.
 				// So no need to clean up the table.
@@ -139,7 +143,7 @@ public class FishermansLicenseQuiz extends AbstractQuest {
 		fishOnTable.setDescription("Oto ryba.");
 
 		fishOnTable.setPosition(7, 4);
-		zone.add(fishOnTable);
+		quizZone().add(fishOnTable);
 	}
 
 	private long remainingTimeToWait(final Player player) {
@@ -147,6 +151,7 @@ public class FishermansLicenseQuiz extends AbstractQuest {
 			// The player has never tried the quiz before.
 			return 0L;
 		}
+        if ("passed".equals(player.getQuest(QUEST_SLOT)) || player.isQuestCompleted(QUEST_SLOT)) { return 0L; }
 		final long timeLastFailed = Long.parseLong(player.getQuest(QUEST_SLOT));
 		final long onedayInMilliseconds = 60 * 60 * 24 * 1000; 
 		final long timeRemaining = timeLastFailed + onedayInMilliseconds
@@ -154,6 +159,15 @@ public class FishermansLicenseQuiz extends AbstractQuest {
 
 		return timeRemaining;
 	}
+
+    private void finishPassedQuiz(Player player,EventRaiser npc) {
+        if (!"passed".equals(player.getQuest(QUEST_SLOT))) { return; }
+        if (!games.stendhal.server.maps.quests.logic.QuestGoldFees.requirePaid(player,QUEST_SLOT,npc)) { return; }
+        player.setQuest(QUEST_SLOT,"done");
+        player.addKarma(15);
+        player.addXP(500);
+        npc.say("Osiem poprawnych odpowiedzi i opłata za wystawienie uprawnień - część teoretyczną masz zaliczoną. Nie musisz zdawać jej ponownie. Zapytaj o #egzamin, gdy zechcesz przejść do połowu ryb.");
+    }
 
 	private void createQuizStep() {
 		final SpeakerNPC fisherman = npcs.get("Santiago");
@@ -167,7 +181,7 @@ public class FishermansLicenseQuiz extends AbstractQuest {
 						if (player.isQuestCompleted(FishermansLicenseCollector.QUEST_SLOT)) {
 							npc.say("Masz już kartę wędkarską i nie mam dla ciebie zadania.");
 						} else {
-							npc.say("Niczego nie potrzebuję, ale jeżeli chcesz to możesz zdać #egzamin na kartę wędkarską.");
+							npc.say("Dobry wędkarz powinien wiedzieć, co wyciąga z wody. Prowadzę #egzamin na kartę wędkarską: najpierw rozpoznawanie ośmiu ryb, potem część praktyczną. Jeśli chcesz spróbować, omówmy zasady.");
 						}
 					}
 				});
@@ -178,8 +192,12 @@ public class FishermansLicenseQuiz extends AbstractQuest {
 					public void fire(final Player player, final Sentence sentence, final EventRaiser npc) {
 						if (player.isQuestCompleted(FishermansLicenseCollector.QUEST_SLOT)) {
 							npc.say("Już masz kartę wędkarską.");
-						} else if (player.isQuestCompleted(QUEST_SLOT)) {
-							npc.say("Jesteś gotowy na drugą część egzaminu?");
+						} else if ("passed".equals(player.getQuest(QUEST_SLOT))) {
+                            finishPassedQuiz(player,npc);
+                        } else if (player.hasQuest(FishermansLicenseCollector.QUEST_SLOT) && !player.isQuestInState(FishermansLicenseCollector.QUEST_SLOT, "rejected")) {
+                            npc.say("Rozpoznawanie ryb masz już za sobą. Teraz przynieś brakujące gatunki do części praktycznej; powiedz #rodzaju, a sprawdzimy twoją listę.");
+                        } else if (player.isQuestCompleted(QUEST_SLOT)) {
+							npc.say("Potrafisz już rozpoznać wszystkie osiem gatunków. Teraz sprawdzimy praktykę: przynieś po jednej rybie każdego rodzaju, a zapamiętam kolejne dostawy. Przyjmujesz drugą część egzaminu?");
 							npc.setCurrentState(ConversationStates.QUEST_2_OFFERED);
 						} else {
 							final long timeRemaining = remainingTimeToWait(player);
@@ -188,7 +206,7 @@ public class FishermansLicenseQuiz extends AbstractQuest {
 									+ TimeUtil.approxTimeUntil((int) (timeRemaining / 1000L))
 									+ ".");
 							} else {
-								npc.say("Jesteś gotowy na pierwszą część egzaminu?");
+								npc.say("Postawię na stole osiem ryb, jedną po drugiej. Wpisuj ich nazwy; pomyłka lub przerwanie próby oznacza oczekiwanie do następnego dnia. Dopiero po zdaniu poproszę o 500 monet za wystawienie uprawnień. Zaczynamy?");
 								npc.setCurrentState(ConversationStates.QUEST_OFFERED);
 							}
 						}
@@ -203,7 +221,7 @@ public class FishermansLicenseQuiz extends AbstractQuest {
 		fisherman.add(ConversationStates.QUEST_OFFERED,
 				ConversationPhrases.YES_MESSAGES, null,
 				ConversationStates.QUESTION_1,
-				"Dobrze. Pierwsze pytanie brzmi: Co to za rodzaj ryby?",
+				"Przyjrzyj się rybie leżącej na stole. Wpisz jej nazwę w polu własnej odpowiedzi i wyślij ją do mnie. Jaki to gatunek?",
 				new ChatAction() {
 					public void fire(final Player player, final Sentence sentence, final EventRaiser npc) {
 						startQuiz();
@@ -224,18 +242,16 @@ public class FishermansLicenseQuiz extends AbstractQuest {
 								sentence.getNormalized().endsWith(species) ||
 								sentence.getTriggerExpression().matches(ConversationParser.createTriggerExpression(species))) {
 							if (currentSpeciesNo == speciesList.size() - 1) {
-								npc.say("Zgadza się! Gratulacje zdałeś pierwszą część #egzaminu.");
-								cleanUpTable();
-								player.setQuest(QUEST_SLOT, "done");
-								player.addKarma(15);
-								player.addXP(500);
+                                cleanUpTable();
+                                player.setQuest(QUEST_SLOT, "passed");
+                                finishPassedQuiz(player,npc);
 							} else {
-								npc.say("Zgadza się! Jaki jest rodzaj tej ryby?");
+								npc.say("Dobrze rozpoznana. Teraz przyjrzyj się następnej rybie na stole i wpisz jej gatunek.");
 								putNextFishOnTable();
 								npc.setCurrentState(ConversationStates.QUESTION_1);
 							}
 						} else {
-							npc.say("Pomyliłeś się. Niestety oblałeś, ale możesz spróbować jutro.");
+							npc.say("To niestety nie ten gatunek. Na dziś kończymy próbę; do kolejnej możesz przystąpić po upływie doby. Warto w tym czasie przyjrzeć się rybom podczas połowów.");
 							cleanUpTable();
 							// remember the current time, as you can't do the
 							// quiz twice a day.
@@ -258,9 +274,10 @@ public class FishermansLicenseQuiz extends AbstractQuest {
 	@Override
 	public void addToWorld() {
 		super.addToWorld();
+		activeQuiz=this;
 		fillQuestInfo(
 				"Karta Rybacka Quiz",
-				"Wędkarz Santiago chce sprawdzić moją więdze o rybach.",
+				"Santiago z Ados sprawdza, czy przyszli wędkarze rozpoznają ryby. Przejdź jego egzamin, aby móc rozpocząć praktyczną część starań o kartę wędkarską.",
 				false);
 		createQuizStep();
 	}

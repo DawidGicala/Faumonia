@@ -15,7 +15,7 @@ package games.stendhal.server.maps.quests;
 import games.stendhal.common.grammar.Grammar;
 import games.stendhal.server.entity.npc.ConversationPhrases;
 import games.stendhal.server.entity.npc.ConversationStates;
-import games.stendhal.server.entity.npc.SpeakerNPC;
+import games.stendhal.server.core.rp.quest.MasterStage;
 import games.stendhal.server.entity.npc.action.DropRecordedItemAction;
 import games.stendhal.server.entity.npc.action.IncreaseKarmaAction;
 import games.stendhal.server.entity.npc.action.IncreaseAtkXPAction;
@@ -79,7 +79,7 @@ public class MainTask14 extends AbstractQuest {
 			res.add("Nie chce podjąć się głównego zadania na wojownika Faumonii");
 			return res;
 		}
-		res.add("Zanim Mistrz Faumonii XIV przyzna mi kolejne zadanie musze wykonać kilka zadań.	Powinienem wybrać się na egzotyczną wyspę Athor i znaleźć turyste Johna a nastepnie wykonać dla niego zadanie. Podobno na wyspę trafie za pomocą statku. Powinienem na niego trafić idąć po ścieżce na południowy-zachód krainy.	Na południe od miasta Kirdneh, w lasie znajduje się wioska elfów albinsów. Powinienem się tam wybrać i odnaleźć Orchiwalda a nastepnie wykonać dla niego zadanie.");
+		res.add("Zanim Mistrz Faumonii przyzna mi kolejne zadanie musze wykonać kilka zadań.	Powinienem wybrać się na egzotyczną wyspę Athor i znaleźć turyste Johna a nastepnie wykonać dla niego zadanie. Podobno na wyspę trafie za pomocą statku. Powinienem na niego trafić idąć po ścieżce na południowy-zachód krainy.	Na południe od miasta Kirdneh, w lasie znajduje się wioska elfów albinsów. Powinienem się tam wybrać i odnaleźć Orchiwalda a nastepnie wykonać dla niego zadanie.");
 		if (!isCompleted(player)) {
 			res.add("Żeby ukończyć główne zadanie musze zanieść pozyskane ziołą do zielarzy i przynieść " + Grammar.a_noun(player.getRequiredItemName(QUEST_SLOT,0)) + ".");
 		}
@@ -90,7 +90,7 @@ public class MainTask14 extends AbstractQuest {
 	}
 	
 	private void checkCollectingQuests() {
-		final SpeakerNPC npc = npcs.get("Mistrz Faumonii XIV");
+		final MasterStage npc = MasterStage.register(14, this);
 		
 		npc.add(
 		ConversationStates.IDLE,
@@ -130,7 +130,7 @@ public class MainTask14 extends AbstractQuest {
 
 	private void requestItem() {
 		
-		final SpeakerNPC npc = npcs.get("Mistrz Faumonii XIV");
+		final MasterStage npc = MasterStage.register(14, this);
 		final Map<String,Integer> items = new HashMap<String, Integer>();
 		
 		items.put("napar z kokudy",8);
@@ -152,7 +152,7 @@ public class MainTask14 extends AbstractQuest {
 	}
 						
 	private void collectItem() {
-			final SpeakerNPC npc = npcs.get("Mistrz Faumonii XIV");
+			final MasterStage npc = MasterStage.register(14, this);
 			
 					npc.add(ConversationStates.IDLE,
 				ConversationPhrases.GREETING_MESSAGES,
@@ -193,7 +193,7 @@ public class MainTask14 extends AbstractQuest {
 	public void addToWorld() {
 		fillQuestInfo(
 				"Wojownik Faumonii 14",
-				"Mistrz Faumonii XIV ma dla ciebie czternaste główne zadanie które pomoże ci zostać wielkim wojownikiem Faumonii.",
+				"Mistrz Faumonii ma dla ciebie czternaste główne zadanie które pomoże ci zostać wielkim wojownikiem Faumonii.",
 				true);
 		
 		checkCollectingQuests();
@@ -214,7 +214,7 @@ public class MainTask14 extends AbstractQuest {
 
 	@Override
 	public String getNPCName() {
-		return "Mistrz Faumonii XIV";
+		return MasterStage.NPC_NAME;
 	}
 	
 	@Override

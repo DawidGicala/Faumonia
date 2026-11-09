@@ -54,6 +54,9 @@ public class BoyNPC implements ZoneConfigurator {
 
 			@Override
 			protected void createDialog() {
+                addReply("wskazówki", "Margaret w tawernie Semos sprzedaje puste flasze. Najpierw pokaż jedną mnie, potem zanieś ją Ilisie do świątyni. Uzdrowicielka powie ci, czego jeszcze potrzeba.");
+                addJob("Zwykle nie siedzę tak bezczynnie, ale choroba odebrała mi siły. Liczę, że Ilisa pomoże mi wrócić do zdrowia.");
+                addReply("tematy", "Możemy wrócić do twojej sprawy albo porozmawiać o czymś innym. Co chcesz wiedzieć?");
 				add(ConversationStates.IDLE,
 						ConversationPhrases.GREETING_MESSAGES,
 						new AndCondition(
@@ -108,7 +111,7 @@ public class BoyNPC implements ZoneConfigurator {
 		});
 
 		npc.setEntityClass("childnpc");
-		npc.setDescription("Oto młody chłopak Tad. Wygląda źle, a jego twarz jest blada.");
+		npc.setDescription("Widzisz Tada, bladego chłopca odpoczywającego w hostelu Semos. Co chwilę przerywa rozmowę kaszlem.");
 
 		npc.setPosition(18, 21);
 		npc.setDirection(Direction.LEFT);

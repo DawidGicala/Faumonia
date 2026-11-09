@@ -64,8 +64,10 @@ public class HealerNPC implements ZoneConfigurator {
 
 			@Override
 			protected void createDialog() {
+                addReply("wskazówki", "Najpierw potrzebuję mieczyka; w jego sprawie porozmawiaj z Hackimem Easso w kuźni Semos. Dopiero potem zbierz trzy lilie, kokudę, napój z winogron i czarną perłę. Miksturę przygotuję, kiedy będę mieć cały zestaw.");
+                addReply("tematy", "Możemy wrócić do twojej sprawy albo porozmawiać o czymś innym. Co chcesz wiedzieć?");
 			        addGreeting("Pozdrawiam. W czym mogę #pomóc?");
-				addJob("Praktykuję alchemię i mam zdolności do leczenia innych.");
+				addJob("Łączę alchemię z leczeniem. Pod ziemią szczególnie docenia się wiedzę o roślinach i świetle, dlatego staram się dzielić nią rozsądnie.");
 				new HealerAdder().addHealer(this, 500);
 				addReply(Arrays.asList("magical", "magiczną"), "My wszyscy mamy zdolności magiczne. Oczywiście różnego rodzaju. Moim ulubionym jest Sunlight Spell do utrzymywania trawy i kwiatków rosnących pod ziemią.");
 				addHelp("Mam #magiczną moc uzdrowienia twoich dolegliwości. Powiedz tylko #ulecz.");
@@ -74,7 +76,7 @@ public class HealerNPC implements ZoneConfigurator {
 			}
 		};
 
-		npc.setDescription("Oto cicha kobieta wyglądająca na życzliwą.");
+		npc.setDescription("Widzisz Salvę Mattori, spokojną alchemiczkę z podziemnego miasta magów. W jej dłoniach nawet zwykłe zioła wydają się cennym surowcem.");
 		npc.setEntityClass("cloakedwomannpc");
 		npc.setPosition(5, 25);
 		npc.initHP(100);

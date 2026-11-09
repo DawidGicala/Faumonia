@@ -43,12 +43,14 @@ public class VerdanNPC implements ZoneConfigurator {
 
 			@Override
 			protected void createDialog() {
+                games.stendhal.server.entity.npc.dialogue.HuntDialogueTopics.install(this);
+                addJob("Nie wszystkie sprawy załatwia się głośną rozmową przy wejściu do ratusza. Interesuje mnie sytuacja w podziemiach zamku Ados i szukam kogoś, kto wykona tam konkretne zlecenie.");
 				addGreeting("Witaj. Co cie do mnie sprowadza? Strasznie tu spokojnie.");
 				addGoodbye("Na razie.");
 			}
 		};
 
-		elemental.setDescription("Oto Verdan. Wygląda trochę dziwnie.");
+		elemental.setDescription("Widzisz Verdana w ratuszu Ados. Rozmawia spokojnie, lecz wyraźnie dobiera słowa.");
 		elemental.setEntityClass("npc_bazylhalszka");
 		elemental.setPosition(34, 5);
 		elemental.setDirection(Direction.LEFT);

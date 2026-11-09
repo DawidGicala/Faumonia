@@ -102,13 +102,13 @@ public class ElfPrincess extends AbstractQuest {
 			ConversationPhrases.QUEST_MESSAGES,
 			new OrCondition(new QuestNotStartedCondition(QUEST_SLOT), new QuestInStateCondition(QUEST_SLOT, 0, "rejected")),
 			ConversationStates.QUEST_OFFERED,
-			"Znajdziesz wędrowną sprzedawczynię kwiatów Różę Kwiaciarkę i weźmiesz od niej orchideę mój ulubiony kwiatek?",
+			"Wśród kamieni wieży najbardziej brakuje mi świeżych kwiatów. Róża Kwiaciarka podróżuje po krainie i potrafi wybrać naprawdę piękne orchidee. Odszukasz ją i przyniesiesz jedną dla mnie?",
 			null);
 
         // shouldn't happen: is a repeatable quest
 		npc.add(ConversationStates.ATTENDING,
 			ConversationPhrases.QUEST_MESSAGES,
-			new QuestCompletedCondition("QUEST_SLOT"),
+			new QuestCompletedCondition(QUEST_SLOT),
 			ConversationStates.ATTENDING,
 			"Dziękuję, ale mam pełno kwiatków.", null);
 
@@ -130,7 +130,7 @@ public class ElfPrincess extends AbstractQuest {
 		npc.add(ConversationStates.QUEST_OFFERED,
 			ConversationPhrases.YES_MESSAGES, null,
 			ConversationStates.ATTENDING,
-			"Dziękuję! Gdy będziesz miał to powiedz #kwiatek, a wtedy będę wiedziała, że go masz. W zamian dam Ci nagrodę.",
+			"Dziękuję. Poproś Różę Kwiaciarkę o orchideę dla Tywysogi, a potem wróć do mnie na szczyt wieży Nalwor. Gdy będziesz mieć kwiat, powiedz #kwiatek.",
 			new MultipleActions(new SetQuestAction(QUEST_SLOT, 0, "start"),
 								new IncreaseKarmaAction(10.0)));
 
@@ -152,8 +152,19 @@ public class ElfPrincess extends AbstractQuest {
 							 new QuestInStateCondition(QUEST_SLOT, 0, "start"),
 							 new PlayerCanEquipItemCondition("orchidea"),
                              new TimePassedCondition(QUEST_SLOT, 1, DELAY)),
-			ConversationStates.IDLE, 
-			"Witaj. Mój daleki wzrok powiedział mi, że potrzebujesz kwiatek dla pięknej dziewczyny. Oto on i dozobaczenia.",
+			ConversationStates.ATTENDING, 
+			"Orchidea dla Tywysogi? Mam odpowiedni kwiat, delikatny i świeży. Weź go ostrożnie i zanieś księżniczce na szczyt wieży Nalwor.",
+			new MultipleActions(new EquipItemAction("orchidea", 1, true), 
+                                new SetQuestAction(QUEST_SLOT, 0, "got_flower"), 
+                                new SetQuestToTimeStampAction(QUEST_SLOT, 1)));
+        // Reuse the native stage and its guards inside the current conversation.
+        rose.add(ConversationStates.ATTENDING, "kwiat księżniczki",
+			new AndCondition(new games.stendhal.server.entity.npc.condition.AlwaysTrueCondition(),
+							 new QuestInStateCondition(QUEST_SLOT, 0, "start"),
+							 new PlayerCanEquipItemCondition("orchidea"),
+                             new TimePassedCondition(QUEST_SLOT, 1, DELAY)),
+			ConversationStates.ATTENDING, 
+			"Orchidea dla Tywysogi? Mam odpowiedni kwiat, delikatny i świeży. Weź go ostrożnie i zanieś księżniczce na szczyt wieży Nalwor.",
 			new MultipleActions(new EquipItemAction("orchidea", 1, true), 
                                 new SetQuestAction(QUEST_SLOT, 0, "got_flower"), 
                                 new SetQuestToTimeStampAction(QUEST_SLOT, 1)));
@@ -165,8 +176,17 @@ public class ElfPrincess extends AbstractQuest {
 								 new QuestInStateCondition(QUEST_SLOT, 0, "start"),
                                  new TimePassedCondition(QUEST_SLOT, 1, DELAY),
 								 new NotCondition(new PlayerCanEquipItemCondition("orchidea"))),
-				ConversationStates.IDLE, 
-				"Szkoda, że nie masz miejsca, aby wziąść ode mnie te piękny kwiat. Wróć, gdy będziesz mógł wziąść ten cenny kwiat bez uszkadzania płatków.",
+				ConversationStates.ATTENDING, 
+				"Orchidea jest gotowa, ale twój plecak jest pełny. Zrób miejsce, żeby płatki nie zostały zgniecione. Potem znów zapytaj mnie o kwiat księżniczki.",
+				null);
+        // Reuse the native stage and its guards inside the current conversation.
+        rose.add(ConversationStates.ATTENDING, "kwiat księżniczki",
+				new AndCondition(new games.stendhal.server.entity.npc.condition.AlwaysTrueCondition(),
+								 new QuestInStateCondition(QUEST_SLOT, 0, "start"),
+                                 new TimePassedCondition(QUEST_SLOT, 1, DELAY),
+								 new NotCondition(new PlayerCanEquipItemCondition("orchidea"))),
+				ConversationStates.ATTENDING, 
+				"Orchidea jest gotowa, ale twój plecak jest pełny. Zrób miejsce, żeby płatki nie zostały zgniecione. Potem znów zapytaj mnie o kwiat księżniczki.",
 				null);
 		
         // don't give the flower if one was given within the last 5 minutes
@@ -175,11 +195,19 @@ public class ElfPrincess extends AbstractQuest {
 				new AndCondition(new GreetingMatchesNameCondition(rose.getName()),
 								 new QuestInStateCondition(QUEST_SLOT, 0, "start"),
                                  new NotCondition(new TimePassedCondition(QUEST_SLOT, 1, DELAY))),
-			ConversationStates.IDLE,
-				"Dałam tobie kwiat pięć minut temu! Jej Królewska Wysokość może się nimi cieszyć przez jakiś czas.",
+			ConversationStates.ATTENDING,
+				"Dopiero niedawno wydawałam ci orchideę. Zanim przygotuję kolejną, musi minąć pięć minut od poprzedniego odbioru. Wróć za chwilę, jeśli księżniczka ponownie poprosiła o kwiat.",
+				null);
+        // Reuse the native stage and its guards inside the current conversation.
+        rose.add(ConversationStates.ATTENDING, "kwiat księżniczki",
+				new AndCondition(new games.stendhal.server.entity.npc.condition.AlwaysTrueCondition(),
+								 new QuestInStateCondition(QUEST_SLOT, 0, "start"),
+                                 new NotCondition(new TimePassedCondition(QUEST_SLOT, 1, DELAY))),
+			ConversationStates.ATTENDING,
+				"Dopiero niedawno wydawałam ci orchideę. Zanim przygotuję kolejną, musi minąć pięć minut od poprzedniego odbioru. Wróć za chwilę, jeśli księżniczka ponownie poprosiła o kwiat.",
 				null);
 	    
-	    final ChatCondition lostFlowerCondition = new AndCondition(new GreetingMatchesNameCondition(rose.getName()),
+	    final ChatCondition lostFlowerCondition = new AndCondition(
 				 // had got the flower before and was supposed to take it to the princess next
 	    		 new QuestInStateCondition(QUEST_SLOT, 0, "got_flower"),
 				 // check chest and so on first - maybe the player does still have it (though we can't check house chests or the floor)
@@ -197,6 +225,12 @@ public class ElfPrincess extends AbstractQuest {
 	    // but that was a while ago that we changed it (November 2010?)
 		rose.add(ConversationStates.IDLE,
 			ConversationPhrases.GREETING_MESSAGES,
+			new AndCondition(new GreetingMatchesNameCondition(rose.getName()), lostFlowerCondition),
+			ConversationStates.QUESTION_1, 
+			"Cześć. Zgubiłeś kwiatek, który dałam ostatnio? Jeżeli potrzebujesz następny to powiedz #tak, ale to strata dla mnie, że muszę dać ci kolejny więc lepiej bądź pewny!",
+			null);
+        // Reuse the native stage and its guards inside the current conversation.
+        rose.add(ConversationStates.ATTENDING, "kwiat księżniczki",
 			lostFlowerCondition,
 			ConversationStates.QUESTION_1, 
 			"Cześć. Zgubiłeś kwiatek, który dałam ostatnio? Jeżeli potrzebujesz następny to powiedz #tak, ale to strata dla mnie, że muszę dać ci kolejny więc lepiej bądź pewny!",
@@ -205,7 +239,7 @@ public class ElfPrincess extends AbstractQuest {
 		rose.add(ConversationStates.QUESTION_1,
 				ConversationPhrases.YES_MESSAGES,
 				lostFlowerCondition,
-				ConversationStates.IDLE,
+				ConversationStates.ATTENDING,
 				"Oto nowe kwiatki dla pięknej pani, ale nie zgub ich.",
 				new MultipleActions(new EquipItemAction("orchidea", 1, true), 
                         new SetQuestAction(QUEST_SLOT, 0, "got_flower"), 
@@ -216,7 +250,7 @@ public class ElfPrincess extends AbstractQuest {
 		rose.add(ConversationStates.QUESTION_1,
 				ConversationPhrases.NO_MESSAGES,
 				lostFlowerCondition,
-				ConversationStates.IDLE,
+				ConversationStates.ATTENDING,
 				"Nie martw się. Na pewno gdzieś je masz!",
 				null);
 	    
@@ -227,7 +261,15 @@ public class ElfPrincess extends AbstractQuest {
 		    	new AndCondition(new GreetingMatchesNameCondition(rose.getName()),
 		    					 new QuestNotInStateCondition(QUEST_SLOT, 0, "start"),
 		    					 new NotCondition(lostFlowerCondition)),
-		    	ConversationStates.IDLE,
+		    	ConversationStates.ATTENDING,
+		    	"Dziś nie mam nic dla Ciebie, przykro mi. Wyruszam teraz w dalszą drogę. Dowidzenia.",
+			    null);
+        // Reuse the native stage and its guards inside the current conversation.
+        rose.add(ConversationStates.ATTENDING, "kwiat księżniczki",
+		    	new AndCondition(new games.stendhal.server.entity.npc.condition.AlwaysTrueCondition(),
+		    					 new QuestNotInStateCondition(QUEST_SLOT, 0, "start"),
+		    					 new NotCondition(lostFlowerCondition)),
+		    	ConversationStates.ATTENDING,
 		    	"Dziś nie mam nic dla Ciebie, przykro mi. Wyruszam teraz w dalszą drogę. Dowidzenia.",
 			    null);
 	}
@@ -263,7 +305,7 @@ public class ElfPrincess extends AbstractQuest {
 			Arrays.asList("flower", "orchidea", "kwiatek"),
 			new NotCondition(new PlayerHasItemWithHimCondition("orchidea")),
 			ConversationStates.ATTENDING,
-			"Widzę, że nie masz przy sobie orchidei. Róża Kwiaciarka przemierza całą wyspę i jestem pewna, że pewnego dnia ją spotkasz!",
+			"Nie widzę przy tobie orchidei, o którą prosiłam. Odszukaj wędrowną Różę Kwiaciarkę i odbierz kwiat przeznaczony dla mnie. Będę czekać tutaj, w wieży.",
 			null);
 
 	}
@@ -273,7 +315,7 @@ public class ElfPrincess extends AbstractQuest {
 		super.addToWorld();
 		fillQuestInfo(
 				"Orchidea dla Księżniczki Elfów",
-				"Tywysoga Księżniczka Elfów z Nalwor Tower, zleciła znalezienie cudownej sprzedawczyni Róży Kwiaciarki, aby odebrać od niej cenną orchideę.",
+				"Tywysoga, księżniczka elfów w wieży Nalwor, tęskni za świeżymi kwiatami. Odszukaj Różę Kwiaciarkę, odbierz zamówioną orchideę i zanieś ją księżniczce.",
 				false);
 		offerQuestStep();
 		getFlowerStep();

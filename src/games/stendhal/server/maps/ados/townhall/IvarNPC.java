@@ -53,15 +53,16 @@ public class IvarNPC implements ZoneConfigurator {
 
 			@Override
 			protected void createDialog() {
+                games.stendhal.server.entity.npc.dialogue.HuntDialogueTopics.install(this);
 				addGreeting("Witam. Jak mogę pomóc?");
-				addJob("Mam tu ogromne zamieszanie, więc nie przeszkadzaj mi za bardzo! Te przeklęte potwory w tunelach chaosu napadają na naszych kupców i powodują chaos. Muszę się tym zająć.");
+				addJob("Pilnuję spraw miasta, choć ostatnio niemal każda kończy się rozmową o kupcach i potworach. Ataki w tunelach odbijają się na handlu Ados, więc szukam doświadczonych wojowników do pomocy.");
 				addHelp("To prawdziwa tragedia! Potwory w tunelach chaosu sieją spustoszenie, atakują naszych kupców i niszczą nasze korytarze. Przez te ataki nasze finanse są w opłakanym stanie. Potrzebujemy pomocy, by sobie z tym poradzić.");
 				addOffer("Nie zajmuję się sprzedażą. Jestem urzędnikiem, a nie handlarzem. Moim zadaniem jest dbanie o finanse miasta.");
 				addQuest("Musimy znaleźć sposób na rozwiązanie problemów z potworami w tunelach chaosu. Te ataki nie mogą trwać wiecznie");
 				addGoodbye("Do widzenia. Proszę, nie zawracaj mi głowy, muszę zająć się bałaganem, który te potwory wywołały.");
 			}
 		};
-		npc.setDescription("Oto urzędnik z ratusza Ados, zaabsorbowany pracą nad problemami miasta. W jego biurze panuje zamieszanie z powodu ataków potworów z tuneli chaosu, które destabilizują handel i finanse miasta. Pomimo natłoku obowiązków, stara się znaleźć rozwiązanie tych problemów. Może warto z nim porozmawiać i dowiedzieć się więcej o sytuacji w tunelach chaosu.");
+		npc.setDescription("Widzisz Ivara, urzędnika ratusza Ados. Wśród codziennych spraw najbardziej martwią go meldunki z tuneli chaosu.");
 		npc.setEntityClass("meatandfishsmokernpc");
 		npc.setPosition(13, 13);
 		npc.initHP(100);

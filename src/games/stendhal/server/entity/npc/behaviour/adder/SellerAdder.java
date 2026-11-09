@@ -49,6 +49,7 @@ public class SellerAdder {
 	 * Remark: There is only one conversation between a player and the NPC at any time.
 	 */
 	private ItemParserResult currentBehavRes;
+	private int currentQuotedPrice;
 	
 	public void addSeller(final SpeakerNPC npc, final SellerBehaviour behaviour) {
 		addSeller(npc, behaviour, true);
@@ -58,6 +59,7 @@ public class SellerAdder {
 		final Engine engine = npc.getEngine();
 
 		merchantsRegister.add(npc.getName(), sellerBehaviour);
+		boolean dialogueSeller = games.stendhal.server.entity.npc.dialogue.NpcDialogueItems.registerSeller(npc, sellerBehaviour);
 		
 		if (offer) {
 			engine.add(
@@ -68,6 +70,10 @@ public class SellerAdder {
 					ConversationStates.ATTENDING, "Sprzedaję "
 									+ Grammar.enumerateCollection(sellerBehaviour.dealtItems())
 							+ ".", null);
+			if (dialogueSeller) {
+				engine.add(ConversationStates.ATTENDING, Arrays.asList("sklep", "shop"), null, false,
+						ConversationStates.ATTENDING, "Sprzedaję " + Grammar.enumerateCollection(sellerBehaviour.dealtItems()) + ".", null);
+			}
 		}
 
 		engine.add(ConversationStates.ATTENDING, Arrays.asList("buy", "kupię"), new SentenceHasErrorCondition(),
@@ -137,9 +143,18 @@ public class SellerAdder {
 							builder.append(Grammar.itthem(res.getAmount()));
 							builder.append("?");
 
+							if (dialogueSeller) {
+								builder.setLength(0);
+								if (player.isBadBoy()) { builder.append("Ze względu na twoją złą aurę cena jest wyższa. "); }
+								builder.append("Mogę sprzedać ci: ").append(chosenItemName).append(" (")
+										.append(res.getAmount()).append(" szt.). Cena wynosi ").append(price)
+										.append(" monet. Potwierdzasz zakup?");
+							}
 							raiser.say(builder.toString());
 
 							currentBehavRes = res;
+							currentQuotedPrice = price;
+							games.stendhal.server.entity.npc.dialogue.NpcDialogueService.quotedPurchase(npc,player,chosenItemName,res.getAmount(),price);
 							npc.setCurrentState(ConversationStates.BUY_PRICE_OFFERED); // success
     						} else {
 							raiser.say("Ile " + Grammar.plural(chosenItemName) + " chcesz kupić?!");
@@ -152,6 +167,24 @@ public class SellerAdder {
 				false, ConversationStates.ATTENDING,
 				null, new ChatAction() {
 					public void fire(final Player player, final Sentence sentence, final EventRaiser raiser) {
+						if (currentBehavRes == null) {
+							raiser.say("Zapytaj ponownie o przedmiot, który chcesz kupić.");
+							return;
+						}
+						if (!sellerBehaviour.getTransactionCondition().fire(player, sentence, npc)) {
+							currentBehavRes = null;
+							sellerBehaviour.getRejectedTransactionAction().fire(player, sentence, raiser);
+							return;
+						}
+						int actualPrice = sellerBehaviour.getCharge(currentBehavRes, player);
+						if (player.isBadBoy()) {
+							actualPrice = (int) (SellerBehaviour.BAD_BOY_BUYING_PENALTY * actualPrice);
+						}
+						if (actualPrice != currentQuotedPrice) {
+							currentBehavRes = null;
+							raiser.say("Cena zmieniła się od naszej wyceny. Niczego nie pobrano. Wybierz przedmiot ponownie, aby potwierdzić aktualną cenę.");
+							return;
+						}
 						final String itemName = currentBehavRes.getChosenItemName();
 						logger.debug("Selling a " + itemName + " to player " + player.getName());
 

@@ -57,16 +57,18 @@ public class LittleGirlNPC implements ZoneConfigurator {
 			}
 
 			@Override
-			protected void createDialog() {	
+			protected void createDialog() {
+                addReply("wskazówki", "Mamusia, Mrs Jones, siedzi na ławce obok placu zabaw. Najpierw porozmawiaj z nią o pozwoleniu, a potem kup jedną porcję lodów u Sama w ogrodach Kalavan. Przynieś je tutaj, żebym nie musiała oddalać się od mamy.");
+                addReply("tematy", "Możemy wrócić do twojej sprawy albo porozmawiać o czymś innym. Co chcesz wiedzieć?");	
 				// greeting and quest in maps/quests/IcecreamForAnnie.java
 			addOffer("Jestem małą dziewczynką. Nie mam nic do zaoferowania.");
-			addJob("Pomagam mojej mamusi.");
+			addJob("Pomagam mamusi, a potem mogę pobawić się w ogrodzie. Tylko od tego biegania robi mi się strasznie gorąco!");
 			addHelp("Zapytaj mamusi.");
 			addGoodbye("Ta ta.");
 			}
 		};
 
-		npc.setDescription("Oto mała dziewczynka, bawiąca się na placu zabaw.");
+		npc.setDescription("Widzisz Annie Jones bawiącą się w ogrodach Kalavan. Jej mama czuwa przy pobliskiej ławce.");
 		npc.setEntityClass("pinkgirlnpc");
 		npc.setPosition(44, 90);
 		npc.initHP(100);

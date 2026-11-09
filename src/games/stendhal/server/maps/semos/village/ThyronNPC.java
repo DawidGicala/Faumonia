@@ -62,29 +62,33 @@ protected void createDialog() {
 
     String greetingBasis = "Witaj, wojowniku! Stoję tutaj przy #przejściu, aby wyjaśnić, co musisz zrobić, by ruszyć dalej. " +
                            "Mogę opowiedzieć ci o #mistrzach #gry, #przejściu, #czerwonym #domku, #zadaniach, #jedzeniu, #piciu i wielu innych rzeczach. " +
-                           "Zapytaj śmiało, a chętnie pomogę! Pamiętaj – słowa podświetlone na niebiesko to te, których możesz użyć w rozmowie!";
+                           "Zapytaj śmiało, a chętnie pomogę! Pamiętaj - słowa podświetlone na niebiesko to te, których możesz użyć w rozmowie!";
 
     add(
             ConversationStates.IDLE,
             ConversationPhrases.GREETING_MESSAGES,
             new AndCondition(
-                    new LevelLessThanCondition(600)
+                    new LevelLessThanCondition(320)
             ),
             ConversationStates.ATTENDING,
-            greetingBasis + "Pamiętaj, aby przygotować się dobrze przed wyruszeniem dalej – wykonaj #zadanie w #czerwonym #domku po lewej stronie.",
+            greetingBasis + "Pamiętaj, aby przygotować się dobrze przed wyruszeniem dalej - wykonaj #zadanie w #czerwonym #domku po lewej stronie.",
             null);
 
-    addHelp("Jeśli potrzebujesz szczegółów, zapytaj mnie o #mistrzów #gry, #barierę, #zadania, #jedzenie lub #picie. Pamiętaj – słowa podświetlone na niebiesko to klucz do dalszej rozmowy!");
+    add(ConversationStates.IDLE, ConversationPhrases.GREETING_MESSAGES,
+            new LevelGreaterThanCondition(319), ConversationStates.ATTENDING,
+            "Dobrze widzieć doświadczonego wojownika. Nadal pilnuję przejścia, ale pomagam też przygotować wyprawę Mistrza; możemy omówić #okucia #wyprawy.", null);
+
+    addHelp("Jeśli potrzebujesz szczegółów, zapytaj mnie o #mistrzów #gry, #barierę, #zadania, #jedzenie lub #picie. Pamiętaj - słowa podświetlone na niebiesko to klucz do dalszej rozmowy!");
 
     addReply(Arrays.asList("bariera", "przejście", "przejściu", "bariere"),
-             "#Bariera blokuje przejście dalej, dopóki nie ukończysz samouczka. Musisz wykonać przynajmniej jedno #zadanie u #mistrza #gry i osiągnąć 7 poziom. " +
-             "Przygotuj się dobrze – zadbaj o #jedzenie, #picie i podstawowe wyposażenie.");
+             "#Bariera blokuje przejście dalej, dopóki nie ukończysz samouczka. Ukończ zadania Hayunna, pierwszy etap Mistrza Faumonii, pomoc Sedro oraz dostawę trzech serów dla Soro. Potrzebny jest również 5 poziom. " +
+             "Przygotuj się dobrze - zadbaj o #jedzenie, #picie i podstawowe wyposażenie.");
 
     addReply(Arrays.asList("czerwony domek", "domku", "dom", "czerwonym domku"),
-             "Czerwony domek znajduje się po lewej stronie od tego miejsca. To tam znajdziesz #mistrzów #gry, którzy zlecą ci pierwsze #zadania i przeprowadzą cię przez podstawy gry.");
+             "Czerwony domek znajduje się po lewej stronie od tego miejsca. To tam znajdziesz Mistrza Faumonii, który zleci ci pierwsze #zadania i przeprowadzi cię przez podstawy gry.");
 
     addReply(Arrays.asList("mistrz", "mistrzowie", "mistrz gry", "mistrzów gry", "mistrza gry"),
-             "Mistrzowie gry, pomagają nowym graczom. Znajdziesz ich w #czerwonym #domku. Wykonaj ich #zadania, aby nauczyć się podstaw i ruszyć dalej!");
+             "Mistrz Faumonii pomaga nowym graczom. Znajdziesz go w #czerwonym #domku. Wykonuj jego #zadania, aby nauczyć się podstaw i ruszyć dalej!");
 
     addReply(Arrays.asList("zadanie", "zadania", "questy"),
              "Zadania to świetny sposób na zdobywanie doświadczenia, złota i przedmiotów. Zacznij podstawowej misji u #mistrza #gry w #czerwonym #domku. Jeśli nie wiesz, co robić, zapytaj na #czacie #globalnym!");
@@ -96,9 +100,9 @@ protected void createDialog() {
              "Na czacie globalnym możesz zadawać pytania innym graczom. Wpisz #/k #wiadomość, aby poprosić o pomoc, porady lub dowiedzieć się czegoś więcej!");
 
     addReply(Arrays.asList("poziom", "level", "awans"),
-             "Aby przejść przez #przejście, musisz zdobyć przynajmniej 7 poziom doświadczenia. Aby to zrobić powalcz ze szczurami, gnomami i koniecznie wykonaj #zadanie u #mistrza #gry, który nauczy Cie podstaw gry.");
+             "Aby przejść przez #przejście, musisz zdobyć przynajmniej 5 poziom doświadczenia. Aby to zrobić powalcz ze szczurami, gnomami i koniecznie wykonaj #zadanie u #mistrza #gry, który nauczy Cie podstaw gry.");
 
-    addQuest("Moim zadaniem jest pomaganie nowym graczom. Pamiętaj, aby przygotować się dobrze przed wyruszeniem dalej – wykonaj #zadanie w #czerwonym #domku po lewej stronie.");
+    addQuest("Moim zadaniem jest pomaganie nowym graczom. Pamiętaj, aby przygotować się dobrze przed wyruszeniem dalej - wykonaj #zadanie w #czerwonym #domku po lewej stronie.");
     addGoodbye("Powodzenia! Pamiętaj, aby odwiedzić #czerwony #domek, wykonać pierwsze zadanie u #mistrza #gry i zapytać na #czacie #globalnym, jeśli czegoś nie wiesz!");
 }
 		};

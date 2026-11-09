@@ -305,6 +305,9 @@ public class SpeakerNPC extends NPC {
 	 *            the entity with whom the NPC should be talking.
 	 */
 	public void setAttending(final RPEntity rpentity) {
+		if (attending != rpentity) {
+			games.stendhal.server.entity.npc.dialogue.NpcDialogueService.end(this, "");
+		}
 		attending = rpentity;
 		lastMessageTurn = SingletonRepository.getRuleProcessor().getTurn();
 		if (rpentity != null) {
@@ -380,6 +383,7 @@ public class SpeakerNPC extends NPC {
 					say(goodbyeMessage);
 				}
 				onGoodbye(attending);
+				games.stendhal.server.entity.npc.dialogue.NpcDialogueService.end(this, goodbyeMessage);
 				engine.setCurrentState(ConversationStates.IDLE);
 				setAttending(null);
 			}
@@ -412,6 +416,14 @@ public class SpeakerNPC extends NPC {
 		return engine.getCurrentState() != ConversationStates.IDLE;
 	}
 
+	/** The UI action has the same owner and expiry as the existing conversation. */
+	public boolean isDialogueCurrent(final Player player) {
+		return attending == player && isTalking() && getZone() != null
+				&& getZone() == player.getZone() && !player.isDisconnected()
+				&& player.squaredDistance(this) <= 8 * 8
+				&& SingletonRepository.getRuleProcessor().getTurn() - lastMessageTurn <= playerChatTimeout;
+	}
+
 	@Override
 	// you can override this if you don't want your NPC to turn around
 	// in certain situations.
@@ -427,6 +439,7 @@ public class SpeakerNPC extends NPC {
 		}
 
 		super.say(text);
+		games.stendhal.server.entity.npc.dialogue.NpcDialogueService.spoken(this, text);
 	}
 
 	/** Message when NPC is attending another player.

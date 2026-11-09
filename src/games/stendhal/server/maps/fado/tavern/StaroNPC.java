@@ -43,12 +43,14 @@ public class StaroNPC implements ZoneConfigurator {
 
 			@Override
 			protected void createDialog() {
+                games.stendhal.server.entity.npc.dialogue.HuntDialogueTopics.install(this);
+                addJob("Dawno temu dotarłem na wyspę ludzi władających magią. Nie poznałem wszystkich jej tajemnic, dlatego wypytuję tych, którzy mają odwagę wyruszyć tam i wrócić z wiadomościami.");
 				addGreeting("Witaj.");
 				addGoodbye("Na razie.");
 			}
 		};
 
-		elemental.setDescription("Oto Staro.");
+		elemental.setDescription("Widzisz Stara w karczmie Fado. Wspomnienie wyspy magów nadal budzi jego ciekawość.");
 		elemental.setEntityClass("verger2npc");
 		elemental.setPosition(23, 20);
 		elemental.setDirection(Direction.LEFT);

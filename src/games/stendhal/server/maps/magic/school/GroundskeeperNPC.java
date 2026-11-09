@@ -64,11 +64,12 @@ public class GroundskeeperNPC implements ZoneConfigurator {
 
 			@Override
 			protected void createDialog() {
+                games.stendhal.server.entity.npc.dialogue.HuntDialogueTopics.install(this);
 				addGreeting("Cześć przyjacielu. Miły dzień na spacer nieprawdaż?");
 				addReply(ConversationPhrases.NO_MESSAGES, "Och przepraszam. Może jutro będziesz miał lepszy dzień.");
 				addReply(ConversationPhrases.YES_MESSAGES, "Dobrze, dobrze. Mam nadzieję, że cieszysz się dniem.");
-				addJob("Moją pracą jest sprzątanie szkoły i naprawa zepsutych rzeczy! Mam dużo pracy!");
-				addHelp("Nie mogę Tobie pomóc. Jestem zajęty przez cały dzień, ale ty mógłbyś mi pomóc w małym #zadaniu!");
+				addJob("Sprzątam szkołę i naprawiam to, co nie wytrzyma kolejnego dnia nauki magii. Najwięcej kłopotu sprawia teraz piwnica; po eksperymentach uczniów ma zdecydowanie zbyt wielu ośmionogich lokatorów.");
+				addHelp("Spójrz tylko na tę miotłę - pajęczyny zbieram od rana, a w piwnicy wciąż ich przybywa. Samo sprzątanie już nie wystarcza. Jeśli nie boisz się pająków, mam dla ciebie #zadanie.");
 				addGoodbye("Dowidzenia.");
 			}
 		};
@@ -76,7 +77,7 @@ public class GroundskeeperNPC implements ZoneConfigurator {
 		groundskeeperNPC.setEntityClass("groundskeepernpc");
 		groundskeeperNPC.setPosition(35, 13);
 		groundskeeperNPC.initHP(1000);
-		groundskeeperNPC.setDescription("Oto Morgrin, kierownik szkoły w Magic City. Jest zawsze zajęty i potrzebuje pomocnej dłoni.");
+		groundskeeperNPC.setDescription("Widzisz Morgrina, dozorcę szkoły magii. Zawsze znajdzie coś do sprzątnięcia albo naprawienia.");
 		zone.add(groundskeeperNPC);
 	}
 }

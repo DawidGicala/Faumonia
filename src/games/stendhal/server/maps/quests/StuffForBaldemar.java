@@ -67,37 +67,37 @@ import java.util.TreeMap;
  * <li> None.
  * </ul>
  */
-public class StuffForBaldemar extends AbstractQuest {
+public class StuffForBaldemar extends AbstractQuest implements games.stendhal.server.core.rp.quest.NativeCollectionDetails {
 	private static Map<Integer, ItemData> neededItems = initneededitems();
 	private static Map<Integer, ItemData> initneededitems() {
 		neededItems = new TreeMap<Integer, ItemData>();
 		ItemData data = new ItemData("sztabka mithrilu", 
 									REQUIRED_MITHRIL_BAR, 
-									"Nie mogę wykuć bez ", 
-									". To JEST tarczy z mithrilu.");
+									"Mithril będzie podstawą tarczy. Brakuje mi jeszcze: ", 
+									". Bez tego nie powstanie właściwy stop.");
 		neededItems.put(1, data);
 		data = new ItemData("obsydian",	REQUIRED_OBSIDIAN, 
-				"Potrzebuję kilku kamieni, aby zmiażdżyć je na proszek i wymieszać z mithrilem. Wciąż potrzebuję ", 
+				"Kamienie rozkruszę na proszek i połączę z mithrilem. Brakuje mi jeszcze: ", 
 				".");
 		neededItems.put(2, data);
 		data = new ItemData("diament",	REQUIRED_DIAMOND , 
-				"Potrzebuję kilku kamieni, aby zmiażdżyć je na proszek i wymieszać z mithrilem. Wciąż potrzebuję ", 
+				"Kamienie rozkruszę na proszek i połączę z mithrilem. Brakuje mi jeszcze: ", 
 				".");
 		neededItems.put(3, data);
 		
 		
 		data = new ItemData("szmaragd",	REQUIRED_EMERALD , 
-				"Potrzebuję kilku kamieni, aby zmiażdżyć je na proszek i wymieszać z mithrilem. Wciąż potrzebuję ", 
+				"Kamienie rozkruszę na proszek i połączę z mithrilem. Brakuje mi jeszcze: ", 
 				".");
 		neededItems.put(4, data);
 		
 		data = new ItemData("rubin",	REQUIRED_CARBUNCLE , 
-				"Potrzebuję kilku kamieni, aby zmiażdżyć je na proszek i wymieszać z mithrilem. Wciąż potrzebuję ", 
+				"Kamienie rozkruszę na proszek i połączę z mithrilem. Brakuje mi jeszcze: ", 
 				".");
 		neededItems.put(5, data);
 		
 		data = new ItemData("szafir",	REQUIRED_SAPPHIRE, 
-				"Potrzebuję kilku kamieni, aby zmiażdżyć je na proszek i wymieszać z mithrilem. Potrzebuję ", 
+				"Kamienie rozkruszę na proszek i połączę z mithrilem. Brakuje mi jeszcze: ", 
 				".");
 		neededItems.put(6, data);
 		int i = 7;
@@ -109,7 +109,7 @@ public class StuffForBaldemar extends AbstractQuest {
 		 i = 8;
 		data = new ItemData("magiczna tarcza płytowa",	REQUIRED_MAGIC_PLATE_SHIELD , 
 				"Potrzebuję ", 
-				" na kawałki i części do twojej nowej tarczy.");
+				". Wykorzystam ją na części nowej tarczy.");
 		neededItems.put(i, data);
 	
 		 i = 9;
@@ -121,18 +121,18 @@ public class StuffForBaldemar extends AbstractQuest {
 		 i = 10;
 			data = new ItemData("żelazo",	REQUIRED_IRON , 
 					"Potrzebuję ", 
-					", aby przetopić w mithrilem i złotem.");
+					", aby przetopić z mithrilem i złotem.");
 			neededItems.put(i, data);
 		 i = 11;
 			data = new ItemData("czarna perła",	REQUIRED_BLACK_PEARL , 
 					"Potrzebuję ", 
-					", aby zmielić na proszek do posypania na tarczę, aby dawała ładny połysk.");
+					", żeby po zmieleniu nadać tarczy połysk.");
 			neededItems.put(i, data);
 
 		 i = 12;
 			data = new ItemData("shuriken",	REQUIRED_SHURIKEN , 
 					"Potrzebuję ", 
-					", aby przetopić z mithrilem, złotem i żelazem. To 'tajny' składnik, o którym wie tylko ty i ja. ;)");
+					", aby przetopić z mithrilem, złotem i żelazem. To 'tajny' składnik, o którym wiemy tylko ty i ja.");
 			neededItems.put(i, data);
 			i = 13;
 			data = new ItemData("kolorowe kulki",	REQUIRED_MARBLES , 
@@ -141,7 +141,7 @@ public class StuffForBaldemar extends AbstractQuest {
 			neededItems.put(i, data);
 
 			data = new ItemData("zima zaklęta w kuli",	REQUIRED_SNOWGLOBE, 
-					"KOCHAM te błyskotki z Athor. Wciąż potrzebuję ", 
+					"Mam słabość do tych błyskotek z Athor. Do kompletu brakuje: ", 
 					".");
 			neededItems.put(14, data);
 		return neededItems;
@@ -287,41 +287,44 @@ public class StuffForBaldemar extends AbstractQuest {
 		final SpeakerNPC npc = npcs.get("Baldemar");
 
 		npc.add(ConversationStates.ATTENDING,
-			ConversationPhrases.QUEST_MESSAGES, null,
-			ConversationStates.QUEST_OFFERED, null,
-			new ChatAction() {
+            ConversationPhrases.QUEST_MESSAGES,
+            null,
+            ConversationStates.QUEST_OFFERED,
+            null,
+            new ChatAction() {
 				public void fire(final Player player, final Sentence sentence, final EventRaiser raiser) {
 					if (!player.hasQuest(QUEST_SLOT) || "rejected".equals(player.getQuest(QUEST_SLOT))) {
-						raiser.say("Mogę wykuć tarczę zrobioną z mithrilu z kilkoma innymi rzeczami. Czy chciałbyś, abym ją wykonał?");
+						raiser.say("Mithril jest lekki, lecz dobra tarcza wymaga czegoś więcej niż samego metalu. Potrafię połączyć go z kamieniami i innymi składnikami, jeśli dostarczysz je do kuźni i dowiedziesz swojej siły. Chcesz zlecić mi taką pracę?");
 					} else if (player.isQuestCompleted(QUEST_SLOT)) {
-						raiser.say("Wolałbym, abyś pozwolił mi się trochę rozerwać.");
+						raiser.say("Tarcza została już oddana w twoje ręce. Daj mi teraz odpocząć po tej pracy; taki stop nie wybacza pośpiechu.");
 						raiser.setCurrentState(ConversationStates.ATTENDING);
 					} else {
-						raiser.say("Dlaczego mi przeszkadzasz skoro jeszcze nie ukończyłeś swojego zadania?");
+						raiser.say("Twoje zamówienie nadal czeka w kuźni. Mogę przypomnieć brakujące materiały albo powiedzieć, jak idzie wykuwanie.");
 						raiser.setCurrentState(ConversationStates.ATTENDING);
 					}
 				}
 			});
 
 		npc.add(ConversationStates.QUEST_OFFERED,
-			ConversationPhrases.YES_MESSAGES, null,
-			ConversationStates.ATTENDING, null,
-			new ChatAction() {
+            ConversationPhrases.YES_MESSAGES,
+            new games.stendhal.server.entity.npc.condition.QuestNotStartedCondition(QUEST_SLOT),
+            ConversationStates.ATTENDING,
+            null,
+            new ChatAction() {
 				public void fire(final Player player, final Sentence sentence, final EventRaiser raiser) {
-					raiser.say(I_WILL_NEED_MANY_THINGS);
+					raiser.say("Dziękuję. Przyjmuję materiały kolejno: " + games.stendhal.server.core.rp.quest.CollectionQuestProgress.itemText(StuffForBaldemar.this.getCollectionItems()) + ". Oddane materiały zostaną w kuźni. Możesz przynosić je partiami, a ja przypomnę ci, czego jeszcze brakuje.");
 					player.setQuest(QUEST_SLOT, "start;0;0;0;0;0;0;0;0;0;0;0;0;0;0");
 					player.addKarma(10);
 
 				}
 			});
 
-		npc.add(
-			ConversationStates.QUEST_OFFERED,
-			ConversationPhrases.NO_MESSAGES,
-			null,
-			ConversationStates.IDLE,
-			"Nie mogę uwierzyć, że nie chcesz skorzystać z tej okazji! Musisz być szalony!!!",
-			new SetQuestAndModifyKarmaAction(QUEST_SLOT, "rejected", -10.0));
+		npc.add(ConversationStates.QUEST_OFFERED,
+            ConversationPhrases.NO_MESSAGES,
+            null,
+            ConversationStates.ATTENDING,
+            "Rozumiem. Nie przyjmuję zamówienia bez twojej zgody. Wróć, jeśli zdecydujesz się pomóc.",
+            new SetQuestAndModifyKarmaAction(QUEST_SLOT, "rejected", -10.0));
 
 		npc.addReply(Arrays.asList("exact", "dokładnie"),
 			"Jak już powiedziałem. Musisz mi dać dokładnie w tej kolejności.");
@@ -334,11 +337,82 @@ public class StuffForBaldemar extends AbstractQuest {
 	private void step_3() {
 		final SpeakerNPC npc = npcs.get("Baldemar");
 
-		npc.add(ConversationStates.IDLE, ConversationPhrases.GREETING_MESSAGES,
-			new AndCondition(new GreetingMatchesNameCondition(npc.getName()),
+		npc.add(ConversationStates.IDLE,
+            ConversationPhrases.GREETING_MESSAGES,
+            new AndCondition(new GreetingMatchesNameCondition(npc.getName()),
 					new QuestStateStartsWithCondition(QUEST_SLOT, "start")),
-			ConversationStates.ATTENDING, null,
-			new ChatAction() {
+            ConversationStates.ATTENDING,
+            null,
+            new ChatAction() {
+				public void fire(final Player player, final Sentence sentence, final EventRaiser raiser) {
+					final String[] tokens = player.getQuest(QUEST_SLOT).split(";");
+					
+					int idx1 = 1;
+					for (ItemData itemdata : neededItems.values()) {
+							itemdata.resetAmount();
+							itemdata.subAmount(tokens[idx1]);
+							idx1++;
+					}
+
+					boolean missingSomething = false;
+
+					int size = neededItems.size();
+					for (int idx = 1; !missingSomething && idx <= size; idx++) {
+						ItemData itemData = neededItems.get(idx);
+						missingSomething = proceedItem(player, raiser,
+								itemData);
+					}
+					
+					if (player.hasKilledSolo("latający złoty smok") && !missingSomething) {
+						raiser.say("Przyniosłeś wszystko. Teraz wykuję tarczę. Wróć za "
+							+ REQUIRED_MINUTES
+							+ " minutę" + ", a będzie gotowa.");
+						player.setQuest(QUEST_SLOT, "forging;" + System.currentTimeMillis());
+					} else {
+						if (!player.hasKilledSolo("latający złoty smok") && !missingSomething) {
+							raiser.say("Tą tarczę mogą dostać ci co zabili latającego złotego smoka bez pomocy innych osób.");
+						}
+
+						StringBuilder sb = new StringBuilder(30);
+						sb.append("start");
+						for (ItemData id : neededItems.values()) {
+							sb.append(";");
+							sb.append(id.getAlreadyBrought());
+						}
+						player.setQuest(QUEST_SLOT, sb.toString());
+							
+					}
+				}
+
+	
+				private boolean proceedItem(final Player player,
+						final EventRaiser engine, final ItemData itemData) {
+					if (itemData.getStillNeeded() > 0) {
+						
+						if (player.isEquipped(itemData.getName(), itemData.getStillNeeded())) {
+							player.drop(itemData.getName(), itemData.getStillNeeded());
+							itemData.setAmount(0);
+						} else {
+							final int amount = player.getNumberOfEquipped(itemData.getName());
+							if (amount > 0) {
+								player.drop(itemData.getName(), amount);
+								itemData.subAmount(amount);
+							}
+
+							engine.say(itemData.getAnswer());
+							return true;
+						}
+					}
+					return false;
+				}
+			});
+        // Resume the native stage without changing its guards or actions.
+        npc.add(ConversationStates.ATTENDING, "dostawa",
+            new AndCondition(new games.stendhal.server.entity.npc.condition.AlwaysTrueCondition(),
+					new QuestStateStartsWithCondition(QUEST_SLOT, "start")),
+            ConversationStates.ATTENDING,
+            null,
+            new ChatAction() {
 				public void fire(final Player player, final Sentence sentence, final EventRaiser raiser) {
 					final String[] tokens = player.getQuest(QUEST_SLOT).split(";");
 					
@@ -402,10 +476,13 @@ public class StuffForBaldemar extends AbstractQuest {
 				}
 			});
 
-		npc.add(ConversationStates.IDLE, ConversationPhrases.GREETING_MESSAGES,
-				new AndCondition(new GreetingMatchesNameCondition(npc.getName()),
+		npc.add(ConversationStates.IDLE,
+            ConversationPhrases.GREETING_MESSAGES,
+            new AndCondition(new GreetingMatchesNameCondition(npc.getName()),
 						new QuestStateStartsWithCondition(QUEST_SLOT, "forging;")),
-				ConversationStates.IDLE, null, new ChatAction() {
+            ConversationStates.ATTENDING,
+            null,
+            new ChatAction() {
 				public void fire(final Player player, final Sentence sentence, final EventRaiser raiser) {
 
 					final String[] tokens = player.getQuest(QUEST_SLOT).split(";");
@@ -415,13 +492,49 @@ public class StuffForBaldemar extends AbstractQuest {
 							- System.currentTimeMillis();
 
 					if (timeRemaining > 0L) {
-						raiser.say("Jeszcze nie wykułem twojej tarczy. Sprawdź za "
+						raiser.say("Tarcza nie jest jeszcze gotowa; takiego stopu nie chcę obrabiać w pośpiechu. Wróć za "
 							+ TimeUtil.approxTimeUntil((int) (timeRemaining / 1000L))
 							+ ".");
 						return;
 					}
 
-					raiser.say("Skończyłem wykuwanie twojej nowej tarczy z mithrilu. Ciesz się. Teraz pójdę sprawdzić co Trillium położyła za ladą dla mnie. ;)");
+					if (!games.stendhal.server.maps.quests.logic.QuestGoldFees.requirePaid(player, QUEST_SLOT, raiser)) { return; }
+                    raiser.say("Tarcza z mithrilu jest gotowa. Każdy składnik trafił na swoje miejsce, a teraz od twojej wprawy zależy, jak dobrze będzie cię chronić. Weź ją i pamiętaj o trudzie, który kosztowała ta praca.");
+					player.addXP(10000000);
+					player.addKarma(500);
+					player.addatk_xp(500000);
+					player.adddef_xp(750000);
+					final Item mithrilshield = SingletonRepository.getEntityManager().getItem("tarcza z mithrilu");
+					mithrilshield.setBoundTo(player.getName());
+					player.equipOrPutOnGround(mithrilshield);
+					player.notifyWorldAboutChanges();
+					player.setQuest(QUEST_SLOT, "done");
+				}
+			});
+        // Resume the native stage without changing its guards or actions.
+        npc.add(ConversationStates.ATTENDING, "dostawa",
+            new AndCondition(new games.stendhal.server.entity.npc.condition.AlwaysTrueCondition(),
+						new QuestStateStartsWithCondition(QUEST_SLOT, "forging;")),
+            ConversationStates.ATTENDING,
+            null,
+            new ChatAction() {
+				public void fire(final Player player, final Sentence sentence, final EventRaiser raiser) {
+
+					final String[] tokens = player.getQuest(QUEST_SLOT).split(";");
+					
+					final long delay = REQUIRED_MINUTES * MathHelper.MILLISECONDS_IN_ONE_MINUTE; 
+					final long timeRemaining = (Long.parseLong(tokens[1]) + delay)
+							- System.currentTimeMillis();
+
+					if (timeRemaining > 0L) {
+						raiser.say("Tarcza nie jest jeszcze gotowa; takiego stopu nie chcę obrabiać w pośpiechu. Wróć za "
+							+ TimeUtil.approxTimeUntil((int) (timeRemaining / 1000L))
+							+ ".");
+						return;
+					}
+
+					if (!games.stendhal.server.maps.quests.logic.QuestGoldFees.requirePaid(player, QUEST_SLOT, raiser)) { return; }
+                    raiser.say("Tarcza z mithrilu jest gotowa. Każdy składnik trafił na swoje miejsce, a teraz od twojej wprawy zależy, jak dobrze będzie cię chronić. Weź ją i pamiętaj o trudzie, który kosztowała ta praca.");
 					player.addXP(10000000);
 					player.addKarma(500);
 					player.addatk_xp(500000);
@@ -435,11 +548,11 @@ public class StuffForBaldemar extends AbstractQuest {
 			});
 
 		npc.add(ConversationStates.ATTENDING,
-			Arrays.asList("forge", "missing", "wykuć", "brakuje"), 
-			new QuestStartedCondition(QUEST_SLOT),
-			ConversationStates.ATTENDING,
-			null,
-			new ChatAction() {
+            Arrays.asList("forge", "missing", "wykuć", "brakuje"),
+            new QuestStateStartsWithCondition(QUEST_SLOT, "start;"),
+            ConversationStates.ATTENDING,
+            null,
+            new ChatAction() {
 				public void fire(final Player player, final Sentence sentence, final EventRaiser raiser) {
 					final String[] tokens = player.getQuest(QUEST_SLOT).split(";");
 
@@ -496,7 +609,7 @@ public class StuffForBaldemar extends AbstractQuest {
 		super.addToWorld();
 		fillQuestInfo(
 				"Rzeczy dla Baldemara",
-				"Porozmawiaj z Baldemarem w magicznym mieście. Prawdopodobnie potrafi wykuć dla ciebie magiczną tarczę z mithrilu.",
+				"Baldemar z magicznego miasta potrafi wykonać tarczę z mithrilu. Poznaj listę materiałów i warunki zlecenia, zanim rozpoczniesz kosztowne przygotowania.",
 				false);
 		step_1();
 		step_2();
@@ -510,34 +623,8 @@ public class StuffForBaldemar extends AbstractQuest {
 	
 	@Override
 	public List<String> getHistory(final Player player) {
-			final List<String> res = new ArrayList<String>();
-			if (!player.hasQuest(QUEST_SLOT)) {
-				return res;
-			}			
-			final String questState = player.getQuest(QUEST_SLOT);
-			res.add("Spotkałem Baldemara w magicznym teatrze.");
-			if (questState.equals("rejected")) {
-				res.add("Nie jestem zainteresowany tarczą wykonaną z mithrilu.");
-				return res;
-			} 
-			res.add("Baldemar powiedział do mnie: " + I_WILL_NEED_MANY_THINGS);
-			// yes, yes. this is the most horrible quest code and so you get a horrible quest history. 
-			if(questState.startsWith("start") && !"start;20;1;1;5;10;10;1;1;10;20;10;20;15;1".equals(questState)){
-				res.add("Nie przyniosłem jeszcze wszystkiego. Baldemar powie mi, co muszę dostarczyć następnym razem.");
-			} else if ("start;20;1;1;5;10;10;1;1;10;20;10;20;15;1".equals(questState) || !questState.startsWith("start")) {
-				res.add("Zaniosłem wszystkie przedmioty dla Baldemar.");
-			}
-			if("start;20;1;1;5;10;10;1;1;10;20;10;20;15;1".equals(questState) && !player.hasKilledSolo("latający złoty smok")){
-				res.add("Będę musiał dzielnie stawić czoła latającemu złotemu smokowi sam, wtedy będę godzień tej tarczy.");
-			}
-			if (questState.startsWith("forging")) {
-				res.add("Baldemar skończył wykuwać moją tarcze z mithrilu!");
-			} 
-			if (isCompleted(player)) {
-				res.add("Dostarczyłem dla Baldemar potrzebne surowce, zabiłem sam latającego złotego smoka. W nagrodę dostałem tarcze z mithrilu.	W nagrodę za ukończenie zadania otrzymałem: 1.000.000 pkt doświadczenia, 100.000 pkt ataku, 150.000 pkt obrony, 100 karmy i tarczę z mithrilu.");
-			}
-			return res;
-	}
+        return games.stendhal.server.core.rp.quest.CollectionQuestProgress.history(this, player);
+    }
 	
 	@Override
 	public int getMinLevel() {
@@ -553,4 +640,14 @@ public class StuffForBaldemar extends AbstractQuest {
 	public String getRegion() {
 		return Region.FADO_CAVES;
 	}
+
+
+
+    public String getCollectionKind(){return "sequence";}
+    public java.util.Map<String,Integer> getCollectionItems(){java.util.Map<String,Integer> m=new java.util.LinkedHashMap<String,Integer>(); for(ItemData i:neededItems.values())m.put(i.itemName,i.requiredAmount); return m;}
+    public String getCollectionHint(){return "Baldemar przyjmuje materiały w podanej kolejności, również partiami. Oprócz dostawy wymaga samodzielnego pokonania latającego złotego smoka. Wykucie tarczy trwa dwa dni; zimę zaklętą w kuli można zdobyć przez pomoc Rudolfowi na Athor.";}
+    public String getCollectionKill(){return "latający złoty smok";}
+public boolean getCollectionSolo(){return true;}
+public int getCollectionWait(){return REQUIRED_MINUTES;}
+
 }

@@ -40,11 +40,11 @@ public class MiterNPC implements ZoneConfigurator {
 		final SpeakerNPC npc = new SpeakerNPC("Miter") {
 			@Override
 			public void createDialog() {
-				addGreeting("Witaj, jestem Miter. Sprzedaje podstawowy ekwipunek aby poznać moją ofertę napisz #oferta. Mogę cie również uleczyć wystarczy, że napiszesz #ulecz. Jesli potrzebujesz w czymś pomocy skorzystaj z chatu globalnego, napisz: #/k #wiadomość");
-				addJob("Moja niezwykła moc pomaga mi uleczyć rany. Sprzedaję także lecznicze mikstury i ekwipunek.");
-				addHelp("Mogę Cię za darmo uleczyć. Powiedz tylko #ulecz. Moge też sprzedać ci swój stary ekwipunek w tym celu napisz #oferta. Statystyki przedmiotów możesz sprawdzić klikając na nie prawym przyciskiem myszy oraz #zobacz, jeżeli chcesz podnieść jakiś przedmiot z ziemi, #naciśnij #i #przeciągnij #go #do #plecaka po prawej stronie.");
+				addGreeting("Witaj, jestem Miter. Pomogę ci przygotować się do pierwszej wyprawy: pokażę podstawowy ekwipunek i opatrzę rany. Wybierz #oferta, aby zajrzeć do sklepu, albo #ulecz, jeśli potrzebujesz pomocy.");
+				addJob("Pomagam początkującym przygotować się do drogi i opatruję ich rany. Sprzedaję podstawowy ekwipunek, a zbędne łupy możesz oddać mi na #skup. Zostaw sobie jedzenie i rzeczy potrzebne w zadaniach.");
+				addHelp("Leczę bez opłat - wybierz #ulecz. W sklepie sprawdź cenę i ilość, a potem potwierdź zakup; kupione rzeczy trafiają do plecaka po prawej. Przedmiot z ziemi przeciągnij do plecaka, a gdy utkniesz, poproś graczy o pomoc przez /k i swoją wiadomość.");
 				addEmotionReply("hugs", "hugs");
-				addGoodbye();
+				addGoodbye("Do zobaczenia. Wróć, jeśli zabraknie ci zapasów albo trzeba będzie opatrzyć rany.");
 			}
 
 			@Override
@@ -56,9 +56,12 @@ public class MiterNPC implements ZoneConfigurator {
 			}
 		};
 		new SellerAdder().addSeller(npc, new SellerBehaviour(SingletonRepository.getShopList().get("startkasa")));
-		new HealerAdder().addHealer(npc, 0);
+		new games.stendhal.server.entity.npc.behaviour.adder.BuyerAdder().addBuyer(npc,
+                new games.stendhal.server.entity.npc.behaviour.impl.BuyerBehaviour(SingletonRepository.getShopList().get("miterbuyback")), false);
+        npc.addReply("skup", "Odkupuję prosty ekwipunek znaleziony przy szczurach i gnomach: maczugi, sztyleciki, peleryny, skórzane zbroje, spodnie, hełmy i buty, a także puklerze, drewniane i ćwiekowe tarcze oraz hełmy nabijane ćwiekami. Powiedz sprzedam i nazwę przedmiotu, a przed zatwierdzeniem podam cenę. Zachowaj jedzenie i rzeczy potrzebne do bieżących zadań.");
+        new HealerAdder().addHealer(npc, 0);
 		npc.setPosition(18, 6);
-		npc.setDescription("Widzisz przyjazną Miter. Wygląda ona na kogoś, od kogo możesz coś kupić. Przywitaj się pisząc #cześć");
+		npc.setDescription("Widzisz Mitera, który pomaga początkującym wojownikom. Ma pod ręką podstawowy ekwipunek i środki do opatrywania ran.");
 		npc.setEntityClass("miternpc");
 		zone.add(npc);
 	}

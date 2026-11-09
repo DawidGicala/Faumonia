@@ -59,12 +59,13 @@ public class WandyNPC implements ZoneConfigurator {
 
 			@Override
 			protected void createDialog() {
+                games.stendhal.server.entity.npc.dialogue.CollectionDialogueTopics.install(this);
 				addGreeting("Witaj przybyszu.");
-				addJob("Jestem mieszkańcem stolicy Ados. Od czasu do czasu lubie zbierać rzadkie przedmioty.");
-				addHelp("Nie potrzebuje pomocy.");
+				addJob("Mieszkam w Ados i zbieram rzadkie przedmioty. Nie każdy brak uzupełnię na miejscowym targu, więc czasem potrzebuję pomocy wędrowca. Do jednej wyprawy wybieram konkretne zamówienie.");
+				addHelp("Szukam rzadkich okazów, których nie znajdę na pierwszym straganie. Zapytaj o #zadanie, a sprawdzę, czego brakuje mi do kolekcji. Najpierw uzgodnij ze mną zamówienie, żeby nie dźwigać zbędnych rzeczy.");
 				addReply(Arrays.asList("exhibits", "eksponaty", "eksponatów"),"Być może będziesz mieć dryg do wyszukiwania przedmiotów i chciałbyś zrobić #zadanie dla mnie.");
 				// remaining behaviour defined in games.stendhal.server.maps.quests.WeeklyItemQuest
-				addGoodbye("Dowidzenia. Miło się z tobą rozmawiało.");
+				addGoodbye("Do zobaczenia. Jeśli trafisz na niezwykły okaz, pamiętaj o mojej kolekcji.");
 			}
 			
 			protected void onGoodbye(RPEntity player) {
@@ -76,7 +77,7 @@ public class WandyNPC implements ZoneConfigurator {
 		npc.setPosition(8, 2);
 		npc.setDirection(Direction.DOWN);
 		npc.initHP(100);
-		npc.setDescription("Oto Wandy.");
+		npc.setDescription("Widzisz Wandyego, mieszkańca Ados z zamiłowaniem do rzadkich przedmiotów. Chętnie słucha wieści o niezwykłych znaleziskach.");
 		zone.add(npc);
 	}
 }

@@ -38,10 +38,11 @@ public class SedroNPC implements ZoneConfigurator {
 		final SpeakerNPC npc = new SpeakerNPC("Sedro") {
 			@Override
 			public void createDialog() {
-				addGreeting("Witaj. Poszukuje dzielnego wojownika. Jesli chcesz mi pomóc napisz #zadanie");
-				addJob("Jestem samotnikiem. Na razie nic nie potrzebuje.");
-				addOffer("Niczego nie potrzebuje, niczego nie sprzedaje.");
-				addGoodbye("Dowidzenia i dziękuję za rozmowę.");
+				addReply("tematy", "Dobrze, posiedźmy jeszcze chwilę. Możemy wrócić do sprawy potworów albo po prostu zamienić kilka słów.");
+				addGreeting("Witaj. Szukam kogoś, kto pomoże mi z potworami w okolicy. Jeśli masz chwilę, zapytaj mnie o #zadanie.");
+				addJob("Żyję tu na uboczu i przywykłem do własnego towarzystwa. Nie znaczy to jednak, że nie obchodzą mnie sprawy okolicy. Dobrze czasem zamienić kilka słów z wędrowcem i dowiedzieć się, co dzieje się poza znajomą drogą.");
+				addOffer("Nie prowadzę sklepu i nie handluję. Mogę za to podzielić się tym, co wiem o okolicy, a za pomoc z potworami mam przygotowany ekwipunek.");
+				addGoodbye("Do widzenia i dziękuję za rozmowę.");
 				// All further behaviour is defined in quest classes.
 			}
 
@@ -55,7 +56,7 @@ public class SedroNPC implements ZoneConfigurator {
 		};
 		npc.setPosition(20, 39);
 		npc.setEntityClass("Sedronpc");
-		npc.setDescription("Widzisz starca Sedro. Zapytaj go o zadanie.");
+		npc.setDescription("Widzisz Sedro, wiekowego samotnika z Semos. Mówi spokojnie i z uwagą słucha przechodzących wędrowców.");
 		npc.setDirection(Direction.DOWN);
 		zone.add(npc);
 	}

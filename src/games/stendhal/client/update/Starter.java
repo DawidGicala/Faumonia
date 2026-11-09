@@ -43,12 +43,13 @@ public class Starter {
 	public static void main(final String[] args) {
 		try {
 			final String version = System.getProperty("java.specification.version");
-			if (Float.parseFloat(version) < 1.6f) {
+			if (Float.parseFloat(version) < 1.8f) {
 				JOptionPane.showMessageDialog(
 					null,
-					"Wymagana jest minimum Java 6 (znana jako 1.6.0), a posiadasz wersję "
+					"Faumonia wymaga Javy 8 lub nowszej. Wykryta wersja: "
 					+ version
-					+ ". Możesz pobrać najnowszą wersję z http://java.com");
+					+ ". Pobierz Javę ze strony https://www.java.com/pl/download/");
+				return;
 			}
 		} catch (final RuntimeException e) {
 			// ignore

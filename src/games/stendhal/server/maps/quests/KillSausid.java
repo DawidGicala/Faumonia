@@ -50,7 +50,7 @@ import java.util.List;
 
 import marauroa.common.Pair;
 
-public class KillSausid extends AbstractQuest {
+public class KillSausid extends AbstractQuest implements games.stendhal.server.core.rp.quest.NativeHuntDetails {
 
 	private static final String QUEST_SLOT = "kill_sausid";
 	protected HashMap<String, Pair<Integer, Integer>> creaturestokill = new HashMap<String, Pair<Integer,Integer>>();
@@ -78,19 +78,19 @@ public class KillSausid extends AbstractQuest {
 		final SpeakerNPC npc = npcs.get("Sausid");
 
 		npc.add(ConversationStates.ATTENDING,
-				ConversationPhrases.QUEST_MESSAGES, 
-				new QuestNotStartedCondition(QUEST_SLOT),
-				ConversationStates.QUEST_OFFERED,
-				"Szukam kogoś kto pomoże mi z kilkoma... stworami... Może mi pomożesz?",
-				null);
+                ConversationPhrases.QUEST_MESSAGES,
+                new QuestNotStartedCondition(QUEST_SLOT),
+                ConversationStates.QUEST_OFFERED,
+                "Mów ciszej, proszę; nie chcę, żeby cała karczma znała moje kłopoty. Potrzebuję pomocy z kilkoma stworami, do których sam nie podejdę. Podejmiesz się dyskretnej wyprawy?",
+                null);
 
 		npc.add(ConversationStates.ATTENDING,
-				ConversationPhrases.QUEST_MESSAGES, 
-				new AndCondition(new QuestStateStartsWithCondition(QUEST_SLOT,"done"),
+                ConversationPhrases.QUEST_MESSAGES,
+                new AndCondition(new QuestStateStartsWithCondition(QUEST_SLOT,"done"),
 						 new TimePassedCondition(QUEST_SLOT, 1, MathHelper.MINUTES_IN_ONE_WEEK*999999)),
-				ConversationStates.QUEST_OFFERED,
-				"Dziękuje za pomoc, pamiętaj, aby o tym nie rozpowiadać...",
-				null);
+                ConversationStates.QUEST_OFFERED,
+                "Znów potrzebuję twojej pomocy z tymi stworami. Omówmy to spokojnie, bez zwracania na siebie uwagi.",
+                null);
 
 		npc.add(ConversationStates.ATTENDING,
 				ConversationPhrases.QUEST_MESSAGES,
@@ -106,18 +106,18 @@ public class KillSausid extends AbstractQuest {
 
 		
 		npc.add(ConversationStates.QUEST_OFFERED,
-				ConversationPhrases.YES_MESSAGES,
-				null,
-				ConversationStates.ATTENDING,
-				"Dziękuję, pamiętaj, aby nikomu o tym nie mówić.... Idź i zabij 10 olbrzymich ptaszorów, 5 krasnali golemów i jednego gigantycznego krasnala. Tylko nikomu o tym nie mów...",
-				new MultipleActions(actions));
+                ConversationPhrases.YES_MESSAGES,
+                null,
+                ConversationStates.ATTENDING,
+                "Chodzi o orły giganty, krasnale golemy i jednego gigantycznego krasnala. Sprawdź dokładne nazwy, bo zwykłe ptaki i krasnale nie rozwiążą mojego problemu." + "\nCele: " + games.stendhal.server.core.rp.quest.HuntQuestProgress.targetText(this,null) + ".",
+                new MultipleActions(actions));
 
-		npc.add(ConversationStates.QUEST_OFFERED, 
-				ConversationPhrases.NO_MESSAGES, 
-				null,
-				ConversationStates.ATTENDING,
-				"Co za szkoda...",
-				new SetQuestAction(QUEST_SLOT, 0, "rejected"));
+		npc.add(ConversationStates.QUEST_OFFERED,
+                ConversationPhrases.NO_MESSAGES,
+                null,
+                ConversationStates.ATTENDING,
+                "W porządku, nie naciskam. Zachowaj tylko tę rozmowę dla siebie.",
+                new SetQuestAction(QUEST_SLOT, 0, "rejected"));
 	}
 
 	private void step_2() {
@@ -154,23 +154,23 @@ public class KillSausid extends AbstractQuest {
 		LinkedList<String> triggers = new LinkedList<String>();
 		triggers.addAll(ConversationPhrases.FINISH_MESSAGES);
 		triggers.addAll(ConversationPhrases.QUEST_MESSAGES);		
-		npc.add(ConversationStates.ATTENDING, 
-				triggers,
-				new AndCondition(
+		npc.add(ConversationStates.ATTENDING,
+                triggers,
+                new AndCondition(
 						new QuestInStateCondition(QUEST_SLOT, 0, "start"),
 						new KilledForQuestCondition(QUEST_SLOT, 1)),
-				ConversationStates.ATTENDING, 
-				"Bardzo dziękuję! Pamiętaj, aby nikomu o tym nie rozpowiadać... Weź te zwoje, powinny Ci się przydać w dalszej podróży...",
-				new MultipleActions(actions));
+                ConversationStates.ATTENDING,
+                "Dobrze, naprawdę dobrze; właśnie takiego meldunku potrzebowałem. Weź bilet turystyczny i zwoje do krypty, a o szczegółach naszej umowy lepiej nie opowiadaj całej karczmie.",
+                new MultipleActions(actions));
 
-		npc.add(ConversationStates.ATTENDING, 
-				triggers,
-				new AndCondition(
+		npc.add(ConversationStates.ATTENDING,
+                triggers,
+                new AndCondition(
 						new QuestInStateCondition(QUEST_SLOT, 0, "start"),
 						new NotCondition(new KilledForQuestCondition(QUEST_SLOT, 1))),
-				ConversationStates.ATTENDING, 
-				"Proszę pomóż mi z tymi stworami...",
-				null);
+                ConversationStates.ATTENDING,
+                null,
+                (p, sentence, raiser) -> raiser.say("Jeszcze nie wszystkie stworzenia z listy zostały pokonane. Powiem ci dokładnie, czego brakuje, żebyś nie wracał tu bez potrzeby." + "\n" + games.stendhal.server.core.rp.quest.HuntQuestProgress.progressText(KillSausid.this,p)));
 	}
 
 	@Override
@@ -178,7 +178,7 @@ public class KillSausid extends AbstractQuest {
 		super.addToWorld();
 		fillQuestInfo(
 				"Tajemnicza misja Sausida",
-				"Sausid, mieszkaniec Fado ma dla Ciebie tajemnicze zadanie.",
+				"Sausid z tawerny Fado woli rozmawiać o swoich kłopotach ściszonym głosem. Poznaj jego listę przeciwników i wróć, gdy rozprawisz się ze wszystkimi wymaganymi celami.",
 				false);
 		step_1();
 		step_2();
@@ -187,24 +187,8 @@ public class KillSausid extends AbstractQuest {
 	
 	@Override
 	public List<String> getHistory(final Player player) {
-			final List<String> res = new ArrayList<String>();
-			if (!player.hasQuest(QUEST_SLOT)) {
-				return res;
-			}
-			if (!isCompleted(player)) {
-				res.add("Musze zabić 10 orłów gigantów, 5 krasnalów golemów i gigantycznego krasnala, aby pomóc Sausidowi.");
-			} else if(isRepeatable(player)){
-				res.add("Mineło już sporo czasu... prawdopodobnie Sausid znowu mnie potrzebuje!");
-			} else {
-				res.add("Pokonałem tajemnicze potwory dla Sausida.	W nagrodę za ukończenie zadania otrzymałem: 200.000 pkt doświadczenia, 10.000 pkt ataku, 12.000 pkt obrony, bilet turystyczny i zapas zwojów do krypty.");
-			}
-			int repetitions = player.getNumberOfRepetitions(getSlotName(), 2);
-			if (repetitions > 0) {
-				res.add("Pomogłem Sausidowi "
-						+ Grammar.quantityplnoun(repetitions, "razy") + ".");
-			}
-			return res;
-	}
+        return games.stendhal.server.core.rp.quest.HuntQuestProgress.history(this,player);
+    }
 
 
 	@Override
@@ -233,4 +217,11 @@ public class KillSausid extends AbstractQuest {
 	public String getRegion() {
 		return Region.NALWOR_CITY;
 	}
+
+    @Override public java.util.Map<String, Pair<Integer,Integer>> getDialogueHuntTargets(Player player) {
+        return java.util.Collections.unmodifiableMap(new java.util.TreeMap<String,Pair<Integer,Integer>>(creaturestokill));
+    }
+    @Override public int getDialogueHuntTotal(Player player) { return 0; }
+    @Override public int getDialogueKillIndex() { return 1; }
+    @Override public String getDialogueHuntHint(Player player) { return "Sausid oczekuje pokonania dziesięciu orłów gigantów, pięciu krasnali golemów i jednego gigantycznego krasnala. Olbrzymi ptasznik to inny przeciwnik i nie zastąpi orła."; }
 }

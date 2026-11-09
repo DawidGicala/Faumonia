@@ -61,15 +61,16 @@ public class PriestessNPC implements ZoneConfigurator {
 
 			@Override
 			protected void createDialog() {
+                games.stendhal.server.entity.npc.dialogue.JourneyDialogueTopics.install(this);
 			    addGreeting(null, new SayTextWithPlayerNameAction("Witaj [name]."));
-			    addJob("Jako kapłanka mogę #zaoferować Ci mikstury.");
+			    addJob("Jako kapłanka opiekuję się tym miejscem i mogę #zaoferować mikstury. Trafiają do mnie także ludzie z polecenia innych mieszkańców. Jeśli przychodzisz w takiej sprawie, powiedz otwarcie, kto cię przysyła.");
 				addHelp("Moja siostra Salva ma dar uzdrawiania. Wyszła na spacer koło akweduktu. Powinieneś ją znaleźć o ile jej potrzebujesz.");
 				new SellerAdder().addSeller(this, new SellerBehaviour(shops.get("superhealing")), true);
 				addGoodbye("Dowidzenia.");
 			}
 		};
 
-		npc.setDescription("Oto piękna kobieta, ukrywająca się pod owinięta tkaniną.");
+		npc.setDescription("Widzisz Kendrę Mattori, kapłankę w magicznej świątyni. Spokojnie czeka, aż wyjaśnisz powód wizyty.");
 		npc.setEntityClass("cloakedwoman2npc");
 		npc.setPosition(9, 10);
 		npc.initHP(100);

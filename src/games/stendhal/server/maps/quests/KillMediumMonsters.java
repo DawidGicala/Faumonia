@@ -77,7 +77,7 @@ import marauroa.common.Pair;
  * REPETITIONS: <ul><li> once a week.</ul>
  */
 
- public class KillMediumMonsters extends AbstractQuest {
+ public class KillMediumMonsters extends AbstractQuest implements games.stendhal.server.core.rp.quest.NativeHuntDetails {
 
 	private static final String QUEST_NPC = "Bate";
 	private static final String QUEST_SLOT = "kill_medium_monsters";
@@ -93,11 +93,11 @@ import marauroa.common.Pair;
 		super();
 		// fill monster types map
 		enemyForces.put("turoni",
-				new Pair<Integer, String>(200,"Zapomniałeś co mi obiecałeś? Miałeś grupę turoni. Powinieneś szukać ich w górach Semos, na północnym-wschodzie."));
+				new Pair<Integer, String>(200,"Turoni szukaj w górach Semos na północnym wschodzie. Zwykłe, uzbrojone, starsze i elitarne tworzą wspólną pulę trzystu zwycięstw."));
 		enemyForces.put("duergarów",
-				new Pair<Integer, String>(200,"Zapomniałeś co mi obiecałeś? Miałeś pokonać grupę duergarów. Znajdziesz ich na najniższym poziomie podziemi Semos."));
+				new Pair<Integer, String>(200,"Duergarów szukaj na najniższym poziomie podziemi Semos. Trzymaj się wykazu przeciwników, które zaliczam do tej umowy; widnieje na nim również zbójnik leśny."));
 		enemyForces.put("turoni",
-				new Pair<Integer, String>(300,"Zapomniałeś co mi obiecałeś? Miałeś grupę turoni. Powinieneś szukać ich w górach Semos, na północnym-wschodzie."));
+				new Pair<Integer, String>(300,"Turoni szukaj w górach Semos na północnym wschodzie. Zwykłe, uzbrojone, starsze i elitarne tworzą wspólną pulę trzystu zwycięstw."));
 
 		enemys.put("ptaków",
 				Arrays.asList("niebieski ptak",
@@ -193,10 +193,7 @@ import marauroa.common.Pair;
 		 */
 		public void fire(final Player player, final Sentence sentence, final EventRaiser speakerNPC) {
 			final String monstersType = chooseRandomEnemys();
-			speakerNPC.say("Szukam płatnego zabójcy. Potrzebuje kogoś, żeby pokonać grupę " + monstersType +
-					" Zabij co najmniej " + enemyForces.get(monstersType).first()+
-					" "+ monstersType +
-					" a wynagrodzę cię.");
+			speakerNPC.say("Nie szukam przechwałek, tylko kogoś, kto wykona konkretną robotę. Wyznaczę ci jedną grupę przeciwników i zapłacę po sprawdzeniu wyniku.\nZlecenie: " + monstersType + ". Łącznie: " + enemyForces.get(monstersType).first() + " zwycięstw. " + enemyForces.get(monstersType).second());
 			final HashMap<String, Pair<Integer, Integer>> toKill = new HashMap<String, Pair<Integer, Integer>>();
 			List<String> sortedcreatures = enemys.get(monstersType);
 			player.setQuest(QUEST_SLOT, 0, "start");
@@ -220,11 +217,10 @@ import marauroa.common.Pair;
 			int moneyreward = 44*Rand.roll1D6();
 			if(killed == killsnumber) {
 				// player killed no more no less then needed soldiers
-				speakerNPC.say("Dobra robota! Weź te duże eliksiry jako zapłatę. Myśle, że za tydzień będe miał dla ciebie kolejne zadanie.");
+				speakerNPC.say("Umowa wykonana, oto twoja zapłata. Eliksiry i skrzynie są przygotowane; po dwóch tygodniach od rozliczenia możesz wrócić po następne zlecenie.");
 			} else {
 				// player killed more then needed soldiers
-				speakerNPC.say("Bardzo dobrze! Zabiłeś "+(killed-killsnumber)+" extra "+
-						Grammar.plnoun(killed-killsnumber, "soldier")+"! Weź te duże eliksiry jako zapłątę. Myśle, że za tydzień będe miała dla ciebie kolejne zadanie.");
+				speakerNPC.say("Umowa wykonana, oto twoja zapłata. Eliksiry i skrzynie są przygotowane; po dwóch tygodniach od rozliczenia możesz wrócić po następne zlecenie. Ponad wymagany cel: " + (killed-killsnumber) + ".");
 			}
 			int karmabonus = 1*(1*killed/(killsnumber)-1);
 			final StackableItem money = (StackableItem)
@@ -243,31 +239,13 @@ import marauroa.common.Pair;
 	 * class for quest talking.
 	 */
 	class ExplainAction implements ChatAction {
+        public void fire(Player player, Sentence sentence, EventRaiser npc) {
+            npc.say("Jeszcze nie osiągnęliśmy celu tej wyprawy. Sprawdźmy aktualny meldunek.\n"
+                + games.stendhal.server.core.rp.quest.HuntQuestProgress.progressText(KillMediumMonsters.this,player));
+        }
+    }
 
-		public void fire(Player player, Sentence sentence, EventRaiser npc) {
-				final String monsters = player.getQuest(QUEST_SLOT, 1);
-				int killed=getKilledCreaturesNumber(player);
-				int killsnumber = enemyForces.get(monsters).first();
-
-				if(killed==0) {
-					// player killed no creatures but asked about quest again.
-					npc.say("Zapomniałeś? Miałeś rozprawić eię z grupą " + monsters + "!");
-					return;
-				}
-				if(killed < killsnumber) {
-					// player killed less then needed soldiers.
-					npc.say("Zabiłeś tylko "+killed+" "+Grammar.plnoun(killed, player.getQuest(QUEST_SLOT, 1))+
-							". Musisz zabić co najmniej "+killsnumber+" "+Grammar.plnoun(killed, player.getQuest(QUEST_SLOT, 1)));
-					return;
-				}
-
-		}
-	}
-
-	/**
-	 * add quest state to npc's fsm.
-	 */
-	private void step_1() {
+    private void step_1() {
 		
 		SpeakerNPC npc = npcs.get(QUEST_NPC);
 
@@ -296,7 +274,7 @@ import marauroa.common.Pair;
 
 		// explanations
 		npc.add(ConversationStates.ATTENDING,
-				Arrays.asList("zadanie", "task", "grupy", "potwory"),
+				Arrays.asList("grupy", "potwory"),
 				new QuestInStateCondition(QUEST_SLOT, 0, "start"),
 				ConversationStates.ATTENDING,
 				null,
@@ -308,7 +286,7 @@ import marauroa.common.Pair;
 
 		// explanations
 		npc.add(ConversationStates.ATTENDING,
-				Arrays.asList("zadanie", "task", "grupy", "potwory"),
+				Arrays.asList("grupy", "potwory"),
 				new QuestNotInStateCondition(QUEST_SLOT, 0, "start"),
 				ConversationStates.ATTENDING,
 				"Na razie nie mam zadania dla ciebie, przyjdź za jakiś czas.",
@@ -364,7 +342,7 @@ import marauroa.common.Pair;
 		super.addToWorld();
 		fillQuestInfo(
 				"Płatny zabójca",
-				"Bate poszukuje płatnego zabójcy, w zamian oferuje zapas eliksirów. Powinienem z nim porozmawiać.",
+				"Bate z tawerny Ados płaci za rozprawienie się ze wskazanymi przeciwnikami. Ustal z nim cele polowania i dopiero wtedy wyrusz na zlecenie.",
 				true);
 		step_1();
 	}
@@ -396,47 +374,8 @@ import marauroa.common.Pair;
 	
  	@Override
  	public List<String> getHistory(final Player player) {
- 		LinkedList<String> history = new LinkedList<String>();
-		if (!player.hasQuest(QUEST_SLOT)) {
-			return history;
-		}
-		
-		if(player.getQuest(QUEST_SLOT, 0).equals("start")) {
-	        final String givenEnemies = player.getQuest(QUEST_SLOT, 1);
-	        final int givenNumber = enemyForces.get(givenEnemies).first(); 
-	        final int killedNumber = getKilledCreaturesNumber(player);
-	        
-			history.add("Bate poprosił mnie o zabicie "+
-					givenNumber+" "+
-					Grammar.plnoun(givenNumber, givenEnemies));
-			String kn = Integer.valueOf(killedNumber).toString();
-			if(killedNumber == 0) {
-				kn="no";
-			}
-			history.add("Aktualnie zabiłem "+
-					kn+" "+
-					Grammar.plnoun(killedNumber, givenEnemies));
-			if(new KilledInSumForQuestCondition(QUEST_SLOT, 2, givenNumber).fire(player, null, null)) {
-				history.add("Zabiłem wystaczająco dużo potworów, aby dostać moją nagrodę.");
-			} else {
-				history.add("Zostało "+(givenNumber-killedNumber)+" "+
-						Grammar.plnoun(givenNumber-killedNumber, givenEnemies)+" do zabicia.");	
-			}
-		}
-		
-		if(isCompleted(player)) {
-			history.add("Pomogłem Bate w hotelu Fado i otrzymałem moja nagrodę!");
-		}	
-		if (isRepeatable(player)) {
-			history.add("Bate znowu potrzebuje pomocy.");
-		} 
-		int repetitions = player.getNumberOfRepetitions(getSlotName(), 3);
-		if (repetitions > 0) {
-			history.add("Pokonałem grupę "
-					+ Grammar.quantityplnoun(repetitions, "") + " dla Lindy.");
-		}
-		return history; 
- 	}
+        return games.stendhal.server.core.rp.quest.HuntQuestProgress.history(this,player);
+    }
 
 	@Override
 	public String getNPCName() {
@@ -447,5 +386,15 @@ import marauroa.common.Pair;
 	public String getRegion() {
 		return Region.SEMOS_SURROUNDS;
 	}
-}
 
+    @Override public java.util.Map<String, Pair<Integer,Integer>> getDialogueHuntTargets(Player player) {
+        java.util.Map<String, Pair<Integer,Integer>> result=new java.util.LinkedHashMap<String, Pair<Integer,Integer>>();
+        String group=player.getQuest(QUEST_SLOT,1);
+        if("start".equals(player.getQuest(QUEST_SLOT,0))&&enemyForces.containsKey(group))
+            for(String creature:enemys.get(group))result.put(creature,new Pair<Integer,Integer>(0,0));
+        return java.util.Collections.unmodifiableMap(result);
+    }
+    @Override public int getDialogueHuntTotal(Player player) { String group=player.getQuest(QUEST_SLOT,1);return "start".equals(player.getQuest(QUEST_SLOT,0))&&enemyForces.containsKey(group)?enemyForces.get(group).first():0; }
+    @Override public int getDialogueKillIndex() { return 2; }
+    @Override public String getDialogueHuntHint(Player player) { String group=player.getQuest(QUEST_SLOT,1);return "start".equals(player.getQuest(QUEST_SLOT,0))&&enemyForces.containsKey(group)?enemyForces.get(group).second():"Omów ze mną wyprawę. Po przyjęciu zlecenia poznasz aktualną grupę przeciwników."; }
+}

@@ -62,15 +62,16 @@ public class IronBuyerNPC implements ZoneConfigurator {
 
 			@Override
 			protected void createDialog() {
+                games.stendhal.server.entity.npc.dialogue.HuntDialogueTopics.install(this);
 				addGreeting();
-				addJob("Jestem nadzorczynią odpowiedzialną za utrzymanie torów dla wagoników w tej kopalni, ale mamy problem, ponieważ nie posiadamy żelaza do ich naprawy! Może mógłbyś mi #zaoferować trochę żelaza?");
+				addJob("Odpowiadam za tory i wagoniki w tej kopalni. Do napraw potrzebujemy żelaza, więc możesz mi je #zaoferować; poza tym muszę pilnować, żeby niesforne krasnale nie dokładały nam strat.");
 				addHelp("Jeżeli chcesz dobrą radę to nie idź na południe. Żyje tam straszny smok!");
 				new BuyerAdder().addBuyer(this, new BuyerBehaviour(shops.get("buyiron")), true);
 				addGoodbye("Żegnaj i uważaj na siebie. Inne krasnale nie lubią obcych kręcących się tutaj!");
 			}
 		};
 
-		loretta.setDescription("Oto Loretta, starsza kobieta krasnal. Pracuje przy torach dla wagoników.");
+		loretta.setDescription("Widzisz Lorettę, starszą krasnolicę doglądającą kopalnianych torów. Jej uwadze trudno umknąć.");
 		loretta.setEntityClass("greendwarfnpc");
 		loretta.setPosition(49, 68);
 		loretta.initHP(100);

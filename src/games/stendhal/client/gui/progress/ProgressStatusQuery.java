@@ -13,4 +13,5 @@ package games.stendhal.client.gui.progress;
 
 public interface ProgressStatusQuery {
 	public void fire(String data);
+	default void refresh(String data) { fire(data); }
 }

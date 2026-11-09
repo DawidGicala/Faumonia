@@ -38,8 +38,9 @@ public class OctavioNPC implements ZoneConfigurator {
 		final SpeakerNPC npc = new SpeakerNPC("Octavio") {
 			@Override
 			public void createDialog() {
+                games.stendhal.server.entity.npc.dialogue.HuntDialogueTopics.install(this);
 				addGreeting("Witaj.");
-				addJob("Jam jest bratem Sato i już nie pamiętam czym kiedyś się zajmowałem... Jestem już za stary.");
+				addJob("Jestem bratem Sato i mam za sobą dość lat, żeby nie pamiętać każdego zajęcia. Wciąż jednak rozpoznaję zagrożenia, których nie załatwi krótka wyprawa za miasto; takim sprawom poświęcam teraz uwagę.");
 				addOffer("Niczego nie potrzebuje, niczego nie sprzedaje.");
 				addGoodbye("Dowidzenia i dziękuję za rozmowę.");
 				// All further behaviour is defined in quest classes.
@@ -55,7 +56,7 @@ public class OctavioNPC implements ZoneConfigurator {
 		};
 		npc.setPosition(73, 26);
 		npc.setEntityClass("octavionpc");
-		npc.setDescription("Widzisz Octavio.. Wiele już widział w swoim życiu.");
+		npc.setDescription("Widzisz Octavia, starego podróżnika z Semos. Wiele zapomniał, ale imiona groźnych stworzeń wciąż wymawia bez wahania.");
 		npc.setDirection(Direction.DOWN);
 		zone.add(npc);
 	}

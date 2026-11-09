@@ -13,6 +13,7 @@
 package games.stendhal.server.events;
 
 import games.stendhal.common.constants.Events;
+import games.stendhal.common.QuestProgress;
 
 import java.util.List;
 
@@ -38,6 +39,15 @@ public class ProgressStatusEvent extends RPEvent {
 		rpclass.add(DefinitionClass.ATTRIBUTE, "description", Type.VERY_LONG_STRING);
 		rpclass.add(DefinitionClass.ATTRIBUTE, "information", Type.VERY_LONG_STRING);
 		rpclass.add(DefinitionClass.ATTRIBUTE, "data", Type.VERY_LONG_STRING);
+		rpclass.add(DefinitionClass.ATTRIBUTE, "quest_progress", Type.VERY_LONG_STRING);
+		rpclass.add(DefinitionClass.ATTRIBUTE, "passive", Type.STRING);
+	}
+
+	/** Optional player-visible snapshot; raw quest slots must never be passed here. */
+	public void setQuestProgress(QuestProgress progress) {
+		if (progress != null) {
+			put("quest_progress", progress.toWire());
+		}
 	}
 
 	/**

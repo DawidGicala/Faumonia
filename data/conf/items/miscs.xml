@@ -23,7 +23,7 @@
 	
 	<item name="paczka jedzenia">
 		<type class="misc" subclass="paczka_jedzenia" tileid="-1"/>
-		<description>Paczka jedzenia przygotowana specjalnie dla mieszkańców Wyspy Athor. To dar, który ma na celu udowodnić Twoją wartość i zyskać zaufanie lokalnej społeczności. Zanieś ją do Woy'tyka, aby pokazać swoje zaangażowanie i odwagę.</description>
+		<description>To paczka jedzenia przygotowana przez Leandera dla mieszkańców Athor. Zanieś ją Woy'tykowi, który poprosił o pomoc w zaopatrzeniu wyspy.</description>
 		<implementation class-name="games.stendhal.server.entity.item.StackableItem"/>
 		<attributes>
 			<quantity value="1"/>
@@ -43,7 +43,7 @@
 	
 	<item name="uszkodzona różdżka">
 		<type class="misc" subclass="uszkodzona_rozdzka" tileid="-1"/>
-		<description>Oto uszkodzona różdżka, która była niegdyś potężnym artefaktem. Aby odkryć jej tajemnice i przywrócić jej dawną moc, znajdź osoby, które wiedzą, jak ją naprawić. Gdy powiesz #różdżka odpowiedniej osobie, na pewno Ci pomoże.</description>
+		<description>Oto uszkodzona różdżka otrzymana od Woy'tyka. Ylrik w Kirdneh zna pozostałe części potrzebne do jej przywrócenia; Samaron zajmuje się ich połączeniem.</description>
 		<implementation class-name="games.stendhal.server.entity.item.StackableItem"/>
 		<attributes>
 			<quantity value="1"/>
@@ -63,7 +63,7 @@
 	
 	<item name="magiczny katalizator">
 		<type class="misc" subclass="magiczny_katalizator" tileid="-1"/>
-		<description>Oto magiczny katalizator, kluczowy element służący do przechowywania mocy różdżki. Tylko z nim możliwe jest przywrócenie pełnej mocy różdżki. Przynieś go razem z uszkodzoną różdżką i kryształami mocy Samaronowi i powiedz #różdżka, aby dowiedzieć się więcej.</description>
+		<description>To magiczny katalizator od Ylrika, jedna z części różdżki Mokoszy. Samaron potrzebuje go razem z uszkodzoną różdżką, aby przygotować dalszą pracę.</description>
 		<implementation class-name="games.stendhal.server.entity.item.StackableItem"/>
 		<attributes>
 			<quantity value="1"/>
@@ -83,7 +83,7 @@
 	
 	<item name="kryształ mocy">
 		<type class="misc" subclass="krysztal_mocy" tileid="-1"/>
-		<description>Oto kryształ mocy, esencja, która napełnia różdżkę niezwykłą mocą. Bez niego różdżka pozostaje bezużyteczna. Przynieś go Samaronowi razem z uszkodzoną różdżką i magicznym katalizatorem i powiedz #różdżka, aby kontynuować swoje zadanie.</description>
+		<description>Oto kryształ mocy od Ylrika, część różdżki Mokoszy. Zachowaj go na końcowe łączenie u Samarona; wcześniej mag wyjaśni, jakie dodatkowe składniki są potrzebne.</description>
 		<implementation class-name="games.stendhal.server.entity.item.StackableItem"/>
 		<attributes>
 			<quantity value="1"/>

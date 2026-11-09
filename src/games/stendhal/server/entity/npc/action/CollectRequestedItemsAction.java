@@ -40,6 +40,7 @@ public final class CollectRequestedItemsAction implements ChatAction {
 	private final String itemName;
 	private final String questionForMore;
 	private final String alreadyBrought;
+	private final String notBrought;
 	private final ChatAction toExecuteOnCompletion;
 	private final String questSlot;
 	private final ConversationStates stateAfterCompletion;
@@ -55,10 +56,17 @@ public final class CollectRequestedItemsAction implements ChatAction {
 	 * @param stateAfterCompletion state to change to after completion
 	 */
 	public CollectRequestedItemsAction(String itemName, String quest, String questionForMore, String alreadyBrought, ChatAction completionAction, ConversationStates stateAfterCompletion) {
+		this(itemName, quest, questionForMore, alreadyBrought, completionAction, stateAfterCompletion, null);
+	}
+
+	/** Optional local wording; existing callers retain their original missing-item response. */
+	public CollectRequestedItemsAction(String itemName, String quest, String questionForMore, String alreadyBrought,
+			ChatAction completionAction, ConversationStates stateAfterCompletion, String notBrought) {
 		this.itemName = itemName;
 		this.questSlot = quest;
 		this.questionForMore = questionForMore;
 		this.alreadyBrought = alreadyBrought;
+		this.notBrought = notBrought;
 		this.toExecuteOnCompletion = completionAction;
 		this.stateAfterCompletion = stateAfterCompletion;
 	}
@@ -68,6 +76,9 @@ public final class CollectRequestedItemsAction implements ChatAction {
 		final Integer missingCount = missingItems.get(itemName);
 
 		if ((missingCount != null) && (missingCount > 0)) {
+            if (missingItems.size()==1 && player.isEquipped(itemName, missingCount)
+                    && toExecuteOnCompletion instanceof QuestFeeAction
+                    && !((QuestFeeAction)toExecuteOnCompletion).prepare(player,raiser)) { return; }
 			if (dropItems(player, itemName, missingCount)) {
 				missingItems = getMissingItems(player);
 
@@ -78,7 +89,7 @@ public final class CollectRequestedItemsAction implements ChatAction {
 					raiser.setCurrentState(this.stateAfterCompletion);
 				}
 			} else {
-				raiser.say("Nie masz przy sobie " + Grammar.a_noun(itemName) + "!");
+				raiser.say(notBrought == null ? "Nie masz przy sobie " + Grammar.a_noun(itemName) + "!" : notBrought);
 			}
 		} else {
 			raiser.say(alreadyBrought);

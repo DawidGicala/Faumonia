@@ -20,47 +20,47 @@ package games.stendhal.server.core.events;
 public enum TutorialEventType {
 
 	FIRST_LOGIN(
-			"Witaj w FaumoniaOnline. Możesz się poruszać używając klawiszy strzałek na klawiaturze lub klikając myszką. "),
+			"Witaj w Faumonii! Poruszaj się strzałkami lub klikaj miejsca na mapie. Przewodnik pomoże ci wykonać pierwsze zadania."),
 	FIRST_MOVE(
-			"Możesz porozmawiać z NPCem, pisząc \"cześć\". Możesz sprawdzić najważniejsze komendy w grze wpisująć /help "),
+			"Podejdź do mieszkańca i napisz \"cześć\" na czacie. W rozmowie korzystaj z niebieskich słów i gotowych odpowiedzi. Listę komend znajdziesz pod /help."),
 	RETURN_HOME(
-			"Porozmawiaj ponownie z NPCem mówiąc \"cześć\". "),
+			"Wróć do swojego rozmówcy i napisz \"cześć\", aby kontynuować zadanie."),
 	VISIT_SEMOS_CITY(
-			"Znalazłeś się w mieście startowym Semos. Spójrz na minimapę w lewym górnym rogu ekranu. W lewym górnych rogu mapy 0_semos_city znajduje się budynek Mistrza Faumonii. Wybierz się do niego a dostaniesz główne zadanie w którym nauczysz się podstaw gry. "),
+			"Witaj w Semos! Otwórz Przewodnik w menu gry - pokaże ci bieżący cel i drogę do rozmówcy. Mistrz Faumonii czeka w swoim domu w zachodniej części miasta i zleca główne zadania. Jeśli utkniesz, wpisz /k i treść pytania, aby poprosić graczy o pomoc."),
 	VISIT_SEMOS_DUNGEON(
-			"Pamiętaj, aby jeść regularnie podczas walki z potworami. Naciśnij podwójnie na ser, mięso lub na innego rodzaju jedzenia, które posiadasz. "),
+			"Jedzenie pomaga odzyskać zdrowie. Kliknij dwukrotnie ser, mięso lub inne jedzenie w plecaku i pilnuj paska PZ podczas walki."),
 	VISIT_SEMOS_DUNGEON_2(
-			"Ostrożnie. Jeżeli będziesz dalej się zagłębiał to spotkasz coraz silniejsze potwory. Możesz uciec z powrotem do Semos, aby Carmen wyleczyła twoje rany. "),
+			"Im głębiej wejdziesz do podziemi, tym silniejsze potwory spotkasz. W razie potrzeby wróć do Semos i poproś Carmen o leczenie."),
 	VISIT_SEMOS_TAVERN(
-			"Możesz handlować z NPC-ami mówiąc \"cześć\", a później pytając o jego ofertę \"oferta\". Jeżeli chciałbyś coś kupić np flaszę to powiedz \"kupię flasza\". "),
+			"Przywitaj się ze sprzedawcą i zapytaj o \"ofertę\". W sklepie wybierz przedmiot oraz ilość, sprawdź cenę i potwierdź zakup. Możesz też handlować przez czat."),
 	VISIT_SEMOS_PLAINS(
-			"Regularne jedzenie jest kluczem do odzyskania swojego zdrowia. Jeżeli posiadasz małe zapasy jedzenia to odwiedź farmę, która znajduje się na północny-wschód stąd. "),
+			"Jedzenie pomaga odzyskiwać zdrowie. Jeśli kończą ci się zapasy, odwiedź farmę na północnym wschodzie."),
 	FIRST_ATTACKED(
-			"Potwory w źółtym kółku atakują Ciebie! Naciśnij na nie, aby walczyć z nimi.  "),
+			"Potwory zaznaczone żółtym kółkiem atakują cię. Kliknij przeciwnika, aby podjąć walkę, i obserwuj swoje zdrowie."),
 	FIRST_KILL(
 			"Kliknij na przedmioty w zwłokach, aby przenieść je do swojego plecaka. "),
     FIRST_PLAYER_KILL(
-			"Zostałeś oznaczony czerwoną czaszką ponieważ zabiłeś wojownika. Możesz spotkać osoby, które będą Cię obserwować. W celu usunięcia tego porozmawiaj z Wikarym pod kościołem w Fado. "),
+			"Czerwona czaszka oznacza piętno zabójcy. Część mieszkańców odmówi ci handlu, leczenia lub zleceń, a zakupy będą droższe. Aby zdjąć piętno, porozmawiaj z Wikarym przy kaplicy w Fado i powiedz: zdejmij. Przed zapłatą poznasz cenę."),
 	FIRST_POISONED(
-			"Zostałeś właśnie zatruty. Jeżeli nie wypiłeś trucizny to oznacza, że zostałeś zatruty przez potwora, który cię atakuje. Szybko zabij potwora ponieważ przy zatruciu twoje PZ z biegiem czasu maleje. "),
+			"Zostałeś zatruty i tracisz PZ. Użyj antidotum, jeśli masz je przy sobie, i pilnuj zdrowia. W razie zagrożenia wycofaj się z walki."),
 	FIRST_PLAYER(
-			"Czy zauważyłeś postacie z nazwą w kolorze białym? Oznaczają one innych wojowników.  "),
+			"Postacie z białymi imionami to inni gracze. Jeśli potrzebujesz pomocy, napisz na czacie globalnym: /k twoje pytanie."),
 	FIRST_DEATH(
-			"Właśnie poległeś w boju, ale to nie koniec przygody. W tym świecie śmierć nie oznacza końca gry. Możesz nadal grać, ale śmierć ma swoją cenę. "),
+			"Twoja postać poległa, ale możesz kontynuować przygodę. Śmierć wiąże się ze stratami, więc sprawdź ekwipunek i zapasy przed kolejną wyprawą."),
 	FIRST_PRIVATE_MESSAGE(
-			"Otrzymałeś prywatną wiadomość, aby odpisać użyj #/msg #imię #wiadomość. "),
+			"Otrzymałeś prywatną wiadomość. Aby odpisać, wpisz /msg, imię gracza i treść odpowiedzi."),
 	FIRST_EQUIPPED(
-			"Właśnie coś dostałeś! Sprawdź swój plecak oraz dłonie.  "),
+			"Otrzymałeś przedmiot. Sprawdź plecak oraz dłonie."),
 	TIMED_HELP(
 			"Sprawdź naszą stronę internetową: #www.faumonia.pl  "),
 	TIMED_NAKED(
 			"Czy nie jest Ci zimno? Naciśnij na sobie prawy przycisk i wybierz \"Ustaw wygląd\", aby się ubrać.  "),
 	TIMED_PASSWORD(
-			"Pamiętaj, żeby nikomu nie udostępniać swojego hasła. Nigdy nie podawaj przyjacielowi, innemu wojownikowi czy administratorowi. "),
+			"Nie udostępniaj nikomu hasła do konta, także znajomym ani osobom podającym się za administrację."),
 	TIMED_OUTFIT(
-			"Podoba się Tobie swój własny wygląd? Jeżeli nie to możesz go zmienić. Naciśnij na sobie prawy przycisk myszy i wybierz \"Ustaw wygląd\", aby poeksperymentować z nowymi fryzurami, twarzami, ubraniami i ciałem.  "),
+			"Chcesz zmienić wygląd postaci? Kliknij ją prawym przyciskiem myszy i wybierz \"Ustaw wygląd\", aby wybrać fryzurę, twarz i ubranie."),
 	TIMED_RULES(
-			"Dziękujemy za pozostanie z nami. Ze względu, że grasz już dość długo to ważne, abyś przeczytał regulamin. ");
+			"Zapoznaj się z regulaminem na www.faumonia.pl, aby poznać zasady gry.");
 	private String message;
 
 	/**

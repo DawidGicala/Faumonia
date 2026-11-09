@@ -49,8 +49,7 @@ import java.util.List;
  * </ul>
  * REPETITIONS: <ul><li> None.</ul>
  */
-public class ToysCollector extends AbstractQuest implements
-		BringListOfItemsQuest {
+public class ToysCollector extends AbstractQuest implements BringListOfItemsQuest, games.stendhal.server.core.rp.quest.NativeCollectionDetails {
 
 	private static final String QUEST_SLOT = "toys_collector";
 	
@@ -62,22 +61,12 @@ public class ToysCollector extends AbstractQuest implements
 	// don't want to use the standard history for this kind of quest for anna as we dont want to say what she needs.
 	@Override
 	public List<String> getHistory(final Player player) {
-			final List<String> res = new ArrayList<String>();
-			if (!player.hasQuest(QUEST_SLOT)) {
-				return res;
-			}
-			final String questState = player.getQuest(QUEST_SLOT);
-			if (!"done".equals(questState)) {
-				res.add("Anna chce coś do zabawy. Muszę pomyśleć co ją uszczęśliwi!");
-			} else {
-				res.add("Mam kilka zabawek dla Anna, Jens i George do zabawy.");
-			}
-			return res;
-	}
+        return games.stendhal.server.core.rp.quest.CollectionQuestProgress.history(this, player);
+    }
 
 	private void setupAbstractQuest() {
 		final BringListOfItemsQuest concreteQuest = this;
-		bringItems = new BringListOfItemsQuestLogic(concreteQuest);
+		bringItems = new games.stendhal.server.maps.quests.logic.DialogueBringListOfItemsQuestLogic(concreteQuest);
 		bringItems.addToWorld();
 	}
 
@@ -86,10 +75,9 @@ public class ToysCollector extends AbstractQuest implements
 		super.addToWorld();
 		fillQuestInfo(
 				"Kolekcjoner Zabawek",
-				"Spróbuj znaleść zabawki dla Anny i jej przyjaciół.",
+				"Anna i jej przyjaciele z Ados chcieliby mieć więcej zabawek. Dowiedz się, czego im brakuje, i pomóż skompletować przedmioty do wspólnej zabawy.",
 				false);
 		setupAbstractQuest();
-		specialStuff();
 	}
 
 	private void specialStuff() {
@@ -116,7 +104,7 @@ public class ToysCollector extends AbstractQuest implements
 	}
 
 	public List<String> getTriggerPhraseToEnumerateMissingItems() {
-		return ConversationPhrases.EMPTY;
+		return Arrays.asList("lista", "kolekcja");
 	}
 
 	public List<String> getAdditionalTriggerPhraseForQuest() {
@@ -128,12 +116,12 @@ public class ToysCollector extends AbstractQuest implements
 	}
 
 	public String welcomeBeforeStartingQuest() {
-		return "Mama powiedziała, że nie powinniśmy rozmawiać z obcymi. Ona martwi się o zaginioną dziewczynkę, ale ja się nudzę. Chcę jakieś #zabawki ( #toys )!";
-	}
+        return "Cześć! Mama nie chce, żebym rozmawiała z obcymi, ale tutaj strasznie się nudzę. Przydałyby się zabawki, którymi moglibyśmy bawić się razem.";
+    }
 
 	public String welcomeDuringActiveQuest() {
-		return "Cześć! Wciąż się nudzę. Przyniosłeś mi zabawki?";
-	}
+        return "O, jesteś! Pamiętam wszystkie zabawki, które już dostałam. Udało ci się znaleźć jeszcze coś dla nas?";
+    }
 
 	public String welcomeAfterQuestIsCompleted() {
 		return "Cześć! Jestem zajęta zabawą moimi zabawkami.";
@@ -144,45 +132,45 @@ public class ToysCollector extends AbstractQuest implements
 	}
 
 	public String respondToQuest() {
-		return "Nie jestem pewna jakie zabawki! Przyniesiesz mi coś? Proszę.";
-	}
+        return "Chciałabym mieć trzy różne zabawki, żeby Jens i George też mieli co robić. Nie muszą przyjść wszystkie naraz. Pomożesz mi je zebrać?";
+    }
 
 	public String respondToQuestAfterItHasAlreadyBeenCompleted() {
 		return "Zabawki są wspaniałe! Dziękuję!";
 	}
 
 	public String respondToQuestAcception() {
-		return "Huuraa! Ale zabawa. Do zobaczenia.";
-	}
+        return "Hurra, będziemy mieli czym się bawić! Przynoś zabawki po jednej, kiedy je znajdziesz. Będę pamiętać, co już dostałam.";
+    }
 
 	public String respondToQuestRefusal() {
-		return "Och ... masz na myśli.";
-	}
+        return "Szkoda, liczyłam na wspólną zabawę. Może jeszcze zmienisz zdanie i coś dla nas znajdziesz.";
+    }
 	
 	// not used
 	public String firstAskForMissingItems(final List<String> missingItems) {
-		return "Nie jestem pewna jakie zabawki! Przyniesiesz mi coś? Proszę";
-	}
+        return "Na liście wciąż pozostają: " + Grammar.enumerateCollection(missingItems) + ". Przekaż po jednym brakującym egzemplarzu; resztę możesz donieść później.";
+    }
 	
 	public String askForMissingItems(final List<String> missingItems) {
-		return "Jakie zabawki mi przyniosłeś?";
-	}
+        return "Na liście wciąż pozostają: " + Grammar.enumerateCollection(missingItems) + ". Przekaż po jednym brakującym egzemplarzu; resztę możesz donieść później.";
+    }
 
 	public String respondToPlayerSayingHeHasNoItems(final List<String> missingItems) {
 		return "Dobrze. Wróć później.";
 	}
 
 	public String askForItemsAfterPlayerSaidHeHasItems() {
-		return "Co mi przyniosłeś?!";
-	}
+        return "Naprawdę coś masz? Pokaż mi zabawkę z naszej listy, a zaraz sprawdzę, czy już takiej nie dostałam.";
+    }
 
 	public String respondToItemBrought() {
-		return "Dziękuję bardzo! Co jeszcze mi przyniosłeś";
-	}
+        return "Ale fajna, dziękuję! Ta zabawka już zostaje z nami. Masz jeszcze którąś z pozostałych?";
+    }
 
 	public String respondToLastItemBrought() {
-		return "Te zabawki będą mnie bawić przez lata! Proszę weź te placki. Arlindo upiekł je dla nas, ale chyba ty powinieneś je mieć.";
-	}
+        return "Mamy już wszystkie zabawki, teraz nie będziemy się nudzić! Weź te tarty od Arlinda w podziękowaniu. My zajmiemy się zabawą, a tobie przydadzą się w drodze.";
+    }
 
 	public void rewardPlayer(final Player player) {
 		final StackableItem pie = (StackableItem) SingletonRepository.getEntityManager().getItem(
@@ -201,12 +189,12 @@ public class ToysCollector extends AbstractQuest implements
 	}
 
 	public String respondToOfferOfNotMissingItem() {
-		return "Mam już tą zabawkę!";
-	}
+        return "Taką zabawkę już mamy. Spróbuj znaleźć którąś z tych, których jeszcze brakuje.";
+    }
 
 	public String respondToOfferOfNotNeededItem() {
-		return "To nie najlepsza zabawka!";
-	}
+        return "Nie umiem bawić się czymś takim. Poszukaj proszę zabawki z naszej listy.";
+    }
 
 	@Override
 	public String getName() {
@@ -222,4 +210,11 @@ public class ToysCollector extends AbstractQuest implements
 	public String getNPCName() {
 		return "Anna";
 	}
+
+
+
+    public String getCollectionKind(){return "list";}
+    public java.util.Map<String,Integer> getCollectionItems(){java.util.Map<String,Integer> m=new java.util.LinkedHashMap<String,Integer>();for(String n:getNeededItems())m.put(n,1);return m;}
+    public String getCollectionHint(){return "Anna zbiera trzy różne zabawki. Przynoś je osobno w dowolnej kolejności; każdą dołoży do kolekcji. Pluszowy miś jest także potrzebny Plinkowi, więc zachowaj dla niego osobny egzemplarz.";}
+    
 }

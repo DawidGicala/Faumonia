@@ -48,7 +48,7 @@ import java.util.List;
 
 import marauroa.common.Pair;
 
-public class KillFairy extends AbstractQuest {
+public class KillFairy extends AbstractQuest implements games.stendhal.server.core.rp.quest.NativeHuntDetails {
 
 	private static final String QUEST_SLOT = "kill_fairy";
 	protected HashMap<String, Pair<Integer, Integer>> creaturestokill = new HashMap<String, Pair<Integer,Integer>>();
@@ -73,19 +73,19 @@ public class KillFairy extends AbstractQuest {
 		final SpeakerNPC npc = npcs.get("Yance");
 
 		npc.add(ConversationStates.ATTENDING,
-				ConversationPhrases.QUEST_MESSAGES, 
-				new QuestNotStartedCondition(QUEST_SLOT),
-				ConversationStates.QUEST_OFFERED,
-				"Nasz bank zaczyna mieć problemy finansowe... musimy znaleźć jakieś źródło dodatkowych dochodów. Może mi pomożesz?",
-				null);
+                ConversationPhrases.QUEST_MESSAGES,
+                new QuestNotStartedCondition(QUEST_SLOT),
+                ConversationStates.QUEST_OFFERED,
+                "Kupcy wracają z drogi z coraz lżejszymi sakiewkami, a nasz bank odczuwa każdy taki napad. Karzełki na wschodzie najwyraźniej uznały cudze monety za swój dochód. Pomożesz ukrócić ten proceder?",
+                null);
 
 		npc.add(ConversationStates.ATTENDING,
-				ConversationPhrases.QUEST_MESSAGES, 
-				new AndCondition(new QuestStateStartsWithCondition(QUEST_SLOT,"done"),
+                ConversationPhrases.QUEST_MESSAGES,
+                new AndCondition(new QuestStateStartsWithCondition(QUEST_SLOT,"done"),
 						 new TimePassedCondition(QUEST_SLOT, 1, MathHelper.MINUTES_IN_ONE_WEEK*2)),
-				ConversationStates.QUEST_OFFERED,
-				"Bank znowu ma problemy finansowe a rozwiązać je możemy w podobny sposób co poprzednio... Może znów mi pomożesz?",
-				null);
+                ConversationStates.QUEST_OFFERED,
+                "Napady znów odbijają się na interesach Fado. Możemy pomóc kupcom tak jak poprzednio; podejmiesz kolejną wyprawę?",
+                null);
 
 		npc.add(ConversationStates.ATTENDING,
 				ConversationPhrases.QUEST_MESSAGES,
@@ -101,18 +101,18 @@ public class KillFairy extends AbstractQuest {
 
 		
 		npc.add(ConversationStates.QUEST_OFFERED,
-				ConversationPhrases.YES_MESSAGES,
-				null,
-				ConversationStates.ATTENDING,
-				"Dziękuję! Idź na wschód od miasta i zabij 25 karzełków amarantowych i 25 karzełków jadeitowych, słyną oni ze swoich zasobnych portfeli... a.. i napadają na kupców i zabierają im pieniądze...",
-				new MultipleActions(actions));
+                ConversationPhrases.YES_MESSAGES,
+                null,
+                ConversationStates.ATTENDING,
+                "Udaj się na wschód od miasta i zajmij się obiema odmianami karzełków. Liczę po dwadzieścia pięć amarantowych i jadeitowych, a łupy z drogi zatrzymasz dla siebie." + "\nCele: " + games.stendhal.server.core.rp.quest.HuntQuestProgress.targetText(this,null) + ".",
+                new MultipleActions(actions));
 
-		npc.add(ConversationStates.QUEST_OFFERED, 
-				ConversationPhrases.NO_MESSAGES, 
-				null,
-				ConversationStates.ATTENDING,
-				"Co za szkoda... Może kiedyś zmienisz zdanie i pomożesz bankowi.",
-				new SetQuestAction(QUEST_SLOT, 0, "rejected"));
+		npc.add(ConversationStates.QUEST_OFFERED,
+                ConversationPhrases.NO_MESSAGES,
+                null,
+                ConversationStates.ATTENDING,
+                "Szkoda, liczyłem na twoją pomoc. Bank pozostanie na miejscu, gdy zechcesz wrócić do sprawy.",
+                new SetQuestAction(QUEST_SLOT, 0, "rejected"));
 	}
 
 	private void step_2() {
@@ -148,23 +148,23 @@ public class KillFairy extends AbstractQuest {
 		LinkedList<String> triggers = new LinkedList<String>();
 		triggers.addAll(ConversationPhrases.FINISH_MESSAGES);
 		triggers.addAll(ConversationPhrases.QUEST_MESSAGES);		
-		npc.add(ConversationStates.ATTENDING, 
-				triggers,
-				new AndCondition(
+		npc.add(ConversationStates.ATTENDING,
+                triggers,
+                new AndCondition(
 						new QuestInStateCondition(QUEST_SLOT, 0, "start"),
 						new KilledForQuestCondition(QUEST_SLOT, 1)),
-				ConversationStates.ATTENDING, 
-				"Bardzo dziękuję! Teraz pieniądze są w swoim miejscu. Proszę przyjmij te eliksiry i jabłecznik.",
-				new MultipleActions(actions));
+                ConversationStates.ATTENDING,
+                "To dobra wiadomość dla kupców i dla Fado. Dziękuję za dopilnowanie obu grup; przygotowałem eliksiry, jabłecznik i skrzynię na dalszą drogę.",
+                new MultipleActions(actions));
 
-		npc.add(ConversationStates.ATTENDING, 
-				triggers,
-				new AndCondition(
+		npc.add(ConversationStates.ATTENDING,
+                triggers,
+                new AndCondition(
 						new QuestInStateCondition(QUEST_SLOT, 0, "start"),
 						new NotCondition(new KilledForQuestCondition(QUEST_SLOT, 1))),
-				ConversationStates.ATTENDING, 
-				"Proszę pomóż mi i zabij te karzełki!",
-				null);
+                ConversationStates.ATTENDING,
+                null,
+                (p, sentence, raiser) -> raiser.say("Potrzebuję jeszcze pomocy z karzełkami. Obie odmiany są ważne, więc nie zastępuj brakujących jadeitowych kolejnymi amarantowymi." + "\n" + games.stendhal.server.core.rp.quest.HuntQuestProgress.progressText(KillFairy.this,p)));
 	}
 
 	@Override
@@ -172,7 +172,7 @@ public class KillFairy extends AbstractQuest {
 		super.addToWorld();
 		fillQuestInfo(
 				"Zabij Karzełki",
-				"Bankier w Fado - Yance musi poprawić sytuacje finansową swojego banku. Jest pewien sposób jak mógłbym mu w tym pomóc...",
+				"Yance z banku Fado martwi się napadami na kupców i znikającymi monetami. Zapytaj go o karzełki, poznaj cele polowania i wróć po wykonaniu zlecenia.",
 				false);
 		step_1();
 		step_2();
@@ -181,24 +181,8 @@ public class KillFairy extends AbstractQuest {
 	
 	@Override
 	public List<String> getHistory(final Player player) {
-			final List<String> res = new ArrayList<String>();
-			if (!player.hasQuest(QUEST_SLOT)) {
-				return res;
-			}
-			if (!isCompleted(player)) {
-				res.add("Musze zabić 25 karzełków amanitowych i 25 karzełków jadeitowych, aby wykonać polecenie Yancego.");
-			} else if(isRepeatable(player)){
-				res.add("Teraz po dwóch tygodniach powinienem odwiedzić bankiera Yancera. Może znów potrzebuje mojej pomocy!");
-			} else {
-				res.add("Zabiłem pare karzełków, a Yandi nie ma już problemów z finansami.	W nagrodę za ukończenie zadania otrzymałem: 5.000 pkt doświadczenia, 80 eliksirów i kilka jabłeczników.");
-			}
-			int repetitions = player.getNumberOfRepetitions(getSlotName(), 2);
-			if (repetitions > 0) {
-				res.add("Pomogłem Yandiemu "
-						+ Grammar.quantityplnoun(repetitions, "razy") + ".");
-			}
-			return res;
-	}
+        return games.stendhal.server.core.rp.quest.HuntQuestProgress.history(this,player);
+    }
 
 
 	@Override
@@ -227,4 +211,11 @@ public class KillFairy extends AbstractQuest {
 	public String getRegion() {
 		return Region.FADO_CITY;
 	}
+
+    @Override public java.util.Map<String, Pair<Integer,Integer>> getDialogueHuntTargets(Player player) {
+        return java.util.Collections.unmodifiableMap(new java.util.TreeMap<String,Pair<Integer,Integer>>(creaturestokill));
+    }
+    @Override public int getDialogueHuntTotal(Player player) { return 0; }
+    @Override public int getDialogueKillIndex() { return 1; }
+    @Override public String getDialogueHuntHint(Player player) { return "Karzełków szukaj na wschód od Fado. Potrzeba po 25 amarantowych i jadeitowych; pieniądze zdobyte podczas wyprawy zostają przy tobie, nie musisz ich oddawać bankowi."; }
 }

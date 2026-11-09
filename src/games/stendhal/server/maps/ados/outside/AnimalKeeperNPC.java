@@ -66,8 +66,10 @@ public class AnimalKeeperNPC implements ZoneConfigurator {
 
 			@Override
 			protected void createDialog() {
+                addReply("wskazówki", "Sprawdź nazwę i ilość karmy w naszej umowie. Mięso można zdobyć podczas polowań, ryby złowić, a rośliny zebrać lub kupić; wybierz sposób odpowiedni do zamówionego jedzenia. Przyjmę dopiero całą wymaganą ilość.");
+                addReply("tematy", "Możemy wrócić do twojej sprawy albo porozmawiać o czymś innym. Co chcesz wiedzieć?");
 				addOffer("Czy możesz zachować to w tajemnicy? Dr. Feelgood nasz weterynarz, może Tobie sprzedać leki, których nie potrzebuje dla zwierząt.");
-				addJob("Opiekuję się schroniskiem i zaopiekuje się każdym porzuconym zwierzątkiem.");
+				addJob("Opiekuję się zwierzętami, które straciły dom albo zostały porzucone. Każde ma inne potrzeby, dlatego układam dostawy karmy zamiast prosić o przypadkowe jedzenie.");
 				add(ConversationStates.ATTENDING,
 					ConversationPhrases.HELP_MESSAGES,
 					new ChatCondition() {
@@ -132,7 +134,7 @@ public class AnimalKeeperNPC implements ZoneConfigurator {
 		npc.setPosition(41, 40);
 		//npc.setDirection(Direction.DOWN);
 		npc.initHP(100);
-		npc.setDescription("Oto Katinka. Opiekuje się zwierzętami w tym Zoo.");
+		npc.setDescription("Widzisz Katinkę, opiekunkę zwierząt w schronisku pod Ados. Nieustannie krąży między podopiecznymi i zapasami karmy.");
 		zone.add(npc);
 	}
 }

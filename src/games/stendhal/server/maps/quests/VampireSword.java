@@ -108,7 +108,7 @@ public class VampireSword extends AbstractQuest {
 			ConversationPhrases.QUEST_MESSAGES, 
 			new QuestNotStartedCondition(QUEST_SLOT),
 			ConversationStates.QUEST_OFFERED, 
-			"Mogę stworzyć potężny wysysający zdrowie miecz dla Ciebie. Będziesz musiał pójść do Katakumb, które znajdują się pod cmentarzem w Semos i pokonać Lorda Wampira. Jesteś zainteresowany?",
+			"Potrafię wykuć krwiopijcę, lecz zwykła stal nie wystarczy do takiej broni. Musisz pokonać Lorda Wampira w katakumbach Semos, zdobyć napełnioną czarę i przynieść mi 200 trucheł wampira. Podejmiesz się wyprawy?",
 			null);
 		
 		// Player asks about quests, but has finished this quest
@@ -134,7 +134,7 @@ public class VampireSword extends AbstractQuest {
 		// Player wants to do the quest
 		npc.add(ConversationStates.QUEST_OFFERED,
 			ConversationPhrases.YES_MESSAGES, null,
-			ConversationStates.ATTENDING, "Później będziesz potrzebował #czarę. Weź ją do #Katakumb w Semos.",
+			ConversationStates.ATTENDING, "Weź pustą czarę do Markovicha w katakumbach pod cmentarzem Semos. Napełni ją za 7 trucheł wampira, 7 trucheł nietoperza i pierścień z czaszką; przygotowanie trwa 5 minut. Mnie przynieś pełną czarę oraz dodatkowe 200 trucheł wampira, już po pokonaniu Lorda Wampira.",
 			new MultipleActions(gobletactions));
 		
 		// Player doesn't want to do the quest; remember this, but they can ask again to start it.
@@ -148,17 +148,20 @@ public class VampireSword extends AbstractQuest {
 
 		npc.addReply(Arrays.asList("catacombs", "katakumb", "katakumbach"), "Katakumby na północ od Semos występowały już w starodawnych #legendach.");
 
-		npc.addReply(Arrays.asList("goblet", "czara", "czarę"), "Idź i napełnij ją krwią napotkanych wrogów, których spotkasz w #Katakumbach.");
+		npc.addReply(Arrays.asList("goblet", "czara", "czarę"), "Czarę napełnia Markovich w katakumbach Semos. Oddaj mu pustą czarę, pierścień z czaszką, 7 trucheł wampira i 7 trucheł nietoperza, a po 5 minutach odbierz gotową czarę. Potem wróć do mnie z nią i 200 truchłami wampira.");
 	}
 
 	private void prepareGobletFillingStep() {
 
 		final SpeakerNPC npc = npcs.get("Markovich");
+        npc.setDescription("Widzisz Markovicha, chorego wampira w katakumbach Semos. Mówi z wysiłkiem i co chwilę przerywa mu kaszel.");
+        npc.addJob("Dawniej sam zdobywałem to, czego potrzebowałem. Teraz choroba zatrzymuje mnie przy kotle; mogę jeszcze napełnić specjalną czarę, jeśli przyniesiesz składniki. O pracę zapytaj, mówiąc napełnij.");
+        games.stendhal.server.entity.npc.dialogue.JourneyDialogueTopics.install(npc);
 
 		npc.addGoodbye("*kaszlnięcie* ... dowidzenia ... *kaszlnięcie*");
 		npc.addReply(
 			Arrays.asList("blood", "truchło wampira", "truchło nietoperza", "krew"),
-			"Potrzebuję krwi. Mogę ją wziąć tylko z wnętrzności żywych lub martwych. Wymieszam krew dla Ciebie i napełnię twoją #czarę jeżeli pozwolisz mi się trochę napić. Powiedz #napełnij jak się zdecydujesz. Boję się potężnego #lorda.");
+			"Stary wampir też musi jakoś przetrwać. Przynieś pustą czarę, 7 trucheł wampira, 7 trucheł nietoperza i pierścień z czaszką, a w 5 minut przygotuję zawartość dla Hogarta. Powiedz #napełnij, gdy zechcesz zlecić pracę.");
 
 		npc.addReply(Arrays.asList("lord", "vampire", "skull ring", "pierścień z czaszką", "lorda", "wampirem", "wampir"),
 			"Lord Wampir rządzi w tych Katakumbach! Boję się go. Mógłbym Ci tylko pomóc jeżeli zabiłbyś go, przyniósł mi pierścień z czaszką oraz #czarę.");
@@ -181,6 +184,9 @@ public class VampireSword extends AbstractQuest {
 				5 * 60, true);
 		new ProducerAdder().addProducer(npc, behaviour,
 			"Proszę nie próbuj mnie zabijać...Jestem tylko starym chorym #wampirem. Czy masz #krew, którą mógłbym wypić? Jeżeli masz #'pustą czarę' to napełnię ją krwią z mojego kotła.");
+        npc.add(ConversationStates.ATTENDING, "odbiór czary", new QuestActiveCondition("sicky_fill_goblet"), ConversationStates.ATTENDING, null,
+                (player,sentence,raiser) -> behaviour.giveProduct(raiser,player));
+
 
 	}
 
@@ -202,7 +208,19 @@ public class VampireSword extends AbstractQuest {
 					new PlayerHasItemWithHimCondition("czara"),
 					new KilledCondition("lord wampir"),
 					new PlayerHasItemWithHimCondition("truchło wampira", REQUIRED_ENTRAILS)),
-			ConversationStates.IDLE, 
+			ConversationStates.ATTENDING, 
+			"Przyniosłeś wszystko czego potrzebuję do wyrobienia krwiopijcy. Wróć za "
+			+ REQUIRED_MINUTES
+			+ " minutę" + ", a będzie gotowy", 
+			new MultipleActions(startforging));
+        // Reuse the native stage and its guards inside the current conversation.
+        npc.add(ConversationStates.ATTENDING, "praca hogarta",
+			new AndCondition(new games.stendhal.server.entity.npc.condition.AlwaysTrueCondition(),
+					new QuestInStateCondition(QUEST_SLOT,"start"),
+					new PlayerHasItemWithHimCondition("czara"),
+					new KilledCondition("lord wampir"),
+					new PlayerHasItemWithHimCondition("truchło wampira", REQUIRED_ENTRAILS)),
+			ConversationStates.ATTENDING, 
 			"Przyniosłeś wszystko czego potrzebuję do wyrobienia krwiopijcy. Wróć za "
 			+ REQUIRED_MINUTES
 			+ " minutę" + ", a będzie gotowy", 
@@ -218,6 +236,16 @@ public class VampireSword extends AbstractQuest {
 		ConversationStates.QUEST_ITEM_BROUGHT, 
 		"Stoczyłeś ciężkie boje, aby przynieść ten kielich. Użyję jego zawartość do wykucia ( #forge ) miecza zwanego krwiopijcą",
 		null);
+        // Reuse the native stage and its guards inside the current conversation.
+        npc.add(ConversationStates.ATTENDING, "praca hogarta",
+				new AndCondition(new games.stendhal.server.entity.npc.condition.AlwaysTrueCondition(), 
+						new QuestInStateCondition(QUEST_SLOT,"start"),
+						new PlayerHasItemWithHimCondition("czara"),
+						new KilledCondition("lord wampir"),
+						new NotCondition(new PlayerHasItemWithHimCondition("truchło wampira", REQUIRED_ENTRAILS))),
+		ConversationStates.QUEST_ITEM_BROUGHT, 
+		"Stoczyłeś ciężkie boje, aby przynieść ten kielich. Użyję jego zawartość do wykucia ( #forge ) miecza zwanego krwiopijcą",
+		null);
 		
 		// Player has only an empty goblet currently, remind to go to Catacombs
 		npc.add(ConversationStates.IDLE, ConversationPhrases.GREETING_MESSAGES,
@@ -225,7 +253,17 @@ public class VampireSword extends AbstractQuest {
 					new QuestInStateCondition(QUEST_SLOT,"start"),
 					new PlayerHasItemWithHimCondition("pusta czara"),
 					new NotCondition(new PlayerHasItemWithHimCondition("czara"))), 
-			ConversationStates.IDLE, 
+			ConversationStates.ATTENDING, 
+			"Zgubiłeś drogę? Katakumby są na północ od Semos." +
+			" Nie wracaj tutaj bez napełnionej czary! Dowidzenia! ",
+			null);
+        // Reuse the native stage and its guards inside the current conversation.
+        npc.add(ConversationStates.ATTENDING, "praca hogarta",
+			new AndCondition(new games.stendhal.server.entity.npc.condition.AlwaysTrueCondition(),
+					new QuestInStateCondition(QUEST_SLOT,"start"),
+					new PlayerHasItemWithHimCondition("pusta czara"),
+					new NotCondition(new PlayerHasItemWithHimCondition("czara"))), 
+			ConversationStates.ATTENDING, 
 			"Zgubiłeś drogę? Katakumby są na północ od Semos." +
 			" Nie wracaj tutaj bez napełnionej czary! Dowidzenia! ",
 			null);
@@ -236,8 +274,17 @@ public class VampireSword extends AbstractQuest {
 						new QuestInStateCondition(QUEST_SLOT,"start"),
 						new PlayerHasItemWithHimCondition("czara"),
 						new NotCondition(new KilledCondition("lord wampir"))),
-		ConversationStates.IDLE, 
-		"Hm, ta czara jest pusta. Musisz zabić vampira i napełnić ją jego krwią.",
+		ConversationStates.ATTENDING, 
+		"Do pracy potrzebuję pełnej czary i dowodu, że udało ci się pokonać Lorda Wampira. Sam kielich nie zastąpi tego zwycięstwa. Wróć do katakumb Semos i doprowadź wyprawę do końca.",
+		null);
+        // Reuse the native stage and its guards inside the current conversation.
+        npc.add(ConversationStates.ATTENDING, "praca hogarta",
+				new AndCondition(new games.stendhal.server.entity.npc.condition.AlwaysTrueCondition(),  
+						new QuestInStateCondition(QUEST_SLOT,"start"),
+						new PlayerHasItemWithHimCondition("czara"),
+						new NotCondition(new KilledCondition("lord wampir"))),
+		ConversationStates.ATTENDING, 
+		"Do pracy potrzebuję pełnej czary i dowodu, że udało ci się pokonać Lorda Wampira. Sam kielich nie zastąpi tego zwycięstwa. Wróć do katakumb Semos i doprowadź wyprawę do końca.",
 		null);
 		
 		// Player lost the empty goblet?
@@ -249,11 +296,20 @@ public class VampireSword extends AbstractQuest {
 			ConversationStates.QUESTION_1, 
 			"Mam nadzieje, że nie zgubiłeś czary! Potrzebujesz następnej?", 
 			null);
+        // Reuse the native stage and its guards inside the current conversation.
+        npc.add(ConversationStates.ATTENDING, "praca hogarta",
+				new AndCondition(new games.stendhal.server.entity.npc.condition.AlwaysTrueCondition(),
+						new QuestInStateCondition(QUEST_SLOT,"start"),
+						new NotCondition(new PlayerHasItemWithHimCondition("pusta czara")),
+						new NotCondition(new PlayerHasItemWithHimCondition("czara"))), 
+			ConversationStates.QUESTION_1, 
+			"Mam nadzieje, że nie zgubiłeś czary! Potrzebujesz następnej?", 
+			null);
 
 		// Player lost the empty goblet, wants another
 		npc.add(ConversationStates.QUESTION_1,
 			ConversationPhrases.YES_MESSAGES, null,
-			ConversationStates.IDLE, "Ty głupcze ..... Następnym razem bądź bardziej ostrożny. Dowidzenia!", 
+			ConversationStates.IDLE, "Mam jeszcze pustą czarę. Weź ją i dopilnuj, żeby tym razem dotarła do Markovicha. Bez pełnej czary nie rozpocznę wykuwania miecza.", 
 			new EquipItemAction("pusta czara"));
 		
 		// Player doesn't have the empty goblet but claims they don't need another.
@@ -270,7 +326,15 @@ public class VampireSword extends AbstractQuest {
 				new AndCondition(new GreetingMatchesNameCondition(npc.getName()),
 						new QuestStateStartsWithCondition(QUEST_SLOT, "forging;"),
 						new NotCondition(new TimePassedCondition(QUEST_SLOT, 1, REQUIRED_MINUTES))),
-				ConversationStates.IDLE, null,
+				ConversationStates.ATTENDING, null,
+				new SayTimeRemainingAction(QUEST_SLOT, 1, REQUIRED_MINUTES, "Jeszcze nie wykułem miecza. Przyjdź za " +
+						""));
+        // Reuse the native stage and its guards inside the current conversation.
+        npc.add(ConversationStates.ATTENDING, "praca hogarta",
+				new AndCondition(new games.stendhal.server.entity.npc.condition.AlwaysTrueCondition(),
+						new QuestStateStartsWithCondition(QUEST_SLOT, "forging;"),
+						new NotCondition(new TimePassedCondition(QUEST_SLOT, 1, REQUIRED_MINUTES))),
+				ConversationStates.ATTENDING, null,
 				new SayTimeRemainingAction(QUEST_SLOT, 1, REQUIRED_MINUTES, "Jeszcze nie wykułem miecza. Przyjdź za " +
 						""));
 		
@@ -287,9 +351,17 @@ public class VampireSword extends AbstractQuest {
 				new AndCondition(new GreetingMatchesNameCondition(npc.getName()),
 						new QuestStateStartsWithCondition(QUEST_SLOT, "forging;"),
 						new TimePassedCondition(QUEST_SLOT, 1, REQUIRED_MINUTES)),
-			ConversationStates.IDLE, 
-			"Skończyłem wykuwanie Wampirzego Miecza. Zasłużyłeś na niego. Teraz wracam do pracy, dowidzenia!", 
-			new MultipleActions(reward));
+			ConversationStates.ATTENDING, 
+			"Krwiopijca jest gotowy. Dostarczona krew związała się z ostrzem, a twoja wyprawa dowiodła, że umiesz stawić czoło jego dawnemu panu. Odbierz broń i pamiętaj, ile kosztowało jej wykucie.", 
+			new games.stendhal.server.entity.npc.action.QuestFeeAction(QUEST_SLOT, new MultipleActions(reward)));
+        // Reuse the native stage and its guards inside the current conversation.
+        npc.add(ConversationStates.ATTENDING, "praca hogarta",
+				new AndCondition(new games.stendhal.server.entity.npc.condition.AlwaysTrueCondition(),
+						new QuestStateStartsWithCondition(QUEST_SLOT, "forging;"),
+						new TimePassedCondition(QUEST_SLOT, 1, REQUIRED_MINUTES)),
+			ConversationStates.ATTENDING, 
+			"Krwiopijca jest gotowy. Dostarczona krew związała się z ostrzem, a twoja wyprawa dowiodła, że umiesz stawić czoło jego dawnemu panu. Odbierz broń i pamiętaj, ile kosztowało jej wykucie.", 
+			new games.stendhal.server.entity.npc.action.QuestFeeAction(QUEST_SLOT, new MultipleActions(reward)));
 
 		npc.add(
 			ConversationStates.QUEST_ITEM_BROUGHT,
@@ -315,7 +387,7 @@ public class VampireSword extends AbstractQuest {
 		super.addToWorld();
 		fillQuestInfo(
 				"Krwiopijca",
-				"Hogart może zrobić dla mnie miecz wysysający życie.",
+				"Hogart, dawny kowal krasnoludów, zna tajemnicę miecza wysysającego życie. Wysłuchaj jego opowieści i dowiedz się, czego potrzebuje do wykucia krwiopijcy.",
 				false);
 		prepareQuestOfferingStep();
 		prepareGobletFillingStep();

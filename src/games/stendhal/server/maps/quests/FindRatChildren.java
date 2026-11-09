@@ -12,6 +12,8 @@
  ***************************************************************************/
 package games.stendhal.server.maps.quests;
 
+import games.stendhal.server.entity.npc.action.DialogueRewardAction;
+
 import games.stendhal.common.grammar.Grammar;
 import games.stendhal.common.parser.Sentence;
 import games.stendhal.server.entity.npc.ChatAction;
@@ -69,6 +71,10 @@ import org.apache.log4j.Logger;
  * </ul>
  */
 public class FindRatChildren extends AbstractQuest {
+    @Override public boolean isRepeatable(Player player) {
+        return isCompleted(player) && new TimePassedCondition(QUEST_SLOT,1,REQUIRED_MINUTES).fire(player,null,null);
+    }
+
 
 	private static Logger logger = Logger.getLogger(FindRatChildren.class);
 
@@ -131,6 +137,16 @@ public class FindRatChildren extends AbstractQuest {
 				"Pomożesz mi jeszcze raz odszukać moje dzieci?",
 				null);
 
+        // Same authoritative step, without requiring the player to leave and greet again.
+        npc.add(
+				ConversationStates.ATTENDING, "dzieci",
+				new AndCondition(new games.stendhal.server.entity.npc.condition.AlwaysTrueCondition(),
+						new QuestCompletedCondition(QUEST_SLOT),
+						new TimePassedCondition(QUEST_SLOT, 1, REQUIRED_MINUTES)),
+				ConversationStates.QUEST_OFFERED,
+				"Pomożesz mi jeszcze raz odszukać moje dzieci?",
+				null);
+
 		npc.add(ConversationStates.ATTENDING,
 				ConversationPhrases.QUEST_MESSAGES,
 				new QuestActiveCondition(QUEST_SLOT),
@@ -149,8 +165,8 @@ public class FindRatChildren extends AbstractQuest {
 				ConversationPhrases.YES_MESSAGES,
 				null,
 				ConversationStates.ATTENDING,
-				"To bardzo miłe z twojej strony. Powodzenia w poszukiwaniach.",
-				new SetQuestAndModifyKarmaAction(QUEST_SLOT, "looking:said", 5.0));
+				"Dziękuję, od razu czuję się mniej samotna z tym zmartwieniem. Szukaj dzieci w lochach Orril i przywitaj się z każdym z nich. Przy powrocie wymień ich imiona, żebym wiedziała, kto jest bezpieczny.",
+				DialogueRewardAction.karma(new SetQuestAndModifyKarmaAction(QUEST_SLOT, "looking:said", 5.0)));
 
 		npc.add(
 				ConversationStates.QUEST_OFFERED,
@@ -158,14 +174,14 @@ public class FindRatChildren extends AbstractQuest {
 				null,
 				ConversationStates.ATTENDING,
 				"Hmmm... Nic nie szkodzi. Jestem pewna, że znajdzie się ktoś kto mi pomoże.",
-				new SetQuestAndModifyKarmaAction(QUEST_SLOT, "rejected", -15.0));
+				DialogueRewardAction.karma(new SetQuestAndModifyKarmaAction(QUEST_SLOT, "rejected", -15.0)));
 
 		npc.add(
 				ConversationStates.QUEST_OFFERED,
 				"dzieci",
 				null,
 				ConversationStates.QUEST_OFFERED,
-				"Moje dzieci poszły bawić się gdzieś w kanałach. Minęło już sporo czasu od tego momentu. Znajdziesz ich i sprawdzisz czy u nich jest wszystko w porządku?",
+				"Avalon, Cody, Mariel i Opal poszli bawić się w podziemnych tunelach, a ja coraz bardziej się martwię. Odszukasz każde z nich i sprawdzisz, czy jest bezpieczne? Potem wróć i przekaż mi wiadomości, podając ich imiona.",
 				null);
 	}
 
@@ -184,7 +200,14 @@ public class FindRatChildren extends AbstractQuest {
 				new AndCondition(new GreetingMatchesNameCondition(npc.getName()),
 						new QuestActiveCondition(QUEST_SLOT)),
 				ConversationStates.QUESTION_1,
-				"Jeżeli znajdziesz moje #dziecko to podaj mi jego imię.", null);
+				"Powiedz, od którego dziecka przynosisz wiadomość. Zapamiętam każdą potwierdzoną wieść, więc możesz wracać do mnie po kolejnych spotkaniach. Czekam na wiadomości od Avalona, Cody'ego, Mariel i Opal.", null);
+
+        // Same authoritative step, without requiring the player to leave and greet again.
+        npc.add(ConversationStates.ATTENDING, "dzieci",
+				new AndCondition(new games.stendhal.server.entity.npc.condition.AlwaysTrueCondition(),
+						new QuestActiveCondition(QUEST_SLOT)),
+				ConversationStates.QUESTION_1,
+				"Powiedz, od którego dziecka przynosisz wiadomość. Zapamiętam każdą potwierdzoną wieść, więc możesz wracać do mnie po kolejnych spotkaniach. Czekam na wiadomości od Avalona, Cody'ego, Mariel i Opal.", null);
 
 		for(final String name : NEEDED_KIDS) {
 			npc.add(ConversationStates.QUESTION_1, name, null,
@@ -221,7 +244,7 @@ public class FindRatChildren extends AbstractQuest {
 						reply = "Dziękuję.";
 					} else if (!looking.contains(name)) {
 						// we have said it was a valid name but haven't seen them
-						reply = "Czy aby na pewno widziałeś to dziecko, chyba mnie oszukujesz.";
+						reply = "Nie mam jeszcze potwierdzenia, że udało ci się spotkać to dziecko. Odszukaj je i przywitaj się z nim, zanim przekażesz mi wiadomość. Wolę poczekać na pewne wieści.";
 					} else if (!isMissing && said.contains(name)) {
 						// we have said the name so we are stupid!
 						reply = "Już mi mówiłeś, że z tym dzieckiem jest wszystko dobrze.";
@@ -236,8 +259,8 @@ public class FindRatChildren extends AbstractQuest {
 						reply += " Jeżeli widziałeś inne z moich dzieci powiedz mi które.";
 						npc.say(reply);
 					} else {
-						player.addXP(5000);
-						player.addKarma(50);
+						DialogueRewardAction.xp(5000).fire(player, null, npc);
+						DialogueRewardAction.karma(new games.stendhal.server.entity.npc.action.IncreaseKarmaAction(50)).fire(player, null, npc);
 						reply += " Uff.... teraz mogę odsapnąć wiedząc, że z dziećmi jest wszystko w porządku.";
 						npc.say(reply);
 						player.setQuest(QUEST_SLOT, "done;" + System.currentTimeMillis());
@@ -277,7 +300,7 @@ public class FindRatChildren extends AbstractQuest {
 		super.addToWorld();
 		fillQuestInfo(
 				"Znajdź Szczurze Dzieci",
-				"Agnus, która żyje w Rat City prosi młodych bohaterów o znalezienie jej dzieci i sprawdzenie czy wszystko u nich w porządku. Poszły one w głąb tuneli i jeszcze się nie wróciły...",
+				"Agnus z miasta szczurów niepokoi się o dzieci, które zapuściły się w tunele. Odnajdź je, porozmawiaj z nimi i przekaż matce wieści o każdym z nich.",
 				true);
 		askingStep();
 		findingStep();
@@ -301,7 +324,7 @@ public class FindRatChildren extends AbstractQuest {
 				return res;
 			}
 			if (!isCompleted(player)) {
-				res.add("Znalazłem " + missingNames(player).size() + " " + Grammar.plnoun(missingNames(player).size(), "child") + " , aby sprawdzić i powiedzieć to Agnus ..");
+				res.add("Przekazano Agnus wieści o " + (NEEDED_KIDS.size()-missingNames(player).size()) + " z " + NEEDED_KIDS.size() + " dzieci. Pozostałe trzeba odszukać i potwierdzić ich bezpieczeństwo.");
 			} else {
 				res.add("Agnus jest szczęśliwa, że znalazłem jej dzieci. Znalezienie ich zaprocentowało większym doświadczeniem.	W nagrodę za ukończenie zadania otrzymałem: 5.000 pkt doświadczenia i 50 pkt karmy.");
 			}

@@ -12,7 +12,6 @@
 
 package games.stendhal.server.entity.npc.behaviour.impl;
 
-import games.stendhal.common.grammar.Grammar;
 import games.stendhal.common.grammar.ItemParserResult;
 import games.stendhal.server.core.engine.SingletonRepository;
 import games.stendhal.server.entity.item.Item;
@@ -96,14 +95,12 @@ public class SellerBehaviour extends MerchantBehaviour {
 		if (player.isEquipped("money", price)) {
 			if (player.equipToInventoryOnly(item)) {
 				player.drop("money", price);
-				seller.say("Gratulacje! Oto "
-						+ Grammar.isare(amount) + " twój "
-						+ Grammar.plnoun(amount, chosenItemName) + "!");
+				seller.say("Proszę, oto twój zakup: " + chosenItemName
+						+ " (" + amount + " szt.).");
 				player.incBoughtForItem(chosenItemName, amount);
 				return true;
 			} else {
-				seller.say("Przepraszam, ale nie możesz wziąść "
-						+ Grammar.plnoun(amount, chosenItemName) + ".");
+				seller.say("Nie masz miejsca w plecaku. Zwolnij miejsce i spróbuj ponownie.");
 				return false;
 			}
 		} else {

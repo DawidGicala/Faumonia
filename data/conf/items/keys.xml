@@ -58,7 +58,7 @@
 	
 	<item name="klucz do tawerny semos">
 		<type class="key" subclass="filigree" tileid="-1"/>
-		<description>Oto klucz do sekretnego pokoju w tawernie Semos. Wykuto go dla wojowników, którzy przeszli jedną z prób Mistrzów Faumonii i udowodnili, że potrafią mierzyć się z zadaniami ukrytymi głęboko w krainie. Na jego powierzchni widać delikatne zdobienia, a metal nosi ślady starej magii chroniącej wejście przed niepowołanymi gośćmi. Ten klucz nie jest zwykłym narzędziem do otwierania drzwi, lecz znakiem zaufania i przepustką do miejsca, do którego trafiają tylko wybrani wojownicy.</description>
+		<description>Oto klucz do sekretnego pokoju w tawernie Semos. Mistrz Faumonii przekazuje go za ukończenie próby XXIV.</description>
 		<implementation class-name="games.stendhal.server.entity.item.Item"/>
 		<attributes>
 			<autobind value=""/>
@@ -433,7 +433,7 @@
 	
 	<item name="klucz do wieliczki">
 		<type class="key" subclass="klucz_do_wieliczki" tileid="-1"/>
-		<description>Oto klucz do Wieliczki. Ten ciężki, srebrny klucz nosi wyraźne ślady wiekowego użytkowania. W jego uchwycie wyryto skomplikowane symbole, które zdają się jaśnieć w ciemności, kiedy zbliżasz się do wejścia do legendarnej kopalni. Wieliczka. Klucz otwiera bramy ukryte w sercu lodowych krain, prowadząc do głębin pełnych skarbów i zagadek solnych labiryntów. </description>
+		<description>Oto ciężki, srebrny klucz do Wieliczki. Otwiera wejście do kopalni; ślady użytkowania pokrywają jego metalowy uchwyt.</description>
 		<implementation class-name="games.stendhal.server.entity.item.Item"/>
 		<attributes>
 			<autobind value=""/>

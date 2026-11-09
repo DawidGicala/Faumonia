@@ -59,8 +59,9 @@ public class TellerNPC implements ZoneConfigurator {
 
 			@Override
 			protected void createDialog() {
+                games.stendhal.server.entity.npc.dialogue.HuntDialogueTopics.install(this);
 				addGreeting("Witaj w banku Fado! Potrzebujesz #pomocy?");
-				addJob("Jestem dyrektorem tego banku.");
+				addJob("Zarządzam bankiem Fado i pilnuję, żeby mieszkańcy mieli gdzie przechować dobytek. Niepokoją mnie też napady na kupców; kiedy monety znikają na drodze, odczuwa to całe miasto.");
 				addHelp("Idź w prawo, a zobaczysz kilka skrzyń. Otwórz jedną i zostaw w niej swój dobytek.");
 				addGoodbye("Życzę miłego dnia.");
 			}
@@ -69,7 +70,7 @@ public class TellerNPC implements ZoneConfigurator {
 		bankNPC.setEntityClass("youngnpc");
 		bankNPC.setPosition(15, 3);
 		bankNPC.initHP(1000);
-		bankNPC.setDescription("Yance jest menadżerem w banku Fado. On może udzielić ci porady jak kożystać ze skrzyń.");
+		bankNPC.setDescription("Widzisz Yancego, dyrektora banku Fado. O skrzyniach i pieniądzach potrafi mówić z równą uwagą.");
 		zone.add(bankNPC);
 	}
 }

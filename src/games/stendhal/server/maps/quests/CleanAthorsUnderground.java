@@ -70,7 +70,7 @@ import marauroa.common.Pair;
 
  */
 
-public class CleanAthorsUnderground extends AbstractQuest {
+public class CleanAthorsUnderground extends AbstractQuest implements games.stendhal.server.core.rp.quest.NativeHuntDetails {
 
 	private static final String QUEST_SLOT = "clean_athors_underground";
 	private static final int WEEK_IN_MINUTES = MathHelper.MINUTES_IN_ONE_HOUR * 24 * 7 * 2;
@@ -86,11 +86,11 @@ public class CleanAthorsUnderground extends AbstractQuest {
 		final SpeakerNPC npc = npcs.get("John");
 
 		npc.add(ConversationStates.ATTENDING,
-				ConversationPhrases.QUEST_MESSAGES, 
-				new QuestNotStartedCondition(QUEST_SLOT),
-				ConversationStates.QUEST_OFFERED,
-				"Moja żona Jane i ja jesteśmy na wakacjach na wyspie Athor. #Niestety nie możemy zwiedzić całej wyspy ponieważ okropne #potwory uniemożliwiają nam to za każdym razem. Możesz nam pomóc zabijając parę z nich, aby uprzyjemnić nam wakacje?",
-				null);
+                ConversationPhrases.QUEST_MESSAGES,
+                new QuestNotStartedCondition(QUEST_SLOT),
+                ConversationStates.QUEST_OFFERED,
+                "Przyjechaliśmy z Jane na Athor, żeby odpocząć i trochę pozwiedzać. Plaża jest piękna, ale potwory skutecznie odcięły nam drogę do podziemi. Pomożesz otworzyć nam drogę do tych miejsc?",
+                null);
 
 		npc.add(
 				ConversationStates.QUEST_OFFERED,
@@ -117,21 +117,16 @@ public class CleanAthorsUnderground extends AbstractQuest {
 		
 		
 		npc.add(ConversationStates.ATTENDING,
-				ConversationPhrases.QUEST_MESSAGES, 
-				new AndCondition(new QuestStateStartsWithCondition(QUEST_SLOT,"done"),
+                ConversationPhrases.QUEST_MESSAGES,
+                new AndCondition(new QuestStateStartsWithCondition(QUEST_SLOT,"done"),
 						 new TimePassedCondition(QUEST_SLOT, 1, WEEK_IN_MINUTES)),
-				ConversationStates.QUEST_OFFERED,
-				"Te #potwory wróciły od poprzedniego razu. Możesz znów nam pomóc?",
-				null);
+                ConversationStates.QUEST_OFFERED,
+                "Potwory wróciły, a my znów musieliśmy zawrócić z podziemi. Czy pomożesz nam jeszcze raz?",
+                null);
 
 	
 
-		final Map<String, Pair<Integer, Integer>> toKill = new TreeMap<String, Pair<Integer, Integer>>();
-		toKill.put("mumia", new Pair<Integer, Integer>(0,1));
-		toKill.put("mumia królewska", new Pair<Integer, Integer>(0,1));
-		toKill.put("minotaur",new Pair<Integer, Integer>(0,1));
-		toKill.put("błękitny smok",new Pair<Integer, Integer>(0,1));
-		toKill.put("król minotaur",new Pair<Integer, Integer>(0,1));
+		final Map<String, Pair<Integer, Integer>> toKill = getDialogueHuntTargets(null);
 
 		final List<ChatAction> actions = new LinkedList<ChatAction>();
 		actions.add(new SetQuestAction(QUEST_SLOT, "start"));
@@ -139,18 +134,18 @@ public class CleanAthorsUnderground extends AbstractQuest {
 
 		
 		npc.add(ConversationStates.QUEST_OFFERED,
-				ConversationPhrases.YES_MESSAGES,
-				null,
-				ConversationStates.ATTENDING,
-				"Cudownie! Nie możemy się doczekać na twój powrót. Zabij po jednym z tych potworów w podziemiach wyspy Athor. Założe się, że dostaniesz je wszystkie!",
-				new MultipleActions(actions));
+                ConversationPhrases.YES_MESSAGES,
+                null,
+                ConversationStates.ATTENDING,
+                "Zejdź do podziemi Athor i pokonaj po jednym przeciwniku z każdego rodzaju na liście. Zwykła mumia i królewska to dwa osobne cele, podobnie jak minotaur i jego król." + "\nCele: " + games.stendhal.server.core.rp.quest.HuntQuestProgress.targetText(this,null) + ".",
+                new MultipleActions(actions));
 
-		npc.add(ConversationStates.QUEST_OFFERED, 
-				ConversationPhrases.NO_MESSAGES, 
-				null,
-				ConversationStates.ATTENDING,
-				"Oh nie ważne. W takim razie pójdziemy dalej się opalać. Nie dlatego, że jesteśmy zmęczeni tym...",
-				new SetQuestAction(QUEST_SLOT, "rejected"));
+		npc.add(ConversationStates.QUEST_OFFERED,
+                ConversationPhrases.NO_MESSAGES,
+                null,
+                ConversationStates.ATTENDING,
+                "Trudno, zostaniemy jeszcze trochę na plaży. Jeśli zmienisz zdanie, znajdziesz mnie tutaj z Jane.",
+                new SetQuestAction(QUEST_SLOT, "rejected"));
 	}
 
 	private void step_2() {
@@ -174,23 +169,23 @@ public class CleanAthorsUnderground extends AbstractQuest {
 		LinkedList<String> triggers = new LinkedList<String>();
 		triggers.addAll(ConversationPhrases.FINISH_MESSAGES);
 		triggers.addAll(ConversationPhrases.QUEST_MESSAGES);		
-		npc.add(ConversationStates.ATTENDING, 
-				triggers,
-				new AndCondition(
+		npc.add(ConversationStates.ATTENDING,
+                triggers,
+                new AndCondition(
 						new QuestInStateCondition(QUEST_SLOT, 0, "start"),
 						new KilledForQuestCondition(QUEST_SLOT, 1)),
-				ConversationStates.ATTENDING, 
-				"Wspaniale! Jak widzę zabiłeś te okropne potwory! Mam nadzieję, że nie wrócą zbyt szybko, bo nie będziemy mieli szansy na zwiedzenie paru miejsc."  + " Proszę weż te eliksiry jako nagrodę za twoją pomoc.",
-				new MultipleActions(actions));
+                ConversationStates.ATTENDING,
+                "Wspaniała wiadomość; może wreszcie zobaczymy coś poza plażą. Przyjmij eliksiry i zwój Athor w podziękowaniu od nas obojga.",
+                new MultipleActions(actions));
 
-		npc.add(ConversationStates.ATTENDING, 
-				triggers,
-				new AndCondition(
+		npc.add(ConversationStates.ATTENDING,
+                triggers,
+                new AndCondition(
 						new QuestInStateCondition(QUEST_SLOT, 0, "start"),
 						new NotCondition(new KilledForQuestCondition(QUEST_SLOT, 1))),
-				ConversationStates.ATTENDING, 
-				"Proszę uwolnij te wspaniałe miejsca od tych okropnych potworów!",
-				null);
+                ConversationStates.ATTENDING,
+                null,
+                (p, sentence, raiser) -> raiser.say("Nie wszystkie miejsca są jeszcze bezpieczne. Sprawdź, którego z pięciu przeciwników brakuje, a my zaczekamy tutaj." + "\n" + games.stendhal.server.core.rp.quest.HuntQuestProgress.progressText(CleanAthorsUnderground.this,p)));
 		
 	}
 
@@ -199,7 +194,7 @@ public class CleanAthorsUnderground extends AbstractQuest {
 		super.addToWorld();
 		fillQuestInfo(
 				"Posprzątaj podziemia Athor",
-				"John i jego żona Jane chcą zwiedzić podziemia wyspy Athor podczas swoich wakacji, ale niestety nie mogą.",
+				"John i Jane przyjechali odpocząć na Athor, lecz potwory uniemożliwiają im zwiedzanie podziemi. Porozmawiaj z Johnem i pomóż oczyścić drogę z wymienionych zagrożeń.",
 				false);
 		step_1();
 		step_2();
@@ -208,19 +203,8 @@ public class CleanAthorsUnderground extends AbstractQuest {
 	
 	@Override
 	public List<String> getHistory(final Player player) {
-			final List<String> res = new ArrayList<String>();
-			if (!player.hasQuest(QUEST_SLOT)) {
-				return res;
-			}
-			if (!isCompleted(player)) {
-				res.add("Musze zabić potwory w podziemiach Athor, aby John i Jane mieli miłe wakacje!");
-			} else if(isRepeatable(player)){
-				res.add("Minęło sporo czasu, gdy spotkałem Johna i Jane na wyspie Athor. Może wciąż potrzebują mojej pomocy.");
-			} else {
-				res.add("Zabiłem pare potworów, a John i Jane mogą w końcu cieszyć się swoimi wakacjami! Nie będą potrzebowali mojej pomocy przez kilka następnych dni.	W nagrodę za ukończenie zadania otrzymałem: 50.000 pkt doświadczenia, 25 karmy i 50 wielkich eliksirów");
-			}
-			return res;
-	}
+        return games.stendhal.server.core.rp.quest.HuntQuestProgress.history(this,player);
+    }
 
 
 	@Override
@@ -249,4 +233,17 @@ public class CleanAthorsUnderground extends AbstractQuest {
 	public String getRegion() {
 		return Region.ATHOR_ISLAND;
 	}
+
+    @Override public java.util.Map<String, Pair<Integer,Integer>> getDialogueHuntTargets(Player player) {
+        final Map<String, Pair<Integer, Integer>> toKill = new TreeMap<String, Pair<Integer, Integer>>();
+		toKill.put("mumia", new Pair<Integer, Integer>(0,1));
+		toKill.put("mumia królewska", new Pair<Integer, Integer>(0,1));
+		toKill.put("minotaur",new Pair<Integer, Integer>(0,1));
+		toKill.put("błękitny smok",new Pair<Integer, Integer>(0,1));
+		toKill.put("król minotaur",new Pair<Integer, Integer>(0,1));
+        return java.util.Collections.unmodifiableMap(toKill);
+    }
+    @Override public int getDialogueHuntTotal(Player player) { return 0; }
+    @Override public int getDialogueKillIndex() { return 1; }
+    @Override public String getDialogueHuntHint(Player player) { return "Zejdź do podziemi Athor i pokonaj po jednej mumii, mumii królewskiej, minotaurze, błękitnym smoku i królu minotaurze. Potem wróć do Johna na wyspie."; }
 }

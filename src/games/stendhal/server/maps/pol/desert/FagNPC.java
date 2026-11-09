@@ -43,12 +43,14 @@ public class FagNPC implements ZoneConfigurator {
 
 			@Override
 			protected void createDialog() {
+                games.stendhal.server.entity.npc.dialogue.HuntDialogueTopics.install(this);
+                addJob("Szukam wojowników, których umiejętności wytrzymują spotkanie z naprawdę groźnymi przeciwnikami. Przechwałki zostawiam innym; mnie interesuje ukończona wyprawa i dokładny meldunek.");
 				addGreeting("Witaj.");
 				addGoodbye("Na razie.");
 			}
 		};
 
-		elemental.setDescription("Oto Fag.");
+		elemental.setDescription("Widzisz Faga przy pustynnej piramidzie. Spogląda na twój ekwipunek, jakby ważył gotowość do trudnej próby.");
 		elemental.setEntityClass("verger2npc");
 		elemental.setPosition(19, 37);
 		elemental.setDirection(Direction.DOWN);

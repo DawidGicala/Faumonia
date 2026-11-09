@@ -80,7 +80,7 @@ public class ClubOfThorns extends AbstractQuest {
 			ConversationPhrases.QUEST_MESSAGES,
 			new QuestNotStartedCondition(QUEST_SLOT),
 			ConversationStates.QUEST_OFFERED,
-			"Zemścij się! Zabij pajęczą królową! Zrozumiałeś?",
+			"Królowa pająków w więzieniu Kotoch musi zginąć. Orki pamiętają krzywdy, człowieku. Weźmiesz na siebie naszą zemstę?",
 			null);
 
 		npc.add(ConversationStates.ATTENDING,
@@ -110,7 +110,7 @@ public class ClubOfThorns extends AbstractQuest {
 			ConversationPhrases.YES_MESSAGES,
 			null,
 			ConversationStates.ATTENDING,
-			"Weź ten klucz. On jest w więzieniu. Zabij go! Potem, wróć ze słowami: #zabity!",
+			"Weź klucz do więzienia Kotoch. Tam szukaj królowej pająków i zabij ją dla Samana; dawne zwycięstwa nie spłacają tego długu. Potem wróć i powiedz #zabity.",
 			new MultipleActions(start));
 
 		npc.add(ConversationStates.QUEST_OFFERED,
@@ -139,13 +139,13 @@ public class ClubOfThorns extends AbstractQuest {
 		npc.add(ConversationStates.ATTENDING, Arrays.asList("kill", "zabij","zabity"),
 			new AndCondition(new QuestInStateCondition(QUEST_SLOT, 0, "start"), new KilledForQuestCondition(QUEST_SLOT, 1)),
 			ConversationStates.ATTENDING,
-			"Zemsta dokonana! Dobrze! Weź ten potężny młot Thora w nagrodę.",
+			"Królowa pająków nie żyje. Saman pamięta twoją pomoc i dotrzymuje słowa. Weź młot Thora, to zapłata za twoją pomoc.",
 			new MultipleActions(reward));
 
 		npc.add(ConversationStates.ATTENDING, Arrays.asList("kill", "zabij","zabity"),
 			new AndCondition(new QuestInStateCondition(QUEST_SLOT, 0, "start"), new NotCondition(new KilledForQuestCondition(QUEST_SLOT, 1))),
 			ConversationStates.ATTENDING,
-			"Zabij pajęczą królową! Orki z Kotoch chcą zemsty!",
+			"Królowa pająków nadal czeka na naszą zemstę. Idź do więzienia Kotoch, użyj otrzymanego klucza i pokonaj ją. Wróć dopiero z wieścią o zwycięstwie.",
 			null);
 	}
 
@@ -158,7 +158,7 @@ public class ClubOfThorns extends AbstractQuest {
 		step_3();
 		fillQuestInfo(
 				"Młot Thora",
-				"Zostań najemnikiem Orka Samana w Kotoch i zdobądź potężną broń.",
+				"Orc Saman z Kotoch szuka kogoś, kto rozprawi się z królową pająków. Przyjmij jego zlecenie i wróć po wypełnieniu warunków, aby odebrać Młot Thora.",
 				false);
 	}
 	

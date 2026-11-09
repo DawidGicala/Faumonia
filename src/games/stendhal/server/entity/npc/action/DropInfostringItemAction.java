@@ -16,6 +16,8 @@ import games.stendhal.common.parser.Sentence;
 import games.stendhal.server.core.config.annotations.Dev;
 import games.stendhal.server.core.config.annotations.Dev.Category;
 import games.stendhal.server.entity.item.Item;
+import games.stendhal.server.entity.item.StackableItem;
+import games.stendhal.server.core.engine.ItemLogger;
 import games.stendhal.server.entity.npc.ChatAction;
 import games.stendhal.server.entity.npc.EventRaiser;
 import games.stendhal.server.entity.player.Player;
@@ -32,7 +34,7 @@ import org.apache.log4j.Logger;
  */
 @Dev(category=Category.ITEMS_OWNED, label="Item-")
 public class DropInfostringItemAction implements ChatAction {
-	private static Logger logger = Logger.getLogger(DropItemAction.class);
+	private static Logger logger = Logger.getLogger(DropInfostringItemAction.class);
 	private final String itemName;
 	private final String infostring;
 	private final int amount;
@@ -70,17 +72,36 @@ public class DropInfostringItemAction implements ChatAction {
 
 	public void fire(final Player player, final Sentence sentence, final EventRaiser npc) {
 		final List<Item> items = player.getAllEquipped(itemName);
-		boolean res = false;
+		long available = 0;
 		for (final Item item : items) {
 			if (infostring.equalsIgnoreCase(item.getInfoString())) {
-				res = player.drop(item.getName(), amount);
+				available += item.getQuantity();
+			}
+		}
+		// Validate the whole marked quantity before consuming any of it.
+		if (amount <= 0 || available < amount) {
+			logger.error("Cannot drop marked item " + itemName, new Throwable());
+			return;
+		}
+		int remaining = amount;
+		for (final Item item : items) {
+			if (!infostring.equalsIgnoreCase(item.getInfoString())) {
+				continue;
+			}
+			int take = Math.min(remaining, item.getQuantity());
+			if (item instanceof StackableItem && take < item.getQuantity()) {
+				((StackableItem) item).setQuantity(item.getQuantity() - take);
+				new ItemLogger().splitOff(player, item, take);
+			} else {
+				// Removing by name could consume an unmarked item in an earlier slot.
+				player.drop(item);
+			}
+			remaining -= take;
+			if (remaining == 0) {
 				break;
 			}
 		}
-
-		if (!res) {
-			logger.error("Cannot drop " + itemName, new Throwable());
-		}
+		player.updateItemAtkDef();
 		player.notifyWorldAboutChanges();
 	}
 

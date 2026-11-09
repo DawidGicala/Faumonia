@@ -84,8 +84,9 @@ public class BlacksmithNPC implements ZoneConfigurator {
 
 			@Override
 			protected void createDialog() {
+                games.stendhal.server.entity.npc.dialogue.JourneyDialogueTopics.install(this);
 				addGreeting("Jak się tutaj dostałeś? Zazwyczaj spotykam tylko #koboldy.");
-				addJob("Jam jest kowalem. Niegdyś żyłem wśród górskich krasnali, ale pozostawiłem wspomnienia o tych czasach daleko za sobą i rzekłbym na szczęście!");
+				addJob("Jestem kowalem, a dawniej mieszkałem wśród górskich krasnali. Teraz pracuję tutaj, w Wofol, z dala od tamtych czasów. Metal znam dobrze, lecz obróbki niezwykłych kamieni wciąż można się nauczyć.");
 				addHelp("Doszły mnie plotki o straszliwych stworach żyjących gdzieś w głębi kopalni i o wściekłych czartach, które są w ich mocy. Na twoim miejscu nie wetknąłbym nawet palca w te czeluście. Jest tam wyjątkowo niebezpiecznie.");
 				addOffer("#Wrvil to imię właściciela sklepu, nie moje. Wciąż wyrabiam okazjonalnie #'szpulki do maszyny'. Jeżeli potrzebujesz powiedz #zrób.");
 				addReply(Arrays.asList("kobolds", "koboldy"), "Wiesz, te włochate stwory. Jakoś nie miałem okazji rozmawiać z nimi, z wyjątkiem jednego o imieniu #Wrvil.");
@@ -258,7 +259,7 @@ public class BlacksmithNPC implements ZoneConfigurator {
 		    //remaining behaviour defined in maps.quests.ObsidianKnife
 			};
 
-		dwarf.setDescription("Oto Alrak, kowal krasnali i pustelnik.");
+		dwarf.setDescription("Widzisz Alraka, krasnoludzkiego kowala i pustelnika z Wofol. Przy narzędziach zostawia miejsce także na księgi o kamieniach.");
 		dwarf.setEntityClass("dwarfnpc");
 		dwarf.setPosition(22, 8);
 		dwarf.initHP(100);

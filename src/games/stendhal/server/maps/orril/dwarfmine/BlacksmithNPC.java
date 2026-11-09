@@ -58,9 +58,10 @@ public class BlacksmithNPC implements ZoneConfigurator {
 
 			@Override
 			protected void createDialog() {
+                games.stendhal.server.entity.npc.dialogue.JourneyDialogueTopics.install(this);
 				addGreeting();
-				addJob("Jestem głównym kowalem. W tajemnicy wykuwam broń dla krasnali, ale oni zapomnieli o mnie i moich #opowieściach.");
-				addHelp("Mógłbym opowiedzieć Tobie #historyjkę...");
+				addJob("Byłem głównym kowalem krasnali i nadal potrafię wykuć broń, jakiej nie spotkasz na zwykłym straganie. Dawni odbiorcy rzadko już o mnie pamiętają. Zostały mi narzędzia, wiedza i kilka #opowieści, których warto wysłuchać.");
+				addHelp("Mogę opowiedzieć ci #historyjkę o ostrzu, którego nie wykonuje się na zwykłe zamówienie. Najpierw wysłuchaj jej uważnie. Jeśli nadal zechcesz taki miecz, porozmawiamy o tym, co trzeba zdobyć.");
 				add(
 				        ConversationStates.ATTENDING,
 				        Arrays.asList("story", "stories", "historyjkę", "historyjka", "historyjki", "opowieściach"),
@@ -79,7 +80,7 @@ public class BlacksmithNPC implements ZoneConfigurator {
 			} //remaining behaviour defined in maps.quests.VampireSword and  maps.quests.MithrilCloak
 		};
 
-		hogart.setDescription("Oto Hogart, emerytowany główny kowal krasnali.");
+		hogart.setDescription("Widzisz Hogarta, dawnego głównego kowala krasnali. Mimo wieku wciąż dobrze zna rzemiosło wykuwania broni.");
 		hogart.setEntityClass("olddwarfnpc");
 		hogart.setPosition(20, 11);
 		hogart.initHP(100);

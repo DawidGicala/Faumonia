@@ -66,23 +66,23 @@ public class LookBookforCeryl extends AbstractQuest {
 			ConversationPhrases.QUEST_MESSAGES,
 			new QuestNotStartedCondition(QUEST_SLOT),
 			ConversationStates.ATTENDING, 
-			"Szukam specjalnej #książki. ", null);
+			"Na półce od miesiąca brakuje czarnej księgi, a kolejni czytelnicy pytają właśnie o nią. Wypożyczyła ją #Jynath; chciałbym wreszcie odzyskać tę #książkę.", null);
 
 		npc.add(ConversationStates.ATTENDING,
 			ConversationPhrases.QUEST_MESSAGES,
 			new QuestCompletedCondition(QUEST_SLOT),
 			ConversationStates.ATTENDING, 
-			"Nie mam nic dla Ciebie.", null);
+			"Czarna księga wróciła już na swoje miejsce. Dziękuję, że udało ci się dopilnować zwrotu; w tej sprawie nie potrzebuję niczego więcej.", null);
 			
      /** Other conditions not met e.g. quest completed */
-		npc.addReply(Arrays.asList("book", "książki", "książka"),"Jeśli chcesz dowiedzieć się więcej, porozmawiać z moim przyjacielem Wikipedian w bibliotece Ados.", null);
+		npc.addReply(Arrays.asList("book", "książki", "książka"),"Jeśli chcesz dowiedzieć się więcej, porozmawiaj z moim przyjacielem Wikipedianem w bibliotece Ados.", null);
 
 		/** If quest is not started yet, start it. */
 		npc.add(
 			ConversationStates.ATTENDING,
 			"book", new QuestNotStartedCondition(QUEST_SLOT),
 			ConversationStates.QUEST_OFFERED,
-			"Czy możesz poprosić #Jynath, aby zwróciła książkę? Przetrzymuje ją od miesiąca, a ludzie szukają jej.",
+			"Jynath mieszka na południe od zamku Orril. Poproś ją o zwrot czarnej księgi i przynieś ją do biblioteki w Semos. Podejmiesz się tego?",
 			null);
 
 		npc.add(
@@ -90,7 +90,7 @@ public class LookBookforCeryl extends AbstractQuest {
 			ConversationPhrases.YES_MESSAGES,
 			null,
 			ConversationStates.ATTENDING,
-			"Wspaniale! Proszę przynieś ją szybko jak to tylko możliwe... jest długa lista oczekujących!",
+			"Dziękuję. U Jynath łatwo stracić rachubę czasu pośród receptur i mikstur, więc przypomnij jej, że przysyła cię Ceryl. Będę czekał tutaj, w bibliotece.",
 			new SetQuestAndModifyKarmaAction(QUEST_SLOT, "start", 5.0));
 
 		npc.add(
@@ -98,7 +98,7 @@ public class LookBookforCeryl extends AbstractQuest {
 			ConversationPhrases.NO_MESSAGES,
 			null,
 			ConversationStates.ATTENDING,
-			"Och... Powinienem wybrać kogoś innego do zrobienia tego.",
+			"Szkoda, czytelnicy wciąż pytają o ten tom. Jeśli zmienisz zdanie, zajrzyj do mnie.",
 			new SetQuestAndModifyKarmaAction(QUEST_SLOT, "rejected", -5.0));
 
 		npc.add(
@@ -106,14 +106,14 @@ public class LookBookforCeryl extends AbstractQuest {
 			"jynath",
 			null,
 			ConversationStates.QUEST_OFFERED,
-			"Jynath jest wiedźmą mieszkającą na południe od zamku Or'ril, a na południowy zachód stąd. Zdobędziesz dla mnie tą książkę?",
+			"Jynath jest wiedźmą mieszkającą na południe od zamku Or'ril, a na południowy zachód stąd. Zdobędziesz dla mnie tę książkę?",
 			null);
 
 		/** Remind player about the quest */
 		npc.add(ConversationStates.ATTENDING, Arrays.asList("book", "książki", "książka"),
 			new QuestInStateCondition(QUEST_SLOT, "start"),
 			ConversationStates.ATTENDING,
-			"Potrzebuję tej książki! Idź i porozmawiaj z #Jynath.", null);
+			"Czarnej księgi nadal nie ma na półce. Jynath mieszka na południe od zamku Orril; porozmawiaj z nią i przynieś mi wypożyczony tom.", null);
 
 		npc.add(
 			ConversationStates.ATTENDING,
@@ -137,7 +137,15 @@ public class LookBookforCeryl extends AbstractQuest {
 			new AndCondition(new GreetingMatchesNameCondition(npc.getName()),
 					new QuestInStateCondition(QUEST_SLOT, "start")),
 			ConversationStates.ATTENDING,
-			"Och, Ceryl chce tą książkę z powrotem? Mój boże! Kompletnie zapomniałam o tym... oto ona!",
+			"Ach, czarna księga Ceryla! Zostawiłam ją przy recepturach i zupełnie zapomniałam o terminie zwrotu. Weź ją do biblioteki w Semos i przekaż mu moje przeprosiny.",
+			new MultipleActions(new EquipItemAction("księga czarna", 1, true), new SetQuestAction(QUEST_SLOT, "jynath")));
+        // Reuse the native stage and its guards inside the current conversation.
+        npc.add(
+			ConversationStates.ATTENDING, "księga ceryla",
+			new AndCondition(new games.stendhal.server.entity.npc.condition.AlwaysTrueCondition(),
+					new QuestInStateCondition(QUEST_SLOT, "start")),
+			ConversationStates.ATTENDING,
+			"Ach, czarna księga Ceryla! Zostawiłam ją przy recepturach i zupełnie zapomniałam o terminie zwrotu. Weź ją do biblioteki w Semos i przekaż mu moje przeprosiny.",
 			new MultipleActions(new EquipItemAction("księga czarna", 1, true), new SetQuestAction(QUEST_SLOT, "jynath")));
 
 		/** If player keep asking for book, just tell him to hurry up */
@@ -147,7 +155,15 @@ public class LookBookforCeryl extends AbstractQuest {
 			new AndCondition(new GreetingMatchesNameCondition(npc.getName()),
 					new QuestInStateCondition(QUEST_SLOT, "jynath")),
 			ConversationStates.ATTENDING,
-			"Lepiej weź tą książkę z powrotem do #Ceryl szybko... on czeka na Ciebie.",
+			"Lepiej weź tę książkę z powrotem do #Ceryl szybko... on czeka na Ciebie.",
+			null);
+        // Reuse the native stage and its guards inside the current conversation.
+        npc.add(
+			ConversationStates.ATTENDING, "księga ceryla",
+			new AndCondition(new games.stendhal.server.entity.npc.condition.AlwaysTrueCondition(),
+					new QuestInStateCondition(QUEST_SLOT, "jynath")),
+			ConversationStates.ATTENDING,
+			"Lepiej weź tę książkę z powrotem do #Ceryl szybko... on czeka na Ciebie.",
 			null);
 
 		npc.add(ConversationStates.ATTENDING, "ceryl", null,
@@ -182,7 +198,16 @@ public class LookBookforCeryl extends AbstractQuest {
 					new QuestInStateCondition(QUEST_SLOT, "jynath"),
 					new PlayerHasItemWithHimCondition("księga czarna")),
 			ConversationStates.ATTENDING,
-			"Och, masz książkę z powrotem! Uff, dziękuję!",
+			"To nasza czarna księga, poznaję oprawę. Wreszcie mogę oddać ją następnym czytelnikom. Przyjmij zapłatę za drogę i dziękuję za pomoc.",
+			new MultipleActions(reward));
+        // Reuse the native stage and its guards inside the current conversation.
+        npc.add(
+			ConversationStates.ATTENDING, "księga ceryla",
+			new AndCondition(new games.stendhal.server.entity.npc.condition.AlwaysTrueCondition(),
+					new QuestInStateCondition(QUEST_SLOT, "jynath"),
+					new PlayerHasItemWithHimCondition("księga czarna")),
+			ConversationStates.ATTENDING,
+			"To nasza czarna księga, poznaję oprawę. Wreszcie mogę oddać ją następnym czytelnikom. Przyjmij zapłatę za drogę i dziękuję za pomoc.",
 			new MultipleActions(reward));
 
 		// There is no other way to get the book.
@@ -199,6 +224,15 @@ public class LookBookforCeryl extends AbstractQuest {
 			ConversationStates.ATTENDING, 
 			"Nie przyniosłeś tej #książki od #Jynath? Proszę idź jej poszukać. Szybko!",
 			new SetQuestAction(QUEST_SLOT, null));
+        // Reuse the native stage and its guards inside the current conversation.
+        npc.add(
+			ConversationStates.ATTENDING, "księga ceryla",
+			new AndCondition(new games.stendhal.server.entity.npc.condition.AlwaysTrueCondition(),
+					new QuestInStateCondition(QUEST_SLOT, "jynath"),
+					new NotCondition(new PlayerHasItemWithHimCondition("księga czarna"))),
+			ConversationStates.ATTENDING, 
+			"Nie przyniosłeś tej #książki od #Jynath? Proszę idź jej poszukać. Szybko!",
+			new SetQuestAction(QUEST_SLOT, null));
 	}
 
 	
@@ -208,20 +242,20 @@ public class LookBookforCeryl extends AbstractQuest {
 		if (!player.hasQuest(QUEST_SLOT)) {
 			return res;
 		}
-		res.add("Spotkałem Ceryl w bibliotece, jest tam bibliotekarzem");
+		res.add("Spotkałem Ceryla, bibliotekarza z Semos.");
 		final String questState = player.getQuest(QUEST_SLOT);
 		if (questState.equals("rejected")) {
 			res.add("Nie chcę szukać książki");
 		}
 		if (player.isQuestInState(QUEST_SLOT, "start", "jynath", "done")) {
-			res.add("Chcę znaleść czarną księgę");
+			res.add("Mam odzyskać czarną księgę od Jynath, mieszkającej na południe od zamku Orril.");
 		}
 		if ((questState.equals("jynath") && player.isEquipped("księga czarna"))
 				|| questState.equals("done")) {
-			res.add("Rozmawiałem z Jynath i mam książkę");
+			res.add("Odebrałem czarną księgę od Jynath. Mam zwrócić ją Cerylowi w bibliotece Semos.");
 		}
 		if (questState.equals("jynath") && !player.isEquipped("księga czarna")) {
-			res.add("Nie mam książki od Jynath");
+			res.add("Nie mam przy sobie czarnej księgi otrzymanej od Jynath.");
 		}
 		if (questState.equals("done")) {
 			res.add("Zwróciłem książkę Cerylowi i dostałem nagrodę.");
@@ -234,7 +268,7 @@ public class LookBookforCeryl extends AbstractQuest {
 		super.addToWorld();
 		fillQuestInfo(
 				"Poszukiwania Książki dla Ceryla",
-				"Ceryl potrzebuje starej książki.",
+				"W bibliotece Semos brakuje czarnej księgi wypożyczonej przez Jynath. Ceryl prosi o jej odzyskanie; odwiedź czarownicę i zwróć tom bibliotekarzowi.",
 				false);
 		step1LearnAboutQuest();
 		step2getBook();

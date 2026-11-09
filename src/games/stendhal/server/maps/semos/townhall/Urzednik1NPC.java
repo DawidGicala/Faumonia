@@ -43,15 +43,16 @@ public class Urzednik1NPC implements ZoneConfigurator {
 
 			@Override
 			protected void createDialog() {
+                games.stendhal.server.entity.npc.dialogue.CollectionDialogueTopics.install(this);
 				addGreeting("Witam obywatelu! Potrzebujesz #pomocy?");
-				addJob("Jestem jednym z urzędników miasta Semos.");
-				addHelp("W Semos spotkasz wielu ludzi, na pewno ktoś będzie potrzebował pomocy.");
+				addJob("Przyjmuję zgłoszenia dotyczące potworów w okolicy Semos. Wspólnie z Billem i burmistrzem prowadzimy jeden rejestr polowań, więc nie musisz trzykrotnie wyjaśniać tej samej sprawy. Powiedz, czy przychodzisz po zlecenie, czy z meldunkiem.");
+				addHelp("Zanim ruszysz na polowanie, sprawdź cel i potrzebną liczbę przeciwników. Zapytaj o #zadanie, a odczytam twoje zlecenie. Bill i burmistrz mają dostęp do tych samych meldunków.");
 				addGoodbye("Życzę miłego dnia!");
 			}
 		};
 
 		npc.setEntityClass("urzedniknpc");
-		npc.setDescription("Oto Urzędnik Hans.");
+		npc.setDescription("Widzisz urzędnika Hansa z Semos. Uważnie porównuje zasłyszane meldunki z własnymi notatkami.");
 		npc.setPosition(4, 15);
 		npc.initHP(100);
 		zone.add(npc);

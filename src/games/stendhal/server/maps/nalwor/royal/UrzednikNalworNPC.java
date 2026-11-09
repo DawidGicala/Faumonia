@@ -52,6 +52,7 @@ public class UrzednikNalworNPC implements ZoneConfigurator {
 
 			@Override
 			protected void createDialog() {
+                games.stendhal.server.entity.npc.dialogue.CollectionDialogueTopics.install(this);
 
 				final Map<String, Integer> items = new HashMap<String, Integer>();
 				items.put("zwój nalwor", BUYING_PRICE);
@@ -59,14 +60,14 @@ public class UrzednikNalworNPC implements ZoneConfigurator {
 				new SellerAdder().addSeller(this, new QuestCompletedSellerBehaviour(QUEST_SLOT, "Sprzedaje zwoje do miasta tylko zasłużonym mieszkańcom Nalwor.", items));
 				// for quest see games.stendhal.server.maps.quest.HelpMrsYeti
 				addGreeting("Dzień dobry. Witaj w mieście Nalwor.");
-				addJob("Aktualnie nie mamy żadnego zadania urzędowego. Mieszkańcy miasta Nalwor często potrzebują kogoś do pomocy, powinieneś zapytać ich o #zadanie.");
+				addJob("Sprawdzam, kto pomógł mieszkańcom Nalwor i zasługuje na oficjalne uznanie. Po zakończeniu wymaganych spraw pozostaje jeszcze jedna dostawa. Zasłużonym mieszkańcom sprzedaję zwoje do naszego miasta.");
 				addHelp("Miasto Nalwor znajduje się w środku centralnych lasów Faumonii.");				
 				addGoodbye();
 			}
 		};
 
 		Urzednik.setEntityClass("urzedniknalwornpc");
-		Urzednik.setDescription("Oto Urzędnik Nalwor. Powinieneś z nim porozmawiać i zapytać o zadanie.");
+		Urzednik.setDescription("Widzisz urzędnika Nalwor. Uważnie słucha spraw mieszkańców i sprawdza ich zasługi dla miasta.");
 		Urzednik.setPosition(21, 2);
 		Urzednik.initHP(100);
 		zone.add(Urzednik);

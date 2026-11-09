@@ -62,19 +62,20 @@ public class CraftsmanNPC implements ZoneConfigurator {
 
 			@Override
 			protected void createDialog() {
+                addReply("tematy", "Możemy omówić badania elfickiego rynsztunku albo moje rzemiosło. Jeśli skończyliśmy zbieranie próbek, chętnie pokażę również ofertę skupu.");
 			    //addGreeting("Welcome to this forest, south of Or'ril river.");
-				addJob("Jestem rzemieślnikiem. Pewnego dnia, mam nadzieję, uda mi się wytworzyć taki przedmiot jaki robią zielone elfy.");
-				addHelp("Mój przyjaciel Orchiwald jest największym gadułą. Mógłby z tobą rozmawiać godzinami o albino elfach i jak tutaj się dostaliśmy.");
-				new BuyerAdder().addBuyer(this, new QuestCompletedBuyerBehaviour("elvish_armor", "I'm not able to buy anything from you right now.", shops.get("buyelvish")), false);
-				addGoodbye("Dowidzenia.");
+				addJob("Jestem rzemieślnikiem i próbuję zrozumieć, jak zielone elfy osiągają taką jakość swoich wyrobów. Same opowieści o ich kunszcie mi nie wystarczają. Potrzebuję prawdziwych próbek, które można dokładnie obejrzeć i porównać.");
+				addHelp("Jeśli ciekawi cię historia elfów albinosów, odwiedź mojego przyjaciela Orchiwalda. Potrafi długo opowiadać o naszym ludzie i drodze, która nas tutaj sprowadziła. Ja najwięcej mogę powiedzieć o rzemiośle i badaniu ekwipunku.");
+				new BuyerAdder().addBuyer(this, new QuestCompletedBuyerBehaviour("elvish_armor", "Najpierw potrzebuję wszystkich próbek elfickiego rynsztunku. Gdy skończymy zadanie, będę mógł je od ciebie skupować.", shops.get("buyelvish")), false);
+				addGoodbye("Do widzenia. Niech twoje znaleziska dobrze ci służą.");
 			}
 		};
 
-		npc.setDescription("Oto Lupos albino elf.");
+		npc.setDescription("Widzisz Luposa, rzemieślnika elfów albinosów. Badawczo ogląda każdy przedmiot, który trafia do jego pracowni.");
 		npc.setEntityClass("albinoelfnpc");
 		npc.setPosition(3, 11);
 		npc.initHP(100);
-		npc.setDescription("Oto Lupos. Jak widzisz jest albinos elfem.");
+		
 		zone.add(npc);
 	}
 }

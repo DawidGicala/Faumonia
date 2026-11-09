@@ -65,7 +65,7 @@ import java.util.List;
  * <li> None.
  * </ul>
  */
-public class AndrzejCollector extends AbstractQuest {
+public class AndrzejCollector extends AbstractQuest implements games.stendhal.server.core.rp.quest.NativeCollectionDetails {
 	private static final int REQURED_KIEL = 1;
 
 	private static final int REQUIRED_PIORO_SERAFINA = 8;
@@ -87,54 +87,49 @@ public class AndrzejCollector extends AbstractQuest {
 		final SpeakerNPC npc = npcs.get("Kolekcjoner Andrzej");
 
 		npc.add(ConversationStates.ATTENDING,
-			ConversationPhrases.QUEST_MESSAGES, null,
-			ConversationStates.QUEST_OFFERED, null,
-			new ChatAction() {
+            ConversationPhrases.QUEST_MESSAGES,
+            null,
+            ConversationStates.QUEST_OFFERED,
+            null,
+            new ChatAction() {
 				public void fire(final Player player, final Sentence sentence, final EventRaiser raiser) {
 					if (!player.hasQuest(QUEST_SLOT) || "rejected".equals(player.getQuest(QUEST_SLOT))) {
-						raiser.say("Kiedyś handlowałem przedmiotami i dorobiłem się fortuny. Teraz jestem kolekcjonerem i chce zebrać wszystko co się da w tej krainie ! Potrzebuje kogoś kto przyniesie mi troche gratów i jeden specjalny przedmiot. Podejmiesz się tego wyzwania?");
+						raiser.say("Kiedyś liczyłem zysk z każdej sprzedanej rzeczy. Dziś wolę zbierać trofea, za którymi stoi prawdziwa wyprawa: od kła złotej kostuchy po rzadkie pióra i zęby. Pomożesz mi uzupełnić kolekcję?");
 					} else if (player.isQuestCompleted(QUEST_SLOT)) {
-						raiser.say("Już mi pomogłeś. Dziękuje");
+						raiser.say("Kolekcja jest już na swoim miejscu, a twoja pomoc nie poszła w zapomnienie. Dbaj o siły, które dzięki niej zyskałeś - przydadzą się w następnej wyprawie.");
 						raiser.setCurrentState(ConversationStates.ATTENDING);
 					} else {
-						raiser.say("Dlaczego zawracasz mi głowę skoro nie masz potrzebnych przedmiotów?");
+						raiser.say("Zachowałem wszystkie trofea, które już mi przekazano. Dokończmy tę kolekcję, zanim zabierzemy się za następną sprawę.");
 						raiser.setCurrentState(ConversationStates.ATTENDING);
 					}
 				}
 			});
 
 		npc.add(ConversationStates.QUEST_OFFERED,
-			ConversationPhrases.YES_MESSAGES, null,
-			ConversationStates.ATTENDING, null,
-			new ChatAction() {
+            ConversationPhrases.YES_MESSAGES,
+            new games.stendhal.server.entity.npc.condition.QuestNotStartedCondition(QUEST_SLOT),
+            ConversationStates.ATTENDING,
+            null,
+            new ChatAction() {
 				public void fire(final Player player, final Sentence sentence, final EventRaiser raiser) {
-					raiser.say("Potrzebuje paru podstawowych przedmiotów i jeden #specjalny: "
-						+ REQURED_KIEL
-						+ " kieł złotej kostuchy, "
-						+ REQUIRED_ROG_DEMONA
-						+ " rogów demona, "
-						+ REQUIRED_PIORO_SERAFINA
-						+ " piór serafina i "
-						+ REQUIRED_ZAB_POTWORA
-						+ " zębów potwora. Wróć, gdy będziesz je miał #dokładnie w tej kolejności! Jeżeli zapomnisz to powiedz #przypomnij");
+					raiser.say("Dziękuję. Trofea ustawiam w takiej kolejności: " + games.stendhal.server.core.rp.quest.CollectionQuestProgress.itemText(AndrzejCollector.this.getCollectionItems()) + ". To, co już przyniesiesz, zostanie w kolekcji. Nie musisz zdobywać wszystkiego na jedną wyprawę.");
 					player.setQuest(QUEST_SLOT, "start;0;0;0;0");
 					player.addKarma(10);
 
 				}
 			});
 
-		npc.add(
-			ConversationStates.QUEST_OFFERED,
-			ConversationPhrases.NO_MESSAGES,
-			null,
-			ConversationStates.IDLE,
-			"Och, naprawdę mi nie pomożesz?",
-			new SetQuestAndModifyKarmaAction(QUEST_SLOT, "rejected", -10.0));
+		npc.add(ConversationStates.QUEST_OFFERED,
+            ConversationPhrases.NO_MESSAGES,
+            null,
+            ConversationStates.ATTENDING,
+            "Rozumiem. Jeśli kiedyś trafisz na te trofea i zechcesz mi je oddać, wróć do mnie.",
+            new SetQuestAndModifyKarmaAction(QUEST_SLOT, "rejected", -10.0));
 
 		npc.addReply(Arrays.asList("exact", "dokładnie"),
 			"Musisz zachować pewną kolejność, przynosząc mi te przedmioty..");
 		npc.addReply(Arrays.asList("specjalny", "specjalnego"),
-			"Potrzebuje kieł złotej kostuchy. Podobno można go zdobyć w bardzo odległych krainach. Niestety nie wiem gdzie dokładnie.");
+			"Potrzebuję kła złotej kostuchy. Podobno można go zdobyć w bardzo odległych krainach. Niestety nie wiem gdzie dokładnie.");
 	}
 
 	private void step_2() {
@@ -145,11 +140,13 @@ public class AndrzejCollector extends AbstractQuest {
 
 		final SpeakerNPC npc = npcs.get("Kolekcjoner Andrzej");
 
-		npc.add(ConversationStates.IDLE, ConversationPhrases.GREETING_MESSAGES,
-			new AndCondition(new GreetingMatchesNameCondition(npc.getName()),
+		npc.add(ConversationStates.IDLE,
+            ConversationPhrases.GREETING_MESSAGES,
+            new AndCondition(new GreetingMatchesNameCondition(npc.getName()),
 						new QuestStateStartsWithCondition(QUEST_SLOT, "start")),
-			ConversationStates.ATTENDING, null,
-			new ChatAction() {
+            ConversationStates.ATTENDING,
+            null,
+            new ChatAction() {
 				public void fire(final Player player, final Sentence sentence, final EventRaiser raiser) {
 					final String[] tokens = player.getQuest(QUEST_SLOT).split(";");
 
@@ -174,7 +171,7 @@ public class AndrzejCollector extends AbstractQuest {
 								neededKiel -= amount;
 							}
 
-							raiser.say("Porozmawiamy jak przyniesiesz mi: "
+							raiser.say("Przyniesione trofea zachowam. Brakuje mi jeszcze: "
 								+ Grammar.quantityplnoun(
 										neededKiel, "kieł złotej kostuchy", "")
 								+ ".");
@@ -193,7 +190,7 @@ public class AndrzejCollector extends AbstractQuest {
 								neededRogDemona -= amount;
 							}
 
-							raiser.say("Porozmawiamy jak przyniesiesz mi:"
+							raiser.say("Przyniesione trofea zachowam. Brakuje mi jeszcze: "
 								+ Grammar.quantityplnoun(neededRogDemona, "róg demona","")
 								+ ".");
 							missingSomething = true;
@@ -210,8 +207,8 @@ public class AndrzejCollector extends AbstractQuest {
 								player.drop("pióro serafina", amount);
 								neededPioroSerafina -= amount;
 							}
-							raiser.say("Porozmawiamy jak przyniesiesz mi:"
-									+ Grammar.quantityplnoun(neededPioroSerafina, "pióro serafina","one") + " więcej.");
+							raiser.say("Przyniesione trofea zachowam. Brakuje mi jeszcze: "
+									+ Grammar.quantityplnoun(neededPioroSerafina, "pióro serafina","one") + ".");
 							missingSomething = true;
 						}
 					}
@@ -226,8 +223,119 @@ public class AndrzejCollector extends AbstractQuest {
 								player.drop("ząb potwora", amount);
 								neededZabPotwora -= amount;
 							}
-							raiser.say("Porozmawiamy jak przyniesiesz mi: "
-								+ Grammar.quantityplnoun(neededZabPotwora, "ząb potwora","one") + " wciąż.");
+							raiser.say("Przyniesione trofea zachowam. Brakuje mi jeszcze: "
+								+ Grammar.quantityplnoun(neededZabPotwora, "ząb potwora","one") + ".");
+							missingSomething = true;
+						}
+					}
+
+					if (player.hasKilled("gashadokuro") && !missingSomething) {
+						raiser.say("Przyniosłeś wszystko. Muszę to odpowiednio poukładać. Daj mi "
+							+ REQUIRED_MINUTES
+							+ " minut" + ", a będzie ułożone.");
+						player.setQuest(QUEST_SLOT, "forging;" + System.currentTimeMillis());
+					} else {
+						if (!player.hasKilled("gashadokuro") && !missingSomething) {
+							raiser.say("Zanim ukończysz zadanie idź i zabij wielkiego szkieleta gashadokuro. Znajdziesz go w tunelach chaosu.");
+						}
+
+						player.setQuest(QUEST_SLOT,
+							"start;"
+							+ (REQURED_KIEL - neededKiel)
+							+ ";"
+							+ (REQUIRED_ROG_DEMONA - neededRogDemona)
+							+ ";"
+							+ (REQUIRED_PIORO_SERAFINA - neededPioroSerafina)
+							+ ";"
+							+ (REQUIRED_ZAB_POTWORA - neededZabPotwora));
+					}
+				}
+			});
+        // Resume the native stage without changing its guards or actions.
+        npc.add(ConversationStates.ATTENDING, "dostawa",
+            new AndCondition(new games.stendhal.server.entity.npc.condition.AlwaysTrueCondition(),
+						new QuestStateStartsWithCondition(QUEST_SLOT, "start")),
+            ConversationStates.ATTENDING,
+            null,
+            new ChatAction() {
+				public void fire(final Player player, final Sentence sentence, final EventRaiser raiser) {
+					final String[] tokens = player.getQuest(QUEST_SLOT).split(";");
+
+					int neededKiel = REQURED_KIEL
+							- Integer.parseInt(tokens[1]);
+					int neededRogDemona = REQUIRED_ROG_DEMONA
+							- Integer.parseInt(tokens[2]);
+					int neededPioroSerafina = REQUIRED_PIORO_SERAFINA
+							- Integer.parseInt(tokens[3]);
+					int neededZabPotwora = REQUIRED_ZAB_POTWORA
+							- Integer.parseInt(tokens[4]);
+					boolean missingSomething = false;
+
+					if (!missingSomething && (neededKiel > 0)) {
+						if (player.isEquipped("kieł złotej kostuchy", neededKiel)) {
+							player.drop("kieł złotej kostuchy", neededKiel);
+							neededKiel = 0;
+						} else {
+							final int amount = player.getNumberOfEquipped("kieł złotej kostuchy");
+							if (amount > 0) {
+								player.drop("kieł złotej kostuchy", amount);
+								neededKiel -= amount;
+							}
+
+							raiser.say("Przyniesione trofea zachowam. Brakuje mi jeszcze: "
+								+ Grammar.quantityplnoun(
+										neededKiel, "kieł złotej kostuchy", "")
+								+ ".");
+							missingSomething = true;
+						}
+					}
+
+					if (!missingSomething && (neededRogDemona > 0)) {
+						if (player.isEquipped("róg demona", neededRogDemona)) {
+							player.drop("róg demona", neededRogDemona);
+							neededRogDemona = 0;
+						} else {
+							final int amount = player.getNumberOfEquipped("róg demona");
+							if (amount > 0) {
+								player.drop("róg demona", amount);
+								neededRogDemona -= amount;
+							}
+
+							raiser.say("Przyniesione trofea zachowam. Brakuje mi jeszcze: "
+								+ Grammar.quantityplnoun(neededRogDemona, "róg demona","")
+								+ ".");
+							missingSomething = true;
+						}
+					}
+
+					if (!missingSomething && (neededPioroSerafina > 0)) {
+						if (player.isEquipped("pióro serafina", neededPioroSerafina)) {
+							player.drop("pióro serafina", neededPioroSerafina);
+							neededPioroSerafina = 0;
+						} else {
+							final int amount = player.getNumberOfEquipped("pióro serafina");
+							if (amount > 0) {
+								player.drop("pióro serafina", amount);
+								neededPioroSerafina -= amount;
+							}
+							raiser.say("Przyniesione trofea zachowam. Brakuje mi jeszcze: "
+									+ Grammar.quantityplnoun(neededPioroSerafina, "pióro serafina","one") + ".");
+							missingSomething = true;
+						}
+					}
+
+					if (!missingSomething && (neededZabPotwora > 0)) {
+						if (player.isEquipped("ząb potwora", neededZabPotwora)) {
+							player.drop("ząb potwora", neededZabPotwora);
+							neededZabPotwora = 0;
+						} else {
+							final int amount = player.getNumberOfEquipped("ząb potwora");
+							if (amount > 0) {
+								player.drop("ząb potwora", amount);
+								neededZabPotwora -= amount;
+							}
+							raiser.say("Przyniesione trofea zachowam. Brakuje mi jeszcze: "
+								+ Grammar.quantityplnoun(neededZabPotwora, "ząb potwora","one") + ".");
 							missingSomething = true;
 						}
 					}
@@ -255,10 +363,13 @@ public class AndrzejCollector extends AbstractQuest {
 				}
 			});
 
-		npc.add(ConversationStates.IDLE, ConversationPhrases.GREETING_MESSAGES,
-			new AndCondition(new GreetingMatchesNameCondition(npc.getName()),
+		npc.add(ConversationStates.IDLE,
+            ConversationPhrases.GREETING_MESSAGES,
+            new AndCondition(new GreetingMatchesNameCondition(npc.getName()),
 						new QuestStateStartsWithCondition(QUEST_SLOT, "forging;")),
-			ConversationStates.IDLE, null, new ChatAction() {
+            ConversationStates.ATTENDING,
+            null,
+            new ChatAction() {
 				public void fire(final Player player, final Sentence sentence, final EventRaiser raiser) {
 
 					final String[] tokens = player.getQuest(QUEST_SLOT).split(";");
@@ -274,11 +385,50 @@ public class AndrzejCollector extends AbstractQuest {
 						return;
 					}
 
-					raiser.say("Skończyłem układanie. Moja kolekcja wygląda przepięknie ! Muszę ci się jakoś odwdzięczyć. Zamknij oczy a zwiększe twoje maksymalne życie... O już! Zamknij jeszcze na chwile... Zwiększyłem również twoje umiejętności walki i obrony. Powinieneś dłużej przeżyć gdy będziesz atakowany. Jeszcze raz dziękuje za pomoc !");
+					if (!games.stendhal.server.maps.quests.logic.QuestGoldFees.requirePaid(player, QUEST_SLOT, raiser)) { return; }
+                    raiser.say("Trofea leżą już obok siebie i wreszcie widać, ile różnych wypraw za nimi stoi. W podziękowaniu zwiększam twoje maksymalne zdrowie o 100 oraz umiejętności walki. Korzystaj z tych sił rozsądnie, bo żaden zbiór nie jest wart życia zbieracza.");
 					player.addXP(1000000);
 					player.addatk_xp(50000);
 					player.adddef_xp(50000);
 					player.setBaseHP(100 + player.getBaseHP());
+                    games.stendhal.server.entity.npc.dialogue.NpcDialogueService.reward((SpeakerNPC)raiser.getEntity(),player,new games.stendhal.common.NpcDialogueSnapshot.Reward("Maksymalne zdrowie","gui/dialogue/health",100,false));
+					player.heal(100, true);
+					final Item magicSword = SingletonRepository.getEntityManager().getItem("money");
+					magicSword.setBoundTo(player.getName());
+					player.equipOrPutOnGround(magicSword);
+					player.notifyWorldAboutChanges();
+					player.setQuest(QUEST_SLOT, "done");
+				}
+			});
+        // Resume the native stage without changing its guards or actions.
+        npc.add(ConversationStates.ATTENDING, "dostawa",
+            new AndCondition(new games.stendhal.server.entity.npc.condition.AlwaysTrueCondition(),
+						new QuestStateStartsWithCondition(QUEST_SLOT, "forging;")),
+            ConversationStates.ATTENDING,
+            null,
+            new ChatAction() {
+				public void fire(final Player player, final Sentence sentence, final EventRaiser raiser) {
+
+					final String[] tokens = player.getQuest(QUEST_SLOT).split(";");
+					
+					final long delay = REQUIRED_MINUTES * MathHelper.MILLISECONDS_IN_ONE_MINUTE; 
+					final long timeRemaining = (Long.parseLong(tokens[1]) + delay)
+							- System.currentTimeMillis();
+
+					if (timeRemaining > 0L) {
+						raiser.say("Wciąż układam swoją nową kolekcje. Wróć za "
+							+ TimeUtil.approxTimeUntil((int) (timeRemaining / 1000L))
+							+ ".");
+						return;
+					}
+
+					if (!games.stendhal.server.maps.quests.logic.QuestGoldFees.requirePaid(player, QUEST_SLOT, raiser)) { return; }
+                    raiser.say("Trofea leżą już obok siebie i wreszcie widać, ile różnych wypraw za nimi stoi. W podziękowaniu zwiększam twoje maksymalne zdrowie o 100 oraz umiejętności walki. Korzystaj z tych sił rozsądnie, bo żaden zbiór nie jest wart życia zbieracza.");
+					player.addXP(1000000);
+					player.addatk_xp(50000);
+					player.adddef_xp(50000);
+					player.setBaseHP(100 + player.getBaseHP());
+                    games.stendhal.server.entity.npc.dialogue.NpcDialogueService.reward((SpeakerNPC)raiser.getEntity(),player,new games.stendhal.common.NpcDialogueSnapshot.Reward("Maksymalne zdrowie","gui/dialogue/health",100,false));
 					player.heal(100, true);
 					final Item magicSword = SingletonRepository.getEntityManager().getItem("money");
 					magicSword.setBoundTo(player.getName());
@@ -289,11 +439,11 @@ public class AndrzejCollector extends AbstractQuest {
 			});
 
 		npc.add(ConversationStates.ATTENDING,
-			Arrays.asList("forge", "missing", "wykuj", "brakuje", "lista", "przypomnij"), 
-			new QuestStartedCondition(QUEST_SLOT),
-			ConversationStates.ATTENDING,
-			null,
-			new ChatAction() {
+            Arrays.asList("forge", "missing", "wykuj", "brakuje", "lista", "przypomnij"),
+            new QuestStateStartsWithCondition(QUEST_SLOT, "start;"),
+            ConversationStates.ATTENDING,
+            null,
+            new ChatAction() {
 				public void fire(final Player player, final Sentence sentence, final EventRaiser raiser) {
 					final String[] tokens = player.getQuest(QUEST_SLOT).split(";");
 
@@ -313,28 +463,31 @@ public class AndrzejCollector extends AbstractQuest {
 				}
 			});
 
-		npc.add(
-			ConversationStates.ANY,
-			"kieł złotej kostuchy",
-			null,
-			ConversationStates.ATTENDING,
-			"Rozmawiałem kiedyś z podróżnikiem który mówił, że w dalekiej piaszczystej krainie widział kły złotej kostuchy leżące na targu.",
-			null);
+		npc.add(ConversationStates.ANY,
+            "kieł złotej kostuchy",
+            null,
+            ConversationStates.ATTENDING,
+            "Rozmawiałem kiedyś z podróżnikiem który mówił, że w dalekiej piaszczystej krainie widział kły złotej kostuchy leżące na targu.",
+            null);
 
-		npc.add(ConversationStates.ANY, "róg demona", null,
-				ConversationStates.ATTENDING,
-				"Musisz wybrać się daleko w podziemia i odszukać ogromnego Balroga. Pokonaj go, a na pewno zdobędziesz róg demona.", null);
-		npc.add(ConversationStates.ANY, "pióro serafina", null,
-				ConversationStates.ATTENDING,
-				"Musisz wybrać się wysoko w chmury i pokonać znajdującego się tam Serafina. Podobno można dostać się tam przy pomocy biletu do niebios.",
-				null);
-		npc.add(
-			ConversationStates.ANY,
-			Arrays.asList("ząb","ząb potwora", "potwora"),
-			null,
-			ConversationStates.ATTENDING,
-			"Nie wiesz skąd zdobyć zęby potwora? Po prostu wyrwij je ogromnym bestiom! Najlepsze zęby do kolekcji mają Jožiny, Cosie oraz Gigantyczne Monstra.",
-			null);
+		npc.add(ConversationStates.ANY,
+            "róg demona",
+            null,
+            ConversationStates.ATTENDING,
+            "Musisz wybrać się daleko w podziemia i odszukać ogromnego Balroga. Pokonaj go, a na pewno zdobędziesz róg demona.",
+            null);
+		npc.add(ConversationStates.ANY,
+            "pióro serafina",
+            null,
+            ConversationStates.ATTENDING,
+            "Musisz wybrać się wysoko w chmury i pokonać znajdującego się tam Serafina. Podobno można dostać się tam przy pomocy biletu do niebios.",
+            null);
+		npc.add(ConversationStates.ANY,
+            Arrays.asList("ząb","ząb potwora", "potwora"),
+            null,
+            ConversationStates.ATTENDING,
+            "Nie wiesz skąd zdobyć zęby potwora? Po prostu wyrwij je ogromnym bestiom! Najlepsze zęby do kolekcji mają Jožiny, Cosie oraz Gigantyczne Monstra.",
+            null);
 	}
 
 	@Override
@@ -342,7 +495,7 @@ public class AndrzejCollector extends AbstractQuest {
 		super.addToWorld();
 		fillQuestInfo(
 				"Rzeczy dla Kolekcjonera Andrzeja",
-				"Kolekcjoner Andrzej potrzebuje kilku rzeczy do swojej kolekcji.",
+				"Kolekcjoner Andrzej z hotelu Fado poszukuje rzadkich trofeów. Poznaj jego listę i przynieś brakujące okazy, aby uzupełnić kolekcję.",
 				false);
 		step_1();
 		step_2();
@@ -356,40 +509,8 @@ public class AndrzejCollector extends AbstractQuest {
 	
 	@Override
 	public List<String> getHistory(final Player player) {
-			final List<String> res = new ArrayList<String>();
-			if (!player.hasQuest(QUEST_SLOT)) {
-				return res;
-			}
-			final String questState = player.getQuest(QUEST_SLOT);
-			res.add("Spotkałem Kolekcjonera Andrzeja w hotelu Fado.");
-			if (questState.equals("rejected")) {
-				res.add("Nie pomoge kolekcjonerowi.");
-				return res;
-			} 
-			res.add("Kolekcjoner Andrzej prosił mnie abym przyniósł mu: " + REQURED_KIEL
-					+ " kieł złotej kostuchy, "
-					+ REQUIRED_ROG_DEMONA
-					+ " piór anioła, "
-					+ REQUIRED_PIORO_SERAFINA
-					+ " piór serafina i "
-					+ REQUIRED_ZAB_POTWORA
-					+ "  zębów potwora, dokładnie w tej kolejności.");
-			if(questState.startsWith("start") && !"start;15;26;12;6".equals(questState)){
-				res.add("Nie dostarczyłem wszystkiego. Kolekcjoner Andrzej powie mi co jeszcze potrzebuje.");
-			} else if ("start;15;26;12;6".equals(questState) || !questState.startsWith("start")) {
-				res.add("Dostarczyłem wszystko o co prosił mnie Kolekcjoner Andrzej.");
-			}
-			if("start;15;26;12;6".equals(questState) && !player.hasKilled("gashadokuro")){
-				res.add("Kolekcjoner poprosił mnie abym zabił... gashadokuro... Podobno znajde go w podziemiach chaosu.");
-			} 
-			if (questState.startsWith("forging")) {
-				res.add("Kolekcjoner Andrzej układa swoje nowe zabawki.");
-			} 
-			if (isCompleted(player)) {
-				res.add("Za przyniesienie kła złotej kostuchy i paru innych rzeczy Kolekcjoner Andrzej zwiększył moje umiejętności obrony, ataku oraz maksymalne życie.	W nagrodę za ukończenie zadania otrzymałem: 1 000.000 pkt doświadczenia, 20.000 pkt ataku, 20.000 pkt obrony i 100 pkt maksymalnego życia więcej.");
-			}
-			return res;	
-	}
+        return games.stendhal.server.core.rp.quest.CollectionQuestProgress.history(this, player);
+    }
 
 	@Override
 	public int getMinLevel() {
@@ -405,4 +526,14 @@ public class AndrzejCollector extends AbstractQuest {
 	public String getRegion() {
 		return Region.FADO_CITY;
 	}
+
+
+
+    public String getCollectionKind(){return "sequence";}
+    public java.util.Map<String,Integer> getCollectionItems(){java.util.Map<String,Integer> m=new java.util.LinkedHashMap<String,Integer>(); m.put("kieł złotej kostuchy",REQURED_KIEL);m.put("róg demona",REQUIRED_ROG_DEMONA);m.put("pióro serafina",REQUIRED_PIORO_SERAFINA);m.put("ząb potwora",REQUIRED_ZAB_POTWORA);return m;}
+    public String getCollectionHint(){return "Kolekcjoner Andrzej w hotelu Fado przyjmuje trofea kolejno: kieł złotej kostuchy, rogi demonów, pióra serafinów i zęby potwora. Wpłaty są zapamiętywane. Wymaga także pokonania gashadokuro; po spełnieniu warunków przygotowanie nagrody trwa godzinę.";}
+    public String getCollectionKill(){return "gashadokuro";}
+public boolean getCollectionSolo(){return false;}
+public int getCollectionWait(){return REQUIRED_MINUTES;}
+
 }

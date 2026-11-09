@@ -43,10 +43,11 @@ public class Archer implements ZoneConfigurator {
 
 			@Override
 			protected void createDialog() {
+                games.stendhal.server.entity.npc.dialogue.CollectionDialogueTopics.install(this);
 				addGreeting("Witaj, jestem trenerem łuczników.");
 				addGoodbye("Żegnaj!");
 				addHelp("Jeśli wykonasz #zadanie, to odznaczę Cię szafirowym medalem, pod warunkiem że posiadasz szmaragdowy.");
-				addJob("Jeśli wykonasz #zadanie, to odznaczę Cię szafirowym medalem,  pod warunkiem że posiadasz szmaragdowy.");
+				addJob("Dbam o łuczników i ich zaopatrzenie. Wymieniam szmaragdowy medal na obsydianowy po zakończeniu wymaganej dostawy i próby walki. Następny etap odznaczeń prowadzi do Trenera Magów.");
 				
 				add(
 				        ConversationStates.ATTENDING,
@@ -58,7 +59,7 @@ public class Archer implements ZoneConfigurator {
 			}
 		};
 
-		elemental.setDescription("Oto dowódca łuczników Ados.");
+		elemental.setDescription("Widzisz Trenera Łuczników, skupionego dowódcę Ados. Ceni cierpliwość i dokładne wykonywanie poleceń.");
 		elemental.setEntityClass("aboss");
 		elemental.setPosition(60, 41);
 		elemental.setDirection(Direction.LEFT);

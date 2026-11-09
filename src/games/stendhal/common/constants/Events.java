@@ -20,6 +20,8 @@ public final class Events {
 	public static final String PRIVATE_TEXT = "private_text";
 	
 	public static final String PUBLIC_TEXT = "text";
+	// Player already has a legacy "text" attribute; Marauroa requires unique definition names.
+	public static final String PLAYER_DIALOGUE_TEXT = "player_dialogue_text";
 
 	/** a sound event */
 	public static final String SOUND = "sound_event";

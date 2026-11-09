@@ -74,7 +74,7 @@ import marauroa.common.Pair;
 
  */
 
-public class KillMonks extends AbstractQuest {
+public class KillMonks extends AbstractQuest implements games.stendhal.server.core.rp.quest.NativeHuntDetails {
 
 	private static final String QUEST_SLOT = "kill_monks3";
 	protected HashMap<String, Pair<Integer, Integer>> creaturestokill = new HashMap<String, Pair<Integer,Integer>>();
@@ -99,19 +99,19 @@ public class KillMonks extends AbstractQuest {
 		final SpeakerNPC npc = npcs.get("Andy");
 
 		npc.add(ConversationStates.ATTENDING,
-				ConversationPhrases.QUEST_MESSAGES, 
-				new QuestNotStartedCondition(QUEST_SLOT),
-				ConversationStates.QUEST_OFFERED,
-				"Moja kochana żona została zamordowana, gdy szła do Wo'fol, aby zamówić pizzę u Kroipa. Jacyś mnichowie ją napadli i nie miała szansy. Teraz chcę się zemścić! Może mi pomożesz?",
-				null);
+                ConversationPhrases.QUEST_MESSAGES,
+                new QuestNotStartedCondition(QUEST_SLOT),
+                ConversationStates.QUEST_OFFERED,
+                "Moja żona szła do Wofol po pizzę od Kroipa i już nie wróciła. Napadli na nią mnisi, a ja do dziś nie potrafię się z tym pogodzić. Pomożesz powstrzymać tych, którzy odebrali mi spokój?",
+                null);
 
 		npc.add(ConversationStates.ATTENDING,
-				ConversationPhrases.QUEST_MESSAGES, 
-				new AndCondition(new QuestStateStartsWithCondition(QUEST_SLOT,"done"),
+                ConversationPhrases.QUEST_MESSAGES,
+                new AndCondition(new QuestStateStartsWithCondition(QUEST_SLOT,"done"),
 						 new TimePassedCondition(QUEST_SLOT, 1, MathHelper.MINUTES_IN_ONE_WEEK*2)),
-				ConversationStates.QUEST_OFFERED,
-				"Ci mnichowie są okrutni, a ja wciąż nie mogę dokonać mojej zemsty. Może znów mi pomożesz?",
-				null);
+                ConversationStates.QUEST_OFFERED,
+                "Mnisi znów nie dają mi spokoju, a wspomnienia wracają. Jeśli możesz, pomóż mi jeszcze raz się z nimi uporać.",
+                null);
 
 		npc.add(ConversationStates.ATTENDING,
 				ConversationPhrases.QUEST_MESSAGES,
@@ -127,18 +127,18 @@ public class KillMonks extends AbstractQuest {
 
 		
 		npc.add(ConversationStates.QUEST_OFFERED,
-				ConversationPhrases.YES_MESSAGES,
-				null,
-				ConversationStates.ATTENDING,
-				"Dziękuję! Zabij 25 mnichów i 25 mnichów ciemności w imię mojej ukochanej żony.",
-				new MultipleActions(actions));
+                ConversationPhrases.YES_MESSAGES,
+                null,
+                ConversationStates.ATTENDING,
+                "Proszę cię o pokonanie obu grup: mnichów i mnichów ciemności. Wiem, że nie zwróci mi to żony, ale może kolejna osoba bezpiecznie dotrze do domu." + "\nCele: " + games.stendhal.server.core.rp.quest.HuntQuestProgress.targetText(this,null) + ".",
+                new MultipleActions(actions));
 
-		npc.add(ConversationStates.QUEST_OFFERED, 
-				ConversationPhrases.NO_MESSAGES, 
-				null,
-				ConversationStates.ATTENDING,
-				"Co za szkoda... Może kiedyś zmienisz zdanie i pomożesz smutnemu człowiekowi.",
-				new SetQuestAction(QUEST_SLOT, 0, "rejected"));
+		npc.add(ConversationStates.QUEST_OFFERED,
+                ConversationPhrases.NO_MESSAGES,
+                null,
+                ConversationStates.ATTENDING,
+                "Rozumiem, to ciężka prośba. Nie będę miał ci za złe, jeśli teraz odejdziesz.",
+                new SetQuestAction(QUEST_SLOT, 0, "rejected"));
 	}
 
 	private void step_2() {
@@ -175,23 +175,23 @@ public class KillMonks extends AbstractQuest {
 		LinkedList<String> triggers = new LinkedList<String>();
 		triggers.addAll(ConversationPhrases.FINISH_MESSAGES);
 		triggers.addAll(ConversationPhrases.QUEST_MESSAGES);		
-		npc.add(ConversationStates.ATTENDING, 
-				triggers,
-				new AndCondition(
+		npc.add(ConversationStates.ATTENDING,
+                triggers,
+                new AndCondition(
 						new QuestInStateCondition(QUEST_SLOT, 0, "start"),
 						new KilledForQuestCondition(QUEST_SLOT, 1)),
-				ConversationStates.ATTENDING, 
-				"Bardzo dziękuję! Teraz mogę spać trochę spokojniej. Proszę przyjmij te eliksiry i ciasto.",
-				new MultipleActions(actions));
+                ConversationStates.ATTENDING,
+                "Dziękuję, że wracasz z taką wiadomością. Przygotowałem ciasto, eliksiry i skrzynie; to niewiele wobec wspomnień, ale chcę się z tobą podzielić tym, co mam.",
+                new MultipleActions(actions));
 
-		npc.add(ConversationStates.ATTENDING, 
-				triggers,
-				new AndCondition(
+		npc.add(ConversationStates.ATTENDING,
+                triggers,
+                new AndCondition(
 						new QuestInStateCondition(QUEST_SLOT, 0, "start"),
 						new NotCondition(new KilledForQuestCondition(QUEST_SLOT, 1))),
-				ConversationStates.ATTENDING, 
-				"Proszę pomóż mi w dokonaniu zemsty!",
-				null);
+                ConversationStates.ATTENDING,
+                null,
+                (p, sentence, raiser) -> raiser.say("Wiem, że ta droga nie jest łatwa. Zostało jeszcze trochę do zrobienia przy obu grupach mnichów; proszę, uważaj na siebie." + "\n" + games.stendhal.server.core.rp.quest.HuntQuestProgress.progressText(KillMonks.this,p)));
 	}
 
 	@Override
@@ -199,7 +199,7 @@ public class KillMonks extends AbstractQuest {
 		super.addToWorld();
 		fillQuestInfo(
 				"Zabij Mnichy",
-				"Żona Andiego została zamordowana przez mnichów, a teraz on chce dokonać na nich zemsty.",
+				"Andy z Ados stracił żonę z rąk mnichów. Chce pomścić jej śmierć; wysłuchaj go i poznaj warunki wyprawy, zanim zdecydujesz się pomóc.",
 				false);
 		step_1();
 		step_2();
@@ -208,24 +208,8 @@ public class KillMonks extends AbstractQuest {
 	
 	@Override
 	public List<String> getHistory(final Player player) {
-			final List<String> res = new ArrayList<String>();
-			if (!player.hasQuest(QUEST_SLOT)) {
-				return res;
-			}
-			if (!isCompleted(player)) {
-				res.add("Musze zabić 25 mnichów i 25 mnichów ciemności, aby dokonać zemsty za żonę Andiego.");
-			} else if(isRepeatable(player)){
-				res.add("Teraz po dwóch tygodniach powinienem odwiedzić Andiego. Może znów potrzebuje mojej pomocy!");
-			} else {
-				res.add("Zabiłem paru mnichów, a Andi może teraz spać trochę spokojniej!	W nagrodę za ukończenie zadania otrzymałem: 15.000 pkt doświadczenia, 50 dużych eliksirów i kilka ciast wiśniowych.");
-			}
-			int repetitions = player.getNumberOfRepetitions(getSlotName(), 2);
-			if (repetitions > 0) {
-				res.add("Zemściłem się dla Andiego "
-						+ Grammar.quantityplnoun(repetitions, "razy") + ".");
-			}
-			return res;
-	}
+        return games.stendhal.server.core.rp.quest.HuntQuestProgress.history(this,player);
+    }
 
 
 	@Override
@@ -254,4 +238,11 @@ public class KillMonks extends AbstractQuest {
 	public String getRegion() {
 		return Region.ADOS_CITY;
 	}
+
+    @Override public java.util.Map<String, Pair<Integer,Integer>> getDialogueHuntTargets(Player player) {
+        return java.util.Collections.unmodifiableMap(new java.util.TreeMap<String,Pair<Integer,Integer>>(creaturestokill));
+    }
+    @Override public int getDialogueHuntTotal(Player player) { return 0; }
+    @Override public int getDialogueKillIndex() { return 1; }
+    @Override public String getDialogueHuntHint(Player player) { return "Andy stracił żonę na drodze do Wofol. Pokonaj po 25 mnichów i mnichów ciemności, a następnie wróć do niego z wieścią o zakończeniu wyprawy."; }
 }

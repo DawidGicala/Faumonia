@@ -60,7 +60,7 @@ public class GhostNPC implements ZoneConfigurator {
 			}
 		};
 
-		ghost.setDescription("A cóż to? To jakaś świetlista postać zmarłego człowieka! Nie masz pojęcia dlaczego wciąż nie odszedł do świata umarłych.");
+		ghost.setDescription("Widzisz Zaka, świetlistą postać zmarłego człowieka w Wofol. Nie wiadomo, co zatrzymuje go po tej stronie.");
 		ghost.setResistance(0);
 		ghost.setEntityClass("man_000_npc");
 		// he is a ghost so he is see through

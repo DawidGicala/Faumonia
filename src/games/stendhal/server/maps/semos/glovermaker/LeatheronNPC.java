@@ -47,30 +47,31 @@ public class LeatheronNPC implements ZoneConfigurator {
 
 			@Override
 			public void createDialog() {
-				addJob("Specjalizuję się w sztuce tworzenia #rękawic #ze #skóry #tygrysa. To połączenie tradycyjnego rzemiosła z nowoczesnymi technikami. Każda para jest unikatowa, wykonana z najwyższą dbałością o detale."); 
+				addJob("Szyję rękawice ze skóry tygrysa. Przy krojeniu pilnuję, żeby dobrze leżały na dłoni, a szwy nie rozchodziły się podczas pracy. Zapytaj o ofertę, jeśli szukasz pary dla siebie."); 
 				addReply(Arrays.asList("pieniadze", "money"),
-				"Za moje usługi i czas pobieram wynagrodzenie. Poza #skórami potrzebuję #1000 #money, aby pokryć koszty materiałów i utrzymania warsztatu. Jakość, którą oferuję, wymaga adekwatnego wynagrodzenia.");
+				"1500 monet to zapłata za uszycie pary rękawic. Skóry przynosisz osobno; pełną listę przypomnę, gdy zapytasz o ofertę.");
 				addReply("skóra tygrysa",
-		        "Skóra tygrysa to niezwykle wytrzymały i szlachetny materiał. Używam jej do tworzenia ekskluzywnych rękawic. Jeśli jesteś zainteresowany, wykonam dla Ciebie parę #rękawic #ze #skóry #tygrysa");
+		        "Ze skóry tygrysa szyję wierzch rękawic. Potrzebuję czterech sztuk na jedną parę, a do tego ośmiu skór zwierzęcych na pozostałe części.");
 				addReply("skóra zwierzęca",
-		        "Skóra zwierzęca, którą pozyskujemy z naszej krainy, jest niezbędna do wzmocnienia rękawic i zapewnienia im dodatkowej trwałości. Używam różnych rodzajów skór, aby nadać każdej parze rękawic unikalny charakter.");
-				addOffer("Mogę stworzyć dla Ciebie rękawice ze skóry jelenia to moje specjalne dzieło. Do ich wykonania potrzebuję #1000 money, #4 #skóry #jelenia oraz #8 #skór #zwierzęcych. Są nie tylko praktyczne, ale i piękne, idealne dla koneserów elegancji. Powiedz #wykonaj #rękawice #ze #skóry #jelenia, a zacznę pracę..");
-				addHelp("Obecnie nie potrzebuję dodatkowej pomocy, ale dziękuję za zainteresowanie. Skupiam się na tworzeniu rękawic ze skóry tygrysa. Jeśli chcesz parę, powiedz #wykonaj #rękawice #ze #skóry #tygrysa.");
+		        "Skóry zwierzęce wykorzystuję do pozostałych części rękawic i wzmocnień. Zbieraj je podczas polowań; na parę potrzeba ośmiu sztuk.");
+				addOffer("Na rękawice ze skóry tygrysa przynieś 4 skóry tygrysa, 8 skór zwierzęcych i 1500 monet. Szycie potrwa 30 minut. Żeby złożyć zamówienie, powiedz: wykonaj rękawice ze skóry tygrysa.");
+				addHelp("Jeśli zbierasz skóry, mogę uszyć z nich rękawice. Zapytaj o ofertę, a podam materiały i cenę. Na początek potrzebne będą skóry tygrysa.");
 				addGoodbye("Trzymaj się.");
 
 				final Map<String, Integer> requiredResources = new TreeMap<String, Integer>();
-				requiredResources.put("money", 1000);
+				requiredResources.put("money", 1500);
 				requiredResources.put("skóra tygrysa", 4);
 				requiredResources.put("skóra zwierzęca", 8);
-				final ProducerBehaviour behaviour = new ProducerBehaviour("leatheron_gloves",
-						Arrays.asList("concoct", "wykonaj"), "rękawice ze skóry tygrysa", requiredResources, 30 * 60);
+				final games.stendhal.server.entity.npc.behaviour.impl.RepricedProducerBehaviour behaviour = new games.stendhal.server.entity.npc.behaviour.impl.RepricedProducerBehaviour("leatheron_gloves",
+						Arrays.asList("concoct", "wykonaj"), "rękawice ze skóry tygrysa", requiredResources, 30 * 60, 1000);
+                behaviour.installPayment(this);
 
 				new ProducerAdder().addProducer(this, behaviour,
-				"Witaj w moim warsztacie. Nazywam się Leatheron i jestem mistrzem tworzenia #rękawic #ze #skóry #tygrysa. Jeśli chcesz, abym wykonał dla Ciebie parę, powiedz #wykonaj #rękawice #ze #skóry #tygrysa.");
+				"Witaj, jestem Leatheron. Szyję rękawice ze skóry tygrysa; zapytaj o ofertę, jeśli chcesz zamówić parę.");
 			}
 		};
 		npc.setEntityClass("weaponsellernpc");
-		npc.setDescription("Leatheron to rzemieślnik o wyrafinowanym spojrzeniu i precyzyjnych ruchach, co świadczy o jego latach doświadczenia. Jego warsztat jest wypełniony skórami i specjalistycznymi narzędziami, niezbędnymi do produkcji rękawic najwyższej klasy. Jego prace są cenione przez miłośników wyrafinowanego stylu i jakości.");
+		npc.setDescription("Widzisz Leatherona, rzemieślnika szyjącego rękawice ze skóry tygrysa. Wśród skór i narzędzi starannie przygotowuje kolejne zamówienia.");
 		npc.setPosition(15, 5);
 		npc.setDirection(Direction.DOWN);
 		npc.initHP(100);

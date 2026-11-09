@@ -52,8 +52,7 @@ import java.util.List;
  * REPETITIONS:
  * <li> None.
  */
-public class WeaponsCollector extends AbstractQuest implements
-		BringListOfItemsQuest {
+public class WeaponsCollector extends AbstractQuest implements BringListOfItemsQuest, games.stendhal.server.core.rp.quest.NativeCollectionDetails {
 
 	private static final List<String> neededWeapons = Arrays.asList("berdysz",
 			"topór bojowy", "pałasz", "kiścień", "halabarda", "katana",
@@ -65,22 +64,22 @@ public class WeaponsCollector extends AbstractQuest implements
 	
 	@Override
 	public List<String> getHistory(final Player player) {
-		return bringItems.getHistory(player);
-	}
+        return games.stendhal.server.core.rp.quest.CollectionQuestProgress.history(this, player);
+    }
 
 	@Override
 	public void addToWorld() {
 		super.addToWorld();
 			fillQuestInfo(
 				"Kolekcjoner Broni",
-				"Balduin, pustelnik, który żyje na wielkiej górze Ados, ma ekscytujące wyzwanie dla Ciebie.",
+				"Balduin, pustelnik z gór Ados, kolekcjonuje broń z różnych stron krainy. Zapytaj o brakujące egzemplarze i przynieś je do jego pierwszej kolekcji.",
 				true);
 		setupAbstractQuest();
 	}
 
 	private void setupAbstractQuest() {
 		final BringListOfItemsQuest concreteQuest = this;
-		bringItems = new BringListOfItemsQuestLogic(concreteQuest);
+		bringItems = new games.stendhal.server.maps.quests.logic.DialogueBringListOfItemsQuestLogic(concreteQuest);
 		bringItems.addToWorld();
 	}
 
@@ -110,14 +109,12 @@ public class WeaponsCollector extends AbstractQuest implements
 	}
 
 	public String welcomeBeforeStartingQuest() {
-		return "Pozdrawiam. Jestem Balduin. Interesujesz się bronią? "
-				+ "Kolekcjonowałem ją odkąd byłem "
-				+ "młody. Może zrobisz dla mnie małe #zadanie.";
-	}
+        return "Pozdrawiam, jestem Balduin. Zbieram broń od młodości, bo po kształcie ostrza nieraz poznasz więcej niż po słowach właściciela. W mojej kolekcji nadal są luki.";
+    }
 
 	public String welcomeDuringActiveQuest() {
-		return "Witaj ponownie. Mam nadzieję, że przyszedłeś, aby mi pomóc w uzupełnieniu mojej #kolekcji.";
-	}
+        return "Witaj ponownie. Wszystkie przekazane okazy są bezpieczne, a brakujące mam zapisane. Przynosisz coś, czym możemy uzupełnić kolekcję?";
+    }
 
 	public String welcomeAfterQuestIsCompleted() {
 		return "Witam! Jeszcze raz dziękuję za skompletowanie mojej kolekcji.";
@@ -129,38 +126,27 @@ public class WeaponsCollector extends AbstractQuest implements
 	}
 
 	public String respondToQuest() {
-		return "Kolekcjonowałem broń od dłuższego czasu "
-				+ "wciąż nie mam tego czego chcę. Czy mógłbyś mi "
-				+ "pomóc w skompletowaniu mojej #kolekcji?";
-	}
+        return "Przez lata zebrałem sporo broni, ale nie każdy rodzaj udało mi się zdobyć. Chcę zachować po jednym egzemplarzu z listy, aby móc porównywać ich wykonanie. Pomożesz mi dokończyć ten zbiór?";
+    }
 
 	public String respondToQuestAfterItHasAlreadyBeenCompleted() {
 		return "Moja kolekcja jest już skompletowana! Jeszcze raz dziękuję.";
 	}
 
 	public String respondToQuestAcception() {
-		return "Jeżeli pomożesz mi w skompletowaniu mojej kolekcji to dam Tobie "
-				+ "coś bardzo interesującego i użytecznego na wymianę. Dowidzenia";
-	}
+        return "Dobrze, odłożę dla kolekcji każdą przyniesioną sztukę. Możesz przynosić broń w dowolnej kolejności, po jednym brakującym egzemplarzu. Za pełną kolekcję odwdzięczę się parą mieczy.";
+    }
 
 	public String respondToQuestRefusal() {
-		return "Cóż. Może ktoś inny mi pomoże. Dowidzenia";
-	}
+        return "Rozumiem, to nie jest krótka lista. Wróć, jeśli podczas podróży zechcesz zbierać okazy również dla mnie.";
+    }
 
 	public String askForMissingItems(final List<String> missingItems) {
-		return "Wciąż brakuje mi " + Grammar.isare(missingItems.size()) + " "
-				+ Grammar.quantityplnoun(missingItems.size(), "weapon", "a")
-				+ " w mojej kolekcji: "
-				+ Grammar.enumerateCollection(missingItems)
-				+ ". Czy masz coś ze sobą?";
-	}
+        return "Na liście wciąż pozostają: " + Grammar.enumerateCollection(missingItems) + ". Przekaż po jednym brakującym egzemplarzu; resztę możesz donieść później.";
+    }
 	public String firstAskForMissingItems(final List<String> missingItems) {
-		return "Brakuje mi " + Grammar.isare(missingItems.size()) + " "
-				+ Grammar.quantityplnoun(missingItems.size(), "weapon", "a")
-				+ " z mojej kolekcji: "
-				+ Grammar.enumerateCollection(missingItems)
-				+ ". Przyniesiesz mi je?";
-	}
+        return "Na liście wciąż pozostają: " + Grammar.enumerateCollection(missingItems) + ". Przekaż po jednym brakującym egzemplarzu; resztę możesz donieść później.";
+    }
 
 
 	public String respondToPlayerSayingHeHasNoItems(final List<String> missingItems) {
@@ -169,17 +155,16 @@ public class WeaponsCollector extends AbstractQuest implements
 	}
 
 	public String askForItemsAfterPlayerSaidHeHasItems() {
-		return "Co dla mnie znalazłeś?";
-	}
+        return "Pokaż znalezioną broń. Sprawdzę ją z listą i odłożę do kolekcji, jeśli jeszcze jej brakuje.";
+    }
 
 	public String respondToItemBrought() {
-		return "Bardzo dziękuję! Masz coś jeszcze dla mnie?";
-	}
+        return "Dobry okaz, dziękuję. Zapisuję go jako przyjęty; drugi taki sam nie będzie już potrzebny. Masz jeszcze coś z listy?";
+    }
 
 	public String respondToLastItemBrought() {
-		return "Nareszcie moja kolekcja jest kompletna! Dziękuję bardzo, "
-				+ "weź te miecze w zamian!";
-	}
+        return "Ostatnia luka została uzupełniona. Przyjmij miecz leworęczny i praworęczny w zamian za wytrwałe kompletowanie zbioru. Niech służą ci równie dobrze, jak te okazy będą służyć mojej kolekcji.";
+    }
 
 	public void rewardPlayer(final Player player) {
 		final Item lhandsword = SingletonRepository.getEntityManager().getItem(
@@ -202,12 +187,12 @@ public class WeaponsCollector extends AbstractQuest implements
 	}
 
 	public String respondToOfferOfNotMissingItem() {
-		return "Mam już to. Czy masz dla mnie inną broń?";
-	}
+        return "Ten rodzaj broni już mam od ciebie. Sprawdź pozostałe braki, zanim oddasz następny egzemplarz.";
+    }
 
 	public String respondToOfferOfNotNeededItem() {
-		return "To nie jest interesująca broń";
-	}
+        return "Tego rodzaju broni nie szukam w obecnej kolekcji. Potrzebuję dokładnie okazów zapisanych na liście.";
+    }
 
 	@Override
 	public String getName() {
@@ -229,4 +214,11 @@ public class WeaponsCollector extends AbstractQuest implements
 	public String getRegion() {
 		return Region.ADOS_SURROUNDS;
 	}
+
+
+
+    public String getCollectionKind(){return "list";}
+    public java.util.Map<String,Integer> getCollectionItems(){java.util.Map<String,Integer> m=new java.util.LinkedHashMap<String,Integer>();for(String n:getNeededItems())m.put(n,1);return m;}
+    public String getCollectionHint(){return "Balduin chce zachować różne rodzaje broni w swojej kolekcji. Przekazuj po jednym brakującym egzemplarzu w dowolnej kolejności. Po zamknięciu tej listy będzie miał kolejne zamówienie.";}
+    
 }

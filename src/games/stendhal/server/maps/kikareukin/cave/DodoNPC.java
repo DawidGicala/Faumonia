@@ -43,12 +43,14 @@ public class DodoNPC implements ZoneConfigurator {
 
 			@Override
 			protected void createDialog() {
+                games.stendhal.server.entity.npc.dialogue.HuntDialogueTopics.install(this);
+                addJob("Interesują mnie anielscy przeciwnicy i ich mroczne odmiany. Kto widzi tylko skrzydła, łatwo przeoczy różnicę między nimi; w moich zleceniach każda odmiana ma znaczenie.");
 				addGreeting("Witaj.");
 				addGoodbye("Na razie.");
 			}
 		};
 
-		elemental.setDescription("Oto Dodo.");
+		elemental.setDescription("Widzisz Dodo w jaskini Kikareukin. O skrzydlatych istotach mówi z ostrożnością, bez zachwytu.");
 		elemental.setEntityClass("fierywaterdistillernpc");
 		elemental.setPosition(115, 48);
 		elemental.setDirection(Direction.UP);

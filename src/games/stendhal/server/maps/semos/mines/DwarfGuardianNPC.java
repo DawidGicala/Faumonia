@@ -49,6 +49,7 @@ public class DwarfGuardianNPC implements ZoneConfigurator {
 
 			@Override
 			protected void createDialog() {
+                games.stendhal.server.entity.npc.dialogue.CollectionDialogueTopics.install(this);
 				addGreeting(null, new ChatAction() {
 					public void fire(final Player player, final Sentence sentence, final EventRaiser raiser) {
 						String reply = "Tam jest coś wielkiego! Każdy jest zdenerwowany. ";
@@ -60,7 +61,7 @@ public class DwarfGuardianNPC implements ZoneConfigurator {
 						raiser.say(reply);
 					}
 				});
-				addJob("Jestem krasnalem strażnikiem i staram się zawrócić śmiałków z drogi, jaką wybrał dla nich los.");
+				addJob("Pilnuję tego miejsca i ostrzegam śmiałków, zanim pójdą dalej. Ktoś musi mówić o niebezpieczeństwie nawet wtedy, gdy nikt nie chce słuchać. Zapasy i porządne ubranie pomogą mi wytrwać na posterunku.");
 				addHelp("Uważaj, gdy będziesz biegł przez głębokie tunele kopalni w Semos. Czekają tam na Ciebie różne silne potwory! Potrzebujesz dobrego sprzętu, o oferty zapytaj Harolda w Tawernie w Semos, być może on będzie w stanie Ci pomóc...");
 				addGoodbye();
 			}
@@ -81,7 +82,7 @@ public class DwarfGuardianNPC implements ZoneConfigurator {
 		});
 
 		npc.setEntityClass("dwarf_guardiannpc");
-		npc.setDescription("Oto Phalk. Jest żołnierzem, który nie chce rezygnować z przygód, jakie zesłał mu los.");
+		npc.setDescription("Widzisz Phalka, krasnoludzkiego strażnika. Wytarte ubranie i zmęczony głos świadczą o długiej służbie na posterunku.");
 		npc.setPosition(118, 26);
 		npc.setDirection(Direction.LEFT);
 		npc.initHP(25);

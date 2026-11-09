@@ -58,15 +58,16 @@ public class PrincessNPC implements ZoneConfigurator {
 
 			@Override
 			protected void createDialog() {
+                games.stendhal.server.entity.npc.dialogue.JourneyDialogueTopics.install(this);
 				addGreeting("Cześć człeku, człowieku.");
-				addJob("Jestem księżniczką. Co mogę zrobić?");
-				addHelp("Stanowcza osoba mogłaby zrobić dla mnie #zadanie.");
+				addJob("Jestem księżniczką elfów i spędzam tu wiele samotnych godzin. Wieża daje daleki widok, lecz nie zastępuje spaceru wśród kwiatów. Dlatego tak cieszą mnie orchidee przynoszone od Róży Kwiaciarki.");
+				addHelp("Z tej wieży widzę wiele dróg, ale od dawna nie przyniesiono mi świeżych kwiatów. Mam #zadanie dla kogoś, kto odszuka Różę Kwiaciarkę. Jej orchidea sprawiłaby mi więcej radości niż kolejna opowieść o dalekiej podróży.");
 				addOffer("Nie handluję. Moi rodzice mogliby to uważać za poniżające.");
 				addGoodbye("Dowidzenia nieznajomy.");
 			}
 		};
 
-		npc.setDescription("Oto piękna, ale samotna Najwyższa Elfka.");
+		npc.setDescription("Widzisz Tywysogę, samotną księżniczkę elfów na szczycie wieży Nalwor. Wypatruje gości i wieści ze świata.");
 		npc.setEntityClass("elfprincessnpc");
 		npc.setPosition(17, 13);
 		npc.initHP(100);

@@ -12,6 +12,8 @@
  ***************************************************************************/
 package games.stendhal.server.maps.quests;
 
+import games.stendhal.server.entity.npc.action.DialogueRewardAction;
+
 import games.stendhal.server.entity.npc.ChatAction;
 import games.stendhal.server.entity.npc.ConversationPhrases;
 import games.stendhal.server.entity.npc.ConversationStates;
@@ -76,20 +78,47 @@ public class IcecreamForAnnie extends AbstractQuest {
 				"Cześć, nazywam się Annie i mam pięć lat.",
 				null);
 
+        // Same authoritative step, without requiring the player to leave and greet again.
+        npc.add(ConversationStates.ATTENDING, "lody", 
+				new AndCondition(new games.stendhal.server.entity.npc.condition.AlwaysTrueCondition(),
+						new QuestNotStartedCondition(QUEST_SLOT),
+						new QuestNotInStateCondition(QUEST_SLOT, "rejected")),
+				ConversationStates.ATTENDING, 
+				"Cześć, nazywam się Annie i mam pięć lat.",
+				null);
+
 		// player is supposed to speak to mummy now
 		npc.add(ConversationStates.IDLE, 
 				ConversationPhrases.GREETING_MESSAGES, 
 				new AndCondition(new GreetingMatchesNameCondition(npc.getName()),
 						new QuestInStateCondition(QUEST_SLOT, "start"),
 						new PlayerHasItemWithHimCondition("lody")),
-				ConversationStates.IDLE, 
-				"Mamusia powiedziała, że nie powinnam z tobą rozmawiać. Jesteś nieznajomym.",
+				ConversationStates.ATTENDING, 
+				"Mamusia nie pozwala mi brać podarunków od nieznajomych. Porozmawiaj najpierw z Mrs Jones, która siedzi na ławce przy placu zabaw. Potem będziemy mogli znowu pogadać o lodach.",
+				null);
+
+        // Same authoritative step, without requiring the player to leave and greet again.
+        npc.add(ConversationStates.ATTENDING, "lody", 
+				new AndCondition(new games.stendhal.server.entity.npc.condition.AlwaysTrueCondition(),
+						new QuestInStateCondition(QUEST_SLOT, "start"),
+						new PlayerHasItemWithHimCondition("lody")),
+				ConversationStates.ATTENDING, 
+				"Mamusia nie pozwala mi brać podarunków od nieznajomych. Porozmawiaj najpierw z Mrs Jones, która siedzi na ławce przy placu zabaw. Potem będziemy mogli znowu pogadać o lodach.",
 				null);
 		
 		// player didn't get ice cream, meanie
 		npc.add(ConversationStates.IDLE, 
 				ConversationPhrases.GREETING_MESSAGES, 
 				new AndCondition(new GreetingMatchesNameCondition(npc.getName()),
+						new QuestInStateCondition(QUEST_SLOT, "start"),
+						new NotCondition(new PlayerHasItemWithHimCondition("lody"))),
+				ConversationStates.ATTENDING, 
+				"Cześć. Jestem głodna.",
+				null);
+
+        // Same authoritative step, without requiring the player to leave and greet again.
+        npc.add(ConversationStates.ATTENDING, "lody", 
+				new AndCondition(new games.stendhal.server.entity.npc.condition.AlwaysTrueCondition(),
 						new QuestInStateCondition(QUEST_SLOT, "start"),
 						new NotCondition(new PlayerHasItemWithHimCondition("lody"))),
 				ConversationStates.ATTENDING, 
@@ -105,11 +134,29 @@ public class IcecreamForAnnie extends AbstractQuest {
 				ConversationStates.QUESTION_1, 
 				"Pychota! Czy ta porcja lodów jest dla mnie?",
 				null);
+
+        // Same authoritative step, without requiring the player to leave and greet again.
+        npc.add(ConversationStates.ATTENDING, "lody", 
+				new AndCondition(new games.stendhal.server.entity.npc.condition.AlwaysTrueCondition(),
+						new QuestInStateCondition(QUEST_SLOT, "mummy"),
+						new PlayerHasItemWithHimCondition("lody")),
+				ConversationStates.QUESTION_1, 
+				"Pychota! Czy ta porcja lodów jest dla mnie?",
+				null);
 		
 		// player spoke to mummy and hasn't got ice cream
 		npc.add(ConversationStates.IDLE, 
 				ConversationPhrases.GREETING_MESSAGES, 
 				new AndCondition(new GreetingMatchesNameCondition(npc.getName()),
+						new QuestInStateCondition(QUEST_SLOT, "mummy"),
+						new NotCondition(new PlayerHasItemWithHimCondition("lody"))),
+				ConversationStates.ATTENDING, 
+				"Cześć. Jestem głodna.",
+				null);
+
+        // Same authoritative step, without requiring the player to leave and greet again.
+        npc.add(ConversationStates.ATTENDING, "lody", 
+				new AndCondition(new games.stendhal.server.entity.npc.condition.AlwaysTrueCondition(),
 						new QuestInStateCondition(QUEST_SLOT, "mummy"),
 						new NotCondition(new PlayerHasItemWithHimCondition("lody"))),
 				ConversationStates.ATTENDING, 
@@ -126,11 +173,29 @@ public class IcecreamForAnnie extends AbstractQuest {
 				ConversationStates.ATTENDING, 
 				"Cześć.",
 				null);
+
+        // Same authoritative step, without requiring the player to leave and greet again.
+        npc.add(ConversationStates.ATTENDING, "lody", 
+				new AndCondition(new games.stendhal.server.entity.npc.condition.AlwaysTrueCondition(),
+						new QuestStartedCondition(QUEST_SLOT),
+						new QuestNotInStateCondition(QUEST_SLOT, "start"),
+						new QuestNotInStateCondition(QUEST_SLOT, "mummy")),
+				ConversationStates.ATTENDING, 
+				"Cześć.",
+				null);
 		
 		// player rejected quest
 		npc.add(ConversationStates.IDLE, 
 				ConversationPhrases.GREETING_MESSAGES, 
 				new AndCondition(new GreetingMatchesNameCondition(npc.getName()),
+						new QuestInStateCondition(QUEST_SLOT, "rejected")),
+				ConversationStates.ATTENDING, 
+				"Cześć.",
+				null);
+
+        // Same authoritative step, without requiring the player to leave and greet again.
+        npc.add(ConversationStates.ATTENDING, "lody", 
+				new AndCondition(new games.stendhal.server.entity.npc.condition.AlwaysTrueCondition(),
 						new QuestInStateCondition(QUEST_SLOT, "rejected")),
 				ConversationStates.ATTENDING, 
 				"Cześć.",
@@ -141,7 +206,7 @@ public class IcecreamForAnnie extends AbstractQuest {
 				ConversationPhrases.QUEST_MESSAGES, 
 				new QuestNotStartedCondition(QUEST_SLOT),
 				ConversationStates.QUEST_OFFERED, 
-				"Jestem głodna! Chciałabym porcję lodów, proszę. Waniliowe z polewą czekoladową. Zdobędziesz takie dla mnie?",
+				"Po całej tej zabawie mam ochotę na coś zimnego. Przyniesiesz mi porcję lodów? Najpierw zapytaj mamusię, siedzi tuż obok.",
 				null);
 
 		// shouldn't happen
@@ -182,7 +247,7 @@ public class IcecreamForAnnie extends AbstractQuest {
 				null,
 				ConversationStates.ATTENDING, 
 				"Dziękuję!",
-				new SetQuestAndModifyKarmaAction(QUEST_SLOT, "start", 10.0));
+				DialogueRewardAction.karma(new SetQuestAndModifyKarmaAction(QUEST_SLOT, "start", 10.0)));
 		
 		// Player says no, they've lost karma
 		npc.add(ConversationStates.QUEST_OFFERED,
@@ -190,22 +255,22 @@ public class IcecreamForAnnie extends AbstractQuest {
 				null, 
 				ConversationStates.IDLE,
 				"Dobrze. Zapytam moją mamusię.",
-				new SetQuestAndModifyKarmaAction(QUEST_SLOT, "rejected", -5.0));
+				DialogueRewardAction.karma(new SetQuestAndModifyKarmaAction(QUEST_SLOT, "rejected", -5.0)));
 		
 		// Player has got ice cream and spoken to mummy
 		final List<ChatAction> reward = new LinkedList<ChatAction>();
 		reward.add(new DropItemAction("lody"));
-		reward.add(new EquipItemAction("prezent"));
-		reward.add(new IncreaseXPAction(500));
+		reward.add(DialogueRewardAction.item("prezent"));
+		reward.add(DialogueRewardAction.xp(500));
 		reward.add(new SetQuestAction(QUEST_SLOT, "done;"));
 		reward.add(new SetQuestToTimeStampAction(QUEST_SLOT,1));
-		reward.add(new IncreaseKarmaAction(10.0));
+		reward.add(DialogueRewardAction.karma(new IncreaseKarmaAction(10.0)));
 		
 		npc.add(ConversationStates.QUESTION_1,
 				ConversationPhrases.YES_MESSAGES, 
 				new PlayerHasItemWithHimCondition("lody"),
 				ConversationStates.ATTENDING, 
-				"Dziękuję bardzo! Jesteś bardzo miły. Weź ten prezent.",
+				"Dziękuję za lody, właśnie na takie miałam ochotę! Przygotowałam dla ciebie mały prezent. Otworzysz go, kiedy zechcesz.",
 				new MultipleActions(reward));
 		
 		// player did have ice cream but put it on ground after question?
@@ -242,7 +307,7 @@ public class IcecreamForAnnie extends AbstractQuest {
 					new AndCondition(new GreetingMatchesNameCondition(mummyNPC.getName()),
 							new QuestInStateCondition(QUEST_SLOT, "start")),
 					ConversationStates.ATTENDING, 
-					"Cześć, widzę, że spotkałeś moją córkę Annie. Mam nadzieję, że nie była zbyt wymagająca. Wyglądasz na miłą osobę.",
+					"Witaj, jestem mamą Annie. Zgadzam się na jedną porcję lodów i dziękuję, że pytasz mnie o pozwolenie. Córka bawi się tu niedaleko, więc nie musisz jej daleko szukać.",
 					new SetQuestAction(QUEST_SLOT, "mummy"));
 
 		// any other state
@@ -257,7 +322,7 @@ public class IcecreamForAnnie extends AbstractQuest {
 		super.addToWorld();
 		fillQuestInfo(
 				"Porcja Lodów dla Annie",
-				"Najlepszą niespodzianką dla małej dziewczynki jak Annie są zimne lody w letni dzień podczas zabawy na podwórku. Ale uważaj: zapytaj przedtem jej mamy o pozwolenie!",
+				"Annie Jones ucieszyłaby się z porcji lodów. Najpierw zapytaj jej mamę o pozwolenie, a dopiero potem przynieś dziewczynce przysmak.",
 				true);
 		icecreamStep();
 		meetMummyStep();

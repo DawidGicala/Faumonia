@@ -63,8 +63,9 @@ public class LuckNPC implements ZoneConfigurator {
 
 			@Override
 			protected void createDialog() {
+                games.stendhal.server.entity.npc.dialogue.HuntDialogueTopics.install(this);
 				addGreeting("Witaj.");
-				addJob("Na razie niczego nie potrzebuje.");
+				addJob("Szukam doświadczonych wojowników gotowych zejść do krypty pod Semos. Nie wysyłam tam przypadkowych przybyszów; najpierw trzeba umieć zadbać o własny powrót.");
 				addQuest("Na razie niczego nie potrzebuje.");
 				final Map<String, Integer> offerings = new HashMap<String, Integer>();
 				addGoodbye("Miłego dnia.");
@@ -74,7 +75,7 @@ public class LuckNPC implements ZoneConfigurator {
 		barman.setEntityClass("azannpc");
 		barman.setPosition(111, 39);
 		barman.initHP(100);
-		barman.setDescription("Oto Luck.");
+		barman.setDescription("Widzisz Lucka na północnych równinach Semos. Uważnie przygląda się tym, którzy pytają o kryptę.");
 		zone.add(barman);
 	}
 }

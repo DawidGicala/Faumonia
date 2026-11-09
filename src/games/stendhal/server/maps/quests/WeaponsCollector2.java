@@ -61,7 +61,7 @@ import java.util.List;
  * <li> None.
  * </ul>
  */
-public class WeaponsCollector2 extends AbstractQuest {
+public class WeaponsCollector2 extends AbstractQuest implements games.stendhal.server.core.rp.quest.NativeCollectionDetails {
 
 	private static final String QUEST_SLOT = "weapons_collector2";
 
@@ -122,60 +122,58 @@ public class WeaponsCollector2 extends AbstractQuest {
 
 		// player says hi before starting the quest
 		npc.add(ConversationStates.IDLE,
-				ConversationPhrases.GREETING_MESSAGES,
-				new AndCondition(new GreetingMatchesNameCondition(npc.getName()),
+            ConversationPhrases.GREETING_MESSAGES,
+            new AndCondition(new GreetingMatchesNameCondition(npc.getName()),
 						new QuestCompletedCondition("weapons_collector"),
 						new QuestNotStartedCondition(QUEST_SLOT)),
-				ConversationStates.ATTENDING,
-				"Pozdrawiam Cię stary przyjacielu. Jeżeli sobie życzysz to mam następne #zadanie dla Ciebie.",
-				null);
+            ConversationStates.ATTENDING,
+            "Pozdrawiam Cię stary przyjacielu. Jeżeli sobie życzysz to mam następne #zadanie dla Ciebie.",
+            null);
 
 		npc.add(ConversationStates.ATTENDING,
-				ConversationPhrases.QUEST_MESSAGES, 
-				new AndCondition(new QuestCompletedCondition("weapons_collector"), new QuestNotStartedCondition(QUEST_SLOT)),
-				ConversationStates.QUEST_2_OFFERED, 
-				null, 
-				new ChatAction() {
+            ConversationPhrases.QUEST_MESSAGES,
+            new AndCondition(new QuestCompletedCondition("weapons_collector"), new QuestNotStartedCondition(QUEST_SLOT)),
+            ConversationStates.QUEST_2_OFFERED,
+            null,
+            new ChatAction() {
 					public void fire(final Player player, final Sentence sentence, final EventRaiser raiser) {
 							if (player.isQuestCompleted(QUEST_SLOT)) {
 								raiser.say("Moja kolekcja jest już kompletna! Dziękuję ponownie.");
 								raiser.setCurrentState(ConversationStates.ATTENDING);
 							} else {
-								raiser.say("Poprzedni wojownicy do tej pory opisywali dziwne nowe potwory z bronią, której nigdy nie widziałem. "
-										+ "Czy mógłbyś pokonać te potwory i przynieść mi ich broń?");
+								raiser.say("Wędrowcy opowiadają o broni, której nie było w naszej pierwszej kolekcji. Chciałbym obejrzeć te okazy i porównać je ze znanymi ostrzami. Podejmiesz się drugiej wyprawy po brakujące egzemplarze?");
 							}
 						}
 				});
 
 		// player is willing to help
 		npc.add(ConversationStates.QUEST_2_OFFERED,
-				ConversationPhrases.YES_MESSAGES, 
-				null,
-				ConversationStates.ATTENDING, 
-				null, 
-				new ChatAction() {
+            ConversationPhrases.YES_MESSAGES,
+            new games.stendhal.server.entity.npc.condition.QuestNotStartedCondition(QUEST_SLOT),
+            ConversationStates.ATTENDING,
+            null,
+            new ChatAction() {
 					public void fire(final Player player, final Sentence sentence, final EventRaiser raiser) {
-						raiser.say("Cudownie. Teraz lista ( #list ) jest krótsza, ale ryzyko może być większe. "
-								+ "Jeżeli wrócisz bezpiecznie to będę miał nagrodę dla Ciebie.");
+						raiser.say("Dobrze, druga lista jest otwarta. Znów potrzebuję po jednym brakującym egzemplarzu i przyjmę je w dowolnej kolejności. Za pełny zbiór odwdzięczę się mieczem lodowym oraz lodową tarczą.");
 						player.setQuest(QUEST_SLOT, "");
 					}
 				});
 
 		// player is not willing to help
 		npc.add(ConversationStates.QUEST_2_OFFERED,
-				ConversationPhrases.NO_MESSAGES, 
-				null,
-				ConversationStates.ATTENDING,
-				"Cóż może ktoś inny mi pomoże.",
-				null);
+            ConversationPhrases.NO_MESSAGES,
+            new games.stendhal.server.entity.npc.condition.QuestNotStartedCondition(QUEST_SLOT),
+            ConversationStates.ATTENDING,
+            "Cóż może ktoś inny mi pomoże.",
+            null);
 
 		// player asks what exactly is missing
-		npc.add(ConversationStates.ATTENDING, 
-				Arrays.asList("list", "listą"), 
-				new QuestActiveCondition(QUEST_SLOT), 
-				ConversationStates.QUESTION_2, 
-				null,
-				new ChatAction() {
+		npc.add(ConversationStates.ATTENDING,
+            Arrays.asList("list", "listą"),
+            new QuestActiveCondition(QUEST_SLOT),
+            ConversationStates.QUESTION_2,
+            null,
+            new ChatAction() {
 					public void fire(final Player player, final Sentence sentence, final EventRaiser raiser) {
 						final List<String> needed = missingWeapons(player, true);
 						raiser.say("Oto "
@@ -189,12 +187,12 @@ public class WeaponsCollector2 extends AbstractQuest {
 				});
 
 		// player says he doesn't have required weapons with him
-		npc.add(ConversationStates.QUESTION_2, 
-				ConversationPhrases.NO_MESSAGES,
-				null, 
-				ConversationStates.IDLE, 
-				null, 
-				new ChatAction() {
+		npc.add(ConversationStates.QUESTION_2,
+            ConversationPhrases.NO_MESSAGES,
+            null,
+            ConversationStates.ATTENDING,
+            null,
+            new ChatAction() {
 					public void fire(final Player player, final Sentence sentence, final EventRaiser raiser) {
 						final List<String> missing = missingWeapons(player, false);
 						raiser.say("Powiadom mnie jeśli coś znajdziesz "
@@ -205,23 +203,25 @@ public class WeaponsCollector2 extends AbstractQuest {
 
 		// player says he has a required weapon with him
 		npc.add(ConversationStates.QUESTION_2,
-				ConversationPhrases.YES_MESSAGES, 
-				null,
-				ConversationStates.QUESTION_2, 
-				"Co znalazłeś?",
-				null);
+            ConversationPhrases.YES_MESSAGES,
+            null,
+            ConversationStates.QUESTION_2,
+            "Co znalazłeś?",
+            null);
 
 		for(final String itemName : neededWeapons) {
-			npc.add(ConversationStates.QUESTION_2, 
-				itemName, 
-				null,
-				ConversationStates.QUESTION_2, 
-				null, 
-				new ChatAction() {
+			npc.add(ConversationStates.QUESTION_2,
+            itemName,
+            null,
+            ConversationStates.QUESTION_2,
+            null,
+            new ChatAction() {
 					public void fire(final Player player, final Sentence sentence, final EventRaiser raiser) {
 						List<String> missing = missingWeapons(player, false);
 
 						if (missing.contains(itemName)) {
+                            if (missing.size()==1 && player.isEquipped(itemName)
+                                    && !games.stendhal.server.maps.quests.logic.QuestGoldFees.requirePaid(player, QUEST_SLOT, raiser)) { return; }
 							if (player.drop(itemName)) {
 								// register weapon as done
 								final String doneText = player.getQuest(QUEST_SLOT);
@@ -242,7 +242,7 @@ public class WeaponsCollector2 extends AbstractQuest {
 									player.addXP(100000);
 									player.addatk_xp(30000);
 									player.adddef_xp(40000);
-									raiser.say("W końcu moja kolekcja jest kompletna! Dziękuję bardzo. Weź w zamian ten miecz i tarcze z lodu!");
+									raiser.say("Druga kolekcja jest kompletna. Dziękuję za wytrwałość i przekazuję obiecane miecz lodowy oraz lodową tarczę. Zachowaj miecz, jeśli planujesz dalsze wyprawy - bywa potrzebny również innym rzemieślnikom.");
 									player.setQuest(QUEST_SLOT, "done");
 									player.notifyWorldAboutChanges();
 									raiser.setCurrentState(ConversationStates.ATTENDING);
@@ -276,22 +276,22 @@ public class WeaponsCollector2 extends AbstractQuest {
 
 	private void playerReturnsWhileQuestIsActive(final SpeakerNPC npc) {
 		npc.add(ConversationStates.IDLE,
-				ConversationPhrases.GREETING_MESSAGES,
-				new AndCondition(new GreetingMatchesNameCondition(npc.getName()),
+            ConversationPhrases.GREETING_MESSAGES,
+            new AndCondition(new GreetingMatchesNameCondition(npc.getName()),
 						new QuestActiveCondition(QUEST_SLOT)),
-				ConversationStates.ATTENDING,
-				"Witaj z powrotem. Mam nadzieję, że przyszedłeś mi pomóc z ostatnią #listą broni.",
-				null);
+            ConversationStates.ATTENDING,
+            "Witaj z powrotem. Mam nadzieję, że przyszedłeś mi pomóc z ostatnią #listą broni.",
+            null);
 	}
 
 /*	private void playerReturnsAfterFinishingQuest(final SpeakerNPC npc) {
-		npc.add(ConversationStates.IDLE, 
-				ConversationPhrases.GREETING_MESSAGES,
-				new AndCondition(new SubjectOptMatchCondition(getName()),
+		npc.add(ConversationStates.IDLE,
+            ConversationPhrases.GREETING_MESSAGES,
+            new AndCondition(new SubjectOptMatchCondition(getName()),
 						new QuestCompletedCondition(QUEST_SLOT)),
-				ConversationStates.ATTENDING,
-				"Witaj! Dziękuję za powiększenie mojej kolekcji.",
-				null);
+            ConversationStates.ATTENDING,
+            "Witaj! Dziękuję za powiększenie mojej kolekcji.",
+            null);
 	} */
 
 	@Override
@@ -299,7 +299,7 @@ public class WeaponsCollector2 extends AbstractQuest {
 		super.addToWorld();
 		fillQuestInfo(
 				"Kolekcjoner Broni 2",
-				"Balduin, pustelnik, który żyje w górach Ados, ma kolejne ekscytujące wyzwanie dla Ciebie.",
+				"Balduin przygotował kolejne zamówienie dla kogoś, kto pomógł mu już zebrać pierwszą kolekcję. Poznaj nową listę broni i dostarcz brakujące egzemplarze.",
 				true);
 		step_1();
 		step_2();
@@ -309,17 +309,8 @@ public class WeaponsCollector2 extends AbstractQuest {
 	
 	@Override
 	public List<String> getHistory(final Player player) {
-			final List<String> res = new ArrayList<String>();
-			if (!player.hasQuest(QUEST_SLOT)) {
-				return res;
-			}
-			if (!isCompleted(player)) {
-				res.add("Jestem na etapie gromadzenia broni dla Balduina, potrzebuje jeszcze " + Grammar.enumerateCollection(missingWeapons(player, false)) + ".");
-			} else {
-				res.add("Znalazłem wszystkie bronie, o które prosił Balduin a on mnie wynagrodził lodowym mieczem i tarcza.");
-			}
-			return res;
-	}
+        return games.stendhal.server.core.rp.quest.CollectionQuestProgress.history(this, player);
+    }
 	
 	@Override
 	public String getName() {
@@ -341,4 +332,10 @@ public class WeaponsCollector2 extends AbstractQuest {
 	public String getRegion() {
 		return Region.ADOS_SURROUNDS;
 	}
+
+
+    public String getCollectionKind(){return "list";}
+    public java.util.Map<String,Integer> getCollectionItems(){java.util.Map<String,Integer> m=new java.util.LinkedHashMap<String,Integer>();for(String n:neededWeapons)m.put(n,1);return m;}
+    public String getCollectionHint(){return "Balduin poszukuje broni z drugiej kolekcji. Przynoś po jednym brakującym egzemplarzu, kiedy go zdobędziesz. Nagrodą za pełną listę są związane z tobą miecz lodowy i lodowa tarcza.";}
+    
 }

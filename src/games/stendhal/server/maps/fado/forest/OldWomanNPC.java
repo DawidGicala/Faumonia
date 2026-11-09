@@ -113,24 +113,25 @@ public class OldWomanNPC implements ZoneConfigurator {
 
 			@Override
 			protected void createDialog() {
-				addGreeting("O ktoś spotkał mnie na mojej drodze. Witam.");
-				addJob("Aktualnie nie pracuję. Powinnam być dobrą matką, ale jakoś #zawiodłam.");
+                addReply("tematy", "Możemy porozmawiać o lesie albo o mojej rodzinie. Słucham, z czym przychodzisz.");
+				addGreeting("Witaj na leśnej ścieżce. Rzadko mam tu okazję zamienić z kimś parę słów.");
+				addJob("Ostatnio szukam w lesie odrobiny spokoju. Po rozstaniu z Rogerem Framptonem trudno mi było poukładać myśli, ale zostawiłam w Kirdneh syna, Jefa. Wiem, że nie powinnam tak długo milczeć.");
 				addReply(Arrays.asList("failed, fail", "zawiodłam"), "Opuściłam mojego biednego syna na tak długo, że wątpię, aby kiedykolwiek się do mnie odezwał. Było tak dużo #problemów...");
 				addReply(Arrays.asList("problem", "problemów"), "Zakochałam się w człowieku z Kirdneh, który nazywa się Roger Frampton. Niestety zerwaliśmy i nie wiedząc co dalej robić opuściłam miasto i spędziłam trochę czasu #sama.");
 				addReply(Arrays.asList("own", "sama"), "Drzewa i zwierzęta stali się moimi największymi towarzyszami porzucając przy tym moją prawdziwą rodzinę. Tęsknie bardzo za moim synem #Jefem.");
 				addReply("Jef", "Taki miły i cichy młody chłopiec. Wiem, że czeka na mój powrót, ale nie jestem jeszcze gotowa.");
 				addQuest("Nie mam teraz dla Ciebie żadnych zadań.");
-				addHelp("Odwiedź tutaj kilku moich nowych #przyjaciół. Są mili i łagodni!");
+				addHelp("Las daje wytchnienie, ale warto pamiętać o tych, którzy czekają w mieście. Gdy trafisz do Kirdneh, porozmawiaj z moim synem Jefem. W okolicy poznasz też Aldrina, który zajmuje się pszczołami i miodem.");
 				addReply(Arrays.asList("friend", "przyjaciół"), "Aldrin wyrabia na prawdę pyszny miód, a jego pszczoły ciężko pracują, aby utrzymać dobrą jakość.");
 				addOffer("Przykro mi, ale nie mam nic do sprzedania.");
-				addGoodbye("Dowidzennia i bądź miły dla mojego syna.");
+				addGoodbye("Do widzenia. Jeśli spotkasz Jefa, potraktuj go życzliwie.");
 			}
 		};
 
 		npc.setEntityClass("oldwomannpc");
 		npc.setPosition(38, 8);
 		npc.initHP(100);
-		npc.setDescription("Oto starsza kobieta. Wygląda na trochę zdezorientowaną.");
+		npc.setDescription("Widzisz Amber, zamyśloną kobietę wędrującą leśnymi ścieżkami. Przy rozmowie jej spojrzenie łagodnieje.");
 		zone.add(npc);
 	}
 }

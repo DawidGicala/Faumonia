@@ -114,6 +114,7 @@ public class CommandCenter {
 		OutfitAction.register();
 		OwnAction.register();
 		ProgressStatusQueryAction.register();
+		NpcDialogueAction.register();
 		PushAction.register();
 		QuestListAction.register();
 		ReorderAction.register();

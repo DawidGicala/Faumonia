@@ -83,7 +83,7 @@ public class KillSpiders extends AbstractQuest {
 				new ChatAction() {
 					public void fire(final Player player, final Sentence sentence, final EventRaiser raiser) {
 						if (!player.hasQuest(QUEST_SLOT) || player.getQuest(QUEST_SLOT).equals("rejected")) {
-							raiser.say("Byłeś kiedyś w szkolnej piwnicy? Odkąd studenci eksperymentowali to pokój jest pełen pająków i niektóre mogą być niebezpieczne! Czy mógłbyś mi pomóc z tym 'małym' problemem?");
+							raiser.say("Po ostatnich eksperymentach uczniów w piwnicy zaroiło się od pająków. Ze zwykłym kurzem radzę sobie sam, ale tych lokatorów miotłą nie przegonię. Zejdziesz tam i pomożesz mi posprzątać?");
 							raiser.setCurrentState(ConversationStates.QUEST_OFFERED);
 						}  else if (player.isQuestCompleted(QUEST_SLOT)) {
 							raiser.say("Już Cię wysłałem, abyś zabił wszystkie potwory w piwnicy!");
@@ -95,10 +95,10 @@ public class KillSpiders extends AbstractQuest {
 								raiser.say("Przepraszam, ale nic dla Ciebie nie mam. Może mógłbyś wrócić później. Muszę posprzątać szkołę raz w tygodniu.");
 								return;
 							}
-							raiser.say("Czy mógłbyś mi znowu pomóc?");
+							raiser.say("Minął tydzień i pająki znów zajęły piwnicę. Czy pomożesz mi z kolejnymi porządkami?");
 							raiser.setCurrentState(ConversationStates.QUEST_OFFERED);
 						} else {
-							raiser.say("Dziękuję za pomoc. Teraz mogę spać spokojnie.");
+							raiser.say("Twoja wyprawa do piwnicy nadal trwa. Pająk, ptasznik i królowa muszą zostać pokonane pod szkołą, a potem chcę usłyszeć od ciebie meldunek.");
 						}
 					}
 				});
@@ -113,7 +113,7 @@ public class KillSpiders extends AbstractQuest {
 				ConversationPhrases.YES_MESSAGES,
 				null,
 				ConversationStates.ATTENDING,
-				"Dobrze. Zejdź na dół do piwnicy i zabij tam wszystkie potwory!",
+				"Zejdź do piwnicy szkoły magii i pokonaj osobiście pająka, ptasznika oraz królową pająków, które tam mieszkają. Liczę stworzenia z tej piwnicy, więc polowanie gdzie indziej nie rozwiąże mojego kłopotu.",
 				new MultipleActions(actions));
 
 		npc.add(ConversationStates.QUEST_OFFERED, 
@@ -141,7 +141,7 @@ public class KillSpiders extends AbstractQuest {
 						if (player.hasKilled("pająk")
 								&& player.hasKilled("pająk ptasznik")
 								&& player.hasKilled("królowa pająków")) {
-							raiser.say("Och dziękuję mój przyjacielu. Masz tutaj coś specjalnego mam to od Magów. Kto to był to nie wiem. Dla kogo to jajko było też nie wiem. Wiem tylko tyle, że Tobie może się przydać.");
+							raiser.say("Nareszcie mogę wrócić do zwykłych porządków, zamiast nasłuchiwać szurania za drzwiami. Mam od magów mityczne jajo; nie znam jego całej historii, ale chętnie oddam je komuś, kto pomógł szkole.");
 							final Item mythegg = SingletonRepository.getEntityManager()
 									.getItem("mityczne jajo");
 							mythegg.setBoundTo(player.getName());
@@ -150,7 +150,31 @@ public class KillSpiders extends AbstractQuest {
 							player.addXP(5000);
 							player.setQuest(QUEST_SLOT, "killed;" + System.currentTimeMillis());
 						} else {
-							raiser.say("Idź na dół i zabij wszystkie potwory, nie zostało Tobie zbyt wiele czasu.");
+							raiser.say("Jeszcze nie wszystkie pająki z piwnicy zostały odnotowane. Sprawdź, czy pokonałeś osobiście zwykłego pająka, ptasznika i królową właśnie pod szkołą; wróć, kiedy skończysz.");
+						}
+		 			}
+				});
+        // Resume the native stage without changing its guards or actions.
+        npc.add(ConversationStates.ATTENDING, "meldunek",
+				new AndCondition(new games.stendhal.server.entity.npc.condition.AlwaysTrueCondition(),
+						new QuestInStateCondition(QUEST_SLOT, "start")),
+				ConversationStates.ATTENDING, 
+				null,
+				new ChatAction() {
+					public void fire(final Player player, final Sentence sentence, final EventRaiser raiser) {
+						if (player.hasKilled("pająk")
+								&& player.hasKilled("pająk ptasznik")
+								&& player.hasKilled("królowa pająków")) {
+							raiser.say("Nareszcie mogę wrócić do zwykłych porządków, zamiast nasłuchiwać szurania za drzwiami. Mam od magów mityczne jajo; nie znam jego całej historii, ale chętnie oddam je komuś, kto pomógł szkole.");
+							final Item mythegg = SingletonRepository.getEntityManager()
+									.getItem("mityczne jajo");
+							mythegg.setBoundTo(player.getName());
+							player.equipOrPutOnGround(mythegg);
+							player.addKarma(5.0);
+							player.addXP(5000);
+							player.setQuest(QUEST_SLOT, "killed;" + System.currentTimeMillis());
+						} else {
+							raiser.say("Jeszcze nie wszystkie pająki z piwnicy zostały odnotowane. Sprawdź, czy pokonałeś osobiście zwykłego pająka, ptasznika i królową właśnie pod szkołą; wróć, kiedy skończysz.");
 						}
 		 			}
 				});
@@ -167,7 +191,7 @@ public class KillSpiders extends AbstractQuest {
 							player.getQuest(QUEST_SLOT, 2).equals("pająk ptasznik") &&
 							player.getQuest(QUEST_SLOT, 3).equals("królowa pająków")
 							) {
-							raiser.say("Och dziękuję mój przyjacielu. Masz tutaj coś specjalnego mam to od Magów. Kto to był to nie wiem. Dla kogo to jajko było też nie wiem. Wiem tylko tyle, że Tobie może się przydać.");
+							raiser.say("Nareszcie mogę wrócić do zwykłych porządków, zamiast nasłuchiwać szurania za drzwiami. Mam od magów mityczne jajo; nie znam jego całej historii, ale chętnie oddam je komuś, kto pomógł szkole.");
 							final Item mythegg = SingletonRepository.getEntityManager()
 									.getItem("mityczne jajo");
 							mythegg.setBoundTo(player.getName());
@@ -176,7 +200,32 @@ public class KillSpiders extends AbstractQuest {
 							player.addXP(5000);
 							player.setQuest(QUEST_SLOT, "killed;" + System.currentTimeMillis());
 						} else {
-							raiser.say("Idź na dół i zabij wszystkie potwory, nie zostało Tobie zbyt wiele czasu.");
+							raiser.say("Jeszcze nie wszystkie pająki z piwnicy zostały odnotowane. Sprawdź, czy pokonałeś osobiście zwykłego pająka, ptasznika i królową właśnie pod szkołą; wróć, kiedy skończysz.");
+						}
+		 			}
+				});
+        // Resume the native stage without changing its guards or actions.
+        npc.add(ConversationStates.ATTENDING, "meldunek",
+				new AndCondition(new games.stendhal.server.entity.npc.condition.AlwaysTrueCondition(),
+						new QuestInStateCondition(QUEST_SLOT, 0, "started")),
+				ConversationStates.ATTENDING, 
+				null,
+				new ChatAction() {
+					public void fire(final Player player, final Sentence sentence, final EventRaiser raiser) {
+						if (player.getQuest(QUEST_SLOT, 1).equals("pająk") &&
+							player.getQuest(QUEST_SLOT, 2).equals("pająk ptasznik") &&
+							player.getQuest(QUEST_SLOT, 3).equals("królowa pająków")
+							) {
+							raiser.say("Nareszcie mogę wrócić do zwykłych porządków, zamiast nasłuchiwać szurania za drzwiami. Mam od magów mityczne jajo; nie znam jego całej historii, ale chętnie oddam je komuś, kto pomógł szkole.");
+							final Item mythegg = SingletonRepository.getEntityManager()
+									.getItem("mityczne jajo");
+							mythegg.setBoundTo(player.getName());
+							player.equipOrPutOnGround(mythegg);
+							player.addKarma(5.0);
+							player.addXP(5000);
+							player.setQuest(QUEST_SLOT, "killed;" + System.currentTimeMillis());
+						} else {
+							raiser.say("Jeszcze nie wszystkie pająki z piwnicy zostały odnotowane. Sprawdź, czy pokonałeś osobiście zwykłego pająka, ptasznika i królową właśnie pod szkołą; wróć, kiedy skończysz.");
 						}
 		 			}
 				});
@@ -187,7 +236,7 @@ public class KillSpiders extends AbstractQuest {
 		super.addToWorld();
 		fillQuestInfo(
 				"Zabij Pająki",
-				"Dozorca Morgrin ze szkoły magów chce, abym wyczyścił piwnicę szkolną z pająków.",
+				"Eksperymenty w szkole magii pozostawiły Morgrinowi piwnicę pełną pająków. Pokonaj wskazane pajęczaki z tej piwnicy i wróć do dozorcy.",
 				true);
 		step_1();
 		step_2();
@@ -283,4 +332,9 @@ public class KillSpiders extends AbstractQuest {
 	public String getRegion() {
 		return Region.FADO_CAVES;
 	}
+
+    public static List<String> getDialogueCreatures() {
+        return java.util.Collections.unmodifiableList(java.util.Arrays.asList("pająk","pająk ptasznik","królowa pająków"));
+    }
+
 }

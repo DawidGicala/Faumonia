@@ -64,8 +64,9 @@ public class BarMaidNPC implements ZoneConfigurator {
 
 			@Override
 			protected void createDialog() {
+                addReply("tematy", "Możemy wrócić do twojej sprawy albo porozmawiać o czymś innym. Co chcesz wiedzieć?");
 				addGreeting("Oh witam czy nie przeszkodziłam czasem w podziwianiu mojego pięknego #kapelusza?");
-				addJob("Jestem kelnerką w tej oberży. Sprzedajemy zarówno importowane jak i lokalne piwo oraz dobre jedzenie.");
+				addJob("Obsługuję gości tej tawerny i pilnuję, żeby nikomu nie zabrakło jedzenia ani piwa. Mój kapelusz też wymaga opieki - owoce muszą być świeże, inaczej cały urok znika.");
 				addHelp("Ta oberża jest świetnym miejscem na odpoczynek i poznanie nowych ludzi! Jeżeli chciałbyś poznać naszą #ofertę to daj znać.");
 				final Map<String, Integer> offerings = new HashMap<String, Integer>();
 				offerings.put("sok z chmielu", 15);
@@ -79,7 +80,7 @@ public class BarMaidNPC implements ZoneConfigurator {
 		tavernMaid.setEntityClass("maidnpc");
 		tavernMaid.setPosition(13, 9);
 		tavernMaid.initHP(100);
-		tavernMaid.setDescription("Oto Coralia. Na kapeluszu nosi egzotyczne jedzenie.");
+		tavernMaid.setDescription("Widzisz Coralię, kelnerkę z tawerny w Ados. Jej owocowy kapelusz wyróżnia się nawet wśród gwarnego tłumu.");
 		zone.add(tavernMaid);
 	}
 }

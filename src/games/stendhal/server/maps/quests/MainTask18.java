@@ -16,7 +16,7 @@ import games.stendhal.common.MathHelper;
 import games.stendhal.server.entity.npc.ChatAction;
 import games.stendhal.server.entity.npc.ConversationPhrases;
 import games.stendhal.server.entity.npc.ConversationStates;
-import games.stendhal.server.entity.npc.SpeakerNPC;
+import games.stendhal.server.core.rp.quest.MasterStage;
 import games.stendhal.server.entity.npc.action.EquipItemAction;
 import games.stendhal.server.entity.npc.action.IncreaseXPAction;
 import games.stendhal.server.entity.npc.action.MultipleActions;
@@ -61,7 +61,7 @@ public class MainTask18 extends AbstractQuest {
 	}
 	
 	private void step_1() {
-		final SpeakerNPC npc = npcs.get("Mistrz Faumonii XVIII");
+		final MasterStage npc = MasterStage.register(18, this);
 
 		npc.add(ConversationStates.ATTENDING,
 				ConversationPhrases.QUEST_MESSAGES, 
@@ -76,6 +76,7 @@ public class MainTask18 extends AbstractQuest {
 		final Map<String, Pair<Integer, Integer>> toKill = new TreeMap<String, Pair<Integer, Integer>>();
 		toKill.put("złoty smok", new Pair<Integer, Integer>(0,50));
 
+		npc.setHuntTargets(toKill);
 		final List<ChatAction> actions = new LinkedList<ChatAction>();
 		actions.add(new SetQuestAction(QUEST_SLOT, "start"));
 		actions.add(new StartRecordingKillsAction(QUEST_SLOT, 1, toKill));
@@ -102,7 +103,7 @@ public class MainTask18 extends AbstractQuest {
 
 	private void step_3() {
 
-		final SpeakerNPC npc = npcs.get("Mistrz Faumonii XVIII");
+		final MasterStage npc = MasterStage.register(18, this);
 
 
 		final List<ChatAction> actions = new LinkedList<ChatAction>();
@@ -125,7 +126,7 @@ public class MainTask18 extends AbstractQuest {
 						new KilledForQuestCondition(QUEST_SLOT, 1)),
 				ConversationStates.ATTENDING, 
 				"Widze, że wykonałeś swoje osiemnaste zadanie. Wspomogłeś wojska Faumonii w walce z Madaramami, znalazłeś kupca na przedmioty chaosów - Hunela oraz udowodniłeś swojeg męstwo zabijajać 50 złotych smoków. "
-				+ "Zasługujesz na odznakę wojownika Faumonii osiemnastego poziomu. W nagrodę za ukończenie tego zadania otrzymałeś: 2.000.000 pkt ataku oraz 6.000.000 pkt obrony. Po nastepne główne zadanie powinieneś przyjść do Mistrza Faumonii XIV po przekroczeniu 220 poziomu doświadczenia. Czas na prawdziwe wyzwania!",
+				+ "Zasługujesz na odznakę wojownika Faumonii osiemnastego poziomu. W nagrodę za ukończenie tego zadania otrzymałeś: 2.000.000 pkt ataku oraz 6.000.000 pkt obrony. Po nastepne główne zadanie powinieneś przyjść do Mistrza Faumonii po przekroczeniu 220 poziomu doświadczenia. Czas na prawdziwe wyzwania!",
 				new MultipleActions(actions));
 
 				npc.add(ConversationStates.ATTENDING, 
@@ -162,7 +163,7 @@ public class MainTask18 extends AbstractQuest {
 		super.addToWorld();
 		fillQuestInfo(
 				"Wojownik Faumonii 18",
-				"Mistrz Faumonii XVIII ma dla ciebie osiemnaste główne zadanie które pomoże ci zostać wielkim wojownikiem Faumonii.",
+				"Mistrz Faumonii ma dla ciebie osiemnaste główne zadanie które pomoże ci zostać wielkim wojownikiem Faumonii.",
 				false);
 		step_1();
 		step_2();
@@ -203,7 +204,7 @@ public class MainTask18 extends AbstractQuest {
 
 	@Override
 	public String getNPCName() {
-		return "Mistrz Faumonii XVIII";
+		return MasterStage.NPC_NAME;
 	}
 	
 	@Override

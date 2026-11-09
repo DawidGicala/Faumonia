@@ -32,7 +32,7 @@
 	
 	<item name="skórzana zbroja">
 		<type class="armor" subclass="leather_armor" tileid="-1"/>
-		<description>Oto skórzana zbroja. Zapewnia tylko minimalną ochronę.</description>
+		<description>Oto skórzana zbroja. Zapewnia tylko minimalną ochronę. Gdy wymienisz ten sprzęt na lepszy, niepotrzebny egzemplarz możesz sprzedać Miterowi w domku startowym w Semos.</description>
 		<implementation class-name="games.stendhal.server.entity.item.Item"/>
 		<attributes>
 			<def value="3"/>
@@ -254,7 +254,7 @@
 	
 	<item name="zbroja karmazynowa">
 		<type class="armor" subclass="red_armor" tileid="-1"/>
-		<description>Oto zbroja karmazynowa. Jej karmazynowy blask cię oczarował.</description>
+		<description>Oto zbroja karmazynowa. Jej karmazynowy blask cię oczarował. Niepotrzebny egzemplarz możesz sprzedać Xinowi Blance w tawernie Semos.</description>
 		<implementation class-name="games.stendhal.server.entity.item.Item"/>
 		<attributes>
 			<def value="13"/>
@@ -311,7 +311,7 @@
 	
 	<item name="krwawa suknia">
 		<type class="armor" subclass="quest_blood_robe" tileid="-1"/>
-		<description>Oto krwawa suknia.</description>
+		<description>Oto krwawa suknia. Adalbert z Kirdneh szuka takiej pamiątki po swojej żonie.</description>
 		<implementation class-name="games.stendhal.server.entity.item.Item"/>
 		<attributes>
 			<def value="15"/>
@@ -882,6 +882,85 @@
 			<slot name="bag"/>
 			<slot name="trade"/>
 			<slot name="armor"/>
+		</equipable>
+	</item>
+	
+	<item name="zbroja rocznicy 2026 1">
+		<type class="armor" subclass="rocznica_2026" tileid="-1"/>
+		<description>Oto Zbroja Młodego Strażnika Trzeciego Świtu. Jej płyty spojono runami trzech promieni, aby osłaniały wojownika podczas najcięższych starć z najeźdźcami. Ten przedmiot przeznaczono dla młodych obrońców, którzy jako pierwsi odpowiedzieli na wezwanie podczas Najazdu Trzeciego Świtu. #3 #rocznica #Faumonii #2026 Przedmiot utracił swą rocznicową moc.</description>
+		<implementation class-name="games.stendhal.server.entity.item.Item"/>
+		<attributes>
+			<def value="1"/>
+			<autobind value=""/>
+		</attributes>
+		<weight value="15.0"/>
+		<value value="23625"/>
+		<equipable>
+			<slot name="ground"/>
+			<slot name="content"/>
+			<slot name="armor"/>
+			<slot name="bag"/>
+			<slot name="trade"/>
+		</equipable>
+	</item>
+
+	<item name="zbroja rocznicy 2026 2">
+		<type class="armor" subclass="rocznica_2026" tileid="-1"/>
+		<description>Oto Zbroja Doświadczonego Strażnika Trzeciego Świtu. Jej płyty spojono runami trzech promieni, aby osłaniały wojownika podczas najcięższych starć z najeźdźcami. Ten przedmiot przeznaczono dla wojowników, którzy przetrwali pierwsze uderzenie najeźdźców i stanęli do kolejnych walk. #3 #rocznica #Faumonii #2026 Przedmiot utracił swą rocznicową moc.</description>
+		<implementation class-name="games.stendhal.server.entity.item.Item"/>
+		<attributes>
+			<def value="1"/>
+			<minlevel value="100"/>
+			<autobind value=""/>
+		</attributes>
+		<weight value="15.0"/>
+		<value value="23625"/>
+		<equipable>
+			<slot name="ground"/>
+			<slot name="content"/>
+			<slot name="armor"/>
+			<slot name="bag"/>
+			<slot name="trade"/>
+		</equipable>
+	</item>
+
+	<item name="zbroja rocznicy 2026 3">
+		<type class="armor" subclass="rocznica_2026" tileid="-1"/>
+		<description>Oto Zbroja Elitarnego Strażnika Trzeciego Świtu. Jej płyty spojono runami trzech promieni, aby osłaniały wojownika podczas najcięższych starć z najeźdźcami. Ten przedmiot przeznaczono dla elitarnych obrońców, którzy rozbili główne szeregi najeźdźców i ocalili mieszkańców krainy. #3 #rocznica #Faumonii #2026 Przedmiot utracił swą rocznicową moc.</description>
+		<implementation class-name="games.stendhal.server.entity.item.Item"/>
+		<attributes>
+			<def value="1"/>
+			<minlevel value="200"/>
+			<autobind value=""/>
+		</attributes>
+		<weight value="15.0"/>
+		<value value="23625"/>
+		<equipable>
+			<slot name="ground"/>
+			<slot name="content"/>
+			<slot name="armor"/>
+			<slot name="bag"/>
+			<slot name="trade"/>
+		</equipable>
+	</item>
+
+	<item name="zbroja rocznicy 2026 4">
+		<type class="armor" subclass="rocznica_2026" tileid="-1"/>
+		<description>Oto Zbroja Legendarnego Strażnika Trzeciego Świtu. Jej płyty spojono runami trzech promieni, aby osłaniały wojownika podczas najcięższych starć z najeźdźcami. Ten przedmiot przeznaczono dla legendarnych wojowników, którzy stanęli naprzeciw najpotężniejszych bestii Najazdu Trzeciego Świtu. #3 #rocznica #Faumonii #2026 Przedmiot utracił swą rocznicową moc.</description>
+		<implementation class-name="games.stendhal.server.entity.item.Item"/>
+		<attributes>
+			<def value="1"/>
+			<minlevel value="300"/>
+			<autobind value=""/>
+		</attributes>
+		<weight value="15.0"/>
+		<value value="23625"/>
+		<equipable>
+			<slot name="ground"/>
+			<slot name="content"/>
+			<slot name="armor"/>
+			<slot name="bag"/>
+			<slot name="trade"/>
 		</equipable>
 	</item>
 	

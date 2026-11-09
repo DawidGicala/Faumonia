@@ -16,7 +16,7 @@ import games.stendhal.common.MathHelper;
 import games.stendhal.server.entity.npc.ChatAction;
 import games.stendhal.server.entity.npc.ConversationPhrases;
 import games.stendhal.server.entity.npc.ConversationStates;
-import games.stendhal.server.entity.npc.SpeakerNPC;
+import games.stendhal.server.core.rp.quest.MasterStage;
 import games.stendhal.server.entity.npc.action.EquipItemAction;
 import games.stendhal.server.entity.npc.action.IncreaseXPAction;
 import games.stendhal.server.entity.npc.action.MultipleActions;
@@ -58,7 +58,7 @@ public class MainTask4 extends AbstractQuest {
 	}
 	
 	private void step_1() {
-		final SpeakerNPC npc = npcs.get("Mistrz Faumonii IV");
+		final MasterStage npc = MasterStage.register(4, this);
 
 		npc.add(ConversationStates.ATTENDING,
 				ConversationPhrases.QUEST_MESSAGES, 
@@ -77,6 +77,7 @@ public class MainTask4 extends AbstractQuest {
 		toKill.put("kobold lider", new Pair<Integer, Integer>(0,5));
 		toKill.put("kobold weteran",new Pair<Integer, Integer>(0,15));
 
+		npc.setHuntTargets(toKill);
 		final List<ChatAction> actions = new LinkedList<ChatAction>();
 		actions.add(new SetQuestAction(QUEST_SLOT, "start"));
 		actions.add(new StartRecordingKillsAction(QUEST_SLOT, 1, toKill));
@@ -103,7 +104,7 @@ public class MainTask4 extends AbstractQuest {
 
 	private void step_3() {
 
-		final SpeakerNPC npc = npcs.get("Mistrz Faumonii IV");
+		final MasterStage npc = MasterStage.register(4, this);
 
 
 		final List<ChatAction> actions = new LinkedList<ChatAction>();
@@ -123,7 +124,7 @@ public class MainTask4 extends AbstractQuest {
 						new KilledForQuestCondition(QUEST_SLOT, 1)),
 				ConversationStates.ATTENDING, 
 				"Widze, że wykonałeś swoje czwarte zadanie, uzyskałeś status zasłużonego mieszkańca Semos i zabiłeś koboldy. "
-				+ "Zasługujesz na odznakę wojownika Faumonii czwartego poziomu. Po nastepne główne zadanie powinieneś przyjść do Mistrza Faumonii V po przekroczeniu 20 poziomu doświadczenia.",
+				+ "Zasługujesz na odznakę wojownika Faumonii czwartego poziomu. Po nastepne główne zadanie powinieneś przyjść do Mistrza Faumonii po przekroczeniu 20 poziomu doświadczenia.",
 				new MultipleActions(actions));
 
 				npc.add(ConversationStates.ATTENDING, 
@@ -151,7 +152,7 @@ public class MainTask4 extends AbstractQuest {
 		super.addToWorld();
 		fillQuestInfo(
 				"Wojownik Faumonii 4",
-				"Mistrz Faumonii IV ma dla ciebie czwarte główne zadanie które pomoże ci zostać wielkim wojownikiem Faumonii.",
+				"Mistrz Faumonii ma dla ciebie czwarte główne zadanie które pomoże ci zostać wielkim wojownikiem Faumonii.",
 				false);
 		step_1();
 		step_2();
@@ -192,7 +193,7 @@ public class MainTask4 extends AbstractQuest {
 
 	@Override
 	public String getNPCName() {
-		return "Mistrz Faumonii IV";
+		return MasterStage.NPC_NAME;
 	}
 	
 	@Override

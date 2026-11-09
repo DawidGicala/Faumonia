@@ -61,8 +61,9 @@ public class TraderNPC implements ZoneConfigurator {
 
 			@Override
 			protected void createDialog() {
+                addReply("tematy", "Możemy wrócić do twojej sprawy albo porozmawiać o czymś innym. Co chcesz wiedzieć?");
 				addGreeting();
-				addJob("Ciii! Sprzedaję rzeczy łowcom przygód.");
+				addJob("Handluję sprzętem dla ludzi, którzy nie boją się wyjść poza miejskie mury. Mogę kupić część twoich zdobyczy albo sprzedać coś na następną wyprawę. Zapytaj o ofertę, zanim zaczniemy targować cenę.");
 				addHelp("Kupuję i sprzedaję różne przedmioty. Zapytaj mnie jaka jest moja #oferta.");
 				new SellerAdder().addSeller(this, new SellerBehaviour(shops.get("sellstuff")), false);
 				new BuyerAdder().addBuyer(this, new BuyerBehaviour(shops.get("buystuff")), false);
@@ -73,7 +74,7 @@ public class TraderNPC implements ZoneConfigurator {
 		};
 
 		xinBlanca.setEntityClass("weaponsellernpc");
-		xinBlanca.setDescription("Oto Xin Blanca. Jest popularny wśród młodych podróżników ze swojego sklepu z ekwipunkiem...");
+		xinBlanca.setDescription("Widzisz Xina Blankę, handlarza ekwipunkiem w tawernie Semos. Rozmawia półgłosem i uważnie ogląda przynoszone towary.");
 		xinBlanca.setPosition(2, 15);
 		xinBlanca.initHP(100);
 		zone.add(xinBlanca);

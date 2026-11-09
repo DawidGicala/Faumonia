@@ -38,8 +38,9 @@ public class DjangoNPC implements ZoneConfigurator {
 		final SpeakerNPC npc = new SpeakerNPC("Django") {
 			@Override
 			public void createDialog() {
+                games.stendhal.server.entity.npc.dialogue.HuntDialogueTopics.install(this);
 				addGreeting("Witaj.");
-				addJob("Lubie smoki  ale czasami jest ich za dużo i zagrażają naszej krainie. Jestem już za stary na polowanie więc szukam kogoś kto by mi pomógł. Zabijesz kilka smoków dla mnie ?.");
+				addJob("Lubię smoki i wiele czasu spędziłem na poznawaniu ich zwyczajów. Czasem jednak jest ich zbyt wiele, a sam nie mam już sił na polowanie; wtedy potrzebuję pomocy młodszych podróżników.");
 				addGoodbye("Dowidzenia.");
 				// All further behaviour is defined in quest classes.
 			}
@@ -54,7 +55,7 @@ public class DjangoNPC implements ZoneConfigurator {
 		};
 		npc.setPosition(5, 3);
 		npc.setEntityClass("djangonpc");
-		npc.setDescription("Widzisz Django.. Bardzo lubi smoki.");
+		npc.setDescription("Widzisz Django, starszego znawcę smoków. Mówi o nich z sympatią, choć dobrze pamięta ich siłę.");
 		npc.setDirection(Direction.DOWN);
 		zone.add(npc);
 	}

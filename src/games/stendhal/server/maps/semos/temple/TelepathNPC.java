@@ -40,6 +40,27 @@ import java.util.List;
 import java.util.Map;
 
 public class TelepathNPC implements ZoneConfigurator {
+	private static final long PEACE_PERIOD = 2L * MathHelper.MILLISECONDS_IN_ONE_DAY;
+
+	/** Rechecked both when offering the service and immediately before removing the mark. */
+	private boolean canRemoveSkull(final Player player, final EventRaiser raiser) {
+		if (!player.isBadBoy()) {
+			raiser.say("Nie nosisz już piętna zabójcy.");
+			return false;
+		}
+		final long timeRemaining = player.getLastPVPActionTime() + PEACE_PERIOD - System.currentTimeMillis();
+		if (timeRemaining > 0) {
+			raiser.say("Musisz powstrzymać się od atakowania innych wojowników przez dwa dni. Wróć za "
+					+ TimeUtil.approxTimeUntil((int) ((timeRemaining + 999) / 1000)) + ".");
+			return false;
+		}
+		if (player.getKarma() < 5) {
+			raiser.say("Twoja karma nie jest jeszcze wystarczająca, abym mogła zdjąć piętno. Pomagaj innym i wróć, gdy się poprawi.");
+			return false;
+		}
+		return true;
+	}
+
 	/**
 	 * Configure a zone.
 	 *
@@ -115,35 +136,28 @@ public class TelepathNPC implements ZoneConfigurator {
 				        		new SetQuestAction("meet_io", "start")));
 	
 				add(ConversationStates.QUESTION_1, ConversationPhrases.YES_MESSAGES, null, ConversationStates.ATTENDING,
-				        null, new ChatAction() {
-
-					        public void fire(final Player player, final Sentence sentence, final EventRaiser raiser) {
-						       	if ((player.getLastPVPActionTime() > System.currentTimeMillis()
-											- 2 * MathHelper.MILLISECONDS_IN_ONE_DAY)) {
-									// player attacked another within the last two weeks
-									long timeRemaining = player.getLastPVPActionTime() - System.currentTimeMillis() 
-										+ 2 * MathHelper.MILLISECONDS_IN_ONE_WEEK;
-									raiser.say("Musisz powstrzymać się od atakowania innych wojowników na dwa tygodnie. Wróć za " + TimeUtil.approxTimeUntil((int) (timeRemaining / 1000L)) + ". Pamiętaj, że będę wiedziała jeżeli pomyślisz o czymś złym!");
-								} else if (player.getKarma() < 5) {
-									// player does not have much good karma
-									raiser.say("Mówią, że spotykają ludzi dobre rzeczy z Twojej strony. Znów masz dobrą karmę. Oznacza to, że zmieniasz się i robisz dobre uczynki dla innych. Wróć, gdy będziesz miał lepszą karmę.");
-								} else {
-									// player has fulfilled all requirements to be rehabilitated
+						null, new ChatAction() {
+							public void fire(final Player player, final Sentence sentence, final EventRaiser raiser) {
+								if (canRemoveSkull(player, raiser)) {
 									raiser.say("Żałujesz swoich czynów?");
 									raiser.setCurrentState(ConversationStates.QUESTION_2);
 								}
-							} 
-					    }
-				);
+							}
+						});
+
 				// player didn't want pk icon removed, offer other help
 				add(ConversationStates.QUESTION_1, ConversationPhrases.NO_MESSAGES, null, ConversationStates.ATTENDING, "Dobrze! Mogę ci #pomóc w różnych rzeczach jeżeli chcesz.", null);
 				// player satisfied the pk removal requirements and said yes they were sorry
 				add(ConversationStates.QUESTION_2, ConversationPhrases.YES_MESSAGES, null, ConversationStates.ATTENDING,
-				        "Dobrze. Wiedziałam.", new ChatAction() {
+						null, new ChatAction() {
+							public void fire(final Player player, final Sentence sentence, final EventRaiser raiser) {
+								if (canRemoveSkull(player, raiser)) {
+									player.rehabilitate();
+									raiser.say("Zdjęłam z ciebie piętno zabójcy. Niech twoje dalsze czyny przyniosą innym spokój.");
+								}
+							}
+						});
 
-					        public void fire(final Player player, final Sentence sentence, final EventRaiser raiser) {
-								player.rehabilitate(); 	
-							} });
 				// player said no they are not really sorry
 				add(ConversationStates.QUESTION_2, ConversationPhrases.NO_MESSAGES, null, ConversationStates.IDLE, "Myślałam, że nie! Dowidzenia!", null);
 				addJob("Potrafię użyć całą moc ludzkiego umysłu. Zrobiłam wielkie postępy w telepatii i telekinezie. Jednakże nadal nie mogę przewidywać przyszłości. Nie jestem pewna czy będziemy w stanie zniszczyć mroczne legiony Blordroughów...");

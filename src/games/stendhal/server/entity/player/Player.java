@@ -177,7 +177,11 @@ public class Player extends RPEntity implements UseListener {
 		}
 	}
 
-	public static Player createZeroLevelPlayer(final String characterName, RPObject template) {
+	private transient java.util.List<String> tutorialGuideStamp;
+    public java.util.List<String> getTutorialGuideStamp() { return tutorialGuideStamp; }
+    public void setTutorialGuideStamp(java.util.List<String> value) { tutorialGuideStamp = value; }
+
+    public static Player createZeroLevelPlayer(final String characterName, RPObject template) {
 		/*
 		 * TODO: Update to use Player and RPEntity methods.
 		 */
@@ -194,6 +198,7 @@ public class Player extends RPEntity implements UseListener {
 		player.put("def_xp", 0);
 		player.put("level", 0);
 		player.setXP(0);
+        games.stendhal.server.core.events.NewcomerGuide.newCharacter(player);
 
 		// define outfit
 		Outfit outfit = null;
@@ -1857,6 +1862,7 @@ public class Player extends RPEntity implements UseListener {
 	 */
 	@Override
 	public void logic() {
+        if (SingletonRepository.getRuleProcessor().getTurn() % 5 == 0) games.stendhal.server.core.events.NewcomerGuide.tick(this);
 		/*
 		 * TODO: Refactor Most of these things can be handled as RPEvents
 		 */
@@ -2228,6 +2234,7 @@ public class Player extends RPEntity implements UseListener {
 	}
 	void setLastPlayerKill(final long milliseconds) {
 		put(LAST_PLAYER_KILL_TIME, milliseconds);
+		TutorialNotifier.killedPlayer(this);
 	}
 
 	public boolean isBadBoy() {
@@ -2253,16 +2260,7 @@ public class Player extends RPEntity implements UseListener {
 
 	@Override
 	protected void rewardKillers(final int oldXP) {
-		// Don't reward for killing players
-		// process tutorial event for first player kill
-
-		for (final String killerName : playersToReward) {
-            final Player killer = SingletonRepository.getRuleProcessor().getPlayer(killerName);
-            // check logout
-            if (killer != null) {
-				TutorialNotifier.killedPlayer(killer);
-            }
-		}
+		// No XP for killing players. The skull tutorial is sent when the actual killer is marked.
 	}
 
 

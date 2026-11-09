@@ -142,6 +142,21 @@ public class BuyerAdder {
 				false, ConversationStates.ATTENDING,
 				null, new ChatAction() {
 					public void fire(final Player player, final Sentence sentence, final EventRaiser raiser) {
+						if (currentBehavRes == null) {
+							raiser.say("Zapytaj ponownie o przedmiot, który chcesz sprzedać.");
+							return;
+						}
+						if (player.isBadBoy()) {
+							currentBehavRes = null;
+							raiser.say("Przepraszam, ale nie mogę ci zaufać. Wyglądasz na zbyt niebezpiecznego do handlowania. Odejdź proszę.");
+							raiser.setCurrentState(ConversationStates.IDLE);
+							return;
+						}
+						if (!buyerBehaviour.getTransactionCondition().fire(player, sentence, npc)) {
+							currentBehavRes = null;
+							buyerBehaviour.getRejectedTransactionAction().fire(player, sentence, raiser);
+							return;
+						}
 						logger.debug("Buying something from player " + player.getName());
 
 						boolean success = buyerBehaviour.transactAgreedDeal(currentBehavRes, raiser, player);

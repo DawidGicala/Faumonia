@@ -65,12 +65,12 @@ public class Ciupagaz1Wasem extends AbstractQuest {
 			new ChatAction() {
 				public void fire(final Player player, final Sentence sentence, final EventRaiser raiser) {
 					if (!player.hasQuest(QUEST_SLOT) || "rejected".equals(player.getQuest(QUEST_SLOT))) {
-						raiser.say("Specjalizuje się w ulepszaniu złotych ciupag o dodatkowy wąs. Jesteś zainteresowany?");
+						raiser.say("Wąs na złotej ciupadze nie jest u mnie byle ozdobą. Przygotuję taką broń z twojej ciupagi, rzadkich materiałów i miliona monet, ale najpierw musisz też pokonać serafina. Podejmiesz się przygotowań?");
 					} else if (player.isQuestCompleted(QUEST_SLOT)) {
-						raiser.say("Przecież już dostałeś swoją ciupagę...");
+						raiser.say("Twoja złota ciupaga z wąsem została ukończona. Włożyłem w nią sporo pracy, więc liczę, że nie będzie tylko wisiała na ścianie.");
 						raiser.setCurrentState(ConversationStates.ATTENDING);
 					} else {
-						raiser.say("Dlaczego zawracasz mi głowę skoro nie ukończyłeś zadania?");
+						raiser.say("Twoje materiały czekają na przeróbkę ciupagi. Wąs nie przytwierdzi się sam, ale najpierw zbierzmy cały komplet i upewnijmy się, że pokonałeś serafina. Mogę przypomnieć braki.");
 						raiser.setCurrentState(ConversationStates.ATTENDING);
 					}
 				}
@@ -81,25 +81,7 @@ public class Ciupagaz1Wasem extends AbstractQuest {
 			ConversationStates.ATTENDING, null,
 			new ChatAction() {
 				public void fire(final Player player, final Sentence sentence, final EventRaiser raiser) {
-					raiser.say("Do ulepszenia złotej ciupagi o dodatkowego wąsa, będę potrzebował kilku rzeczy: "
-						+ REQUIRED_CIUPAGA
-						+ " złotą ciupagę, "
-						+ REQUIRED_MONEY
-						+ " złota, "
-						+ REQUIRED_GOLD_BAR
-						+ " sztabek złota, "
-						+ REQUIRED_NIEBIANSKIE_PIORO
-						+ " niebiańskich piór, "
-						+ REQUIRED_TYTANOWA_SKALA
-						+ " tytanową skałę, "
-						+ REQUIRED_GREEN_CLAW
-						+ " pazur zielonego smoka, "
-						+ REQUIRED_GOLDEN_CLAW
-						+ " pazur złotego smoka, "
-						+ REQUIRED_BLACK_CLAW
-						+ " pazur czarnego smoka. Potrzebuje również kieł starożytnej bestii, przynieś mi "
-						+ REQUIRED_KIEL_KOSTUCHY
-						+ " kieł złotej kostuchy. Wróć, gdy będziesz je miał #dokładnie w tej kolejności! Jeżeli zapomnisz to powiedz #przypomnij");
+					raiser.say("Do przerobienia złotej ciupagi potrzebuję po kolei: " + games.stendhal.server.core.rp.quest.JourneyQuestProgress.requirementsText(Ciupagaz1Wasem.this) + ". Możesz donosić je partiami; odłożę je do czasu zebrania kompletu. Warunkiem rozpoczęcia pracy jest też pokonanie serafina.");
 					player.setQuest(QUEST_SLOT, "start;0;0;0;0;0;0;0;0;0");
 					player.addKarma(10);
 
@@ -165,7 +147,7 @@ public class Ciupagaz1Wasem extends AbstractQuest {
 								neededCiupaga -= amount;
 							}
 
-							raiser.say("Nie mogę wykuć bez "
+							raiser.say("Najpierw potrzebuję broni, którą mam przerobić. Brakuje: "
 								+ Grammar.quantityplnoun(
 										neededCiupaga, "złota ciupaga", "")
 								+ ".");
@@ -184,9 +166,9 @@ public class Ciupagaz1Wasem extends AbstractQuest {
 								neededMoney -= amount;
 							}
 
-							raiser.say("Jak możesz wymagać wykucia skoro nie masz "
+							raiser.say("Przekazane rzeczy odkładam do pracy. Do kompletu brakuje: "
 								+ Grammar.quantityplnoun(neededMoney, "money","")
-								+ " ?");
+								+ ".");
 							missingSomething = true;
 						}
 					}
@@ -202,9 +184,9 @@ public class Ciupagaz1Wasem extends AbstractQuest {
 								neededGoldBar -= amount;
 							}
 
-							raiser.say("Jak możesz wymagać wykucia skoro nie masz "
+							raiser.say("Przekazane rzeczy odkładam do pracy. Do kompletu brakuje: "
 								+ Grammar.quantityplnoun(neededGoldBar, "sztabka złota","")
-								+ " ?");
+								+ ".");
 							missingSomething = true;
 						}
 					}
@@ -220,9 +202,9 @@ public class Ciupagaz1Wasem extends AbstractQuest {
 								neededNiebianskiePioro -= amount;
 							}
 
-							raiser.say("Jak możesz wymagać wykucia skoro nie masz "
+							raiser.say("Przekazane rzeczy odkładam do pracy. Do kompletu brakuje: "
 								+ Grammar.quantityplnoun(neededNiebianskiePioro, "niebiańskie pióro","")
-								+ " ?");
+								+ ".");
 							missingSomething = true;
 						}
 					}
@@ -238,9 +220,9 @@ public class Ciupagaz1Wasem extends AbstractQuest {
 								neededTytanowaSkala -= amount;
 							}
 
-							raiser.say("Jak możesz wymagać wykucia skoro nie masz "
+							raiser.say("Przekazane rzeczy odkładam do pracy. Do kompletu brakuje: "
 								+ Grammar.quantityplnoun(neededTytanowaSkala, "tytanowa skała","")
-								+ " ?");
+								+ ".");
 							missingSomething = true;
 						}
 					}
@@ -256,9 +238,9 @@ public class Ciupagaz1Wasem extends AbstractQuest {
 								neededGreenClaw -= amount;
 							}
 
-							raiser.say("Jak możesz wymagać wykucia skoro nie masz "
+							raiser.say("Przekazane rzeczy odkładam do pracy. Do kompletu brakuje: "
 								+ Grammar.quantityplnoun(neededGreenClaw, "pazur zielonego smoka","")
-								+ " ?");
+								+ ".");
 							missingSomething = true;
 						}
 					}
@@ -274,9 +256,9 @@ public class Ciupagaz1Wasem extends AbstractQuest {
 								neededGoldenClaw -= amount;
 							}
 
-							raiser.say("Jak możesz wymagać wykucia skoro nie masz "
+							raiser.say("Przekazane rzeczy odkładam do pracy. Do kompletu brakuje: "
 								+ Grammar.quantityplnoun(neededGoldenClaw, "pazur złotego smoka","")
-								+ " ?");
+								+ ".");
 							missingSomething = true;
 						}
 					}
@@ -292,9 +274,9 @@ public class Ciupagaz1Wasem extends AbstractQuest {
 								neededBlackClaw -= amount;
 							}
 
-							raiser.say("Jak możesz wymagać wykucia skoro nie masz "
+							raiser.say("Przekazane rzeczy odkładam do pracy. Do kompletu brakuje: "
 								+ Grammar.quantityplnoun(neededBlackClaw, "pazur czarnego smoka","")
-								+ " ?");
+								+ ".");
 							missingSomething = true;
 						}
 					}
@@ -322,7 +304,229 @@ public class Ciupagaz1Wasem extends AbstractQuest {
 						player.setQuest(QUEST_SLOT, "forging;" + System.currentTimeMillis());
 					} else {
 						if (!player.hasKilled("serafin") && !missingSomething) {
-							raiser.say("Złota ciupaga z wąsem jest już gotowa.... lecz zanim ją dostaniesz, musisz udowodnić, że na nią zasługujesz. Idź i zabij serafina!");
+							raiser.say("Materiały mam już przygotowane, lecz zostało ci jeszcze pokonanie serafina. Nie oddawaj drugi raz zebranych rzeczy. Po tym zwycięstwie rozpocznę wykuwanie ciupagi, które potrwa dobę.");
+						}
+
+						player.setQuest(QUEST_SLOT,
+							"start;"
+							+ (REQUIRED_CIUPAGA - neededCiupaga)
+							+ ";"
+							+ (REQUIRED_MONEY - neededMoney)
+							+ ";"
+							+ (REQUIRED_GOLD_BAR - neededGoldBar)
+							+ ";"
+							+ (REQUIRED_NIEBIANSKIE_PIORO - neededNiebianskiePioro)
+							+ ";"
+							+ (REQUIRED_TYTANOWA_SKALA - neededTytanowaSkala)
+							+ ";"
+							+ (REQUIRED_GREEN_CLAW - neededGreenClaw)
+							+ ";"
+							+ (REQUIRED_GOLDEN_CLAW - neededGoldenClaw)
+							+ ";"
+							+ (REQUIRED_BLACK_CLAW - neededBlackClaw)
+							+ ";"
+							+ (REQUIRED_KIEL_KOSTUCHY - neededKielKostuchy));
+					}
+				}
+			});
+        // Reuse the native stage and its guards inside the current conversation.
+        npc.add(ConversationStates.ATTENDING, "materiały ludwika",
+			new AndCondition(new games.stendhal.server.entity.npc.condition.AlwaysTrueCondition(),
+						new QuestStateStartsWithCondition(QUEST_SLOT, "start")),
+			ConversationStates.ATTENDING, null,
+			new ChatAction() {
+				public void fire(final Player player, final Sentence sentence, final EventRaiser raiser) {
+					final String[] tokens = player.getQuest(QUEST_SLOT).split(";");
+
+					int neededCiupaga = REQUIRED_CIUPAGA
+							- Integer.parseInt(tokens[1]);
+					int neededMoney = REQUIRED_MONEY
+							- Integer.parseInt(tokens[2]);
+					int neededGoldBar = REQUIRED_GOLD_BAR
+							- Integer.parseInt(tokens[3]);
+					int neededNiebianskiePioro = REQUIRED_NIEBIANSKIE_PIORO
+							- Integer.parseInt(tokens[4]);
+					int neededTytanowaSkala = REQUIRED_TYTANOWA_SKALA
+							- Integer.parseInt(tokens[5]);
+					int neededGreenClaw = REQUIRED_GREEN_CLAW
+							- Integer.parseInt(tokens[6]);
+					int neededGoldenClaw = REQUIRED_GOLDEN_CLAW
+							- Integer.parseInt(tokens[7]);
+					int neededBlackClaw = REQUIRED_BLACK_CLAW
+							- Integer.parseInt(tokens[8]);
+					int neededKielKostuchy = REQUIRED_KIEL_KOSTUCHY
+							- Integer.parseInt(tokens[9]);		
+					boolean missingSomething = false;
+
+					if (!missingSomething && (neededCiupaga > 0)) {
+						if (player.isEquipped("złota ciupaga", neededCiupaga)) {
+							player.drop("złota ciupaga", neededCiupaga);
+							neededCiupaga = 0;
+						} else {
+							final int amount = player.getNumberOfEquipped("złota ciupaga");
+							if (amount > 0) {
+								player.drop("złota ciupaga", amount);
+								neededCiupaga -= amount;
+							}
+
+							raiser.say("Najpierw potrzebuję broni, którą mam przerobić. Brakuje: "
+								+ Grammar.quantityplnoun(
+										neededCiupaga, "złota ciupaga", "")
+								+ ".");
+							missingSomething = true;
+						}
+					}
+
+					if (!missingSomething && (neededMoney > 0)) {
+						if (player.isEquipped("money", neededMoney)) {
+							player.drop("money", neededMoney);
+							neededMoney = 0;
+						} else {
+							final int amount = player.getNumberOfEquipped("money");
+							if (amount > 0) {
+								player.drop("money", amount);
+								neededMoney -= amount;
+							}
+
+							raiser.say("Przekazane rzeczy odkładam do pracy. Do kompletu brakuje: "
+								+ Grammar.quantityplnoun(neededMoney, "money","")
+								+ ".");
+							missingSomething = true;
+						}
+					}
+					
+					if (!missingSomething && (neededGoldBar > 0)) {
+						if (player.isEquipped("sztabka złota", neededGoldBar)) {
+							player.drop("sztabka złota", neededGoldBar);
+							neededGoldBar = 0;
+						} else {
+							final int amount = player.getNumberOfEquipped("sztabka złota");
+							if (amount > 0) {
+								player.drop("sztabka złota", amount);
+								neededGoldBar -= amount;
+							}
+
+							raiser.say("Przekazane rzeczy odkładam do pracy. Do kompletu brakuje: "
+								+ Grammar.quantityplnoun(neededGoldBar, "sztabka złota","")
+								+ ".");
+							missingSomething = true;
+						}
+					}
+					
+					if (!missingSomething && (neededNiebianskiePioro > 0)) {
+						if (player.isEquipped("niebiańskie pióro", neededNiebianskiePioro)) {
+							player.drop("niebiańskie pióro", neededNiebianskiePioro);
+							neededNiebianskiePioro = 0;
+						} else {
+							final int amount = player.getNumberOfEquipped("niebiańskie pióro");
+							if (amount > 0) {
+								player.drop("niebiańskie pióro", amount);
+								neededNiebianskiePioro -= amount;
+							}
+
+							raiser.say("Przekazane rzeczy odkładam do pracy. Do kompletu brakuje: "
+								+ Grammar.quantityplnoun(neededNiebianskiePioro, "niebiańskie pióro","")
+								+ ".");
+							missingSomething = true;
+						}
+					}
+					
+					if (!missingSomething && (neededTytanowaSkala > 0)) {
+						if (player.isEquipped("tytanowa skała", neededTytanowaSkala)) {
+							player.drop("tytanowa skała", neededTytanowaSkala);
+							neededTytanowaSkala = 0;
+						} else {
+							final int amount = player.getNumberOfEquipped("tytanowa skała");
+							if (amount > 0) {
+								player.drop("tytanowa skała", amount);
+								neededTytanowaSkala -= amount;
+							}
+
+							raiser.say("Przekazane rzeczy odkładam do pracy. Do kompletu brakuje: "
+								+ Grammar.quantityplnoun(neededTytanowaSkala, "tytanowa skała","")
+								+ ".");
+							missingSomething = true;
+						}
+					}
+					
+					if (!missingSomething && (neededGreenClaw > 0)) {
+						if (player.isEquipped("pazur zielonego smoka", neededGreenClaw)) {
+							player.drop("pazur zielonego smoka", neededGreenClaw);
+							neededGreenClaw = 0;
+						} else {
+							final int amount = player.getNumberOfEquipped("pazur zielonego smoka");
+							if (amount > 0) {
+								player.drop("pazur zielonego smoka", amount);
+								neededGreenClaw -= amount;
+							}
+
+							raiser.say("Przekazane rzeczy odkładam do pracy. Do kompletu brakuje: "
+								+ Grammar.quantityplnoun(neededGreenClaw, "pazur zielonego smoka","")
+								+ ".");
+							missingSomething = true;
+						}
+					}
+					
+					if (!missingSomething && (neededGoldenClaw > 0)) {
+						if (player.isEquipped("pazur złotego smoka", neededGoldenClaw)) {
+							player.drop("pazur złotego smoka", neededGoldenClaw);
+							neededGoldenClaw = 0;
+						} else {
+							final int amount = player.getNumberOfEquipped("pazur złotego smoka");
+							if (amount > 0) {
+								player.drop("pazur złotego smoka", amount);
+								neededGoldenClaw -= amount;
+							}
+
+							raiser.say("Przekazane rzeczy odkładam do pracy. Do kompletu brakuje: "
+								+ Grammar.quantityplnoun(neededGoldenClaw, "pazur złotego smoka","")
+								+ ".");
+							missingSomething = true;
+						}
+					}
+					
+					if (!missingSomething && (neededBlackClaw > 0)) {
+						if (player.isEquipped("pazur czarnego smoka", neededBlackClaw)) {
+							player.drop("pazur czarnego smoka", neededBlackClaw);
+							neededBlackClaw = 0;
+						} else {
+							final int amount = player.getNumberOfEquipped("pazur czarnego smoka");
+							if (amount > 0) {
+								player.drop("pazur czarnego smoka", amount);
+								neededBlackClaw -= amount;
+							}
+
+							raiser.say("Przekazane rzeczy odkładam do pracy. Do kompletu brakuje: "
+								+ Grammar.quantityplnoun(neededBlackClaw, "pazur czarnego smoka","")
+								+ ".");
+							missingSomething = true;
+						}
+					}
+
+					if (!missingSomething && (neededKielKostuchy > 0)) {
+						if (player.isEquipped("kieł złotej kostuchy", neededKielKostuchy)) {
+							player.drop("kieł złotej kostuchy", neededKielKostuchy);
+							neededKielKostuchy = 0;
+						} else {
+							final int amount = player.getNumberOfEquipped("kieł złotej kostuchy");
+							if (amount > 0) {
+								player.drop("kieł złotej kostuchy", amount);
+								neededKielKostuchy -= amount;
+							}
+							raiser.say("Kieł złotej kostuchy zdobędziesz ze starożytnego potwora. Bez niego nie bede pracować. Potrzebuję  "
+								+ Grammar.quantityplnoun(neededKielKostuchy, "kieł złotej kostuchy","one") + " wciąż.");
+							missingSomething = true;
+						}
+					}
+
+					if (player.hasKilled("serafin") && !missingSomething) {
+						raiser.say("Przyniosłeś wszystko. Biorę się do wykuwania złotej ciupagi z wąsem. Wróć za "
+							+ REQUIRED_MINUTES
+							+ " minutę" + ", a będzie gotowa.");
+						player.setQuest(QUEST_SLOT, "forging;" + System.currentTimeMillis());
+					} else {
+						if (!player.hasKilled("serafin") && !missingSomething) {
+							raiser.say("Materiały mam już przygotowane, lecz zostało ci jeszcze pokonanie serafina. Nie oddawaj drugi raz zebranych rzeczy. Po tym zwycięstwie rozpocznę wykuwanie ciupagi, które potrwa dobę.");
 						}
 
 						player.setQuest(QUEST_SLOT,
@@ -351,7 +555,7 @@ public class Ciupagaz1Wasem extends AbstractQuest {
 		npc.add(ConversationStates.IDLE, ConversationPhrases.GREETING_MESSAGES,
 			new AndCondition(new GreetingMatchesNameCondition(npc.getName()),
 						new QuestStateStartsWithCondition(QUEST_SLOT, "forging;")),
-			ConversationStates.IDLE, null, new ChatAction() {
+			ConversationStates.ATTENDING, null, new ChatAction() {
 				public void fire(final Player player, final Sentence sentence, final EventRaiser raiser) {
 
 					final String[] tokens = player.getQuest(QUEST_SLOT).split(";");
@@ -367,7 +571,37 @@ public class Ciupagaz1Wasem extends AbstractQuest {
 						return;
 					}
 
-					raiser.say("Udowodniłeś, że zasługujesz na złotą ciupagę z wąsem. Oto ona!");
+					raiser.say("Gotowe, takiej ciupagi nie robi się w pośpiechu. Złoto, rzadkie trofea i ten charakterystyczny wąs tworzą teraz jedną całość. Odbierz broń i pokaż, że umiesz się nią posługiwać.");
+					player.addXP(1000000);
+					player.addKarma(100);
+					final Item magicSword = SingletonRepository.getEntityManager().getItem("złota ciupaga z wąsem");
+					magicSword.setBoundTo(player.getName());
+					player.equipOrPutOnGround(magicSword);
+					player.notifyWorldAboutChanges();
+					player.setQuest(QUEST_SLOT, "done");
+				}
+			});
+        // Reuse the native stage and its guards inside the current conversation.
+        npc.add(ConversationStates.ATTENDING, "materiały ludwika",
+			new AndCondition(new games.stendhal.server.entity.npc.condition.AlwaysTrueCondition(),
+						new QuestStateStartsWithCondition(QUEST_SLOT, "forging;")),
+			ConversationStates.ATTENDING, null, new ChatAction() {
+				public void fire(final Player player, final Sentence sentence, final EventRaiser raiser) {
+
+					final String[] tokens = player.getQuest(QUEST_SLOT).split(";");
+					
+					final long delay = REQUIRED_MINUTES * MathHelper.MILLISECONDS_IN_ONE_MINUTE; 
+					final long timeRemaining = (Long.parseLong(tokens[1]) + delay)
+							- System.currentTimeMillis();
+
+					if (timeRemaining > 0L) {
+						raiser.say("Jeszcze nie skończyłem wykuwania ciupagi. Wróć za "
+							+ TimeUtil.approxTimeUntil((int) (timeRemaining / 1000L))
+							+ ".");
+						return;
+					}
+
+					raiser.say("Gotowe, takiej ciupagi nie robi się w pośpiechu. Złoto, rzadkie trofea i ten charakterystyczny wąs tworzą teraz jedną całość. Odbierz broń i pokaż, że umiesz się nią posługiwać.");
 					player.addXP(1000000);
 					player.addKarma(100);
 					final Item magicSword = SingletonRepository.getEntityManager().getItem("złota ciupaga z wąsem");
@@ -380,7 +614,7 @@ public class Ciupagaz1Wasem extends AbstractQuest {
 
 		npc.add(ConversationStates.ATTENDING,
 			Arrays.asList("forge", "missing", "wykuj", "brakuje", "lista", "przypomnij"), 
-			new QuestStartedCondition(QUEST_SLOT),
+			new games.stendhal.server.entity.npc.condition.QuestStateStartsWithCondition(QUEST_SLOT, "start;"),
 			ConversationStates.ATTENDING,
 			null,
 			new ChatAction() {
@@ -414,7 +648,7 @@ public class Ciupagaz1Wasem extends AbstractQuest {
 							+ neededGreenClaw + " pazur zielonego smoka, "
 							+ neededGoldenClaw + " pazur złotego smoka, "
 							+ neededBlackClaw + " pazur czarnego smoka i "
-							+ neededKielKostuchy + " kieł złotej kostuchyy");
+							+ neededKielKostuchy + " kieł złotej kostuchy");
 				}
 			});
 
@@ -447,7 +681,7 @@ public class Ciupagaz1Wasem extends AbstractQuest {
 		super.addToWorld();
 		fillQuestInfo(
 				"Złota ciupaga z wąsem",
-				"Kowal Ludwik wykuje dla Ciebie legendarną ciupagę - złotą ciupage z wąsem.",
+				"Ludwik ze zbójeckiej wioski podejmuje się ulepszenia złotej ciupagi. Omów z kowalem potrzebne materiały i warunki wykonania złotej ciupagi z wąsem.",
 				false);
 		step_1();
 		step_2();
@@ -461,49 +695,18 @@ public class Ciupagaz1Wasem extends AbstractQuest {
 	
 	@Override
 	public List<String> getHistory(final Player player) {
-			final List<String> res = new ArrayList<String>();
-			if (!player.hasQuest(QUEST_SLOT)) {
-				return res;
-			}
-			final String questState = player.getQuest(QUEST_SLOT);
-			res.add("Spotkałem Ludwika w zbójeckiej wiosce.");
-			if (questState.equals("rejected")) {
-				res.add("Odmówiłem wykonania złotej ciupagi z wąsem.");
-				return res;
-			} 
-			res.add("Aby wykuć złotą ciupage z wąsem, Ludwik potrzebuje: " + REQUIRED_CIUPAGA
-					+ " złotą ciupagę, "
-					+ REQUIRED_MONEY
-					+ " złota, "
-					+ REQUIRED_GOLD_BAR
-					+ " sztabek zlota"
-					+ REQUIRED_NIEBIANSKIE_PIORO
-					+ " niebiańskie pióra "
-					+ REQUIRED_TYTANOWA_SKALA
-					+ " tytanową skałę "
-					+ REQUIRED_GREEN_CLAW
-					+ " pazur zielonego smoka "
-					+ REQUIRED_GOLDEN_CLAW
-					+ " pazur złotego smoka "
-					+ REQUIRED_BLACK_CLAW
-					+ " pazur czarnego smoka i "
-					+ REQUIRED_KIEL_KOSTUCHY
-					+ " kieł złotej kostuchyy, dokładnie w tej kolejności.");
-			if(questState.startsWith("start") && !"start;15;26;12;6".equals(questState)){
-				res.add("Nie dostarczyłem wszystkiego. Ludwik powie mi co jeszcze potrzebuje.");
-			} else if ("start;15;26;12;6".equals(questState) || !questState.startsWith("start")) {
-				res.add("Dostarczyłem wszystko co potrzebne.");
-			}
-			if("start;15;26;12;6".equals(questState) && !player.hasKilled("szczur")){
-				res.add("Aby zasłużyć na złotą ciupagę z wąsem musze zabić serafina. Powinienem szukać go wysoko w górach.");
-			} 
-			if (questState.startsWith("forging")) {
-				res.add("Ludwik wykuwa moją złotą ciupagę z wąsem.");
-			} 
-			if (isCompleted(player)) {
-				res.add("Za trochę surowców otrzymałem legendarną broń - złotą ciupagę z wąsem.	W nagrodę za ukończenie zadania otrzymałem: 1.000.000 pkt doświadczenia, 100 pkt karmy i złotą ciupagę z wąsem.");
-			}
-			return res;	
+        final List<String> res = new ArrayList<String>();
+        if (!player.hasQuest(QUEST_SLOT)) return res;
+        res.add("Spotkałem Ludwika w zbójeckiej wiosce.");
+        games.stendhal.common.QuestProgress progress = games.stendhal.server.core.rp.quest.JourneyQuestProgress.read(this,player);
+        if (isCompleted(player)) { res.add("Otrzymałem złotą ciupagę z wąsem, 1000000 XP postaci i 100 karmy."); return res; }
+        res.add(progress.getNextStep());
+        if (progress.getState()!=games.stendhal.common.QuestProgress.State.DECLINED) {
+            res.add("Materiały w kolejności dostaw: " + games.stendhal.server.core.rp.quest.JourneyQuestProgress.requirementsText(this) + ".");
+            for (games.stendhal.common.QuestProgress.Objective goal : progress.getObjectives())
+                if (goal.getCurrent()<goal.getRequired()) res.add(goal.getLabel()+" - pozostało: "+(goal.getRequired()-goal.getCurrent())+".");
+        }
+        return res;
 	}
 
  	// match to the min level of the elemental dagger
@@ -521,4 +724,19 @@ public class Ciupagaz1Wasem extends AbstractQuest {
 	public String getRegion() {
 		return Region.FADO_CITY;
 	}
+
+    public static java.util.Map<String,Integer> getRequiredItems() {
+        java.util.Map<String,Integer> items=new java.util.LinkedHashMap<String,Integer>();
+        items.put("złota ciupaga", REQUIRED_CIUPAGA);
+        items.put("money", REQUIRED_MONEY);
+        items.put("sztabka złota", REQUIRED_GOLD_BAR);
+        items.put("niebiańskie pióro", REQUIRED_NIEBIANSKIE_PIORO);
+        items.put("tytanowa skała", REQUIRED_TYTANOWA_SKALA);
+        items.put("pazur zielonego smoka", REQUIRED_GREEN_CLAW);
+        items.put("pazur złotego smoka", REQUIRED_GOLDEN_CLAW);
+        items.put("pazur czarnego smoka", REQUIRED_BLACK_CLAW);
+        items.put("kieł złotej kostuchy", REQUIRED_KIEL_KOSTUCHY);
+        return java.util.Collections.unmodifiableMap(items);
+    }
+
 }

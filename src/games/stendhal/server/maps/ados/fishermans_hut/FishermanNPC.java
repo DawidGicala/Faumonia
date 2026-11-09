@@ -86,8 +86,9 @@ public class FishermanNPC implements ZoneConfigurator {
 
 			@Override
 			protected void createDialog() {
-				addJob("Jestem rybakiem, a także wyrabiam #olejek z tranu dorsza. Olejek jest niesamowicie potrzebny, aby maszyny chodziły płynnie.");
-				addHelp("W dzisiejszych czasach możesz przeczytać drogowskazy, książki i inne rzeczy w Faiumoni.");
+                games.stendhal.server.entity.npc.dialogue.JourneyDialogueTopics.install(this);
+				addJob("Łowię ryby i wyrabiam #olejek z tranu dorsza, przydatny do smarowania maszyn. Dawniej pamiętałem też mnóstwo rybackich powiedzonek. Z sieciami radzę sobie lepiej niż z pamięcią, więc czasem proszę podróżnych o pomoc.");
+				addHelp("Rybak powinien mieć cierpliwość nie tylko do ryb, ale i do czytania. W księgach można znaleźć powiedzonka, których nawet ja już nie pamiętam. Jeśli pomagasz mi odszukać cytat, zachowaj jego dokładne brzmienie.");
 				addOffer("Mogę zrobić dla Ciebie trochę olejku jeżeli potrzebujesz.");
 				addGoodbye("Dowidzenia.");
 				addReply(Arrays.asList("oil", "olejek"),"Poproś mnie o wykonanie #olejku o ile masz dorsza ze sobą. Jestem trochę zapominalski i gdy przyjdziesz to przypomnij mi mówiąc 'przypomnij'.");
@@ -253,7 +254,7 @@ public class FishermanNPC implements ZoneConfigurator {
 				});
 			}
 		};
-		fisherman.setDescription("Oto Pequod zapominalski stary rybak. Czasami trzeba mu przypomnieć co powinien zrobić!");
+		fisherman.setDescription("Widzisz Pequoda, starego rybaka z Ados. Zamyśla się, próbując przypomnieć sobie dawno słyszane powiedzonko.");
 		fisherman.setEntityClass("fishermannpc");
 		fisherman.setDirection(Direction.DOWN);
 		fisherman.setPosition(3, 3);

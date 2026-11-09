@@ -45,7 +45,7 @@ public class KidsNPCs implements ZoneConfigurator {
 	private void buildKids(final StendhalRPZone zone) {
 		final String[] names = { "Jens", "George", "Anna" };
 		final String[] classes = { "kid3npc", "kid4npc", "kid5npc" };
-		final String[] descriptions = {"Oto Jens. Wydaje się być nieco znudzony.", "Oto George. Jest małym chłopcem, który uwielbia się bawić!", "Widzisz Annę. Jest uroczą dziewczynką, która szuka zabawek."};
+		final String[] descriptions = {"Oto Jens. Wydaje się być nieco znudzony.", "Oto George. Jest małym chłopcem, który uwielbia się bawić!", "Widzisz Annę bawiącą się w pobliżu innych dzieci. Rozgląda się za czymś, co mogłoby przerwać nudę."};
 		final Node[] start = new Node[] { new Node(40, 29), new Node(40, 41), new Node(45, 29) };
 		for (int i = 0; i < 3; i++) {
 			final SpeakerNPC npc = new SpeakerNPC(names[i]) {
@@ -73,6 +73,7 @@ public class KidsNPCs implements ZoneConfigurator {
 
 				@Override
 				protected void createDialog() {
+                    if ("Anna".equals(getName())) { games.stendhal.server.entity.npc.dialogue.CollectionDialogueTopics.install(this); addJob("Chciałabym się bawić z Jensem i George’em, tylko ciągle brakuje nam zabawek. Mama każe uważać na obcych. Jeśli przyniesiesz coś dla nas, będę bardzo wdzięczna."); }
 					// Anna is special because she has a quest
 					if (!getName().equals("Anna")) {
 						add(ConversationStates.IDLE,

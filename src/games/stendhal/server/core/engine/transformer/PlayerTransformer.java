@@ -217,6 +217,10 @@ public class PlayerTransformer implements Transformer {
 		try {
 			if (object.has("zoneid") && object.has("x") && object.has("y")) {
 				if (Version.checkCompatibility(object.get("release"),Debug.VERSION)) {
+					if (LoginZoneRedirects.apply(object, player)) {
+						player.put("release", Debug.VERSION);
+						return;
+					}
 					zone = SingletonRepository.getRPWorld().getZone(object.get("zoneid"));
 				} else {
 					if (player.getLevel() >= 2) {

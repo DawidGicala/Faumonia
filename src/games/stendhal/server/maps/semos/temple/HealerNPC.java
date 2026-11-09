@@ -53,18 +53,19 @@ public class HealerNPC implements ZoneConfigurator {
 
 			@Override
 			protected void createDialog() {
-				addGreeting();
-				addJob("Moje specjalne moce pomagają mi w leczeniu rannych ludzi. Także sprzedaję mikstury i antidota.");
-				addHelp("Mogę Cię uleczyć ( #heal ) za darmo lub możesz wziąć jeden przygotowany przeze mnie medykament na podróż. Chcesz wiedzieć jaka jest moja #oferta?");
+                addReply("tematy", "Możemy porozmawiać o magicznych kulach, leczeniu albo zapasach na podróż. Powiedz, czego teraz potrzebujesz.");
+				addGreeting("Witaj w świątyni. Zatrzymaj się na chwilę i powiedz, z czym przychodzisz.");
+				addJob("Opiekuję się rannymi i przygotowuję lekarstwa dla podróżnych. Uczę też ostrożnego obchodzenia się z magią - nawet niewielka kula potrafi kryć wielką moc.");
+				addHelp("Jeśli potrzebujesz leczenia, powiedz #ulecz, a ustalimy koszt. Na dalszą drogę możesz też kupić mikstury i antidota z mojej #oferty. Lepiej przygotować zapasy tutaj, niż szukać ich dopiero w niebezpieczeństwie.");
 				new SellerAdder().addSeller(this, new SellerBehaviour(shops.get("healing")));
 				// charge (2*the player level + 1) to heal
 				new HealerAdder().addHealer(this, -2);
-				addGoodbye();
+				addGoodbye("Do widzenia. Niech droga będzie dla ciebie łagodna.");
 			}
 		};
 
 		npc.setEntityClass("welcomernpc");
-		npc.setDescription("Oto Ilisa. Jest młoda, ładna i otacza ją magiczna aura.");
+		npc.setDescription("Widzisz Ilisę, uzdrowicielkę ze świątyni w Semos. Mówi spokojnie, a wokół niej unosi się delikatna magiczna aura.");
 		npc.setPosition(9, 6);
 		npc.initHP(100);
 		zone.add(npc);

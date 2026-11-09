@@ -430,6 +430,31 @@ public class Engine {
 	 * @return true if a transition was made, false otherwise
 	 */
 	public boolean step(final Player player, final Sentence sentence) {
+		games.stendhal.server.entity.npc.dialogue.NpcDialogueService.beforeStep(speakerNPC, player, sentence.getOriginalText());
+		boolean handled = false;
+		try {
+			handled = stepInternal(player, sentence);
+			return handled;
+		} finally {
+			games.stendhal.server.entity.npc.dialogue.NpcDialogueService.afterStep(speakerNPC, player, handled);
+		}
+	}
+
+	/** Read-only eligibility check for explicitly curated pilot reply commands. */
+	public boolean canHandle(final Player player, final String text) {
+		Sentence sentence = ConversationParser.parse(text);
+		if (sentence.isEmpty()) { return false; }
+		for (MatchType type : new MatchType[] { MatchType.EXACT_MATCH, MatchType.NORMALIZED_MATCH,
+				MatchType.SIMILAR_MATCH, MatchType.ABSOLUTE_JUMP, MatchType.NORMALIZED_JUMP, MatchType.SIMILAR_JUMP }) {
+			for (Transition transition : stateTransitionTable) {
+				if (matchesTransition(type, sentence, transition)
+						&& transition.isConditionFulfilled(player, sentence, speakerNPC)) { return true; }
+			}
+		}
+		return false;
+	}
+
+	private boolean stepInternal(final Player player, final Sentence sentence) {
 		if (sentence.isEmpty()) {
 			logger.debug("empty input sentence: " + getCurrentState());
 			return false;
@@ -583,6 +608,13 @@ public class Engine {
 	}
 
 	private void executeTransition(final Player player, final Sentence sentence, final Transition trans) {
+		if (trans.getAction() instanceof games.stendhal.server.entity.npc.action.QuestFeeAction
+				&& !((games.stendhal.server.entity.npc.action.QuestFeeAction)trans.getAction()).prepare(player, new EventRaiser(speakerNPC))) {
+			currentState = ConversationStates.ATTENDING;
+			speakerNPC.setIdea("attending");
+			speakerNPC.notifyWorldAboutChanges();
+			return;
+		}
 		final ConversationStates nextState = trans.getNextState();
 
 		if (trans.getReply() != null) {

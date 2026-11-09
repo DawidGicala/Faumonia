@@ -59,9 +59,10 @@ public class TraderNPC implements ZoneConfigurator {
 
 			@Override
 			protected void createDialog() {
+                games.stendhal.server.entity.npc.dialogue.CollectionDialogueTopics.install(this);
 				addGreeting("Witajże w mieście Wofol władanym przez Koboldów. Mam nadzieję, iż w pokoju przybywasz.");
-				addJob("Zajmuję się #handlem. Sprzedaję i skupuję od koboldów i od każdego, kto tutaj zawita. Jam jeden z nielicznych Koboldów, który mówi w waszym języku.");
-				addHelp("Zajmuję się #handlem każdego rodzaju sprzętu.");
+				addJob("Zajmuję się handlem z koboldami i przybyszami. Jestem jednym z niewielu, którzy mówią waszym językiem, ale przy zapłacie nie ma miejsca na nieporozumienia. Jeśli przysyła cię Phalk, wspomnij jego imię.");
+				addHelp("Zajmuję się #handlem ekwipunkiem. Najpierw obejrzyj, co kupuję i sprzedaję, a potem ustalimy zapłatę. Przesyłka dla Phalka to osobna sprawa; wspomnij jego imię, jeśli po nią przyszedłeś.");
 				addQuest("W tej sprawie udaj się raczej do Alraka - górskiego krasnala, który mieszka z Koboldami. Być może znajdzie Ci niejedno zadanie.");
 				new SellerAdder().addSeller(this, new SellerBehaviour(shops.get("sellstuff2")), false);
 				new BuyerAdder().addBuyer(this, new BuyerBehaviour(shops.get("buystuff2")), false);
@@ -74,7 +75,7 @@ public class TraderNPC implements ZoneConfigurator {
 		trader.setEntityClass("koboldnpc");
 		trader.setPosition(4, 4);
 		trader.initHP(100);
-		trader.setDescription("Oto Wrvil. On może wyposażyć i może uczynić cię bogatym w tym samym czasie.");
+		trader.setDescription("Widzisz Wrvila, koboldzkiego kupca z Wofol. Sprawnie ocenia ekwipunek i nie traci z oczu ustalonej zapłaty.");
 		zone.add(trader);
 	}
 }

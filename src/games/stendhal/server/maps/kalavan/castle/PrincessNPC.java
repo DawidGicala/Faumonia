@@ -68,11 +68,12 @@ public class PrincessNPC implements ZoneConfigurator {
 
 			@Override
 			protected void createDialog() {
+                games.stendhal.server.entity.npc.dialogue.JourneyDialogueTopics.install(this);
 				addGreeting("Jak się masz?");
 				addReply(Arrays.asList("dobrze", "wspaniale", "good", "fine"), "Dobrze! W czym mogę pomóc?");
 				addReply(Arrays.asList("źle", "bad"), "O rany ... W czym mogę pomóc?");
 				addReply(Arrays.asList("wspaniale", "well"), "Cudownie! W czym mogę pomóc?");
-				addJob("Jestem księżniczką tego królestwa. Aby zostać obywatelem tego królestwa porozmawiaj w mieście z Barrett Holmesem. Może sprzeda Ci dom. Zanim pójdziesz mógłbyś mi wyświadczyć przysługę ( #favour )...");
+				addJob("Jestem córką króla Cozarta, ale sam tytuł niewiele znaczy, jeśli nie umie się nikomu pomóc. Staram się zdobyć lekarstwa dla jeńców w piwnicach. Za taką pomoc mogę polecić cię ojcu w sprawie obywatelstwa Kalavan.");
 				addHelp("Uważaj na szalonych naukowców. Mój ojciec uwolnił ich, aby wykonali pewną pracę w podziemiach i obawiam się, że pewne rzeczy, wymknęły się im spod kontroli...");
 				addOffer("Przepraszam, ale nie mam Ci nic do zaoferowania. Mógłbyś mi wyświadczyć pewną przysługę ( #favour ), chociaż...");
 				addGoodbye("Dowidzenia i powodzenia.");
@@ -82,7 +83,7 @@ public class PrincessNPC implements ZoneConfigurator {
 		princessNPC.setEntityClass("princess2npc");
 		princessNPC.setPosition(19, 21);
 		princessNPC.initHP(100);
-		princessNPC.setDescription("Widzisz Princess Ylflia. Mimo, że jest księżniczką, wydaje się być bardzo przyjazną i pomocną.");
+		princessNPC.setDescription("Widzisz księżniczkę Ylflię z Kalavan. Mówi przyjaźnie, lecz martwi się losem jeńców w podziemiach.");
 		zone.add(princessNPC);
 	}
 }

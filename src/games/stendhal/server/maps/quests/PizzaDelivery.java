@@ -12,6 +12,8 @@
  ***************************************************************************/
 package games.stendhal.server.maps.quests;
 
+import games.stendhal.server.entity.npc.action.DialogueRewardAction;
+
 import games.stendhal.common.Rand;
 import games.stendhal.common.grammar.Grammar;
 import games.stendhal.common.parser.Sentence;
@@ -169,7 +171,7 @@ public class PizzaDelivery extends AbstractQuest {
 			return res;
 		}
 		final String questState = player.getQuest(QUEST_SLOT);
-		res.add("Spotkałem Leander i zgodził się pomóc przy roznoszeniu pizzy.");
+		res.add("Spotkałem Leandra i podjąłem się dostarczania jego pizzy.");
 		if (!"done".equals(questState)) {
 			final String[] questData = questState.split(";");
 			final String customerName = questData[0];
@@ -177,19 +179,24 @@ public class PizzaDelivery extends AbstractQuest {
 			res.add("Leander dał mi " + customerData.flavor + " dla " + customerName + ".");
 			res.add("Leander powiedział do mnie: \"" + customerData.npcDescription + "\"");
 			if (!isDeliveryTooLate(player)) {
-				res.add("Jeśli pośpiesze sie doniosę pizze jeszcze gorąco.");
+				res.add("Jeśli się pospieszę, dostarczę jeszcze gorącą pizzę i otrzymam napiwek.");
 			} else {
 				res.add("Pizza jest już zimna.");
 			}
 		} else {
-			res.add("Mam przy sobie pizzę, którą ostatnio dał mi Leander.");
+			res.add("Zakończyłem ostatnią dostawę pizzy od Leandra. Mogę zapytać go o następne zamówienie.");
 		}
 		return res;
 	}
 
 	// Don't add Sally here, as it would conflict with Leander telling
 	// about his daughter.
-	private static void buildCustomerDatabase() {
+	public static String customerHint(String name) {
+        if(customerDB==null)buildCustomerDatabase();
+        CustomerData data=customerDB.get(name); return data==null?null:data.npcDescription;
+    }
+    public static boolean isCustomer(String name) { return customerHint(name)!=null; }
+    private static void buildCustomerDatabase() {
 		customerDB = new HashMap<String, CustomerData>();
 
 		customerDB.put("Balduin",
@@ -224,7 +231,7 @@ public class PizzaDelivery extends AbstractQuest {
 				300, 
 				// experience gain for delivery
 				500, 
-				"Nie sądziłem, że uda Ci się to dostarczyć! Jesteś wielki! Weź tę %s pieniędzy!",
+				"Nie sądziłem, że dotrze tu jeszcze gorąca pizza! Dziękuję za szybką dostawę. Weź %d monet napiwku.",
 				"Przyszła zimna, ale czego się mogłem spodziewać skoro pizza jest z piekarni daleko stąd... Dzięki.",
 				20));
 
@@ -435,11 +442,11 @@ public class PizzaDelivery extends AbstractQuest {
     			+ Grammar.quantityplnoun(data.expectedMinutes, "minute", "one")
     			+ ". Powiedz \"pizza\", a "
     			+ name
-				+ " będzie wiedział, że ja Ciebie przysłałem. Aha załóż ten uniform i i nie upuść na ziemie " + data.flavor + "! Nasi klienci chcą świeżą.");
+				+ " będzie wiedzieć, że przysyła cię Leander. Załóż strój dostawcy i pilnuj " + data.flavor + ". Odbiorca doceni gorącą pizzę.");
     		player.setOutfit(UNIFORM, true);
     		player.setQuest(QUEST_SLOT, name + ";" + System.currentTimeMillis());
 		} else {
-			npc.say("Wróć gdy będziesz miał miejsce na pizzę!");
+			npc.say("Nie mogę wręczyć ci pizzy, bo w plecaku nie ma miejsca. Zwolnij jedno miejsce i wróć do rozmowy o dostawie. Zamówienie rozpoczniemy dopiero, gdy odbierzesz paczkę.");
 		}
 	}
 	
@@ -491,6 +498,10 @@ public class PizzaDelivery extends AbstractQuest {
 			for (final Item pizza : player.getAllEquipped("pizza")) {
 				final String flavor = pizza.getInfoString();
 				if (data.flavor.equals(flavor)) {
+                    if (!npc.getName().equals(player.getQuest(QUEST_SLOT,0)) || !npc.getName().equals(pizza.getBoundTo())) {
+                        npc.say("Ta pizza nie jest częścią twojej obecnej dostawy dla mnie. Zachowaj ją i sprawdź u Leandra, dokąd masz teraz iść.");
+                        return;
+                    }
 					player.drop(pizza);
 					// Check whether the player was supposed to deliver the
 					// pizza. 
@@ -501,7 +512,7 @@ public class PizzaDelivery extends AbstractQuest {
 							} else {
 								npc.say(data.messageOnColdPizza);
 							}
-							player.addXP(data.xp / 2);
+							DialogueRewardAction.xp(data.xp / 2).fire(player, null, npc);
 						} else {
 							if (data.messageOnHotPizza.contains("%s")) {
 								npc.say(String.format(data.messageOnHotPizza,
@@ -513,8 +524,10 @@ public class PizzaDelivery extends AbstractQuest {
 							final StackableItem money = (StackableItem) SingletonRepository.getEntityManager()
 									.getItem("money");
 							money.setQuantity(data.tip);
-							player.equipOrPutOnGround(money);
-							player.addXP(data.xp);
+							int carriedBefore = player.getNumberOfEquipped(money.getName());
+                    player.equipOrPutOnGround(money);
+                    DialogueRewardAction.recordItem(player, npc, money, carriedBefore, data.tip);
+							DialogueRewardAction.xp(data.xp).fire(player, null, npc);
 						}
 						player.setQuest(QUEST_SLOT, "done");
 						putOffUniform(player);
@@ -550,7 +563,7 @@ public class PizzaDelivery extends AbstractQuest {
 				ConversationPhrases.QUEST_MESSAGES,
 				new AndCondition(new OutfitCompatibleWithClothesCondition(), new QuestNotActiveCondition(QUEST_SLOT)),
 				ConversationStates.QUEST_OFFERED, 
-				"Musisz szybko dostarczyć gorącą pizzę. Jeżeli będziesz szybki to dostaniesz niezły napiwek. Dasz radę?",
+				"W piecu czeka już następna pizza, a klient nie będzie chciał jeść zimnej. Dam ci zamówienie, strój dostawcy i dokładne wskazówki; za szybką dostawę możesz dostać napiwek. Podejmiesz się tego?",
 				null);
 		
 		// haven't done the pizza quest before or already delivered the last one, outfit would be incompatible with pizza outfit
@@ -605,7 +618,7 @@ public class PizzaDelivery extends AbstractQuest {
 			ConversationPhrases.NO_MESSAGES,
 			null,
 			ConversationStates.ATTENDING,
-			"Niedobrze. Mam nadzieję, że moja córka #Sally szybko wróci z obozu, aby pomóc mi w dostawach.",
+			"Niedobrze. Mam nadzieję, że moja siostra #Sally szybko wróci z obozu, aby pomóc mi w dostawach.",
 			new ChatAction() {
 				public void fire(final Player player, final Sentence sentence, final EventRaiser npc) {
 					putOffUniform(player);
@@ -641,7 +654,7 @@ public class PizzaDelivery extends AbstractQuest {
 		super.addToWorld();
 		fillQuestInfo(
 				"Dostawa Pizzy",
-				"*Mniam!* Wspaniale pachnie. Jest gorąca... Pospiesz się z dostawą!",
+				"Leander z piekarni w Semos szuka kogoś do dostarczenia gorącej pizzy. Zapamiętaj adresata i ruszaj w drogę, zanim zamówienie wystygnie.",
 				false);
 		buildCustomerDatabase();
 		prepareBaker();

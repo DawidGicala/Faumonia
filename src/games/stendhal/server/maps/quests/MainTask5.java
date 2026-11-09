@@ -15,7 +15,7 @@ package games.stendhal.server.maps.quests;
 import games.stendhal.common.grammar.Grammar;
 import games.stendhal.server.entity.npc.ConversationPhrases;
 import games.stendhal.server.entity.npc.ConversationStates;
-import games.stendhal.server.entity.npc.SpeakerNPC;
+import games.stendhal.server.core.rp.quest.MasterStage;
 import games.stendhal.server.entity.npc.action.DropRecordedItemAction;
 import games.stendhal.server.entity.npc.action.IncreaseKarmaAction;
 import games.stendhal.server.entity.npc.action.IncreaseAtkXPAction;
@@ -79,7 +79,7 @@ public class MainTask5 extends AbstractQuest {
 			res.add("Nie chce podjąć się głównego zadania na wojownika Faumonii");
 			return res;
 		}
-		res.add("Zanim Mistrz Faumonii V przyzna mi kolejne zadanie znowu musze pomóc innym.	Powinienem odwiedzić rzemieślnika Ouchita w tawernie Semos i zdobyć łuk.	Muszę porozmawiać z kowalem Xoderosem z Semos i wybrać się do stolicy Faumonii - Ados aby wykonać zadanie.");
+		res.add("Zanim Mistrz Faumonii przyzna mi kolejne zadanie znowu musze pomóc innym.	Powinienem odwiedzić rzemieślnika Ouchita w tawernie Semos i zdobyć łuk.	Muszę porozmawiać z kowalem Xoderosem z Semos i wybrać się do stolicy Faumonii - Ados aby wykonać zadanie.");
 		if (!isCompleted(player)) {
 			res.add("Żeby ukończyć główne zadanie musze odnaleźć niedźwiedzie siedliska i przynieść " + Grammar.a_noun(player.getRequiredItemName(QUEST_SLOT,0)) + "	Informacji na temat powinienem szukać u graczy lub na stronie internetowej: www.faumonia.pl w zakładce expowiska.");
 		}
@@ -90,7 +90,7 @@ public class MainTask5 extends AbstractQuest {
 	}
 	
 	private void checkCollectingQuests() {
-		final SpeakerNPC npc = npcs.get("Mistrz Faumonii V");
+		final MasterStage npc = MasterStage.register(5, this);
 		
 		npc.add(
 		ConversationStates.IDLE,
@@ -130,7 +130,7 @@ public class MainTask5 extends AbstractQuest {
 
 	private void requestItem() {
 		
-		final SpeakerNPC npc = npcs.get("Mistrz Faumonii V");
+		final MasterStage npc = MasterStage.register(5, this);
 		final Map<String,Integer> items = new HashMap<String, Integer>();
 		
 		items.put("mięso",400);
@@ -153,7 +153,7 @@ public class MainTask5 extends AbstractQuest {
 	}
 						
 	private void collectItem() {
-			final SpeakerNPC npc = npcs.get("Mistrz Faumonii V");
+			final MasterStage npc = MasterStage.register(5, this);
 			
 					npc.add(ConversationStates.IDLE,
 				ConversationPhrases.GREETING_MESSAGES,
@@ -194,7 +194,7 @@ public class MainTask5 extends AbstractQuest {
 	public void addToWorld() {
 		fillQuestInfo(
 				"Wojownik Faumonii 5",
-				"Mistrz Faumonii V ma dla ciebie piąte główne zadanie które pomoże ci zostać wielkim wojownikiem Faumonii.",
+				"Mistrz Faumonii ma dla ciebie piąte główne zadanie które pomoże ci zostać wielkim wojownikiem Faumonii.",
 				true);
 		
 		checkCollectingQuests();
@@ -215,7 +215,7 @@ public class MainTask5 extends AbstractQuest {
 
 	@Override
 	public String getNPCName() {
-		return "Mistrz Faumonii V";
+		return MasterStage.NPC_NAME;
 	}
 	
 	@Override

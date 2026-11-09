@@ -149,8 +149,9 @@ public class SheepBuyerNPC implements ZoneConfigurator {
 		final SpeakerNPC npc = new SheepBuyerSpeakerNPC("Sato") {
 			@Override
 			public void createDialog() {
+                addReply("tematy", "Możemy wrócić do twojej sprawy albo porozmawiać o czymś innym. Co chcesz wiedzieć?");
 				addGreeting();
-				addJob("Skupuję owce w Semos, a później wysyłam je do Ados, gdzie są eksportowane.");
+				addJob("Skupuję owce i wysyłam je dalej do Ados. W interesach liczy się zdrowie zwierzęcia i jego waga. Jeśli przysyła cię Nishiya, porozmawiamy osobno o jego prezencie.");
 				addHelp("Skupuję owce i sądzę, że to uczciwa cena. Jeżeli się zdecydujesz na sprzedaż to powiedz #sprzedam #sheep, a zrobimy interes!");
 				addGoodbye();
 				addQuest("Hmm Potrzebuję prezentu dla mojego przyjaciela. Może zapytasz Nishiyę o jakiś pomysł...");
@@ -177,7 +178,7 @@ public class SheepBuyerNPC implements ZoneConfigurator {
 		npc.setPosition(103, 45);
 		npc.setEntityClass("buyernpc");
 		zone.add(npc);
-		npc.setDescription("Oto Sato. On lubi owcę.");
+		npc.setDescription("Widzisz Sato, skupującego owce w Semos. Ocenia każde zwierzę wprawnym spojrzeniem.");
 	}
 
 	private static class SheepBuyerBehaviour extends BuyerBehaviour {

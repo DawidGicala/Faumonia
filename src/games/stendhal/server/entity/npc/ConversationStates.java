@@ -115,5 +115,9 @@ public enum ConversationStates {
 
 	QUESTION_2,
 
-	QUESTION_3;
+	QUESTION_3,
+
+    /** Isolated from the older quests at Fag, Thyron and Hogart. */
+    EXPEDITION_DISCUSSION,
+    EXPEDITION_OFFERED;
 }

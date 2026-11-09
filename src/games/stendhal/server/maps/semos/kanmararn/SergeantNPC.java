@@ -52,15 +52,16 @@ public class SergeantNPC implements ZoneConfigurator  {
 
 			@Override
 			protected void createDialog() {
+                games.stendhal.server.entity.npc.dialogue.JourneyDialogueTopics.install(this);
 				addGreeting("Dzień dobry łowco przygód!");
-				addJob("Jestem sierżantem w wojsku.");
+				addJob("Dowodziłem wyprawą do Kanmararn. Straciliśmy ludzi, a Henry zniknął wraz z mapą, której potrzebuję do dalszej drogi. Jeśli masz o nim wieści, wysłucham ich uważnie.");
 				addGoodbye("Powodzenia i uważaj na siebie i na krasnale wokoło!");
 				// all other behaviour is defined in the quest.
 			}
 		};
 
 		npc.setEntityClass("royalguardnpc");
-		npc.setDescription("Sergeant James jest sierżantem w Armii Semos. Wydaje się być nieco zagubiony ...");
+		npc.setDescription("Widzisz sierżanta Jamesa z armii Semos. Próbuje odzyskać orientację po rozbiciu swojej wyprawy.");
 		npc.setPosition(66, 46);
 		npc.setBaseHP(100);
 		npc.initHP(75);

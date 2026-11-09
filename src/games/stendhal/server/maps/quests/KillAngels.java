@@ -71,7 +71,7 @@ import marauroa.common.Pair;
  * </ul>
  */
 
-public class KillAngels extends AbstractQuest {
+public class KillAngels extends AbstractQuest implements games.stendhal.server.core.rp.quest.NativeHuntDetails {
 
 	private static final String QUEST_SLOT = "kill_angel";
 	private static final int WEEK_IN_MINUTES = MathHelper.MINUTES_IN_ONE_HOUR * 24 * 30;
@@ -85,54 +85,47 @@ public class KillAngels extends AbstractQuest {
 		final SpeakerNPC npc = npcs.get("Dodo");
 
 		npc.add(ConversationStates.ATTENDING,
-				ConversationPhrases.QUEST_MESSAGES, 
-				new QuestNotStartedCondition(QUEST_SLOT),
-				ConversationStates.QUEST_OFFERED,
-				"Poszukuje kogoś kto pozabija trochę aniołów... "
-				+ "Zainteresowany?",
-				null);
+                ConversationPhrases.QUEST_MESSAGES,
+                new QuestNotStartedCondition(QUEST_SLOT),
+                ConversationStates.QUEST_OFFERED,
+                "Skrzydła bywają złudną obietnicą bezpieczeństwa. Potrzebuję wojownika, który zmierzy się z aniołami, ich upadłymi braćmi i istotami ciemności. Podejmiesz taką wyprawę?",
+                null);
 
 		npc.add(ConversationStates.ATTENDING,
-				ConversationPhrases.QUEST_MESSAGES, 
-				new AndCondition(new QuestStateStartsWithCondition(QUEST_SLOT,"done"),
+                ConversationPhrases.QUEST_MESSAGES,
+                new AndCondition(new QuestStateStartsWithCondition(QUEST_SLOT,"done"),
 						 new TimePassedCondition(QUEST_SLOT, 1, WEEK_IN_MINUTES)),
-				ConversationStates.QUEST_OFFERED,
-				"Dziękuje za pokonanie aniołów!",
-				null);
+                ConversationStates.QUEST_OFFERED,
+                "Skrzydlaci przeciwnicy znów dali o sobie znać. Jeśli masz siły na następną wyprawę, przygotowałem tę samą listę celów.",
+                null);
 
 		npc.add(ConversationStates.ATTENDING,
-				ConversationPhrases.QUEST_MESSAGES, 
-				new AndCondition(new QuestStateStartsWithCondition(QUEST_SLOT,"done"),
+                ConversationPhrases.QUEST_MESSAGES,
+                new AndCondition(new QuestStateStartsWithCondition(QUEST_SLOT,"done"),
 						 new NotCondition(new TimePassedCondition(QUEST_SLOT, 1, WEEK_IN_MINUTES))),
-				ConversationStates.ATTENDING,
-				"Juz niczego nie potrzebuje.",
-				null);
+                ConversationStates.ATTENDING,
+                "Ta wyprawa została już rozliczona. Odpocznij i wróć, kiedy nadejdzie czas na kolejną.",
+                null);
 
-		final Map<String, Pair<Integer, Integer>> toKill = new TreeMap<String, Pair<Integer, Integer>>();
-		toKill.put("anioł", new Pair<Integer, Integer>(0,20));
-		toKill.put("upadły anioł", new Pair<Integer, Integer>(0,20));
-		toKill.put("archanioł",new Pair<Integer, Integer>(0,8));
-		toKill.put("archanioł ciemności",new Pair<Integer, Integer>(0,4));
-		toKill.put("anioł ciemności",new Pair<Integer, Integer>(0,6));
+		final Map<String, Pair<Integer, Integer>> toKill = getDialogueHuntTargets(null);
 
 		final List<ChatAction> actions = new LinkedList<ChatAction>();
 		actions.add(new SetQuestAction(QUEST_SLOT, "start"));
 		actions.add(new StartRecordingKillsAction(QUEST_SLOT, 1, toKill));
 		
 		npc.add(ConversationStates.QUEST_OFFERED,
-				ConversationPhrases.YES_MESSAGES,
-				null,
-				ConversationStates.ATTENDING,
-				"Doskonale. Idź i zabij: 20 aniołów, 20 upadłych aniołów, 8 archaniołów, 6 aniołów ciemności i 4 archanioły ciemności.",
-				new MultipleActions(actions));
+                ConversationPhrases.YES_MESSAGES,
+                null,
+                ConversationStates.ATTENDING,
+                "Nie lekceważ żadnej z pięciu odmian. Zwykłe anioły liczę oddzielnie od archaniołów i tych, które służą ciemności; dopiero pełna lista zakończy wyprawę." + "\nCele: " + games.stendhal.server.core.rp.quest.HuntQuestProgress.targetText(this,null) + ".",
+                new MultipleActions(actions));
 
-		npc.add(ConversationStates.QUEST_OFFERED, 
-				ConversationPhrases.NO_MESSAGES, 
-				null,
-				ConversationStates.ATTENDING,
-				"Trudno. "
-				+ "Może ktoś inny mi pomoże. ",
-				new SetQuestAction(QUEST_SLOT, "rejected"));
+		npc.add(ConversationStates.QUEST_OFFERED,
+                ConversationPhrases.NO_MESSAGES,
+                null,
+                ConversationStates.ATTENDING,
+                "Rozumiem. Lepiej wrócić po przygotowaniach niż zniknąć na pierwszym starciu.",
+                new SetQuestAction(QUEST_SLOT, "rejected"));
 	}
 
 	private void step_2() {
@@ -164,25 +157,23 @@ public class KillAngels extends AbstractQuest {
 		LinkedList<String> triggers = new LinkedList<String>();
 		triggers.addAll(ConversationPhrases.FINISH_MESSAGES);
 		triggers.addAll(ConversationPhrases.QUEST_MESSAGES);		
-		npc.add(ConversationStates.ATTENDING, 
-				triggers,
-				new AndCondition(
+		npc.add(ConversationStates.ATTENDING,
+                triggers,
+                new AndCondition(
 						new QuestInStateCondition(QUEST_SLOT, 0, "start"),
 						new KilledForQuestCondition(QUEST_SLOT, 1)),
-				ConversationStates.ATTENDING, 
-				"Widzę, że w końcu zabiłeś anioły. "
-				+ "Troche to trwało...",
-				new MultipleActions(actions));
+                ConversationStates.ATTENDING,
+                "Twoja wyprawa objęła wszystkie wskazane odmiany. Zasłużyłeś na zapłatę i zapasy na dalszą drogę; bilety oraz zwoje również są twoje.",
+                new MultipleActions(actions));
 				
-		npc.add(ConversationStates.ATTENDING, 
-				triggers,
-				new AndCondition(
+		npc.add(ConversationStates.ATTENDING,
+                triggers,
+                new AndCondition(
 						new QuestInStateCondition(QUEST_SLOT, 0, "start"),
 						new NotCondition(new KilledForQuestCondition(QUEST_SLOT, 1))),
-				ConversationStates.ATTENDING, 
-				"Jeszcze nie zabiłeś wszystkich aniołów. "
-				+ "Upewnij się, że zabiłeś 20 aniołów, 20 upadłych aniołów 8 archaniołów, 6 aniołów ciemnosći i 4 archanioły ciemności.",
-				null);
+                ConversationStates.ATTENDING,
+                null,
+                (p, sentence, raiser) -> raiser.say("Na liście zostały jeszcze skrzydlate istoty. Zanim ruszysz ponownie, sprawdź dokładne odmiany, których brakuje." + "\n" + games.stendhal.server.core.rp.quest.HuntQuestProgress.progressText(KillAngels.this,p)));
 	}
 
 	@Override
@@ -190,7 +181,7 @@ public class KillAngels extends AbstractQuest {
 		super.addToWorld();
 		fillQuestInfo(
 				"Zabij Anioły",
-				"Dodo poszukuje kogoś kto pokona trochę aniołów.",
+				"Dodo z jaskini Kikareukin zleca walkę z anielskimi przeciwnikami i ich mrocznymi odmianami. Sprawdź listę przed wyprawą, bo każda wskazana odmiana liczy się osobno.",
 				false);
 		step_1();
 		step_2();
@@ -199,19 +190,8 @@ public class KillAngels extends AbstractQuest {
 	
 	@Override
 	public List<String> getHistory(final Player player) {
-			final List<String> res = new ArrayList<String>();
-			if (!player.hasQuest(QUEST_SLOT)) {
-				return res;
-			}
-			if (!isCompleted(player)) {
-				res.add("Muszę zabić: 20 aniołow, 20 upadłych aniołów, 8 archaniołów, 4 archanioły ciemności i 6 aniołów ciemności.");
-			} else if(isRepeatable(player)){
-				res.add("Anioły zostały pokonane.");
-			} else {
-				res.add("Pomogłem Dodoowi i zabiłem anioły.	W nagrodę za ukończenie zadania otrzymałem: 10.000.000 pkt doświadczenia, 200.000 pkt ataku i 300.000 pkt obrony.");
-			}
-			return res;
-	}
+        return games.stendhal.server.core.rp.quest.HuntQuestProgress.history(this,player);
+    }
 
 
 	@Override
@@ -245,4 +225,17 @@ public class KillAngels extends AbstractQuest {
 		return Region.SEMOS_SURROUNDS;
 	}
 	
+
+    @Override public java.util.Map<String, Pair<Integer,Integer>> getDialogueHuntTargets(Player player) {
+        final Map<String, Pair<Integer, Integer>> toKill = new TreeMap<String, Pair<Integer, Integer>>();
+		toKill.put("anioł", new Pair<Integer, Integer>(0,20));
+		toKill.put("upadły anioł", new Pair<Integer, Integer>(0,20));
+		toKill.put("archanioł",new Pair<Integer, Integer>(0,8));
+		toKill.put("archanioł ciemności",new Pair<Integer, Integer>(0,4));
+		toKill.put("anioł ciemności",new Pair<Integer, Integer>(0,6));
+        return java.util.Collections.unmodifiableMap(toKill);
+    }
+    @Override public int getDialogueHuntTotal(Player player) { return 0; }
+    @Override public int getDialogueKillIndex() { return 1; }
+    @Override public String getDialogueHuntHint(Player player) { return "Wyprawa obejmuje pięć rodzajów anielskich przeciwników. Rozliczam każdy rodzaj osobno, więc przed powrotem sprawdź również archanioły ciemności."; }
 }

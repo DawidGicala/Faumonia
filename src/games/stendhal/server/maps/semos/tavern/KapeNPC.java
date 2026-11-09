@@ -43,12 +43,14 @@ public class KapeNPC implements ZoneConfigurator {
 
 			@Override
 			protected void createDialog() {
+                games.stendhal.server.entity.npc.dialogue.HuntDialogueTopics.install(this);
+                addJob("Nie pochodzę stąd i chciałem po prostu obejrzeć tutejsze góry. Barbarzyńcy szybko ostudzili mój zapał do wycieczek; teraz szukam kogoś, kto potrafi poradzić sobie z ich osadą.");
 				addGreeting("Witaj.");
 				addGoodbye("Na razie.");
 			}
 		};
 
-		elemental.setDescription("Oto Kape. Wygląda trochę dziwnie.");
+		elemental.setDescription("Widzisz Kapego, przybysza odpoczywającego w karczmie Semos. Na wspomnienie gór marszczy brwi.");
 		elemental.setEntityClass("npc_bazylhalszka");
 		elemental.setPosition(26, 11);
 		elemental.setDirection(Direction.DOWN);

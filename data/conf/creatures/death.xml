@@ -198,7 +198,7 @@
 
 	<creature name="kostucha różowa wielka">
 		<type class="pol/zjawy_wielkie" subclass="zai_kostucha_rozowa_gigant" tileid="pol_zjawy_wielkie.png:3"/>
-		<description/>
+		<description>Widzisz wielką kostuchę, której szata i ostrze kosy wyróżniają się jaskrawym, różowym kolorem.</description>
 		<attributes>
 			<atk value="3099"/>
 			<def value="141"/>
@@ -233,7 +233,7 @@
 
 	<creature name="kostucha wielka">
 		<type class="pol/zjawy_wielkie" subclass="zai_kostucha_gigant" tileid="pol_zjawy_wielkie.png:4"/>
-		<description/>
+		<description>Widzisz wielką kostuchę w ciemnej szacie, z bladą czaszką pod kapturem i długą kosą w dłoniach.</description>
 		<attributes>
 			<atk value="5199"/>
 			<def value="129"/>
@@ -273,7 +273,7 @@
 
 	<creature name="kostucha złota wielka">
 		<type class="pol/zjawy_wielkie" subclass="zai_kostucha_zlota_gigant" tileid="pol_zjawy_wielkie.png:5"/>
-		<description/>
+		<description>Widzisz wielką kostuchę w złotej szacie, dzierżącą kosę o złotym ostrzu.</description>
 		<attributes>
 			<atk value="3999"/>
 			<def value="174"/>

@@ -1,0 +1,17 @@
+# Local build outputs and runtime files (historically tracked files are retained).
+/build/
+/build-archive/
+/log/
+/server.ini
+/build.ant-private.properties
+/keystore.ks
+/hs_err_pid*.log
+*.mv.db
+*.h2.db
+*.trace.db
+__pycache__/
+*.pyc
+
+# Internal working reports stay on the development computer.
+/doc/backlog-2026-11-07/
+/doc/faumonia-quest-overhaul/

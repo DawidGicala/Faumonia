@@ -847,6 +847,7 @@ kupić 100 niezapisany zwój
 
 	<zone name="-1_nalwor_caves_w" level="-1" x="500128" y="500128"
 		file="Level -1/nalwor/caves_w.tmx">
+        <configurator class-name="games.stendhal.server.maps.quests.ExpeditionSurveyConfigurator"/>
 		<portal x="47" y="28" ref="hell1">
 			<destination zone="hell" ref="start"/>
 			<implementation class-name="games.stendhal.server.entity.mapstuff.portal.LevelCheckingPortal">

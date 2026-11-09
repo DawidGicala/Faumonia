@@ -69,14 +69,16 @@ public class PostNPC implements ZoneConfigurator {
 
 			@Override
 			protected void createDialog() {
+                games.stendhal.server.entity.npc.dialogue.CollectionDialogueTopics.install(this);
+                games.stendhal.server.entity.npc.dialogue.HuntDialogueTopics.install(this);
 				addGreeting("Cześć. W czym mogę #pomóc?");
-				addJob("Pracuję na poczcie. Jesteś tutaj nowy i nie budzisz jeszcze zaufania.");
-				addHelp("Nie mam tej #pracy od dawna ... wróć za jakiś czas może dam Ci coś interesującego do zrobienia.");
+				addJob("Pracuję na poczcie Nalwor i odpowiadam za to, by przesyłki trafiały we właściwe ręce. Zaufania nie zdobywa się samym powitaniem, ale pomoc naszym listonoszom jest dobrym początkiem.");
+				addHelp("Listonosze muszą docierać do celu, nawet gdy drogi nie są bezpieczne. Rabusie coraz częściej im to utrudniają. Zapytaj o #zadanie, jeśli chcesz pomóc naszej poczcie.");
 				addGoodbye("Dowidzenia. Miło było Cię poznać!");
 			}
 		};
 
-		npc.setDescription("Oto piękna kobieta elf.");
+		npc.setDescription("Widzisz Lorithien, elfkę pracującą na poczcie Nalwor. Każdego obcego ocenia uważnym spojrzeniem.");
 		npc.setEntityClass("postelfnpc");
 		npc.setPosition(11, 3);
 		npc.initHP(100);

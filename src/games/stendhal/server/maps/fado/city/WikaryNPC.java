@@ -61,6 +61,39 @@ public class WikaryNPC implements ZoneConfigurator {
 
 	private void buildNPC(final StendhalRPZone zone) {
 		final SpeakerNPC npc = new SpeakerNPC("Wikary") {
+			private Player removalCustomer;
+			private int removalPrice;
+
+			private int removalPrice(final Player player) {
+				int price;
+				if (player.getLevel() < 10) {
+					price = 1000;
+				} else if (player.getLevel() >= 10 && player.getLevel() < 250) {
+					price = 10000;
+				} else if (player.getLevel() >= 250 && player.getLevel() < 350) {
+					price = 20000;
+				} else {
+					price = 40000;
+				}
+				return price;
+			}
+
+			private boolean hasSkull(final Player player, final EventRaiser raiser) {
+				if (!player.isBadBoy()) {
+					removalCustomer = null;
+					raiser.say("Nie nosisz piętna zabójcy. Nie musisz za nic płacić.");
+					return false;
+				}
+				return true;
+			}
+
+			private void offerRemoval(final Player player, final EventRaiser raiser) {
+				removalCustomer = player;
+				removalPrice = removalPrice(player);
+				raiser.say("Zdjęcie piętna zabójcy kosztuje " + removalPrice + " monet. Czy chcesz zapłacić?");
+				raiser.setCurrentState(ConversationStates.SERVICE_OFFERED);
+			}
+
 
 			@Override
 			protected void createPath() {
@@ -91,8 +124,8 @@ public class WikaryNPC implements ZoneConfigurator {
 				addReply("nic", "Dobrze.");
 				addJob("Jestem wikarym w Fado. Zbieram pieniądze na zakup organów do kaplicy, zapytaj mnie o #ofertę, aby dowiedzieć się jak mogę Cię wynagrodzić za ten gest.");
 				addHelp("Wspomóż zakup organów do kaplicy, mówiąc #datek #<ilość> #money lub zdejmij klątwę z siebie, mówiąc #zdejmij");
-				addQuest("Jedyną rzecz jaką potrzebuje to #datek na organy do kaplicy. Po za tym za nie wielką opłatą mogę #zdjąć z Ciebie piętno zabójcy.");
-				addOffer("Dam ci miksturę, która cię uleczy w zamian za drobny #datek na organy lub zdejmę z Ciebie klątwę czaszki za odpowiednią cenę.");
+				addQuest("Zbieram datki na organy do kaplicy. Możesz złożyć #datek albo poprosić o zdjęcie piętna zabójcy. W tej drugiej sprawie powiedz #zdejmij.");
+				addOffer("Za #datek na organy, wynoszący co najmniej 1000 monet, podaruję ci tabliczkę czekolady. Mogę też #zdjąć piętno zabójcy - przed zapłatą podam ci cenę.");
 
 				addReply("datek", null,
 					new BehaviourAction(new Behaviour("money"), Arrays.asList("charity", "datek"), "offer") {
@@ -107,15 +140,15 @@ public class WikaryNPC implements ZoneConfigurator {
 
 						if (sentence.getExpressions().size() == 1) {
 							// player only said 'datek'
-							raiser.say("Nie masz tyle pieniędzy, aby wesprzeć zakup organów. Przyjdź kiedy indziej.");
+							raiser.say("Przyjmuję datki od 1000 monet. Jeśli chcesz pomóc, powiedz na przykład: datek 1000 money.");
 						} else {
 							if (amount < 1000) {
 								// Less than 1000 is not money for him
-								raiser.say("Nie masz tyle pieniędzy, aby wesprzeć zakup organów. Przyjdź kiedy indziej.");
+								raiser.say("Przyjmuję datki od 1000 monet. Jeśli chcesz pomóc, powiedz na przykład: datek 1000 money.");
 							} else {
 								if (player.isEquipped("money", amount)) {
 									player.drop("money", amount);
-									raiser.say("Bóg Ci zapłać. Jesteśmy coraz bliżej zakupu nowych organów!");
+									raiser.say("Bóg ci zapłać. Jesteśmy coraz bliżej zakupu nowych organów! Przyjmij tabliczkę czekolady w podziękowaniu.");
 									final Item drink = SingletonRepository.getEntityManager().getItem(
 											"tabliczka czekolady");
 									player.equipOrPutOnGround(drink);
@@ -130,7 +163,7 @@ public class WikaryNPC implements ZoneConfigurator {
 
 					@Override
 					public void fireRequestError(final ItemParserResult res, final Player player, final Sentence sentence, final EventRaiser raiser) {
-						if (res.getChosenItemName() == null) {
+						if (sentence.getExpressions().size() == 1 || res.getChosenItemName() == null) {
 							fireRequestOK(res, player, sentence, raiser);
 						} else {
 							// This bit is just in case the player says 'datek X potatoes', not money
@@ -139,55 +172,42 @@ public class WikaryNPC implements ZoneConfigurator {
 					}
 				});
 
-				add(ConversationStates.ATTENDING, Arrays.asList("remove", "zdejmij"), null,
+				add(ConversationStates.ATTENDING, Arrays.asList("remove", "zdejmij", "zdjąć"), null,
 					ConversationStates.ATTENDING, null, new ChatAction() {
 						public void fire(final Player player, final Sentence sentence, final EventRaiser raiser) {
-							int price = 1000;
-							if (player.getLevel() < 10) {
-								price = 1000;
-							} else if (player.getLevel() >= 10 && player.getLevel() < 250) {
-								price = 10000;
-							} else if (player.getLevel() >= 150 && player.getLevel() < 350) {
-								price = 20000;
-							} else {
-								price = 40000;
+							if (hasSkull(player, raiser)) {
+								offerRemoval(player, raiser);
 							}
-
-							raiser.say("Jeśli chcesz zdjąć piętno zabójcy to musisz zapłacić "
-											+ price
-											+ " money. Czy chcesz zapłacić?");
-							raiser.setCurrentState(ConversationStates.SERVICE_OFFERED);
 						}
 					});
 
-				add(ConversationStates.SERVICE_OFFERED,
-					ConversationPhrases.YES_MESSAGES, null,
+				add(ConversationStates.SERVICE_OFFERED, ConversationPhrases.YES_MESSAGES, null,
 					ConversationStates.ATTENDING, null, new ChatAction() {
 						public void fire(final Player player, final Sentence sentence, final EventRaiser raiser) {
-							int price = 1000;
-							if (player.getLevel() < 10) {
-								price = 1000;
-							} else if (player.getLevel() >= 10 && player.getLevel() < 250) {
-								price = 10000;
-							} else if (player.getLevel() >= 150 && player.getLevel() < 350) {
-								price = 20000;
-							} else {
-								price = 40000;
+							if (!hasSkull(player, raiser)) {
+								return;
 							}
-
-							if (player.drop("money", price)) {
+							// Never charge a different player or a price they have not confirmed.
+							if (removalCustomer != player || removalPrice != removalPrice(player)) {
+								offerRemoval(player, raiser);
+								return;
+							}
+							if (player.drop("money", removalPrice)) {
 								player.rehabilitate();
-								raiser.say("Zdjąłem z Ciebie piętno zabójcy. Uważaj na siebie!");
+								raiser.say("Zdjąłem z ciebie piętno zabójcy. Uważaj na siebie!");
 							} else {
-								raiser.say("Nie masz tyle pieniędzy, aby zdjąć piętno zabójcy!");
+								raiser.say("Potrzebujesz " + removalPrice + " monet, aby zdjąć piętno zabójcy. Wróć, gdy je zbierzesz.");
 							}
+							removalCustomer = null;
 						}
 					});
 
-				add(ConversationStates.SERVICE_OFFERED,
-						ConversationPhrases.NO_MESSAGES, null,
-						ConversationStates.ATTENDING,
-						"Nie wiesz co tracisz.", null);
+				add(ConversationStates.SERVICE_OFFERED, ConversationPhrases.NO_MESSAGES, null,
+					ConversationStates.ATTENDING, "Dobrze. Wróć, jeśli zmienisz zdanie.", new ChatAction() {
+						public void fire(final Player player, final Sentence sentence, final EventRaiser raiser) {
+							removalCustomer = null;
+						}
+					});
 
 				addGoodbye("Bywaj!");
 			}

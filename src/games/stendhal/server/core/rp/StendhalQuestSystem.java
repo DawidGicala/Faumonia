@@ -254,6 +254,10 @@ public class StendhalQuestSystem {
 		loadQuest(new MainTask23());
 		loadQuest(new FindDragons());
 		loadQuest(new MainTask24());
+		loadQuest(new AncientDragonCloak());
+        loadQuest(new FagDeathScout());
+        loadQuest(new ThyronExpeditionFittings());
+        loadQuest(new MainTask25());
 
 
 
@@ -497,6 +501,17 @@ public class StendhalQuestSystem {
 			}
 		}
 		return res;
+	}
+
+	/** Resolves only quests already visible in this player's journal. */
+	public IQuest getVisibleQuest(final Player player, final String title) {
+		for (final IQuest quest : quests) {
+			if (quest.isVisibleOnQuestStatus() && quest.isStarted(player)
+					&& quest.getQuestInfo(player).getName().equals(title)) {
+				return quest;
+			}
+		}
+		return null;
 	}
 
 

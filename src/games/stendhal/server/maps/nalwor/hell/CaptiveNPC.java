@@ -43,8 +43,9 @@ public class CaptiveNPC implements ZoneConfigurator {
 
 			@Override
 			protected void createDialog() {
+                addReply("tematy", "Możemy wrócić do twojej sprawy albo porozmawiać o czymś innym. Co chcesz wiedzieć?");
 				addGreeting("pomocy!");
-				addJob("pomóż mi");
+				addJob("Nie mam już siły myśleć o niczym poza tym gorącem. Miecz lodowy daje mi krótką ulgę, której nie znajduję tutaj w żaden inny sposób.");
 				addHelp("gdzie jest mój miecz lodowy?");
 				addOffer("proszę miecz lodowy");
 				addGoodbye("dowidzenia");
@@ -56,7 +57,7 @@ public class CaptiveNPC implements ZoneConfigurator {
 		tomi.setPosition(119, 13);
 		tomi.setBaseHP(100); 
 		tomi.setHP(50);
-		tomi.setDescription("Oto Tomi. Jest cały spocony i na pewno potrzebuje coś do ochłodzenia.");
+		tomi.setDescription("Widzisz Tomiego uwięzionego w piekielnym żarze. Jest wyczerpany i kurczowo szuka choć odrobiny chłodu.");
 		zone.add(tomi);
 	}
 }

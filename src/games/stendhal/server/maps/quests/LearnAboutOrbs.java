@@ -12,6 +12,8 @@
  ***************************************************************************/
 package games.stendhal.server.maps.quests;
 
+import games.stendhal.server.entity.npc.action.DialogueRewardAction;
+
 import games.stendhal.server.entity.npc.ConversationPhrases;
 import games.stendhal.server.entity.npc.ConversationStates;
 import games.stendhal.server.entity.npc.SpeakerNPC;
@@ -73,7 +75,7 @@ public class LearnAboutOrbs extends AbstractQuest {
 		if (!player.hasQuest(QUEST_SLOT)) {
 			return res;
 		}
-		res.add("Spotkałem Ilisa w świątyni w Semos.");
+		res.add("Spotkałem Ilisę w świątyni w Semos.");
 		final String questState = player.getQuest(QUEST_SLOT);
 		if (questState.equals("done")) {
 			res.add("Ilisa pokazała mi jak używać kul. Muszę uważać, ponieważ mogą mnie wysłać w inne niebezpieczne miejsce.");
@@ -88,20 +90,20 @@ public class LearnAboutOrbs extends AbstractQuest {
 			ConversationPhrases.QUEST_MESSAGES, 
 			new QuestNotCompletedCondition(QUEST_SLOT),
 			ConversationStates.QUEST_OFFERED, 
-			"Pewne kule mają specjalne właściwości. Mogłabym Cię nauczyć jak #używać kuli jak ta co leży na stole.", null);
+			"Ta kula na stole nie jest zwykłą ozdobą. Niektóre kule pozwalają zajrzeć w odległe miejsca, a inne potrafią przenieść wędrowca daleko stąd. Mogę pokazać ci, jak ich #używać i na co uważać.", null);
 
 		npc.add(ConversationStates.ATTENDING,
 			ConversationPhrases.QUEST_MESSAGES,
 			new QuestCompletedCondition(QUEST_SLOT),
 			ConversationStates.ATTENDING, 
-			"Mogę Ci przypomnieć jak #używać kuli.", null);
+			"Pamiętasz naszą lekcję o kulach? Jeśli coś ci umknęło, chętnie przypomnę, jak ich #używać. Przy magii ostrożność przydaje się bardziej niż pośpiech.", null);
 
 		// player interested in orb
 		npc.add(ConversationStates.QUEST_OFFERED,
 			Arrays.asList("use", "używać"), 
 			new LevelGreaterThanCondition(10),
 			ConversationStates.QUESTION_1,
-			"Naciśnij prawy przycisk i wybierz Użyj. Dostałeś jakąś wiadomość?",
+			"Podejdź tuż do kuli na stole, kliknij ją prawym przyciskiem i wybierz Użyj. Przeczytaj wiadomość, która się pojawi - przed dotknięciem obcej kuli warto poznać jej działanie. Czy udało ci się odczytać wiadomość?",
 			null);
 
 		// player interested in orb but level < 10
@@ -109,7 +111,7 @@ public class LearnAboutOrbs extends AbstractQuest {
 			Arrays.asList("use", "używać"), 
 			new NotCondition(new LevelGreaterThanCondition(10)),
 			ConversationStates.ATTENDING,
-			"Aha, Dostałam wiadomość, że wciąż jesteś tutaj nowy. Może wróć później, gdy będziesz miał więcej doświadczenia. Na razie jeżeli potrzebujesz #pomocy to pytaj!",
+			"Na tę lekcję przyjdzie pora, gdy osiągniesz 11. poziom. Najpierw oswój się z okolicą i nabierz doświadczenia, żeby magiczna podróż nie zaskoczyła cię zbyt daleko od domu. Wróć wtedy, a spokojnie przećwiczymy korzystanie z kul.",
 			null);
 
 		// player wants reminder on Use
@@ -118,20 +120,20 @@ public class LearnAboutOrbs extends AbstractQuest {
 			Arrays.asList("use", "używać"),
 			null,
 			ConversationStates.ATTENDING,
-			"Naciśnij prawy przycisk na kuli i wybierz Użyj.",
+			"Stań tuż przy kuli, kliknij ją prawym przyciskiem i wybierz Użyj. Uważnie przeczytaj wiadomość, zanim zrobisz kolejny krok. Kule mogą prowadzić do niebezpiecznych miejsc, więc zawsze pomyśl też o drodze powrotnej.",
 			null);
 
 		// player got message from orb
 		npc.add(ConversationStates.QUESTION_1,
 			ConversationPhrases.YES_MESSAGES, null,
 			ConversationStates.ATTENDING,
-			"Jesteś naturalny! Teraz jak nauczyłeś się korzystać z kuli to możesz się przenieść do miejsca pełnego magi. Nie używaj go dopóki nie będziesz mógł znaleźć drogi powrotnej!",
-			new MultipleActions(new IncreaseXPAction(50), new SetQuestAction(QUEST_SLOT, "done")));
+			"Dobrze, właśnie o to chodziło. Znasz już podstawy korzystania z kul, ale pamiętaj, że każda może działać inaczej. Zanim pozwolisz magii przenieść cię dalej, upewnij się, że potrafisz wrócić.",
+			new MultipleActions(DialogueRewardAction.xp(50), new SetQuestAction(QUEST_SLOT, "done")));
 
 		// player didn't get message, try again
 		npc.add(ConversationStates.QUESTION_1, ConversationPhrases.NO_MESSAGES,
 			null, ConversationStates.QUESTION_1,
-			"Cóż musisz stanąć obok. Podejdź blisko. Dostałeś wiadomość?", null);
+			"Spróbuj stanąć bezpośrednio obok kuli na stole. Kliknij ją prawym przyciskiem, wybierz Użyj i sprawdź wiadomość - z daleka nie dosięgniesz jej mocy. Czy teraz udało ci się ją odczytać?", null);
 	}
 
 	@Override
@@ -139,7 +141,7 @@ public class LearnAboutOrbs extends AbstractQuest {
 		super.addToWorld();
 		fillQuestInfo(
 				"Nauka o Kulach",
-				"Ilisa nauczy mnie o Kulach.",
+				"Ilisa ze świątyni w Semos uczy ostrożnego korzystania z magicznych kul.",
 				false);
 		step1();
 

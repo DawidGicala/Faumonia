@@ -11,6 +11,8 @@
  ***************************************************************************/
 package games.stendhal.server.maps.quests;
 
+import games.stendhal.server.entity.npc.action.DialogueRewardAction;
+
 import games.stendhal.common.Level;
 import games.stendhal.common.parser.Sentence;
 import games.stendhal.server.core.rp.StendhalRPAction;
@@ -175,7 +177,7 @@ public class SheepGrowing extends AbstractQuest {
 				ConversationPhrases.NO_MESSAGES,
 				new AndCondition(playerHasNoSheep, 
 						new QuestInStateCondition(QUEST_SLOT, "asked")),
-				ConversationStates.IDLE,
+				ConversationStates.ATTENDING,
 				"Ok... muszę pracować dwa razy ciężej w najbliższych dniach...",
 				new SetQuestAction(QUEST_SLOT, "rejected"));
 		
@@ -206,7 +208,7 @@ public class SheepGrowing extends AbstractQuest {
 				ConversationPhrases.YES_MESSAGES,
 				new AndCondition(playerHasNoSheep, 
 						new QuestInStateCondition(QUEST_SLOT, "asked")),
-				ConversationStates.IDLE,
+				ConversationStates.ATTENDING,
 				"Dzięki! *uśmiecha się* Proszę, o to Twój puszysty wychowanek. Opiekuj się nim! " +
 				"Jeśli owieczka umrze albo ją zostawisz, będziesz zmuszony kupić nową. " +
 				"Oh... I nie sprzedaj przypadkowo owcy Sato - porozmawiaj z nim, gdy owca urośnie.",
@@ -258,7 +260,17 @@ public class SheepGrowing extends AbstractQuest {
 						new QuestInStateCondition(QUEST_SLOT,"start"),
 						playerHasFullWeightSheep),
 				ConversationStates.QUEST_ITEM_BROUGHT,
-				"Cześć. Cóż za piękna i zdrowa owca przyszła tutaj z Tobą! Czyżby była ona dla mnie?",
+				"Ta owca wygląda zdrowo i osiągnęła już odpowiednią wagę. Nishiya wspominał, że ktoś pomoże mu przygotować prezent dla mojego przyjaciela. Czy przekazujesz mi właśnie tę owcę w jego imieniu?",
+				null);
+
+        // Same authoritative step, without requiring the player to leave and greet again.
+        npc.add(
+				ConversationStates.ATTENDING, "owca nishiyi",
+				new AndCondition(
+						new QuestInStateCondition(QUEST_SLOT,"start"),
+						playerHasFullWeightSheep),
+				ConversationStates.QUEST_ITEM_BROUGHT,
+				"Ta owca wygląda zdrowo i osiągnęła już odpowiednią wagę. Nishiya wspominał, że ktoś pomoże mu przygotować prezent dla mojego przyjaciela. Czy przekazujesz mi właśnie tę owcę w jego imieniu?",
 				null);
 
 		npc.add(
@@ -267,8 +279,18 @@ public class SheepGrowing extends AbstractQuest {
 				new AndCondition(
 						new QuestInStateCondition(QUEST_SLOT,"start"),
 						new NotCondition(playerHasFullWeightSheep)),
-				ConversationStates.IDLE,
-				"Witaj. Powinieneś mieć owcę od Nishiyi dla mnie! Ale chcę najedzoną. Wróć, gdy będziesz miał taką. Dowidzenia!",
+				ConversationStates.ATTENDING,
+				"Czekam na owcę obiecaną przez Nishiyę. Nakarm ją do wagi 100 i przyprowadź tutaj; wtedy odbiorę ją jako prezent. Nie musisz jej sprzedawać.",
+				null);
+
+        // Same authoritative step, without requiring the player to leave and greet again.
+        npc.add(
+				ConversationStates.ATTENDING, "owca nishiyi",
+				new AndCondition(
+						new QuestInStateCondition(QUEST_SLOT,"start"),
+						new NotCondition(playerHasFullWeightSheep)),
+				ConversationStates.ATTENDING,
+				"Czekam na owcę obiecaną przez Nishiyę. Nakarm ją do wagi 100 i przyprowadź tutaj; wtedy odbiorę ją jako prezent. Nie musisz jej sprzedawać.",
 				null);
 		
 		// Player answers yes - Sheep is given to Sato
@@ -278,7 +300,7 @@ public class SheepGrowing extends AbstractQuest {
 				new AndCondition(
 						new QuestInStateCondition(QUEST_SLOT,"start"),
 						playerHasFullWeightSheep),
-				ConversationStates.IDLE,
+				ConversationStates.ATTENDING,
 				"Wiedziałem! Kupiłeś ją u Nishiyi, prawda? Czekałem na nią! " +
 				"To prezent dla mojego przyjaciela. Byłoby mi wstyd, gdybym nie przyniósł mu prezentu urodzinowego! " +
 				"Przekaż Nishiyi moje szczere podziękowania.",
@@ -291,7 +313,7 @@ public class SheepGrowing extends AbstractQuest {
 				new AndCondition(
 						new QuestInStateCondition(QUEST_SLOT,"start"),
 						playerHasFullWeightSheep),
-				ConversationStates.IDLE,
+				ConversationStates.ATTENDING,
 				"Chciał wysłać mi jedną jakiś czas temu ...",
 				null);
         
@@ -314,15 +336,15 @@ public class SheepGrowing extends AbstractQuest {
 				// give XP to level 2
 				int reward = Level.getXP( 2 ) - player.getXP();
 				if(reward > MIN_XP_GAIN) {
-					player.addXP(reward);
+					DialogueRewardAction.xp(reward).fire(player, null, npc);
 				} else {
-					player.addXP(MIN_XP_GAIN);
+					DialogueRewardAction.xp(MIN_XP_GAIN).fire(player, null, npc);
 				}
 				player.notifyWorldAboutChanges();
 			}
 		});
 		reward.add(new SetQuestAction(QUEST_SLOT, "done"));
-		reward.add(new IncreaseKarmaAction( 10 ));
+		reward.add(DialogueRewardAction.karma(new IncreaseKarmaAction( 10 )));
 		
 		final SpeakerNPC npc = npcs.get("Nishiya");
 		// Asks player if he handed over the sheep
@@ -331,14 +353,22 @@ public class SheepGrowing extends AbstractQuest {
 				ConversationPhrases.GREETING_MESSAGES,
 				new QuestInStateCondition(QUEST_SLOT, "handed_over"),
 				ConversationStates.QUEST_ITEM_QUESTION,
-				"Dałeś już owcę Sato?",
+				"Widzę, że wracasz bez owcy, a od Sato dotarły dobre wieści. Chcę tylko potwierdzić: przekazałeś mu już mój prezent?",
+				null);
+
+        // Same authoritative step, without requiring the player to leave and greet again.
+        npc.add(
+				ConversationStates.ATTENDING, "owca nishiyi",
+				new QuestInStateCondition(QUEST_SLOT, "handed_over"),
+				ConversationStates.QUEST_ITEM_QUESTION,
+				"Widzę, że wracasz bez owcy, a od Sato dotarły dobre wieści. Chcę tylko potwierdzić: przekazałeś mu już mój prezent?",
 				null);
 		// Player answers yes - give reward
 		npc.add(
 				ConversationStates.QUEST_ITEM_QUESTION,
 				ConversationPhrases.YES_MESSAGES,
 				new QuestInStateCondition(QUEST_SLOT, "handed_over"),
-				ConversationStates.IDLE,
+				ConversationStates.ATTENDING,
 				"Dziękuję! Nie wiesz, jak wiele muszę teraz robić! Jestem bardzo zapracowany. " +
 				"Naprawdę mi pomogłeś.",
 				new MultipleActions(reward));
@@ -347,7 +377,7 @@ public class SheepGrowing extends AbstractQuest {
 				ConversationStates.QUEST_ITEM_QUESTION,
 				ConversationPhrases.NO_MESSAGES,
 				new QuestInStateCondition(QUEST_SLOT, "handed_over"),
-				ConversationStates.IDLE,
+				ConversationStates.ATTENDING,
 				"W porządku... Nie nie zapomnij o tym. Sato pilnie potrzebuje owcy!",
 				null);
 		

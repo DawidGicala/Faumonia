@@ -79,7 +79,7 @@
 
 	<creature name="elf albinos magik">
 		<type class="albino_elf" subclass="albino_elf_magician" tileid="albino_elf.png:2"/>
-		<description>Oto elf albinos magik. ZNa wszystkie sekrety magii. Lepiej nie pozwól mu uwolnić jego całej mocy!</description>
+		<description>Oto elf albinos magik. Zna wszystkie sekrety magii. Lepiej nie pozwól mu uwolnić całej jego mocy!</description>
 		<attributes>
 			<atk value="522"/>
 			<def value="35"/>
@@ -148,7 +148,7 @@
 
 	<creature name="elf albinos król">
 		<type class="albino_elf" subclass="albino_elf_king" tileid="albino_elf.png:1"/>
-		<description>Oto elf albinos król. Jest ojcem elfów albinosów i wygrał wiele walk ze swoją poteżną armią elfów albinosów.</description>
+		<description>Oto elf albinos król. Jest ojcem elfów albinosów i wygrał wiele walk ze swoją potężną armią elfów albinosów.</description>
 		<attributes>
 			<atk value="521"/>
 			<def value="42"/>

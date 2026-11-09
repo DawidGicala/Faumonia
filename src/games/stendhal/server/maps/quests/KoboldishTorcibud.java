@@ -121,7 +121,7 @@ public class KoboldishTorcibud extends AbstractQuest {
         super.addToWorld();
         fillQuestInfo(
             "Koboldish Torcibud",
-            "Wrviliza potrzebuje składników do przygotowania jej sławnej Nalewki Litworowej.",
+            "Wrviliza prowadzi bar w Wofol i przygotowuje nalewkę litworową. Poznaj jej przepis i dostarcz składniki, aby mogła uzupełnić zapasy.",
             true);
         phase_1();
         phase_2();
@@ -268,7 +268,7 @@ public class KoboldishTorcibud extends AbstractQuest {
             ConversationPhrases.QUEST_MESSAGES,
             new QuestNotStartedCondition(QUEST_SLOT),
             ConversationStates.QUEST_OFFERED,
-            "Hau! Mój magazyn z zapasami do przygotowania litworowej #nalewki kurczy się. Czy chcesz mi pomóc z uzupełnieniem #składników?",
+            "Hau! Dobra nalewka potrzebuje czasu i porządnych składników, a półki w moim magazynie pustoszeją. Potrzebuję butelek, ziół i litworowego ekstraktu. Pomożesz mi uzupełnić zapasy do kolejnej partii?",
             null
         );
 
@@ -279,7 +279,7 @@ public class KoboldishTorcibud extends AbstractQuest {
                 new QuestCompletedCondition(QUEST_SLOT),
                 new TimeReachedCondition(QUEST_SLOT, 1)),
             ConversationStates.QUEST_OFFERED,
-            "Hau! W rzeczy samej/ Potrzebuję paru #składników do zrobienia litworowej #nalewki. Pomożesz mi?",
+            "Hau! Przyszedł czas na następną partię litworowej nalewki. Poprzednie zapasy już się rozeszły, więc przygotuję nową listę składników. Podejmiesz się dostawy?",
             null);
 
         // Player has done the quest already but it's too early to get another
@@ -311,7 +311,7 @@ public class KoboldishTorcibud extends AbstractQuest {
                 new QuestNotStartedCondition(QUEST_SLOT),
                 new QuestInStateCondition(QUEST_SLOT, "rejected")),
             ConversationStates.QUEST_OFFERED,
-            "Hau! Kilka butelek, karczoch, pare ziół i ekstrakt litworowy... Coś takiego. Pomożesz mi?",
+            "Hau! Potrzebuję butli czwórniaczka, wąskich butelek, mandragory, karczocha, aranduli, sclarii, kekiku i ekstraktu litworowego. Ilości ustalę dla tej partii, kiedy zgodzisz się pomóc. Przyjmujesz zamówienie?",
             null);
 
         // Player accepts the quest and gets to know what Wrviliza needs (switch to phase_2)
@@ -330,7 +330,7 @@ public class KoboldishTorcibud extends AbstractQuest {
             		// because in this quest, the amounts depend on level, above.
             		new SayRequiredItemsFromCollectionAction(
                         QUEST_SLOT,
-                        "Hau! Teraz potrzebuję [items]. Czy przypadkiem nie masz czegoś ze sobą?")));
+                        "Hau! Dla tej partii potrzebuję: [items]. Możesz przynosić składniki po trochu; odłożę je, aż zbierzemy całą partię. Masz już coś przy sobie?")));
 
         // Player is not inclined to comply with the request and has not already rejected it once
         npc.add(ConversationStates.QUEST_OFFERED,

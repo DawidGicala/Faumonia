@@ -61,9 +61,10 @@ public class TeacherNPC implements ZoneConfigurator {
 
 			@Override
 			protected void createDialog() {
+                games.stendhal.server.entity.npc.dialogue.JourneyDialogueTopics.install(this);
 				addGreeting("Witaj nowicjuszu!");
-				addJob("Jestem nauczycielem rybołówstwa. Ludzie przychodzą tutaj, aby zdać egzaminy ( #exams ).");
-				addHelp("Jeżeli będziesz przeszukiwał Faiumoni to znajdziesz kilka dobrych miejsc na łowienie.");
+				addJob("Uczę rybołówstwa i sprawdzam, czy przyszli wędkarze znają swoje połowy. Najpierw trzeba rozpoznać ryby, a potem dostarczyć po jednej z każdego wymaganego gatunku. Dopiero oba etapy składają się na kartę wędkarską.");
+				addHelp("Dobry wędkarz rozpoznaje swój połów, zanim wrzuci go do koszyka. Zacznij od mojego #zadania: najpierw sprawdzimy znajomość ryb, a potem poproszę o okazy na część praktyczną. Nie musisz przynosić ich przed egzaminem.");
 				addReply(Arrays.asList("oil", "olejek"),"Pomyliłeś się. Idź i zapytaj Pequoda o olejek. Mieszka w sąsiedniej chatce.");
 			}
 		};
@@ -72,7 +73,7 @@ public class TeacherNPC implements ZoneConfigurator {
 		fisherman.setDirection(Direction.DOWN);
 		fisherman.setPosition(3, 3);
 		fisherman.initHP(100);
-		fisherman.setDescription("Oto Santiago. Wszyscy rybacy mają zaufanie do jego doświadczenia.");
+		fisherman.setDescription("Widzisz Santiago, doświadczonego nauczyciela rybołówstwa z Ados. Przygotowuje stół do kolejnego egzaminu.");
 		zone.add(fisherman);
 	}
 }

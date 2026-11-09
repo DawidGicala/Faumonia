@@ -61,6 +61,39 @@ public class WikaryNPC implements ZoneConfigurator {
 
 	private void buildNPC(final StendhalRPZone zone) {
 		final SpeakerNPC npc = new SpeakerNPC("Wikary") {
+			private Player removalCustomer;
+			private int removalPrice;
+
+			private int removalPrice(final Player player) {
+				int price;
+				if (player.getLevel() < 10) {
+					price = 1000;
+				} else if (player.getLevel() >= 10 && player.getLevel() < 250) {
+					price = 10000;
+				} else if (player.getLevel() >= 250 && player.getLevel() < 500) {
+					price = 250000;
+				} else {
+					price = 500000;
+				}
+				return price;
+			}
+
+			private boolean hasSkull(final Player player, final EventRaiser raiser) {
+				if (!player.isBadBoy()) {
+					removalCustomer = null;
+					raiser.say("Nie nosisz piętna zabójcy. Nie musisz za nic płacić.");
+					return false;
+				}
+				return true;
+			}
+
+			private void offerRemoval(final Player player, final EventRaiser raiser) {
+				removalCustomer = player;
+				removalPrice = removalPrice(player);
+				raiser.say("Zdjęcie piętna zabójcy kosztuje " + removalPrice + " monet. Czy chcesz zapłacić?");
+				raiser.setCurrentState(ConversationStates.SERVICE_OFFERED);
+			}
+
 
 			@Override
 			protected void createPath() {
@@ -139,55 +172,42 @@ public class WikaryNPC implements ZoneConfigurator {
 					}
 				});
 
-				add(ConversationStates.ATTENDING, Arrays.asList("remove", "zdejmij"), null,
+				add(ConversationStates.ATTENDING, Arrays.asList("remove", "zdejmij", "zdjąć"), null,
 					ConversationStates.ATTENDING, null, new ChatAction() {
 						public void fire(final Player player, final Sentence sentence, final EventRaiser raiser) {
-							int price = 1000;
-							if (player.getLevel() < 10) {
-								price = 1000;
-							} else if (player.getLevel() >= 10 && player.getLevel() < 250) {
-								price = 10000;
-							} else if (player.getLevel() >= 250 && player.getLevel() < 500) {
-								price = 250000;
-							} else {
-								price = 500000;
+							if (hasSkull(player, raiser)) {
+								offerRemoval(player, raiser);
 							}
-
-							raiser.say("Jeśli chcesz zdjąć piętno zabójcy to musisz zapłacić "
-											+ price
-											+ " money. Czy chcesz zapłacić?");
-							raiser.setCurrentState(ConversationStates.SERVICE_OFFERED);
 						}
 					});
 
-				add(ConversationStates.SERVICE_OFFERED,
-					ConversationPhrases.YES_MESSAGES, null,
+				add(ConversationStates.SERVICE_OFFERED, ConversationPhrases.YES_MESSAGES, null,
 					ConversationStates.ATTENDING, null, new ChatAction() {
 						public void fire(final Player player, final Sentence sentence, final EventRaiser raiser) {
-							int price = 1000;
-							if (player.getLevel() < 10) {
-								price = 1000;
-							} else if (player.getLevel() >= 10 && player.getLevel() < 250) {
-								price = 10000;
-							} else if (player.getLevel() >= 250 && player.getLevel() < 500) {
-								price = 250000;
-							} else {
-								price = 500000;
+							if (!hasSkull(player, raiser)) {
+								return;
 							}
-
-							if (player.drop("money", price)) {
+							// Never charge a different player or a price they have not confirmed.
+							if (removalCustomer != player || removalPrice != removalPrice(player)) {
+								offerRemoval(player, raiser);
+								return;
+							}
+							if (player.drop("money", removalPrice)) {
 								player.rehabilitate();
-								raiser.say("Zdjąłem z Ciebie piętno zabójcy. Uważaj na siebie!");
+								raiser.say("Zdjąłem z ciebie piętno zabójcy. Uważaj na siebie!");
 							} else {
-								raiser.say("Nie masz tyle pieniędzy, aby zdjąć piętno zabójcy!");
+								raiser.say("Potrzebujesz " + removalPrice + " monet, aby zdjąć piętno zabójcy. Wróć, gdy je zbierzesz.");
 							}
+							removalCustomer = null;
 						}
 					});
 
-				add(ConversationStates.SERVICE_OFFERED,
-						ConversationPhrases.NO_MESSAGES, null,
-						ConversationStates.ATTENDING,
-						"Nie wiesz co tracisz.", null);
+				add(ConversationStates.SERVICE_OFFERED, ConversationPhrases.NO_MESSAGES, null,
+					ConversationStates.ATTENDING, "Dobrze. Wróć, jeśli zmienisz zdanie.", new ChatAction() {
+						public void fire(final Player player, final Sentence sentence, final EventRaiser raiser) {
+							removalCustomer = null;
+						}
+					});
 
 				addGoodbye("Bywaj!");
 			}

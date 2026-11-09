@@ -64,7 +64,7 @@ import java.util.List;
  */
 public class KillDarkElves extends AbstractQuest {
 	private static final String QUEST_SLOT = "kill_dark_elves";
-	protected final List<String> creatures = 
+	protected static final List<String> creatures = 
 		Arrays.asList("elf ciemności kapitan",
 				      "elf ciemności generał",
 				      "elf ciemności rycerz",
@@ -87,7 +87,7 @@ public class KillDarkElves extends AbstractQuest {
 				ConversationPhrases.QUEST_MESSAGES, 
 				new QuestActiveCondition(QUEST_SLOT),
 				ConversationStates.ATTENDING, 
-				"Już Cię wysłałem, abyś zabił mroczne elfy w tunelu pod ukrytym pokojem. Przynieś mi stamtąd amulet od cosia.",
+				"Nasza umowa nadal obowiązuje. Zajmij się mrocznymi elfami w kryjówce pod sekretnym pokojem i przynieś amulet mutanta coś; zwykła wędrówka po Nalwor nie wystarczy.",
 				null);
 
 		
@@ -102,7 +102,7 @@ public class KillDarkElves extends AbstractQuest {
 				ConversationPhrases.QUEST_MESSAGES, 
 				new QuestNotStartedCondition(QUEST_SLOT),
 				ConversationStates.QUEST_OFFERED, 
-				"Mam problem z mrocznymi elfami. Powinienem być z nimi w porozumieniu... teraz są zbyt silne. W #sekretnym #pokoju w sali na dole jest wejście do ich kryjówki.",
+				"Mroczne elfy miały dotrzymywać porozumienia, tymczasem ich kryjówka stała się zagrożeniem dla Nalwor. Wejście jest poniżej nas: sekretny pokój ma szary dach i twarz demona na drzwiach. Zejdziesz tam i odzyskasz dla mnie amulet mutanta coś?",
 				null);
 
 		final List<ChatAction> actions = new LinkedList<ChatAction>();
@@ -116,7 +116,7 @@ public class KillDarkElves extends AbstractQuest {
 			ConversationPhrases.YES_MESSAGES,
 			null,
 			ConversationStates.ATTENDING,
-			"Dobrze. Proszę zabij wszystkie mroczne elfy na dole i zdobądź amulet od mutanta zwanego coś.",
+			"Zejdź do kryjówki i rozpraw się z każdym rodzajem mrocznych elfów z listy. Musisz osobiście pokonać je właśnie tam, a z mutanta coś przynieść amulet. Bez amuletu nie zakończymy tej sprawy.",
 			new MultipleActions(actions));
 
 		npc.add(ConversationStates.QUEST_OFFERED, 
@@ -131,7 +131,7 @@ public class KillDarkElves extends AbstractQuest {
 			Arrays.asList("secret", "room", "sekretnym", "pokoju"),
 			null,
 			ConversationStates.QUEST_OFFERED,
-			"To jest pokój na dole z szarym dachem z twarzą demona na drzwiach. W środku zobaczysz jak mroczne elfy robią mutanta. Pomożesz mi?",
+			"Zejdź poniżej sali i szukaj szarego dachu oraz twarzy demona na drzwiach. W środku prowadzą eksperymenty z mutantem coś; to od niego trzeba odzyskać amulet. Podejmiesz tę wyprawę?",
 			null);
 	}
 
@@ -151,8 +151,16 @@ public class KillDarkElves extends AbstractQuest {
 				new AndCondition(new GreetingMatchesNameCondition(npc.getName()),
 						new QuestInStateCondition(QUEST_SLOT, "start"),
 						new NotCondition(new KilledCondition("elf ciemności łucznik", "elf ciemności kapitan", "coś"))),
-				ConversationStates.QUEST_STARTED, 
-				"Nie pamiętasz co mi obiecałeś w sprawie problemów z mrocznymi elfami? Musisz wrócić do #sekretnego #pokoju. Zabij wszystkie mroczne elfy i mutanta o imieniu coś.",
+				ConversationStates.ATTENDING, 
+				"Twoja wyprawa nadal trwa. Pokonaj łucznika, kapitana mrocznych elfów oraz mutanta coś, a potem przynieś mi amulet.",
+				null);
+        // Resume the native stage without changing its guards or actions.
+        npc.add(ConversationStates.ATTENDING, "meldunek",
+				new AndCondition(new games.stendhal.server.entity.npc.condition.AlwaysTrueCondition(),
+						new QuestInStateCondition(QUEST_SLOT, "start"),
+						new NotCondition(new KilledCondition("elf ciemności łucznik", "elf ciemności kapitan", "coś"))),
+				ConversationStates.ATTENDING, 
+				"Twoja wyprawa nadal trwa. Pokonaj łucznika, kapitana mrocznych elfów oraz mutanta coś, a potem przynieś mi amulet.",
 				null);
 		
 		npc.add(ConversationStates.IDLE, 
@@ -161,8 +169,17 @@ public class KillDarkElves extends AbstractQuest {
 						new QuestInStateCondition(QUEST_SLOT, "start"),
 						new KilledCondition("elf ciemności łucznik", "elf ciemności kapitan", "coś"),
 						new NotCondition(new PlayerHasItemWithHimCondition("amulet")))
-				, ConversationStates.QUEST_STARTED
-				, "Co się stało z amuletem? Pamiętasz, że potrzebuję go z powrotem!"
+				, ConversationStates.ATTENDING
+				, "Przeciwnicy zostali pokonani, ale brakuje amuletu. Przynieś go z kryjówki mutanta coś; dopiero wtedy zamkniemy naszą umowę."
+				, null);
+        // Resume the native stage without changing its guards or actions.
+        npc.add(ConversationStates.ATTENDING, "meldunek",
+				new AndCondition(new games.stendhal.server.entity.npc.condition.AlwaysTrueCondition(),
+						new QuestInStateCondition(QUEST_SLOT, "start"),
+						new KilledCondition("elf ciemności łucznik", "elf ciemności kapitan", "coś"),
+						new NotCondition(new PlayerHasItemWithHimCondition("amulet")))
+				, ConversationStates.ATTENDING
+				, "Przeciwnicy zostali pokonani, ale brakuje amuletu. Przynieś go z kryjówki mutanta coś; dopiero wtedy zamkniemy naszą umowę."
 				, null);
 	
 		npc.add(ConversationStates.IDLE, 
@@ -172,7 +189,20 @@ public class KillDarkElves extends AbstractQuest {
 						new KilledCondition("elf ciemności łucznik", "elf ciemności kapitan", "coś"),
 						new PlayerHasItemWithHimCondition("amulet"))
 				, ConversationStates.ATTENDING
-				, "Bardzo, bardzo dziękuję. Cieszę się z oddania amuletu. Weź ten pierścień. Może on odrodzić twe moce po śmierci.",
+				, "Amulet znów jest na swoim miejscu, a zagrożenie zostało odparte. Przyjmij pierścień szmaragdowy w dowód dotrzymania umowy; jeśli kiedyś ulegnie uszkodzeniu, Ognir zna się na takich naprawach.",
+				new MultipleActions(new DropItemAction("amulet"),
+						new EquipItemAction("pierścień szmaragdowy", 1, true),
+						new IncreaseXPAction(20000),
+						new IncreaseKarmaAction(25.0),
+						new SetQuestAction(QUEST_SLOT, "done")));
+        // Resume the native stage without changing its guards or actions.
+        npc.add(ConversationStates.ATTENDING, "meldunek",
+				new AndCondition(new games.stendhal.server.entity.npc.condition.AlwaysTrueCondition(),
+						new QuestInStateCondition(QUEST_SLOT, "start"),
+						new KilledCondition("elf ciemności łucznik", "elf ciemności kapitan", "coś"),
+						new PlayerHasItemWithHimCondition("amulet"))
+				, ConversationStates.ATTENDING
+				, "Amulet znów jest na swoim miejscu, a zagrożenie zostało odparte. Przyjmij pierścień szmaragdowy w dowód dotrzymania umowy; jeśli kiedyś ulegnie uszkodzeniu, Ognir zna się na takich naprawach.",
 				new MultipleActions(new DropItemAction("amulet"),
 						new EquipItemAction("pierścień szmaragdowy", 1, true),
 						new IncreaseXPAction(20000),
@@ -197,12 +227,17 @@ public class KillDarkElves extends AbstractQuest {
 						new QuestInStateCondition(QUEST_SLOT,0,"started"),
 						new NotCondition(
 								new QuestInStateCondition(QUEST_SLOT, completedQuestState))),
-				ConversationStates.QUEST_STARTED, 
-				"Nie pamiętasz? Obiecałeś mi rozwiązać problem z ciemnymi elfami"+
-				" Zabij każdego ciemnego elfa w #sekretnym #pokoju w szczególności "+
-				" przywódców ciemnych elfów, ich czarodziejów i wszystkich łuczników." +
-				"  nie zapomnij też o matronie."+
-				" I najważniejsze po zabiciu mutanta #coś przynieś mi amulet z jego zwłok.",
+				ConversationStates.ATTENDING, 
+				"Nie zakończyliśmy jeszcze sprawy mrocznych elfów. Sprawdź przywódców, czarodziejów i łuczników w kryjówce; matrona również musi zostać pokonana. Pamiętaj też o amulecie z mutanta coś.",
+				new ExamineChatAction("dark-elves-wanted.png", "List Gończy!!", ""));
+        // Resume the native stage without changing its guards or actions.
+        npc.add(ConversationStates.ATTENDING, "meldunek",
+				new AndCondition(
+						new QuestInStateCondition(QUEST_SLOT,0,"started"),
+						new NotCondition(
+								new QuestInStateCondition(QUEST_SLOT, completedQuestState))),
+				ConversationStates.ATTENDING, 
+				"Nie zakończyliśmy jeszcze sprawy mrocznych elfów. Sprawdź przywódców, czarodziejów i łuczników w kryjówce; matrona również musi zostać pokonana. Pamiętaj też o amulecie z mutanta coś.",
 				new ExamineChatAction("dark-elves-wanted.png", "List Gończy!!", ""));
 		
 		npc.add(ConversationStates.IDLE, 
@@ -211,8 +246,17 @@ public class KillDarkElves extends AbstractQuest {
 						new QuestInStateCondition(QUEST_SLOT, completedQuestState),
 						new NotCondition(
 								new PlayerHasItemWithHimCondition("amulet")))
-				, ConversationStates.QUEST_STARTED
-				, "Co się stało z amuletem? Pamiętaj muszę go mieć z powrotem!"
+				, ConversationStates.ATTENDING
+				, "Przeciwnicy zostali pokonani, ale brakuje amuletu. Przynieś go z kryjówki mutanta coś; dopiero wtedy zamkniemy naszą umowę."
+				, null);
+        // Resume the native stage without changing its guards or actions.
+        npc.add(ConversationStates.ATTENDING, "meldunek",
+				new AndCondition(new games.stendhal.server.entity.npc.condition.AlwaysTrueCondition(),
+						new QuestInStateCondition(QUEST_SLOT, completedQuestState),
+						new NotCondition(
+								new PlayerHasItemWithHimCondition("amulet")))
+				, ConversationStates.ATTENDING
+				, "Przeciwnicy zostali pokonani, ale brakuje amuletu. Przynieś go z kryjówki mutanta coś; dopiero wtedy zamkniemy naszą umowę."
 				, null);
 	
 		npc.add(ConversationStates.IDLE, 
@@ -221,7 +265,19 @@ public class KillDarkElves extends AbstractQuest {
 						new QuestInStateCondition(QUEST_SLOT, completedQuestState),
 						new PlayerHasItemWithHimCondition("amulet"))
 				, ConversationStates.ATTENDING
-				, "Bardzo, bardzo dziękuję. Cieszę się z oddania amuletu. Weź ten pierścień. Może on odrodzić twe moce po śmierci.",
+				, "Amulet znów jest na swoim miejscu, a zagrożenie zostało odparte. Przyjmij pierścień szmaragdowy w dowód dotrzymania umowy; jeśli kiedyś ulegnie uszkodzeniu, Ognir zna się na takich naprawach.",
+				new MultipleActions(new DropItemAction("amulet"),
+						new EquipItemAction("pierścień szmaragdowy", 1, true),
+						new IncreaseXPAction(50000),
+						new IncreaseKarmaAction(25.0),
+						new SetQuestAction(QUEST_SLOT, "done")));
+        // Resume the native stage without changing its guards or actions.
+        npc.add(ConversationStates.ATTENDING, "meldunek",
+				new AndCondition(new games.stendhal.server.entity.npc.condition.AlwaysTrueCondition(),
+						new QuestInStateCondition(QUEST_SLOT, completedQuestState),
+						new PlayerHasItemWithHimCondition("amulet"))
+				, ConversationStates.ATTENDING
+				, "Amulet znów jest na swoim miejscu, a zagrożenie zostało odparte. Przyjmij pierścień szmaragdowy w dowód dotrzymania umowy; jeśli kiedyś ulegnie uszkodzeniu, Ognir zna się na takich naprawach.",
 				new MultipleActions(new DropItemAction("amulet"),
 						new EquipItemAction("pierścień szmaragdowy", 1, true),
 						new IncreaseXPAction(50000),
@@ -229,11 +285,11 @@ public class KillDarkElves extends AbstractQuest {
 						new SetQuestAction(QUEST_SLOT, "done")));
 		
 		npc.add(
-			ConversationStates.QUEST_STARTED,
+			ConversationStates.ATTENDING,
 			Arrays.asList("secret", "room", "sekretnego", "pokoju"),
 			null,
 			ConversationStates.ATTENDING,
-			"Pokój jest pod nami. Ma szary dach i twarz demona na drzwiach. Potrzebuję Ciebie, abyś zabił mroczne elfy i przyniósł mi amulet z mutanta coś.",
+			"Sekretny pokój jest poniżej nas, pod szarym dachem i za drzwiami z twarzą demona. Wejdź do kryjówki, pokonaj mroczne elfy z listy i odzyskaj amulet od mutanta coś.",
 			null);
 	}
 
@@ -242,7 +298,7 @@ public class KillDarkElves extends AbstractQuest {
 		super.addToWorld();
 		fillQuestInfo(
 				"Zabij Mroczne Elfy",
-				"Maerion lider elfów chce, abyś zabił mroczne elfy w sekretnym pokoju i odzyskał jego amulet.",
+				"Maerion z Nalwor chce odzyskać amulet z kryjówki mrocznych elfów. Poznaj drogę do sekretnego pokoju, pokonaj wskazanych przeciwników i przynieś zgubę.",
 				false);
 		step_1();
 		step_2();
@@ -370,4 +426,7 @@ public class KillDarkElves extends AbstractQuest {
 	public String getNPCName() {
 		return "Maerion";
 	}
+
+    public static List<String> getDialogueCreatures() { return java.util.Collections.unmodifiableList(creatures); }
+
 }

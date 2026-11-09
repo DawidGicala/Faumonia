@@ -43,10 +43,11 @@ public class Warrior implements ZoneConfigurator {
 
 			@Override
 			protected void createDialog() {
+                games.stendhal.server.entity.npc.dialogue.CollectionDialogueTopics.install(this);
 				addGreeting("Witaj, jestem trenerem rycerzy.");
 				addGoodbye("Żegnaj!");
 				addHelp("Jeśli wykonasz #zadanie, to odznaczę Cię szmaragdowym medalem.");
-				addJob("Jeśli wykonasz #zadanie, to odznaczę Cię szmaragdowym medalem.");
+				addJob("Szkolę rycerzy i pilnuję zapasów oddziału. Za dostawę oraz próbę walki mogę przyznać szmaragdowy medal. Z nim można później zwrócić się do Trenera Łuczników.");
 				
 				add(
 				        ConversationStates.ATTENDING,
@@ -58,7 +59,7 @@ public class Warrior implements ZoneConfigurator {
 			}
 		};
 
-		elemental4.setDescription("Oto dowódca Rycerzy Ados.");
+		elemental4.setDescription("Widzisz Trenera Rycerzy, dowódcę szkolącego wojowników Ados. Ocenia gotowość do służby, nie tylko wygląd broni.");
 		elemental4.setEntityClass("kboss");
 		elemental4.setPosition(60, 57);
 		elemental4.setDirection(Direction.LEFT);

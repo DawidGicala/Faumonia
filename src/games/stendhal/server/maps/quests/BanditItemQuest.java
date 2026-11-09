@@ -77,7 +77,7 @@ import java.util.Map;
  * REPETITIONS:
  * <ul><li> once a week</ul>
  */
-public class BanditItemQuest extends AbstractQuest {
+public class BanditItemQuest extends AbstractQuest implements games.stendhal.server.core.rp.quest.NativeCollectionDetails {
 
 	private static final String QUEST_SLOT = "bandit_item";
 	
@@ -141,8 +141,7 @@ public class BanditItemQuest extends AbstractQuest {
 		// common place to get the start quest actions as we can both starts it and abort and start again
 		
 		final List<ChatAction> actions = new LinkedList<ChatAction>();
-		actions.add(new StartRecordingRandomItemCollectionAction(QUEST_SLOT,0,items,"Zbieram wszystko co zbójeckie."
-				+ " Przynieś [item] i nie zapomnij powiedzieć #'załatwione'."));	
+		actions.add(new StartRecordingRandomItemCollectionAction(QUEST_SLOT, 0, items, "Nie zbieram byle świecidełek, interesuje mnie zbójecki ekwipunek. Tym razem przynieś [item]. Gdy dostawa będzie w komplecie, powiedz #zakończone, a uczciwie się rozliczymy."));	
 		actions.add(new SetQuestToTimeStampAction(QUEST_SLOT, 1));
 		
 		return new MultipleActions(actions);
@@ -150,60 +149,61 @@ public class BanditItemQuest extends AbstractQuest {
 	
 	private void getQuest() {
 		final SpeakerNPC npc = npcs.get("Szaberka");
-		npc.add(ConversationStates.ATTENDING, ConversationPhrases.QUEST_MESSAGES,
-				new AndCondition(new QuestActiveCondition(QUEST_SLOT),
-								 new NotCondition(new TimePassedCondition(QUEST_SLOT,1,expireDelay))), 
-				ConversationStates.ATTENDING,
-				null,
-				new SayRequiredItemAction(QUEST_SLOT,0,"Już masz zadanie przyniesienia [item]"
-						+ ". Powiedz #zakończone jeżeli będziesz miał ze sobą."));
+		npc.add(ConversationStates.ATTENDING,
+            ConversationPhrases.QUEST_MESSAGES,
+            new AndCondition(new QuestActiveCondition(QUEST_SLOT),
+								 new NotCondition(new TimePassedCondition(QUEST_SLOT,1,expireDelay))),
+            ConversationStates.ATTENDING,
+            null,
+            new SayRequiredItemAction(QUEST_SLOT, 0, "Twoje zamówienie pozostaje aktualne: [item]. Nie musisz pytać o nowe zadanie, przynieś tę dostawę i powiedz #zakończone."));
 		
-		npc.add(ConversationStates.ATTENDING, ConversationPhrases.QUEST_MESSAGES,
-				new AndCondition(new QuestActiveCondition(QUEST_SLOT),
-								 new TimePassedCondition(QUEST_SLOT,1,expireDelay)), 
-				ConversationStates.ATTENDING,
-				null,
-				new SayRequiredItemAction(QUEST_SLOT,0,"Już masz zadanie przyniesienia [item]"
-						+ ". Powiedz #zakończone jeżeli będziesz miał  ze sobą. Być może teraz ten przedmiot występuje rzadko. Mogę dać Tobie #inne zadanie lub możesz wrócić z tym, o które prosiłem Cię wcześniej."));
+		npc.add(ConversationStates.ATTENDING,
+            ConversationPhrases.QUEST_MESSAGES,
+            new AndCondition(new QuestActiveCondition(QUEST_SLOT),
+								 new TimePassedCondition(QUEST_SLOT,1,expireDelay)),
+            ConversationStates.ATTENDING,
+            null,
+            new SayRequiredItemAction(QUEST_SLOT, 0, "Nadal czekam na [item]. Poszukiwania trwają już dość długo, więc mogę przyjąć prośbę o #inne zamówienie; możesz też dokończyć obecne. Dostarczony komplet zgłoś słowem #zakończone."));
 	
-		npc.add(ConversationStates.ATTENDING, ConversationPhrases.QUEST_MESSAGES,
-				new AndCondition(new QuestCompletedCondition(QUEST_SLOT),
-								 new NotCondition(new TimePassedCondition(QUEST_SLOT,1,delay))), 
-				ConversationStates.ATTENDING,
-				null,
-				new SayTimeRemainingAction(QUEST_SLOT,1, delay, "Na tą chwilę nic nie potrzebuję. Wróć za "));
+		npc.add(ConversationStates.ATTENDING,
+            ConversationPhrases.QUEST_MESSAGES,
+            new AndCondition(new QuestCompletedCondition(QUEST_SLOT),
+								 new NotCondition(new TimePassedCondition(QUEST_SLOT,1,delay))),
+            ConversationStates.ATTENDING,
+            null,
+            new SayTimeRemainingAction(QUEST_SLOT,1, delay, "Na tą chwilę nic nie potrzebuję. Wróć za "));
 		
 		
 		final List<ChatAction> actions = new LinkedList<ChatAction>();
-		actions.add(new StartRecordingRandomItemCollectionAction(QUEST_SLOT,0,items,"Zbieram wszystko co zbójeckie."
-				+ " Przynieś [item] i nie zapomnij powiedzieć #'załatwione'."));
+		actions.add(new StartRecordingRandomItemCollectionAction(QUEST_SLOT, 0, items, "Nie zbieram byle świecidełek, interesuje mnie zbójecki ekwipunek. Tym razem przynieś [item]. Gdy dostawa będzie w komplecie, powiedz #zakończone, a uczciwie się rozliczymy."));
 		actions.add(new SetQuestToTimeStampAction(QUEST_SLOT, 1));
 		
-		npc.add(ConversationStates.ATTENDING, ConversationPhrases.QUEST_MESSAGES,
-				new OrCondition(new QuestNotStartedCondition(QUEST_SLOT),
+		npc.add(ConversationStates.ATTENDING,
+            ConversationPhrases.QUEST_MESSAGES,
+            new OrCondition(new QuestNotStartedCondition(QUEST_SLOT),
 								new AndCondition(new QuestCompletedCondition(QUEST_SLOT),
-												 new TimePassedCondition(QUEST_SLOT,1,delay))), 
-				ConversationStates.ATTENDING,
-				null,
-				startQuestAction());
+												 new TimePassedCondition(QUEST_SLOT,1,delay))),
+            ConversationStates.ATTENDING,
+            null,
+            startQuestAction());
 	}
 	
 	private void completeQuest() {
 		final SpeakerNPC npc = npcs.get("Szaberka");
 		
 		npc.add(ConversationStates.ATTENDING,
-				ConversationPhrases.FINISH_MESSAGES,
-				new QuestNotStartedCondition(QUEST_SLOT),
-				ConversationStates.ATTENDING, 
-				"Nie pamiętam, abym dawał Tobie #zadanie.",
-				null);
+            ConversationPhrases.FINISH_MESSAGES,
+            new QuestNotStartedCondition(QUEST_SLOT),
+            ConversationStates.ATTENDING,
+            "Nie pamiętam, abym dawał Tobie #zadanie.",
+            null);
 		
 		npc.add(ConversationStates.ATTENDING,
-				ConversationPhrases.FINISH_MESSAGES,
-				new QuestCompletedCondition(QUEST_SLOT),
-				ConversationStates.ATTENDING, 
-				"Już ukończyłeś ostatnie zadanie, które Ci dałem.",
-				null);
+            ConversationPhrases.FINISH_MESSAGES,
+            new QuestCompletedCondition(QUEST_SLOT),
+            ConversationStates.ATTENDING,
+            "Już ukończyłeś ostatnie zadanie, które Ci dałem.",
+            null);
 		
 		final List<ChatAction> actions = new LinkedList<ChatAction>();
 		actions.add(new DropRecordedItemAction(QUEST_SLOT,0));
@@ -224,26 +224,25 @@ public class BanditItemQuest extends AbstractQuest {
 				goldamount = 500 * Rand.roll1D6();
 				money.setQuantity(goldamount);
 				player.equipOrPutOnGround(money);
-				raiser.say("Wspaniale! Weź te 4 zwoje do naszej wioski oraz " + Integer.toString(goldamount) + " money na pokrycie wydatków podróży.");
+				raiser.say("Dobra robota, dokładnie tego brakowało w moich zbiorach. Dostawa została przyjęta; zapłata i zwoje pomogą ci podczas następnych wypraw. Otrzymujesz " + goldamount + " monet.");
 			}
 		});
 		
 		npc.add(ConversationStates.ATTENDING,
-				ConversationPhrases.FINISH_MESSAGES, 
-				new AndCondition(new QuestActiveCondition(QUEST_SLOT),
+            ConversationPhrases.FINISH_MESSAGES,
+            new AndCondition(new QuestActiveCondition(QUEST_SLOT),
 								 new PlayerHasRecordedItemWithHimCondition(QUEST_SLOT,0)),
-				ConversationStates.ATTENDING, 
-				null,
-				new MultipleActions(actions));
+            ConversationStates.ATTENDING,
+            null,
+            new MultipleActions(actions));
 		
 		npc.add(ConversationStates.ATTENDING,
-				ConversationPhrases.FINISH_MESSAGES,
-				new AndCondition(new QuestActiveCondition(QUEST_SLOT),
+            ConversationPhrases.FINISH_MESSAGES,
+            new AndCondition(new QuestActiveCondition(QUEST_SLOT),
 								 new NotCondition(new PlayerHasRecordedItemWithHimCondition(QUEST_SLOT,0))),
-				ConversationStates.ATTENDING, 
-				null,
-				new SayRequiredItemAction(QUEST_SLOT,0,"Nie masz ze sobą [item]"
-						+ " Zdobądź i powiedz wtedy #zakończone."));
+            ConversationStates.ATTENDING,
+            null,
+            new SayRequiredItemAction(QUEST_SLOT, 0, "Do pełnej dostawy brakuje ci jeszcze: [item]. Nie zabieram części zamówienia; wróć z całym kompletem i powiedz #zakończone."));
 		
 	}
 	
@@ -251,27 +250,27 @@ public class BanditItemQuest extends AbstractQuest {
 		final SpeakerNPC npc = npcs.get("Szaberka");
 		
 		npc.add(ConversationStates.ATTENDING,
-				ConversationPhrases.ABORT_MESSAGES,
-				new AndCondition(new QuestActiveCondition(QUEST_SLOT),
-						 		 new TimePassedCondition(QUEST_SLOT,1,expireDelay)), 
-				ConversationStates.ATTENDING, 
-				null, 
-				startQuestAction());
+            ConversationPhrases.ABORT_MESSAGES,
+            new AndCondition(new QuestActiveCondition(QUEST_SLOT),
+						 		 new TimePassedCondition(QUEST_SLOT,1,expireDelay)),
+            ConversationStates.ATTENDING,
+            null,
+            startQuestAction());
 		
 		npc.add(ConversationStates.ATTENDING,
-				ConversationPhrases.ABORT_MESSAGES,
-				new AndCondition(new QuestActiveCondition(QUEST_SLOT),
-						 		 new NotCondition(new TimePassedCondition(QUEST_SLOT,1,expireDelay))), 
-				ConversationStates.ATTENDING, 
-				"Nie minęło tak dużo czasu od rozpoczęcia zadania. Nie powinieneś się tak szybko poddawać.", 
-				null);
+            ConversationPhrases.ABORT_MESSAGES,
+            new AndCondition(new QuestActiveCondition(QUEST_SLOT),
+						 		 new NotCondition(new TimePassedCondition(QUEST_SLOT,1,expireDelay))),
+            ConversationStates.ATTENDING,
+            "Nie minęło tak dużo czasu od rozpoczęcia zadania. Nie powinieneś się tak szybko poddawać.",
+            null);
 		
 		npc.add(ConversationStates.ATTENDING,
-				ConversationPhrases.ABORT_MESSAGES,
-				new QuestNotActiveCondition(QUEST_SLOT),
-				ConversationStates.ATTENDING, 
-				"Obawiam się, że jeszcze nie dałem Tobie #zadania.", 
-				null);
+            ConversationPhrases.ABORT_MESSAGES,
+            new QuestNotActiveCondition(QUEST_SLOT),
+            ConversationStates.ATTENDING,
+            "Obawiam się, że jeszcze nie dałem Tobie #zadania.",
+            null);
 		
 	}
 
@@ -282,47 +281,15 @@ public class BanditItemQuest extends AbstractQuest {
 	
 	@Override
 	public List<String> getHistory(final Player player) {
-		final List<String> res = new ArrayList<String>();
-		if (!player.hasQuest(QUEST_SLOT)) {
-			return res;
-		}
-		res.add("Spotkałem Szaberkę.");
-		final String questState = player.getQuest(QUEST_SLOT);
-		if ("rejected".equals(questState)) {
-			res.add("Nie chcę pomóc Szaberce.");
-			return res;
-		}
-		res.add("Chcę pomóc Szaberce.");
-		if (player.hasQuest(QUEST_SLOT) && !player.isQuestCompleted(QUEST_SLOT)) {
-			String questItem = player.getRequiredItemName(QUEST_SLOT,0);
-			int amount = player.getRequiredItemQuantity(QUEST_SLOT,0);
-			if (!player.isEquipped(questItem, amount)) {
-				res.add(String.format("Zostałem poproszony, aby przynieść " +Grammar.quantityplnoun(amount, questItem, "") + " do Szaberki."));
-			} else {
-				res.add(String.format("Mam " + Grammar.quantityplnoun(amount, questItem, "a") + " dla Szaberki. Muszę mu to zanieść."));
-			}
-		}
-		if (isRepeatable(player)) {
-			res.add("Zaniosłem zbójnicki przedmiot do Szaberki, prawdopodobnie już potrzebuje kolejnego.");
-		} else if (isCompleted(player)) {
-			res.add("Pomogłem Szaberce. Za 21 dni znów do niego zajrzę.");
-		}
-		// add to history how often player helped Szaberka so far
-		final int repetitions = player.getNumberOfRepetitions(getSlotName(), 2);
-		if (repetitions > 0) {
-			res.add("Przyniosłem już "
-					+ Grammar.quantityplnoun(repetitions, "") + " przedmiotów Szaberec.");
-		}
-
-		return res;
-	}
+        return games.stendhal.server.core.rp.quest.CollectionQuestProgress.history(this, player);
+    }
 	
 	@Override
 	public void addToWorld() {
 		super.addToWorld();
 		fillQuestInfo(
 				"Szaberka poszukuje przedmiotów zbójnickich",
-				"Szaberka, poszukuje wszystkiego co zbójnickie i potrzebuje mojej pomocy raz na 3 tygodnie.",
+				"Szaberka ze zbójeckiej wioski zbiera broń, talizmany i części stroju związane ze zbójnikami. Zapytaj o aktualne zamówienie; po jego wykonaniu na kolejne trzeba zaczekać trzy tygodnie.",
 				true);
 		buildItemsMap();
 		
@@ -357,4 +324,12 @@ public class BanditItemQuest extends AbstractQuest {
 	public String getNPCName() {
 		return "Szaberka";
 	}
+
+
+
+    public String getCollectionKind(){return "random";}
+    public java.util.Map<String,Integer> getCollectionItems(){return new java.util.TreeMap<String,Integer>(items);}
+    public String getCollectionHint(){return "Liczy się tylko przedmiot i ilość zapisane w aktualnym zamówieniu. Przynieś całą dostawę i zgłoś jej zakończenie. Kolejne zlecenie oraz wymiana trudnego zamówienia są dostępne po upływie odpowiedniego czasu.";}
+    public int getCollectionWait(){return delay;} public int getCollectionExpiry(){return expireDelay;}
+
 }

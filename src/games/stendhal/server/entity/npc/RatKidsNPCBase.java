@@ -42,9 +42,11 @@ public abstract class RatKidsNPCBase extends SpeakerNPC {
 
 	@Override
 	protected void createDialog() {
+        addReply("mama", "Moja mama Agnus mieszka w Rat City. Odwiedź ją w domu i powiedz, że nic mi nie jest. Pewnie już się martwi, że tak długo nie wracam.");
+        addGoodbye("Do widzenia! Uważaj w tunelach.");
 		add(ConversationStates.IDLE, ConversationPhrases.GREETING_MESSAGES,
 				new GreetingMatchesNameCondition(getName()), true,
-				ConversationStates.IDLE, null, new RatKidGreetingAction());
+                ConversationStates.ATTENDING, null, new RatKidGreetingAction());
 	}
 
 	/**
@@ -54,7 +56,9 @@ public abstract class RatKidsNPCBase extends SpeakerNPC {
 	 */
 	private static class RatKidGreetingAction implements ChatAction {
 		public void fire(final Player player, final Sentence sentence, final EventRaiser npc) {
-			if (!player.hasQuest(QUEST_SLOT) || player.isQuestInState(QUEST_SLOT, "rejected")) {
+            if(player.isQuestCompleted(QUEST_SLOT)) {
+                npc.say("Witaj ponownie! Dziękuję za przekazanie mamie wiadomości. Postaram się już nie wpędzać jej w takie zmartwienie.");
+            } else if (!player.hasQuest(QUEST_SLOT) || player.isQuestInState(QUEST_SLOT, "rejected")) {
 				npc.say("Moja mama mówi mi, że nie powinienem rozmawiać z obcymi.");
 			} else {
 				final String npcQuestText = player.getQuest(QUEST_SLOT);
@@ -73,8 +77,8 @@ public abstract class RatKidsNPCBase extends SpeakerNPC {
 					} else if ( npcDoneText.length > 1) {
 						player.setQuest(QUEST_SLOT, lookStr + ";" + npcName
 								+ ":" + saidStr);//
-						npc.say("Cześć nazywam się " + npc.getName() + ". Proszę powiedz mojej mamie, że ze mną jest wszystko w porządku.");
-						player.addXP(500);
+                        npc.say("Cześć, nazywam się " + npc.getName() + ". Bawię się tutaj i zupełnie nie zauważyłem, ile minęło czasu. Powiedz mojej mamie Agnus, że nic mi nie jest, żeby przestała się martwić.");
+                        games.stendhal.server.entity.npc.action.DialogueRewardAction.xp(500).fire(player,sentence,npc);
 					} else {
 						npc.say("Moja mama mówi mi, że nie powinienem rozmawiać z obcymi.");
 					}

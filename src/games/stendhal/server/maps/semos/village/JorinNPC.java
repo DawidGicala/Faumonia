@@ -94,13 +94,13 @@ protected void createDialog() {
     addHelp("Możesz zapytać o #zadania, #barierę, #mikstury, #przedmioty, #walkę lub #mistrzów #gry.");
 
     addReply(Arrays.asList("zadania", "questy", "misje", "zadaniach", "zadanie"),
-             "Zadania to podstawa twojego rozwoju. Udaj się do mmistrzów #gry w czerwonym domku. Wykonaj pierwsze zadanie, aby nauczyć się podstaw walki i skończyć samouczek.");
+             "Zadania to podstawa twojego rozwoju. Udaj się do Mistrza Faumonii w czerwonym domku. Wykonaj pierwsze zadanie, aby nauczyć się podstaw walki i skończyć samouczek.");
 
     addReply(Arrays.asList("mistrzowie gry", "mistrz gry", "czerwony domek", "mistrzach gry", "mistrzów gry"),
-             "Mistrzowie gry znajdują się w czerwonym domku. To oni zlecają zadania, które przeprowadzą cię przez całą grę. Koniecznie się tam wybierz!");
+             "Mistrz Faumonii czeka w czerwonym domku. Kolejne etapy u tego samego mentora przeprowadzą cię przez całą grę. Koniecznie się tam wybierz!");
 
     addReply(Arrays.asList("bariera", "przejście", "blokada", "barierze", "barierę"),
-             "Próbując przejść dalej w prawo natrafisz na barierę. Aby przejść dalej, wykonaj pierwsze #zadanie u #mistrzów #gry i osiągnij co najmniej 7 poziom. Porozmawiać z Sedro który stoi przy przejściu o szybkim zadaniu z serem.");
+             "Próbując przejść dalej w prawo natrafisz na barierę. Ukończ zadania Hayunna, pierwszy etap Mistrza Faumonii, pomoc Sedro i dostawę trzech serów dla Soro, a także osiągnij poziom 5. Przycisk Przewodnik przy czacie pokaże ci bieżący cel.");
 
     addReply(Arrays.asList("walka", "potwory", "jak walczyć", "walkę"),
              "Aby zaatakować, kliknij na potwora prawym przyciskiem myszy i wybierz opcję 'Atakuj'. Pamiętaj, że niektóre potwory, jak szczury, mogą uciekać. Warto też mieć pod ręką #mikstury, aby szybko odzyskać zdrowie.");

@@ -694,7 +694,7 @@
 		<drops>
 			<item value="wielki eliksir" quantity="[1,129]" probability="100.0"/>
 			<item value="gigantyczny eliksir" quantity="[1,49]" probability="90.0"/>
-			<item value="szczerbiec" quantity="[1,1]" probability="1.0"/>
+			<item value="szczerbiec" quantity="[1,1]" probability="0.25"/>
 			<item value="money" quantity="[11,49999]" probability="100.0"/>
 			<item value="pazur zielonego smoka" quantity="[1,1]" probability="25.0"/>
 			<item value="kieł smoka" quantity="[1,4]" probability="25.0"/>

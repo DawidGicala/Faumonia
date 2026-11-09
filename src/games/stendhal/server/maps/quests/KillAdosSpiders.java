@@ -50,7 +50,7 @@ import java.util.List;
 
 import marauroa.common.Pair;
 
-public class KillAdosSpiders extends AbstractQuest {
+public class KillAdosSpiders extends AbstractQuest implements games.stendhal.server.core.rp.quest.NativeHuntDetails {
 
 	private static final String QUEST_SLOT = "kill_ados_spiders";
 	protected HashMap<String, Pair<Integer, Integer>> creaturestokill = new HashMap<String, Pair<Integer,Integer>>();
@@ -84,19 +84,19 @@ public class KillAdosSpiders extends AbstractQuest {
 		final SpeakerNPC npc = npcs.get("Walt");
 
 		npc.add(ConversationStates.ATTENDING,
-				ConversationPhrases.QUEST_MESSAGES, 
-				new QuestNotStartedCondition(QUEST_SLOT),
-				ConversationStates.QUEST_OFFERED,
-				"Pająki które zaczeły się pojawiać w większych ilościach straszą mojego syna. Poszukuje kogoś kto się z nimi rozprawi. Może mi pomożesz?",
-				null);
+                ConversationPhrases.QUEST_MESSAGES,
+                new QuestNotStartedCondition(QUEST_SLOT),
+                ConversationStates.QUEST_OFFERED,
+                "Mój syn boi się już wychodzić za próg, odkąd wokół pojawia się tyle pajęczaków. Nie potrafię pilnować go na każdym kroku, a sam nie poradzę sobie z największymi bestiami. Pomożesz mi zadbać o bezpieczeństwo rodziny?",
+                null);
 
 		npc.add(ConversationStates.ATTENDING,
-				ConversationPhrases.QUEST_MESSAGES, 
-				new AndCondition(new QuestStateStartsWithCondition(QUEST_SLOT,"done"),
+                ConversationPhrases.QUEST_MESSAGES,
+                new AndCondition(new QuestStateStartsWithCondition(QUEST_SLOT,"done"),
 						 new TimePassedCondition(QUEST_SLOT, 1, MathHelper.MINUTES_IN_ONE_WEEK*999999)),
-				ConversationStates.QUEST_OFFERED,
-				"Pajęczaki znów wróciły... Może znów mi pomożesz?",
-				null);
+                ConversationStates.QUEST_OFFERED,
+                "Pajęczaki znów wróciły, a wraz z nimi strach mojego syna. Czy jeszcze raz pomożesz nam odzyskać spokój?",
+                null);
 
 		npc.add(ConversationStates.ATTENDING,
 				ConversationPhrases.QUEST_MESSAGES,
@@ -112,18 +112,18 @@ public class KillAdosSpiders extends AbstractQuest {
 
 		
 		npc.add(ConversationStates.QUEST_OFFERED,
-				ConversationPhrases.YES_MESSAGES,
-				null,
-				ConversationStates.ATTENDING,
-				"Dziękuję!!! Idź i zabij 50 pająków, 50 pająków ptaszników, 30 królowych pająków, 1 arachne oraz 1 olbrzymiego ptasznika. Jeżeli nie wiesz gdzie szukać konkretnego potwora, zapytaj Starkada w banku Semos. Olbrzymi ptasznik oraz arachne są niesamowicie niebezpieczne - możesz spróbować zaatakować je z dystansu.",
-				new MultipleActions(actions));
+                ConversationPhrases.YES_MESSAGES,
+                null,
+                ConversationStates.ATTENDING,
+                "Dziękuję, naprawdę na ciebie liczę. Musimy przerzedzić pięć rodzajów pajęczaków; Starkad w banku Semos podpowie, gdzie ich szukać. Uważaj szczególnie na arachne i olbrzymiego ptasznika." + "\nCele: " + games.stendhal.server.core.rp.quest.HuntQuestProgress.targetText(this,null) + ".",
+                new MultipleActions(actions));
 
-		npc.add(ConversationStates.QUEST_OFFERED, 
-				ConversationPhrases.NO_MESSAGES, 
-				null,
-				ConversationStates.ATTENDING,
-				"Co za szkoda... Moja rodzina jest w niebezpieczeństwie...",
-				new SetQuestAction(QUEST_SLOT, 0, "rejected"));
+		npc.add(ConversationStates.QUEST_OFFERED,
+                ConversationPhrases.NO_MESSAGES,
+                null,
+                ConversationStates.ATTENDING,
+                "Rozumiem, to groźne stworzenia. Jeśli nabierzesz sił i zmienisz zdanie, nadal będę potrzebował pomocy.",
+                new SetQuestAction(QUEST_SLOT, 0, "rejected"));
 	}
 
 	private void step_2() {
@@ -160,23 +160,23 @@ public class KillAdosSpiders extends AbstractQuest {
 		LinkedList<String> triggers = new LinkedList<String>();
 		triggers.addAll(ConversationPhrases.FINISH_MESSAGES);
 		triggers.addAll(ConversationPhrases.QUEST_MESSAGES);		
-		npc.add(ConversationStates.ATTENDING, 
-				triggers,
-				new AndCondition(
+		npc.add(ConversationStates.ATTENDING,
+                triggers,
+                new AndCondition(
 						new QuestInStateCondition(QUEST_SLOT, 0, "start"),
 						new KilledForQuestCondition(QUEST_SLOT, 1)),
-				ConversationStates.ATTENDING, 
-				"Bardzo dziękuję! Moja rodzina jest teraz bezpieczna. Weź te sztabki złota, odkładałem je przez pół życia na właśnie taką okazję... Weź również ten smoczy zwój, nie wiem do czego służy. Od dawna leży i się kurzy...",
-				new MultipleActions(actions));
+                ConversationStates.ATTENDING,
+                "Nareszcie mogę powiedzieć synowi, że ktoś zadbał o nasze bezpieczeństwo. Oddaję ci złoto odkładane na trudne czasy i smoczy zwój, który od dawna u mnie leżał. Niech pomogą ci w dalszej drodze.",
+                new MultipleActions(actions));
 
-		npc.add(ConversationStates.ATTENDING, 
-				triggers,
-				new AndCondition(
+		npc.add(ConversationStates.ATTENDING,
+                triggers,
+                new AndCondition(
 						new QuestInStateCondition(QUEST_SLOT, 0, "start"),
 						new NotCondition(new KilledForQuestCondition(QUEST_SLOT, 1))),
-				ConversationStates.ATTENDING, 
-				"Proszę pomóż mojej rodzinie i zabij te pająki!!!",
-				null);
+                ConversationStates.ATTENDING,
+                null,
+                (p, sentence, raiser) -> raiser.say("Jeszcze nie wszystkie pajęczaki zostały pokonane. Martwię się o rodzinę, ale nie chcę, żebyś zginął przez pośpiech." + "\n" + games.stendhal.server.core.rp.quest.HuntQuestProgress.progressText(KillAdosSpiders.this,p)));
 	}
 
 	@Override
@@ -184,7 +184,7 @@ public class KillAdosSpiders extends AbstractQuest {
 		super.addToWorld();
 		fillQuestInfo(
 				"Rodzina Walta w niebezpieczeństwie",
-				"Pajęczaki namnożyły się w krainie i zagrażają bezpieczeństwu rodziny Walta z Ados. Może powinienem im pomóc.",
+				"Walt z Ados martwi się o rodzinę, odkąd w krainie namnożyły się pajęczaki. Ustal z nim cele polowania i pokonaj wskazane odmiany, aby mógł spokojniej myśleć o bezpieczeństwie syna.",
 				false);
 		step_1();
 		step_2();
@@ -193,24 +193,8 @@ public class KillAdosSpiders extends AbstractQuest {
 	
 	@Override
 	public List<String> getHistory(final Player player) {
-			final List<String> res = new ArrayList<String>();
-			if (!player.hasQuest(QUEST_SLOT)) {
-				return res;
-			}
-			if (!isCompleted(player)) {
-				res.add("Musze zabić 50 pająków, 50 pająków ptaszników, 30 królowych pająków, arachne oraz olbrzymiego ptasznika, aby pomóc rodzinie Walta.");
-			} else if(isRepeatable(player)){
-				res.add("Mineło już sporo czasu... prawdopodobnie rodzina Walta znowu mnie potrzebuje!");
-			} else {
-				res.add("Pokonałem pajęczaki i rodzina Walta jest znów bezpieczna.	W nagrodę za ukończenie zadania otrzymałem: 500.000 pkt doświadczenia, 20.000 pkt ataku, 20.000 pkt obrony, smoczy zwój i zapas sztabek złota.");
-			}
-			int repetitions = player.getNumberOfRepetitions(getSlotName(), 2);
-			if (repetitions > 0) {
-				res.add("Pomogłem Waltowi "
-						+ Grammar.quantityplnoun(repetitions, "razy") + ".");
-			}
-			return res;
-	}
+        return games.stendhal.server.core.rp.quest.HuntQuestProgress.history(this,player);
+    }
 
 
 	@Override
@@ -239,4 +223,11 @@ public class KillAdosSpiders extends AbstractQuest {
 	public String getRegion() {
 		return Region.NALWOR_CITY;
 	}
+
+    @Override public java.util.Map<String, Pair<Integer,Integer>> getDialogueHuntTargets(Player player) {
+        return java.util.Collections.unmodifiableMap(new java.util.TreeMap<String,Pair<Integer,Integer>>(creaturestokill));
+    }
+    @Override public int getDialogueHuntTotal(Player player) { return 0; }
+    @Override public int getDialogueKillIndex() { return 1; }
+    @Override public String getDialogueHuntHint(Player player) { return "Szukaj pięciu rodzajów pajęczaków z listy. Starkad w banku Semos zna ich siedliska; na arachne i olbrzymiego ptasznika przygotuj zapasy oraz broń dystansową."; }
 }

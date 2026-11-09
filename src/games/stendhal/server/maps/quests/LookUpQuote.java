@@ -130,7 +130,7 @@ public class LookUpQuote extends AbstractQuest {
 						npc.say("Już się Ciebie pytałem o przysługę! Znalazłeś ulubione powiedzonko " + name + "?");
 						npc.setCurrentState(ConversationStates.QUESTION_1);
 					} else {
-						npc.say("Kiedyś miałem książkę z ulubionymi powiedzonkami rybaków, ale ją zgubiłem. Teraz nie mogę sobie przypomnieć powiedzonek. Możesz ich poszukać dla mnie?");
+						npc.say("Miałem kiedyś zbiór powiedzonek rybaków, ale książka zaginęła, a pamięć płata mi figle. W bibliotece Ados wciąż można szukać dawnych tekstów. Pomożesz mi odnaleźć słowa jednego z autorów?");
 					}
 				}
 			});
@@ -153,7 +153,7 @@ public class LookUpQuote extends AbstractQuest {
 
 		fisherman.add(ConversationStates.QUESTION_1,
 			ConversationPhrases.YES_MESSAGES, null,
-			ConversationStates.QUESTION_2, "Jak brzmi?", null);
+			ConversationStates.QUESTION_2, "Podaj dokładne brzmienie jego powiedzonka. Wpisz cytat w polu własnej odpowiedzi; samo imię rybaka nie wystarczy.", null);
 
 		fisherman.add(ConversationStates.QUESTION_1,
 			ConversationPhrases.NO_MESSAGES, null,
@@ -172,7 +172,7 @@ public class LookUpQuote extends AbstractQuest {
 					final Sentence expected = ConversationParser.parse(quote, new SimilarExprMatcher());
 
 					if (answer.matchesFull(expected)) {
-						npc.say("Oh racja to jest to! Jak mogłem to zapomnieć? Weź tą poręczną wędkę jako wyraz mojej wdzięczności!");
+						npc.say("Tak, właśnie te słowa chodziły mi po głowie! Dziękuję za cierpliwość do starego rybaka. Weź wędkę, może podczas własnych połowów zbierzesz równie dobre opowieści.");
 						final Item fishingRod = SingletonRepository.getEntityManager().getItem("wędka");
 						fishingRod.setBoundTo(player.getName());
 						player.equipOrPutOnGround(fishingRod);
@@ -183,7 +183,7 @@ public class LookUpQuote extends AbstractQuest {
 						npc.say("Dowidzenia - do następnego razu!");
 						npc.setCurrentState(ConversationStates.IDLE);
 					} else {
-						npc.say("Sądzę, że się pomyliłeś. Wróć, gdy będziesz dobrze znał powiedzenie.");
+						npc.say("To nie jest powiedzonko rybaka, o którego prosiłem. Sprawdź dokładne brzmienie i wróć z cytatem; nadal szukamy tych samych słów. Nie musisz przyjmować nowego zadania.");
 						npc.setCurrentState(ConversationStates.IDLE);
 					}
 				}
@@ -195,7 +195,7 @@ public class LookUpQuote extends AbstractQuest {
 		super.addToWorld();
 		fillQuestInfo(
 				"Poszukiwania Cytatu",
-				"Pequod zapomniał cytatu znanego rybaka.",
+				"Pequod nie może przypomnieć sobie pewnego rybackiego powiedzonka. Dowiedz się, czyich słów szuka, odnajdź cytat i przekaż go rybakowi w dokładnym brzmieniu.",
 				false);
 		createFishingRod();
 	}

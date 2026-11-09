@@ -82,7 +82,7 @@ class SoundSettings {
 		page.setBorder(BorderFactory.createEmptyBorder(pad, pad, pad, pad));
 
 		// click mode
-		muteToggle = new JCheckBox("Odtwórz dźwięki");
+		muteToggle = new JCheckBox("Włącz dźwięk");
 		boolean soundOn = Boolean.parseBoolean(WtWindowManager.getInstance().getProperty(SOUND_PROPERTY, "true"));
 		muteToggle.setSelected(soundOn);
 		muteToggle.addItemListener(new MuteListener());
@@ -90,13 +90,13 @@ class SoundSettings {
 
 		// Device selector
 		JComponent hbox = SBoxLayout.createContainer(SBoxLayout.HORIZONTAL, pad);
-		JComponent selectorLabel = new JLabel("Urządzenie dźwięku:");
+		JComponent selectorLabel = new JLabel("Urządzenie dźwiękowe:");
 		hbox.add(selectorLabel);
 		JComponent selector = createDeviceSelector();
 		hbox.add(selector);
-		selector.setToolTipText("<html>Wyjściowe urządzenie dźwięku. <b>auto</b> powinno"
-				+ " działać u większości osób,<br>ale wypróbuj inne jeżeli nie możesz otrzymać"
-				+ " zadowalającego dźwięku</html>");
+		selector.setToolTipText("<html>Wybierz urządzenie odtwarzające dźwięk. Ustawienie automatyczne"
+				+ " zwykle wystarcza.<br>Jeśli nie słyszysz gry, wybierz inne"
+				+ " urządzenie.</html>");
 		sliderComponents.add(selectorLabel);
 		sliderComponents.add(selector);
 		page.add(hbox);
@@ -108,18 +108,18 @@ class SoundSettings {
 		row.add(label);
 		SBoxLayout.addSpring(row);
 		masterVolume = createMasterVolumeSlider();
-		masterVolume.setToolTipText("Głośność wszystki kanałów dźwięku");
+		masterVolume.setToolTipText("Głośność wszystkich dźwięków gry.");
 		row.add(masterVolume);
 		sliderComponents.add(label);
 		sliderComponents.add(masterVolume);
 
 		row = SBoxLayout.createContainer(SBoxLayout.HORIZONTAL, pad);
 		page.add(row, SBoxLayout.constraint(SLayout.EXPAND_X));
-		label = new JLabel("GUI");
+		label = new JLabel("Interfejs");
 		row.add(label);
 		SBoxLayout.addSpring(row);
 		guiVolume = createVolumeSlider("gui");
-		guiVolume.setToolTipText("Głośność interaktywnych operacji jak zamykanie okien");
+		guiVolume.setToolTipText("Głośność czynności w interfejsie, np. zamykania okien.");
 		row.add(guiVolume);
 		sliderComponents.add(label);
 		sliderComponents.add(guiVolume);
@@ -130,7 +130,7 @@ class SoundSettings {
 		row.add(label);
 		SBoxLayout.addSpring(row);
 		effectsVolume = createVolumeSlider("sfx");
-		effectsVolume.setToolTipText("Głośność walki i inne efekty");
+		effectsVolume.setToolTipText("Głośność odgłosów walki i pozostałych efektów.");
 		row.add(effectsVolume);
 		sliderComponents.add(label);
 		sliderComponents.add(effectsVolume);
@@ -162,7 +162,7 @@ class SoundSettings {
 		row.add(label);
 		SBoxLayout.addSpring(row);
 		musicVolume = createVolumeSlider("music");
-		musicVolume.setToolTipText("Głośność dźwięku");
+		musicVolume.setToolTipText("Głośność muzyki.");
 		row.add(musicVolume);
 		sliderComponents.add(label);
 		sliderComponents.add(musicVolume);
@@ -189,6 +189,15 @@ class SoundSettings {
 	 */
 	private JComponent createDeviceSelector() {
 		final JComboBox selector = new JComboBox();
+		// Keep the stored device name stable; translate only its displayed label.
+		selector.setRenderer(new javax.swing.DefaultListCellRenderer() {
+			@Override
+			public java.awt.Component getListCellRendererComponent(javax.swing.JList list,
+					Object value, int index, boolean isSelected, boolean cellHasFocus) {
+				Object label = DEFAULT_DEVICE.equals(value) ? "Automatycznie (zalecane)" : value;
+				return super.getListCellRendererComponent(list, label, index, isSelected, cellHasFocus);
+			}
+		});
 		
 		// Fill with available device names
 		selector.addItem(DEFAULT_DEVICE);
@@ -206,7 +215,7 @@ class SoundSettings {
 				wm.setProperty(DEVICE_PROPERTY, (selected != null) ? selected.toString() : DEFAULT_DEVICE);
 				wm.save();
 				// Warn the user about the delayed effect
-				String msg = "Zmiana urządzenia dźwięku zadziała dopiero przy kolejnym włączeniu gry.";
+				String msg = "Zmiana urządzenia dźwiękowego zacznie działać po ponownym uruchomieniu gry.";
 				ClientSingletonRepository.getUserInterface().addEventLine(new EventLine("", msg, NotificationType.CLIENT));
 			}
 		});

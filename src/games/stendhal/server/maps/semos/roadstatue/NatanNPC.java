@@ -65,14 +65,15 @@ public class NatanNPC implements ZoneConfigurator {
 
 			@Override
 			protected void createDialog() {
+                games.stendhal.server.entity.npc.dialogue.HuntDialogueTopics.install(this);
 				addGreeting("Cześć. W czym mogę #pomóc?");
-				addJob("Poszukuje kogoś kto pomoże rozprawić się ze stworami z dreamscape. Może mi #pomożesz?");
-				addHelp("Potwory w dreamscape nawiedzają mnie w snach... mam dla Ciebie pewne #zadanie.");
+				addJob("Zajmuje mnie to, co dzieje się w krainie snów. Tamtejsze stworzenia wracają w moich nocnych koszmarach, dlatego szukam pomocy kogoś, kto potrafi stawić im czoło.");
+				addHelp("Nawet kiedy zamykam oczy, wracają stworzenia z krainy snów. Potrzebuję kogoś, kto potrafi zmierzyć się z nimi naprawdę. Zapytaj o #zadanie, a powiem, które nie dają mi spokoju.");
 				addGoodbye("Dowidzenia. Miło było Cię poznać!");
 			}
 		};
 
-		npc.setDescription("Oto Natan, wyglądający na zatroskanego i skupionego. Zdaje się nosić ciężar tajemniczych problemów związanych ze stworami z dreamscape, które nawiedzają go nawet we śnie");
+		npc.setDescription("Widzisz Natana, zatroskanego podróżnika. Stworzenia z krainy snów zdają się nie dawać mu spokoju nawet na jawie.");
 		npc.setEntityClass("man_003_npc");
 		npc.setPosition(10, 8);
 		npc.initHP(100);

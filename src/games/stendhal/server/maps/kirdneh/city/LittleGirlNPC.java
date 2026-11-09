@@ -52,8 +52,10 @@ public class LittleGirlNPC implements ZoneConfigurator {
 
 			@Override
 			protected void createDialog() {
+                addReply("wskazówki", "Najpierw zapytaj moją mamę Carey, czy mogę dostać czekoladę. Sara Beth na Athor sprzedaje tabliczki czekolady przy swoim stoisku. Mama wspominała też o szkole zabójców, ale tam jest niebezpiecznie.");
+                addReply("tematy", "Możemy wrócić do twojej sprawy albo porozmawiać o czymś innym. Co chcesz wiedzieć?");
 				// greeting message in quest given (ChocolateForElisabeth)
-				addJob("Praca? Lubię bawić się moimi #zabawkami :)");
+				addJob("Bawię się zabawkami i wymyślam dla nich przygody. Mam nawet misia od chłopca z Semos! Mama mówi, żebym nie oddalała się od ławki.");
 				addReply(Arrays.asList("toys", "zabawkami"), "Jest młody chłopak, który mieszka w Semos i raz dał mi jednego ze swoich pluszowych misi :) Takie to słodkie!");
 				addHelp("Zapytaj mojej #mamy. Może ona Tobie pomoże...");
 				addReply(Arrays.asList("mommy", "mama", "mamy"), "Siedzi tam na ławce i cieszy się słońcem.");
@@ -67,7 +69,7 @@ public class LittleGirlNPC implements ZoneConfigurator {
 		npc.setEntityClass("littlegirl2npc");
 		npc.setPosition(92, 15);
 		npc.initHP(100);
-		npc.setDescription("Oto Elisabeth. Wygląda na głodną.");
+		npc.setDescription("Widzisz Elisabeth, dziewczynkę bawiącą się niedaleko swojej mamy w Kirdneh. Ożywia się na każdą wzmiankę o czekoladzie.");
 		zone.add(npc);
 	}
 }

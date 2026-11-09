@@ -31,6 +31,7 @@ import games.stendhal.client.gui.chatlog.EventLine;
 import games.stendhal.client.gui.chatlog.HeaderLessEventLine;
 import games.stendhal.client.gui.chattext.ChatCompletionHelper;
 import games.stendhal.client.gui.chattext.ChatTextController;
+import games.stendhal.client.gui.dialogue.NpcDialogueController;
 import games.stendhal.client.gui.group.GroupPanelController;
 import games.stendhal.client.gui.layout.FreePlacementLayoutManager;
 import games.stendhal.client.gui.layout.SBoxLayout;
@@ -77,6 +78,7 @@ import java.util.List;
 import java.util.Locale;
 
 import javax.swing.JComponent;
+import javax.swing.JButton;
 import javax.swing.JLayeredPane;
 import javax.swing.JPanel;
 import javax.swing.JSplitPane;
@@ -222,6 +224,7 @@ public class j2DClient implements UserInterface {
 	 */
 	public j2DClient() {
 		setDefault(this);
+		NpcDialogueController.get().reset();
 		screenController = null;
 	}
 
@@ -354,7 +357,27 @@ public class j2DClient implements UserInterface {
 		// Set maximum size to prevent the entry requesting massive widths, but
 		// force expand if there's extra space anyway
 		chatText.getPlayerChatText().setMaximumSize(new Dimension(screenSize.width, Integer.MAX_VALUE));
-		chatBox.add(chatText.getPlayerChatText(), SBoxLayout.constraint(SLayout.EXPAND_X));
+		JPanel chatEntry = new JPanel(new java.awt.BorderLayout(4, 0));
+		chatEntry.setOpaque(false);
+		chatEntry.add(chatText.getPlayerChatText(), java.awt.BorderLayout.CENTER);
+		JButton dialogueButton = new JButton("Rozmowa");
+		dialogueButton.setFocusable(false);
+		dialogueButton.setToolTipText("Pokaż ostatnią rozmowę z NPC");
+		dialogueButton.addActionListener(event -> {
+			if (!NpcDialogueController.get().reopen()) {
+				addEventLine(new HeaderLessEventLine("Rozpocznij rozmowę z NPC, aby otworzyć jej okno.", NotificationType.CLIENT));
+			}
+		});
+		JPanel chatButtons = new JPanel(new java.awt.FlowLayout(java.awt.FlowLayout.RIGHT, 3, 0));
+        chatButtons.setOpaque(false);chatButtons.add(dialogueButton);
+        JButton guideButton = new JButton("Przewodnik");guideButton.setFocusable(false);
+        guideButton.setToolTipText("Bieżący cel i podpowiedzi dla nowych graczy");
+        guideButton.addActionListener(event -> {
+            if (!games.stendhal.client.gui.tutorial.TutorialGuideController.get().reopen())
+                addEventLine(new HeaderLessEventLine("Przewodnik pojawi się po zalogowaniu postaci.", NotificationType.CLIENT));
+        });
+        chatButtons.add(guideButton);chatEntry.add(chatButtons, java.awt.BorderLayout.EAST);
+		chatBox.add(chatEntry, SBoxLayout.constraint(SLayout.EXPAND_X));
 
 		chatBox.add(chatLogArea, SBoxLayout.constraint(SLayout.EXPAND_X, SLayout.EXPAND_Y));
 
@@ -1056,6 +1079,17 @@ public class j2DClient implements UserInterface {
 		return mainFrame.getMainFrame();
 	}
 
+	/** Visible world viewport in desktop coordinates, excluding chat and side panels. */
+	public java.awt.Rectangle getGameAreaBoundsOnScreen() {
+		if (screen != null && screen.isShowing()) {
+			return new java.awt.Rectangle(screen.getLocationOnScreen(), screen.getSize());
+		}
+		return getMainFrame().getBounds();
+	}
+
+	/** Anchor for the first placement of the movable NPC window, above chat. */
+	public Component getDialogueAnchor() { return chatText.getPlayerChatText(); }
+
 	/**
 	 * Get the current game screen height.
 	 *
@@ -1113,6 +1147,11 @@ public class j2DClient implements UserInterface {
 	 *            <code>true</code> if offline.
 	 */
 	public void setOffline(final boolean offline) {
+		if (offline && !this.offline) {
+			SwingUtilities.invokeLater(() -> NpcDialogueController.get().disconnected());
+		} else if (!offline && this.offline) {
+			SwingUtilities.invokeLater(() -> NpcDialogueController.get().connected());
+		}
 		screenController.setOffline(offline);
 		this.offline = offline;
 	}

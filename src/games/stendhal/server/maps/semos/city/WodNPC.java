@@ -43,12 +43,14 @@ public class WodNPC implements ZoneConfigurator {
 
 			@Override
 			protected void createDialog() {
+                games.stendhal.server.entity.npc.dialogue.HuntDialogueTopics.install(this);
+                addJob("Lubię wiedzieć, czy wojownik potrafi skupić się na wyznaczonym celu. Las i góry stawiają różne wymagania, dlatego do każdej wyprawy wybieram jedną grupę przeciwników.");
 				addGreeting("Witaj.");
 				addGoodbye("Na razie.");
 			}
 		};
 
-		elemental.setDescription("Oto Wod. Wygląda.. staro?");
+		elemental.setDescription("Widzisz Woda, starszego mieszkańca Semos w kapeluszu. Wojowników ocenia raczej po rozwadze niż po głośnych deklaracjach.");
 		elemental.setEntityClass("manwithhatnpc");
 		elemental.setPosition(111, 40);
 		elemental.setDirection(Direction.DOWN);

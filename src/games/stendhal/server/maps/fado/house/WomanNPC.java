@@ -64,14 +64,15 @@ public class WomanNPC implements ZoneConfigurator {
 
 			@Override
 			protected void createDialog() {
+                games.stendhal.server.entity.npc.dialogue.CollectionDialogueTopics.install(this);
 				//addGreeting();
-				addJob("Gdybym mogła to projektowałabym sukienki!");
-				addHelp("Możesz otrzymać pomoc od Xhiphin Zohos. Zazwyczaj siedzi w sąsiednim domku. *hi hi hi* Ciekawa jestem dlaczego!");
+				addJob("Najchętniej projektowałabym sukienki, ale równie chętnie oglądam dobrze wykonane płaszcze. Zbieram różne kroje i kolory, bo trudno porównywać je tylko z cudzych opowieści. Może podczas wypraw znajdziesz coś do mojej kolekcji.");
+				addHelp("Jeśli chodzi o płaszcze, chętnie obejrzę to, co przynosisz z wypraw. O inne sprawy możesz zapytać Xhiphina Zohosa w sąsiednim domu. Ja najlepiej czuję się przy tkaninach, wykrojach i igle.");
 				addGoodbye("Dowidzenia, dowidzenia!");
 			}
 		};
 
-		woman.setDescription("Oto modnie ubrana młoda kobieta. Wygląda trochę na flirciarę.");
+		woman.setDescription("Widzisz Josephine, młodą kobietę starannie dobierającą swój strój. Z zaciekawieniem przygląda się noszonym przez wędrowców płaszczom.");
 		woman.setEntityClass("youngwomannpc");
 		woman.setPosition(3, 4);
 		woman.initHP(100);

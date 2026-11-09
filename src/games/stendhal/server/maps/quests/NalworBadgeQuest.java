@@ -44,7 +44,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class NalworBadgeQuest extends AbstractQuest {
+public class NalworBadgeQuest extends AbstractQuest implements games.stendhal.server.core.rp.quest.NativeCollectionDetails {
 
 	//this quest slot
 	private static final String QUEST_SLOT = "nalwor_badge";
@@ -60,138 +60,110 @@ public class NalworBadgeQuest extends AbstractQuest {
 
 	@Override
 	public List<String> getHistory(final Player player) {
-		final List<String> res = new ArrayList<String>();
-		if (!player.hasQuest(QUEST_SLOT)) {
-			return res;
-		}
-		res.add("Zdecydowałem się pomóc mieszkańcom Nalwor.");
-		final String questState = player.getQuest(QUEST_SLOT);
-		if (questState.equals("rejected")) {
-			res.add("Nie chcę pomóc mieszkańcom Nalwor");
-			return res;
-		}
-		res.add("Podobno Nnyddion, Lorithien i Grafindle potrzebują pomocy. Powinienem z nimi porozmawiać.");
-		if (!isCompleted(player)) {
-			res.add("Żeby ukończyć zadanie musze przynieść " + Grammar.a_noun(player.getRequiredItemName(QUEST_SLOT,0)) + ".");
-		}
-		if (isCompleted(player)) {
-			res.add("Zostałem zasłużonym mieszkańcem Nalwor i od teraz moge kupować zwoje.");
-		}
-		return res;
-	}
+        return games.stendhal.server.core.rp.quest.CollectionQuestProgress.history(this, player);
+    }
 	
 	private void checkCollectingQuests() {
 		final SpeakerNPC npc = npcs.get("Urzędnik Nalwor");
 		
 		
-		npc.add(
-		ConversationStates.IDLE,
-		ConversationPhrases.GREETING_MESSAGES,
-			new AndCondition(new GreetingMatchesNameCondition(npc.getName()),
+		npc.add(ConversationStates.IDLE,
+            ConversationPhrases.GREETING_MESSAGES,
+            new AndCondition(new GreetingMatchesNameCondition(npc.getName()),
 			new QuestNotStartedCondition(QUEST_SLOT)),
-		ConversationStates.ATTENDING,
-		"Witaj. Jestem urzędnikiem Nalwor. Zajmuje się sprawami urzędowymi i sprzedaje zwoje do miasta zasłużonym mieszkańcom.",
-		null);
+            ConversationStates.ATTENDING,
+            "Witaj w urzędzie Nalwor. Tytuł zasłużonego mieszkańca nadajemy za pomoc ludziom z naszego miasta. Mogę sprawdzić twoje zasługi i wyjaśnić, czego jeszcze potrzeba.",
+            null);
+        // Resume the native stage without changing its guards or actions.
+        npc.add(ConversationStates.ATTENDING, "dostawa",
+            new AndCondition(new games.stendhal.server.entity.npc.condition.AlwaysTrueCondition(),
+			new QuestNotStartedCondition(QUEST_SLOT)),
+            ConversationStates.ATTENDING,
+            "Witaj w urzędzie Nalwor. Tytuł zasłużonego mieszkańca nadajemy za pomoc ludziom z naszego miasta. Mogę sprawdzić twoje zasługi i wyjaśnić, czego jeszcze potrzeba.",
+            null);
 		
-		npc.add(ConversationStates.ATTENDING,
-			Arrays.asList("mieszkańcom", "zadanie", "zasłużonu", "task"),
-			new AndCondition(new QuestNotCompletedCondition(FIRST_QUEST_SLOT),
-					new QuestNotStartedCondition(QUEST_SLOT)),
-			ConversationStates.ATTENDING,
-			"Jeśli chcesz zostać zasłużonym mieszkańcem Nalwor to najpierw musisz zdobyć klucz do banku.",
-			null);
+		
 			
-		npc.add(ConversationStates.ATTENDING,
-			Arrays.asList("mieszkańcom", "zadanie", "zasłużonu", "task"),
-			new AndCondition(new QuestNotCompletedCondition(SECOND_QUEST_SLOT),
-					new QuestNotStartedCondition(QUEST_SLOT)),
-			ConversationStates.ATTENDING,
-			"Jeśli chcesz zostać zasłużonym mieszkańcem Nalwor to musisz pomóc Nnyddion zapełnić depozyt.",
-			null);	
+			
 					
 		npc.add(ConversationStates.ATTENDING,
-			Arrays.asList("mieszkańcom", "zadanie", "zasłużonu", "task"),
-			new AndCondition(new QuestNotCompletedCondition(THIRD_QUEST_SLOT),
-					new QuestNotStartedCondition(QUEST_SLOT)),
-			ConversationStates.ATTENDING,
-			"Jeśli chcesz zostać zasłużonym mieszkańcem Nalwor to musisz pomóc poczcie Nalwor.",
-			null);
+            Arrays.asList("mieszkańcom", "zadanie", "zasłużonu", "task"),
+            new AndCondition(new QuestNotStartedCondition(QUEST_SLOT), new games.stendhal.server.entity.npc.condition.OrCondition(new QuestNotCompletedCondition(FIRST_QUEST_SLOT), new QuestNotCompletedCondition(SECOND_QUEST_SLOT), new QuestNotCompletedCondition(THIRD_QUEST_SLOT))),
+            ConversationStates.ATTENDING,
+            null,
+            new games.stendhal.server.entity.npc.ChatAction(){public void fire(Player player, games.stendhal.common.parser.Sentence sentence, games.stendhal.server.entity.npc.EventRaiser raiser){raiser.say(games.stendhal.server.core.rp.quest.CollectionQuestProgress.progressText(NalworBadgeQuest.this,player));}});
 			
 	}
 
 	private void requestItem() {
 		
 		final SpeakerNPC npc = npcs.get("Urzędnik Nalwor");
-		final Map<String,Integer> items = new HashMap<String, Integer>();
-		
-		
-		
-		items.put("zbroja elficka",1);
-		items.put("spodnie elfickie",1);
-		items.put("buty elfickie",1);
-		items.put("tarcza elficka",1);
-		items.put("hełm elficki",1);
-		items.put("płaszcz elficki",1);
-		
+		final Map<String,Integer> items = getCollectionItems();
 		npc.add(ConversationStates.ATTENDING,
-				Arrays.asList("mieszkańcom", "zadanie", "zasłużonu", "task"),
-				new AndCondition(
+            Arrays.asList("mieszkańcom", "zadanie", "zasłużonu", "task"),
+            new AndCondition(
 						new QuestNotStartedCondition(QUEST_SLOT),
 						new QuestCompletedCondition(SECOND_QUEST_SLOT),
 						new QuestCompletedCondition(FIRST_QUEST_SLOT),
 						new QuestCompletedCondition(THIRD_QUEST_SLOT)),
-					ConversationStates.ATTENDING,
-					null,
-					new StartRecordingRandomItemCollectionAction(QUEST_SLOT, items, "Pomogłeś już wielu mieszkańcom Nalwor. Aby ostatecznie udowodnić mi, że jesteś oddany Nalwor,"
-						+ " proszę przynieś [item]."));
+            ConversationStates.ATTENDING,
+            null,
+            new StartRecordingRandomItemCollectionAction(QUEST_SLOT, items, "Trzy wymagane sprawy zostały zakończone. Dopełnij jeszcze dostawy dla Nalwor: [item]. Gdy wrócisz z całym kompletem, będę mógł przyznać ci tytuł zasłużonego mieszkańca."));
 	}
 						
 	private void collectItem() {
 			final SpeakerNPC npc = npcs.get("Urzędnik Nalwor");
 			
 					npc.add(ConversationStates.IDLE,
-				ConversationPhrases.GREETING_MESSAGES,
-				new AndCondition(new GreetingMatchesNameCondition(npc.getName()),
+            ConversationPhrases.GREETING_MESSAGES,
+            new AndCondition(new GreetingMatchesNameCondition(npc.getName()),
 						new QuestActiveCondition(QUEST_SLOT)),
-				ConversationStates.QUEST_ITEM_QUESTION, 
-				"Przyniosłeś przedmioty, o które cię prosiłem?",
-				null);
+            ConversationStates.QUEST_ITEM_QUESTION,
+            "Twoje wcześniejsze zasługi są już uznane. Pozostała dostawa, którą wpisałem do dokumentów. Masz przy sobie cały zamówiony komplet?",
+            null);
+        // Resume the native stage without changing its guards or actions.
+        npc.add(ConversationStates.ATTENDING, "dostawa",
+            new AndCondition(new games.stendhal.server.entity.npc.condition.AlwaysTrueCondition(),
+						new QuestActiveCondition(QUEST_SLOT)),
+            ConversationStates.QUEST_ITEM_QUESTION,
+            "Twoje wcześniejsze zasługi są już uznane. Pozostała dostawa, którą wpisałem do dokumentów. Masz przy sobie cały zamówiony komplet?",
+            null);
 				
 			npc.add(ConversationStates.QUEST_ITEM_QUESTION,
-				ConversationPhrases.YES_MESSAGES, 
-				new AndCondition(new QuestActiveCondition(QUEST_SLOT),
+            ConversationPhrases.YES_MESSAGES,
+            new AndCondition(new QuestActiveCondition(QUEST_SLOT),
 								new NotCondition(new PlayerHasRecordedItemWithHimCondition(QUEST_SLOT))),
-				ConversationStates.ATTENDING, 
-				null,
-				new SayRequiredItemAction(QUEST_SLOT, "Nie masz przy sobie [item]."));
+            ConversationStates.ATTENDING,
+            null,
+            new SayRequiredItemAction(QUEST_SLOT, "W dokumentach widnieje jeszcze dostawa: [item]. Wróć z całym kompletem; twoje ukończone sprawy zachowują ważność."));
 
 					npc.add(ConversationStates.QUEST_ITEM_QUESTION,
-				ConversationPhrases.YES_MESSAGES, 
-				new AndCondition(new QuestActiveCondition(QUEST_SLOT),
+            ConversationPhrases.YES_MESSAGES,
+            new AndCondition(new QuestActiveCondition(QUEST_SLOT),
 								new PlayerHasRecordedItemWithHimCondition(QUEST_SLOT)),
-				ConversationStates.ATTENDING, 
-				"Dziękuje Ci w imieniu mieszkańców Nalwor. Oficjalnie honoruje cię zasłużonym mieszkańcem Nalwor. Od teraz możesz kupić u mnie zwoje do miasta.",
-				new MultipleActions(new DropRecordedItemAction(QUEST_SLOT), 
+            ConversationStates.ATTENDING,
+            "Dostawa przyjęta, a twoja pomoc mieszkańcom Nalwor została oficjalnie uznana. Od tej chwili możesz kupować u mnie zwoje do miasta. Przyjmij również nagrodę za zakończone starania.",
+            new games.stendhal.server.entity.npc.action.QuestFeeAction(QUEST_SLOT, new MultipleActions(new DropRecordedItemAction(QUEST_SLOT), 
 									new SetQuestAction(QUEST_SLOT, "done"),
 									new IncreaseXPAction(80000),
 									new IncreaseAtkXPAction(3500),
 									new IncreaseDefXPAction(4000),
 									new EquipItemAction("zwój nalwor", 10, true),
-									new IncreaseKarmaAction(10)));
+									new IncreaseKarmaAction(10))));
 									
 				npc.add(ConversationStates.QUEST_ITEM_QUESTION,
-				ConversationPhrases.NO_MESSAGES, 
-				null,
-				ConversationStates.ATTENDING, 
-				null,
-				new SayRequiredItemAction(QUEST_SLOT, "Wróć kiedy będziesz mieć [item] ze sobą."));
+            ConversationPhrases.NO_MESSAGES,
+            null,
+            ConversationStates.ATTENDING,
+            null,
+            new SayRequiredItemAction(QUEST_SLOT, "W dokumentach widnieje jeszcze dostawa: [item]. Wróć z całym kompletem; twoje ukończone sprawy zachowują ważność."));
 	}			
 
 	@Override
 	public void addToWorld() {
 		fillQuestInfo(
 				"Mieszkaniec Nalwor",
-				"Urzędnik Nalwor uhonoruje cie jako zasłużonego mieszkańca jeśli pomożesz kilku tutejszym mieszkańcom.",
+				"Pomóż mieszkańcom Nalwor, aby zasłużyć na oficjalne uznanie miasta. Urzędnik sprawdzi twoje zasługi, a przed zakończeniem wyjaśni wymaganą dostawę i opłatę.",
 				true);
 		
 		checkCollectingQuests();
@@ -219,6 +191,23 @@ public class NalworBadgeQuest extends AbstractQuest {
 	public String getRegion() {
 		return Region.NALWOR_CITY;
 	}
-}
+
+
+
+    public String getCollectionKind(){return "badge";}
+    public java.util.Map<String,Integer> getCollectionItems(){final Map<String,Integer> items = new HashMap<String, Integer>();
 		
-	        	
+		
+		
+		items.put("zbroja elficka",1);
+		items.put("spodnie elfickie",1);
+		items.put("buty elfickie",1);
+		items.put("tarcza elficka",1);
+		items.put("hełm elficki",1);
+		items.put("płaszcz elficki",1);
+		
+		return items;}
+    public String getCollectionHint(){return "Tytuł zasłużonego mieszkańca wymaga ukończenia trzech miejscowych spraw. Następnie urzędnik poprosi o jedną konkretną dostawę. Po jej przekazaniu otworzy dla ciebie zakup zwojów do miasta.";}
+    public java.util.Map<String,String> getCollectionPrerequisites(){java.util.Map<String,String> m=new java.util.LinkedHashMap<String,String>();m.put(FIRST_QUEST_SLOT,"Dostarcz złoto Grafindlowi");m.put(SECOND_QUEST_SLOT,"Dostarcz miecze Nnyddion");m.put(THIRD_QUEST_SLOT,"Pomóż Lorithien z rabusiami");return m;}
+
+}

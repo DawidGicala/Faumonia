@@ -12,6 +12,8 @@
  ***************************************************************************/
 package games.stendhal.server.maps.quests;
 
+import games.stendhal.server.entity.npc.action.DialogueRewardAction;
+
 import games.stendhal.common.Rand;
 import games.stendhal.common.parser.Sentence;
 import games.stendhal.server.core.engine.SingletonRepository;
@@ -81,6 +83,14 @@ public class ChocolateForElisabeth extends AbstractQuest {
 				ConversationStates.ATTENDING, 
 				"Nie pamiętam kiedy ostatnio czułam zapach dobrej tabliczki #czekolady...",
 				null);
+
+        // Same authoritative step, without requiring the player to leave and greet again.
+        npc.add(ConversationStates.ATTENDING, "czekolada", 
+				new AndCondition(new games.stendhal.server.entity.npc.condition.AlwaysTrueCondition(),
+						new QuestNotStartedCondition(QUEST_SLOT), new QuestNotInStateCondition(QUEST_SLOT, "rejected")),
+				ConversationStates.ATTENDING, 
+				"Nie pamiętam kiedy ostatnio czułam zapach dobrej tabliczki #czekolady...",
+				null);
 		
 		npc.addReply(Arrays.asList("chocolate", "czekolada", "czekolady"), "Moja mam powiedziała mi, że czekoladę można znaleść w szkole zabójców, która jest #niebezpieczna. Powiedziała mi także, że ktoś sprzedaje ją w Ados...");
 		
@@ -91,14 +101,30 @@ public class ChocolateForElisabeth extends AbstractQuest {
 				ConversationPhrases.GREETING_MESSAGES, 
 				new AndCondition(new GreetingMatchesNameCondition(npc.getName()),
 						new QuestInStateCondition(QUEST_SLOT, "start"), new PlayerHasItemWithHimCondition("tabliczka czekolady")),
-				ConversationStates.IDLE, 
-				"Moja mama chce wiedzieć kogo pytałam o tabliczkę czekolady :(",
+				ConversationStates.ATTENDING, 
+				"Najpierw porozmawiaj z moją mamą Carey, siedzi niedaleko na ławce. Musi wiedzieć, od kogo dostanę czekoladę. Poczekam tutaj, aż się poznacie.",
+				null);
+
+        // Same authoritative step, without requiring the player to leave and greet again.
+        npc.add(ConversationStates.ATTENDING, "czekolada", 
+				new AndCondition(new games.stendhal.server.entity.npc.condition.AlwaysTrueCondition(),
+						new QuestInStateCondition(QUEST_SLOT, "start"), new PlayerHasItemWithHimCondition("tabliczka czekolady")),
+				ConversationStates.ATTENDING, 
+				"Najpierw porozmawiaj z moją mamą Carey, siedzi niedaleko na ławce. Musi wiedzieć, od kogo dostanę czekoladę. Poczekam tutaj, aż się poznacie.",
 				null);
 		
 		// player didn't get chocolate, meanie
 		npc.add(ConversationStates.IDLE, 
 				ConversationPhrases.GREETING_MESSAGES, 
 				new AndCondition(new GreetingMatchesNameCondition(npc.getName()),
+						new QuestInStateCondition(QUEST_SLOT, "start"), new NotCondition(new PlayerHasItemWithHimCondition("tabliczka czekolady"))),
+				ConversationStates.ATTENDING, 
+				"Mam nadzieje, że ktoś mi przyniesie tabliczkę czekolady...:(",
+				null);
+
+        // Same authoritative step, without requiring the player to leave and greet again.
+        npc.add(ConversationStates.ATTENDING, "czekolada", 
+				new AndCondition(new games.stendhal.server.entity.npc.condition.AlwaysTrueCondition(),
 						new QuestInStateCondition(QUEST_SLOT, "start"), new NotCondition(new PlayerHasItemWithHimCondition("tabliczka czekolady"))),
 				ConversationStates.ATTENDING, 
 				"Mam nadzieje, że ktoś mi przyniesie tabliczkę czekolady...:(",
@@ -110,13 +136,29 @@ public class ChocolateForElisabeth extends AbstractQuest {
 				new AndCondition(new GreetingMatchesNameCondition(npc.getName()),
 						new QuestInStateCondition(QUEST_SLOT, "mummy"), new PlayerHasItemWithHimCondition("tabliczka czekolady")),
 				ConversationStates.QUESTION_1, 
-				"Wspaniale! Ta tabliczka czekolady jest dla mnie?",
+				"Ale pachnie! Mama mówiła, że już z tobą rozmawiała. Czy ta tabliczka czekolady jest naprawdę dla mnie?",
+				null);
+
+        // Same authoritative step, without requiring the player to leave and greet again.
+        npc.add(ConversationStates.ATTENDING, "czekolada", 
+				new AndCondition(new games.stendhal.server.entity.npc.condition.AlwaysTrueCondition(),
+						new QuestInStateCondition(QUEST_SLOT, "mummy"), new PlayerHasItemWithHimCondition("tabliczka czekolady")),
+				ConversationStates.QUESTION_1, 
+				"Ale pachnie! Mama mówiła, że już z tobą rozmawiała. Czy ta tabliczka czekolady jest naprawdę dla mnie?",
 				null);
 		
 		// player spoke to mummy and hasn't got chocolate
 		npc.add(ConversationStates.IDLE, 
 				ConversationPhrases.GREETING_MESSAGES, 
 				new AndCondition(new GreetingMatchesNameCondition(npc.getName()),
+						new QuestInStateCondition(QUEST_SLOT, "mummy"), new NotCondition(new PlayerHasItemWithHimCondition("tabliczka czekolady"))),
+				ConversationStates.ATTENDING, 
+				"Mam nadziej, że ktoś przyniesie mi tabliczkę czekolady...:(",
+				null);
+
+        // Same authoritative step, without requiring the player to leave and greet again.
+        npc.add(ConversationStates.ATTENDING, "czekolada", 
+				new AndCondition(new games.stendhal.server.entity.npc.condition.AlwaysTrueCondition(),
 						new QuestInStateCondition(QUEST_SLOT, "mummy"), new NotCondition(new PlayerHasItemWithHimCondition("tabliczka czekolady"))),
 				ConversationStates.ATTENDING, 
 				"Mam nadziej, że ktoś przyniesie mi tabliczkę czekolady...:(",
@@ -130,11 +172,27 @@ public class ChocolateForElisabeth extends AbstractQuest {
 				ConversationStates.ATTENDING, 
 				"Cześć.",
 				null);
+
+        // Same authoritative step, without requiring the player to leave and greet again.
+        npc.add(ConversationStates.ATTENDING, "czekolada", 
+				new AndCondition(new games.stendhal.server.entity.npc.condition.AlwaysTrueCondition(),
+						new QuestStartedCondition(QUEST_SLOT), new QuestNotInStateCondition(QUEST_SLOT, "start"), new QuestNotInStateCondition(QUEST_SLOT, "mummy")),
+				ConversationStates.ATTENDING, 
+				"Cześć.",
+				null);
 		
 		// player rejected quest
 		npc.add(ConversationStates.IDLE, 
 				ConversationPhrases.GREETING_MESSAGES,
 				new AndCondition(new GreetingMatchesNameCondition(npc.getName()),
+						new QuestInStateCondition(QUEST_SLOT, "rejected")),
+				ConversationStates.ATTENDING, 
+				"Cześć.",
+				null);
+
+        // Same authoritative step, without requiring the player to leave and greet again.
+        npc.add(ConversationStates.ATTENDING, "czekolada",
+				new AndCondition(new games.stendhal.server.entity.npc.condition.AlwaysTrueCondition(),
 						new QuestInStateCondition(QUEST_SLOT, "rejected")),
 				ConversationStates.ATTENDING, 
 				"Cześć.",
@@ -145,7 +203,7 @@ public class ChocolateForElisabeth extends AbstractQuest {
 				ConversationPhrases.QUEST_MESSAGES, 
 				new QuestNotStartedCondition(QUEST_SLOT),
 				ConversationStates.QUEST_OFFERED, 
-				"Chciałabym dostać tabliczkę czekolady. Chociaż jedną. Ciemno brązową lub słodką białą lub z posypką. Zdobędziesz jedną dla mnie?",
+				"Marzy mi się tabliczka czekolady, taka pachnąca i słodka. Mama pilnuje mnie tutaj i nie może pójść po nią ze mną. Przyniesiesz jedną, jeśli mama się zgodzi?",
 				null);
 		
 		// shouldn't happen
@@ -186,7 +244,7 @@ public class ChocolateForElisabeth extends AbstractQuest {
 				null,
 				ConversationStates.ATTENDING, 
 				"Dziękuję!",
-				new SetQuestAndModifyKarmaAction(QUEST_SLOT, "start", 10.0));
+				DialogueRewardAction.karma(new SetQuestAndModifyKarmaAction(QUEST_SLOT, "start", 10.0)));
 		
 		// Player says no, they've lost karma
 		npc.add(ConversationStates.QUEST_OFFERED,
@@ -194,7 +252,7 @@ public class ChocolateForElisabeth extends AbstractQuest {
 				null, 
 				ConversationStates.IDLE,
 				"Dobrze poczekam aż moja mama znajdzie pomocną dłoń...",
-				new SetQuestAndModifyKarmaAction(QUEST_SLOT, "rejected", -5.0));
+				DialogueRewardAction.karma(new SetQuestAndModifyKarmaAction(QUEST_SLOT, "rejected", -5.0)));
 		
 		// Player has got chocolate bar and spoken to mummy
 		final List<ChatAction> reward = new LinkedList<ChatAction>();
@@ -206,22 +264,24 @@ public class ChocolateForElisabeth extends AbstractQuest {
 				
 				final StackableItem reward = (StackableItem) SingletonRepository.getEntityManager().getItem(rewardClass);
 				reward.setQuantity(1);
-				player.equipOrPutOnGround(reward);
+				int carriedBefore = player.getNumberOfEquipped(reward.getName());
+                    player.equipOrPutOnGround(reward);
+                    DialogueRewardAction.recordItem(player, npc, reward, carriedBefore, 1);
 				player.notifyWorldAboutChanges();
 			}
 		});
-		reward.add(new IncreaseXPAction(500));
-		reward.add(new IncreaseAtkXPAction(200));
-		reward.add(new IncreaseDefXPAction(250));
+		reward.add(DialogueRewardAction.xp(500));
+		reward.add(DialogueRewardAction.attackXP(200));
+		reward.add(DialogueRewardAction.defenseXP(250));
 		reward.add(new SetQuestAction(QUEST_SLOT, "done;"));
 		reward.add(new SetQuestToTimeStampAction(QUEST_SLOT,1));
-		reward.add(new IncreaseKarmaAction(10.0));
+		reward.add(DialogueRewardAction.karma(new IncreaseKarmaAction(10.0)));
 						
 		npc.add(ConversationStates.QUESTION_1,
 				ConversationPhrases.YES_MESSAGES, 
 				new PlayerHasItemWithHimCondition("tabliczka czekolady"),
 				ConversationStates.ATTENDING, 
-				"Dziękuję BARDZO! Jesteś świetny. Weź oto te kwiatki jako prezent.",
+				"Dziękuję, zachowam kawałek na później! Mam dla ciebie kwiatek w podziękowaniu. Może przypomni ci o nas, kiedy ruszysz dalej.",
 				new MultipleActions(reward));
 		
 	
@@ -259,7 +319,7 @@ public class ChocolateForElisabeth extends AbstractQuest {
 					new AndCondition(new GreetingMatchesNameCondition(mummyNPC.getName()),
 							new QuestInStateCondition(QUEST_SLOT, "start")),
 					ConversationStates.ATTENDING, 
-					"Oh już spotkałeś moją córkę Elisabeth. Wyglądasz na miłą osobę i byłabym wdzięczna gdybyś mógł przynieść jej tabliczkę czekolady ponieważ nie jestem zbyt #silna na to.",
+					"Elisabeth zdążyła już poprosić cię o czekoladę? Dziękuję, że najpierw przyszedłeś do mnie; zgadzam się na jedną tabliczkę. Zostań na bezpiecznym szlaku, nie warto ryzykować dla słodyczy.",
 					new SetQuestAction(QUEST_SLOT, "mummy"));
 
 		mummyNPC.addReply(Arrays.asList("strong", "silna"), "Próbowałam zdobyć trochę czekolady dla Elisabeth parę razy, ale nie mogłam się przedostać przez morderców i bandytów kręcących się #tam.");
@@ -278,7 +338,7 @@ public class ChocolateForElisabeth extends AbstractQuest {
 		super.addToWorld();
 		fillQuestInfo(
 				"Czekolada dla Elisabeth",
-				"Słodka, słodka czekolada! Nikt nie może bez niej żyć! A Elisabeth chciała by ją mieć...",
+				"Elisabeth marzy o czekoladzie. Zanim sprawisz jej słodką niespodziankę, porozmawiaj z jej mamą i uzyskaj zgodę.",
 				true);
 		chocolateStep();
 		meetMummyStep();
@@ -309,7 +369,7 @@ public class ChocolateForElisabeth extends AbstractQuest {
             if (isRepeatable(player)) {
                 res.add("Przyniosłem trochę czekolady dla Elisabeth. Dała mi w zamian kwiatki. Może chciałaby więcej czekolady.");
             } else {
-                res.add("Elisabeth je czekoladę, którą jej dałem i dała mi w zamian kwiaty.	W nagrodę za ukończenie zadania otrzymałem: 500 pkt doświadczenia, 250 pkt ataku, 200 pkt obrony i 10 pkt karmy.");
+                res.add("Elisabeth je czekoladę, którą jej dałem i dała mi w zamian kwiaty.	W nagrodę za ukończenie zadania otrzymałem: 500 pkt doświadczenia, 200 pkt ataku, 250 pkt obrony i 10 pkt karmy.");
             }			
 		}
 		return res;

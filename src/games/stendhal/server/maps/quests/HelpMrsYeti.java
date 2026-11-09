@@ -12,6 +12,8 @@
  ***************************************************************************/
 package games.stendhal.server.maps.quests;
 
+import games.stendhal.server.entity.npc.action.DialogueRewardAction;
+
 import games.stendhal.common.parser.Sentence;
 import games.stendhal.server.entity.creature.Pet;
 import games.stendhal.server.entity.npc.ChatAction;
@@ -100,7 +102,7 @@ import org.apache.log4j.Logger;
 				ConversationPhrases.QUEST_MESSAGES, 
 				new QuestNotStartedCondition(QUEST_SLOT),
 				ConversationStates.QUEST_OFFERED, 
-				"Jam jest w rozpaczy wielkiej, gdyż mąż mój Pan Yeti opuścił me progi. Trza mi mocnego eliksiru by na powrót szczęśliwym go uczynić i jakiś podarek by go obłaskawić. Czy mi pomożesz?",
+				"Jam jest w wielkiej rozpaczy, bo mój Pan Yeti odwrócił się ode mnie. Potrzeba mi eliksiru miłości i podarku, który znów sprowadzi go do domu. Pomożesz mi odzyskać jego serce?",
 				null);
 
 		npc.add(ConversationStates.ATTENDING,
@@ -114,14 +116,14 @@ import org.apache.log4j.Logger;
 		npc.add(ConversationStates.QUEST_OFFERED,
 				ConversationPhrases.YES_MESSAGES, null,
 				ConversationStates.ATTENDING,
-				"Dziękuję ci za chęci! Musisz prędko udać się do Salva Mattori w magicznym mieście po #eliksir miłości.",
-				new SetQuestAndModifyKarmaAction(QUEST_SLOT, "start", 10.0));
+				"Udaj się do Salvy Mattori w podziemnym mieście magów i poproś o #eliksir miłości dla mnie. Salva zna się na podobnych miksturach i jest moją dawną znajomą. Ja zaczekam tutaj, w jaskini pod Semos.",
+				DialogueRewardAction.karma(new SetQuestAndModifyKarmaAction(QUEST_SLOT, "start", 10.0)));
 
 		// Player says no, they've lost karma.
 		npc.add(ConversationStates.QUEST_OFFERED,
 				ConversationPhrases.NO_MESSAGES, null, ConversationStates.IDLE,
 				"Och, jakiś ty bezduszny...",
-				new SetQuestAndModifyKarmaAction(QUEST_SLOT, "rejected", -10.0));
+				DialogueRewardAction.karma(new SetQuestAndModifyKarmaAction(QUEST_SLOT, "rejected", -10.0)));
 	}
 
 	private void makePotion() {
@@ -150,13 +152,13 @@ import org.apache.log4j.Logger;
 		npc.add(ConversationStates.ATTENDING, Arrays.asList("salva","mieczyk","eliksir", "eliksir","nóż"),
 				new AndCondition(new QuestInStateCondition(QUEST_SLOT, "mieczyk"),
 				new PlayerHasItemWithHimCondition("mieczyk")),
-				ConversationStates.ATTENDING, "Bardzo dobrze! Teraz potrzebuję kilku rzeczy, aby przygotować ci miłosny #eliksir. Potrzebuję 3 kwiaty lilii, 1 kokudę, 1 kieliszek napoju z winogron i 1 czarną perłę. Przynieś mi wszystko za jednym razem, a przygotuję ci #eliksir.",
+				ConversationStates.ATTENDING, "Ten mieczyk wystarczy do przygotowania składników. Przynieś trzy lilie, jedną kokudę, jeden napój z winogron i jedną czarną perłę. Potrzebuję całego zestawu naraz, żeby sporządzić #eliksir miłości.",
 				new MultipleActions(new SetQuestAction(QUEST_SLOT, "eliksir"), new DropItemAction("mieczyk")));
 
 		npc.add(ConversationStates.ATTENDING, Arrays.asList("salva","mieczyk","eliksir","potion"),
 				new AndCondition(new QuestInStateCondition(QUEST_SLOT, "mieczyk"),
 				new NotCondition(new PlayerHasItemWithHimCondition("mieczyk"))),
-				ConversationStates.ATTENDING, "Rozumiem, że byłe s już u Hackima? Gdzie masz magiczny mieczyk?",
+				ConversationStates.ATTENDING, "Hackim wyjaśnił już sprawę mieczyka, ale nie widzę go przy tobie. Przynieś zwykły mieczyk od Xina Blanki z Semos. Bez ostrza nie przygotuję składników eliksiru.",
 				null);
 
 		final List<ChatAction> potionactions = new LinkedList<ChatAction>();
@@ -164,8 +166,8 @@ import org.apache.log4j.Logger;
 		potionactions.add(new DropItemAction("kokuda"));
 		potionactions.add(new DropItemAction("napój z winogron"));
 		potionactions.add(new DropItemAction("czarna perła"));
-		potionactions.add(new EquipItemAction("eliksir miłości"));
-		potionactions.add(new IncreaseXPAction(100));
+		potionactions.add(DialogueRewardAction.item("eliksir miłości"));
+		potionactions.add(DialogueRewardAction.xp(100));
 		potionactions.add(new SetQuestAction(QUEST_SLOT, "gotpotion"));
 
 		// don't make player wait for potion - could add this in later if wanted
@@ -185,7 +187,7 @@ import org.apache.log4j.Logger;
 																   new PlayerHasItemWithHimCondition("kokuda"),
 																   new PlayerHasItemWithHimCondition("napój z winogron"),
 																   new PlayerHasItemWithHimCondition("czarna perła")))),
-				ConversationStates.ATTENDING, "Potrzebuję 3 kwiaty lilii, 1 kokudę, 1 kieliszek wina i 1 czarną perłę, aby przygotować miłosny eliksir. Proszę przynieś mi wszystko naraz. Dziękuję!", null);
+				ConversationStates.ATTENDING, "Do eliksiru nadal potrzebuję trzech lilii, jednej kokudy, jednego napoju z winogron i jednej czarnej perły. Zbierz cały zestaw i wróć do mnie. Nie zabiorę części składników, dopóki nie będzie można przygotować mikstury.", null);
 
 
 	}
@@ -198,7 +200,7 @@ import org.apache.log4j.Logger;
 				new QuestInStateCondition(QUEST_SLOT, "hackim"),
 				ConversationStates.ATTENDING, "Salva potrzebuje kolejny magiczny mieczyk? No cóż, oczywiście, że ci pomogę. Jestem jednak bardzo głodny. "
 				+ "Muszę coś zjeść! Przynieś mi 5 #tart to ci pomogę!",
-				new SetQuestAndModifyKarmaAction(QUEST_SLOT, "pies", 1.0));
+				DialogueRewardAction.karma(new SetQuestAndModifyKarmaAction(QUEST_SLOT, "pies", 1.0)));
 
 		npc.add(ConversationStates.ATTENDING, Arrays.asList("salva", "pies", "placek", "tart"),
 				new AndCondition(new QuestInStateCondition(QUEST_SLOT, "pies"),
@@ -206,12 +208,12 @@ import org.apache.log4j.Logger;
 				ConversationStates.ATTENDING, "Pięknie ci dziękuję! Zdradzę ci mały sekret. Otóż tak na prawdę nie jestem jeszcze kowalem, "
 				+ "tylko zwykłym czeladnikiem. Nie potrafię zrobić miecza! Sprzedałem Salvie zwykły mieczyk, ale taki jej był potrzebny! Więc zanieś jej "
 				+ "zwykły mieczyk jaki można kupić od Xin Blanca w Tawernie w Semos. Ja jej powiem, że jest mojej roboty! A! I dziękuję za tartę!!!",
-				new MultipleActions(new SetQuestAndModifyKarmaAction(QUEST_SLOT, "mieczyk", 1.0), new DropItemAction("tarta",5)));
+				new MultipleActions(DialogueRewardAction.karma(new SetQuestAndModifyKarmaAction(QUEST_SLOT, "mieczyk", 1.0)), new DropItemAction("tarta",5)));
 
 		npc.add(ConversationStates.ATTENDING, Arrays.asList("salva", "pies", "placek", "tarta"),
 				new AndCondition(new QuestInStateCondition(QUEST_SLOT, "pies"),
 				new NotCondition(new PlayerHasItemWithHimCondition("tarta",5))),
-				ConversationStates.ATTENDING, "Arlindo z Ados robi najlepszą tartę. Nie zapomnij przynieść mi pięciu sztuk, jestem bardzo głodny!",
+				ConversationStates.ATTENDING, "Arlindo w piekarni Ados potrafi przygotować tarty. Przynieś mi pięć sztuk, a opowiem, jak zdobyć mieczyk dla Salvy. Nie chcę narobić jej kolejnego kłopotu... choć chyba już trochę narobiłem.",
 				null);
 
 	}
@@ -225,8 +227,8 @@ import org.apache.log4j.Logger;
 
 		final List<ChatAction> tookpotionactions = new LinkedList<ChatAction>();
 		tookpotionactions.add(new DropItemAction("eliksir miłości"));
-		tookpotionactions.add(new IncreaseKarmaAction(10.0));
-		tookpotionactions.add(new IncreaseXPAction(1000));
+		tookpotionactions.add(DialogueRewardAction.karma(new IncreaseKarmaAction(10.0)));
+		tookpotionactions.add(DialogueRewardAction.xp(1000));
 		tookpotionactions.add(new SetQuestAction(QUEST_SLOT, "dragon"));
 
 		npc.add(ConversationStates.ATTENDING, questTrigger,
@@ -244,11 +246,11 @@ import org.apache.log4j.Logger;
 		
 		npc.add(ConversationStates.ATTENDING,
 				questTrigger, 
-				new OrCondition(new QuestInStateCondition(QUEST_SLOT, "start"), 
+				new OrCondition(new QuestInStateCondition(QUEST_SLOT, "start"), new QuestInStateCondition(QUEST_SLOT, "hackim"), new QuestInStateCondition(QUEST_SLOT, "eliksir"), 
 								new QuestInStateCondition(QUEST_SLOT, "pies"), 
 								new QuestInStateCondition(QUEST_SLOT, "mieczyk")),
 				ConversationStates.ATTENDING,
-				"Czekam byś przyniósł mi eliksir miłosny. Poproś Salvę Mattori z magicznego miasta o miłosny #eliksir.",
+				"Wciąż czekam na eliksir miłości od Salvy Mattori z podziemnego miasta magów. Wróć do niej i dokończ przygotowania. Gdy mikstura będzie gotowa, przynieś ją tutaj, do mojej jaskini.",
 				null);
 	}
 
@@ -281,7 +283,7 @@ import org.apache.log4j.Logger;
 				public void fire(final Player player, final Sentence sentence,
 								final EventRaiser npc) {
 					if(!player.hasPet()){
-						npc.say("Jaką miĹłą owieczkę prowadzisz. Ja jednak potrzebuję małego smoka dla pana Yeti. Porozmawiaj z Morgrinem ze szkoły magicznej.");
+						npc.say("Ładną owcę prowadzisz, ale to nie zwierzę, o które prosiłam. Potrzebuję małego smoka dla Pana Yeti. O smocze jajo zapytaj Morgrina, a o wyklucie Terryego.");
 						return;
 					}
 					Pet pet = player.getPet();
@@ -289,8 +291,8 @@ import org.apache.log4j.Logger;
 					if("baby_dragon".equals(petType)) {
 						player.removePet(pet);
 						npc.say("Przyprowadziłeś małego smoka! Będzie z niego pyszny gulasz! Gulasz z małego smoka to moja specjalność, a pan Yeti uwielbia go! Uczyniłeś nas wielce szczęśliwymi! Wróć tu następnego dnia, a otrzymasz #nagrodę.");
-						player.addKarma(5.0);
-						player.addXP(500);
+						DialogueRewardAction.karma(new games.stendhal.server.entity.npc.action.IncreaseKarmaAction(5.0)).fire(player, null, npc);
+						DialogueRewardAction.xp(500).fire(player, null, npc);
 						pet.delayedDamage(pet.getHP(), "Mrs. Yeti");
 						player.setQuest(QUEST_SLOT,"reward;"+System.currentTimeMillis());
 						player.notifyWorldAboutChanges();
@@ -327,8 +329,8 @@ import org.apache.log4j.Logger;
 							// delay is in minutes, last parameter is argument of timestamp
 							new TimePassedCondition(QUEST_SLOT,1,DELAY_IN_MINUTES)),
 			ConversationStates.ATTENDING,
-			"Dziękuję! Aby ci się odwdzięczyć chcę ci zaoferować możliwość kupna ryb. Powiedz #kupię #płotka, a sprzedam ci tanio. Mam ich mnóstwo, a ty pewnie z nich zrobisz użytek.",
-			new MultipleActions(new SetQuestAction(QUEST_SLOT,"done"), new IncreaseXPAction(500000)));
+			"Pan Yeti dostał swój ulubiony posiłek, a w naszej jaskini znów jest spokojniej. Od teraz będę sprzedawać ci płotki - powiedz #kupię #płotka, jeśli zechcesz uzupełnić zapasy. Przyjmij też obiecaną nagrodę za całą tę wyprawę.",
+            new MultipleActions(new SetQuestAction(QUEST_SLOT,"done"), DialogueRewardAction.xp(500000), DialogueRewardAction.access("Zakup płotek u Mrs. Yeti")));
 
 	}
 
@@ -338,7 +340,7 @@ import org.apache.log4j.Logger;
 		super.addToWorld();
 		fillQuestInfo(
 				"Pomoc Mrs Yeti",
-				"Mrs Yeti jest nieszczęśliwa z miłością swojego życia, ponieważ jej mąż odwrócił się od niej. Teraz para jest w dużych kłopotach. Tylko specjalny napój miłosny może pomóc Mrs Yeti, aby odzyskać męża. Pomożesz jej?",
+				"Mrs. Yeti martwi się, że jej mąż odsunął się od niej. Liczy na pomoc w zdobyciu szczególnego napoju; wysłuchaj jej prośby i ustal, czego potrzeba.",
 				true);
 		startQuest();
 		makePotion();
@@ -372,12 +374,12 @@ import org.apache.log4j.Logger;
 			if ("pies".equals(questState)) {
 				return res;
 			} 
-			res.add("Hackim powiedział abym kupił zwykły mieczyk u Xin Blanca! Najwyraźniej nabirał Salvę przez te wszystkie lata. Ona wierzyła, że są magiczne...");
-			if ("knife".equals(questState)) {
+			res.add("Hackim poradził mi kupić zwykły mieczyk u Xina Blanki. Salva wierzy, że ostrze jest magiczne, ale wystarczy jej solidne narzędzie.");
+			if ("mieczyk".equals(questState)) {
 				return res;
 			} 
-			res.add("Eliksir miłości wymaga 3 kwiaty lili, 1 gałązka kokudy, 1 szklanka napoju z winogron i 1 czarną perłę.");
-			if ("potion".equals(questState)) {
+			res.add("Do eliksiru potrzeba trzech lilii, jednej kokudy, jednego napoju z winogron i jednej czarnej perły.");
+			if ("eliksir".equals(questState)) {
 				return res;
 			} 
 			res.add("Muszę zanieść eliksir miłości do pani Yeti.");

@@ -59,8 +59,8 @@ public class TannarNPC implements ZoneConfigurator {
 		        "Skóra jelenia jest wyjątkowo delikatna i elastyczna, idealna na rękawice. Używam jej, aby stworzyć wygodne, ale wytrzymałe rękawice, które służą na długie lata. Jeśli dostarczysz mi #4 #skóry #jelenia, z przyjemnością wykonam dla Ciebie parę #rękawic #ze #skóry #jelenia");
 				addReply("skóra zwierzęca",
 		        "Skóre zwierzecą możesz pozyskać zabijajać różne zwierzęta w naszje krainie. Dzięki niej moge zadbać o wzmocnienia szwów i zwiększenia trwałości skórzanych rękawic.");
-				addOffer("Mogę stworzyć dla Ciebie #rękawice #ze #skóry #lwa. Potrzebne mi do tego #1000 monet, #4 skóry lwa oraz #8 skór zwierzęcych. To nie tylko rękawice, ale dzieło sztuki, odzwierciedlające twoją siłę i status. Jeżeli chcesz to poproś mnie, abym go przyrządził mówiąc #wykonaj #rękawice #ze #skóry #lwa.");
-				addHelp("Dziękuję, ale aktualnie nie potrzebuję pomocy. Moja praca to tworzenie rękawic ze skóry lwa. Jeśli potrzebujesz parę, powiedz #wykonaj #rękawice #ze #skóry #lwa.");
+				addOffer("Szyję #rękawice #ze #skóry #jelenia, elastyczne i wygodne na pierwsze wyprawy. Na jedną parę przynieś #4 #skóry #jelenia, #8 #skór #zwierzęcych i #1000 monet na nici oraz pracę warsztatu. Powiedz #wykonaj #rękawice #ze #skóry #jelenia, a przygotuję zamówienie w pół godziny.");
+				addHelp("Nie mam teraz dodatkowego zlecenia, ale mogę uszyć dla ciebie rękawice ze skóry jelenia. Zapytaj o moją #ofertę, żeby sprawdzić materiały, albo powiedz #wykonaj #rękawice #ze #skóry #jelenia.");
 				addGoodbye("Trzymaj się.");
 
 				final Map<String, Integer> requiredResources = new TreeMap<String, Integer>();

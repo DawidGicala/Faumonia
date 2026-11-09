@@ -78,7 +78,7 @@ public class GhostNPC implements ZoneConfigurator {
 			}
 		};
 	
-		ghost.setDescription("Oto duch o figurze kobiety.");
+		ghost.setDescription("Widzisz Mary, ducha kobiety błąkającego się w jaskini Athor. Jej sylwetka ledwie odcina się od mroku.");
 		ghost.setResistance(0);
 		ghost.setEntityClass("woman_005_npc");
 		// she is a ghost so she is see through

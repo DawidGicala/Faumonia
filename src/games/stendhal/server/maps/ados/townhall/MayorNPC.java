@@ -66,15 +66,16 @@ public class MayorNPC implements ZoneConfigurator {
 
 			@Override
 			protected void createDialog() {
+                games.stendhal.server.entity.npc.dialogue.CollectionDialogueTopics.install(this);
 				addGreeting("Pozdrawiam Cię w imieniu mieszkańców Ados.");
-				addJob("Jestem burmistrzem Ados.");
-				addHelp("Niczego nie potrzebuję.");
+				addJob("Zajmuję się sprawami Ados, także tymi małymi, które łatwo przeoczyć. Mieszkańcy potrzebują dostaw i kogoś, na kim można polegać. Mogę powierzyć ci jedno z bieżących zamówień.");
+				addHelp("W mieście zawsze ktoś czeka na dostawę. Zapytaj o #zadanie, a sprawdzę, jakie zamówienie mogę ci powierzyć. Wolę, żebyś wrócił z potrzebną rzeczą, niż przynosił przypadkowe zapasy.");
 				//addQuest("I don't know you well yet. Perhaps later in the year I can trust you with something.");
 				addGoodbye("Życzę miłego dnia.");
 			}
 		};
 
-		mayor.setDescription("Oto szanowany burmistrz Ados");
+		mayor.setDescription("Widzisz Chalmersa, burmistrza Ados. Między rozmowami przegląda sprawy czekające na załatwienie.");
 		mayor.setEntityClass("badmayornpc");
 		mayor.setPosition(3, 9);
 		mayor.initHP(100);

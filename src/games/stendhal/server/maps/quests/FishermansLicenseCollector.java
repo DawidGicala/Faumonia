@@ -120,9 +120,9 @@ public class FishermansLicenseCollector extends AbstractQuest {
 
 		// player is willing to help
 		npc.add(ConversationStates.QUEST_2_OFFERED,
-			ConversationPhrases.YES_MESSAGES, null,
+			ConversationPhrases.YES_MESSAGES, new AndCondition(new QuestCompletedCondition(FishermansLicenseQuiz.QUEST_SLOT), new QuestNotStartedCondition(QUEST_SLOT)),
 			ConversationStates.ATTENDING,
-			"Przynieś mi rybę po jednej z każdego #rodzaju, abym wiedział, że je znasz.",
+			"Przynieś po jednej rybie każdego gatunku: pstrąg, okoń, makrela, dorsz, płotka, palia alpejska, błazenek i pokolec. Możesz przynosić ryby pojedynczo; odłożę każdy brakujący okaz. Zapytaj o #rodzaju, żeby sprawdzić listę i przekazać połów.",
 			new SetQuestAndModifyKarmaAction(QUEST_SLOT, "", 5.0));
 
 		// player is not willing to help
@@ -160,7 +160,7 @@ public class FishermansLicenseCollector extends AbstractQuest {
 
 		// player says he has a required fish with him
 		npc.add(ConversationStates.QUESTION_2,
-			ConversationPhrases.YES_MESSAGES, null,
+			ConversationPhrases.YES_MESSAGES, new QuestActiveCondition(QUEST_SLOT),
 			ConversationStates.QUESTION_2, "Jaką rybę złapałeś?",
 			null);
 
@@ -172,6 +172,8 @@ public class FishermansLicenseCollector extends AbstractQuest {
 						List<String> missing = missingFish(player, false);
 
 						if (missing.contains(itemName)) {
+                            if (missing.size()==1 && player.isEquipped(itemName)
+                                    && !games.stendhal.server.maps.quests.logic.QuestGoldFees.requirePaid(player, QUEST_SLOT, raiser)) { return; }
 							if (player.drop(itemName)) {
 								// register fish as done
 								final String doneText = player.getQuest(QUEST_SLOT);
@@ -181,11 +183,12 @@ public class FishermansLicenseCollector extends AbstractQuest {
 								missing = missingFish(player, true);
 
 								if (!missing.isEmpty()) {
-									raiser.say("Ta ryba wygląda nieźle! Masz inną dla mnie?");
+									raiser.say("Ten gatunek mogę już odhaczyć. Zachowam go jako część twojego egzaminu; kolejną rybę możesz oddać teraz albo przynieść później.");
 								} else {
 									player.addXP(2000);
-									raiser.say("Wykonałeś dobrą robotę! Teraz jesteś prawdziwym rybakiem i będziesz lepszym, gdy złowisz rybę!");
+									raiser.say("Mam już wszystkie osiem gatunków. Zaliczasz także praktyczną część egzaminu i otrzymujesz kartę wędkarską; twoje umiejętności połowu rosną. Niech następne wyprawy nad wodę będą udane.");
 									player.setQuest(QUEST_SLOT, "done");
+                                    raiser.setCurrentState(ConversationStates.ATTENDING);
 									// once there are other ways to increase your
 									// fishing skills, increase the old skills
 									// instead of just setting to 0.5.
@@ -198,7 +201,7 @@ public class FishermansLicenseCollector extends AbstractQuest {
 										+ ". Co masz dla mnie?");
 							}
 						} else {
-							raiser.say("Nie możesz oszukiwać na tym egzaminie! Wiem, że już mi dałeś tą rybę. Masz inną rybę dla mnie?");
+							raiser.say("Mam już rybę tego gatunku. Nie potrzebuję drugiej sztuki; poszukaj okazów, których nadal brakuje na liście.");
 						}
 					}
 				});
@@ -238,7 +241,7 @@ public class FishermansLicenseCollector extends AbstractQuest {
 		super.addToWorld();
 		fillQuestInfo(
 				"Karta Rybacka część 2",
-				"Jesteś prawdziwym rybakiem? Jeżeli tak to spróbuj przekonać rybaka Santiago o swoich umiejętnościach przynosząć mu rybę z każdego rodzaju.",
+				"Po zdanym egzaminie Santiago chce zobaczyć twój połów. Dostarcz po jednej rybie każdego wskazanego gatunku i zakończ praktyczną część zdobywania karty wędkarskiej.",
 				true);
 		step_1();
 		step_2();
@@ -275,4 +278,7 @@ public class FishermansLicenseCollector extends AbstractQuest {
 	public String getNPCName() {
 		return "Santiago";
 	}
+
+    public static List<String> getRequiredFish(){ return java.util.Collections.unmodifiableList(neededFish); }
+
 }

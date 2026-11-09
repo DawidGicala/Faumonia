@@ -52,8 +52,9 @@ public class DwarfGuardNPC implements ZoneConfigurator {
 
 			@Override
 			protected void createDialog() {
+                games.stendhal.server.entity.npc.dialogue.JourneyDialogueTopics.install(this);
 			    addQuest("Boję się stąd wychodzić... Czy możesz mi #zaoferować naprawdę dobry sprzęt?");
-				addJob("Byłem strażnikiem w więzieniu. Dopóki... cóż pewnie znasz resztę.");
+				addJob("Pilnowałem tego więzienia, zanim zaatakowały duergary. Teraz sam siedzę za kratami i nasłuchuję każdego kroku. Przydałaby mi się pomoc kogoś, kto zdoła zdobyć klucz.");
 				new BuyerAdder().addBuyer(this, new BuyerBehaviour(shops.get("buychaos")), true);
 
 				addGoodbye("Dowidzenia ... bądź ostrożny ...");
@@ -62,7 +63,7 @@ public class DwarfGuardNPC implements ZoneConfigurator {
 		};
 
 		npc.setEntityClass("dwarfguardnpc");
-		npc.setDescription("Hunel jest przyjaznym krasnoludem. Jak on tu wszedł i dlaczego on jest przestraszony?");
+		npc.setDescription("Widzisz Hunela, przestraszonego krasnoluda za kratami więzienia Kanmararn. Wciąż trudno mu pogodzić się z utratą kontroli nad strażnicą.");
 		npc.setPosition(10, 23);
 		npc.setPerceptionRange(7);
 		npc.initHP(100);

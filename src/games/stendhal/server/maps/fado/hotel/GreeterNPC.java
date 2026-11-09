@@ -60,9 +60,10 @@ public class GreeterNPC implements ZoneConfigurator {
 
 			@Override
 			protected void createDialog() {
+                games.stendhal.server.entity.npc.dialogue.HuntDialogueTopics.install(this);
 				addGreeting("Cześć! Witam w Hotelu w mieście Fado! Mogę w czymś #pomóc?");
 
-				addJob("Jestem recepcjonistką w hotelu.");
+				addJob("Pracuję w hotelowej recepcji i chętnie zajmowałabym się samymi gośćmi. Po ostatnich zniszczeniach najpierw musimy jednak doprowadzić pokoje do porządku; z rezerwacjami trzeba jeszcze zaczekać.");
 				addHelp("Kiedy skończą się prace remontowe w hotelu to będzie można #zarezerwować sobie pokój.");
 				//addHelp("You can #reserve a room if you'd like, or #explore the hotel.");
 				addReply(Arrays.asList("zarezerwować", "reserve"),
@@ -76,7 +77,7 @@ public class GreeterNPC implements ZoneConfigurator {
 		greeterNPC.setEntityClass("hotelreceptionistnpc");
 		greeterNPC.setPosition(16, 50);
 		greeterNPC.initHP(1000);
-		greeterNPC.setDescription("Oto Linda. Należy do przyjaznego hotelowego personelu i jest odpowiedzialna za ustalanie cen pokoju.");
+		greeterNPC.setDescription("Widzisz Lindę, recepcjonistkę hotelu Fado. Uprzejmy uśmiech nie ukrywa zmęczenia ciągnącym się remontem.");
 		zone.add(greeterNPC);
 	}
 }

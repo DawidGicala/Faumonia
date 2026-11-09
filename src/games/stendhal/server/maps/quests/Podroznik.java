@@ -62,12 +62,12 @@ public class Podroznik extends AbstractQuest {
 			new ChatAction() {
 				public void fire(final Player player, final Sentence sentence, final EventRaiser raiser) {
 					if (!player.hasQuest(QUEST_SLOT) || "rejected".equals(player.getQuest(QUEST_SLOT))) {
-						raiser.say("Potrzebuje kogoś kto mi pomoże uzupełnić zapasy. Jeżeli przyniesiesz mi potrzebne przedmioty, oddam ci mój naszyjnik. Co ty na to?");
+						raiser.say("W drodze przydają się i zapasy, i trofea na wymianę, a moje powoli się kończą. Za pomoc w ich uzupełnieniu oddam ci naszyjnik podróżnika; trzeba też rozprawić się ze szczurem olbrzymim. Zgodzisz się pomóc?");
 					} else if (player.isQuestCompleted(QUEST_SLOT)) {
-						raiser.say("Przecież już dostałeś naszyjnik...");
+						raiser.say("Naszyjnik podróżnika należy już do ciebie. Zapasy mam uporządkowane, mogę więc znów myśleć o dalszej drodze.");
 						raiser.setCurrentState(ConversationStates.ATTENDING);
 					} else {
-						raiser.say("Dlaczego zawracasz mi głowę skoro nie ukończyłeś zadania?");
+						raiser.say("Pamiętam nasze ustalenia i wszystkie przekazane materiały. Możesz teraz sprawdzić braki albo oddać kolejną część dostawy. Gdy zbierzesz wszystko i spełnisz warunek walki, rozpocznę pracę.");
 						raiser.setCurrentState(ConversationStates.ATTENDING);
 					}
 				}
@@ -78,15 +78,7 @@ public class Podroznik extends AbstractQuest {
 			ConversationStates.ATTENDING, null,
 			new ChatAction() {
 				public void fire(final Player player, final Sentence sentence, final EventRaiser raiser) {
-					raiser.say("Będę potrzebował kilku rzeczy: "
-						+ REQUIRED_ARANDULA
-						+ " arandul aby móc wykonać nowe maści lecznicze, "
-						+ REQUIRED_KIEL
-						+ " kłów niedźwiedzia, "
-						+ REQUIRED_PAZUR
-						+ " pazurów niedźwiedzia. Przyda mi sie też coś do jedzenia, wiec przynieś mi "
-						+ REQUIRED_BOROWIK
-						+ " borówikow. Wróć, gdy będziesz je miał #dokładnie w tej kolejności! Jeżeli zapomnisz to powiedz #przypomnij");
+					raiser.say("Na dalszą drogę potrzebuję zapasów w tej kolejności: " + games.stendhal.server.core.rp.quest.JourneyQuestProgress.requirementsText(Podroznik.this) + ". Możesz donosić je partiami; odłożę je do czasu zebrania kompletu. Pokonaj też szczura olbrzymiego; dopiero wtedy przygotuję obiecany naszyjnik.");
 					player.setQuest(QUEST_SLOT, "start;0;0;0;0");
 					player.addKarma(10);
 
@@ -209,7 +201,117 @@ public class Podroznik extends AbstractQuest {
 						player.setQuest(QUEST_SLOT, "forging;" + System.currentTimeMillis());
 					} else {
 						if (!player.hasKilled("szczur olbrzymi") && !missingSomething) {
-							raiser.say("Zanim dostaniesz naszyjnik, zabij olbrzymiego szczura który kraży tu w okolicy. Strasznie mnie denerwuje!");
+							raiser.say("Materiały są już zebrane i nie musisz przynosić ich ponownie. Pozostało ci pokonać szczura olbrzymiego. Wróć po zwycięstwie, wtedy przejdziemy do następnego etapu.");
+						}
+
+						player.setQuest(QUEST_SLOT,
+							"start;"
+							+ (REQUIRED_KIEL - neededKiel)
+							+ ";"
+							+ (REQUIRED_ARANDULA - neededArandula)
+							+ ";"
+							+ (REQUIRED_PAZUR - neededPazury)
+							+ ";"
+							+ (REQUIRED_BOROWIK - neededBorowik));
+					}
+				}
+			});
+        // Reuse the native stage and its guards inside the current conversation.
+        npc.add(ConversationStates.ATTENDING, "materiały wędrowca",
+			new AndCondition(new games.stendhal.server.entity.npc.condition.AlwaysTrueCondition(),
+						new QuestStateStartsWithCondition(QUEST_SLOT, "start")),
+			ConversationStates.ATTENDING, null,
+			new ChatAction() {
+				public void fire(final Player player, final Sentence sentence, final EventRaiser raiser) {
+					final String[] tokens = player.getQuest(QUEST_SLOT).split(";");
+
+					int neededKiel = REQUIRED_KIEL
+							- Integer.parseInt(tokens[1]);
+					int neededArandula = REQUIRED_ARANDULA
+							- Integer.parseInt(tokens[2]);
+					int neededPazury = REQUIRED_PAZUR
+							- Integer.parseInt(tokens[3]);
+					int neededBorowik = REQUIRED_BOROWIK
+							- Integer.parseInt(tokens[4]);
+					boolean missingSomething = false;
+
+					if (!missingSomething && (neededKiel > 0)) {
+						if (player.isEquipped("kieł niedźwiedzi", neededKiel)) {
+							player.drop("kieł niedźwiedzi", neededKiel);
+							neededKiel = 0;
+						} else {
+							final int amount = player.getNumberOfEquipped("kieł niedźwiedzi");
+							if (amount > 0) {
+								player.drop("kieł niedźwiedzi", amount);
+								neededKiel -= amount;
+							}
+
+							raiser.say("Moja łowiecka kolekcja jest wybrakowana. Przynieś mi "
+								+ Grammar.quantityplnoun(
+										neededKiel, "kieł niedźwiedzi", "")
+								+ ".");
+							missingSomething = true;
+						}
+					}
+
+					if (!missingSomething && (neededArandula > 0)) {
+						if (player.isEquipped("arandula", neededArandula)) {
+							player.drop("arandula", neededArandula);
+							neededArandula = 0;
+						} else {
+							final int amount = player.getNumberOfEquipped("arandula");
+							if (amount > 0) {
+								player.drop("arandula", amount);
+								neededArandula -= amount;
+							}
+
+							raiser.say("Kończa mi sie zapasy mikstur leczniczych. Potrzebuje czegoś do produkcji nowych, przynieś mi "
+								+ Grammar.quantityplnoun(neededArandula, "arandula","")
+								+ "");
+							missingSomething = true;
+						}
+					}
+
+					if (!missingSomething && (neededPazury > 0)) {
+						if (player.isEquipped("niedźwiedzie pazury", neededPazury)) {
+							player.drop("niedźwiedzie pazury", neededPazury);
+							neededPazury = 0;
+						} else {
+							final int amount = player.getNumberOfEquipped("niedźwiedzie pazury");
+							if (amount > 0) {
+								player.drop("niedźwiedzie pazury", amount);
+								neededPazury -= amount;
+							}
+							raiser.say("Bez niedźwiedzich pazurów moja łowiecka kolekcja jest wybrakowana. Potrzebuję "
+									+ Grammar.quantityplnoun(neededPazury, "niedźwiedzie pazury","") + "");
+							missingSomething = true;
+						}
+					}
+
+					if (!missingSomething && (neededBorowik > 0)) {
+						if (player.isEquipped("borowik", neededBorowik)) {
+							player.drop("borowik", neededBorowik);
+							neededBorowik = 0;
+						} else {
+							final int amount = player.getNumberOfEquipped("borowik");
+							if (amount > 0) {
+								player.drop("borowik", amount);
+								neededBorowik -= amount;
+							}
+							raiser.say("Kończa mi sie zapasy żywności a coś musze jeść. Przynieś mi "
+								+ Grammar.quantityplnoun(neededBorowik, "borowik","") + "");
+							missingSomething = true;
+						}
+					}
+
+					if (player.hasKilled("szczur olbrzymi") && !missingSomething) {
+						raiser.say("Przyniosłeś wszystko i zabiłes tego wstretnego szczura. Daj mi teraz chwile na uporzadkowanie zapasów. Wróć za "
+							+ REQUIRED_MINUTES
+							+ " minutę" + ", a dostaniesz naszyjnik.");
+						player.setQuest(QUEST_SLOT, "forging;" + System.currentTimeMillis());
+					} else {
+						if (!player.hasKilled("szczur olbrzymi") && !missingSomething) {
+							raiser.say("Materiały są już zebrane i nie musisz przynosić ich ponownie. Pozostało ci pokonać szczura olbrzymiego. Wróć po zwycięstwie, wtedy przejdziemy do następnego etapu.");
 						}
 
 						player.setQuest(QUEST_SLOT,
@@ -228,7 +330,39 @@ public class Podroznik extends AbstractQuest {
 		npc.add(ConversationStates.IDLE, ConversationPhrases.GREETING_MESSAGES,
 			new AndCondition(new GreetingMatchesNameCondition(npc.getName()),
 						new QuestStateStartsWithCondition(QUEST_SLOT, "forging;")),
-			ConversationStates.IDLE, null, new ChatAction() {
+			ConversationStates.ATTENDING, null, new ChatAction() {
+				public void fire(final Player player, final Sentence sentence, final EventRaiser raiser) {
+
+					final String[] tokens = player.getQuest(QUEST_SLOT).split(";");
+					
+					final long delay = REQUIRED_MINUTES * MathHelper.MILLISECONDS_IN_ONE_MINUTE; 
+					final long timeRemaining = (Long.parseLong(tokens[1]) + delay)
+							- System.currentTimeMillis();
+
+					if (timeRemaining > 0L) {
+						raiser.say("Jeszcze nie skończyłem układania. Wróć za "
+							+ TimeUtil.approxTimeUntil((int) (timeRemaining / 1000L))
+							+ ".");
+						return;
+					}
+
+					raiser.say("Skończyłem układanie. W zamian za twoja pomoc, przyjmij ten magiczny naszyjnik. Na pewno ochroni cie przed różnymi klatwami, albo i nie...");
+					player.addXP(25000);
+					player.addatk_xp(5000);
+					player.adddef_xp(5000);
+					player.addKarma(15);
+					final Item magicSword = SingletonRepository.getEntityManager().getItem("naszyjnik podróżnika");
+					magicSword.setBoundTo(player.getName());
+					player.equipOrPutOnGround(magicSword);
+					player.notifyWorldAboutChanges();
+					player.setQuest(QUEST_SLOT, "done");
+				}
+			});
+        // Reuse the native stage and its guards inside the current conversation.
+        npc.add(ConversationStates.ATTENDING, "materiały wędrowca",
+			new AndCondition(new games.stendhal.server.entity.npc.condition.AlwaysTrueCondition(),
+						new QuestStateStartsWithCondition(QUEST_SLOT, "forging;")),
+			ConversationStates.ATTENDING, null, new ChatAction() {
 				public void fire(final Player player, final Sentence sentence, final EventRaiser raiser) {
 
 					final String[] tokens = player.getQuest(QUEST_SLOT).split(";");
@@ -259,7 +393,7 @@ public class Podroznik extends AbstractQuest {
 
 		npc.add(ConversationStates.ATTENDING,
 			Arrays.asList("forge", "missing", "wykuj", "brakuje", "lista", "przypomnij"), 
-			new QuestStartedCondition(QUEST_SLOT),
+			new games.stendhal.server.entity.npc.condition.QuestStateStartsWithCondition(QUEST_SLOT, "start;"),
 			ConversationStates.ATTENDING,
 			null,
 			new ChatAction() {
@@ -311,7 +445,7 @@ public class Podroznik extends AbstractQuest {
 		super.addToWorld();
 		fillQuestInfo(
 				"Tajemniczy Podróżnik",
-				"Podróżnik w jaskini pod Ados podaruje ci magiczny naszyjnik, jeżeli mu pomożesz..",
+				"Tajemniczy Wędrowiec w jaskini pod Ados potrzebuje rzeczy na dalszą drogę. Zapytaj o jego listę; w zamian za pomoc oferuje magiczny naszyjnik.",
 				false);
 		step_1();
 		step_2();
@@ -325,40 +459,18 @@ public class Podroznik extends AbstractQuest {
 	
 	@Override
 	public List<String> getHistory(final Player player) {
-			final List<String> res = new ArrayList<String>();
-			if (!player.hasQuest(QUEST_SLOT)) {
-				return res;
-			}
-			final String questState = player.getQuest(QUEST_SLOT);
-			res.add("Spotkałem Tajemniczego Podróżnika w jaskini w górach Ados.");
-			if (questState.equals("rejected")) {
-				res.add("Stwierdziłem, że nie potrzebny mi naszyjnik podróżnika.");
-				return res;
-			} 
-			res.add("Podróżnik powiedział mi, że dostane naszyjnik jeżeli dostarcze mu:" + REQUIRED_KIEL
-					+ " kłów niedźwiedzich, "
-					+ REQUIRED_ARANDULA
-					+ " aranduli, "
-					+ REQUIRED_PAZUR
-					+ " niedźwiedzich pazurów i "
-					+ REQUIRED_BOROWIK
-					+ " borowików, dokładnie w tej kolejności.");
-					
-			if(questState.startsWith("start") && !"start;15;26;12;6".equals(questState)){
-				res.add("Nie zrobiłem wszystkiego. Podróżnik powie mi czego jeszcze potrzebuje.");
-			} else if ("start;15;26;12;6".equals(questState) || !questState.startsWith("start")) {
-				res.add("Dostarczyłem wszystko czego chciał Podróżnik.");
-			}
-			if("start;15;26;12;6".equals(questState) && !player.hasKilled("szczur olbrzymi")){
-				res.add("Aby dostać naszyjnik, muszę zabić olbrzymiego szczura. Powinienem go szukać w jaskiniach.");
-			} 
-			if (questState.startsWith("forging")) {
-				res.add("Musze poczekać aż podróżnik uporządkuję swoje rzeczy.");
-			} 
-			if (isCompleted(player)) {
-				res.add("Za niedźwiedzie pazury, kły niedźwiedzia, arandule i borowiki dostałem naszyjnik podróżnika.	W nagrodę za ukończenie zadania otrzymałem: 25.000 pkt doświadczenia, 5.000 pkt ataku, 5.000 pkt obrony, 15 pkt karmy oraz naszyjnik podróżnika.");
-			}
-			return res;	
+        final List<String> res = new ArrayList<String>();
+        if (!player.hasQuest(QUEST_SLOT)) return res;
+        res.add("Spotkałem Tajemniczego Wędrowca w jaskini w górach Ados.");
+        games.stendhal.common.QuestProgress progress = games.stendhal.server.core.rp.quest.JourneyQuestProgress.read(this,player);
+        if (isCompleted(player)) { res.add("Otrzymałem naszyjnik podróżnika, 25000 XP postaci, 5000 XP ataku, 5000 XP obrony i 15 karmy."); return res; }
+        res.add(progress.getNextStep());
+        if (progress.getState()!=games.stendhal.common.QuestProgress.State.DECLINED) {
+            res.add("Materiały w kolejności dostaw: " + games.stendhal.server.core.rp.quest.JourneyQuestProgress.requirementsText(this) + ".");
+            for (games.stendhal.common.QuestProgress.Objective goal : progress.getObjectives())
+                if (goal.getCurrent()<goal.getRequired()) res.add(goal.getLabel()+" - pozostało: "+(goal.getRequired()-goal.getCurrent())+".");
+        }
+        return res;
 	}
 
 	@Override
@@ -375,4 +487,14 @@ public class Podroznik extends AbstractQuest {
 	public String getRegion() {
 		return Region.ADOS_CITY;
 	}
+
+    public static java.util.Map<String,Integer> getRequiredItems() {
+        java.util.Map<String,Integer> items=new java.util.LinkedHashMap<String,Integer>();
+        items.put("kieł niedźwiedzi", REQUIRED_KIEL);
+        items.put("arandula", REQUIRED_ARANDULA);
+        items.put("niedźwiedzie pazury", REQUIRED_PAZUR);
+        items.put("borowik", REQUIRED_BOROWIK);
+        return java.util.Collections.unmodifiableMap(items);
+    }
+
 }

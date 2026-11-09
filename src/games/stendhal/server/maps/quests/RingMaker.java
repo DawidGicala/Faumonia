@@ -96,11 +96,11 @@ public class RingMaker extends AbstractQuest {
                 public void fire(final Player player, final Sentence sentence, final EventRaiser npc) {
                     final RingOfLife emeraldRing = (RingOfLife) player.getFirstEquipped("pierścień szmaragdowy");
                     if (emeraldRing.isBroken()) {
-                        npc.say("Co za szkoda, twój pierścień szmaragdowy jest zepsuty. Mogę go naprawić, ale to #kosztuje.");
+                        npc.say("Szmaragd stracił swoją moc, ale oprawę da się jeszcze uratować. Naprawa zajmie 15 minut i kosztuje 100000 monet, 40 sztabek złota, 10 szmaragdów oraz 1 diament. Czy oddasz mi uszkodzony pierścień i materiały?");
                     } else {
                         // ring is not broken so he just lets player know
                         // where it can be fixed
-                        npc.say("Cześć. Na twoim pierścieniu znajduje się rzadki szmaragd. Jeżeli się zepsuje, to przyjdź do mnie, a ja go naprawię.");
+                        npc.say("Ten szmaragd nadal pracuje prawidłowo, więc naprawa nie jest potrzebna. Jeśli pierścień kiedyś się zużyje, przynieś go do mnie. Nie ma powodu rozbierać sprawnej oprawy.");
                         npc.setCurrentState(ConversationStates.ATTENDING);
                     }
                 }
@@ -124,7 +124,7 @@ public class RingMaker extends AbstractQuest {
                     new TimePassedCondition(QUEST_SLOT, 1, REQUIRED_MINUTES)
                 ),
                 ConversationStates.ATTENDING, 
-                "Z radością ci powiem, że twój pierścień szmaragdowy udało się naprawić! Jest teraz jak nowy.",
+                "Szmaragd odzyskał blask, a oprawa znów trzyma go pewnie. Oto twój naprawiony pierścień szmaragdowy. Dbaj o niego, bo kolejna wyprawa może wystawić go na próbę.",
                 new MultipleActions(
                         new IncreaseXPAction(500),
                         new SetQuestAction(QUEST_SLOT, "done"),
@@ -138,7 +138,7 @@ public class RingMaker extends AbstractQuest {
                     new TimePassedCondition(QUEST_SLOT, 1, REQUIRED_MINUTES)
                 ),
                 ConversationStates.ATTENDING, 
-                "Z radością ci powiem, że twój pierścień życia udało się naprawić! Jest teraz jak nowy.",
+                "Naprawa skończona. Szmaragd odzyskał blask i znów może chronić cię w podróży. Oto twój pierścień; dbaj o niego, bo kolejna wyprawa wystawi go na próbę.",
                 new MultipleActions(
                         new IncreaseXPAction(500),
                         new SetQuestAction(QUEST_SLOT, "done"),
@@ -150,8 +150,8 @@ public class RingMaker extends AbstractQuest {
                     new QuestStateStartsWithCondition(QUEST_SLOT, FORGING),
                     new NotCondition(new TimePassedCondition(QUEST_SLOT, 1, REQUIRED_MINUTES))
                 ),
-                ConversationStates.IDLE, null,
-                new SayTimeRemainingAction(QUEST_SLOT, 1, REQUIRED_MINUTES, "Nie skończyłem jeszcze naprawy twego pierścienia życia. Powróć proszę za "));
+                ConversationStates.ATTENDING, null,
+                new SayTimeRemainingAction(QUEST_SLOT, 1, REQUIRED_MINUTES, "Jeszcze naprawiam oprawę twojego szmaragdu. Materiały mam już u siebie, pozostaje poczekać. Wróć za "));
 
         npc.add(ConversationStates.QUEST_ITEM_BROUGHT, 
                 "kosztuje", 
@@ -167,15 +167,16 @@ public class RingMaker extends AbstractQuest {
         npc.add(ConversationStates.QUEST_ITEM_BROUGHT,
                 ConversationPhrases.YES_MESSAGES, 
                 new AndCondition(
+                    repairableRing(),
                     new PlayerHasItemWithHimCondition("sztabka złota", REQUIRED_GOLD),
                     new PlayerHasItemWithHimCondition("money", REQUIRED_MONEY),
                     new PlayerHasItemWithHimCondition("szmaragd", REQUIRED_GEM),
                     new PlayerHasItemWithHimCondition("diament", REQUIRED_DIAMOND)
                 ), 
-                ConversationStates.IDLE,
-                "Dobrze, to wszystko czego potrzebuję do naprawienia pierścienia. Wróć za "
+                ConversationStates.ATTENDING,
+                "Mam pierścień i komplet materiałów, więc mogę zacząć naprawę. Wróć za "
                         + REQUIRED_MINUTES
-                        + " minutę, a będzie gotowy. Dowidzenia.",
+                        + " minut i zapytaj o szmaragd. Wtedy oddam ci gotowy pierścień.",
                 new MultipleActions(
                         new DropItemAction("sztabka złota", REQUIRED_GOLD),
                         new DropItemAction("szmaragd", REQUIRED_GEM),
@@ -197,13 +198,14 @@ public class RingMaker extends AbstractQuest {
         npc.add(ConversationStates.QUEST_ITEM_BROUGHT,
                 ConversationPhrases.YES_MESSAGES, 
                 new NotCondition(new AndCondition(
+                    repairableRing(),
                     new PlayerHasItemWithHimCondition("sztabka złota", REQUIRED_GOLD),
                     new PlayerHasItemWithHimCondition("money", REQUIRED_MONEY),
                     new PlayerHasItemWithHimCondition("szmaragd", REQUIRED_GEM),
                     new PlayerHasItemWithHimCondition("diament", REQUIRED_DIAMOND)
                 )),
-                ConversationStates.IDLE, 
-                "Wróć jak będziesz miał pieniądze, szmaragd, diament oraz złoto. Tymczasem żegnaj.",
+                ConversationStates.ATTENDING, 
+                "Nie mam jeszcze wszystkiego do naprawy albo nie nosisz przy sobie uszkodzonego pierścienia. Potrzebuję samego pierścienia, 100000 monet, 40 sztabek złota, 10 szmaragdów i 1 diamentu. Niczego nie zabiorę, dopóki nie dostarczysz kompletu.",
                 null);
 
         npc.add(ConversationStates.QUEST_ITEM_BROUGHT,
@@ -219,7 +221,7 @@ public class RingMaker extends AbstractQuest {
         super.addToWorld();
         fillQuestInfo(
                 "Twórca Pierścienia",
-                "Ognir, ekspert pierścieni, może naprawić uszkodzony pierścień życia.",
+                "Szmaragdowy pierścień może utracić swoje właściwości. Ognir, jubiler z Fado, obejrzy uszkodzony egzemplarz i wyjaśni warunki jego naprawy.",
                 false);
         fixRingStep(npcs.get("Ognir"));
     }
@@ -236,7 +238,7 @@ public class RingMaker extends AbstractQuest {
         if (!player.hasQuest(QUEST_SLOT)) {
             return res;
         }
-        res.add("Ognir powiedział, że może naprawić mój pierścień życia za: 10 szmaragdów, 100000 money, 40 złotych sztabek i 1 diament.");
+        res.add("Ognir powiedział, że może naprawić mój pierścień życia za: 10 szmaragdów, 100000 monet, 40 złotych sztabek i 1 diament.");
         final String questState = player.getQuest(QUEST_SLOT);
         if (questState.startsWith(FORGING) && (new TimePassedCondition(QUEST_SLOT, 1, REQUIRED_MINUTES)).fire(player,null, null)) {
             res.add("Mój pierścień jest gotowy do odebrania u Ognira! Muszę powiedzieć mu \"szmaragd\", aby go odzyskać.");
@@ -263,4 +265,11 @@ public class RingMaker extends AbstractQuest {
     public String getNPCName() {
         return "Ognir";
     }
+
+    private games.stendhal.server.entity.npc.ChatCondition repairableRing() {
+        return (p, sentence, npc) -> p.getFirstEquipped("pierścień szmaragdowy") instanceof RingOfLife
+            && ((RingOfLife)p.getFirstEquipped("pierścień szmaragdowy")).isBroken()
+            && !new QuestStateStartsWithCondition(QUEST_SLOT, FORGING).fire(p,sentence,npc);
+    }
+
 }

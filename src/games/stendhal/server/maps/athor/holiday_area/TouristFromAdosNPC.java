@@ -42,8 +42,10 @@ public class TouristFromAdosNPC implements ZoneConfigurator  {
 	
 			@Override
 			public void createDialog() {
+                addReply("wskazówki", "Pam i David pracują w przebieralniach na Athor. Przynieś wybranemu ratownikowi arandulę, kokudę i mały eliksir, po jednej sztuce, i zamów olejek do opalania. Przygotowanie trwa dziesięć minut; potem odbierz olejek i przynieś mi go.");
+                addReply("tematy", "Możemy wrócić do twojej sprawy albo porozmawiać o czymś innym. Co chcesz wiedzieć?");
 				addGreeting("Miło Cię poznać!");
-				addJob("Jestem na wakacjach! Porozmawiajmy o czymś innym!");
+				addJob("Przyjechałam z Ados odpocząć od miejskiego zgiełku. Morze jest wspaniałe, tylko słońce okazało się znacznie mocniejsze, niż się spodziewałam.");
 				addHelp("Uważaj! Na tej wyspie jest pustynia gdzie wielu poszukiwaczy przygód straciło życie...");
 				addGoodbye("Mam nadzieję, że zobaczymy się później!");
 				// more dialog is defined in the SuntanCreamForZara quest.
@@ -53,7 +55,7 @@ public class TouristFromAdosNPC implements ZoneConfigurator  {
 		npc.setPosition(60, 33);
 		npc.setEntityClass("swimmer8npc");
 		npc.setDirection(Direction.DOWN);
-		npc.setDescription("Oto Zara opalająca się na plaży i sądząca, że za bardzo się spiekła.");
+		npc.setDescription("Widzisz Zarę wypoczywającą na plaży Athor. Przysłania zaczerwienioną skórę i wypatruje odrobiny cienia.");
 		zone.add(npc);		
 	}
 }

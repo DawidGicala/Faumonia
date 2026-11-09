@@ -63,7 +63,7 @@ public class EventFactory {
 	private static Event<RPEntity> createEventsForRPEntity(RPEntity entity, RPEvent rpevent) {
 		String name = rpevent.getName();
 		Event<RPEntity> event = null;
-		if (name.equals(Events.PUBLIC_TEXT)) {
+		if (name.equals(Events.PUBLIC_TEXT) || name.equals(Events.PLAYER_DIALOGUE_TEXT)) {
 			event = new PublicTextEvent();
 		} else if (name.equals(Events.PRIVATE_TEXT)) {
 			event = new PrivateTextEvent();
@@ -77,6 +77,10 @@ public class EventFactory {
 			event = new GroupInviteEvent();
 		} else if (name.equals(Events.PROGRESS_STATUS_CHANGE)) {
 			event = new ProgressStatusEvent();
+		} else if (name.equals("tutorial_guide")) {
+            event = new TutorialGuideEvent();
+        } else if (name.equals("npc_dialogue")) {
+			event = new NpcDialogueEvent();
 		} else if (name.equals(Events.REACHED_ACHIEVEMENT)) {
 			event = new ReachedAchievementEvent();
 		}

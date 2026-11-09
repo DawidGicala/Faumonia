@@ -64,14 +64,15 @@ public class KolekcjonerAndrzejNPC implements ZoneConfigurator {
 
 			@Override
 			protected void createDialog() {
+                games.stendhal.server.entity.npc.dialogue.CollectionDialogueTopics.install(this);
 				addGreeting();
-				addJob("Gdybym mogł to przynosiłbym przepiękne artefakty do muzeum!");
-				addHelp("Nic nie potrzebuje. Dziękuje.");
+				addJob("Dorobiłem się na handlu, ale same monety przestały mnie cieszyć. Teraz zbieram rzadkie trofea i wolę obejrzeć niezwykły kieł niż kolejną pełną sakiewkę. Jeśli lubisz dalekie wyprawy, możemy sobie pomóc.");
+				addHelp("Interesują mnie trofea, obok których trudno przejść obojętnie. Zapytaj o #zadanie, a pokażę ci braki w kolekcji. Zwykły worek łupów nie wystarczy - szukam konkretnych okazów.");
 				addGoodbye("Dowidzenia, dowidzenia!");
 			}
 		};
 
-		woman.setDescription("Oto klient tego hotelu. Podobno zarobił dużo pieniędzy na handlu i teraz kolekcjonuje różne cenne przedmioty.");
+		woman.setDescription("Widzisz Kolekcjonera Andrzeja, zamożnego gościa hotelu Fado. O rzadkich trofeach opowiada z większym zapałem niż o dawnych interesach.");
 		woman.setEntityClass("kolekcjonerandrzejnpc");
 		woman.setPosition(112, 3);
 		woman.initHP(100);

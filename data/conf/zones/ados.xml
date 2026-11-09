@@ -4316,6 +4316,7 @@ Południowy-wschód: Doki
 	</zone>
 
 	<zone name="-1_ados_caves_e" level="-1" x="500512" y="499872" file="Level -1/ados/caves_e.tmx">
+        <configurator class-name="games.stendhal.server.maps.quests.ExpeditionSurveyConfigurator"/>
 	</zone>
 
 	<zone name="-1_ados_caves_s" level="-1" x="500384" y="500000" file="Level -1/ados/caves_s.tmx">

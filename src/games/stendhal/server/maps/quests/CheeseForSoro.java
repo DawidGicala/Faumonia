@@ -12,6 +12,8 @@
  ***************************************************************************/
 package games.stendhal.server.maps.quests;
 
+import games.stendhal.server.entity.npc.action.DialogueRewardAction;
+
 import games.stendhal.common.grammar.Grammar;
 import games.stendhal.server.entity.npc.ChatAction;
 import games.stendhal.server.entity.npc.ConversationPhrases;
@@ -47,12 +49,21 @@ import java.util.Map;
 
 public class CheeseForSoro extends AbstractQuest {
 
+    public static java.util.Map<String,Integer> getRequiredItems() {
+        games.stendhal.server.util.ItemCollection items=new games.stendhal.server.util.ItemCollection();
+        items.addFromQuestStateString(NEEDED_ITEMS);
+        java.util.Map<String,Integer> result=new java.util.LinkedHashMap<String,Integer>();
+        for(java.util.Map.Entry<String,Integer> e:items.entrySet()) result.put(e.getKey(),e.getValue());
+        return java.util.Collections.unmodifiableMap(result);
+    }
+
+
 	public static final String QUEST_SLOT = "cheese_for_soro";
 
 	/**
 	 * required items for the quest.
 	 */
-	protected static final String NEEDED_ITEMS = "ser=10";
+	protected static final String NEEDED_ITEMS = "ser=3";
 
 	@Override
 	public List<String> getHistory(final Player player) {
@@ -60,7 +71,7 @@ public class CheeseForSoro extends AbstractQuest {
 		if (!player.hasQuest(QUEST_SLOT)) {
 			return res;
 		}
-		res.add("Soro poprosił mnie o zebranie 10 kawałków sera. Moge go zdobyć ze szczurów.");
+		res.add("Soro poprosił mnie o 3 kawałki sera. Mogę znaleźć je przy pokonanych szczurach w Semos i przynosić partiami.");
 		final String questState = player.getQuest(QUEST_SLOT);
 		if ("rejected".equals(questState)) {
 			res.add("Nie chcę pomóc Soro. Myślę, że znajdzie on kogoś innego do pomocy.");
@@ -80,24 +91,23 @@ public class CheeseForSoro extends AbstractQuest {
 		npc.add(ConversationStates.ATTENDING, 
 				ConversationPhrases.QUEST_MESSAGES,
 			new AndCondition(
-					new LevelGreaterThanCondition(4),
 					new QuestNotStartedCondition(QUEST_SLOT),
 					new NotCondition(new QuestInStateCondition(QUEST_SLOT,"rejected"))),
 			ConversationStates.QUESTION_1, 
-			"Jestem smakoszem sera, poszukuje kogoś kto go dla mnie trochę znajdzie! Mógłbyś mi pomóc? Napisz #tak lub #nie", null);
+			"Nie odmówię dobrego sera, lecz moje zapasy znowu się skończyły. Szukam kogoś, kto pomoże je uzupełnić. Chcesz usłyszeć szczegóły?", null);
 
 		npc.add(ConversationStates.ATTENDING, 
 			ConversationPhrases.QUEST_MESSAGES,
 			new QuestInStateCondition(QUEST_SLOT,"rejected"),
 			ConversationStates.QUEST_OFFERED, 
-			"No cóż, może innym razem..", null);
+			"Chcesz jednak pomóc? Nadal potrzebuję trzech kawałków sera. Przyniesiesz mi je?", null);
 
 		npc.add(
 			ConversationStates.QUESTION_1,
 			ConversationPhrases.YES_MESSAGES,
 			new QuestNotStartedCondition(QUEST_SLOT),
 			ConversationStates.ATTENDING,
-			"Świetnie, potrzebuje 10 kawałków sera. Jeśli zgadzasz się mi pomóc napisz: #ser",
+			"Potrzebuję trzech kawałków sera, najlepiej zanim znów dopadnie mnie głód. W zamian podzielę się ekwipunkiem, który może jeszcze komuś posłużyć. Porozmawiajmy o #serze.",
 			null);
 
 		npc.add(
@@ -105,7 +115,7 @@ public class CheeseForSoro extends AbstractQuest {
 			ConversationPhrases.NO_MESSAGES,
 			new QuestNotStartedCondition(QUEST_SLOT),
 			ConversationStates.ATTENDING,
-			"Jestem Soro. Pochodze z #Ados.",
+			"Jestem Soro, pochodzę z #Ados. W Semos znalazłem trochę spokoju po latach podróży. Jeśli zmienisz zdanie w sprawie sera, wróć do rozmowy.",
 			null);
 
 		npc.add(
@@ -113,7 +123,7 @@ public class CheeseForSoro extends AbstractQuest {
 			Arrays.asList("ser", "cheese", "żółty"),
 			new QuestNotStartedCondition(QUEST_SLOT),
 			ConversationStates.QUEST_OFFERED,
-			"Ser możesz zdobyć ze szczurów pałętających się po naszym mieście. Leczy trochę życia, możesz też go sprzedać innym graczom za pare monet w banku Semos. Przyniesiesz mi 10 kawałków takiego sera? Jeśli się zgadzasz napisz: #tak",
+			"Szczury kręcące się po Semos potrafią podkradać ser. Pokonaj kilka i sprawdź, co po nich zostało; odkładaj zdobycz, aż uzbierasz trzy sztuki. Przyniesiesz mi taki zapas?",
 			null);
 
 		npc.add(
@@ -122,7 +132,7 @@ public class CheeseForSoro extends AbstractQuest {
 			null,
 			ConversationStates.ATTENDING,
 			null,
-			new MultipleActions(new SetQuestAndModifyKarmaAction(QUEST_SLOT, NEEDED_ITEMS, 5.0),
+			new MultipleActions(DialogueRewardAction.karma(new SetQuestAndModifyKarmaAction(QUEST_SLOT, NEEDED_ITEMS, 5.0)),
 								new SayRequiredItemsFromCollectionAction(QUEST_SLOT, "Jak miło! Proszę przynieś mi: [items].")));
 
 		npc.add(
@@ -131,14 +141,14 @@ public class CheeseForSoro extends AbstractQuest {
 			null,
 			ConversationStates.ATTENDING,
 			"Ech... Cóż, niedobrze... Taka twoja wola.",
-			new SetQuestAndModifyKarmaAction(QUEST_SLOT, "rejected", -5.0));
+			DialogueRewardAction.karma(new SetQuestAndModifyKarmaAction(QUEST_SLOT, "rejected", -5.0)));
 
 		npc.add(
 			ConversationStates.ATTENDING,
 			"ser",
 			null,
 			ConversationStates.ATTENDING,
-			"Ser po zjedzeniu uleczy troche twojego zdrowia. Możesz go zdobyć ze szczurów pałetajacych sie po mieście.",
+			"Ser możesz znaleźć przy pokonanych szczurach w Semos. Jest też pożywieniem, więc oddziel swoją porcję od trzech sztuk obiecanych mnie. Przyjmę dostawę również partiami.",
 			null);
 
 		npc.add(
@@ -146,7 +156,7 @@ public class CheeseForSoro extends AbstractQuest {
 			"semos",
 			null,
 			ConversationStates.ATTENDING,
-			"Semos to miasto w którym aktualnie sie znajdujemy. Jest jednym z miast Faumonii.",
+			"Jesteśmy w Semos. Wielu przybyszów zaczyna tutaj swoje podróże, a mieszkańcy mają dla nich drobne zlecenia. Warto poznać sąsiadów, zanim ruszysz dalej.",
 			null);
 
 		npc.add(
@@ -154,7 +164,7 @@ public class CheeseForSoro extends AbstractQuest {
 			Arrays.asList("ados", "stolica"),
 			null,
 			ConversationStates.ATTENDING,
-			"Idac ciagle na zachod trafisz do ogromnego miasta - Ados. Jest ono stolica całej Faumonii",
+			"Ados leży na wschód od Semos. To duże miasto z rynkiem i wieloma rzemieślnikami. Na dłuższą wyprawę przygotuj zapasy i sprawny ekwipunek.",
 			null);
 
 		npc.add(
@@ -162,7 +172,7 @@ public class CheeseForSoro extends AbstractQuest {
 			"ekwipunek",
 			null,
 			ConversationStates.ATTENDING,
-			"Ekwipunek przyda sie do ochrony przed potworami znajdujacymi sie w tej krainie. W grze przydaja sie rownież eliksiry, jeden z nich możesz zrobić w mieście przy pomocy tej rosliny - aranduli",
+			"Broń i pancerz to podstawa, ale zostaw też miejsce na jedzenie i eliksiry. O lekarstwa zapytaj Carmen w Semos. Pokażę ci arandulę - to jedno z ziół, których potrzebuje.",
 			new ExamineChatAction("arandula.png", "Soro's drawing", "Arandula"));
 
 	}
@@ -174,44 +184,47 @@ public class CheeseForSoro extends AbstractQuest {
 				new AndCondition(new GreetingMatchesNameCondition(npc.getName()),
 						new QuestActiveCondition(QUEST_SLOT)),
 				ConversationStates.ATTENDING,
-				"Witaj ponownie. Czy przyniosłeś mi ser? Napisz #tak lub #nie ",
+				"Witaj ponownie. Sprawdźmy, czy udało się zdobyć trochę sera. Przyjmę to, co masz, i przypomnę, ile jeszcze brakuje.",
 				null);
 
 		/* player asks what exactly is missing (says ingredients) */
-		npc.add(ConversationStates.ATTENDING, "tak", null,
+		npc.add(ConversationStates.ATTENDING, "tak", new QuestActiveCondition(QUEST_SLOT),
 				ConversationStates.QUESTION_2, null,
-				new SayRequiredItemsFromCollectionAction(QUEST_SLOT, "Potrzebuję [items]. Czy masz ze sobą? Jeżeli tak, napisz #tak"));
+				new SayRequiredItemsFromCollectionAction(QUEST_SLOT, "Brakuje mi jeszcze: [items]. Jeśli masz ser, wybierz oddanie z odpowiedzi poniżej albo napisz #ser."));
 
 		npc.add(ConversationStates.ATTENDING, 
 				ConversationPhrases.QUEST_MESSAGES,
 				new QuestActiveCondition(QUEST_SLOT),
 			ConversationStates.QUESTION_2, 
-			null, new SayRequiredItemsFromCollectionAction(QUEST_SLOT, "Potrzebuję [items]. Czy masz ze sobą? Jeżeli tak, napisz #tak"));		
+			null, new SayRequiredItemsFromCollectionAction(QUEST_SLOT, "Brakuje mi jeszcze: [items]. Jeśli masz ser, wybierz oddanie z odpowiedzi poniżej albo napisz #ser."));		
 
 		/* player says he has a required item with him (says yes) */
 		npc.add(ConversationStates.QUESTION_2,
 				ConversationPhrases.YES_MESSAGES, null,
-				ConversationStates.QUESTION_2, "Dobrze, a co dokładnie masz? Jeżeli przyniosłeś #ser, napisz #ser. ",
+				ConversationStates.QUESTION_2, "Możesz mi go teraz przekazać. Wybierz oddanie sera albo napisz #ser.",
 				null);
 
 		ChatAction completeAction = new  MultipleActions(
 				new SetQuestAction(QUEST_SLOT, "done"),
-				new SayTextAction("Wspaniale! Kocham ser. Trzymaj tę statuetkę aniołka, możesz ją sprzedać za trochę pieniędzy w banku Semos u Furgo. Bank Semos znajdziesz koło biblioteki u góry. Weź również mój stary ekwipunek, dzieki niemu łatwiej bedzie ci wytrwać w tej przeklętej krainie..."),
-				new IncreaseXPAction(1000),
-				new IncreaseAtkXPAction(500),
-				new IncreaseDefXPAction(500),
-				new IncreaseKarmaAction(10),
-				new EquipItemAction("statuetka aniołka", 1),
-				new EquipItemAction("kiścień", 1),
-				new EquipItemAction("mieczyk", 1),
-				new EquipItemAction("skórzany hełm", 1),
-				new EquipItemAction("koszula", 1),
-				new EquipItemAction("skórzane spodnie", 1),
-				new EquipItemAction("buty skórzane", 1),
-				new EquipItemAction("peleryna", 1),
-				new EquipItemAction("puklerz", 1)
+				new SayTextAction("Taki zapas sera od razu poprawia mi humor. Weź mój dawny ekwipunek oraz statuetkę aniołka - Furgo w banku Semos może ją od ciebie odkupić. Niech ten podarunek ułatwi ci pierwsze wyprawy."),
+				DialogueRewardAction.xp(1000),
+				DialogueRewardAction.attackXP(500),
+				DialogueRewardAction.defenseXP(500),
+				DialogueRewardAction.karma(new IncreaseKarmaAction(10)),
+				DialogueRewardAction.item("statuetka aniołka", 1),
+				DialogueRewardAction.item("kiścień", 1),
+				DialogueRewardAction.item("mieczyk", 1),
+				DialogueRewardAction.item("skórzany hełm", 1),
+				DialogueRewardAction.item("koszula", 1),
+				DialogueRewardAction.item("skórzane spodnie", 1),
+				DialogueRewardAction.item("buty skórzane", 1),
+				DialogueRewardAction.item("peleryna", 1),
+				DialogueRewardAction.item("puklerz", 1)
 				);
 
+        // A migrated delivery may already cover the new total. Claim explicitly, once.
+        npc.add(ConversationStates.ANY, "odbiór", new QuestInStateCondition(QUEST_SLOT, "ser=0"),
+                ConversationStates.ATTENDING, null, completeAction);
 		/* add triggers for the item names */
 		final ItemCollection items = new ItemCollection();
 		items.addFromQuestStateString(NEEDED_ITEMS);
@@ -259,8 +272,9 @@ public class CheeseForSoro extends AbstractQuest {
 				ConversationPhrases.QUEST_MESSAGES,
 				null,
 			    ConversationStates.ATTENDING, 
-			    "Dziękuje za Twoją pomoc! Pamiętaj, żeby wybrać się do czerwonego domku po lewej stronie i wykonać zadanie dla Mistrza Gry. Możesz również odwiedzić Sedro siedzącego przed domkiem startowym. Dzięki temu przejdziesz dalej.",
-			    null);
+			    null, (player, sentence, raiser) -> raiser.say(player.isQuestCompleted("help_sedro")
+                    ? "Z serem już mi pomogłeś, a Sedro też otrzymał pomoc. Zajrzyj do przewodnika, jeśli chcesz sprawdzić, co zostało przed wyjściem z Semos. Uważaj na siebie!"
+                    : "Z serem już mi pomogłeś, dziękuję. Odwiedź Sedro przed domkiem startowym i zapytaj go o potwory. Ekwipunek, który ci dałem, przyda się podczas polowania."));
 	}
 	
 	@Override
@@ -268,7 +282,7 @@ public class CheeseForSoro extends AbstractQuest {
 		super.addToWorld();
 		fillQuestInfo(
 				"Ser dla Soro",
-				"Soro potrzebuje 10 kawałków sera. Możesz go zdobyć ze szczurów w mieście Semos.",
+				"Soro potrzebuje 3 kawałków sera. Możesz go zdobyć ze szczurów w mieście Semos.",
 				true);
 		prepareRequestingStep();
 		prepareBringingStep();

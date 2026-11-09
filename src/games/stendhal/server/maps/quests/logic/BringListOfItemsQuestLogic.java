@@ -242,6 +242,8 @@ public class BringListOfItemsQuestLogic {
 						List<String> missing = getListOfStillMissingItems(player, false);
 
 						if (missing.contains(itemName)) {
+						    if (missing.size() == 1 && player.isEquipped(itemName)
+						            && !QuestGoldFees.requirePaid(player, concreteQuest.getSlotName(), raiser)) { return; }
 						    if (!player.drop(itemName)) {
         						raiser.say(concreteQuest.respondToOfferOfNotExistingItem(itemName));
         						return;

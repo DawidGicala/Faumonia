@@ -45,14 +45,14 @@ public class UpdateGUIDialogs {
 		int resCode;
 		if (update) {
 			resCode = JOptionPane.showConfirmDialog(null,
-					new SelectableLabel("Jest już nowa wersja, która zajmuje " + sizeString + " KB.\r\n"
-							+ "Czy " + ClientGameConfiguration.get("GAME_NAME") + " powinna zostać zaktualizowana?"), DIALOG_TITLE,
+					new SelectableLabel("Dostępna jest aktualizacja o rozmiarze " + sizeString + " KB.\r\n"
+							+ "Czy " + ClientGameConfiguration.get("GAME_NAME") + " ma zostać zaktualizowana?"), DIALOG_TITLE,
 					JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
 		} else {
 			resCode = JOptionPane.showConfirmDialog(null,
-					new SelectableLabel("Potrzebne jest pobranie dodatkowych plików, które zajmują "
+					new SelectableLabel("Do uruchomienia gry trzeba pobrać pliki o rozmiarze "
 							+ sizeString + " KB.\r\n"
-							+ "Czy " + ClientGameConfiguration.get("GAME_NAME") + " powinna zostać zainstalowana?"),
+							+ "Czy " + ClientGameConfiguration.get("GAME_NAME") + " ma zostać zainstalowana?"),
 					DIALOG_TITLE, JOptionPane.YES_NO_OPTION,
 					JOptionPane.QUESTION_MESSAGE);
 		}

@@ -12,6 +12,8 @@
  ***************************************************************************/
 package games.stendhal.server.maps.quests;
 
+import games.stendhal.server.entity.npc.action.DialogueRewardAction;
+
 import games.stendhal.common.parser.Sentence;
 import games.stendhal.server.core.engine.SingletonRepository;
 import games.stendhal.server.entity.item.Item;
@@ -22,6 +24,7 @@ import games.stendhal.server.entity.npc.EventRaiser;
 import games.stendhal.server.entity.npc.SpeakerNPC;
 import games.stendhal.server.entity.npc.action.SetQuestAction;
 import games.stendhal.server.entity.npc.condition.AndCondition;
+import games.stendhal.server.entity.npc.condition.QuestNotStartedCondition;
 import games.stendhal.server.entity.npc.condition.QuestCompletedCondition;
 import games.stendhal.server.entity.npc.condition.QuestInStateCondition;
 import games.stendhal.server.entity.npc.condition.QuestNotCompletedCondition;
@@ -59,27 +62,31 @@ public class NewsFromHackim extends AbstractQuest {
 		if (!player.hasQuest(QUEST_SLOT)) {
 			return res;
 		}
-				res.add("Hackim asystent kowala chce abym zaniósł tajną wiadomość do Xin Blanca w tawernie Semos.");
+				res.add("Hackim, asystent kowala, chce, abym zaniósł tajną wiadomość do Xin Blanca w tawernie Semos.");
 		final String questState = player.getQuest(QUEST_SLOT);
 		if (questState.equals("rejected")) {
 			res.add("QUEST_REJECTED");
 			return res;
 		}
-			res.add("Zdecydowałem sie wykonać to zadanie. Musze dostarczyć wiadomość Hackima do Xin Blanca w tawernie Semos.");
+			res.add("Zdecydowałem się wykonać to zadanie. Muszę dostarczyć wiadomość Hackima do Xin Blanca w tawernie Semos.");
 		if (isCompleted(player)) {
-			res.add("Dostarczyłem wiadomości do Xin Blanca. W zamian dostałem nowy hełm.	W nagrodę za ukończenie zadania otrzymałem: 200 pkt doświadczenia, 200 pkt ataku, 300 pkt obrony i hełm kolczy.");
+			res.add("Dostarczyłem wiadomość do Xin Blanca. W zamian dostałem nowy hełm.	W nagrodę za ukończenie zadania otrzymałem: 200 pkt doświadczenia, 200 pkt ataku, 300 pkt obrony i hełm kolczy.");
 		}
 		return res;
 	}
 
 	private void step_1() {
 		final SpeakerNPC npc = npcs.get("Hackim Easso");
+        npc.add(ConversationStates.ATTENDING, ConversationPhrases.QUEST_MESSAGES,
+            new QuestInStateCondition(QUEST_SLOT,"start"), ConversationStates.ATTENDING,
+            "Wiadomość nadal czeka na doręczenie. Idź do Xina Blanki w tawernie Semos i powiedz, że nowa dostawa broni jest gotowa. Nie musimy ustalać tej samej przysługi drugi raz.",null);
+
 
 		npc.add(ConversationStates.ATTENDING,
 			ConversationPhrases.QUEST_MESSAGES, 
-			new QuestNotCompletedCondition(QUEST_SLOT),
+			new games.stendhal.server.entity.npc.condition.OrCondition(new QuestNotStartedCondition(QUEST_SLOT), new QuestInStateCondition(QUEST_SLOT, "rejected")),
 			ConversationStates.QUEST_OFFERED,
-			"Pssst! Podejdź tutaj... zrób mi przysługę i powiedz #Xin #Blanca że nowa dostawa broni jest gotowa. Powiesz mu?",
+			"Pssst, podejdź bliżej, zanim Xoderos oderwie się od kowadła. Przekaż Xinowi Blance w tawernie Semos, że nowa dostawa broni jest gotowa. Zaniesiesz mu tę wiadomość dyskretnie?",
 			null);
 
 		npc.add(ConversationStates.ATTENDING,
@@ -94,7 +101,7 @@ public class NewsFromHackim extends AbstractQuest {
 			ConversationPhrases.YES_MESSAGES,
 			null,
 			ConversationStates.ATTENDING,
-			"Dziękuję! Jestem pewien, że #Xin dobrze Cię wynagrodzi. Daj znać jeżeli czegoś byś potrzebował.",
+			"Znajdziesz Xina Blankę w tawernie Semos. Wystarczy, że przekażesz mu wiadomość o gotowej dostawie; będzie wiedział, o co chodzi. Nie rozpowiadaj tego po całej kuźni.",
 			new SetQuestAction(QUEST_SLOT, "start"));
 
 		npc.add(
@@ -110,10 +117,10 @@ public class NewsFromHackim extends AbstractQuest {
 			Arrays.asList("Xin", "Xin Blanca", "Blanca"),
 			null,
 			ConversationStates.QUEST_OFFERED,
-			"Nie wiesz kto to jest Xin? Każdy w oberży zna Xina. Jest to facet, który większości ludzi w Semos jest winny pieniądze za piwo! Zrobisz to?",
+			"Xin Blanca handluje wyposażeniem w tawernie Semos. Poznasz go po tym, że nawet przy kuflu rozgląda się za kolejnym interesem. Mam mu przekazać, że podejmujesz się dostarczenia wiadomości?",
 			null);
 
-			npc.addReply(Arrays.asList("Xin", "Xin Blanca", "Blanca"), "Xin's jest super. Też bym chciał pracować w oberży. Ale mój tata mówi, że powinienem uczyć się handlu.");
+			npc.addReply(Arrays.asList("Xin", "Xin Blanca", "Blanca"), "Xin Blanca przesiaduje w tawernie Semos i handluje ekwipunkiem. Jeśli niesiesz moją wiadomość, porozmawiaj z nim o gotowej dostawie. Ja zostanę przy pracy, żeby Xoderos nie zaczął zadawać pytań.");
 	}
 
 	private void step_2() {
@@ -127,9 +134,9 @@ public class NewsFromHackim extends AbstractQuest {
 				public void fire(final Player player, final Sentence sentence, final EventRaiser raiser) {
 					String answer;
 					if (player.isEquipped("hełm kolczy")) {
-						answer = "Weź ten nowy hełm! Daj mi znać jeżeli będziesz czegoś potrzebował.";
+						answer = "Widzę, że masz już hełm kolczy, ale drugi też może się przydać. Możesz go zachować albo sprzedać.";
 					} else {
-						answer = "Weź ten nowy... aha już masz... Cóż możesz go sprzedać lub wymienić.";
+						answer = "Weź ten hełm kolczy. Na szlaku warto mieć czym osłonić głowę.";
 					}
 					// player.say("Well, to make a long story short; I know
 					// your business with Hackim and I'm here to tell you
@@ -139,10 +146,44 @@ public class NewsFromHackim extends AbstractQuest {
 					player.setQuest(QUEST_SLOT, "done");
 
 					final Item item = SingletonRepository.getEntityManager().getItem("hełm kolczy");
-					player.equipOrPutOnGround(item);
-					player.addXP(200);
-					player.addatk_xp(200);
-					player.adddef_xp(300);
+					int carriedBefore = player.getNumberOfEquipped(item.getName());
+                    player.equipOrPutOnGround(item);
+                    DialogueRewardAction.recordItem(player, raiser, item, carriedBefore, 1);
+					DialogueRewardAction.xp(200).fire(player, null, raiser);
+					DialogueRewardAction.attackXP(200).fire(player, null, raiser);
+					DialogueRewardAction.defenseXP(300).fire(player, null, raiser);
+
+					player.notifyWorldAboutChanges();
+				}
+			});
+
+        // Same authoritative step, without requiring the player to leave and greet again.
+        npc.add(ConversationStates.ATTENDING, "wiadomość hackima",
+			new AndCondition(new games.stendhal.server.entity.npc.condition.AlwaysTrueCondition(),
+					new QuestInStateCondition(QUEST_SLOT, "start")),
+			ConversationStates.ATTENDING, null,
+			new ChatAction() {
+				public void fire(final Player player, final Sentence sentence, final EventRaiser raiser) {
+					String answer;
+					if (player.isEquipped("hełm kolczy")) {
+						answer = "Widzę, że masz już hełm kolczy, ale drugi też może się przydać. Możesz go zachować albo sprzedać.";
+					} else {
+						answer = "Weź ten hełm kolczy. Na szlaku warto mieć czym osłonić głowę.";
+					}
+					// player.say("Well, to make a long story short; I know
+					// your business with Hackim and I'm here to tell you
+					// that the next shipment is ready.");
+					raiser.say("W końcu gotowe! To dobra wiadomość! Pozwól mi się odwdzięczyć za twoją pomoc... "
+									+ answer);
+					player.setQuest(QUEST_SLOT, "done");
+
+					final Item item = SingletonRepository.getEntityManager().getItem("hełm kolczy");
+					int carriedBefore = player.getNumberOfEquipped(item.getName());
+                    player.equipOrPutOnGround(item);
+                    DialogueRewardAction.recordItem(player, raiser, item, carriedBefore, 1);
+					DialogueRewardAction.xp(200).fire(player, null, raiser);
+					DialogueRewardAction.attackXP(200).fire(player, null, raiser);
+					DialogueRewardAction.defenseXP(300).fire(player, null, raiser);
 
 					player.notifyWorldAboutChanges();
 				}
@@ -154,7 +195,7 @@ public class NewsFromHackim extends AbstractQuest {
 		super.addToWorld();
 		fillQuestInfo(
 				"Wiadomości od Hackima",
-				"Hackim Easso asystent kowala, potrzebuje pomocy przy przekazaniu wiadomości do kogoś w Semos. Muszę mu pomóc.",
+				"Hackim Easso chce dyskretnie przekazać wiadomość Xinowi Blance w tawernie Semos. Powiedz Xinowi, że dostawa broni jest gotowa; to on podziękuje ci za doręczenie.",
 				false);
 		step_1();
 		step_2();

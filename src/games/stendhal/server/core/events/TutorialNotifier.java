@@ -53,7 +53,9 @@ public class TutorialNotifier {
 	 *            Player
 	 */
 	public static void login(final Player player) {
-		process(player, TutorialEventType.FIRST_LOGIN);
+		NewcomerGuide.initialize(player);
+        player.setTutorialGuideStamp(null);
+        process(player, TutorialEventType.FIRST_LOGIN);
 	}
 
 	/**

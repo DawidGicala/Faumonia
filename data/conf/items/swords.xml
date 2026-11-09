@@ -36,7 +36,7 @@
 	
 	<item name="sztylet żywiołów">
 		<type class="sword" subclass="elemental_dagger" tileid="-1"/>
-		<description>Oto sztylet żywiołów. Został wykonany bardzo starannie.</description>
+		<description>Oto sztylet żywiołów wykuty przez Żywioł Ognia. Żywioł Wody potrafi ulepszyć to ostrze, jeśli spełnisz warunki jego zadania.</description>
 		<implementation class-name="games.stendhal.server.entity.item.Item"/>
 		<attributes>
 			<atk value="15"/>
@@ -57,7 +57,7 @@
 		
 	<item name="ulepszony sztylet żywiołów">
 		<type class="sword" subclass="upgraded_elemental_dagger" tileid="-1"/>
-		<description>Oto ulepszony sztylet żywiołów. Został wzmocniony poteżna magia żywiołów.</description>
+		<description>Oto ulepszony sztylet żywiołów. Ostrze wykute przez Żywioł Ognia zostało wzmocnione przez Żywioł Wody z użyciem szafirów.</description>
 		<implementation class-name="games.stendhal.server.entity.item.Item"/>
 		<attributes>
 			<atk value="9"/>
@@ -99,7 +99,7 @@
 	
 	<item name="sztylecik">
 		<type class="sword" subclass="dagger" tileid="-1"/>
-		<description>Widzisz sztylecik, jest bardziej dekoracją niż szybką bronią.</description>
+		<description>Widzisz niewielki sztylecik. To prosta broń na początek wędrówki, lekka i łatwa do schowania. Niepotrzebny egzemplarz skupuje Miter w domku startowym w Semos.</description>
 		<implementation class-name="games.stendhal.server.entity.item.Item"/>
 		<attributes>
 			<atk value="8"/>

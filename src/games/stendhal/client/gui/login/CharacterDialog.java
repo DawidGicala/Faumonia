@@ -129,7 +129,7 @@ public final class CharacterDialog extends JDialog implements Runnable {
 		SBoxLayout.addSpring(buttonBar);
 		
 		// Action buttons. Should these be of uniform size?
-		JButton newCharButton = new JButton("Nowa Postać");
+		JButton newCharButton = new JButton("Nowa postać");
 		newCharButton.addActionListener(new CreateCharacterAction(this));
 		// Disable creating unreasonable amounts of characters. Enough is enough.
 		if (characters.keySet().size() >= MAX_CHARACTERS) {
@@ -288,13 +288,13 @@ public final class CharacterDialog extends JDialog implements Runnable {
 			dispose();
 		} catch (TimeoutException e) {
 			logger.error(e, e);
-			handleError("Upłynął limit czasu na połączenie. Zaloguj się ponownie.", "Wybierz Postać");
+			handleError("Połączenie wygasło. Zaloguj się ponownie.", "Wybierz postać");
 		} catch (InvalidVersionException e) {
 			logger.error(e, e);
-			handleError("Twoja wersja FaumoniaOnline jest niekompatybilna z wersją serwera.", "Wybierz Postać");
+			handleError("Ta wersja klienta nie jest zgodna z serwerem. Pobierz aktualną wersję gry.", "Wybierz postać");
 		} catch (BannedAddressException e) {
 			logger.error(e, e);
-			handleError("Zaloguj się ponownie.", "Wybierz Postać");
+			handleError("Zaloguj się ponownie.", "Wybierz postać");
 		}
 	}
 
@@ -329,7 +329,7 @@ public final class CharacterDialog extends JDialog implements Runnable {
 		public void actionPerformed(final ActionEvent evt) {
 			String name = JOptionPane.showInputDialog(parent,
 					"Wprowadź imię twojej postaci:",
-					"Utwórz Postać",
+					"Utwórz postać",
 					JOptionPane.QUESTION_MESSAGE);
 
 			if (name == null) {
@@ -346,13 +346,13 @@ public final class CharacterDialog extends JDialog implements Runnable {
 				}
 			} catch (TimeoutException e) {
 				logger.error(e, e);
-				parent.handleError("Upłynął limit czasu na połączenie. Zaloguj się ponownie.", "Wybierz Postać");
+				parent.handleError("Połączenie wygasło. Zaloguj się ponownie.", "Wybierz postać");
 			} catch (InvalidVersionException e) {
 				logger.error(e, e);
-				parent.handleError("Twoja wersja FaumoniaOnline jest niekompatybilna z wersją serwera.", "Wybierz Postać");
+				parent.handleError("Ta wersja klienta nie jest zgodna z serwerem. Pobierz aktualną wersję gry.", "Wybierz postać");
 			} catch (BannedAddressException e) {
 				logger.error(e, e);
-				parent.handleError("Zaloguj się ponownie.", "Wybierz Postać");
+				parent.handleError("Zaloguj się ponownie.", "Wybierz postać");
 			}
 		}
 	}

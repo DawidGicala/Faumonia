@@ -11,6 +11,7 @@
  *                                                                         *
  ***************************************************************************/
 package games.stendhal.server.maps.quests;
+import games.stendhal.server.entity.npc.action.DialogueRewardAction;
 
 import games.stendhal.common.grammar.Grammar;
 import games.stendhal.common.parser.Sentence;
@@ -114,7 +115,7 @@ public class FindGhosts extends AbstractQuest {
 			ConversationPhrases.QUEST_MESSAGES,
 			new OrCondition(new QuestNotStartedCondition(QUEST_SLOT), new QuestInStateCondition(QUEST_SLOT, "rejected")),
 			ConversationStates.QUEST_OFFERED,
-			"Czuję się taka samotna. Spotykam tylko potwory i żywych ludzi. Jeżeli wiedziałabym o innych #duchach to poczułabym się lepiej.",
+			"Żywi przechodzą przez ten dom i prędzej czy później odchodzą. Ja zostałam, sama z pamięcią dawnych dni. Gdybym wiedziała o innych #duchach, może ta cisza nie byłaby tak ciężka.",
 			null);
 
 		npc.add(ConversationStates.ATTENDING,
@@ -135,7 +136,7 @@ public class FindGhosts extends AbstractQuest {
 			ConversationPhrases.YES_MESSAGES, 
 			null,
 			ConversationStates.ATTENDING,
-			"To wspaniale z twojej strony. Powodzenia w szukaniu ich. Jeśli one na prawde istnieją to jeden powinien krążyć po naszym mieście, inny zamieszkuje podziemne miasto Wofol, kolejnego powinieneś szukać w podziemiach tropikalnej wyspy a ostatni krąży po szczurzym mieście.",
+			"Szukaj jednego ducha w Ados, drugiego w podziemnym Wofol, kolejnego w jaskini na tropikalnej wyspie Athor, a ostatniego w szczurzym mieście pod Orril. Porozmawiaj z każdym i zapamiętaj jego imię. Potem wróć, a wysłucham wiadomości także pojedynczo.",
 			new SetQuestAndModifyKarmaAction(QUEST_SLOT, "looking:said", 5.0));
 
 		npc.add(
@@ -151,7 +152,7 @@ public class FindGhosts extends AbstractQuest {
 			Arrays.asList("spirits", "spirit", "duch", "duchy", "duchach"),
 			null,
 			ConversationStates.QUEST_OFFERED,
-			"Czuję, że są 4 inne duchy. Gdybym znała ich imiona to mogłabym się z nimi skontaktować. Znajdziesz je i powiesz mi ich imiona?",
+			"Czuję obecność czterech innych duchów, ale nie znam ich imion. Odszukasz je, porozmawiasz z każdym i przyniesiesz mi wiadomości? Same pogłoski nie wystarczą, chcę mieć pewność, że naprawdę ktoś jeszcze tu pozostał.",
 			null);
 	}
 
@@ -168,6 +169,12 @@ public class FindGhosts extends AbstractQuest {
 		// some ghosts.
 		npc.add(ConversationStates.IDLE, ConversationPhrases.GREETING_MESSAGES,
 			new AndCondition(new GreetingMatchesNameCondition(npc.getName()),
+						new QuestActiveCondition(QUEST_SLOT)),
+			ConversationStates.QUESTION_1,
+			"Jeżeli znajdziesz #duchy to proszę wyjaw mi ich imiona.", null);
+        // Reuse the native stage and its guards inside the current conversation.
+        npc.add(ConversationStates.ATTENDING, "wieści duchów",
+			new AndCondition(new games.stendhal.server.entity.npc.condition.AlwaysTrueCondition(),
 						new QuestActiveCondition(QUEST_SLOT)),
 			ConversationStates.QUESTION_1,
 			"Jeżeli znajdziesz #duchy to proszę wyjaw mi ich imiona.", null);
@@ -209,10 +216,13 @@ public class FindGhosts extends AbstractQuest {
 							// we haven't said the name yet so we add it to the list
 							player.setQuest(QUEST_SLOT, lookingStr
 									+ ":" + saidStr + ";" + name);
-							reply = "Dziękuje.";
+							reply = "mary".equals(name) ? "Mary pozostała w jaskini na Athor... Dobrze wiedzieć, że nawet tak daleko ktoś dzieli mój los."
+                            : "ben".equals(name) ? "Ben jest tutaj, w Ados? Był tak blisko, a nie wiedziałam o jego obecności."
+                            : "zak".equals(name) ? "Zak w podziemnym Wofol... Zapamiętam to imię i miejsce."
+                            : "Goran pozostał pod Orril, w szczurzym mieście. Dziękuję, że dotarłeś tam i z nim porozmawiałeś.";
 						} else if (!looking.contains(name)) {
 							// we have said it was a valid name but haven't met them
-							reply = "Nie wierzę, że rozmawiałeś z duchem o tym imieniu.";
+							reply = "Nie wystarczy samo imię. Spotkaj tego ducha i porozmawiaj z nim, a potem wróć do mnie z wiadomością.";
 						} else if (!isMissing && said.contains(name)) {
 							// we have said the name so we are stupid!
 							reply = "Mówiłeś mi już o tym duchu.";
@@ -227,13 +237,13 @@ public class FindGhosts extends AbstractQuest {
 							reply += " Jeżeli spotkasz inne duchy to proszę powiedz mi ich imiona.";
 							npc.say(reply);
 						} else {
-							player.setBaseHP(50 + player.getBaseHP());
-							player.heal(50, true);
+							DialogueRewardAction.maximumHealth((p, text, n) -> p.setBaseHP(50+p.getBaseHP())).fire(player,sentence,npc);
+							DialogueRewardAction.healing((p, text, n) -> { p.heal(50,true); }).fire(player,sentence,npc);
 							player.addXP(10000);
 							player.addatk_xp(5000);
 							player.adddef_xp(5000);
 							player.addKarma(50);
-							reply += " Znam teraz 4 inne duchy. Może teraz będę mogła się skontaktować z nimi za pomocą telepatii. Nie mogłam dać Ci nic z materialnych rzeczy i dlatego zwiększyłam twoją żywotność. Będziesz mógł żyć dłużej.";
+							reply += " Znam już wszystkie cztery imiona. Spróbuję nawiązać z nimi kontakt; sama myśl, że nie jestem jedyna, przynosi ulgę. Nie mam rzeczy, którymi mogłabym się podzielić, ale zwiększyłam twoją żywotność o 50 punktów.";
 							npc.say(reply);
 							player.setQuest(QUEST_SLOT, "done");
 							player.notifyWorldAboutChanges();
@@ -255,7 +265,7 @@ public class FindGhosts extends AbstractQuest {
 			"",
 			new NotCondition(new TriggerInListCondition(NEEDED_SPIRITS)),
 			ConversationStates.QUESTION_1,
-			"Przepraszam, ale nie rozumiem Ciebie. Jakie to było imię?",
+			"Nie rozpoznaję tego imienia. Powiedz, z którym duchem rzeczywiście udało ci się porozmawiać podczas wędrówki. Możemy omówić każde spotkanie osobno.",
 			null);
 
 		npc.add(
@@ -273,6 +283,12 @@ public class FindGhosts extends AbstractQuest {
 						new NotCondition(new QuestActiveCondition(QUEST_SLOT))),
 				ConversationStates.ATTENDING, "Ałłłuuuuuuu!", 
 				null);
+        // Reuse the native stage and its guards inside the current conversation.
+        npc.add(ConversationStates.ATTENDING, "wieści duchów",
+				new AndCondition(new games.stendhal.server.entity.npc.condition.AlwaysTrueCondition(),
+						new NotCondition(new QuestActiveCondition(QUEST_SLOT))),
+				ConversationStates.ATTENDING, "Ałłłuuuuuuu!", 
+				null);
 	}
 
 	@Override
@@ -280,7 +296,7 @@ public class FindGhosts extends AbstractQuest {
 		super.addToWorld();
 		fillQuestInfo(
 				"Poszukiwania Duchów",
-				"Pewnego razu paru podróżnych rozmawiało z duchami, które odwiedziły ich podczas podróży przez Faumonie. Jeden z nich młody duch zwany Carena ukryty gdzieś w okolicach Ados potrzebuje pomocy...",
+				"Carena, duch samotnej kobiety z opuszczonego domu w Ados, chciałaby poznać losy podobnych jej istot. Wyrusz na poszukiwanie innych duchów i wróć do niej z wieściami.",
 				true);
 		askingStep();
 		findingStep();

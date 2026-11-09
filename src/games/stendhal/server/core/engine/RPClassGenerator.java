@@ -312,6 +312,15 @@ public class RPClassGenerator {
 		if (!RPClass.hasRPClass(Events.PROGRESS_STATUS_CHANGE)) {
 			ProgressStatusEvent.generateRPClass();
 		}
+		if (!RPClass.hasRPClass(games.stendhal.common.TutorialGuideSnapshot.EVENT)) {
+            games.stendhal.server.events.TutorialGuideEvent.generateRPClass();
+        }
+        if (!RPClass.hasRPClass(games.stendhal.common.NpcDialogueSnapshot.EVENT)) {
+			games.stendhal.server.events.NpcDialogueEvent.generateRPClass();
+		}
+		if (!RPClass.hasRPClass(Events.PLAYER_DIALOGUE_TEXT)) {
+			games.stendhal.server.events.PlayerDialogueTextEvent.generateRPClass();
+		}
 		if (!RPClass.hasRPClass("show_item_list")) {
 			ShowItemListEvent.generateRPClass();
 		}

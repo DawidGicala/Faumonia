@@ -46,10 +46,11 @@ public class WeaponsCollectorNPC implements ZoneConfigurator {
 
 			@Override
 			protected void createDialog() {
+                games.stendhal.server.entity.npc.dialogue.CollectionDialogueTopics.install(this);
 			  // This greeting is mostly not used as the quests override it
 				addGreeting("Pozdrawiam, przyjacielu.");
 				addHelp("Na wschód od wzgórza jest bagno, na którym możesz zdobyć rzadką broń.");
-				addJob("Jestem zbyt stary, aby pracować. Żyję tutaj jak pustelnik.");
+				addJob("Nie mam już sił na dawną pracę i żyję tutaj spokojnie. Broń nadal mnie interesuje, zwłaszcza różnice między egzemplarzami z dalekich stron. Dlatego proszę podróżników o pomoc w uzupełnianiu kolekcji.");
 				addGoodbye("Miło było Cię poznać.");
 				// will buy black items once the Ultimate Collector quest is completed
 				new BuyerAdder().addBuyer(this, new QuestCompletedBuyerBehaviour("ultimate_collector", "Kupię od ciebie czarne przedmioty, gdy ukończysz każde #'wyzwanie', które ci postawie.", shops.get("buyblack")), false);
@@ -64,7 +65,7 @@ public class WeaponsCollectorNPC implements ZoneConfigurator {
 		npc.setPosition(16, 8);
 		npc.setDirection(Direction.DOWN);
 		npc.initHP(100);
-		npc.setDescription("Oto Balduin. Żyje tu jako pustelnik. Możliwe, że ma dla ciebie zadanie.");
+		npc.setDescription("Widzisz Balduina, starego pustelnika i kolekcjonera broni. Przygląda się ostrzom uważniej niż przechodniom.");
 		zone.add(npc);
 	}
 }

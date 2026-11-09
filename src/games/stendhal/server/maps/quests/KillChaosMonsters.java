@@ -72,7 +72,7 @@ import marauroa.common.Pair;
  * </ul>
  */
 
-public class KillChaosMonsters extends AbstractQuest {
+public class KillChaosMonsters extends AbstractQuest implements games.stendhal.server.core.rp.quest.NativeHuntDetails {
 
 	private static final String QUEST_SLOT = "kill_chaos_monsters";
 	private static final int WEEK_IN_MINUTES = MathHelper.MINUTES_IN_ONE_HOUR * 9999 * 9999;
@@ -86,61 +86,48 @@ public class KillChaosMonsters extends AbstractQuest {
 		final SpeakerNPC npc = npcs.get("Ivar");
 
 		npc.add(ConversationStates.ATTENDING,
-				ConversationPhrases.QUEST_MESSAGES, 
-				new AndCondition(new LevelGreaterThanCondition(199),
+                ConversationPhrases.QUEST_MESSAGES,
+                new AndCondition(new LevelGreaterThanCondition(199),
 				new QuestNotStartedCondition(QUEST_SLOT)),
-				ConversationStates.QUEST_OFFERED,
-				"Sytuacja w tunelach chaosu wymyka się spod kontroli. "
-				+ "Potwory atakują naszych kupców i destabilizują finanse miasta. Potrzebuję kogoś odważnego, kto wejdzie do tych tuneli i pokona potwory. Czy jesteś gotów podjąć się tego wyzwania?",
-				null);
+                ConversationStates.QUEST_OFFERED,
+                "Z tuneli chaosu docierają kolejne wieści o napadach na kupców. Nie wystarczy przepędzić kilku słabszych stworzeń; potrzebuję kogoś, kto zmierzy się z najgroźniejszymi. Podejmiesz się tego dla Ados?",
+                null);
 
 		npc.add(ConversationStates.ATTENDING,
-				ConversationPhrases.QUEST_MESSAGES, 
-				new AndCondition(new QuestStateStartsWithCondition(QUEST_SLOT,"done"),
+                ConversationPhrases.QUEST_MESSAGES,
+                new AndCondition(new QuestStateStartsWithCondition(QUEST_SLOT,"done"),
 						 new TimePassedCondition(QUEST_SLOT, 1, WEEK_IN_MINUTES)),
-				ConversationStates.QUEST_OFFERED,
-				"Jeszcze raz dziękuje za pomoc z potworami w tunelach Ados! Bardzo nam pomogłeś.",
-				null);
+                ConversationStates.QUEST_OFFERED,
+                "Znów potrzebuję sprawdzonego wojownika do tuneli chaosu. Czy podejmiesz kolejną wyprawę według przygotowanej listy?",
+                null);
 
 		npc.add(ConversationStates.ATTENDING,
-				ConversationPhrases.QUEST_MESSAGES, 
-				new AndCondition(new QuestStateStartsWithCondition(QUEST_SLOT,"done"),
+                ConversationPhrases.QUEST_MESSAGES,
+                new AndCondition(new QuestStateStartsWithCondition(QUEST_SLOT,"done"),
 						 new NotCondition(new TimePassedCondition(QUEST_SLOT, 1, WEEK_IN_MINUTES))),
-				ConversationStates.ATTENDING,
-				"Jeszcze raz dziękuje za pomoc z potworami w tunelach Ados! Bardzo nam pomogłeś.",
-				null);
+                ConversationStates.ATTENDING,
+                "Dziękuję za pomoc Ados. Twoja wyprawa jest już rozliczona; obecnie nie wystawiam kolejnego zlecenia.",
+                null);
 
-		final Map<String, Pair<Integer, Integer>> toKill = new TreeMap<String, Pair<Integer, Integer>>();
-		toKill.put("superczłowiek olbrzym", new Pair<Integer, Integer>(0,1));
-		toKill.put("jeździec chaosu na czerwonym smoku", new Pair<Integer, Integer>(0,2));
-		toKill.put("jeździec chaosu na zielonym smoku", new Pair<Integer, Integer>(0,4));
-		toKill.put("czarny szkielet gigant",new Pair<Integer, Integer>(0,1));
-		toKill.put("kostucha wielka",new Pair<Integer, Integer>(0,1));
-		toKill.put("krasnal golem",new Pair<Integer, Integer>(0,4));
-		toKill.put("upadły anioł",new Pair<Integer, Integer>(0,1));
-		toKill.put("czarny olbrzym",new Pair<Integer, Integer>(0,3));
-		toKill.put("olbrzymi ptasznik",new Pair<Integer, Integer>(0,1));
-		toKill.put("złoty smok",new Pair<Integer, Integer>(0,1));
-		toKill.put("czarny smok",new Pair<Integer, Integer>(0,1));
+		final Map<String, Pair<Integer, Integer>> toKill = getDialogueHuntTargets(null);
 
 		final List<ChatAction> actions = new LinkedList<ChatAction>();
 		actions.add(new SetQuestAction(QUEST_SLOT, "start"));
 		actions.add(new StartRecordingKillsAction(QUEST_SLOT, 1, toKill));
 		
 		npc.add(ConversationStates.QUEST_OFFERED,
-				ConversationPhrases.YES_MESSAGES,
-				null,
-				ConversationStates.ATTENDING,
-				"Doskonale. Dziękuję za podjęcie się tego wyzwania. Idź i przeszukaj wszystkie tunele chaosu, pokonując najsilniejsze potwory: superczłowieka olbrzyma, 2 jeźdźców chaosu na czerwonym smoku, 4 jeźdźców chaosu na zielonym smoku, czarnego szkieleta giganta, kostuchę wielką, 4 krasnale golemy, upadłego anioła, 3 czarne olbrzymy, olbrzymiego ptasznika, złotego smoka i czarnego smoka. I ogromnego szkieleta gashadokuro... nie, gashadokuro odpuścimy... Powodzenia!",
-				new MultipleActions(actions));
+                ConversationPhrases.YES_MESSAGES,
+                null,
+                ConversationStates.ATTENDING,
+                "Przygotowałem listę jedenastu rodzajów przeciwników, którzy szczególnie zagrażają kupcom. Przeszukaj tunele i odnotuj każdego z nich; gashadokuro nie jest częścią tego zlecenia." + "\nCele: " + games.stendhal.server.core.rp.quest.HuntQuestProgress.targetText(this,null) + ".",
+                new MultipleActions(actions));
 
-		npc.add(ConversationStates.QUEST_OFFERED, 
-				ConversationPhrases.NO_MESSAGES, 
-				null,
-				ConversationStates.ATTENDING,
-				"Rozumiem, że nie chcesz podjąć się tego zadania. To ogromne wyzwanie i nie każdy jest na nie gotowy.. "
-				+ "Znajdę kogoś innego, kto może będzie miał odwagę zmierzyć się z tymi potworami. Jeśli zmienisz zdanie, wróć do mnie. Twoja pomoc jest naprawdę potrzebna. ",
-				new SetQuestAction(QUEST_SLOT, "rejected"));
+		npc.add(ConversationStates.QUEST_OFFERED,
+                ConversationPhrases.NO_MESSAGES,
+                null,
+                ConversationStates.ATTENDING,
+                "Przyjmuję twoją decyzję. Wolę dostać pomoc przygotowanego wojownika, więc wróć, gdy poczujesz się na siłach.",
+                new SetQuestAction(QUEST_SLOT, "rejected"));
 	}
 
 	private void step_2() {
@@ -162,30 +149,28 @@ public class KillChaosMonsters extends AbstractQuest {
 		}
 
 		actions.add(new SetQuestAction(QUEST_SLOT, "done;1"));
-		actions.add(new SetQuestToTimeStampAction(QUEST_SLOT, 10));
+		actions.add(new SetQuestToTimeStampAction(QUEST_SLOT, 1));
 		
 		LinkedList<String> triggers = new LinkedList<String>();
 		triggers.addAll(ConversationPhrases.FINISH_MESSAGES);
 		triggers.addAll(ConversationPhrases.QUEST_MESSAGES);		
-		npc.add(ConversationStates.ATTENDING, 
-				triggers,
-				new AndCondition(
+		npc.add(ConversationStates.ATTENDING,
+                triggers,
+                new AndCondition(
 						new QuestInStateCondition(QUEST_SLOT, 0, "start"),
 						new KilledForQuestCondition(QUEST_SLOT, 1)),
-				ConversationStates.ATTENDING, 
-				"Widzę, że udało ci się zabić potwory w tunelach chaosu! Dziękuję ci w imieniu Ados, bez twojej pomocy nie poradzilibyśmy sobie.  "
-				+ "W nagrodę weź te zwoje do jaskiń chaosów. I tak nam tu zalegają... Powodzenia, dzielny wojowniku!",
-				new MultipleActions(actions));
+                ConversationStates.ATTENDING,
+                "To dobra wiadomość dla kupców i całego Ados. Wszystkie wskazane zagrożenia zostały rozliczone, a te zwoje chaosu są twoją zapłatą za trud wyprawy.",
+                new MultipleActions(actions));
 
-		npc.add(ConversationStates.ATTENDING, 
-				triggers,
-				new AndCondition(
+		npc.add(ConversationStates.ATTENDING,
+                triggers,
+                new AndCondition(
 						new QuestInStateCondition(QUEST_SLOT, 0, "start"),
 						new NotCondition(new KilledForQuestCondition(QUEST_SLOT, 1))),
-				ConversationStates.ATTENDING, 
-				"Musisz odnaleźć tunele chaosu pod Ados i pokonać znajdujące się tam potwory. "
-				+ "Upewnij się, że zabiłeś wszystkie: superczłowiek olbrzym, 2 jeźdźców chaosu na czerwonym smoku, 4 jeźdźców chaosu na zielonym smoku, czarny szkielet gigant, kostucha wielka, 4 krasnale golemy, upadły anioł, 3 czarne olbrzymy, olbrzymi ptasznik, złoty smok, czarny smok. I ogromnego szkieleta gashadokuro... nie, gashadokuro mieliśmy odpuscić... Powodzenia",
-				null);
+                ConversationStates.ATTENDING,
+                null,
+                (p, sentence, raiser) -> raiser.say("Meldunek jest jeszcze niepełny. Sprawdź brakujące stworzenia i nie trać sił na przeciwników, których w tym zleceniu nie wymagam." + "\n" + games.stendhal.server.core.rp.quest.HuntQuestProgress.progressText(KillChaosMonsters.this,p)));
 	}
 
 	@Override
@@ -193,7 +178,7 @@ public class KillChaosMonsters extends AbstractQuest {
 		super.addToWorld();
 		fillQuestInfo(
 				"Potwory w tunelach Chaosu",
-				"Ivar, urzędnik z ratusza Ados, ma poważne problemy z potworami w tunelach chaosu, które destabilizują finanse miasta przez atakowanie kupców. Prosi cię o pomoc w eliminacji tych zagrożeń. Musisz udać się do tuneli chaosu pod Ados i pokonać określone potwory.",
+				"Kupcy Ados tracą towary podczas ataków w tunelach chaosu. Ivar z ratusza prosi o osłabienie wskazanych potworów, aby handel mógł znów działać spokojniej.",
 				false);
 		step_1();
 		step_2();
@@ -202,19 +187,8 @@ public class KillChaosMonsters extends AbstractQuest {
 	
 	@Override
 	public List<String> getHistory(final Player player) {
-			final List<String> res = new ArrayList<String>();
-			if (!player.hasQuest(QUEST_SLOT)) {
-				return res;
-			}
-			if (!isCompleted(player)) {
-				res.add("Muszę zabić wszystkie potwory w tunelach chaosu: superczłowieka olbrzyma, 2 jeźdźców chaosu na czerwonym smoku, 4 jeźdźców chaosu na zielonym smoku, czarnego szkieleta giganta, kostuchę wielką, 4 krasnale golemy, upadłego anioła, 3 czarne olbrzymy, olbrzymiego ptasznika, złotego smoka i czarnego smoka. I ogromnego szkieleta gashadokuro... nie, gashadokuro mieliśmy odpuścić..");
-			} else if(isRepeatable(player)){
-				res.add("Jeszcze raz dziękuje za pomoc z potworami w tunelach Ados! Bardzo nam pomogłeś.");
-			} else {
-				res.add("Odnalazłem tunele chaosu i pokonałem wszystkie znajdujące się tam potwory.	W nagrodę za ukończenie zadania otrzymałem: 500 000 pkt doświadczenia, 20 000 pkt ataku, 20 000 pkt obrony oraz 10 zwoi chaosu.");
-			}
-			return res;
-	}
+        return games.stendhal.server.core.rp.quest.HuntQuestProgress.history(this,player);
+    }
 
 
 	@Override
@@ -248,4 +222,23 @@ public class KillChaosMonsters extends AbstractQuest {
 		return Region.SEMOS_SURROUNDS;
 	}
 	
+
+    @Override public java.util.Map<String, Pair<Integer,Integer>> getDialogueHuntTargets(Player player) {
+        final Map<String, Pair<Integer, Integer>> toKill = new TreeMap<String, Pair<Integer, Integer>>();
+		toKill.put("superczłowiek olbrzym", new Pair<Integer, Integer>(0,1));
+		toKill.put("jeździec chaosu na czerwonym smoku", new Pair<Integer, Integer>(0,2));
+		toKill.put("jeździec chaosu na zielonym smoku", new Pair<Integer, Integer>(0,4));
+		toKill.put("czarny szkielet gigant",new Pair<Integer, Integer>(0,1));
+		toKill.put("kostucha wielka",new Pair<Integer, Integer>(0,1));
+		toKill.put("krasnal golem",new Pair<Integer, Integer>(0,4));
+		toKill.put("upadły anioł",new Pair<Integer, Integer>(0,1));
+		toKill.put("czarny olbrzym",new Pair<Integer, Integer>(0,3));
+		toKill.put("olbrzymi ptasznik",new Pair<Integer, Integer>(0,1));
+		toKill.put("złoty smok",new Pair<Integer, Integer>(0,1));
+		toKill.put("czarny smok",new Pair<Integer, Integer>(0,1));
+        return java.util.Collections.unmodifiableMap(toKill);
+    }
+    @Override public int getDialogueHuntTotal(Player player) { return 0; }
+    @Override public int getDialogueKillIndex() { return 1; }
+    @Override public String getDialogueHuntHint(Player player) { return "Przeszukaj tunele chaosu pod Ados. Na liście jest jedenaście rodzajów przeciwników; gashadokuro nie należy do tego zlecenia."; }
 }

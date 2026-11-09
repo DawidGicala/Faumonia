@@ -43,16 +43,17 @@ public class General implements ZoneConfigurator {
 
 			@Override
 			protected void createDialog() {
+                games.stendhal.server.entity.npc.dialogue.CollectionDialogueTopics.install(this);
 				addGreeting("Witaj, jestem generałem wojsk Ados.");
 				addGoodbye("Na razie");
 				addHelp("Mam dla Ciebie #zadanie, jeśli nie boisz się potworów!");
-				addJob("Mam dla Ciebie #zadanie, jeśli nie boisz się potworów!");
+				addJob("Dowodzę żołnierzami Ados i pilnuję, żeby mieli czym walczyć oraz z czego żyć. Potrzebujemy regularnych dostaw, więc powierzam podróżnikom konkretne zamówienia. Zapytaj o zadanie, jeśli chcesz pomóc oddziałowi.");
 				
 				
 			}
 		};
 
-		elemental2.setDescription("Oto generał wojsk Ados.");
+		elemental2.setDescription("Widzisz Generała Jana, dowódcę wojsk Ados. Meldunki i sprawy zaopatrzenia traktuje równie poważnie.");
 		elemental2.setEntityClass("bman");
 		elemental2.setPosition(9, 2);
 		elemental2.setDirection(Direction.DOWN);

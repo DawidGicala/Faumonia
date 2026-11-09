@@ -12,6 +12,8 @@
  ***************************************************************************/
 package games.stendhal.server.maps.quests;
 
+import games.stendhal.server.entity.npc.action.DialogueRewardAction;
+
 import games.stendhal.server.entity.npc.ChatAction;
 import games.stendhal.server.entity.npc.ConversationPhrases;
 import games.stendhal.server.entity.npc.ConversationStates;
@@ -71,15 +73,15 @@ public class CleanStorageSpace extends AbstractQuest {
 		if (!player.hasQuest(QUEST_SLOT)) {
 			return res;
 		}
-		res.add("Spotkałem Eonne w jej domu obok piekarni.");
+		res.add("Spotkałem Eonnę w domu obok piekarni w Semos.");
 		final String questState = player.getQuest(QUEST_SLOT, 0);
 		if ("rejected".equals(questState)) {
 			res.add("Nie chcę wyczyścić jej piwnicy z potworów.");
 		return res;	
 		}
 		res.add("Obiecałem Eonnie zabić szczury i węże w piwnicy.");
-		if (("start".equals(questState) && player.hasKilled("szczur") && player.hasKilled("szczur jaskiniowy") && player.hasKilled("wąż")) || "done".equals(questState)) {
-		res.add("Musze wyczyścić piwnicę Eonny z gryzoni i węży.");
+		if (("start".equals(questState) && new KilledForQuestCondition(QUEST_SLOT, 1).fire(player, null, null)) || "done".equals(questState)) {
+		res.add("Pokonałem wymagane szkodniki od chwili przyjęcia zadania. Mogę wrócić do Eonny.");
 		}
 		if ("done".equals(questState)) {
 			res.add("Eonna podziękowała mi i nazwała mnie swoim bohaterem.	W nagrodę za ukończenie zadania otrzymałem: 1.000 pkt doświadczenia i 25 pkt karmy.");
@@ -94,14 +96,14 @@ public class CleanStorageSpace extends AbstractQuest {
 				ConversationPhrases.QUEST_MESSAGES, 
 				new QuestNotStartedCondition(QUEST_SLOT),
 				ConversationStates.QUEST_OFFERED,
-				"Moja #piwnica jest pełna szczurów. Pomożesz mi?",
+				"Z piwnicy znów dochodzi chrobotanie, a sama miotła już nie wystarcza. Trzeba rozprawić się ze szczurem, szczurem jaskiniowym i wężem, zanim dobiorą się do zapasów. Zejdziesz na dół i mi pomożesz?",
 				null);
 
 		npc.add(ConversationStates.ATTENDING,
 				ConversationPhrases.QUEST_MESSAGES, 
 				new QuestActiveCondition(QUEST_SLOT),
 				ConversationStates.ATTENDING, 
-				"Dziękuję jeszcze raz! Sądzę, że na dole jest nadal czysto.", null);
+				"Wciąż czekam na wieści z piwnicy. Trzeba pokonać po jednym szczurze, szczurze jaskiniowym i wężu od chwili przyjęcia mojej prośby. Zapytaj o #postęp, a sprawdzimy, co jeszcze zostało.", null);
 
 		final List<ChatAction> start = new LinkedList<ChatAction>();
 		
@@ -112,7 +114,7 @@ public class CleanStorageSpace extends AbstractQuest {
 		toKill.put("szczur jaskiniowy", new Pair<Integer, Integer>(0,1));
 		toKill.put("wąż", new Pair<Integer, Integer>(0,1));
 
-		start.add(new IncreaseKarmaAction(2.0));
+		start.add(DialogueRewardAction.karma(new IncreaseKarmaAction(2.0)));
 		start.add(new SetQuestAction(QUEST_SLOT, 0, "start"));
 		start.add(new StartRecordingKillsAction(QUEST_SLOT, 1, toKill));
 		
@@ -121,12 +123,12 @@ public class CleanStorageSpace extends AbstractQuest {
 				ConversationPhrases.YES_MESSAGES,
 				null,
 				ConversationStates.ATTENDING,
-				"Och, dziękuję! Poczekam tutaj, a jeżeli spróbują uciec to uderzę je moją miotłą!",
+				"Uff, dobrze mieć kogoś do pomocy. Schody tutaj prowadzą do piwnicy; rozpraw się z jednym szczurem, jednym szczurem jaskiniowym i jednym wężem. Ja zostanę na górze z miotłą, gdyby któryś próbował przemknąć obok ciebie.",
 				new MultipleActions(start));
 
 		npc.add(ConversationStates.QUEST_OFFERED, ConversationPhrases.NO_MESSAGES, null,
 				ConversationStates.ATTENDING,
-				"*chlip* Cóż może ktoś inny będzie moim bohaterem...",
+				"Szkoda, sama nie odważę się zejść do tych szkodników. Jeszcze trochę popilnuję schodów z miotłą. Jeśli zmienisz zdanie, wróć - zapasy same się nie obronią.",
 				new SetQuestAndModifyKarmaAction(QUEST_SLOT, "rejected", -2.0));
 
 		npc.add(
@@ -134,7 +136,7 @@ public class CleanStorageSpace extends AbstractQuest {
 				Arrays.asList("piwnica", "piwnicy", "basement", "storage space"),
 				null,
 				ConversationStates.QUEST_OFFERED,
-				"Tak, idź na dół po schodach. Tam jest cała gromada obrzydliwych szczurów. Chyba widziałam tam też węża. Powinieneś uważać... wciąż chcesz mi pomóc?",
+				"Zejdź schodami w tym domu do piwnicy. Szukaj szczura, szczura jaskiniowego i węża - trzeba pokonać po jednym z każdego rodzaju, a możesz korzystać z pomocy towarzyszy. Podejmiesz się tego?",
 				null);
 	}
 
@@ -147,23 +149,34 @@ public class CleanStorageSpace extends AbstractQuest {
 		final SpeakerNPC npc = npcs.get("Eonna");
 		
 		final List<ChatAction> reward = new LinkedList<ChatAction>();
-		reward.add(new IncreaseKarmaAction(25.0));
-		reward.add(new IncreaseXPAction(1000));
+		reward.add(DialogueRewardAction.karma(new IncreaseKarmaAction(25.0)));
+		reward.add(DialogueRewardAction.xp(1000));
 		reward.add(new SetQuestAction(QUEST_SLOT, "done"));
+        npc.add(ConversationStates.ATTENDING, "postęp",
+            new AndCondition(new QuestInStateCondition(QUEST_SLOT, 0, "start"), new KilledForQuestCondition(QUEST_SLOT, 1)),
+            ConversationStates.ATTENDING,
+            "Wszystkie trzy rodzaje szkodników zostały pokonane. Wreszcie mogę zająć się zapasami zamiast nasłuchiwać przy schodach. Dziękuję za pomoc!", new MultipleActions(reward));
+        npc.add(ConversationStates.ATTENDING, "postęp",
+            new AndCondition(new QuestInStateCondition(QUEST_SLOT, 0, "start"), new NotCondition(new KilledForQuestCondition(QUEST_SLOT, 1))),
+            ConversationStates.ATTENDING,
+            "Jeszcze nie wszystkie szkodniki zostały pokonane. Sprawdź naszą listę: trzeba po jednym szczurze, szczurze jaskiniowym i wężu od przyjęcia zadania. Schody do piwnicy są tutaj, a ja poczekam na górze.", null);
+        npc.add(ConversationStates.ATTENDING, "wskazówki", new QuestInStateCondition(QUEST_SLOT, 0, "start"), ConversationStates.ATTENDING,
+            "Zejdź schodami w tym domu do piwnicy. Pokonaj po jednym szczurze, szczurze jaskiniowym i wężu; możesz walczyć razem z towarzyszami. Potem wróć i przywitaj się albo zdaj sprawę z postępu.", null);
+
 
 		// the player returns to Eonna after having started the quest.
 		// Eonna checks if the player has killed one of each animal race.
 		npc.add(ConversationStates.IDLE, ConversationPhrases.GREETING_MESSAGES,
 				new AndCondition(new GreetingMatchesNameCondition(npc.getName()),
 						new QuestInStateCondition(QUEST_SLOT, 0, "start"), new KilledForQuestCondition(QUEST_SLOT,1)),
-				ConversationStates.ATTENDING, "Nareszcie bohater! Dziękuję!",
+				ConversationStates.ATTENDING, "Nareszcie mogę odetchnąć i zajrzeć do zapasów bez ściskania miotły jak włóczni. Wszystkie trzy rodzaje szkodników zostały pokonane. Dziękuję, naprawdę oszczędziło mi to strachu!",
 				new MultipleActions(reward));
 
 		npc.add(ConversationStates.IDLE, ConversationPhrases.GREETING_MESSAGES,
 				new AndCondition(new GreetingMatchesNameCondition(npc.getName()),
 						new QuestInStateCondition(QUEST_SLOT, 0, "start"), new NotCondition(new KilledForQuestCondition(QUEST_SLOT, 1))),
-				ConversationStates.QUEST_STARTED,
-				"Nie pamiętasz, że obiecałeś mi pomóc w oczyszczeniu mojej #piwnicy ze szczurów?",
+				ConversationStates.ATTENDING,
+				"Dobrze cię widzieć, ale w piwnicy wciąż zostało coś do zrobienia. Potrzebuję pomocy ze szczurem, szczurem jaskiniowym i wężem. Możemy sprawdzić #postęp, zanim zejdziesz znowu na dół.",
 				null);
 
 		npc.add(
@@ -171,7 +184,7 @@ public class CleanStorageSpace extends AbstractQuest {
 				Arrays.asList("basement", "piwnicy", "piwnica"),
 				null,
 				ConversationStates.ATTENDING,
-				"Tak jak powiedziałam w dół schodami. Proszę wyczyść ze wszystkich szczurów i zobacz czy nie ma tam węża!",
+				"Wejście do piwnicy jest na dole schodów w tym domu. Pokonaj po jednym szczurze, szczurze jaskiniowym i wężu; liczy się też wspólna walka z towarzyszami. Potem wróć do mnie na górę.",
 				null);
 	}
 

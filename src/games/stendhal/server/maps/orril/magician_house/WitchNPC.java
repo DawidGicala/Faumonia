@@ -74,8 +74,9 @@ public class WitchNPC implements ZoneConfigurator {
 
 			@Override
 			protected void createDialog() {
+                games.stendhal.server.entity.npc.dialogue.JourneyDialogueTopics.install(this);
 				addGreeting();
-				addJob("Jestem czarownicą skoro pytasz. Hoduję #collard jako hobby.");
+				addJob("Jestem czarownicą i zajmuję się miksturami. Hoduję też #collard, choć traktuję to raczej jak odpoczynek od receptur. Przy takiej pracy łatwo przeoczyć dzień, a czasem i termin zwrotu książki.");
 				addReply("collard",	"To ta kapusta w doniczce. Bądź ostrożny z tym!");
 				/*
 				 * addHelp("You may want to buy some potions or do some #task
@@ -115,7 +116,7 @@ public class WitchNPC implements ZoneConfigurator {
 		npc.setEntityClass("witchnpc");
 		npc.setPosition(24, 7);
 		npc.initHP(100);
-		npc.setDescription("Widzisz wiedźmę Jynath. Ona lata na miotle.");
+		npc.setDescription("Widzisz wiedźmę Jynath, skupioną na swoich recepturach. Pomiędzy zajęciami znajduje też czas na uprawę roślin.");
 		zone.add(npc);
 	}
 }

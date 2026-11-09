@@ -201,7 +201,7 @@ public class LoginDialog extends JDialog {
 		/*
 		 * Username
 		 */
-		l = new JLabel("Wprowadź imię wojownika");
+		l = new JLabel("Login");
 		c.insets = new Insets(4, 4, 4, 4);
 		c.gridx = 0;
 		c.gridy = 3;
@@ -217,7 +217,7 @@ public class LoginDialog extends JDialog {
 		/*
 		 * Password
 		 */
-		l = new JLabel("Wprowadź hasło");
+		l = new JLabel("Hasło");
 
 		c.gridx = 0;
 		c.gridy = 4;
@@ -256,7 +256,7 @@ public class LoginDialog extends JDialog {
 		contentPane.add(savePasswordBox, c);
 
 		loginButton = new JButton();
-		loginButton.setText("Zaloguj do serwera");
+		loginButton.setText("Zaloguj się");
 		loginButton.setMnemonic(KeyEvent.VK_L);
 		this.rootPane.setDefaultButton(loginButton);
 
@@ -308,7 +308,7 @@ public class LoginDialog extends JDialog {
 		JButton button = new JButton(icon);
 		// Clear the margins that buttons normally add
 		button.setMargin(new Insets(0, 0, 0, 0));
-		button.setToolTipText("Usuwa wybrane konto z listy");
+		button.setToolTipText("Usuwa zapisany profil z tego komputera. Konto na serwerze pozostaje dostępne.");
 
 		button.addActionListener(new ActionListener() {
 
@@ -389,7 +389,7 @@ public class LoginDialog extends JDialog {
 			"Zostanie usunięty twój profil z lokalnej listy kont.\n"
 			+ "Nie usunie to twojego konta z żadnego serwera.\n"
 			+ "Czy chcesz usunąć profil \'" + profile.getUser() + "@" + profile.getHost() + "\'?",
-			"Usuwa prfil użytkownika z lokalnej listy kont",
+			"Usuwanie zapisanego profilu",
 			JOptionPane.OK_CANCEL_OPTION,
 			JOptionPane.QUESTION_MESSAGE,
 			null,
@@ -452,7 +452,7 @@ public class LoginDialog extends JDialog {
 				message = message + ", because profile was null";
 			}
 			Logger.getLogger(LoginDialog.class).error(message, ex);
-			handleError("Nie można połączyć się z serwerem. Źle wpisałeś nazwę serwera?", "Nieprawidłowe połączenie");
+			handleError("Nie udało się znaleźć serwera. Sprawdź jego adres i połączenie z internetem.", "Błąd połączenia");
 			return;
 		}
 
@@ -475,10 +475,10 @@ public class LoginDialog extends JDialog {
 			});
 
 		} catch (final InvalidVersionException e) {
-			handleError("Uruchomiłeś starszą wersję FaumoniaOnline. Proszę zaktualizuj",
+			handleError("Ta wersja klienta nie jest zgodna z serwerem. Pobierz aktualną wersję gry.",
 					"Starsza wersja");
 		} catch (final TimeoutException e) {
-			handleError("Serwer jest niedostępny. Możliwe, że padł, a jeżeli używasz innego serwera to sprawdź czy dobrze wpisałeś jego nazwę i numer portu.",
+			handleError("Serwer nie odpowiada. Sprawdź jego adres i port oraz połączenie z internetem, a potem spróbuj ponownie.",
 					"Błąd logowania");
 		} catch (final LoginFailedException e) {
 			handleError(e.getMessage(), "Nie powiodło się logowanie");
@@ -537,7 +537,7 @@ public class LoginDialog extends JDialog {
 		} catch (final IOException ioex) {
 			JOptionPane.showMessageDialog(this,
 					"Wystąpił błąd podczas ładowania informacji o logowaniu",
-					"Błąd Ładowania Informacji Logowania",
+					"Błąd odczytu profili",
 					JOptionPane.WARNING_MESSAGE);
 		}
 
@@ -611,7 +611,7 @@ public class LoginDialog extends JDialog {
 		} catch (final IOException ioex) {
 			JOptionPane.showMessageDialog(this,
 					"Wystąpił błąd podczas zapisywania informacji o logowaniu",
-					"Błąd Zapisu Informacji Logowania",
+					"Błąd zapisu profili",
 					JOptionPane.WARNING_MESSAGE);
 		}
 	}

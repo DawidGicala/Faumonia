@@ -68,10 +68,11 @@ public class GoldsmithNPC implements ZoneConfigurator {
 
 			@Override
 			protected void createDialog() {
-				addGreeting("Cześć!");
-				addJob("Jestem złotnikiem w tym mieście.");
-				addHelp("Mój brat Xoderos jest kowalem w Semos. Teraz sprzedaje narzędzia. Może zrobić dla Ciebie #'misę do pukania złota'.");
-				addGoodbye("Żegnaj");
+                addReply("tematy", "Porozmawiajmy o złocie, materiałach do odlewania albo o moim bracie. Czasem dobrze oderwać na chwilę wzrok od pracy.");
+				addGreeting("Witaj w warsztacie. Podejdź śmiało, tylko uważaj przy palenisku.");
+				addJob("Jestem złotnikiem i najchętniej spędzam czas przy pracy z kruszcem. Z jednej bryłki złota i dwóch polan odlewam sztabkę; zajmuje mi to kwadrans. Powiedz #odlej, jeśli masz materiały.");
+				addHelp("Mój brat Xoderos prowadzi kuźnię w Semos i sprzedaje narzędzia, w tym misę do płukania złota. Za jej pomocą możesz szukać bryłek w odpowiednich miejscach nad wodą. Przynieś bryłkę i dwa polana, jeśli zechcesz zamienić ją w sztabkę.");
+				addGoodbye("Do widzenia. Ja wracam do paleniska.");
 
 				// Joshua makes gold if you bring him gold nugget and wood
 				final Map<String, Integer> requiredResources = new TreeMap<String, Integer>();
@@ -82,13 +83,13 @@ public class GoldsmithNPC implements ZoneConfigurator {
 						 Arrays.asList("cast", "odlej"), "sztabka złota", requiredResources, 15 * 60);
 
 				new ProducerAdder().addProducer(this, behaviour,
-				        "Cześć! Jestem tutejszym złotnikiem. Jeżeli będziesz chciał, abym odlał dla Ciebie #sztabkę #złota to daj znać! Wystarczy, że powiesz #odlej");
+				        "Witaj w warsztacie. Jeśli przyniesiesz bryłkę złota i dwa polana, mogę odlać dla ciebie sztabkę w kwadrans. Powiedz #odlej, a przyjrzę się materiałom.");
 				addReply("polano",
 						"Potrzebuję trochę polan, aby podtrzymywać ogień. Możesz je znaleźć w lesie.");
 				addReply(Arrays.asList("ore", "gold ore", "gold nugget", "bryłka złota"),
 						"Aby otrzymać sztabki złota potrzebne są bryłki tego kruszcu.");
 				addReply(Arrays.asList("gold bar", "gold", "bar", "sztabkę złota"),
-				        "Odlałem  już złoto dla Ciebie, ale trzymaj je w bezpiecznym miejscu. Słyszałem pogłoski, że niedługo znowu będzie można bezpiecznie podróżować do Fado. Tam będziesz mógł wymienić lub sprzedać.");
+				        "Sztabka to kruszec przygotowany do dalszej pracy. Mogę ją odlać z jednej bryłki złota, zużywając dwa polana na opał. Jeśli właśnie o to ci chodzi, powiedz #odlej.");
 				addReply(Arrays.asList("gold pan", "misę do pukania złota"),
 				        "Jeżeli już masz misę do pukania złota to możesz wydobywać złoto w pewnych miejscach.");
 				addReply(Arrays.asList("oil","can of oil", "olejek"),"Rybacy nas w to zaopatrują.");
@@ -99,7 +100,7 @@ public class GoldsmithNPC implements ZoneConfigurator {
 		goldsmith.setDirection(Direction.DOWN);
 		goldsmith.setPosition(18, 3);
 		goldsmith.initHP(100);
-		goldsmith.setDescription("Oto Joshua. Jego rodzina jest znana z wykuwania różnych materjałów. Czy znasz jego brata Xoderosa?");
+		goldsmith.setDescription("Widzisz Joshuę, złotnika z Ados i brata Xoderosa. Z uwagą przygląda się kruszcowi, jakby reszta świata na chwilę przestała istnieć.");
 		zone.add(goldsmith);
 	}
 }

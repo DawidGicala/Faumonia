@@ -43,10 +43,11 @@ public class SmithNPC implements ZoneConfigurator {
 
 			@Override
 			protected void createDialog() {
+                games.stendhal.server.entity.npc.dialogue.CollectionDialogueTopics.install(this);
 				addGreeting("Szacum wodzu! Jestem Vulcanus kowal.");
 				addGoodbye("Na razie");
-				addHelp("Mógłbym Ci pomóc w zdobyciu #specjalnego przedmiotu...");
-				addJob("Używałem do wykuwania broni dla Króla Faiumoni, ale było to dawno temu. Teraz droga jest zablokowana.");
+				addHelp("Szukasz czegoś #specjalnego? Potrafię wykuć miecz nieśmiertelnych, ale potrzebuję odpowiednich materiałów, a ty musisz dowieść, że podołasz próbie. Wysłuchaj szczegółów, zanim wyruszysz po składniki.");
+				addJob("Dawno temu wykuwałem broń dla króla Faumonii. Droga została zablokowana, lecz ręce wciąż pamiętają tę pracę. Miecz nieśmiertelnych mogę przygotować tylko komuś, kto dostarczy materiały i dowiedzie swojej siły.");
 				
 				add(
 				        ConversationStates.ATTENDING,
@@ -58,7 +59,7 @@ public class SmithNPC implements ZoneConfigurator {
 			}
 		};
 
-		smith.setDescription("Oto Vulcanus. Czujesz się dziwnie stojąc w jego pobliżu.");
+		smith.setDescription("Widzisz Vulcanusa przy kuźni. W jego obecności nawet zwykła rozmowa nabiera ciężaru dawno pamiętanych wydarzeń.");
 		smith.setEntityClass("transparentnpc");
 		smith.setAlternativeImage("vulcanus");
 		smith.setPosition(84, 74);

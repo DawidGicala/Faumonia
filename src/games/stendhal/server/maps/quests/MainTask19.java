@@ -15,7 +15,7 @@ package games.stendhal.server.maps.quests;
 import games.stendhal.common.grammar.Grammar;
 import games.stendhal.server.entity.npc.ConversationPhrases;
 import games.stendhal.server.entity.npc.ConversationStates;
-import games.stendhal.server.entity.npc.SpeakerNPC;
+import games.stendhal.server.core.rp.quest.MasterStage;
 import games.stendhal.server.entity.npc.action.DropRecordedItemAction;
 import games.stendhal.server.entity.npc.action.IncreaseKarmaAction;
 import games.stendhal.server.entity.npc.action.IncreaseAtkXPAction;
@@ -79,7 +79,7 @@ public class MainTask19 extends AbstractQuest {
 			res.add("Nie chce podjąć się głównego zadania na wojownika Faumonii");
 			return res;
 		}
-		res.add("Zanim Mistrz Faumonii XIX przyzna mi kolejne zadanie musze wykonać kilka zadań.	Muszę odnaleźć Natana i pomóc mu pokonać potwory z krainy snów dreamscape. Podobno znajdę go w okolicy dziwnej statuetki w mieście Semos, koło mieszkania Pddidi.");
+		res.add("Zanim Mistrz Faumonii przyzna mi kolejne zadanie musze wykonać kilka zadań.	Muszę odnaleźć Natana i pomóc mu pokonać potwory z krainy snów dreamscape. Podobno znajdę go w okolicy dziwnej statuetki w mieście Semos, koło mieszkania Pddidi.");
 		if (!isCompleted(player)) {
 			res.add("Żeby ukończyć główne zadanie musze pokony z krainy snów dreamscape i przynieść " + Grammar.a_noun(player.getRequiredItemName(QUEST_SLOT,0)) + "	Informacji na ten temat powinienem szukać u graczy lub na stronie internetowej: www.faumonia.pl");
 		}
@@ -90,7 +90,7 @@ public class MainTask19 extends AbstractQuest {
 	}
 	
 	private void checkCollectingQuests() {
-		final SpeakerNPC npc = npcs.get("Mistrz Faumonii XIX");
+		final MasterStage npc = MasterStage.register(19, this);
 		
 		npc.add(
 		ConversationStates.IDLE,
@@ -130,7 +130,7 @@ public class MainTask19 extends AbstractQuest {
 
 	private void requestItem() {
 		
-		final SpeakerNPC npc = npcs.get("Mistrz Faumonii XIX");
+		final MasterStage npc = MasterStage.register(19, this);
 		final Map<String,Integer> items = new HashMap<String, Integer>();
 		
 		items.put("buty xenocyjskie",1);
@@ -165,7 +165,7 @@ public class MainTask19 extends AbstractQuest {
 	}
 						
 	private void collectItem() {
-			final SpeakerNPC npc = npcs.get("Mistrz Faumonii XIX");
+			final MasterStage npc = MasterStage.register(19, this);
 			
 					npc.add(ConversationStates.IDLE,
 				ConversationPhrases.GREETING_MESSAGES,
@@ -206,7 +206,7 @@ public class MainTask19 extends AbstractQuest {
 	public void addToWorld() {
 		fillQuestInfo(
 				"Wojownik Faumonii 19",
-				"Mistrz Faumonii XIX ma dla ciebie dziewiętnaste główne zadanie które pomoże ci zostać wielkim wojownikiem Faumonii.",
+				"Mistrz Faumonii ma dla ciebie dziewiętnaste główne zadanie które pomoże ci zostać wielkim wojownikiem Faumonii.",
 				true);
 		
 		checkCollectingQuests();
@@ -227,7 +227,7 @@ public class MainTask19 extends AbstractQuest {
 
 	@Override
 	public String getNPCName() {
-		return "Mistrz Faumonii XIX";
+		return MasterStage.NPC_NAME;
 	}
 	
 	@Override

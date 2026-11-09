@@ -71,25 +71,27 @@ public class FarmerNPC implements ZoneConfigurator {
 			
 			@Override
 			protected void createDialog() {
-				addGreeting("Heja! Miło Cię widzieć w naszym gospodarstwie.");
-				addJob("Och praca tutaj jest ciężka. Nawet nie myślę o tym, że mógłbyś mi pomóc.");
-				addOffer("Nasze mleko jest najlepsze. Zapytaj moją żonę #Philomena o mleko. Ja sprzedaję #'puste worki'");
-				addReply("Philomena","Ona jest w domku na południowy-zachód stąd.");
-				addHelp("Potrzebujesz pomocy? Mogę coś ci opowiedzieć o #sąsiedztwie.");
+				addReply("tematy", "Mów śmiało, tylko konkretnie. Robota sama się nie zrobi, ale na kilka słów znajdę czas.");
+				addGreeting("Witaj w gospodarstwie. Jeśli czegoś potrzebujesz, mów, póki jestem w pobliżu.");
+				addJob("Prowadzę to gospodarstwo i pilnuję, żeby zwierzętom niczego nie brakowało. Pracy jest tyle, że człowiek ledwie obejrzy się za siebie, a już trzeba zaczynać następną. Nie narzekam, ale rąk do roboty nigdy za wiele.");
+                addOffer("Moja żona, #Philomena, zna się na mleku najlepiej. Ja sprzedaję #'puste worki'. W gospodarstwie zawsze warto mieć pod ręką coś, w co można spakować zapasy.");
+				addReply("Philomena","Philomena jest w domku na południowy zachód stąd. Zajrzyj do niej, jeśli szukasz mleka; ja zajmuję się tutaj gospodarstwem.");
+                addHelp("Znam okolicę z codziennej pracy, więc mogę ci wskazać drogę. Opowiem ci o #sąsiedztwie, jeśli nie wiesz, którędy ruszyć. Tylko nie każ mi przy tym porzucać gospodarstwa.");
 				addReply(Arrays.asList("neighborhood.", "sąsiedztwie."),"Na północy znajduje się jaskinia z niedźwiedziami i innymi potworami. Jeżeli pójdziesz na północny-wschód " +
 						"to po pewnym czasie dojdziesz do dużego miasta Ados. Na wschodzie jest duuuuża skała. Balduin " +
 						"wciąż tam mieszka? Chcesz wyruszyć na południowy-wschód? Cóż.. możesz tamtędy dojść do Ados, ale " +
 						"droga jest trochę trudniejsza.");
-				addQuest("Nie mam teraz czasu na takie rzeczy. Pracuję.. pracuję.. pracuję..");
-				addReply(Arrays.asList("empty sack", "puste worki"),"Oh mam tego mnóstwo na sprzedaż. Czy chcesz kupić #'pusty worek'.");
+				addQuest("Teraz nie mam dla ciebie osobnego zlecenia. Muszę doglądać gospodarstwa, ale jeśli ktoś cię do mnie przysłał, powiedz kto.");
+				addReply(Arrays.asList("empty sack", "puste worki"),"Mam na sprzedaż #'pusty worek' i mogę odstąpić ci więcej niż jeden. Wybierz, ile potrzebujesz, a podam cenę.");
                 final Map<String, Integer> offerings = new HashMap<String, Integer>();
                 offerings.put("pusty worek", 10);
-                new SellerAdder().addSeller(this, new SellerBehaviour(offerings));
-				addGoodbye("Dowidzenia, dowidzenia. Bądź ostrożny.");
+                addReply(java.util.Arrays.asList("sklep", "shop"), "Sprzedaję puste worki. Przydają się do noszenia zapasów; wybierz, ile chcesz kupić.");
+                new SellerAdder().addSeller(this, new SellerBehaviour(offerings), false);
+				addGoodbye("Do zobaczenia. Uważaj po drodze, ja wracam do pracy.");
 			}
 		};
 
-		npc.setDescription("Oto Karl miły starszy rolnik.");
+		npc.setDescription("Widzisz Karla, starszego rolnika. Jego spracowane dłonie i oszczędne słowa zdradzają człowieka przywykłego do ciężkiej pracy.");
 		npc.setEntityClass("beardmannpc");
 		npc.setPosition(64, 75);
 		npc.initHP(100);

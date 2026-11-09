@@ -4,7 +4,7 @@
 
 	<item name="arandula">
 		<type class="herb" subclass="arandula" tileid="-1"/>
-		<description>Oto arandula. Zioło to ma właściwości lecznicze, jeśli wiesz jak je użyć.</description>
+		<description>Oto arandula, zioło o właściwościach leczniczych. Carmen zbiera je na zapasy, a Ilisa wykorzystuje przy przygotowaniu lekarstwa dla Tada.</description>
 		<implementation class-name="games.stendhal.server.entity.item.StackableItem"/>
 		<attributes>
 			<quantity value="1"/>

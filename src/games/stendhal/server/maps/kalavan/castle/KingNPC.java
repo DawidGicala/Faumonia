@@ -58,6 +58,9 @@ public class KingNPC implements ZoneConfigurator {
 
 			@Override
 			protected void createDialog() {
+                games.stendhal.server.entity.npc.dialogue.JourneyDialogueTopics.install(this);
+                addJob("Rządzę Kalavan i odpowiadam za spokój moich obywateli. Moja córka Ylflia zna tych, którzy pomagają mieszkańcom zamku; jej polecenie wiele dla mnie znaczy.");
+                addGoodbye("Możesz odejść. Niech podróż będzie spokojna.");
 				// it's all in
 				// games.stendhal.server.maps.quests.ImperialPrincess
 			}
@@ -66,7 +69,7 @@ public class KingNPC implements ZoneConfigurator {
 		kingNPC.setEntityClass("kingcozartnpc");
 		kingNPC.setPosition(40, 22);
 		kingNPC.initHP(100);
-		kingNPC.setDescription("Oto King Cozart, król Kalavan i jego obywateli.");
+        kingNPC.setDescription("Widzisz króla Cozarta, władcę Kalavan. Nawet podczas posiłku oczekuje, że rozmówca okaże mu należny szacunek.");
 		zone.add(kingNPC);
 	}
 }

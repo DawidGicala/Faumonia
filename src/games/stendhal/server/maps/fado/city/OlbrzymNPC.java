@@ -43,12 +43,14 @@ public class OlbrzymNPC implements ZoneConfigurator {
 
 			@Override
 			protected void createDialog() {
+                games.stendhal.server.entity.npc.dialogue.HuntDialogueTopics.install(this);
+                addJob("Chciałem poznać okolicę i wybrałem się do jaskini na południe od miasta. Spotkanie z olbrzymami skończyło tę wycieczkę szybciej, niż planowałem; teraz bardziej cenię dobre przygotowanie.");
 				addGreeting("Witaj.");
 				addGoodbye("Na razie.");
 			}
 		};
 
-		elemental.setDescription("Oto Rade. Wygląda trochę dziwnie.");
+		elemental.setDescription("Widzisz Radego w Fado. O jaskiniach opowiada już znacznie ostrożniej niż o miejskich spacerach.");
 		elemental.setEntityClass("doctornpc");
 		elemental.setPosition(29, 76);
 		elemental.setDirection(Direction.DOWN);

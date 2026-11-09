@@ -18,6 +18,7 @@ import games.stendhal.client.gui.layout.SBoxLayout;
 import games.stendhal.client.gui.layout.SLayout;
 import games.stendhal.client.gui.wt.core.SettingChangeAdapter;
 import games.stendhal.client.gui.wt.core.WtWindowManager;
+import games.stendhal.common.QuestProgress;
 
 import java.awt.Component;
 import java.awt.Dimension;
@@ -25,6 +26,8 @@ import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.ComponentAdapter;
+import java.awt.event.ComponentEvent;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -37,6 +40,7 @@ import javax.swing.JEditorPane;
 import javax.swing.JScrollPane;
 import javax.swing.JTabbedPane;
 import javax.swing.SwingUtilities;
+import javax.swing.Timer;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 import javax.swing.event.HyperlinkEvent;
@@ -49,9 +53,9 @@ import javax.swing.text.DefaultCaret;
  */
 public class ProgressLog {
 	/** Width of the window content. */
-	private static final int PAGE_WIDTH = 450;
+	private static final int PAGE_WIDTH = 760;
 	/** Height of the window content. */
-	private static final int PAGE_HEIGHT = 300;
+	private static final int PAGE_HEIGHT = 520;
 	/** Width of the index area of a page. */
 	private static final int INDEX_WIDTH = 180;
 	/** Image used for the log background. */
@@ -84,6 +88,21 @@ public class ProgressLog {
 		window.add(tabs);
 		window.pack();
 		WindowUtils.watchFontSize(window);
+
+		// Refresh only the selected pilot quest while its journal is visible.
+		final Timer refreshTimer = new Timer(3000, new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent event) {
+				Component selected = tabs.getSelectedComponent();
+				if (window.isVisible() && selected instanceof Page) {
+					((Page) selected).refreshProgress();
+				}
+			}
+		});
+		window.addComponentListener(new ComponentAdapter() {
+			@Override public void componentShown(ComponentEvent event) { refreshTimer.start(); }
+			@Override public void componentHidden(ComponentEvent event) { refreshTimer.stop(); }
+		});
 		
 		WtWindowManager.getInstance().registerSettingChangeListener("ui.logfont",
 				new SettingChangeAdapter("ui.logfont", FONT_NAME) {
@@ -144,14 +163,22 @@ public class ProgressLog {
 	 * @param information information
 	 * @param contents content paragraphs
 	 */
-	void setPageContent(String page, String header, String description, String information, List<String> contents) {
+	void setPageContent(String page, String header, String description, String information, List<String> contents,
+			QuestProgress progress, boolean passive) {
 		int index = tabs.indexOfTab(page);
 		if (index != -1) {
 			Component comp = tabs.getComponent(index);
 			if (comp instanceof Page) {
-				((Page) comp).setContent(header, description, information, contents);
+				((Page) comp).setContent(header, description, information, contents, progress, passive);
 			}
 		}
+	}
+
+	/** Late background replies must neither reopen the window nor replace another quest. */
+	boolean acceptsRefresh(String category, String item) {
+		int selected = tabs.getSelectedIndex();
+		return window.isVisible() && selected >= 0 && category.equals(tabs.getTitleAt(selected))
+				&& item.equals(((Page) tabs.getSelectedComponent()).contentQueryData);
 	}
 	
 	/**
@@ -181,7 +208,7 @@ public class ProgressLog {
 	 * A page on the window.
 	 */
 	@SuppressWarnings("serial")
-	private static class Page extends JComponent implements HyperlinkListener {
+	static class Page extends JComponent implements HyperlinkListener {
 		/** Html area for the subjects. */
 		private final JEditorPane indexArea;
 		/** The html area. */
@@ -200,6 +227,8 @@ public class ProgressLog {
 		private ProgressStatusQuery contentQuery;
 		/** Additional data for the content updating query. */
 		private String contentQueryData;
+		private boolean refreshProgress;
+		private String lastContent;
 		/** Name of the font. */
 		private String fontName;
 		
@@ -228,6 +257,10 @@ public class ProgressLog {
 			panels.add(indexScrollPane, SBoxLayout.constraint(SLayout.EXPAND_Y));
 			
 			contentArea = new PrettyEditorPane();
+			Caret contentCaret = contentArea.getCaret();
+			if (contentCaret instanceof DefaultCaret) {
+				((DefaultCaret) contentCaret).setUpdatePolicy(DefaultCaret.NEVER_UPDATE);
+			}
 			// Does not need a listener. There should be no links
 			
 			contentScrollPane = new JScrollPane(contentArea);
@@ -259,6 +292,12 @@ public class ProgressLog {
 			}
 			if (contentQuery != null && (contentQueryData != null)) {
 				contentQuery.fire(contentQueryData);
+			}
+		}
+
+		void refreshProgress() {
+			if (refreshProgress && contentQuery != null && contentQueryData != null) {
+				contentQuery.refresh(contentQueryData);
 			}
 		}
 		
@@ -348,14 +387,17 @@ public class ProgressLog {
 		 * @param information information
 		 * @param contents content paragraphs
 		 */
-		void setContent(String header, String description, String information, List<String> contents) {
+		void setContent(String header, String description, String information, List<String> contents,
+				QuestProgress progress, final boolean passive) {
+			refreshProgress = progress != null && (progress.getState() == QuestProgress.State.ACTIVE
+					|| progress.getState() == QuestProgress.State.READY_TO_DELIVER);
 			StringBuilder text = new StringBuilder("<html>");
 			text.append(createStyleDefinition());
 
 			// header
 			if (header != null) {
 				text.append("<h2>");
-				text.append(header);
+				text.append(QuestProgressFormatter.escape(header));
 				text.append("</h2>");
 			}
 
@@ -366,6 +408,8 @@ public class ProgressLog {
 				text.append("</b></p>");
 			}
 
+			text.append(QuestProgressFormatter.render(progress));
+
 			// description
 			if (description != null) {
 				text.append("<p><i>");
@@ -375,6 +419,7 @@ public class ProgressLog {
 
 			// details
 			if (!contents.isEmpty()) {
+				if (progress != null) { text.append("<h3>Historia zadania</h3>"); }
 				text.append("<ul>");
 				for (String elem : contents) {
 					text.append("<li>");
@@ -384,7 +429,12 @@ public class ProgressLog {
 				text.append("</ul>");
 			}
 			text.append("</html>");
-			contentArea.setText(text.toString());
+			String rendered = text.toString();
+			if (passive && rendered.equals(lastContent)) { return; }
+			lastContent = rendered;
+			final int scrollPosition = contentScrollPane.getVerticalScrollBar().getValue();
+			contentArea.setText(rendered);
+			contentArea.setCaretPosition(0);
 
 			/*
 			 * Scroll to top. This needs to be pushed to the even queue, because
@@ -394,7 +444,7 @@ public class ProgressLog {
 			SwingUtilities.invokeLater(new Runnable() {
 				@Override
 				public void run() {
-					contentScrollPane.getVerticalScrollBar().setValue(0);
+					contentScrollPane.getVerticalScrollBar().setValue(passive ? scrollPosition : 0);
 				}
 			});	
 		}
@@ -408,6 +458,7 @@ public class ProgressLog {
 				 * to parse it as an URL.
 				 */
 				contentQueryData = event.getDescription();
+				refreshProgress = false;
 				if (contentQuery != null) {
 					contentQuery.fire(contentQueryData);
 				}

@@ -54,8 +54,10 @@ public class MotherNPC implements ZoneConfigurator {
 
 			@Override
 			protected void createDialog() {
+                addReply("wskazówki", "Florence Boullabaisse gotuje zupę rybną na rynku w Ados. Zbierz dla niej składniki z przepisu i odbierz gotową porcję ze stołu. Tę zupę przynieś tutaj dla Hughiego.");
+                addReply("tematy", "Możemy wrócić do twojej sprawy albo porozmawiać o czymś innym. Co chcesz wiedzieć?");
 				addGreeting("Witaj. Przykro mi, ale nie mam za dużo czasu, gdy mój synek choruje...");
-				addJob("Mój brat opiekuje się tą farmą. Ja tylko opiekuję się tutaj synem.");
+				addJob("Mój brat zajmuje się gospodarstwem, a ja doglądam Hughiego. Dopóki choruje, najchętniej nie odchodziłabym od jego łóżka.");
 				addHelp("Philomena sprzeda Ci mleko i masło.");
 				addGoodbye("Dowidzenia.");
 			}
@@ -63,7 +65,7 @@ public class MotherNPC implements ZoneConfigurator {
 		npc.setEntityClass("woman_006_npc");
 		npc.setPosition(30, 9);
 		npc.initHP(100);
-		npc.setDescription("Oto Anastasia, wygląda na przybitą.");
+		npc.setDescription("Widzisz Anastasię czuwającą nad chorym synem w gospodarstwie pod Ados. Mówi cicho, żeby go nie obudzić.");
 	    zone.add(npc);
 	}
 }

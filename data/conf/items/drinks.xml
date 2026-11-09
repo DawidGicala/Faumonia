@@ -357,7 +357,7 @@
 
 	<item name="woda">
 		<type class="drink" subclass="waterbottle" tileid="-1"/>
-		<description>Oto woda. Jest świeża i smaczna.</description>
+		<description>Oto świeża woda. Właśnie o taką prosi Hayunn; Miter sprzedaje ją w domku startowym w Semos.</description>
 		<implementation class-name="games.stendhal.server.entity.item.Drink"/>
 		<attributes>
 			<amount value="10"/>
@@ -1092,7 +1092,7 @@
 
 	<item name="butelka wody">
 		<type class="drink" subclass="woda_butelka" tileid="-1"/>
-		<description>Oto butelka wody. Pyszna. Prosto ze źródła.</description>
+		<description>Oto butelka wody, zapas napoju na drogę. W sklepie występuje osobno od zwykłej wody, o którą prosi Hayunn.</description>
 		<implementation class-name="games.stendhal.server.entity.item.Drink"/>
 		<attributes>
 			<amount value="80"/>

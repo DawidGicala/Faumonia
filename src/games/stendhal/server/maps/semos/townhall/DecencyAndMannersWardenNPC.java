@@ -42,6 +42,7 @@ public class DecencyAndMannersWardenNPC implements ZoneConfigurator {
 
 			@Override
 			protected void createDialog() {
+                addReply("tematy", "Możemy wrócić do twojej sprawy albo porozmawiać o czymś innym. Co chcesz wiedzieć?");
 				addHelp("Jestem miejskim Strażnikiem Dobrych Obyczajów i Manier. Mogę poradzić jak zachowywać się w różnych sytuacjach. Na przykład nie chodź nago. Słyszałeś kiedyś o #kolorowym #ubraniu?");
 				addReply(Arrays.asList("outfit", "colour", "outfit colouring", "kolorowym", "ubraniu", "kolorowym ubraniu"),
 						"Możesz pokolorować swoje ubranie ulubionym kolorem. Wybierz wygląd i naciśnij prawy przycisk na sobie i pokoloruj swoje włosy lub ubranie! Może na pomarańczowo. Pasuje do Halloween!");

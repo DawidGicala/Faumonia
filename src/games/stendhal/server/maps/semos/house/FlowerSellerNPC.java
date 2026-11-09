@@ -41,7 +41,8 @@ public class FlowerSellerNPC implements ZoneConfigurator {
 			}
 	                @Override
 			protected void createDialog() {
-			    addJob("Jestem wędrowną kwiaciarką z dalekiego Grodu Kraka.");
+                games.stendhal.server.entity.npc.dialogue.JourneyDialogueTopics.install(this);
+			    addJob("Pochodzę z Grodu Kraka i wędruję z kwiatami po krainie. Jedni szukają u mnie podarunku, inni czegoś, co przypomni bliskiej osobie o domu. Specjalne zamówienie wymaga jednak powodu i odrobiny cierpliwości.");
 			    addGoodbye("Wszystko zaczyna się od róż ... dowidzenia ...");
 			    // the rest is in the ElfPrincess quest
 			}
@@ -49,7 +50,7 @@ public class FlowerSellerNPC implements ZoneConfigurator {
 
 		rose.setEntityClass("gypsywomannpc");
 		rose.initHP(100);
-		rose.setDescription("Oto Róża Kwiaciarka. Skacze z miejsca na miejsce z koszykiem pełnym pięknych róż.");
+		rose.setDescription("Widzisz Różę Kwiaciarkę z koszykiem świeżych kwiatów. Nigdy nie zostaje długo w jednym miejscu.");
 
 		// start in int_semos_house
 		final StendhalRPZone	zone = SingletonRepository.getRPWorld().getZone("int_semos_house");

@@ -1499,7 +1499,7 @@
 
 	<item name="kieł złotej kostuchy">
 		<type class="resource" subclass="kiel_zlotej_kostuchy" tileid="-1"/>
-		<description>Oto kieł złotej kostuchy. Legenda głosi, że w głębokich jaskiniach mieszka czarodziej, który potrafi wykonać z niego złoty sztylet.</description>
+		<description>Oto kieł złotej kostuchy. Takiego trofeum szuka Kolekcjoner Andrzej; Ludwik wykorzystuje je przy przeróbce złotej ciupagi. Jeden kieł zamyka także próbę XXV u Mistrza Faumonii.</description>
 		<implementation class-name="games.stendhal.server.entity.item.StackableItem"/>
 		<attributes>
 			<quantity value="1"/>
@@ -1679,7 +1679,7 @@
 
 	<item name="skóra czarnego smoka">
 		<type class="resource" subclass="skora_czarnego_smoka" tileid="-1"/>
-		<description>Oto kawał skóry czarnego smoka. Sprzedaj go lub poszukaj zdolnego szewca, który uszyje z niego płaszcz lub rękawice.</description>
+		<description>Oto kawał skóry czarnego smoka. Terry potrzebuje takich skór przy przygotowaniu materiału na płaszcz pradawnych smoków.</description>
 		<implementation class-name="games.stendhal.server.entity.item.StackableItem"/>
 		<attributes>
 			<quantity value="1"/>
@@ -1699,7 +1699,7 @@
 
 	<item name="skóra czerwonego smoka">
 		<type class="resource" subclass="skora_czerwonego_smoka" tileid="-1"/>
-		<description>Oto kawał skóry czerwonego smoka. Sprzedaj go lub poszukaj zdolnego szewca, który uszyje z niego płaszcz lub rękawice.</description>
+		<description>Oto kawał skóry czerwonego smoka. Terry potrzebuje takich skór przy przygotowaniu materiału na płaszcz pradawnych smoków.</description>
 		<implementation class-name="games.stendhal.server.entity.item.StackableItem"/>
 		<attributes>
 			<quantity value="1"/>
@@ -1719,7 +1719,7 @@
 
 	<item name="skóra niebieskiego smoka">
 		<type class="resource" subclass="skora_niebieskiego_smoka" tileid="-1"/>
-		<description>Oto kawał skóry niebieskiego smoka. Sprzedaj go lub poszukaj zdolnego szewca, który uszyje z niego płaszcz lub rękawice.</description>
+		<description>Oto kawał skóry niebieskiego smoka. Terry potrzebuje takich skór przy przygotowaniu materiału na płaszcz pradawnych smoków.</description>
 		<implementation class-name="games.stendhal.server.entity.item.StackableItem"/>
 		<attributes>
 			<quantity value="1"/>
@@ -1739,7 +1739,7 @@
 
 	<item name="skóra zielonego smoka">
 		<type class="resource" subclass="skora_zielonego_smoka" tileid="-1"/>
-		<description>Oto kawał skóry zielonego smoka. Sprzedaj go lub poszukaj zdolnego szewca, który uszyje z niego płaszcz lub rękawice.</description>
+		<description>Oto kawał skóry zielonego smoka. Terry potrzebuje takich skór przy przygotowaniu materiału na płaszcz pradawnych smoków.</description>
 		<implementation class-name="games.stendhal.server.entity.item.StackableItem"/>
 		<attributes>
 			<quantity value="1"/>
@@ -1759,7 +1759,7 @@
 
 	<item name="skóra złotego smoka">
 		<type class="resource" subclass="skora_zlotego_smoka" tileid="-1"/>
-		<description>Oto kawał skóry złotego smoka. Sprzedaj go lub poszukaj zdolnego szewca, który uszyje z niego płaszcz lub rękawice.</description>
+		<description>Oto kawał skóry złotego smoka. Terry potrzebuje takich skór przy przygotowaniu materiału na płaszcz pradawnych smoków.</description>
 		<implementation class-name="games.stendhal.server.entity.item.StackableItem"/>
 		<attributes>
 			<quantity value="1"/>
@@ -1779,7 +1779,7 @@
 	
 	<item name="skóra jelenia">
 		<type class="resource" subclass="skora_jelenia" tileid="-1"/>
-		<description> Oto skóra jelenia, delikatna i wyjątkowo miękka. Wprawny rękodzielnik może z niej stworzyć wygodne rękawice, idealne dla wojowników, którzy cenią sobie zwinność w walce.</description>
+		<description>Widzisz miękką skórę jelenia. Tannar w warsztacie rękawic w Semos wykona z 4 takich skór i 8 skór zwierzęcych parę rękawic ze skóry jelenia; koszt pracy wynosi 1000 monet. Szycie jednej pary trwa 30 minut.</description>
 		<implementation class-name="games.stendhal.server.entity.item.StackableItem"/>
 		<attributes>
 			<quantity value="1"/>
@@ -1799,7 +1799,7 @@
 
 	<item name="skóra lwa">
 		<type class="resource" subclass="skora_lwa" tileid="-1"/>
-		<description>Oto skóra lwa, surowiec pochodzący od potężnych lwów Faumonii. Rękawice ze skóry lwa to doskonały wybór dla odważnych i potężnych wojowników.</description>
+		<description>Widzisz grubą skórę lwa. Glover w warsztacie rękawic w Semos potrzebuje 4 takich skór, 8 skór zwierzęcych i 1500 monet na parę rękawic ze skóry lwa; szycie trwa 30 minut. Nadmiar skór skupuje Kolekcjoner Cole na targu w Ados.</description>
 		<implementation class-name="games.stendhal.server.entity.item.StackableItem"/>
 		<attributes>
 			<quantity value="1"/>
@@ -1819,7 +1819,7 @@
 
 	<item name="skóra tygrysa">
 		<type class="resource" subclass="skora_tygrysa" tileid="-1"/>
-		<description>Oto skóra tygrysa, rzadki materiał zdobywany od niebezpiecznych tygrysów. Rękawice ze skóry tygrysa symbolizują potęgę i odwagę wojownika.</description>
+		<description>Widzisz wytrzymałą skórę tygrysa. Leatheron w warsztacie rękawic w Semos potrzebuje 4 takich skór, 8 skór zwierzęcych i 1500 monet na parę rękawic ze skóry tygrysa; szycie trwa 30 minut. Nadmiar skór skupuje Kolekcjoner Cole na targu w Ados.</description>
 		<implementation class-name="games.stendhal.server.entity.item.StackableItem"/>
 		<attributes>
 			<quantity value="1"/>
@@ -1859,7 +1859,7 @@
 
 	<item name="skóra zwierzęca">
 		<type class="resource" subclass="skora_zwierzeca" tileid="-1"/>
-		<description>Oto skóra zwierzęca, pochodząca od różnych stworzeń w naszym świecie. Rękawice wykonane z tego surowca to solidny wybór dla każdego dzielnego wojownika.</description>
+		<description>Widzisz skórę zwierzęcą, przydatną do wzmacniania rękawic. Tannar, Leatheron i Glover w warsztacie rękawic w Semos potrzebują po 8 takich skór na parę, oprócz skóry jelenia, tygrysa lub lwa i zapłaty za pracę. Nadmiar skupuje Kolekcjoner Cole na targu w Ados.</description>
 		<implementation class-name="games.stendhal.server.entity.item.StackableItem"/>
 		<attributes>
 			<quantity value="1"/>
@@ -2260,4 +2260,12 @@
 		</equipable>
 	</item>
 	
+    <item name="paczka okuć Thyrona">
+        <type class="box" subclass="skrzynka" tileid="-1"/>
+        <description>To oznaczona paczka okuć, którą Hogart przygotował dla Thyrona. Dostarcz ją zleceniodawcy przy barierze w Semos.</description>
+        <implementation class-name="games.stendhal.server.entity.item.Item"/>
+        <attributes><undroppableondeath value="1"/></attributes>
+        <weight value="1.0"/><value value="0"/>
+        <equipable><slot name="bag"/><slot name="content"/><slot name="ground"/></equipable>
+    </item>
 </items>

@@ -73,7 +73,7 @@ import marauroa.common.Pair;
  * </ul>
  */
 
-public class KillStone extends AbstractQuest {
+public class KillStone extends AbstractQuest implements games.stendhal.server.core.rp.quest.NativeHuntDetails {
 
 	private static final String QUEST_SLOT = "kill_stone";
 	private static final int WEEK_IN_MINUTES = MathHelper.MINUTES_IN_ONE_HOUR * 7 * 4;
@@ -87,55 +87,48 @@ public class KillStone extends AbstractQuest {
 		final SpeakerNPC npc = npcs.get("Luck");
 
 		npc.add(ConversationStates.ATTENDING,
-				ConversationPhrases.QUEST_MESSAGES, 
-				new AndCondition(new LevelGreaterThanCondition(249),
+                ConversationPhrases.QUEST_MESSAGES,
+                new AndCondition(new LevelGreaterThanCondition(249),
 				new QuestNotStartedCondition(QUEST_SLOT)),
-				ConversationStates.QUEST_OFFERED,
-				"W pobliżu znajduje się podziemna krypta. "
-				+ "Szukam kogoś kto wejdzie tam i pokona wszystkie potwory. Pomożesz?",
-				null);
+                ConversationStates.QUEST_OFFERED,
+                "Pod Semos kryje się krypta, której mieszkańcy nie witają gości przyjaźnie. Potrzebuję doświadczonego wojownika, który wejdzie tam i zmierzy się z najgroźniejszymi stworzeniami. Pomożesz?",
+                null);
 
 		npc.add(ConversationStates.ATTENDING,
-				ConversationPhrases.QUEST_MESSAGES, 
-				new AndCondition(new QuestStateStartsWithCondition(QUEST_SLOT,"done"),
+                ConversationPhrases.QUEST_MESSAGES,
+                new AndCondition(new QuestStateStartsWithCondition(QUEST_SLOT,"done"),
 						 new TimePassedCondition(QUEST_SLOT, 1, WEEK_IN_MINUTES)),
-				ConversationStates.QUEST_OFFERED,
-				"Szukam kogoś kto znowu wejdzie do kamiennej krypty i pokona wszystkie potwory. Pomożesz?",
-				null);
+                ConversationStates.QUEST_OFFERED,
+                "Krypta znów wymaga sprawdzenia. Jeśli jesteś gotowy, podejmij kolejną wyprawę przeciw jej mieszkańcom.",
+                null);
 
 		npc.add(ConversationStates.ATTENDING,
-				ConversationPhrases.QUEST_MESSAGES, 
-				new AndCondition(new QuestStateStartsWithCondition(QUEST_SLOT,"done"),
+                ConversationPhrases.QUEST_MESSAGES,
+                new AndCondition(new QuestStateStartsWithCondition(QUEST_SLOT,"done"),
 						 new NotCondition(new TimePassedCondition(QUEST_SLOT, 1, WEEK_IN_MINUTES))),
-				ConversationStates.ATTENDING,
-				"Szukam kogoś kto znowu wejdzie do kamiennej krypty i pokona wszystkie potwory. Pomożesz?",
-				null);
+                ConversationStates.ATTENDING,
+                "Twoja ostatnia wyprawa jest już rozliczona. Na następną trzeba zaczekać 28 godzin od jej zakończenia.",
+                null);
 
-		final Map<String, Pair<Integer, Integer>> toKill = new TreeMap<String, Pair<Integer, Integer>>();
-		toKill.put("czarny olbrzym", new Pair<Integer, Integer>(0,1));
-		toKill.put("kostucha różowa wielka", new Pair<Integer, Integer>(0,1));
-		toKill.put("czarna śmierć",new Pair<Integer, Integer>(0,1));
-		toKill.put("superczłowiek olbrzym",new Pair<Integer, Integer>(0,2));
-		toKill.put("gigantyczny kamienny golem",new Pair<Integer, Integer>(0,1));
+		final Map<String, Pair<Integer, Integer>> toKill = getDialogueHuntTargets(null);
 
 		final List<ChatAction> actions = new LinkedList<ChatAction>();
 		actions.add(new SetQuestAction(QUEST_SLOT, "start"));
 		actions.add(new StartRecordingKillsAction(QUEST_SLOT, 1, toKill));
 		
 		npc.add(ConversationStates.QUEST_OFFERED,
-				ConversationPhrases.YES_MESSAGES,
-				null,
-				ConversationStates.ATTENDING,
-				"Doskonale. Odnajdź ukrytą kryptę w pobliżu i zabij wszystkie znajdujace się tam potwory.",
-				new MultipleActions(actions));
+                ConversationPhrases.YES_MESSAGES,
+                null,
+                ConversationStates.ATTENDING,
+                "Odnajdź kryptę pod Semos i trzymaj się dokładnej listy. Szczególnie uważaj na gigantycznego kamiennego golema; dwóch superczłowieków olbrzymów również trzeba odnotować osobno." + "\nCele: " + games.stendhal.server.core.rp.quest.HuntQuestProgress.targetText(this,null) + ".",
+                new MultipleActions(actions));
 
-		npc.add(ConversationStates.QUEST_OFFERED, 
-				ConversationPhrases.NO_MESSAGES, 
-				null,
-				ConversationStates.ATTENDING,
-				"Trudno. "
-				+ "Znajdę kogoś innego. ",
-				new SetQuestAction(QUEST_SLOT, "rejected"));
+		npc.add(ConversationStates.QUEST_OFFERED,
+                ConversationPhrases.NO_MESSAGES,
+                null,
+                ConversationStates.ATTENDING,
+                "Rozumiem. W takiej krypcie przygotowanie jest ważniejsze od pośpiechu.",
+                new SetQuestAction(QUEST_SLOT, "rejected"));
 	}
 
 	private void step_2() {
@@ -161,25 +154,23 @@ public class KillStone extends AbstractQuest {
 		LinkedList<String> triggers = new LinkedList<String>();
 		triggers.addAll(ConversationPhrases.FINISH_MESSAGES);
 		triggers.addAll(ConversationPhrases.QUEST_MESSAGES);		
-		npc.add(ConversationStates.ATTENDING, 
-				triggers,
-				new AndCondition(
+		npc.add(ConversationStates.ATTENDING,
+                triggers,
+                new AndCondition(
 						new QuestInStateCondition(QUEST_SLOT, 0, "start"),
 						new KilledForQuestCondition(QUEST_SLOT, 1)),
-				ConversationStates.ATTENDING, 
-				"Widzę, że udało ci się zabić potwory w krypcie! "
-				+ "W nagrodę wzmocniłem twoje umiejętności ataku i obrony.",
-				new MultipleActions(actions));
+                ConversationStates.ATTENDING,
+                "Dobra robota, wszystkie wskazane stworzenia zostały pokonane. Przyjmij nagrody za wyprawę; zdobyte doświadczenie przyda ci się przy następnym zejściu.",
+                new MultipleActions(actions));
 
-		npc.add(ConversationStates.ATTENDING, 
-				triggers,
-				new AndCondition(
+		npc.add(ConversationStates.ATTENDING,
+                triggers,
+                new AndCondition(
 						new QuestInStateCondition(QUEST_SLOT, 0, "start"),
 						new NotCondition(new KilledForQuestCondition(QUEST_SLOT, 1))),
-				ConversationStates.ATTENDING, 
-				"Musisz odnaleźć kryptę pod Semos i pokonać znajdujące się tam potwory "
-				+ "Upewnij się, że zabiłeś wszystkie.",
-				null);
+                ConversationStates.ATTENDING,
+                null,
+                (p, sentence, raiser) -> raiser.say("Krypta nie została jeszcze w pełni sprawdzona. Przejrzyj brakujące cele, żeby następna wyprawa miała jasny kierunek." + "\n" + games.stendhal.server.core.rp.quest.HuntQuestProgress.progressText(KillStone.this,p)));
 	}
 
 	@Override
@@ -187,7 +178,7 @@ public class KillStone extends AbstractQuest {
 		super.addToWorld();
 		fillQuestInfo(
 				"Krypta pod Semos",
-				"Zdaniem Lucka, w okolicy Semos znajduje się podziemna krypta, może powinienem jej poszukać?",
+				"Luck na równinach Semos szuka śmiałka do wyprawy w podziemną kryptę. Wysłuchaj jego wskazówek i poznaj przeciwników, z którymi trzeba się tam zmierzyć.",
 				false);
 		step_1();
 		step_2();
@@ -196,19 +187,8 @@ public class KillStone extends AbstractQuest {
 	
 	@Override
 	public List<String> getHistory(final Player player) {
-			final List<String> res = new ArrayList<String>();
-			if (!player.hasQuest(QUEST_SLOT)) {
-				return res;
-			}
-			if (!isCompleted(player)) {
-				res.add("Muszę zabić wszystkie potwory w krypcie.");
-			} else if(isRepeatable(player)){
-				res.add("Błąd gry. Zgłoś go do administracji..");
-			} else {
-				res.add("Odnalazłem kryptę i pokonałem wszystkie znajdujące się tam potwory.	W nagrodę za ukończenie zadania otrzymałem: 1.000.000 pkt doświadczenia, 30.000 pkt obrony i 20.000 pkt ataku.");
-			}
-			return res;
-	}
+        return games.stendhal.server.core.rp.quest.HuntQuestProgress.history(this,player);
+    }
 
 
 	@Override
@@ -242,4 +222,17 @@ public class KillStone extends AbstractQuest {
 		return Region.SEMOS_SURROUNDS;
 	}
 	
+
+    @Override public java.util.Map<String, Pair<Integer,Integer>> getDialogueHuntTargets(Player player) {
+        final Map<String, Pair<Integer, Integer>> toKill = new TreeMap<String, Pair<Integer, Integer>>();
+		toKill.put("czarny olbrzym", new Pair<Integer, Integer>(0,1));
+		toKill.put("kostucha różowa wielka", new Pair<Integer, Integer>(0,1));
+		toKill.put("czarna śmierć",new Pair<Integer, Integer>(0,1));
+		toKill.put("superczłowiek olbrzym",new Pair<Integer, Integer>(0,2));
+		toKill.put("gigantyczny kamienny golem",new Pair<Integer, Integer>(0,1));
+        return java.util.Collections.unmodifiableMap(toKill);
+    }
+    @Override public int getDialogueHuntTotal(Player player) { return 0; }
+    @Override public int getDialogueKillIndex() { return 1; }
+    @Override public String getDialogueHuntHint(Player player) { return "Szukaj krypty pod Semos. Lista obejmuje czarnego olbrzyma, kostuchę różową wielką, czarną śmierć, dwóch superczłowieków olbrzymów i gigantycznego kamiennego golema."; }
 }

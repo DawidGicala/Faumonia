@@ -73,6 +73,7 @@ public class KoboldBarmaidNPC implements ZoneConfigurator {
 			@Override
 
 			protected void createDialog() {
+                games.stendhal.server.entity.npc.dialogue.JourneyDialogueTopics.install(this);
 				class TorcibudSellerBehaviour extends SellerBehaviour {
 					TorcibudSellerBehaviour(final Map<String, Integer> items) {
 						super(items);
@@ -161,9 +162,9 @@ public class KoboldBarmaidNPC implements ZoneConfigurator {
 					"Hau! Witam w Kobold's Den bar wanderer!"
 						+ " Jestem Wrviliza, żona #Wrvila."
 						+ " Jeżeli chcesz, abym #zaoferowała trochę napojów to daj znać!");
-				addJob("Hau! Oferuję napój z winogron, sok z chmielu i mój specjał #'nalewka litworowa' lub #'mocna nalewka litworowa'.");
-				addHelp("Hau... Jeżeli jesteś spragniony to mogę #zaoferować trochę napojów. Jeżeli nie zauważałeś to jest pub!");
-				addGoodbye("Hau... DOwidzenia i powodzenia!");
+				addJob("Hau! Prowadzę ten bar i dbam, żeby gościom nie zabrakło napojów. Moja specjalność to #nalewka litworowa, ale dobra partia wymaga całego zestawu składników. Magazyn sam się nie napełni, więc czasem potrzebuję pomocy z dostawą.");
+				addHelp("Hau! Spragniony? Mogę #zaoferować ci napoje. Jeśli przychodzisz z dostawą, powiedz od razu - składniki nalewki trzymam osobno od towaru dla gości.");
+				addGoodbye("Hau! Do widzenia i uważaj po drodze.");
 
 				addReply(Arrays.asList("wine","beer","napój z winogron","sok z chmielu"),
 						"Hau! Ugasi twoje pragnienie za kilka monet...");
@@ -191,7 +192,7 @@ public class KoboldBarmaidNPC implements ZoneConfigurator {
 		npc.setEntityClass("koboldbarmaidnpc");
 		npc.setPosition(9, 3);
 		npc.initHP(100);
-		npc.setDescription("Oto Wrviliza kelnerka kobold.");
+		npc.setDescription("Widzisz Wrvilizę, koboldkę prowadzącą bar w Wofol. Pilnuje napojów i składników swojej litworowej nalewki.");
 		zone.add(npc);
 
 	}

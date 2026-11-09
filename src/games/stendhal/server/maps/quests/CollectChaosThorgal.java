@@ -49,28 +49,36 @@ public class CollectChaosThorgal extends AbstractQuest {
 	private void step_1() {
 		final SpeakerNPC npc = npcs.get("Thorgal");
 
-		npc.add(ConversationStates.IDLE, ConversationPhrases.GREETING_MESSAGES,
-				new AndCondition(new GreetingMatchesNameCondition(npc.getName()),
-						new QuestCompletedCondition(QUEST_SLOT)),
-				ConversationStates.ATTENDING,
-				"Cześć. Jak widzisz, wciąż jestem w trakcie badań nad tunelami chaosu. Dziękuję za Twoją pomoc. Pamiętaj, że jeśli będziesz potrzebować zwojów do tych tuneli, zawsze możesz do mnie wrócić.",
-				null);
-
-npc.add(ConversationStates.IDLE, ConversationPhrases.GREETING_MESSAGES,
+		npc.add(ConversationStates.IDLE,
+        ConversationPhrases.GREETING_MESSAGES,
         new AndCondition(new GreetingMatchesNameCondition(npc.getName()),
-                new QuestNotCompletedCondition(QUEST_SLOT),
-                new NotCondition(new PlayerHasItemWithHimCondition("hełm chaosu")),
-                new NotCondition(new PlayerHasItemWithHimCondition("zbroja chaosu")),
-                new NotCondition(new PlayerHasItemWithHimCondition("spodnie chaosu")),
-                new NotCondition(new PlayerHasItemWithHimCondition("buty chaosu")),
-                new NotCondition(new PlayerHasItemWithHimCondition("płaszcz chaosu")),
-                new NotCondition(new PlayerHasItemWithHimCondition("tarcza chaosu")),
-                new NotCondition(new PlayerHasItemWithHimCondition("miecz chaosu"))),
-        ConversationStates.IDLE,
-        "Jestem Thorgal, podróżnik, który od lat przemierza tunele chaosu. Potrzebuję Twojej pomocy, aby zdobyć trochę ekwipunku do dalszej eksploracji. #Przynieś #mi: #hełm #chaosu, #zbroję #chaosu, #spodnie #chaosu, #buty #chaosu, #płaszcz #chaosu, #tarczę #chaosu #oraz #miecz #chaosu. ",
+						new QuestCompletedCondition(QUEST_SLOT)),
+        ConversationStates.ATTENDING,
+        "Cześć. Jak widzisz, wciąż jestem w trakcie badań nad tunelami chaosu. Dziękuję za Twoją pomoc. Pamiętaj, że jeśli będziesz potrzebować zwojów do tych tuneli, zawsze możesz do mnie wrócić.",
+        null);
+        // Resume the native stage without changing its guards or actions.
+        npc.add(ConversationStates.ATTENDING, "meldunek",
+        new AndCondition(new games.stendhal.server.entity.npc.condition.AlwaysTrueCondition(),
+						new QuestCompletedCondition(QUEST_SLOT)),
+        ConversationStates.ATTENDING,
+        "Cześć. Jak widzisz, wciąż jestem w trakcie badań nad tunelami chaosu. Dziękuję za Twoją pomoc. Pamiętaj, że jeśli będziesz potrzebować zwojów do tych tuneli, zawsze możesz do mnie wrócić.",
+        null);
+
+npc.add(ConversationStates.IDLE,
+        ConversationPhrases.GREETING_MESSAGES,
+        new AndCondition(new GreetingMatchesNameCondition(npc.getName()),new QuestNotCompletedCondition(QUEST_SLOT),new NotCondition(new AndCondition(new PlayerHasItemWithHimCondition("hełm chaosu"),new PlayerHasItemWithHimCondition("zbroja chaosu"),new PlayerHasItemWithHimCondition("spodnie chaosu"),new PlayerHasItemWithHimCondition("buty chaosu"),new PlayerHasItemWithHimCondition("płaszcz chaosu"),new PlayerHasItemWithHimCondition("tarcza chaosu"),new PlayerHasItemWithHimCondition("miecz chaosu")))),
+        ConversationStates.ATTENDING,
+        "Im dalej zapuszczam się w tunele chaosu, tym trudniej utrzymać sprzęt w dobrym stanie. Potrzebuję kompletnego zestawu: hełmu, zbroi, spodni, butów, płaszcza, tarczy i miecza chaosu. Przynieś wszystkie siedem rzeczy naraz, a odwdzięczę się zwojami i udostępnię mój handel.",
+        new SetQuestAction(QUEST_SLOT, "start"));
+        // Resume the native stage without changing its guards or actions.
+        npc.add(ConversationStates.ATTENDING, "meldunek",
+        new AndCondition(new games.stendhal.server.entity.npc.condition.AlwaysTrueCondition(),new QuestNotCompletedCondition(QUEST_SLOT),new NotCondition(new AndCondition(new PlayerHasItemWithHimCondition("hełm chaosu"),new PlayerHasItemWithHimCondition("zbroja chaosu"),new PlayerHasItemWithHimCondition("spodnie chaosu"),new PlayerHasItemWithHimCondition("buty chaosu"),new PlayerHasItemWithHimCondition("płaszcz chaosu"),new PlayerHasItemWithHimCondition("tarcza chaosu"),new PlayerHasItemWithHimCondition("miecz chaosu")))),
+        ConversationStates.ATTENDING,
+        "Im dalej zapuszczam się w tunele chaosu, tym trudniej utrzymać sprzęt w dobrym stanie. Potrzebuję kompletnego zestawu: hełmu, zbroi, spodni, butów, płaszcza, tarczy i miecza chaosu. Przynieś wszystkie siedem rzeczy naraz, a odwdzięczę się zwojami i udostępnię mój handel.",
         new SetQuestAction(QUEST_SLOT, "start"));
 
-npc.add(ConversationStates.IDLE, ConversationPhrases.GREETING_MESSAGES,
+npc.add(ConversationStates.IDLE,
+        ConversationPhrases.GREETING_MESSAGES,
         new AndCondition(
             new GreetingMatchesNameCondition(npc.getName()),
             new QuestNotCompletedCondition(QUEST_SLOT),
@@ -83,8 +91,8 @@ npc.add(ConversationStates.IDLE, ConversationPhrases.GREETING_MESSAGES,
             new PlayerHasItemWithHimCondition("miecz chaosu") 
         ),
         ConversationStates.ATTENDING,
-        "Dziękuję za przyniesienie ekwipunku. Twoja pomoc jest nieoceniona dla moich badań nad tunelami chaosu. Dzięki Tobie mogę kontynuować swoje prace. Jeśli potrzebujesz zwojów do tuneli chaosu, mogę Ci je sprzedać. W tym celu powiedz #oferta ",
-        new MultipleActions(
+        "Cały zestaw jest na miejscu; mogę znów planować dalszą drogę przez tunele. Oddaję ci cztery zwoje chaosu i przygotowaną nagrodę za dostawę. Od teraz możesz też pytać o moją ofertę zwojów.",
+        new games.stendhal.server.entity.npc.action.QuestFeeAction(QUEST_SLOT, new MultipleActions(
         new SetQuestAction(QUEST_SLOT, "done"),
         new IncreaseXPAction(500000),
         new IncreaseAtkXPAction(20000),
@@ -97,8 +105,36 @@ npc.add(ConversationStates.IDLE, ConversationPhrases.GREETING_MESSAGES,
 		new DropItemAction("tarcza chaosu", 1),
 		new DropItemAction("miecz chaosu", 1),
 		new EquipItemAction("zwój chaosu", 4, true)
-    )
-);
+    )));
+        // Resume the native stage without changing its guards or actions.
+        npc.add(ConversationStates.ATTENDING, "meldunek",
+        new AndCondition(
+            new games.stendhal.server.entity.npc.condition.AlwaysTrueCondition(),
+            new QuestNotCompletedCondition(QUEST_SLOT),
+            new PlayerHasItemWithHimCondition("hełm chaosu"),
+            new PlayerHasItemWithHimCondition("zbroja chaosu"), 
+            new PlayerHasItemWithHimCondition("spodnie chaosu"), 
+            new PlayerHasItemWithHimCondition("buty chaosu"),
+            new PlayerHasItemWithHimCondition("płaszcz chaosu"), 
+			new PlayerHasItemWithHimCondition("tarcza chaosu"), 
+            new PlayerHasItemWithHimCondition("miecz chaosu") 
+        ),
+        ConversationStates.ATTENDING,
+        "Cały zestaw jest na miejscu; mogę znów planować dalszą drogę przez tunele. Oddaję ci cztery zwoje chaosu i przygotowaną nagrodę za dostawę. Od teraz możesz też pytać o moją ofertę zwojów.",
+        new games.stendhal.server.entity.npc.action.QuestFeeAction(QUEST_SLOT, new MultipleActions(
+        new SetQuestAction(QUEST_SLOT, "done"),
+        new IncreaseXPAction(500000),
+        new IncreaseAtkXPAction(20000),
+        new IncreaseDefXPAction(20000),
+		new DropItemAction("hełm chaosu", 1),
+		new DropItemAction("zbroja chaosu", 1),
+		new DropItemAction("spodnie chaosu", 1),
+		new DropItemAction("buty chaosu", 1),
+		new DropItemAction("płaszcz chaosu", 1),
+		new DropItemAction("tarcza chaosu", 1),
+		new DropItemAction("miecz chaosu", 1),
+		new EquipItemAction("zwój chaosu", 4, true)
+    )));
 
 	}
 
@@ -107,7 +143,7 @@ npc.add(ConversationStates.IDLE, ConversationPhrases.GREETING_MESSAGES,
 		super.addToWorld();
 		fillQuestInfo(
 				"Podróżnik w tunelach chaosu",
-				"Thorgal, podróżnik badający Tunele Chaosu pod Semos, potrzebuje Twojej pomocy w zdobyciu ekwipunku do dalszej eksploracji. Znajdziesz go w jaskiniach, gdzie czeka na odważnych śmiałków gotowych przynieść mu niezbędne przedmioty.",
+				"Thorgal przygotowuje się do dalszych wypraw w tunele chaosu pod Semos. Przynieś wymagany zestaw ekwipunku; za pomoc udostępni ci handel zwojami.",
 				true);
 		step_1();
 	}
@@ -120,7 +156,7 @@ npc.add(ConversationStates.IDLE, ConversationPhrases.GREETING_MESSAGES,
 			}
 			res.add("Muszę znaleźć: hełm chaosu, zbroję chaosu, spodnie chaosu, buty chaosu, płaszcz chaosu, tarczę chaosu oraz miecz chaosu i dostarczyć je Thorgalowi.");
 			if (isCompleted(player)) {
-				res.add("Dostarczyłem Thorgalowi ekwipunek, którego potrzebował do dalszej eksploracji tuneli chaosu. W nagrodę za ukończenie zadania otrzymałem: 10.000 pkt doświadczenia, 5.000 pkt doświadczenia w ataku i obronie oraz dostęp do sklepu Thorgala, gdzie mogę kupować zwoje do tuneli chaosu.");
+				res.add("Dostarczyłem Thorgalowi siedem elementów chaosu. Otrzymałem 500000 XP postaci, 20000 XP ataku, 20000 XP obrony i cztery związane zwoje chaosu oraz dostęp do jego sklepu.");
 			}
 			return res;
 	}
@@ -144,4 +180,9 @@ npc.add(ConversationStates.IDLE, ConversationPhrases.GREETING_MESSAGES,
 	public String getRegion() {
 		return Region.SEMOS_DUNGEONS;
 	}
+
+    public static List<String> getRequiredItems() {
+        return java.util.Collections.unmodifiableList(java.util.Arrays.asList("hełm chaosu","zbroja chaosu","spodnie chaosu","buty chaosu","płaszcz chaosu","tarcza chaosu","miecz chaosu"));
+    }
+
 }

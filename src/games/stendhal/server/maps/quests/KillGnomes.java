@@ -72,7 +72,7 @@ import marauroa.common.Pair;
  * </ul>
  */
 
-public class KillGnomes extends AbstractQuest {
+public class KillGnomes extends AbstractQuest implements games.stendhal.server.core.rp.quest.NativeHuntDetails {
 
 	private static final String QUEST_SLOT = "kill_gnomes";
 	private static final int KILLS_INDEX = 1;
@@ -89,13 +89,13 @@ public class KillGnomes extends AbstractQuest {
 		final String killData = player.getQuest(QUEST_SLOT, KILLS_INDEX);
 
 		if (killData == null) {
-			return "nie mam jeszcze zapisanego postępu zadania";
+			return "nie można teraz wyświetlić postępu polowania; zgłoś problem administracji";
 		}
 
 		final List<String> tokens = Arrays.asList(killData.split(","));
 
 		if ((tokens.size() % 5) != 0) {
-			return "nie mogę odczytać postępu zadania";
+			return "nie można teraz wyświetlić postępu polowania; zgłoś problem administracji";
 		}
 
 		final StringBuilder progress = new StringBuilder();
@@ -159,56 +159,49 @@ public class KillGnomes extends AbstractQuest {
 		final SpeakerNPC npc = npcs.get("Jenny");
 
 		npc.add(ConversationStates.ATTENDING,
-				ConversationPhrases.QUEST_MESSAGES,
-				new OrCondition(
+                ConversationPhrases.QUEST_MESSAGES,
+                new OrCondition(
 						new QuestNotStartedCondition(QUEST_SLOT),
 						new QuestInStateCondition(QUEST_SLOT, 0, "rejected")),
-				ConversationStates.QUEST_OFFERED,
-				"Gnomy kradną marchewki z naszej farmy na północ od #Semos. "
-				+ "Potrzebują dobrej lekcji. Pomożesz?",
-				null);
+                ConversationStates.QUEST_OFFERED,
+                "Gnomy znów wyjadają marchew z farm na północ od Semos. Trudno utrzymać zapasy, kiedy po każdej nocy trzeba liczyć straty. Pomożesz dać im nauczkę?",
+                null);
 
 		npc.add(ConversationStates.ATTENDING,
-				ConversationPhrases.QUEST_MESSAGES,
-				new AndCondition(new QuestStateStartsWithCondition(QUEST_SLOT, "done"),
+                ConversationPhrases.QUEST_MESSAGES,
+                new AndCondition(new QuestStateStartsWithCondition(QUEST_SLOT, "done"),
 						 new TimePassedCondition(QUEST_SLOT, 1, WEEK_IN_MINUTES)),
-				ConversationStates.QUEST_OFFERED,
-				"Te zuchwałe gnomy znowu kradną nasze marchewki. Sądzę, że potrzebują kolejnej lekcji. Pomożesz?",
-				null);
+                ConversationStates.QUEST_OFFERED,
+                "Spokój na farmie nie trwał długo i gnomy wróciły po marchew. Czy jeszcze raz pomożesz ochronić nasze plony?",
+                null);
 
 		npc.add(ConversationStates.ATTENDING,
-				ConversationPhrases.QUEST_MESSAGES,
-				new AndCondition(new QuestStateStartsWithCondition(QUEST_SLOT, "done"),
+                ConversationPhrases.QUEST_MESSAGES,
+                new AndCondition(new QuestStateStartsWithCondition(QUEST_SLOT, "done"),
 						 new NotCondition(new TimePassedCondition(QUEST_SLOT, 1, WEEK_IN_MINUTES))),
-				ConversationStates.ATTENDING,
-				"Gnomy nie sprawiają problemu od momentu, gdy dałeś im dobrą lekcje.",
-				null);
+                ConversationStates.ATTENDING,
+                "Od twojej wyprawy na farmach jest spokojniej. Gdy miną dwa dni, możemy sprawdzić, czy pomoc znów jest potrzebna.",
+                null);
 
-		final Map<String, Pair<Integer, Integer>> creaturesToKill = new TreeMap<String, Pair<Integer, Integer>>();
-		creaturesToKill.put("gnom", new Pair<Integer, Integer>(0, 20));
-		creaturesToKill.put("gnom zwiadowca", new Pair<Integer, Integer>(0, 10));
-		creaturesToKill.put("gnom kawalerzysta", new Pair<Integer, Integer>(0, 10));
+		final Map<String, Pair<Integer, Integer>> creaturesToKill = getDialogueHuntTargets(null);
 
 		final List<ChatAction> actions = new LinkedList<ChatAction>();
 		actions.add(new SetQuestAction(QUEST_SLOT, "start"));
 		actions.add(new StartRecordingKillsAction(QUEST_SLOT, KILLS_INDEX, creaturesToKill));
 
 		npc.add(ConversationStates.QUEST_OFFERED,
-				ConversationPhrases.YES_MESSAGES,
-				null,
-				ConversationStates.ATTENDING,
-				"Doskonale. Zabij " + QUEST_REQUIREMENTS_TEXT + ". "
-				+ "Obozowisko #gnomów znajdziesz na północny-zachód od #Semos. "
-				+ "Stan zadania sprawdzisz przez #Menu oraz #Dziennik #Zadań.",
-				new MultipleActions(actions));
+                ConversationPhrases.YES_MESSAGES,
+                null,
+                ConversationStates.ATTENDING,
+                "Ich obozowisko leży na północny zachód od Semos. Rozpraw się ze zwykłymi gnomami, zwiadowcami i kawalerzystami, żeby nie wrócili za tobą na farmę." + "\nCele: " + games.stendhal.server.core.rp.quest.HuntQuestProgress.targetText(this,null) + ".",
+                new MultipleActions(actions));
 
 		npc.add(ConversationStates.QUEST_OFFERED,
-				ConversationPhrases.NO_MESSAGES,
-				null,
-				ConversationStates.ATTENDING,
-				"Masz rację. Chyba to zbyt okropne, aby wybijać gnomy, które kradną marchewki. "
-				+ "Może farma powinna zwiększyć ochronę. ",
-				new SetQuestAction(QUEST_SLOT, "rejected"));
+                ConversationPhrases.NO_MESSAGES,
+                null,
+                ConversationStates.ATTENDING,
+                "Rozumiem, masz własne sprawy. Gdy znajdziesz chwilę, zapytaj mnie ponownie o gnomy.",
+                new SetQuestAction(QUEST_SLOT, "rejected"));
 	}
 
 	private void step_2() {
@@ -230,31 +223,22 @@ public class KillGnomes extends AbstractQuest {
 		triggers.addAll(ConversationPhrases.QUEST_MESSAGES);
 
 		npc.add(ConversationStates.ATTENDING,
-				triggers,
-				new AndCondition(
+                triggers,
+                new AndCondition(
 						new QuestInStateCondition(QUEST_SLOT, 0, "start"),
 						new KilledForQuestCondition(QUEST_SLOT, KILLS_INDEX)),
-				ConversationStates.ATTENDING,
-				"Widzę, że zabiłeś gnomy. Mam nadzieje, że przez jakiś czas nie będą się zbliżać do marchwi! "
-				+ "Proszę weź te mikstury w dowód uznania.",
-				new MultipleActions(actions));
+                ConversationStates.ATTENDING,
+                "To ulga dla ludzi, którzy pracują na polach. Przygotowałam mikstury i skrzynię w podziękowaniu; oby przez jakiś czas marchew zostawała tam, gdzie rośnie.",
+                new MultipleActions(actions));
 
 		npc.add(ConversationStates.ATTENDING,
-				triggers,
-				new AndCondition(
+                triggers,
+                new AndCondition(
 						new QuestInStateCondition(QUEST_SLOT, 0, "start"),
 						new NotCondition(new KilledForQuestCondition(QUEST_SLOT, KILLS_INDEX))),
-				ConversationStates.ATTENDING,
-				null,
-				new ChatAction() {
-					public void fire(final Player player, final Sentence sentence, final EventRaiser raiser) {
-						raiser.say("Musisz jeszcze nauczyć te zuchwałe gnomy lekcji. "
-								+ "Postęp: " + getKillProgress(player) + ". "
-								+ "Do zabicia zostało: " + QUEST_REQUIREMENTS_TEXT + ". "
-								+ "Obozowisko #gnomów znajdziesz na północny-zachód od #Semos. "
-								+ "Stan zadania sprawdzisz przez #Menu oraz #Dziennik #Zadań.");
-					}
-				});
+                ConversationStates.ATTENDING,
+                null,
+                (p, sentence, raiser) -> raiser.say("Gnomy nadal mają zbyt wielu towarzyszy w obozie. Sprawdź, której grupy brakuje na liście, zanim ruszysz ponownie." + "\n" + games.stendhal.server.core.rp.quest.HuntQuestProgress.progressText(KillGnomes.this,p)));
 	}
 
 	@Override
@@ -262,7 +246,7 @@ public class KillGnomes extends AbstractQuest {
 		super.addToWorld();
 		fillQuestInfo(
 				"Zabij Gnomy",
-				"Pomocy! Gnomy ukradły marchewki młynarzowej Jenny! Idź do wioski gnomów, położonej na północny-zachód od Semos i zemścij się w jej imieniu.",
+				"Jenny, młynarka z Semos, martwi się o zapasy marchwi podkradane przez gnomy. Przyjmij jej zlecenie i wyrusz w stronę ich wioski na północny zachód od miasta.",
 				false);
 		step_1();
 		step_2();
@@ -271,33 +255,8 @@ public class KillGnomes extends AbstractQuest {
 
 	@Override
 	public List<String> getHistory(final Player player) {
-		final List<String> res = new ArrayList<String>();
-
-		if (!player.hasQuest(QUEST_SLOT)) {
-			return res;
-		}
-
-		if (player.isQuestInState(QUEST_SLOT, "rejected")) {
-			res.add("Odmówiłem Jenny pomocy z gnomami. Jeśli zmienię zdanie, mogę ponownie z nią porozmawiać.");
-			return res;
-		}
-
-		if (!isCompleted(player)) {
-			res.add("Muszę zabić 20 gnomów, 10 gnomów zwiadowców oraz 10 gnomów kawalerzystów.");
-
-			if (player.isQuestInState(QUEST_SLOT, 0, "start")) {
-				res.add("Mój obecny postęp: " + getKillProgress(player) + ".");
-			}
-
-			res.add("Obozowisko gnomów znajdę na północny-zachód od Semos. Jenny chce, żebym dał im lekcję za kradzież marchewek z farmy.");
-		} else if (isRepeatable(player)) {
-			res.add("Te brzydkie gnomy zapomniały lekcji jaką im dałem. Kradną jeszcze więcej! Jenny potrzebuje mojej pomocy.");
-		} else {
-			res.add("Pomogłem Jenny. Gnomy trzymają się teraz z dala od marchewek. Hura! W nagrodę za ukończenie zadania otrzymałem: 1.000 pkt doświadczenia, 30 eliksirów oraz skrzynię skarbów I.");
-		}
-
-		return res;
-	}
+        return games.stendhal.server.core.rp.quest.HuntQuestProgress.history(this,player);
+    }
 
 	@Override
 	public String getName() {
@@ -329,4 +288,15 @@ public class KillGnomes extends AbstractQuest {
 	public String getRegion() {
 		return Region.SEMOS_SURROUNDS;
 	}
+
+    @Override public java.util.Map<String, Pair<Integer,Integer>> getDialogueHuntTargets(Player player) {
+        final Map<String, Pair<Integer, Integer>> creaturesToKill = new TreeMap<String, Pair<Integer, Integer>>();
+		creaturesToKill.put("gnom", new Pair<Integer, Integer>(0, 20));
+		creaturesToKill.put("gnom zwiadowca", new Pair<Integer, Integer>(0, 10));
+		creaturesToKill.put("gnom kawalerzysta", new Pair<Integer, Integer>(0, 10));
+        return java.util.Collections.unmodifiableMap(creaturesToKill);
+    }
+    @Override public int getDialogueHuntTotal(Player player) { return 0; }
+    @Override public int getDialogueKillIndex() { return 1; }
+    @Override public String getDialogueHuntHint(Player player) { return "Obozowisko gnomów leży na północny zachód od Semos, w okolicy farm. Pokonaj także zwiadowców i kawalerzystów; zwykłe gnomy nie zastąpią tych dwóch grup."; }
 }

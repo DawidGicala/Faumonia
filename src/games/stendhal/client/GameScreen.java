@@ -571,7 +571,13 @@ public class GameScreen extends JComponent implements IGameScreen, DropTarget,
 		// Don't scale text to keep it readable
 		drawText(g2d);
 		
-		paintOffLineIfNeeded(g2d);
+		games.stendhal.common.TutorialGuideSnapshot guide = games.stendhal.client.gui.tutorial.TutorialGuideController.get().marker();
+        if (guide != null) {
+            Point point = convertWorldToScreenView(guide.x + 0.5, guide.y + 0.5);
+            games.stendhal.client.gui.tutorial.TutorialGuideController.get().paintMarker(g2d, gameLayers.getAreaName(),
+                    (int)(point.x * scale), (int)(point.y * scale), getWidth(), getHeight());
+        }
+        paintOffLineIfNeeded(g2d);
 		graphics.dispose();
 	}
 		

@@ -57,16 +57,17 @@ public class ManWithHatNPC implements ZoneConfigurator {
 
 			@Override
 			protected void createDialog() {
+                games.stendhal.server.entity.npc.dialogue.HuntDialogueTopics.install(this);
 				addGreeting("Witaj.");
-				addHelp("Gdy mieszkałem z moją ukochaną żoną to sporo podróżowaliśmy. Kochaliśmy plażę na Athor Island! *Westchnienie* Te wspomnienia sprawiają, że robię się smutny...Proszę zostam mnie teraz samego...");
-				addJob("Przestałem pracować, gdy moja żona odeszła.");
+				addHelp("Z żoną często podróżowaliśmy; najbardziej lubiliśmy plażę na Athor. Dziś trudno mi wracać do tych wspomnień. Jeśli wybierasz się w drogę z kimś bliskim, nie zostawiaj go samego w niebezpieczeństwie.");
+				addJob("Przestałem pracować po śmierci żony. Kiedyś dużo razem podróżowaliśmy, a teraz najtrudniej mi myśleć o drodze do Wofol, z której już nie wróciła.");
 				addOffer("Nie mam nic do zaoferowania.");
-				addGoodbye("Dowidzenia i dziękuję za rozmowę.");
+				addGoodbye("Do widzenia. Dziękuję, że znalazłeś chwilę, żeby mnie wysłuchać.");
 				
 			}
 		};
 
-		npc.setDescription("Oto mężczyzna w kapeluszu. Nazywa się Andy i wygląda na bardzo przygnębionego.");
+		npc.setDescription("Widzisz Andyego, przygnębionego mieszkańca Ados w kapeluszu. Czasem urywa zdanie, jakby wracał myślami do dawnej podróży.");
 		npc.setEntityClass("manwithhatnpc");
 		npc.setPosition(41, 6);
 		npc.setDirection(Direction.RIGHT);

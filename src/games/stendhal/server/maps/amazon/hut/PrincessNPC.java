@@ -62,11 +62,12 @@ public class PrincessNPC implements ZoneConfigurator {
 
 			@Override
 			protected void createDialog() {
+                games.stendhal.server.entity.npc.dialogue.JourneyDialogueTopics.install(this);
 			        addGreeting("Huh, Co ty tutaj robisz?");
 				addReply(Arrays.asList("sorry", "przepraszam"), "Nie powinieneś się do mnie wślizgiwać od tak!");
 				addReply(Arrays.asList("look", "zobacz", "zobaczyć", "przeszukaj"), "Nie powinieneś tu szperać, tutaj wszystko jest moje!");
 				addReply(Arrays.asList("nothing", "nic"), "Odejdź i idź robić to gdzie indziej, a nie w moim domku!");
-				addJob("Praca? Myślisz, że księżniczka taka jak ja potrzebuje pracy? Ha!");
+				addJob("Jestem księżniczką Amazonek i odpowiadam przed moimi siostrami za to, kogo tu przyjmuję. Obcy rzadko zyskują nasze zaufanie od pierwszego spotkania. Okaż szacunek tej wyspie, a może znajdziemy powód do dalszej rozmowy.");
 				addHelp("Strzeż się moich sióstr na wyspie. One nie lubią obcych.");
 				addOffer("Nie mam nic do zaoferowania.");
 				addGoodbye("Dowidzenia i strzeż się barbarzyńców.");
@@ -76,7 +77,7 @@ public class PrincessNPC implements ZoneConfigurator {
 		princessNPC.setEntityClass("amazoness_princessnpc");
 		princessNPC.setPosition(6, 13);
 		princessNPC.initHP(100);
-		princessNPC.setDescription("Widzisz księżniczke Esclara. Pachnie kokosem i ananasem...");
+		princessNPC.setDescription("Widzisz księżniczkę Esclarę. Wokół unosi się słodki zapach kokosa i ananasa.");
 		zone.add(princessNPC);
 	}
 }

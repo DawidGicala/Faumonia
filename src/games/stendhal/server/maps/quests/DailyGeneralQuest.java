@@ -68,7 +68,7 @@ import java.util.Map;
  * REPETITIONS:
  * <li> once a day
  */
-public class DailyGeneralQuest extends AbstractQuest {
+public class DailyGeneralQuest extends AbstractQuest implements games.stendhal.server.core.rp.quest.NativeCollectionDetails {
 
 	private static final String QUEST_SLOT = "general_item";
 	
@@ -173,8 +173,7 @@ public class DailyGeneralQuest extends AbstractQuest {
 		// common place to get the start quest actions as we can both starts it and abort and start again
 		
 		final List<ChatAction> actions = new LinkedList<ChatAction>();
-		actions.add(new StartRecordingRandomItemCollectionAction(QUEST_SLOT,0,items,"Potrzebujemy zapasów. Zdobądź [item]"
-				+ " i powiedz #complete."));	
+		actions.add(new StartRecordingRandomItemCollectionAction(QUEST_SLOT, 0, items, "Zaopatrzenie nie trafia do oddziału samo, ktoś musi je dostarczyć. Dziś potrzebuję [item]. Przynieś cały komplet i zgłoś #zakończone, żebym mógł zamknąć zamówienie."));	
 		actions.add(new SetQuestToTimeStampAction(QUEST_SLOT, 1));
 		
 		return new MultipleActions(actions);
@@ -182,57 +181,59 @@ public class DailyGeneralQuest extends AbstractQuest {
 	
 	private void getQuest() {
 		final SpeakerNPC npc = npcs.get("Generał Jan");
-		npc.add(ConversationStates.ATTENDING, ConversationPhrases.QUEST_MESSAGES,
-				new AndCondition(new QuestActiveCondition(QUEST_SLOT),
-								 new NotCondition(new TimePassedCondition(QUEST_SLOT,1,expireDelay))), 
-				ConversationStates.ATTENDING,
-				null,
-				new SayRequiredItemAction(QUEST_SLOT,0,"Już dostałeś zadanie by przynieść [item]"
-						+ ". Powiedz #complete jeżeli przyniesiesz!"));
+		npc.add(ConversationStates.ATTENDING,
+            ConversationPhrases.QUEST_MESSAGES,
+            new AndCondition(new QuestActiveCondition(QUEST_SLOT),
+								 new NotCondition(new TimePassedCondition(QUEST_SLOT,1,expireDelay))),
+            ConversationStates.ATTENDING,
+            null,
+            new SayRequiredItemAction(QUEST_SLOT, 0, "Twoje zamówienie pozostaje aktualne: [item]. Nie musisz pytać o nowe zadanie, przynieś tę dostawę i powiedz #zakończone."));
 		
-		npc.add(ConversationStates.ATTENDING, ConversationPhrases.QUEST_MESSAGES,
-				new AndCondition(new QuestActiveCondition(QUEST_SLOT),
-								 new TimePassedCondition(QUEST_SLOT,1,expireDelay)), 
-				ConversationStates.ATTENDING,
-				null,
-				new SayRequiredItemAction(QUEST_SLOT,0,"Jesteś na etapie poszukiwania [item]"
-						+ " powiedz #complete, jak przyniesiesz. Być może nie ma tych przedmiotów! Możesz przynieść #inny przedmiot jeżeli chcesz lub wróć z tym, o który cię na początku prosiłem."));
+		npc.add(ConversationStates.ATTENDING,
+            ConversationPhrases.QUEST_MESSAGES,
+            new AndCondition(new QuestActiveCondition(QUEST_SLOT),
+								 new TimePassedCondition(QUEST_SLOT,1,expireDelay)),
+            ConversationStates.ATTENDING,
+            null,
+            new SayRequiredItemAction(QUEST_SLOT, 0, "Nadal czekam na [item]. Poszukiwania trwają już dość długo, więc mogę przyjąć prośbę o #inne zamówienie; możesz też dokończyć obecne. Dostarczony komplet zgłoś słowem #zakończone."));
 	
-		npc.add(ConversationStates.ATTENDING, ConversationPhrases.QUEST_MESSAGES,
-				new AndCondition(new QuestCompletedCondition(QUEST_SLOT),
-								 new NotCondition(new TimePassedCondition(QUEST_SLOT,1,delay))), 
-				ConversationStates.ATTENDING,
-				null,
-				new SayTimeRemainingAction(QUEST_SLOT,1, delay, "Możesz dostać tylko jedno zadanie dziennie. Proszę wróć za"));
+		npc.add(ConversationStates.ATTENDING,
+            ConversationPhrases.QUEST_MESSAGES,
+            new AndCondition(new QuestCompletedCondition(QUEST_SLOT),
+								 new NotCondition(new TimePassedCondition(QUEST_SLOT,1,delay))),
+            ConversationStates.ATTENDING,
+            null,
+            new SayTimeRemainingAction(QUEST_SLOT,1, delay, "Możesz dostać tylko jedno zadanie dziennie. Proszę wróć za"));
 
 		
 		
 		
-		npc.add(ConversationStates.ATTENDING, ConversationPhrases.QUEST_MESSAGES,
-				new OrCondition(new QuestNotStartedCondition(QUEST_SLOT),
+		npc.add(ConversationStates.ATTENDING,
+            ConversationPhrases.QUEST_MESSAGES,
+            new OrCondition(new QuestNotStartedCondition(QUEST_SLOT),
 								new AndCondition(new QuestCompletedCondition(QUEST_SLOT),
-												 new TimePassedCondition(QUEST_SLOT,1,delay))), 
-				ConversationStates.ATTENDING,
-				null,
-				startQuestAction());
+												 new TimePassedCondition(QUEST_SLOT,1,delay))),
+            ConversationStates.ATTENDING,
+            null,
+            startQuestAction());
 	}
 	
 	private void completeQuest() {
 		final SpeakerNPC npc = npcs.get("Generał Jan");
 		
 		npc.add(ConversationStates.ATTENDING,
-				ConversationPhrases.FINISH_MESSAGES, 
-				new QuestNotStartedCondition(QUEST_SLOT),
-				ConversationStates.ATTENDING, 
-				"Obawiam się, że jeszcze nie dałem tobie #zadania.",
-				null);
+            ConversationPhrases.FINISH_MESSAGES,
+            new QuestNotStartedCondition(QUEST_SLOT),
+            ConversationStates.ATTENDING,
+            "Obawiam się, że jeszcze nie dałem tobie #zadania.",
+            null);
 		
 		npc.add(ConversationStates.ATTENDING,
-				ConversationPhrases.FINISH_MESSAGES, 
-				new QuestCompletedCondition(QUEST_SLOT),
-				ConversationStates.ATTENDING, 
-				"Już ukończyłeś ostatnie zadanie, które ci dałem.",
-				null);
+            ConversationPhrases.FINISH_MESSAGES,
+            new QuestCompletedCondition(QUEST_SLOT),
+            ConversationStates.ATTENDING,
+            "Już ukończyłeś ostatnie zadanie, które ci dałem.",
+            null);
 		
 		final List<ChatAction> actions = new LinkedList<ChatAction>();
 		actions.add(new DropRecordedItemAction(QUEST_SLOT,0));
@@ -245,21 +246,20 @@ public class DailyGeneralQuest extends AbstractQuest {
 		actions.add(new IncreaseDefXPAction(10000));
 		
 		npc.add(ConversationStates.ATTENDING,
-				ConversationPhrases.FINISH_MESSAGES,
-				new AndCondition(new QuestActiveCondition(QUEST_SLOT),
+            ConversationPhrases.FINISH_MESSAGES,
+            new AndCondition(new QuestActiveCondition(QUEST_SLOT),
 								 new PlayerHasRecordedItemWithHimCondition(QUEST_SLOT,0)),
-				ConversationStates.ATTENDING, 
-				"Dobra robota! Pozwól sobie podziękować w imieniu żołnierzy Ados!",
-				new MultipleActions(actions));
+            ConversationStates.ATTENDING,
+            "Dostawa dotarła, a zapasy oddziału zostały uzupełnione. Dobra służba zaczyna się od dotrzymywania takich zobowiązań. Przyjmij zapłatę za wykonane zlecenie.",
+            new MultipleActions(actions));
 		
 		npc.add(ConversationStates.ATTENDING,
-				ConversationPhrases.FINISH_MESSAGES,
-				new AndCondition(new QuestActiveCondition(QUEST_SLOT),
+            ConversationPhrases.FINISH_MESSAGES,
+            new AndCondition(new QuestActiveCondition(QUEST_SLOT),
 								 new NotCondition(new PlayerHasRecordedItemWithHimCondition(QUEST_SLOT,0))),
-				ConversationStates.ATTENDING, 
-				null,
-				new SayRequiredItemAction(QUEST_SLOT,0,"Jeszcze nie przyniosłeś [item]"
-						+ ". Idź i zdobądź, a wtedy wróć i powiedz #complete jak skończysz."));
+            ConversationStates.ATTENDING,
+            null,
+            new SayRequiredItemAction(QUEST_SLOT, 0, "Do pełnej dostawy brakuje ci jeszcze: [item]. Nie zabieram części zamówienia; wróć z całym kompletem i powiedz #zakończone."));
 
 	}
 	
@@ -267,28 +267,28 @@ public class DailyGeneralQuest extends AbstractQuest {
 		final SpeakerNPC npc = npcs.get("Generał Jan");
 		
 		npc.add(ConversationStates.ATTENDING,
-				ConversationPhrases.ABORT_MESSAGES,
-				new AndCondition(new QuestActiveCondition(QUEST_SLOT),
-						 		 new TimePassedCondition(QUEST_SLOT,1,expireDelay)), 
-				ConversationStates.ATTENDING, 
-				null, 
-				// start quest again immediately
+            ConversationPhrases.ABORT_MESSAGES,
+            new AndCondition(new QuestActiveCondition(QUEST_SLOT),
+						 		 new TimePassedCondition(QUEST_SLOT,1,expireDelay)),
+            ConversationStates.ATTENDING,
+            null,
+            // start quest again immediately
 				startQuestAction());
 		
 		npc.add(ConversationStates.ATTENDING,
-				ConversationPhrases.ABORT_MESSAGES,
-				new AndCondition(new QuestActiveCondition(QUEST_SLOT),
-						 		 new NotCondition(new TimePassedCondition(QUEST_SLOT,1,expireDelay))), 
-				ConversationStates.ATTENDING, 
-				"Dalej potrzebuje tego przedmiotu. Musisz przynieść to o co cie prosiłem.", 
-				null);
+            ConversationPhrases.ABORT_MESSAGES,
+            new AndCondition(new QuestActiveCondition(QUEST_SLOT),
+						 		 new NotCondition(new TimePassedCondition(QUEST_SLOT,1,expireDelay))),
+            ConversationStates.ATTENDING,
+            "Dalej potrzebuje tego przedmiotu. Musisz przynieść to o co cie prosiłem.",
+            null);
 		
 		npc.add(ConversationStates.ATTENDING,
-				ConversationPhrases.ABORT_MESSAGES,
-				new QuestNotActiveCondition(QUEST_SLOT),
-				ConversationStates.ATTENDING, 
-				"Obawiam się, że jeszcze nie dałem tobie #zadania.", 
-				null);
+            ConversationPhrases.ABORT_MESSAGES,
+            new QuestNotActiveCondition(QUEST_SLOT),
+            ConversationStates.ATTENDING,
+            "Obawiam się, że jeszcze nie dałem tobie #zadania.",
+            null);
 		
 	}
 
@@ -299,48 +299,15 @@ public class DailyGeneralQuest extends AbstractQuest {
 	
 	@Override
 	public List<String> getHistory(final Player player) {
-		final List<String> res = new ArrayList<String>();
-		if (!player.hasQuest(QUEST_SLOT)) {
-			return res;
-		}
-		res.add("Spotkałem Generała Jana w twierdzy Ados");
-		final String questState = player.getQuest(QUEST_SLOT);
-		if ("rejected".equals(questState)) {
-			res.add("Nie chę pomóc żołnierzom Ados.");
-			return res;
-		}
-
-		res.add("Chcę pomóc żołnierzom Ados.");
-		if (player.hasQuest(QUEST_SLOT) && !player.isQuestCompleted(QUEST_SLOT)) {
-			String questItem = player.getRequiredItemName(QUEST_SLOT,0);
-			int amount = player.getRequiredItemQuantity(QUEST_SLOT,0);
-			if (!player.isEquipped(questItem, amount)) {
-				res.add(("Zostałem poproszony o przyniesienie "
-						+ Grammar.quantityplnoun(amount, questItem, "") + ", aby pomóc żołnierzom Ados. Nie mam tego jeszcze."));
-			} else {
-				res.add(("Znalazłem "
-						+ Grammar.quantityplnoun(amount, questItem, "") + " do pomocy Generałowi Janowi i muszę je dostarczyć."));
-			}
-		}
-		int repetitions = player.getNumberOfRepetitions(getSlotName(), 2);
-		if (repetitions > 0) {
-			res.add("Pomogłem Generałowi Janowi "
-					+ Grammar.quantityplnoun(repetitions, "razy") + " do tej pory.");
-		}
-		if (isRepeatable(player)) {
-            res.add("Dostarczyłem ostatni przedmiot do Generała i teraz znowu potrzebuje zapasów.");
-		} else if (isCompleted(player)){
-			res.add("Dostarczyłem ostatni przedmiot do Generała i odebrałem moją nagrodę w ciągu 24 godzin.");
-		}
-		return res;
-	}
+        return games.stendhal.server.core.rp.quest.CollectionQuestProgress.history(this, player);
+    }
 
 	@Override
 	public void addToWorld() {
 		super.addToWorld();
 		fillQuestInfo(
 				"Dzienne Zadanie na przyniesienie przedmiotu dla Generała",
-				"Generał Jan potrzebuje zapasów dla żołnierzy Ados.",
+				"Generał Jan potrzebuje dostaw dla żołnierzy Ados. Przyjmij bieżące zamówienie i wróć z towarem wskazanym przez dowódcę.",
 				true);
 		
 		buildItemsMap();
@@ -375,4 +342,12 @@ public class DailyGeneralQuest extends AbstractQuest {
 	public String getNPCName() {
 		return "Generał Jan";
 	}
+
+
+
+    public String getCollectionKind(){return "random";}
+    public java.util.Map<String,Integer> getCollectionItems(){return new java.util.TreeMap<String,Integer>(items);}
+    public String getCollectionHint(){return "Liczy się tylko przedmiot i ilość zapisane w aktualnym zamówieniu. Przynieś całą dostawę i zgłoś jej zakończenie. Kolejne zlecenie oraz wymiana trudnego zamówienia są dostępne po upływie odpowiedniego czasu.";}
+    public int getCollectionWait(){return delay;} public int getCollectionExpiry(){return expireDelay;}
+
 }

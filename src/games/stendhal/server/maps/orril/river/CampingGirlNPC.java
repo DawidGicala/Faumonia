@@ -44,10 +44,11 @@ public class CampingGirlNPC implements ZoneConfigurator {
 
 			@Override
 			protected void createDialog() {
+                addReply("tematy", "Możemy porozmawiać o obozowaniu albo drewnie do ogniska. Ja przez ten czas dopilnuję pieczenia.");
 				//addGreeting();
-				addJob("Praca? Jestem tylko małą dziewczynką! Skautem.");
-				addHelp("Możesz znaleźć sporo użytecznych rzeczy w lesie na przykład drewno i grzyby. Uważaj, niektóre grzyby są trujące!");
-				addGoodbye();
+				addJob("Jestem skautką i uczę się radzić sobie poza miastem. Tata, Leander z piekarni w Semos, zna się na jedzeniu, a ja próbuję dopilnować go tutaj przy ognisku. Jak widać, to też wymaga pracy!");
+				addHelp("W lesie znajdziesz drewno i grzyby, ale nie każdy grzyb nadaje się do jedzenia. Polan szukaj w lesie na północ stąd. Na wyprawę zabierz zapasy, żeby zgłodniały brzuch nie zmuszał cię do zgadywania, co można zjeść.");
+				addGoodbye("Do widzenia! Wpadnij jeszcze odpocząć przy ogniu.");
 				// remaining behaviour is defined in maps.quests.Campfire.				
 			}
 		};
@@ -56,7 +57,7 @@ public class CampingGirlNPC implements ZoneConfigurator {
 		sally.setPosition(40, 61);
 		sally.setDirection(Direction.RIGHT);
 		sally.initHP(100);
-		sally.setDescription("Widzisz Sally. Ona jest córką Leandera, piekarza Semos a obecnie obozuję nad rzeką.");
+		sally.setDescription("Widzisz Sally, córkę piekarza Leandera z Semos. Obozuje nad rzeką Orril i uważnie pilnuje ogniska.");
 		zone.add(sally);
 	}
 }

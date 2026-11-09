@@ -14,6 +14,9 @@ package games.stendhal.client.events;
 
 import games.stendhal.client.entity.RPEntity;
 import games.stendhal.client.gui.progress.ProgressLogController;
+import games.stendhal.common.QuestProgress;
+import java.util.Collections;
+import java.util.List;
 
 import org.apache.log4j.Logger;
 
@@ -31,12 +34,19 @@ public class ProgressStatusEvent extends Event<RPEntity> {
 	@Override
 	public void execute() {
 		try {
+			// Marauroa decodes an empty list as a list with one empty string.
+			List<String> data = "[]".equals(event.get("data"))
+					? Collections.<String>emptyList() : event.getList("data");
 			if (!event.has("progress_type")) {
-				ProgressLogController.get().showCategories(event.getList("data"));
+				ProgressLogController.get().showCategories(data);
 			} else if (!event.has("item")) {
-				ProgressLogController.get().showCategorySummary(event.get("progress_type"), event.getList("data"));
+				ProgressLogController.get().showCategorySummary(event.get("progress_type"), data);
 			} else {
-				ProgressLogController.get().showDescription(event.get("progress_type"), event.get("item"), event.get("description"), event.get("information"), event.getList("data"));
+				QuestProgress progress = event.has("quest_progress")
+						? QuestProgress.fromWire(event.getList("quest_progress")) : null;
+				ProgressLogController.get().showDescription(event.get("progress_type"), event.get("item"),
+						event.get("description"), event.has("information") ? event.get("information") : "",
+						data, progress, event.has("passive"));
 			}
 		} catch (RuntimeException e) {
 			logger.error("Failed to process progress status. Event: " + event, e);

@@ -68,7 +68,7 @@ public class UpdateProgressBar extends JFrame implements
 	 * @param toVersion the version the download leads to
 	 */
 	public UpdateProgressBar(final int max, final String urlBase, final String fromVersion, final String toVersion) {
-		super("Pobieram...");
+		super("Pobieranie...");
 		setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
 		addWindowListener(new UpdateProgressBarWindowListener());
 
@@ -97,9 +97,9 @@ public class UpdateProgressBar extends JFrame implements
 		contentPane.setBorder(BorderFactory.createEmptyBorder(5, 5, 5, 5));
 
 		if (fromVersion == null) {
-			contentPane.add(new JLabel("Proszę poczekać na pobranie " + ClientGameConfiguration.get("GAME_NAME") + "..."));
+			contentPane.add(new JLabel("Pobieranie plików " + ClientGameConfiguration.get("GAME_NAME") + "..."));
 		} else {
-			contentPane.add(new JLabel("Pobieram aktualizacje..."));
+			contentPane.add(new JLabel("Pobieranie aktualizacji..."));
 		}
 		contentPane.add(Box.createVerticalStrut(5));
 

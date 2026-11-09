@@ -41,7 +41,8 @@ public class MillerNPC implements ZoneConfigurator {
 		SpeakerNPC npc = new SpeakerNPC("Jenny") {
 			@Override
 			public void createDialog() {
-				addJob("Prowadzę młyn, w którym mielę #kłosy na mąkę. Zaopatruję też piekarnię w Semos. Powiedz tylko #zmiel.");
+                games.stendhal.server.entity.npc.dialogue.HuntDialogueTopics.install(this);
+				addJob("Prowadzę młyn i mielę #kłosy na mąkę dla piekarni w Semos. Jeśli potrzebujesz mąki, powiedz #zmiel; martwią mnie też gnomy, które podkradają marchew z farm.");
 				addReply("kłosy",
 				        "Niedaleko jest farma. Zazwyczaj pozwalają ludziom tam zbierać kłosy zboża. Oczywiście potrzebujesz #kosy do ich ścięcia.");
 				addReply("kosy",
@@ -71,7 +72,7 @@ public class MillerNPC implements ZoneConfigurator {
 		new SellerAdder().addSeller(npc, new SeedSellerBehaviour());
 		new ProducerAdder().addProducer(npc, behaviour,"Pozdrawiam! Nazywam się Jenny jestem szefową tutejszego młyna. Jeżeli przyniesiesz mi #kłosy zboża to zmielę je dla Ciebie na mąkę. Powiedz tylko #zmiel.");
 		npc.setPosition(19, 39);
-		npc.setDescription("Oto Jenny. Pracuje w młynie.");	
+		npc.setDescription("Widzisz Jenny, młynarkę z równin Semos. Dogląda zapasów zboża i z troską mówi o pobliskich farmach.");	
 		npc.setDirection(Direction.DOWN);
 		npc.setEntityClass("woman_003_npc");
 		zone.add(npc);

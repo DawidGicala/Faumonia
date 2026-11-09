@@ -54,8 +54,9 @@ public class BateNPC implements ZoneConfigurator {
 
 			@Override
 			protected void createDialog() {
+                games.stendhal.server.entity.npc.dialogue.HuntDialogueTopics.install(this);
 				addGreeting("Witaj, czego chcesz?");
-				addJob("Na razie niczego nie potrzebuje.");
+				addJob("Zlecam konkretną robotę i płacę za jej wykonanie. Jeśli szukasz zadania, omówimy cel oraz rozliczenie; reszta moich spraw nie jest tematem dla całej karczmy.");
 				addQuest("Na razie niczego nie potrzebuje.");
 				addHelp("Nie jestem od pomagania.");
 				final Map<String, Integer> offerings = new HashMap<String, Integer>();
@@ -67,7 +68,7 @@ public class BateNPC implements ZoneConfigurator {
 		barman.setPosition(6, 14);
 		barman.setDirection(Direction.RIGHT);
 		barman.initHP(100);
-		barman.setDescription("Bate wygląda na tajemniczego człowieka. Może powinienem z nim porozmawiać?");
+		barman.setDescription("Widzisz Batego w karczmie Ados. Nie wygląda na człowieka skłonnego do długich uprzejmości.");
 		zone.add(barman);
 	}
 }

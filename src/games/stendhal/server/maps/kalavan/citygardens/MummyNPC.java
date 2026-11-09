@@ -50,11 +50,12 @@ public class MummyNPC implements ZoneConfigurator {
 			}
 			@Override
 			protected void createDialog() {
+                addReply("tematy", "Możemy wrócić do twojej sprawy albo porozmawiać o czymś innym. Co chcesz wiedzieć?");
 
 				// greeting in maps/quests/IcecreamForAnnie.java
 				addOffer("Nie mogę. Jestem zajęta pilnowaniem mojej córki.");
 				addQuest("Nic, dziękuję.");
-				addJob("Jestem matką.");
+				addJob("Jestem mamą Annie. Przy takim małym wulkanie energii trzeba mieć oczy dookoła głowy, ale wspólny spacer po ogrodach dobrze nam robi.");
 				addHelp("Pomogę jeżeli będę mogła, ale muszę pilnować swojej córki.");
 				addGoodbye("Dowidzenia.");
 			}
@@ -64,7 +65,7 @@ public class MummyNPC implements ZoneConfigurator {
 			}
 		};
 
-		mummyNPC.setDescription("Oto kobieta odpoczywająca na ławce i obserwująca zabawę córki.");
+		mummyNPC.setDescription("Widzisz Mrs Jones siedzącą w ogrodach Kalavan. Odpoczywa na ławce i przygląda się zabawie córki.");
 		mummyNPC.setEntityClass("woman_000_npc");
 		mummyNPC.setPosition(53, 88);
 		mummyNPC.initHP(100);

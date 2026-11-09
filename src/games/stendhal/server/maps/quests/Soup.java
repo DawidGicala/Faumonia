@@ -12,6 +12,8 @@
  ***************************************************************************/
 package games.stendhal.server.maps.quests;
 
+import games.stendhal.server.entity.npc.action.DialogueRewardAction;
+
 import games.stendhal.common.grammar.Grammar;
 import games.stendhal.common.parser.Sentence;
 import games.stendhal.server.core.engine.SingletonRepository;
@@ -60,6 +62,7 @@ import marauroa.common.game.IRPZone;
  * @author kymara
  */
 public class Soup extends AbstractQuest {
+    public static java.util.List<String> getRequiredItems() { return java.util.Collections.unmodifiableList(NEEDED_FOOD); }
 
 	private static final List<String> NEEDED_FOOD = Arrays.asList("marchew",
 			"szpinak", "cukinia", "kapusta", "sałata", "cebula", "kalafior",
@@ -107,7 +110,7 @@ public class Soup extends AbstractQuest {
 	 * Serves the soup as a reward for the given player.
 	 * @param player to be rewarded
 	 */
-	private void placeSoupFor(final Player player) {
+	private void placeSoupFor(final Player player, final EventRaiser npc) {
 		final Item soup = SingletonRepository.getEntityManager()
 				.getItem("zupa");
 		final IRPZone zone = SingletonRepository.getRPWorld().getZone("int_fado_tavern");
@@ -119,6 +122,7 @@ public class Soup extends AbstractQuest {
 		// base HP. soup is already persistent so it will last.
 		soup.put("amount", player.getBaseHP());
 		zone.add(soup);
+        DialogueRewardAction.recordItem(player, npc, soup, player.getNumberOfEquipped(soup.getName()), 1);
 	}
 
 	private void step_1() {
@@ -131,7 +135,16 @@ public class Soup extends AbstractQuest {
 			new AndCondition(new GreetingMatchesNameCondition(npc.getName()),
 					new QuestNotStartedCondition(QUEST_SLOT)),
 			ConversationStates.INFORMATION_1,
-			"Witaj nieznajomy. Wyglądasz na zmęczonego podróżami. Wiem co mogłoby Cię #ożywić.",
+			"Witaj, podróżniku. Przy tym stole można wreszcie usiąść, odłożyć ciężki plecak i zjeść coś ciepłego. Moja warzywna zupa potrafi porządnie #ożywić.",
+			null);
+
+        // Same authoritative step, without requiring the player to leave and greet again.
+        npc.add(
+			ConversationStates.ATTENDING, "zupa",
+			new AndCondition(new games.stendhal.server.entity.npc.condition.AlwaysTrueCondition(),
+					new QuestNotStartedCondition(QUEST_SLOT)),
+			ConversationStates.INFORMATION_1,
+			"Witaj, podróżniku. Przy tym stole można wreszcie usiąść, odłożyć ciężki plecak i zjeść coś ciepłego. Moja warzywna zupa potrafi porządnie #ożywić.",
 			null);
 
 		// player returns after finishing the quest (it is repeatable) after the
@@ -146,11 +159,31 @@ public class Soup extends AbstractQuest {
 			"Witaj ponownie. Przyszedłeś po więcej smacznej zupy?",
 			null);
 
+        // Same authoritative step, without requiring the player to leave and greet again.
+        npc.add(
+			ConversationStates.ATTENDING, "zupa",
+			new AndCondition(new games.stendhal.server.entity.npc.condition.AlwaysTrueCondition(),
+					new QuestCompletedCondition(QUEST_SLOT),
+					new TimePassedCondition(QUEST_SLOT, 1, REQUIRED_MINUTES)),  
+			ConversationStates.QUEST_OFFERED,
+			"Witaj ponownie. Przyszedłeś po więcej smacznej zupy?",
+			null);
+
 		// player returns after finishing the quest (it is repeatable) before
 		// the time as finished
 		npc.add(ConversationStates.IDLE,
 				ConversationPhrases.GREETING_MESSAGES,
 				new AndCondition(new GreetingMatchesNameCondition(npc.getName()),
+						new QuestCompletedCondition(QUEST_SLOT),
+						new NotCondition(new TimePassedCondition(QUEST_SLOT, 1, REQUIRED_MINUTES))), 
+				ConversationStates.ATTENDING, 
+				null,
+				new SayTimeRemainingAction(QUEST_SLOT, 1, REQUIRED_MINUTES , "Mam nadzieję, że nie przyszedłeś po więcej zupy, ponieważ nie skończyłam zmywać naczyń. Proszę wróć za ")
+			);
+
+        // Same authoritative step, without requiring the player to leave and greet again.
+        npc.add(ConversationStates.ATTENDING, "zupa",
+				new AndCondition(new games.stendhal.server.entity.npc.condition.AlwaysTrueCondition(),
 						new QuestCompletedCondition(QUEST_SLOT),
 						new NotCondition(new TimePassedCondition(QUEST_SLOT, 1, REQUIRED_MINUTES))), 
 				ConversationStates.ATTENDING, 
@@ -198,7 +231,7 @@ public class Soup extends AbstractQuest {
 		npc.add(ConversationStates.QUEST_OFFERED,
 			ConversationPhrases.YES_MESSAGES, null,
 			ConversationStates.QUESTION_1, 
-			"Dokonałeś słusznego wyboru. Masz coś czego potrzebuję?",
+			"Zatem ugotujemy porządną zupę. Przynoś warzywa pojedynczo lub partiami, a ja odłożę każdą dostawę. Gdy zbierzemy cały przepis, postawię dla ciebie porcję na stole.",
 			new SetQuestAction(QUEST_SLOT, ""));
 
 		// player is not willing to help
@@ -250,6 +283,16 @@ public class Soup extends AbstractQuest {
 			"Witaj ponownie! Mam nadzieje, że zebrałeś jakieś #składniki na zupę.",
 			null);
 
+        // Same authoritative step, without requiring the player to leave and greet again.
+        npc.add(
+			ConversationStates.ATTENDING, "zupa",
+			new AndCondition(new games.stendhal.server.entity.npc.condition.AlwaysTrueCondition(),
+					new QuestStartedCondition(QUEST_SLOT),
+					new NotCondition(new QuestStateStartsWithCondition(QUEST_SLOT, "done"))),
+			ConversationStates.QUESTION_1,
+			"Witaj ponownie! Mam nadzieje, że zebrałeś jakieś #składniki na zupę.",
+			null);
+
 		// player asks what exactly is missing
 		npc.add(ConversationStates.QUESTION_1, Arrays.asList("ingredients", "składniki"),
 			new AndCondition(new QuestStartedCondition(QUEST_SLOT), new NotCondition(new QuestStateStartsWithCondition(QUEST_SLOT, "done"))),
@@ -289,8 +332,8 @@ public class Soup extends AbstractQuest {
 								if (!missing.isEmpty()) {
 									npc.say("Dziękuję bardzo! Co jeszcze mi przyniosłeś?");
 								} else {
-									player.addKarma(5.0);
-									player.addXP(20);
+									DialogueRewardAction.karma(new games.stendhal.server.entity.npc.action.IncreaseKarmaAction(5.0)).fire(player, null, npc);
+									DialogueRewardAction.xp(20).fire(player, null, npc);
 									/*
 									 * place soup after XP added otherwise
 									 * the XP change MIGHT change level and
@@ -299,7 +342,7 @@ public class Soup extends AbstractQuest {
 									 * to be accurate for the place soup
 									 * stage
 									 */
-									placeSoupFor(player);
+									placeSoupFor(player, npc);
 									player.healPoison();
 									npc.say("Zupę masz na stole. Wyleczy Cię. "
 											+ "Mój magiczny sposób robienia zupy da Ci też trochę karmy.");
@@ -375,15 +418,15 @@ public class Soup extends AbstractQuest {
 							+ Grammar.enumerateCollection(missing)
 							+ ". Dostaniesz mało karmy jeżeli nadal będziesz popełniał takie błędy!");
 			// to fix bug [ 2517439 ] 
-			player.addKarma(-5.0);
+			DialogueRewardAction.karma(new games.stendhal.server.entity.npc.action.IncreaseKarmaAction(-5.0)).fire(player, null, npc);
 			return;
 		} else {
 			// you get less XP if you did it the lazy way
 			// and no karma
-			player.addXP(20);
-			placeSoupFor(player);
+			DialogueRewardAction.xp(20).fire(player, null, npc);
+			placeSoupFor(player, npc);
 			player.healPoison();
-			npc.say("Zupa, która jest na stole jest dla Ciebie. Uleczy Cię. Daj mi znać jeżeli mogłabym jeszcze w czymś pomóc.");
+			npc.say("Twoja porcja stoi już na stole i jest przeznaczona dla ciebie. Zjedz ją, kiedy zechcesz odzyskać siły. Ja tymczasem umyję naczynia przed następnym gotowaniem.");
 			player.setQuest(QUEST_SLOT, "done;"
 					+ System.currentTimeMillis());
 			player.notifyWorldAboutChanges();
@@ -396,7 +439,7 @@ public class Soup extends AbstractQuest {
 		super.addToWorld();
 		fillQuestInfo(
 				"Zupa",
-				"Mother Helena robi pożywną i smaczną zupę..",
+				"Old Mother Helena w Fado gotuje pożywną zupę warzywną. Poznaj jej przepis i przynieś składniki, aby mogła przygotować porcję również dla ciebie.",
 				false);
 		step_1();
 		step_2();

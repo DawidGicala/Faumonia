@@ -12,6 +12,8 @@
  ***************************************************************************/
 package games.stendhal.server.maps.quests;
 
+import games.stendhal.server.entity.npc.action.DialogueRewardAction;
+
 import games.stendhal.common.parser.Sentence;
 import games.stendhal.server.entity.npc.ChatAction;
 import games.stendhal.server.entity.npc.ConversationPhrases;
@@ -100,14 +102,14 @@ public class HelpTomi extends AbstractQuest {
 			questTrigger, 
 			new AndCondition(new QuestNotCompletedCondition(QUEST_SLOT), new NotCondition(new PlayerHasItemWithHimCondition("miecz lodowy"))),
 			ConversationStates.ATTENDING, 
-			"mój miecz lodowy? proszę o miecz lodowy", null);
+			"Ten żar nie daje mi odpocząć ani na chwilę. Przynieś mi miecz lodowy, jego chłód choć trochę łagodzi to gorąco. Tylko takiego miecza teraz potrzebuję.", null);
 		
 		// says quest or ice and doesn't have an ice sword and has brought one in the past
 		npc.add(ConversationStates.ATTENDING,
 			questTrigger,
 			new AndCondition(new QuestCompletedCondition(QUEST_SLOT), new NotCondition(new PlayerHasItemWithHimCondition("miecz lodowy"))),
 			ConversationStates.ATTENDING, 
-			"gdzie jest mój miecz lodowy?", null);
+			"Chłód znów ustąpił i wszystko parzy tak samo jak wcześniej. Jeśli zdobędziesz kolejny miecz lodowy, przynieś go tutaj. Pamiętam, że już raz mi pomogłeś.", null);
 
 		// says quest or ice and has ice sword with him (first time)
 		// player gets a karma bonus and some xp
@@ -115,8 +117,8 @@ public class HelpTomi extends AbstractQuest {
 			questTrigger, 
 			new AndCondition(new QuestNotCompletedCondition(QUEST_SLOT), new PlayerHasItemWithHimCondition("miecz lodowy")),
 			ConversationStates.ATTENDING,
-			"mój miecz lodowy :)",
-			new MultipleActions(new DropItemAction("miecz lodowy"), new IncreaseXPAction(1000), new IncreaseKarmaAction(30.0), new SetQuestAction(QUEST_SLOT, "done;1")));
+			"Nareszcie czuję chłód zamiast tego nieznośnego żaru. Dziękuję, mogę przez chwilę odetchnąć. Przyjmij nagrodę za to, że o mnie pamiętasz.",
+			new MultipleActions(new DropItemAction("miecz lodowy"), DialogueRewardAction.xp(1000), DialogueRewardAction.karma(new IncreaseKarmaAction(30.0)), new SetQuestAction(QUEST_SLOT, "done;1")));
 		
 		// says quest or ice and has ice sword with him (second+ time)
 		// player gets a karma bonus and some xp
@@ -140,17 +142,12 @@ public class HelpTomi extends AbstractQuest {
 						N = Integer.parseInt(questparts[1]) + 1;
 					}
 					player.drop("miecz lodowy");
-						player.addKarma(15.0);
+						DialogueRewardAction.karma(new games.stendhal.server.entity.npc.action.IncreaseKarmaAction(15.0)).fire(player, null, npc);
 						player.setQuest(QUEST_SLOT, "done;" + Integer.toString(N));
-						player.addXP(1000);
+						DialogueRewardAction.xp(1000).fire(player, null, npc);
 						// make the number of smilies correspond to how many
 						// times you helped him
-						StringBuffer saybuf = new StringBuffer();
-						saybuf.append("o mój icek ☺☺☺ ");
-						for (int i = 0; i < N; i++) {
-							saybuf.append("☺☺ ");
-						}
-					npc.say(saybuf.toString());
+						npc.say("Znów przynosisz odrobinę chłodu do tego miejsca. Dziękuję, pamiętam każdą taką pomoc. Przyjmij nagrodę za kolejny miecz.");
 				}
 			});
 								
@@ -162,7 +159,7 @@ public class HelpTomi extends AbstractQuest {
 		// want "ice" and quest_messages to have same meaning in this quest
 		fillQuestInfo(
 				"Pomoc Tomiemu",
-				"Chłopiec Tomi jest torturowany w gorącym piekle. Jedyną rzeczą, która może mu pomóc jest jego... MIECZ LODOWY!",
+				"Tomi cierpi w piekle i prosi o miecz lodowy. Odnajdź chłopca, poznaj jego prośbę i dostarcz broń, na której tak mu zależy.",
 				true);
 	    questTrigger = ConversationPhrases.combine(ConversationPhrases.QUEST_MESSAGES, extraTrigger);
 		step1();

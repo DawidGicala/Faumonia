@@ -15,7 +15,7 @@ package games.stendhal.server.maps.quests;
 import games.stendhal.common.grammar.Grammar;
 import games.stendhal.server.entity.npc.ConversationPhrases;
 import games.stendhal.server.entity.npc.ConversationStates;
-import games.stendhal.server.entity.npc.SpeakerNPC;
+import games.stendhal.server.core.rp.quest.MasterStage;
 import games.stendhal.server.entity.npc.action.DropRecordedItemAction;
 import games.stendhal.server.entity.npc.action.IncreaseKarmaAction;
 import games.stendhal.server.entity.npc.action.IncreaseAtkXPAction;
@@ -79,7 +79,7 @@ public class MainTask16 extends AbstractQuest {
 			res.add("Nie chce podjąć się głównego zadania na wojownika Faumonii");
 			return res;
 		}
-		res.add("Zanim Mistrz Faumonii XVI przyzna mi kolejne główne zadanie musze wykonać kilka zadań.	Muszę odwiedzić tawernę w mieście Semos i wykonać zadanie dla turysty Kape.	Powinienem odnaleźć Woda i wykonać dla niego zadanie, podobno znajdę go przed tawerną w mieście Semos.");
+		res.add("Zanim Mistrz Faumonii przyzna mi kolejne główne zadanie musze wykonać kilka zadań.	Muszę odwiedzić tawernę w mieście Semos i wykonać zadanie dla turysty Kape.	Powinienem odnaleźć Woda i wykonać dla niego zadanie, podobno znajdę go przed tawerną w mieście Semos.");
 		if (!isCompleted(player)) {
 			res.add("Żeby ukończyć główne zadanie musze pokonać kanibali na wyspie Athor i przynieść " + Grammar.a_noun(player.getRequiredItemName(QUEST_SLOT,0)) + ".");
 		}
@@ -90,7 +90,7 @@ public class MainTask16 extends AbstractQuest {
 	}
 	
 	private void checkCollectingQuests() {
-		final SpeakerNPC npc = npcs.get("Mistrz Faumonii XVI");
+		final MasterStage npc = MasterStage.register(16, this);
 		
 		npc.add(
 		ConversationStates.IDLE,
@@ -130,7 +130,7 @@ public class MainTask16 extends AbstractQuest {
 
 	private void requestItem() {
 		
-		final SpeakerNPC npc = npcs.get("Mistrz Faumonii XVI");
+		final MasterStage npc = MasterStage.register(16, this);
 		final Map<String,Integer> items = new HashMap<String, Integer>();
 		
 		items.put("bursztyn",333);
@@ -155,7 +155,7 @@ public class MainTask16 extends AbstractQuest {
 	}
 						
 	private void collectItem() {
-			final SpeakerNPC npc = npcs.get("Mistrz Faumonii XVI");
+			final MasterStage npc = MasterStage.register(16, this);
 			
 					npc.add(ConversationStates.IDLE,
 				ConversationPhrases.GREETING_MESSAGES,
@@ -178,7 +178,7 @@ public class MainTask16 extends AbstractQuest {
 				new AndCondition(new QuestActiveCondition(QUEST_SLOT),
 								new PlayerHasRecordedItemWithHimCondition(QUEST_SLOT)),
 				ConversationStates.ATTENDING, 
-				"Pomogłeś Wodowi i Kape oraz pokonałeś kanibali. Zasługujesz na odznakę wojownika Faumonii szesnastego poziomu. Następne główne zadanie otrzymasz po przekroczeniu 180 poziomu doświadczenia. Uważaj! Następne zadanie jest ograniczone poziomowo, nie wykonasz go po przekroczeniu 200 poziomu doświadczenia.",
+				"Pomogłeś Wodowi i Kape oraz pokonałeś kanibali. Zasługujesz na odznakę wojownika Faumonii szesnastego poziomu. Następne główne zadanie otrzymasz po przekroczeniu 180 poziomu doświadczenia. Do kolejnej próby przygotuje cię między innymi wyprawa do katakumb Semos i zadanie Hogarta z kopalni Orril.",
 				new MultipleActions(new DropRecordedItemAction(QUEST_SLOT), 
 									new SetQuestAction(QUEST_SLOT, "done"),
 									new DropItemAction("odznaka wojownika XV",1),
@@ -196,7 +196,7 @@ public class MainTask16 extends AbstractQuest {
 	public void addToWorld() {
 		fillQuestInfo(
 				"Wojownik Faumonii 16",
-				"Mistrz Faumonii XVI ma dla ciebie szesnaste główne zadanie które pomoże ci zostać wielkim wojownikiem Faumonii.",
+				"Mistrz Faumonii ma dla ciebie szesnaste główne zadanie które pomoże ci zostać wielkim wojownikiem Faumonii.",
 				true);
 		
 		checkCollectingQuests();
@@ -217,7 +217,7 @@ public class MainTask16 extends AbstractQuest {
 
 	@Override
 	public String getNPCName() {
-		return "Mistrz Faumonii XVI";
+		return MasterStage.NPC_NAME;
 	}
 	
 	@Override

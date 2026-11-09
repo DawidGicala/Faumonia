@@ -56,30 +56,31 @@ public class GloveMakerNPC implements ZoneConfigurator {
 
 			@Override
 			public void createDialog() {
-				addJob("Specjalizuję się w rzemiośle #rękawic #ze #skóry #lwa. To sztuka łącząca tradycję z nowoczesnymi technikami. Każda para rękawic jest unikalna i wykonana z największą starannością."); 
+				addJob("Szyję rękawice ze skóry lwa. Dobrze dobrane skóry i mocne szwy są ważniejsze niż ozdoby; rękawice mają służyć podczas wypraw."); 
 				addReply(Arrays.asList("pieniadze", "money"),
-				"Pieniądze to wynagrodzenie za moją pracę i czas. Oprócz #skór potrzebuję #1000 monet, aby pokryć koszty materiałów i utrzymania warsztatu. Wysoka jakość wymaga odpowiedniego wynagrodzenia");
+				"1500 monet to zapłata za uszycie pary rękawic. Skóry przynosisz osobno; pełną listę przypomnę, gdy zapytasz o ofertę.");
 				addReply("skóra lwa",
-		        "Skóra lwa to materiał pełen majestatu i siły. Wykorzystuję ją do tworzenia rękawic, które są zarówno trwałe, jak i prestiżowe. Jeśli chcesz to wykonam dla Ciebie parę #rękawic #ze #skóry #lwa");
+		        "Ze skóry lwa szyję wierzch rękawic. Potrzebuję czterech sztuk na jedną parę, a do tego ośmiu skór zwierzęcych na pozostałe części.");
 				addReply("skóra zwierzęca",
-		        "Skóre zwierzecą możesz pozyskać zabijajać różne zwierzęta w naszje krainie. Dzięki niej moge zadbać o wzmocnienia szwów i zwiększenia trwałości skórzanych rękawic.");
-				addOffer("Mogę stworzyć dla Ciebie #rękawice #ze #skóry #lwa. Potrzebne mi do tego #1000 monet, #4 skóry lwa oraz #8 skór zwierzęcych. To nie tylko rękawice, ale dzieło sztuki, odzwierciedlające twoją siłę i status. Jeżeli chcesz to poproś mnie, abym go przyrządził mówiąc #wykonaj #rękawice #ze #skóry #lwa.");
-				addHelp("Dziękuję, ale aktualnie nie potrzebuję pomocy. Moja praca to tworzenie rękawic ze skóry lwa. Jeśli potrzebujesz parę, powiedz #wykonaj #rękawice #ze #skóry #lwa.");
+		        "Skóry zwierzęce wykorzystuję do pozostałych części rękawic i wzmocnień. Zbieraj je podczas polowań; na parę potrzeba ośmiu sztuk.");
+				addOffer("Na rękawice ze skóry lwa przynieś 4 skóry lwa, 8 skór zwierzęcych i 1500 monet. Szycie potrwa 30 minut. Żeby złożyć zamówienie, powiedz: wykonaj rękawice ze skóry lwa.");
+				addHelp("Jeśli zbierasz skóry, mogę uszyć z nich rękawice. Zapytaj o ofertę, a podam materiały i cenę. Na początek potrzebne będą skóry lwa.");
 				addGoodbye("Trzymaj się.");
 
 				final Map<String, Integer> requiredResources = new TreeMap<String, Integer>();
-				requiredResources.put("money", 1000);
+				requiredResources.put("money", 1500);
 				requiredResources.put("skóra lwa", 4);
 				requiredResources.put("skóra zwierzęca", 8);
-				final ProducerBehaviour behaviour = new ProducerBehaviour("glover_gloves",
-						Arrays.asList("concoct", "wykonaj"), "rękawice ze skóry lwa", requiredResources, 30 * 60);
+				final games.stendhal.server.entity.npc.behaviour.impl.RepricedProducerBehaviour behaviour = new games.stendhal.server.entity.npc.behaviour.impl.RepricedProducerBehaviour("glover_gloves",
+						Arrays.asList("concoct", "wykonaj"), "rękawice ze skóry lwa", requiredResources, 30 * 60, 1000);
+                behaviour.installPayment(this);
 
 				new ProducerAdder().addProducer(this, behaviour,
-				"Witaj w moim warsztacie. Jestem Glover, mistrz w tworzeniu #rękawic #ze #skóry #lwa. Jeśli chcesz, abym wykonał dla Ciebie parę, powiedz #wykonaj #rękawice #ze #skóry #lwa.");
+				"Witaj, jestem Glover. Szyję rękawice ze skóry lwa; zapytaj o ofertę, jeśli chcesz zamówić parę.");
 			}
 		};
 		npc.setEntityClass("wellroundedguynpc");
-		npc.setDescription("Glover to rzemieślnik o głębokim spojrzeniu i pewnych ruchach, co świadczy o latach doświadczenia. Jego warsztat jest pełen skór i narzędzi potrzebnych do tworzenia wysokiej jakości rękawic. Jego prace są cenione przez wojowników i znawców elegancji.");
+		npc.setDescription("Widzisz Glovera, rzemieślnika szyjącego rękawice ze skóry lwa. Wśród skór i narzędzi starannie przygotowuje kolejne zamówienia.");
 		npc.setPosition(3, 8);
 		npc.setDirection(Direction.DOWN);
 		npc.initHP(100);

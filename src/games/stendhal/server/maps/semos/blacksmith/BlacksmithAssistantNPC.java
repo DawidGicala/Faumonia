@@ -64,6 +64,8 @@ public class BlacksmithAssistantNPC implements ZoneConfigurator  {
 
 	@Override
 			public void createDialog() {
+                addReply("wskazówki", "Xina Blankę znajdziesz w tawernie Semos. Jeśli chodzi o sprawę Salvy, potrzebuję pięciu tart od Arlinda z piekarni Ados. Te dwie przysługi załatwiamy osobno.");
+                addReply("tematy", "Możemy wrócić do twojej sprawy albo porozmawiać o czymś innym. Co chcesz wiedzieć?");
 				
 				// A little trick to make NPC remember if it has met
 		        // player before and react accordingly
@@ -88,7 +90,7 @@ public class BlacksmithAssistantNPC implements ZoneConfigurator  {
 		};
 		npc.setPosition(5, 2);
 		npc.setEntityClass("naughtyteennpc");
-		npc.setDescription("Oto Hackim Easso, pomocnik kowala.");
+		npc.setDescription("Widzisz Hackima Easso, młodego czeladnika w kuźni Xoderosa. Próbuje wyglądać poważnie, choć wciąż zerka na gotowe miecze.");
 		zone.add(npc);		
 	}
 }

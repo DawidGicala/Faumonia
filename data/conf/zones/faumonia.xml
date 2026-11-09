@@ -114,6 +114,7 @@ Bądź ostrożny to nie jest miejsce dla młokosa !
 	</zone>
 	
 	<zone name="-1_orril_river_cave" file="Level -1/faumonia/-1_orril_river_cave.tmx">
+        <configurator class-name="games.stendhal.server.maps.quests.ExpeditionSurveyConfigurator"/>
 		
 		<portal x="71" y="51" ref="w1b">
 			<destination zone="0_orril_river_s" ref="w1a" />
@@ -489,16 +490,7 @@ Bądź ostrożny to nie jest miejsce dla młokosa !
 		
 		<portal x="35" y="16" ref="tutorial1b">
 			<destination zone="-1_semos_village_cave" ref="tutorial1a"/>
-			<implementation class-name="games.stendhal.server.entity.mapstuff.portal.LevelCheckingPortal">
-				<parameter name="minimum-level">7</parameter>
-				<parameter name="rejected">Aby przejść dalej musisz ukończyć szybki samouczek. Jeżeli czegoś nie wiesz, napisz #/k #wiadomość, aby poprosić innych wojowników o pomoc.
-
-Przejście dalej wymaga od Ciebie ukończenia 1 zadania u Mistrza Gry na pokonanie kilku szczurów oraz osiągnięcia przynajmniej 7 poziomu. Najszybszym sposobem na zdobycie 7 poziomu jest wykonanie zadania u Soro który wymaga przyniesienia zapasu sera - znajdziesz go na prawo od czerwonego domku Mistrzów Gry. Możesz również powalczyć z gnomami, przechodząc przez niebieski tunel pod czerwonym domkiem Mistrzów Gry. Jeżeli jeszcze tego nie zrobiłeś, wykonaj ekspresowe zadanie u Hayunn`a w domku startowym.
-
-Zadania u Mistrzów Gry przeprowadzą Cię przez całą grę, nie tylko przez początkowy samouczek. Dlatego wybierz się do Mistrza Gry w czerwonym budynku, rozpocznij zadanie i kontynuuj je w dowolnej chwili przez całą grę. Jest to idealny sposób na poznanie całej krainy Faumonii.
-
-#Jeżeli #nie #wiesz #co #teraz #robić #udaj #się #do #Mistrza #Gry #w #czerwonym #domku #i #wykonaj #zadania. </parameter>
-			</implementation>
+			<implementation class-name="games.stendhal.server.entity.mapstuff.portal.NewcomerPortal" />
 			<attribute name="hidden"/>
 		</portal>
 		
@@ -513,16 +505,7 @@ Zadania u Mistrzów Gry przeprowadzą Cię przez całą grę, nie tylko przez po
 		
 		<portal x="36" y="16" ref="tutorial2b">
 			<destination zone="-1_semos_village_cave" ref="tutorial2a"/>
-			<implementation class-name="games.stendhal.server.entity.mapstuff.portal.LevelCheckingPortal">
-				<parameter name="minimum-level">7</parameter>
-				<parameter name="rejected">Aby przejść dalej musisz ukończyć szybki samouczek. Jeżeli czegoś nie wiesz, napisz #/k #wiadomość, aby poprosić innych wojowników o pomoc.
-
-Przejście dalej wymaga od Ciebie ukończenia 1 zadania u Mistrza Gry na pokonanie kilku szczurów oraz osiągnięcia przynajmniej 7 poziomu. Najszybszym sposobem na zdobycie 7 poziomu jest wykonanie zadania u Soro który wymaga przyniesienia zapasu sera - znajdziesz go na prawo od czerwonego domku Mistrzów Gry. Możesz również powalczyć z gnomami, przechodząc przez niebieski tunel pod czerwonym domkiem Mistrzów Gry. Jeżeli jeszcze tego nie zrobiłeś, wykonaj ekspresowe zadanie u Hayunn`a w domku startowym.
-
-Zadania u Mistrzów Gry przeprowadzą Cię przez całą grę, nie tylko przez początkowy samouczek. Dlatego wybierz się do Mistrza Gry w czerwonym budynku, rozpocznij zadanie i kontynuuj je w dowolnej chwili przez całą grę. Jest to idealny sposób na poznanie całej krainy Faumonii.
-
-#Jeżeli #nie #wiesz #co #teraz #robić #udaj #się #do #Mistrza #Gry #w #czerwonym #domku #i #wykonaj #zadania. </parameter>
-			</implementation>
+			<implementation class-name="games.stendhal.server.entity.mapstuff.portal.NewcomerPortal" />
 			<attribute name="hidden"/>
 		</portal>
 		
@@ -537,16 +520,7 @@ Zadania u Mistrzów Gry przeprowadzą Cię przez całą grę, nie tylko przez po
 		
 		<portal x="37" y="16" ref="tutorial3b">
 			<destination zone="-1_semos_village_cave" ref="tutorial3a"/>
-			<implementation class-name="games.stendhal.server.entity.mapstuff.portal.LevelCheckingPortal">
-				<parameter name="minimum-level">7</parameter>
-				<parameter name="rejected">Aby przejść dalej musisz ukończyć szybki samouczek. Jeżeli czegoś nie wiesz, napisz #/k #wiadomość, aby poprosić innych wojowników o pomoc.
-
-Przejście dalej wymaga od Ciebie ukończenia 1 zadania u Mistrza Gry na pokonanie kilku szczurów oraz osiągnięcia przynajmniej 7 poziomu. Najszybszym sposobem na zdobycie 7 poziomu jest wykonanie zadania u Soro który wymaga przyniesienia zapasu sera - znajdziesz go na prawo od czerwonego domku Mistrzów Gry. Możesz również powalczyć z gnomami, przechodząc przez niebieski tunel pod czerwonym domkiem Mistrzów Gry. Jeżeli jeszcze tego nie zrobiłeś, wykonaj ekspresowe zadanie u Hayunn`a w domku startowym.
-
-Zadania u Mistrzów Gry przeprowadzą Cię przez całą grę, nie tylko przez początkowy samouczek. Dlatego wybierz się do Mistrza Gry w czerwonym budynku, rozpocznij zadanie i kontynuuj je w dowolnej chwili przez całą grę. Jest to idealny sposób na poznanie całej krainy Faumonii.
-
-#Jeżeli #nie #wiesz #co #teraz #robić #udaj #się #do #Mistrza #Gry #w #czerwonym #domku #i #wykonaj #zadania. </parameter>
-			</implementation>
+			<implementation class-name="games.stendhal.server.entity.mapstuff.portal.NewcomerPortal" />
 			<attribute name="hidden"/>
 		</portal>
 		
@@ -561,16 +535,7 @@ Zadania u Mistrzów Gry przeprowadzą Cię przez całą grę, nie tylko przez po
 		
 		<portal x="38" y="16" ref="tutorial4b">
 			<destination zone="-1_semos_village_cave" ref="tutorial4a"/>
-			<implementation class-name="games.stendhal.server.entity.mapstuff.portal.LevelCheckingPortal">
-				<parameter name="minimum-level">7</parameter>
-				<parameter name="rejected">Aby przejść dalej musisz ukończyć szybki samouczek. Jeżeli czegoś nie wiesz, napisz #/k #wiadomość, aby poprosić innych wojowników o pomoc.
-
-Przejście dalej wymaga od Ciebie ukończenia 1 zadania u Mistrza Gry na pokonanie kilku szczurów oraz osiągnięcia przynajmniej 7 poziomu. Najszybszym sposobem na zdobycie 7 poziomu jest wykonanie zadania u Soro który wymaga przyniesienia zapasu sera - znajdziesz go na prawo od czerwonego domku Mistrzów Gry. Możesz również powalczyć z gnomami, przechodząc przez niebieski tunel pod czerwonym domkiem Mistrzów Gry. Jeżeli jeszcze tego nie zrobiłeś, wykonaj ekspresowe zadanie u Hayunn`a w domku startowym.
-
-Zadania u Mistrzów Gry przeprowadzą Cię przez całą grę, nie tylko przez początkowy samouczek. Dlatego wybierz się do Mistrza Gry w czerwonym budynku, rozpocznij zadanie i kontynuuj je w dowolnej chwili przez całą grę. Jest to idealny sposób na poznanie całej krainy Faumonii.
-
-#Jeżeli #nie #wiesz #co #teraz #robić #udaj #się #do #Mistrza #Gry #w #czerwonym #domku #i #wykonaj #zadania. </parameter>
-			</implementation>
+			<implementation class-name="games.stendhal.server.entity.mapstuff.portal.NewcomerPortal" />
 			<attribute name="hidden"/>
 		</portal>
 		

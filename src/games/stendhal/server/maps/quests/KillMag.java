@@ -72,7 +72,7 @@ import marauroa.common.Pair;
  * </ul>
  */
 
-public class KillMag extends AbstractQuest {
+public class KillMag extends AbstractQuest implements games.stendhal.server.core.rp.quest.NativeHuntDetails {
 
 	private static final String QUEST_SLOT = "kill_mag";
 	private static final int KILLS_INDEX = 1;
@@ -89,13 +89,13 @@ public class KillMag extends AbstractQuest {
 		final String killData = player.getQuest(QUEST_SLOT, KILLS_INDEX);
 
 		if (killData == null) {
-			return "nie mam jeszcze zapisanego postępu zadania";
+			return "nie można teraz wyświetlić postępu polowania; zgłoś problem administracji";
 		}
 
 		final List<String> tokens = Arrays.asList(killData.split(","));
 
 		if ((tokens.size() % 5) != 0) {
-			return "nie mogę odczytać postępu zadania";
+			return "nie można teraz wyświetlić postępu polowania; zgłoś problem administracji";
 		}
 
 		final StringBuilder progress = new StringBuilder();
@@ -159,58 +159,49 @@ public class KillMag extends AbstractQuest {
 		final SpeakerNPC npc = npcs.get("Staro");
 
 		npc.add(ConversationStates.ATTENDING,
-				ConversationPhrases.QUEST_MESSAGES,
-				new OrCondition(
+                ConversationPhrases.QUEST_MESSAGES,
+                new OrCondition(
 						new QuestNotStartedCondition(QUEST_SLOT),
 						new QuestInStateCondition(QUEST_SLOT, 0, "rejected")),
-				ConversationStates.QUEST_OFFERED,
-				"Dawno temu byłem na jakiejś bardzo dziwnej #wyspie. Znajdowali się na niej ludzie którzy władali #magią. "
-				+ "Szukam kogoś kto wybierze się na tę wyspę i ją zbada. Pomożesz?",
-				null);
+                ConversationStates.QUEST_OFFERED,
+                "Kiedyś trafiłem na dziwną wyspę, gdzie ludzie władali potężną magią. Do dziś zastanawiam się, czego tam uczą i dokąd prowadzą te nauki. Wyruszysz tam i zmierzysz się z jej mieszkańcami?",
+                null);
 
 		npc.add(ConversationStates.ATTENDING,
-				ConversationPhrases.QUEST_MESSAGES,
-				new AndCondition(new QuestStateStartsWithCondition(QUEST_SLOT, "done"),
+                ConversationPhrases.QUEST_MESSAGES,
+                new AndCondition(new QuestStateStartsWithCondition(QUEST_SLOT, "done"),
 						 new TimePassedCondition(QUEST_SLOT, 1, WEEK_IN_MINUTES)),
-				ConversationStates.QUEST_OFFERED,
-				"Magowie znów mogą zbierać się na wyspie. Czy pomożesz mi sprawdzić to miejsce kolejny raz?",
-				null);
+                ConversationStates.QUEST_OFFERED,
+                "Magowie znów gromadzą się na wyspie. Czy zechcesz sprawdzić to miejsce podczas kolejnej wyprawy?",
+                null);
 
 		npc.add(ConversationStates.ATTENDING,
-				ConversationPhrases.QUEST_MESSAGES,
-				new AndCondition(new QuestStateStartsWithCondition(QUEST_SLOT, "done"),
+                ConversationPhrases.QUEST_MESSAGES,
+                new AndCondition(new QuestStateStartsWithCondition(QUEST_SLOT, "done"),
 						 new NotCondition(new TimePassedCondition(QUEST_SLOT, 1, WEEK_IN_MINUTES))),
-				ConversationStates.ATTENDING,
-				"Na tę chwilę niczego nie potrzebuje.",
-				null);
+                ConversationStates.ATTENDING,
+                "Na razie mam dość wiadomości z wyspy. Wróć po tygodniu od rozliczenia wyprawy, jeśli zechcesz pomóc ponownie.",
+                null);
 
-		final Map<String, Pair<Integer, Integer>> creaturesToKill = new TreeMap<String, Pair<Integer, Integer>>();
-		creaturesToKill.put("pustelnik", new Pair<Integer, Integer>(0, 20));
-		creaturesToKill.put("uczeń czarnoksiężnika", new Pair<Integer, Integer>(0, 10));
-		creaturesToKill.put("czarnoksiężnik", new Pair<Integer, Integer>(0, 10));
-		creaturesToKill.put("uczeń czarnoksiężnika mroku", new Pair<Integer, Integer>(0, 10));
-		creaturesToKill.put("czarnoksiężnik mroku", new Pair<Integer, Integer>(0, 10));
-		creaturesToKill.put("czarownica z Aenye", new Pair<Integer, Integer>(0, 3));
+		final Map<String, Pair<Integer, Integer>> creaturesToKill = getDialogueHuntTargets(null);
 
 		final List<ChatAction> actions = new LinkedList<ChatAction>();
 		actions.add(new SetQuestAction(QUEST_SLOT, "start"));
 		actions.add(new StartRecordingKillsAction(QUEST_SLOT, KILLS_INDEX, creaturesToKill));
 
 		npc.add(ConversationStates.QUEST_OFFERED,
-				ConversationPhrases.YES_MESSAGES,
-				null,
-				ConversationStates.ATTENDING,
-				"Doskonale. Odnajdź tę #wyspę i zabij: " + QUEST_REQUIREMENTS_TEXT + ". "
-				+ "Stan zadania sprawdzisz przez #Menu oraz #Dziennik #Zadań.",
-				new MultipleActions(actions));
+                ConversationPhrases.YES_MESSAGES,
+                null,
+                ConversationStates.ATTENDING,
+                "Odszukaj wyspę i sprawdź wszystkie odmiany z listy, od pustelników po czarownicę z Aenye. Uczniowie i czarnoksiężnicy są osobnymi celami; pokonanie jednych nie zastąpi drugich." + "\nCele: " + games.stendhal.server.core.rp.quest.HuntQuestProgress.targetText(this,null) + ".",
+                new MultipleActions(actions));
 
 		npc.add(ConversationStates.QUEST_OFFERED,
-				ConversationPhrases.NO_MESSAGES,
-				null,
-				ConversationStates.ATTENDING,
-				"Trudno. "
-				+ "Może kiedyś się zdecydujesz. ",
-				new SetQuestAction(QUEST_SLOT, "rejected"));
+                ConversationPhrases.NO_MESSAGES,
+                null,
+                ConversationStates.ATTENDING,
+                "Nie nalegam. Taką wyprawę warto zacząć z pełnymi zapasami i spokojną głową.",
+                new SetQuestAction(QUEST_SLOT, "rejected"));
 	}
 
 	private void step_2() {
@@ -239,31 +230,22 @@ public class KillMag extends AbstractQuest {
 		triggers.addAll(ConversationPhrases.QUEST_MESSAGES);
 
 		npc.add(ConversationStates.ATTENDING,
-				triggers,
-				new AndCondition(
+                triggers,
+                new AndCondition(
 						new QuestInStateCondition(QUEST_SLOT, 0, "start"),
 						new KilledForQuestCondition(QUEST_SLOT, KILLS_INDEX)),
-				ConversationStates.ATTENDING,
-				"Widzę, że pokonałeś ludzi władających magią. W międzyczasie dowiedziałem się, w jaki sposób posługują się oni magią. "
-				+ "Prawdopodobnie istnieją magiczne różdżki, które wraz z magią stanowią świetną broń dystansową, podobną do łuku czy kuszy. "
-				+ "Proszę, weź te nagrody w ramach podziękowania.",
-				new MultipleActions(actions));
+                ConversationStates.ATTENDING,
+                "Twoja wyprawa potwierdza, jak wielu różnych magów działa na wyspie. Zostawiam ci zapas magii do różdżek i przygotowane skrzynie; może wykorzystasz tę wiedzę w następnej podróży.",
+                new MultipleActions(actions));
 
 		npc.add(ConversationStates.ATTENDING,
-				triggers,
-				new AndCondition(
+                triggers,
+                new AndCondition(
 						new QuestInStateCondition(QUEST_SLOT, 0, "start"),
 						new NotCondition(new KilledForQuestCondition(QUEST_SLOT, KILLS_INDEX))),
-				ConversationStates.ATTENDING,
-				null,
-				new ChatAction() {
-					public void fire(final Player player, final Sentence sentence, final EventRaiser raiser) {
-						raiser.say("Zapomniałeś już? Obiecałeś, że pójdziesz na #wyspę i rozejrzysz się za ludźmi posługującymi się #magią. "
-								+ "Postęp: " + getKillProgress(player) + ". "
-								+ "Do zabicia zostało: " + QUEST_REQUIREMENTS_TEXT + ". "
-								+ "Stan zadania sprawdzisz przez #Menu oraz #Dziennik #Zadań.");
-					}
-				});
+                ConversationStates.ATTENDING,
+                null,
+                (p, sentence, raiser) -> raiser.say("Jeszcze nie wszystkie odmiany magów zostały odnotowane. Sprawdź listę przed wyprawą, zwłaszcza uczniów mroku i czarownicę z Aenye." + "\n" + games.stendhal.server.core.rp.quest.HuntQuestProgress.progressText(KillMag.this,p)));
 	}
 
 	@Override
@@ -271,7 +253,7 @@ public class KillMag extends AbstractQuest {
 		super.addToWorld();
 		fillQuestInfo(
 				"Czarnoksiężnicy",
-				"W tawernie Fado spotkałem mężczyzne imieniem Staro który opowiedział mi o odległej wyspie na której moge spotkać ludzi posługujących się magią.",
+				"Staro z tawerny Fado opowiada o odległej wyspie zamieszkanej przez ludzi władających magią. Wysłuchaj go i podejmij zlecenie dotyczące tamtejszych czarnoksiężników.",
 				false);
 		step_1();
 		step_2();
@@ -280,33 +262,8 @@ public class KillMag extends AbstractQuest {
 
 	@Override
 	public List<String> getHistory(final Player player) {
-		final List<String> res = new ArrayList<String>();
-
-		if (!player.hasQuest(QUEST_SLOT)) {
-			return res;
-		}
-
-		if (player.isQuestInState(QUEST_SLOT, "rejected")) {
-			res.add("Odmówiłem Staro pomocy z wyprawą na wyspę. Jeśli zmienię zdanie, mogę ponownie z nim porozmawiać.");
-			return res;
-		}
-
-		if (!isCompleted(player)) {
-			res.add("Muszę odnaleźć wyspę i zabić: 20 pustelników, 10 uczniów czarnoksiężnika, 10 uczniów czarnoksiężnika mroku, 10 czarnoksiężników, 10 czarnoksiężników mroku oraz 3 czarownice z Aenye.");
-
-			if (player.isQuestInState(QUEST_SLOT, 0, "start")) {
-				res.add("Mój obecny postęp: " + getKillProgress(player) + ".");
-			}
-
-			res.add("Staro opowiedział mi o odległej wyspie, na której można spotkać ludzi posługujących się magią.");
-		} else if (isRepeatable(player)) {
-			res.add("Magowie znów mogą zbierać się na wyspie. Powinienem odwiedzić Staro, jeśli chcę ponownie mu pomóc.");
-		} else {
-			res.add("Pokonałem czarnoksiężników i dowiedziałem się, że jeśli odnajdę magiczną różdżkę to wraz z magią będę mógł nią miotać na odległość! W nagrodę za ukończenie zadania otrzymałem: 250.000 pkt doświadczenia, magie oraz skrzynie skarbów.");
-		}
-
-		return res;
-	}
+        return games.stendhal.server.core.rp.quest.HuntQuestProgress.history(this,player);
+    }
 
 	@Override
 	public String getName() {
@@ -338,4 +295,18 @@ public class KillMag extends AbstractQuest {
 	public String getRegion() {
 		return Region.SEMOS_SURROUNDS;
 	}
+
+    @Override public java.util.Map<String, Pair<Integer,Integer>> getDialogueHuntTargets(Player player) {
+        final Map<String, Pair<Integer, Integer>> creaturesToKill = new TreeMap<String, Pair<Integer, Integer>>();
+		creaturesToKill.put("pustelnik", new Pair<Integer, Integer>(0, 20));
+		creaturesToKill.put("uczeń czarnoksiężnika", new Pair<Integer, Integer>(0, 10));
+		creaturesToKill.put("czarnoksiężnik", new Pair<Integer, Integer>(0, 10));
+		creaturesToKill.put("uczeń czarnoksiężnika mroku", new Pair<Integer, Integer>(0, 10));
+		creaturesToKill.put("czarnoksiężnik mroku", new Pair<Integer, Integer>(0, 10));
+		creaturesToKill.put("czarownica z Aenye", new Pair<Integer, Integer>(0, 3));
+        return java.util.Collections.unmodifiableMap(creaturesToKill);
+    }
+    @Override public int getDialogueHuntTotal(Player player) { return 0; }
+    @Override public int getDialogueKillIndex() { return 1; }
+    @Override public String getDialogueHuntHint(Player player) { return "Odszukaj wyspę, na której spotkasz pustelników, uczniów i czarnoksiężników. Lista obejmuje także czarownicę z Aenye; każdą odmianę liczę osobno."; }
 }

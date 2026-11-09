@@ -16,7 +16,7 @@ import games.stendhal.common.MathHelper;
 import games.stendhal.server.entity.npc.ChatAction;
 import games.stendhal.server.entity.npc.ConversationPhrases;
 import games.stendhal.server.entity.npc.ConversationStates;
-import games.stendhal.server.entity.npc.SpeakerNPC;
+import games.stendhal.server.core.rp.quest.MasterStage;
 import games.stendhal.server.entity.npc.action.EquipItemAction;
 import games.stendhal.server.entity.npc.action.IncreaseXPAction;
 import games.stendhal.server.entity.npc.action.MultipleActions;
@@ -61,7 +61,7 @@ public class MainTask20 extends AbstractQuest {
 	}
 	
 	private void step_1() {
-		final SpeakerNPC npc = npcs.get("Mistrz Faumonii XX");
+		final MasterStage npc = MasterStage.register(20, this);
 
 		npc.add(ConversationStates.ATTENDING,
 				ConversationPhrases.QUEST_MESSAGES, 
@@ -77,6 +77,7 @@ public class MainTask20 extends AbstractQuest {
 		toKill.put("lodowy olbrzym", new Pair<Integer, Integer>(0, 20));
 		toKill.put("czarny olbrzym", new Pair<Integer, Integer>(0, 20));
 
+		npc.setHuntTargets(toKill);
 		final List<ChatAction> actions = new LinkedList<ChatAction>();
 		actions.add(new SetQuestAction(QUEST_SLOT, "start"));
 		actions.add(new StartRecordingKillsAction(QUEST_SLOT, 1, toKill));
@@ -103,7 +104,7 @@ public class MainTask20 extends AbstractQuest {
 
 	private void step_3() {
 
-		final SpeakerNPC npc = npcs.get("Mistrz Faumonii XX");
+		final MasterStage npc = MasterStage.register(20, this);
 
 
 		final List<ChatAction> actions = new LinkedList<ChatAction>();
@@ -126,7 +127,7 @@ public class MainTask20 extends AbstractQuest {
 						new KilledForQuestCondition(QUEST_SLOT, 1)),
 				ConversationStates.ATTENDING, 
 				"Widze, że wykonałeś swoje dwudzieste zadanie. Mocno zwiedziłeś podziemia chaosów pod Semos, pomogłeś Thorgalowi i Ivarowi oraz zyskałeś możliwość zakupu zwoi chaosu. Ponadto udowodniłeś swojeg męstwo zabijajać 20 lodowych olbrzymów i 20 czarnych olbrzymów. "
-				+ "Zasługujesz na odznakę wojownika Faumonii dwudziestego poziomu. W nagrodę za ukończenie tego zadania weź ten klucz czarnoksiężników chaosu. Pozwoli Ci on dostać się do tajemniczej krypty czarnoksiężników chaosu pełnej bogactw. Po nastepne główne zadanie powinieneś przyjść do Mistrza Faumonii XXI po przekroczeniu 250 poziomu doświadczenia.",
+				+ "Zasługujesz na odznakę wojownika Faumonii dwudziestego poziomu. W nagrodę za ukończenie tego zadania weź ten klucz czarnoksiężników chaosu. Pozwoli Ci on dostać się do tajemniczej krypty czarnoksiężników chaosu pełnej bogactw. Po nastepne główne zadanie powinieneś przyjść do Mistrza Faumonii po przekroczeniu 250 poziomu doświadczenia.",
 				new MultipleActions(actions));
 
 				npc.add(ConversationStates.ATTENDING, 
@@ -163,7 +164,7 @@ public class MainTask20 extends AbstractQuest {
 		super.addToWorld();
 		fillQuestInfo(
 				"Wojownik Faumonii 20",
-				"Mistrz Faumonii XX ma dla ciebie dwudzieste główne zadanie które pomoże ci zostać wielkim wojownikiem Faumonii.",
+				"Mistrz Faumonii ma dla ciebie dwudzieste główne zadanie które pomoże ci zostać wielkim wojownikiem Faumonii.",
 				false);
 		step_1();
 		step_2();
@@ -204,7 +205,7 @@ public class MainTask20 extends AbstractQuest {
 
 	@Override
 	public String getNPCName() {
-		return "Mistrz Faumonii XX";
+		return MasterStage.NPC_NAME;
 	}
 	
 	@Override

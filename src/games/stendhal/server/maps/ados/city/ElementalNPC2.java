@@ -43,10 +43,11 @@ public class ElementalNPC2 implements ZoneConfigurator {
 
 			@Override
 			protected void createDialog() {
+                games.stendhal.server.entity.npc.dialogue.JourneyDialogueTopics.install(this);
 				addGreeting("Witaj, jestem Wodnym żywiołem.");
 				addGoodbye("Na razie.");
 				addHelp("Znam starodawne techniki magiczne. Mógłbym Ci pomóc w ulepszeniu sztyletu zwanego sztyletem żywiołów przy pomocy #specjalnego zaklęcia.");
-				addJob("Kiedyś byłem jednym z najlepszych kowali na całą Faumonie.");
+				addJob("Dawniej pracowałem przy kuźni, teraz korzystam również z mocy wody. Potrafię ulepszyć sztylet żywiołów, łącząc dawne rzemiosło z magią szafiru. Potrzebuję do tego istniejącego ostrza, nie samej obietnicy jego zdobycia.");
 				
 				add(
 				        ConversationStates.ATTENDING,
@@ -58,7 +59,7 @@ public class ElementalNPC2 implements ZoneConfigurator {
 			}
 		};
 
-		elemental.setDescription("Oto Żywioł Wody. Czujesz się dziwnie stojąc w pobliżu.");
+		elemental.setDescription("Widzisz Żywioł Wody z Ados. Jego spokojna obecność kontrastuje z chłodem wokół.");
 		elemental.setEntityClass("koreknpc2");
 		elemental.setPosition(119, 115);
 		elemental.setDirection(Direction.DOWN);

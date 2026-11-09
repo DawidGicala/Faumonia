@@ -42,9 +42,11 @@ public abstract class GhostNPCBase extends SpeakerNPC {
 
 	@Override
 	protected void createDialog() {
+        addGoodbye("Pozwól nam trwać w spokoju. Do zobaczenia.");
+                games.stendhal.server.entity.npc.dialogue.JourneyDialogueTopics.install(this);
 		add(ConversationStates.IDLE, ConversationPhrases.GREETING_MESSAGES,
 				new GreetingMatchesNameCondition(getName()), true,
-				ConversationStates.IDLE, null, new GhostGreetingAction());
+				ConversationStates.ATTENDING, null, new GhostGreetingAction());
 	}
 
 	/**

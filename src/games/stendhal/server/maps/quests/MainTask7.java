@@ -15,7 +15,7 @@ package games.stendhal.server.maps.quests;
 import games.stendhal.common.grammar.Grammar;
 import games.stendhal.server.entity.npc.ConversationPhrases;
 import games.stendhal.server.entity.npc.ConversationStates;
-import games.stendhal.server.entity.npc.SpeakerNPC;
+import games.stendhal.server.core.rp.quest.MasterStage;
 import games.stendhal.server.entity.npc.action.DropRecordedItemAction;
 import games.stendhal.server.entity.npc.action.IncreaseKarmaAction;
 import games.stendhal.server.entity.npc.action.IncreaseAtkXPAction;
@@ -78,7 +78,7 @@ public class MainTask7 extends AbstractQuest {
 			res.add("Nie chce podjąć się głównego zadania na wojownika Faumonii");
 			return res;
 		}
-		res.add("Zanim Mistrz Faumonii VII przyzna mi kolejne zadanie musze uzyskać status zasłużonego mieszkańca miasta Kirdneh. Miasto Kirdneh znajdę przemierząjąc karzełkowy las na wschód od miasta Fado.");
+		res.add("Zanim Mistrz Faumonii przyzna mi kolejne zadanie musze uzyskać status zasłużonego mieszkańca miasta Kirdneh. Miasto Kirdneh znajdę przemierząjąc karzełkowy las na wschód od miasta Fado.");
 		if (!isCompleted(player)) {
 			res.add("Żeby ukończyć główne zadanie musze zdobyć 20 sztuk nietoperzego truchła a następne przetworzyć je na eliksiry i przynieść: " + Grammar.a_noun(player.getRequiredItemName(QUEST_SLOT,0)) + "	Truchło nietoperze moge przetworzyć na duże eliksiry u grabarza Same Taker w mieście Semos.");
 		}
@@ -89,7 +89,7 @@ public class MainTask7 extends AbstractQuest {
 	}
 	
 	private void checkCollectingQuests() {
-		final SpeakerNPC npc = npcs.get("Mistrz Faumonii VII");
+		final MasterStage npc = MasterStage.register(7, this);
 		
 		npc.add(
 		ConversationStates.IDLE,
@@ -118,7 +118,7 @@ public class MainTask7 extends AbstractQuest {
 
 	private void requestItem() {
 		
-		final SpeakerNPC npc = npcs.get("Mistrz Faumonii VII");
+		final MasterStage npc = MasterStage.register(7, this);
 		final Map<String,Integer> items = new HashMap<String, Integer>();
 		
 		items.put("duży eliksir",20);
@@ -138,7 +138,7 @@ public class MainTask7 extends AbstractQuest {
 	}
 						
 	private void collectItem() {
-			final SpeakerNPC npc = npcs.get("Mistrz Faumonii VII");
+			final MasterStage npc = MasterStage.register(7, this);
 			
 					npc.add(ConversationStates.IDLE,
 				ConversationPhrases.GREETING_MESSAGES,
@@ -179,7 +179,7 @@ public class MainTask7 extends AbstractQuest {
 	public void addToWorld() {
 		fillQuestInfo(
 				"Wojownik Faumonii 7",
-				"Mistrz Faumonii VII ma dla ciebie siódme główne zadanie które pomoże ci zostać wielkim wojownikiem Faumonii.",
+				"Mistrz Faumonii ma dla ciebie siódme główne zadanie które pomoże ci zostać wielkim wojownikiem Faumonii.",
 				true);
 		
 		checkCollectingQuests();
@@ -200,7 +200,7 @@ public class MainTask7 extends AbstractQuest {
 
 	@Override
 	public String getNPCName() {
-		return "Mistrz Faumonii VII";
+		return MasterStage.NPC_NAME;
 	}
 	
 	@Override

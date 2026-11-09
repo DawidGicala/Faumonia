@@ -73,8 +73,10 @@ public class MaidNPC implements ZoneConfigurator {
 
 			@Override
 			protected void createDialog() {
+                addReply("wskazówki", "Większość warzyw zbierzesz na działkach Fado; marchew i sałatę znajdziesz także w okolicach Semos. Kapusty szukaj w doniczkach w domach czarownic lub elfów. Przynoś składniki partiami, po jednej sztuce każdego warzywa z przepisu.");
+                addReply("tematy", "Możemy wrócić do twojej sprawy albo porozmawiać o czymś innym. Co chcesz wiedzieć?");
 				//addGreeting();
-				addJob("Jestem kelnerką w tej oberży. Sprzedajemy importowane piwa i dobre jedzenie.");
+				addJob("Dbam, żeby goście tej tawerny nie odchodzili głodni. Sprzedaję jedzenie i napoje, a z przyniesionych warzyw gotuję zupę, którą pamiętają nawet najdalsi wędrowcy.");
 				addHelp("Dlaczego nie wziąć przyjaciół i zrobić sobie przerwy. Możesz skorzystać z długiego stołu, na którym można postawić jedzenie.");
 				addQuest("Och nie mam czasu na coś takiego.");
 
@@ -95,7 +97,7 @@ public class MaidNPC implements ZoneConfigurator {
 		tavernMaid.setEntityClass("oldmaidnpc");
 		tavernMaid.setPosition(10, 16);
 		tavernMaid.initHP(100);
-		tavernMaid.setDescription("Oto Old Mother Helena. Jest świetną kucharką a jej zupa jest znana w całej krainie Faumoni i nie tylko.");
+		tavernMaid.setDescription("Widzisz Old Mother Helenę, gospodynię tawerny w Fado. Między obsługiwaniem gości dogląda garnka pachnącej zupy.");
 		zone.add(tavernMaid);
 	}
 }

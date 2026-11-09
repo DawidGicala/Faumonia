@@ -38,16 +38,17 @@ public class SamaronNPC implements ZoneConfigurator {
 		final SpeakerNPC npc = new SpeakerNPC("Samaron") {
 			@Override
 			public void createDialog() {
-				addGreeting("Witaj, podróżniku. Nazywam się Samaron. Krążą legendy o potężnej różdżce, której fragmenty są rozsiane po całym świecie. Różdżka ta posiada moc, o której zwykli śmiertelnicy mogą tylko marzyć. Jeśli chcesz dowiedzieć się więcej, wypowiedz słowo #różdżka");
-				addJob("Jestem mistrzem magii i alchemii. Od lat poszukuję składników i wiedzy potrzebnych do stworzenia najpotężniejszych artefaktów. Moim największym celem jest odnalezienie trzech części legendarnej różdżki Mokoszy i złożenie jej w jedną całość. Wielu próbowało, ale nieliczni przetrwali.");
-				addHelp("Mogę pomóc Ci w zdobyciu tej niezwykle silnej różdżki Mokoszy, która może przeważyć szalę na Twoją korzyść w każdej bitwie. Aby to osiągnąć, musisz znaleźć trzy magiczne części ukryte w różnych zakątkach świata. Przyjdź do mnie, gdy będziesz gotów na to wyzwanie i powiedz #różdżka");
+                games.stendhal.server.entity.npc.dialogue.JourneyDialogueTopics.install(this);
+				addGreeting("Witaj, podróżniku. Jestem Samaron i szukam fragmentów różdżki Mokoszy. Sam nie dotrę do wszystkich miejsc, w których mogą się znajdować; jeśli interesuje cię ta wyprawa, mam dla ciebie #zadanie.");
+				addJob("Badam magię i alchemię, ale najbardziej zajmuje mnie teraz różdżka Mokoszy. Jej fragmenty trzeba najpierw odnaleźć, a dopiero później połączyć przy użyciu odpowiednich składników. Sama opowieść o potędze artefaktu nie zastąpi tej pracy.");
+				addHelp("Pracuję nad odtworzeniem różdżki Mokoszy. Trzeba odnaleźć trzy części i przygotować składniki do ich połączenia. Jeśli chcesz mi pomóc, zapytaj o #zadanie - wyjaśnię ci kolejność prac.");
 				addGoodbye("Powodzenia, niech magia będzie z Tobą. Wracaj, gdy będziesz gotów na kolejne wyzwania.");
 			}
 
 
 		};
 		npc.setPosition(112, 45);
-		npc.setDescription("Przed Tobą stoi Samaron, potężny mag o przenikliwym spojrzeniu i tajemniczej aurze. Jego otoczenie pełne jest starożytnych artefaktów i magicznych ksiąg, a w powietrzu czuć emanację niezwykłej energii. Samaron wydaje się wiedzieć więcej, niż zdradza, a jego obecność wzbudza zarówno respekt, jak i ciekawość.");
+		npc.setDescription("Widzisz Samarona, maga badającego części różdżki Mokoszy. Uważnie słucha wieści przynoszonych z dalekich stron.");
 		npc.setEntityClass("samaronnpc");
 		zone.add(npc);
 	}

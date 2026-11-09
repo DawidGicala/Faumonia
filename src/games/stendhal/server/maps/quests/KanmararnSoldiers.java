@@ -222,10 +222,9 @@ public class KanmararnSoldiers extends AbstractQuest {
 
 		henry.add(ConversationStates.ATTENDING,
 			ConversationPhrases.QUEST_MESSAGES, 
-			new AndCondition(new QuestNotCompletedCondition(QUEST_SLOT),
-							 new QuestNotInStateCondition(QUEST_SLOT,"map")),
+			new games.stendhal.server.entity.npc.condition.QuestNotStartedCondition(QUEST_SLOT),
 			ConversationStates.QUEST_OFFERED, 
-			"Znajdź moją #drużynę Peter, Tom i Charles. Udowodnij, że ich znalazłeś a ja Cię wynagrodzę. Zrobisz to?", 
+			"Peter, Tom i Charles zostali w głębi Kanmararn, gdy nasza wyprawa się rozpadła. Odszukaj ich i przynieś rzeczy, po których rozpoznam towarzyszy: zbroję łuskową Petera, skórzane spodnie Toma i karteczkę Charlesa. Pomożesz mi ustalić, co się z nimi stało?", 
 			null);
 		
 		henry.add(ConversationStates.ATTENDING,
@@ -239,7 +238,7 @@ public class KanmararnSoldiers extends AbstractQuest {
 		henry.add(ConversationStates.QUEST_OFFERED,
 			ConversationPhrases.YES_MESSAGES, null,
 			ConversationStates.ATTENDING,
-			"Dziękuje! Bedę czekał na twój powrót.",
+			"Dziękuję. Szukaj ich w tych podziemiach; zwykłe rzeczy tego samego rodzaju niczego mi nie powiedzą. Potrzebuję przedmiotów należących właśnie do Petera, Toma i Charlesa.",
 			new SetQuestAndModifyKarmaAction(QUEST_SLOT, "start", 5.0));
 
 		henry.add(
@@ -279,7 +278,17 @@ public class KanmararnSoldiers extends AbstractQuest {
 						new PlayerHasInfostringItemWithHimCondition("karteczka", "charles"),
 						new PlayerHasInfostringItemWithHimCondition("zbroja łuskowa", "peter")),
 				ConversationStates.ATTENDING,
-				"Och nie! Peter, Tom i Charles nie żyją? *płacz*. W każdym razie oto twoja nagroda i zatrzymaj IOU.", 
+				"Poznaję te rzeczy... Żaden z nich nie wróci. Weź moją mapę i zanieś ją sierżantowi Jamesowi; karteczkę Charlesa możesz zachować. Dziękuję, że przynosisz wieści, choć tak trudno ich słuchać.", 
+				new MultipleActions(actions));
+        // Reuse the native stage and its guards inside the current conversation.
+        henry.add(ConversationStates.ATTENDING, "wieści żołnierzy",
+				new AndCondition(new games.stendhal.server.entity.npc.condition.AlwaysTrueCondition(),
+						new QuestInStateCondition(QUEST_SLOT, "start"),
+						new PlayerHasInfostringItemWithHimCondition("skórzane spodnie", "tom"),
+						new PlayerHasInfostringItemWithHimCondition("karteczka", "charles"),
+						new PlayerHasInfostringItemWithHimCondition("zbroja łuskowa", "peter")),
+				ConversationStates.ATTENDING,
+				"Poznaję te rzeczy... Żaden z nich nie wróci. Weź moją mapę i zanieś ją sierżantowi Jamesowi; karteczkę Charlesa możesz zachować. Dziękuję, że przynosisz wieści, choć tak trudno ich słuchać.", 
 				new MultipleActions(actions));
 
 		henry.add(ConversationStates.IDLE,
@@ -292,13 +301,25 @@ public class KanmararnSoldiers extends AbstractQuest {
 										new PlayerHasInfostringItemWithHimCondition("karteczka", "charles"),
 										new PlayerHasInfostringItemWithHimCondition("zbroja łuskowa", "peter")))),
 				ConversationStates.ATTENDING,
-				"Nie udowodniłeś, że znalazłeś wszystkich!", 
+				"Wciąż brakuje śladów któregoś z moich towarzyszy. Przynieś razem zbroję łuskową Petera, skórzane spodnie Toma i karteczkę Charlesa. Rozpoznam ich osobiste rzeczy, nie dowolny ekwipunek.", 
+				null);
+        // Reuse the native stage and its guards inside the current conversation.
+        henry.add(ConversationStates.ATTENDING, "wieści żołnierzy",
+				new AndCondition(new games.stendhal.server.entity.npc.condition.AlwaysTrueCondition(),
+						new QuestInStateCondition(QUEST_SLOT, "start"),
+						new NotCondition(
+								new AndCondition(
+										new PlayerHasInfostringItemWithHimCondition("skórzane spodnie", "tom"),
+										new PlayerHasInfostringItemWithHimCondition("karteczka", "charles"),
+										new PlayerHasInfostringItemWithHimCondition("zbroja łuskowa", "peter")))),
+				ConversationStates.ATTENDING,
+				"Wciąż brakuje śladów któregoś z moich towarzyszy. Przynieś razem zbroję łuskową Petera, skórzane spodnie Toma i karteczkę Charlesa. Rozpoznam ich osobiste rzeczy, nie dowolny ekwipunek.", 
 				null);
 
 		henry.add(ConversationStates.ATTENDING, Arrays.asList("map", "group", "help", "mapa", "pomoc"), 
 				new OrCondition(
 					new	QuestCompletedCondition(QUEST_SLOT), 
-					new AndCondition(new HenryQuestCompletedCondition(),
+					new AndCondition(new QuestInStateCondition(QUEST_SLOT, "map"),
 					new PlayerOwnsItemIncludingBankCondition("mapa"))),
 				ConversationStates.ATTENDING,
 				"Jestem smutny, bo większość moich przyjaciół nie żyje.", null);
@@ -306,10 +327,10 @@ public class KanmararnSoldiers extends AbstractQuest {
 		henry.add(ConversationStates.ATTENDING, Arrays.asList("map", "mapa"), 
 				new AndCondition(
 					new	QuestNotCompletedCondition(QUEST_SLOT), 
-					new HenryQuestCompletedCondition(),
+					new QuestInStateCondition(QUEST_SLOT, "map"),
 					new NotCondition(new PlayerOwnsItemIncludingBankCondition("mapa"))),
 				ConversationStates.ATTENDING,
-				"Na szczęście narysowałem kopię mapy, ale proszę nie zgub jej.", 
+				"Mam jeszcze kopię mapy, więc nie wszystko stracone. Zanieś ją sierżantowi Jamesowi i tym razem pilnuj jej uważnie. Nie chcę, żeby śmierć moich towarzyszy poszła na marne.", 
 				new GiveMapAction(true));
 
 		henry.add(ConversationStates.ATTENDING, Arrays.asList("map", "mapa"),
@@ -402,7 +423,7 @@ public class KanmararnSoldiers extends AbstractQuest {
 				new AndCondition(new QuestInStateCondition(QUEST_SLOT, "map"),
 								new PlayerHasInfostringItemWithHimCondition("mapa", "henry")),
 				ConversationStates.ATTENDING, 
-				"Mapa! Cudownie! Dziękuję. Oto twoja nagroda.",
+				"To mapa Henryego. Dzięki niej mogę uporządkować to, co zostało z naszej wyprawy, i obrać dalszą drogę. Weź te żelazne buty w podziękowaniu za pomoc.",
 				new MultipleActions(actions));
 
 		james.add(ConversationStates.ATTENDING, 
@@ -435,7 +456,7 @@ public class KanmararnSoldiers extends AbstractQuest {
 		super.addToWorld();
 		fillQuestInfo(
 				"Żołnierz Kanmararn",
-				"Jakiś czas temu Sergeant James wraz ze swoimi najdzielniejszymi żołnierzami rozpoczął poszukiwanie skarbu w Kanmararn mieście krasnali. Jeszcze nie wrócili. Pójdziesz ich poszukać?.",
+				"Wyprawa sierżanta Jamesa do Kanmararn nie wróciła do Semos. Odszukaj żołnierzy, dowiedz się, co ich spotkało, i pomóż odzyskać zaginioną mapę.",
 				true);
 		prepareCowardSoldier();
 		prepareCorpses();

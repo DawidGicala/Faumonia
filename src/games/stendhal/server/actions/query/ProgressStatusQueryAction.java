@@ -19,8 +19,12 @@ import games.stendhal.server.core.engine.SingletonRepository;
 import games.stendhal.server.core.rp.StendhalQuestSystem;
 import games.stendhal.server.entity.player.Player;
 import games.stendhal.server.events.ProgressStatusEvent;
+import games.stendhal.common.QuestProgress;
+import games.stendhal.server.core.rp.quest.PilotQuestProgress;
+import games.stendhal.server.maps.quests.IQuest;
 
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 
 import marauroa.common.game.RPAction;
@@ -53,7 +57,7 @@ public class ProgressStatusQueryAction implements ActionListener {
 		} else if (!action.has("item")) {
 			sendItemList(player, action.get("progress_type"));
 		} else {
-			sendDetails(player, action.get("progress_type"), action.get("item"));
+			sendDetails(player, action.get("progress_type"), action.get("item"), action.has("passive"));
 		}
 
 		player.notifyWorldAboutChanges();
@@ -95,13 +99,25 @@ public class ProgressStatusQueryAction implements ActionListener {
 	 * @param progressType the type of progress the player is interested in
 	 * @param item name of item to get details about
 	 */
-	private void sendDetails(Player player, String progressType, String item) {
+	private void sendDetails(Player player, String progressType, String item, boolean passive) {
 		StendhalQuestSystem questSystem = SingletonRepository.getStendhalQuestSystem();
 		if (progressType.equals("Otwarte zadania") || progressType.equals("Ukończone zadania")) {
-			player.addEvent(new ProgressStatusEvent(progressType, item, 
+			IQuest quest = questSystem.getVisibleQuest(player, item);
+			if (quest == null) {
+				return;
+			}
+			QuestProgress progress = PilotQuestProgress.read(quest, player);
+			List<String> history = progress != null && progress.getState() == QuestProgress.State.UNKNOWN
+					? Collections.<String>emptyList() : questSystem.getQuestProgressDetails(player, item);
+			ProgressStatusEvent event = new ProgressStatusEvent(progressType, item,
 				questSystem.getQuestDescription(player, item),
 				questSystem.getQuestLevelWarning(player, item),
-				questSystem.getQuestProgressDetails(player, item)));
+				history);
+			event.setQuestProgress(progress);
+			if (passive) {
+				event.put("passive", "1");
+			}
+			player.addEvent(event);
 		} else if (progressType.equals("Produkcja")) {
 			player.addEvent(new ProgressStatusEvent(progressType, item, 
 					SingletonRepository.getProducerRegister().getProductionDescription(player, item),

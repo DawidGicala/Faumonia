@@ -54,15 +54,16 @@ public class OrcSamanNPC implements ZoneConfigurator {
 
 			@Override
 			protected void createDialog() {
+                games.stendhal.server.entity.npc.dialogue.JourneyDialogueTopics.install(this);
 				addGreeting("Oof.");
-				addJob("Ja Orc Saman.");
-				addHelp("Orc Saman potrzebuje pomocy! Zrób #zadanie.");
+				addJob("Ja Orc Saman. Pamiętam krzywdy wyrządzone orkom Kotoch. Potrzebuję kogoś do zemsty na królowej pająków.");
+				addHelp("Orc Saman pamięta, co zrobiła królowa pająków. Ty masz broń, ja mam #zadanie. Wysłuchaj mnie, zanim pójdziesz do jej kryjówki.");
 				addOffer("Żadnego handlu.");
 				addGoodbye("Żegnaj.");
 			}
 		};
 
-		npc.setDescription("Oto Orc Saman.");
+		npc.setDescription("Widzisz Orka Samana z Kotoch. Niecierpliwie czeka na wieści o królowej pająków.");
 		npc.setEntityClass("orcsamannpc");
 		npc.setPosition(8, 113);
 		npc.initHP(100);

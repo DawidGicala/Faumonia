@@ -14,7 +14,7 @@
 	
 	<item name="peleryna">
 		<type class="cloak" subclass="cloak" tileid="-1"/>
-		<description>To zwykła peleryna. Załóż ją to nie bedzie ci zimno.</description>
+		<description>Widzisz zwykłą pelerynę, która osłania plecy wędrowca. To skromny element pierwszego ekwipunku. Jeśli znajdziesz lepszy płaszcz, pelerynę możesz sprzedać Miterowi w domku startowym w Semos.</description>
 		<implementation class-name="games.stendhal.server.entity.item.Item"/>
 		<attributes>
 			<def value="1"/>
@@ -32,7 +32,7 @@
 	
 	<item name="płaszcz karmazynowy">
 		<type class="cloak" subclass="red_cloak" tileid="-1"/>
-		<description>Widzisz płaszcz karmazynowy w kropki. Jest odlotowy.</description>
+		<description>Widzisz płaszcz karmazynowy w kropki. Jest odlotowy. Niepotrzebny egzemplarz możesz sprzedać Xinowi Blance w tawernie Semos.</description>
 		<implementation class-name="games.stendhal.server.entity.item.Item"/>
 		<attributes>
 			<def value="4"/>
@@ -449,7 +449,7 @@
 	</item>
 	
 	<item name="cucha zbójnicka">
-		<type class="armor" subclass="goralska_cucha" tileid="-1"/>
+		<type class="cloak" subclass="goralska_cucha" tileid="-1"/>
 		<description>Oto cucha zbójnicka. Tkana z owczej wełny, zapewnia ochronę przed zimnem i deszczem, jednocześnie świadcząc o statusie zbójnika w bandzie.</description>
 		<implementation class-name="games.stendhal.server.entity.item.Item"/>
 		<attributes>
@@ -545,7 +545,7 @@
 	
 	<item name="płaszcz ze smoczych łusek">
 		<type class="cloak" subclass="dragon_scale_cloak" tileid="-1"/>
-		<description>Widzisz płaszcz ze smoczych łusek. Jego ciężkie, ciemne łuski pamiętają oddech pradawnych smoków i żar miejsc, do których docierają tylko najodważniejsi wojownicy. Materiał jest twardy jak pancerz, a mimo to układa się na ramionach niczym trofeum zdobyte po długiej, niebezpiecznej wyprawie. Ten płaszcz noszą tylko ci, którzy odnaleźli ukryte smoki rozsiane po krainie Faumonii.</description>
+		<description>Widzisz płaszcz ze smoczych łusek, nagrodę za odnalezienie jedenastu smoków Faumonii. Jego ciężkie łuski przypominają o długiej drodze między miejscami spotkań.</description>
 		<implementation class-name="games.stendhal.server.entity.item.Item"/>
 		<attributes>
 			<def value="47"/>
@@ -600,6 +600,26 @@
 			<slot name="cloak"/>
 		</equipable>
 	</item>
+	
+	<item name="płaszcz pradawnych smoków">
+	<type class="cloak" subclass="ancient_scale_cloak" tileid="-1"/>
+	<description>Oto płaszcz pradawnych smoków. Terry przygotował materiał ze smoczych płaszczy i skór, a Josephine połączyła go z płaszczem ze smoczych łusek. To końcowy efekt ich wspólnej pracy i twoich wypraw.</description>
+	<implementation class-name="games.stendhal.server.entity.item.Item"/>
+	<attributes>
+		<def value="56"/>
+		<minlevel value="350"/>
+		<autobind value=""/>
+	</attributes>
+	<weight value="8.0"/>
+	<value value="250000"/>
+	<equipable>
+		<slot name="ground"/>
+		<slot name="content"/>
+		<slot name="bag"/>
+		<slot name="trade"/>
+		<slot name="cloak"/>
+	</equipable>
+</item>
 	
 	<item name="płaszcz z mithrilu">
 		<type class="cloak" subclass="mithril_cloak" tileid="-1"/>
@@ -722,6 +742,85 @@
 	<item name="płaszcz demonicznego w 2025">
 		<type class="cloak" subclass="demoniczny_plaszcz_2025" tileid="-1"/>
 		<description>Oto Płaszcz Demonicznego Wędrowca, z tkaniny wyrwanej z grzbietów zamarzniętych bestii i spiętej czaszką, której oczy nadal szukają ofiar; unosi się za wojownikiem, jakby był cieniem samego mrozu, gotowym rzucić się na tych, którzy ośmielą się podejść zbyt blisko #zima #2025</description>
+		<implementation class-name="games.stendhal.server.entity.item.Item"/>
+		<attributes>
+			<def value="1"/>
+			<minlevel value="300"/>
+			<autobind value=""/>
+		</attributes>
+		<weight value="6.0"/>
+		<value value="73000"/>
+		<equipable>
+			<slot name="ground"/>
+			<slot name="content"/>
+			<slot name="cloak"/>
+			<slot name="bag"/>
+			<slot name="trade"/>
+		</equipable>
+	</item>
+	
+	<item name="płaszcz rocznicy 2026 1">
+		<type class="cloak" subclass="rocznica_2026" tileid="-1"/>
+		<description>Oto Płaszcz Młodego Strażnika Trzeciego Świtu. Jego tkanina przyjmuje blask wschodzącego słońca i powiewa za wojownikiem niczym chorągiew obrońców krainy. Ten przedmiot przeznaczono dla młodych obrońców, którzy jako pierwsi odpowiedzieli na wezwanie podczas Najazdu Trzeciego Świtu. #3 #rocznica #Faumonii #2026 Przedmiot utracił swą rocznicową moc.</description>
+		<implementation class-name="games.stendhal.server.entity.item.Item"/>
+		<attributes>
+			<def value="1"/>
+			<autobind value=""/>
+		</attributes>
+		<weight value="6.0"/>
+		<value value="73000"/>
+		<equipable>
+			<slot name="ground"/>
+			<slot name="content"/>
+			<slot name="cloak"/>
+			<slot name="bag"/>
+			<slot name="trade"/>
+		</equipable>
+	</item>
+
+	<item name="płaszcz rocznicy 2026 2">
+		<type class="cloak" subclass="rocznica_2026" tileid="-1"/>
+		<description>Oto Płaszcz Doświadczonego Strażnika Trzeciego Świtu. Jego tkanina przyjmuje blask wschodzącego słońca i powiewa za wojownikiem niczym chorągiew obrońców krainy. Ten przedmiot przeznaczono dla wojowników, którzy przetrwali pierwsze uderzenie najeźdźców i stanęli do kolejnych walk. #3 #rocznica #Faumonii #2026 Przedmiot utracił swą rocznicową moc.</description>
+		<implementation class-name="games.stendhal.server.entity.item.Item"/>
+		<attributes>
+			<def value="1"/>
+			<minlevel value="100"/>
+			<autobind value=""/>
+		</attributes>
+		<weight value="6.0"/>
+		<value value="73000"/>
+		<equipable>
+			<slot name="ground"/>
+			<slot name="content"/>
+			<slot name="cloak"/>
+			<slot name="bag"/>
+			<slot name="trade"/>
+		</equipable>
+	</item>
+
+	<item name="płaszcz rocznicy 2026 3">
+		<type class="cloak" subclass="rocznica_2026" tileid="-1"/>
+		<description>Oto Płaszcz Elitarnego Strażnika Trzeciego Świtu. Jego tkanina przyjmuje blask wschodzącego słońca i powiewa za wojownikiem niczym chorągiew obrońców krainy. Ten przedmiot przeznaczono dla elitarnych obrońców, którzy rozbili główne szeregi najeźdźców i ocalili mieszkańców krainy. #3 #rocznica #Faumonii #2026 Przedmiot utracił swą rocznicową moc.</description>
+		<implementation class-name="games.stendhal.server.entity.item.Item"/>
+		<attributes>
+			<def value="1"/>
+			<minlevel value="200"/>
+			<autobind value=""/>
+		</attributes>
+		<weight value="6.0"/>
+		<value value="73000"/>
+		<equipable>
+			<slot name="ground"/>
+			<slot name="content"/>
+			<slot name="cloak"/>
+			<slot name="bag"/>
+			<slot name="trade"/>
+		</equipable>
+	</item>
+
+	<item name="płaszcz rocznicy 2026 4">
+		<type class="cloak" subclass="rocznica_2026" tileid="-1"/>
+		<description>Oto Płaszcz Legendarnego Strażnika Trzeciego Świtu. Jego tkanina przyjmuje blask wschodzącego słońca i powiewa za wojownikiem niczym chorągiew obrońców krainy. Ten przedmiot przeznaczono dla legendarnych wojowników, którzy stanęli naprzeciw najpotężniejszych bestii Najazdu Trzeciego Świtu. #3 #rocznica #Faumonii #2026 Przedmiot utracił swą rocznicową moc.</description>
 		<implementation class-name="games.stendhal.server.entity.item.Item"/>
 		<attributes>
 			<def value="1"/>

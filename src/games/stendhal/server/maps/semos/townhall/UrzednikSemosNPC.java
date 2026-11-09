@@ -52,6 +52,7 @@ public class UrzednikSemosNPC implements ZoneConfigurator {
 
 			@Override
 			protected void createDialog() {
+                games.stendhal.server.entity.npc.dialogue.CollectionDialogueTopics.install(this);
 
 				final Map<String, Integer> items = new HashMap<String, Integer>();
 				items.put("zwój semos", BUYING_PRICE);
@@ -59,14 +60,14 @@ public class UrzednikSemosNPC implements ZoneConfigurator {
 				new SellerAdder().addSeller(this, new QuestCompletedSellerBehaviour(QUEST_SLOT, "Sprzedaje zwoje do miasta tylko zasłużonym mieszkańcom Semos.", items));
 				// for quest see games.stendhal.server.maps.quest.HelpMrsYeti
 				addGreeting("Dzień dobry. Witaj w urzędzie miasta Semos.");
-				addJob("Aktualnie nie mamy żadnego zadania urzędowego. Mieszkańcy miasta Semos często potrzebują kogoś do pomocy, powinieneś zapytać ich o #zadanie.");
+				addJob("Sprawdzam, kto pomógł mieszkańcom Semos i zasługuje na oficjalne uznanie. Po zakończeniu wymaganych spraw pozostaje jeszcze jedna dostawa. Zasłużonym mieszkańcom sprzedaję zwoje do naszego miasta.");
 				addHelp("Miasto Semos znajduje się w północno-wschodniej części Faumonii w pobliżu gór.");				
 				addGoodbye();
 			}
 		};
 
 		Urzednik.setEntityClass("urzedniknpc");
-		Urzednik.setDescription("Oto Urzędnik Semos. Powinieneś z nim porozmawiać i zapytać o zadanie.");
+		Urzednik.setDescription("Widzisz urzędnika Semos. Uważnie słucha spraw mieszkańców i sprawdza ich zasługi dla miasta.");
 		Urzednik.setPosition(18, 28);
 		Urzednik.initHP(100);
 		zone.add(Urzednik);

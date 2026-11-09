@@ -15,7 +15,7 @@ package games.stendhal.server.maps.quests;
 import games.stendhal.common.grammar.Grammar;
 import games.stendhal.server.entity.npc.ConversationPhrases;
 import games.stendhal.server.entity.npc.ConversationStates;
-import games.stendhal.server.entity.npc.SpeakerNPC;
+import games.stendhal.server.core.rp.quest.MasterStage;
 import games.stendhal.server.entity.npc.action.DropRecordedItemAction;
 import games.stendhal.server.entity.npc.action.IncreaseKarmaAction;
 import games.stendhal.server.entity.npc.action.IncreaseAtkXPAction;
@@ -79,9 +79,9 @@ public class MainTask3 extends AbstractQuest {
 			res.add("Nie chce podjąć się głównego zadania na wojownika Faumonii");
 			return res;
 		}
-		res.add("Zanim Mistrz Faumonii III przyzna mi kolejne zadanie znowu musze pomóc innym mieszkancom Semos. Powinienem porozmawiać ze starcem Sedro i chorym chłopcem Tadem.");
+		res.add("Zanim Mistrz Faumonii przyzna mi kolejne zadanie znowu musze pomóc innym mieszkancom Semos. Powinienem porozmawiać ze starcem Sedro i chorym chłopcem Tadem.");
 		if (!isCompleted(player)) {
-			res.add("Żeby ukończyć główne zadanie musze przynieść " + Grammar.a_noun(player.getRequiredItemName(QUEST_SLOT,0)) + " aby udowodnić, że umiem wytwarzać eliksiry ziołowe.	Mistrz Faumonii III poinformował mnie, że zielarze w Semos chętne powiedzą gdzie powinienem szukać danego zioła.");
+			res.add("Żeby ukończyć główne zadanie musze przynieść " + Grammar.a_noun(player.getRequiredItemName(QUEST_SLOT,0)) + " aby udowodnić, że umiem wytwarzać eliksiry ziołowe.	Mistrz Faumonii poinformował mnie, że zielarze w Semos chętne powiedzą gdzie powinienem szukać danego zioła.");
 		}
 		if (isCompleted(player)) {
 			res.add("Ukończyłem trzecie zadanie od Mistrza Faumonii i otrzymałem odznakę wojownika Faumonii trzeciego poziomu.	Otrzymałem nóż z kości. Podobno dzięki niemu moge wzmocnić swoje umiejętności ataku i obrony. W tym celu powinienem wybrać się na pole treningowe pod bankiem Semos i znaleźć innego gracza do treningu. Mistrz Faumonii powiedział mi, że podczas walki z potworami i graczami przez cały czas zdobywam punkty ataku i obrony, tym więcej ich mam, tym silniejszy jestem.	Następne główne zadanie otrzymam po przekroczeniu 15 poziomu doświadczenia.");
@@ -90,7 +90,7 @@ public class MainTask3 extends AbstractQuest {
 	}
 	
 	private void checkCollectingQuests() {
-		final SpeakerNPC npc = npcs.get("Mistrz Faumonii III");
+		final MasterStage npc = MasterStage.register(3, this);
 		
 		npc.add(
 		ConversationStates.IDLE,
@@ -130,7 +130,7 @@ public class MainTask3 extends AbstractQuest {
 
 	private void requestItem() {
 		
-		final SpeakerNPC npc = npcs.get("Mistrz Faumonii III");
+		final MasterStage npc = MasterStage.register(3, this);
 		final Map<String,Integer> items = new HashMap<String, Integer>();
 		
 		items.put("napar z aranduli",30);
@@ -152,7 +152,7 @@ public class MainTask3 extends AbstractQuest {
 	}
 						
 	private void collectItem() {
-			final SpeakerNPC npc = npcs.get("Mistrz Faumonii III");
+			final MasterStage npc = MasterStage.register(3, this);
 			
 					npc.add(ConversationStates.IDLE,
 				ConversationPhrases.GREETING_MESSAGES,
@@ -194,7 +194,7 @@ public class MainTask3 extends AbstractQuest {
 	public void addToWorld() {
 		fillQuestInfo(
 				"Wojownik Faumonii 3",
-				"Mistrz Faumonii III ma dla ciebie trzecie główne zadanie które pomoże ci zostać wielkim wojownikiem Faumonii.",
+				"Mistrz Faumonii ma dla ciebie trzecie główne zadanie które pomoże ci zostać wielkim wojownikiem Faumonii.",
 				true);
 		
 		checkCollectingQuests();
@@ -215,7 +215,7 @@ public class MainTask3 extends AbstractQuest {
 
 	@Override
 	public String getNPCName() {
-		return "Mistrz Faumonii III";
+		return MasterStage.NPC_NAME;
 	}
 	
 	@Override

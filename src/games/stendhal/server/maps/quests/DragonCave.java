@@ -52,7 +52,7 @@ import java.util.Map;
  *
  * author: davvids
  */
-public class DragonCave extends AbstractQuest {
+public class DragonCave extends AbstractQuest implements games.stendhal.server.core.rp.quest.NativeCollectionDetails {
 	
 	private static final int REQUIRED_LEVEL = 100;
 
@@ -65,157 +65,142 @@ public class DragonCave extends AbstractQuest {
 
 	@Override
 	public List<String> getHistory(final Player player) {
-		final List<String> res = new ArrayList<String>();
-		if (!player.hasQuest(QUEST_SLOT)) {
-			return res;
-		}
-		res.add("Terry poprosił mnie o przyniesienie kilku przedmiotów. Zdecydowałem się mu pomóc.");
-		final String questState = player.getQuest(QUEST_SLOT);
-		if ("rejected".equals(questState)) {
-			res.add("Nie chcę pomóc Terremu.");
-		} else if (!"done".equals(questState)) {
-			final ItemCollection missingItems = new ItemCollection();
-			missingItems.addFromQuestStateString(questState);
-			res.add("Wciąż muszę przynieść Terremu " + Grammar.enumerateCollection(missingItems.toStringList()) + ".");
-		} else {
-			res.add("Przyniosłem Terremu wszystkie rzeczy o które mnie poprosił.	W nagrodę za ukończenie zadania otrzymałem: 50.000 pkt doświadczenia, 5.000 pkt ataku, 5.000 pkt obrony, 20 pkt karmy i smoczy zwój.");
-		}
-		return res;
-	}
+        return games.stendhal.server.core.rp.quest.CollectionQuestProgress.history(this, player);
+    }
 
 	private void prepareRequestingStep() {
 		final SpeakerNPC npc = npcs.get("Terry");
 
-		npc.add(ConversationStates.ATTENDING, 
-				ConversationPhrases.QUEST_MESSAGES,
-			new AndCondition(
+		npc.add(ConversationStates.ATTENDING,
+            ConversationPhrases.QUEST_MESSAGES,
+            new AndCondition(
 					new LevelGreaterThanCondition(99),
 					new QuestNotStartedCondition(QUEST_SLOT),
 					new NotCondition(new QuestInStateCondition(QUEST_SLOT,"rejected"))),
-			ConversationStates.QUESTION_1, 
-			"Hej ty! Tak, do ciebie mówię! Mógłbyś mi pomóc?", null);
+            ConversationStates.QUESTION_1,
+            "Hej, podróżniku! Opiekuję się małymi smokami i zbieram rzeczy związane z ich większymi krewniakami. Pomożesz mi uzupełnić tę kolekcję?",
+            null);
 
-		npc.add(ConversationStates.ATTENDING, 
-			ConversationPhrases.QUEST_MESSAGES,
-			new QuestInStateCondition(QUEST_SLOT,"rejected"),
-			ConversationStates.QUEST_OFFERED, 
-			"Hej, chcesz mi jakoś pomóc?", null);
+		npc.add(ConversationStates.ATTENDING,
+            ConversationPhrases.QUEST_MESSAGES,
+            new AndCondition(new QuestInStateCondition(QUEST_SLOT,"rejected"), new LevelGreaterThanCondition(REQUIRED_LEVEL - 1)),
+            ConversationStates.QUEST_OFFERED,
+            "Wróciła ci ochota na smoczą wyprawę? Nadal szukam brakujących okazów do kolekcji. Jeśli przyjmiesz prośbę, zapiszę dokładną listę.",
+            null);
 
-		npc.add(
-			ConversationStates.QUESTION_1,
-			ConversationPhrases.YES_MESSAGES,
-			new QuestNotStartedCondition(QUEST_SLOT),
-			ConversationStates.ATTENDING,
-			"Świetnie, interesuje się wszystkim co jest związane ze smokami. Potrzebuje paru #przedmiotów do kolekcji. Jeśli przyniesiesz mi to czego potrzebuje dostaniesz odemnie specjalną nagrodę",
-			null);
+		npc.add(ConversationStates.QUESTION_1,
+            ConversationPhrases.YES_MESSAGES,
+            new QuestNotStartedCondition(QUEST_SLOT),
+            ConversationStates.ATTENDING,
+            "Smoki fascynują mnie nie tylko podczas walki. Chcę porównać ich skóry, kamienie i wykonane z nich płaszcze. Zapytaj o #przedmiotów, a pokażę ci pełną listę do przyjęcia.",
+            null);
 
-		npc.add(
-			ConversationStates.QUESTION_1,
-			ConversationPhrases.NO_MESSAGES,
-			new QuestNotStartedCondition(QUEST_SLOT),
-			ConversationStates.ATTENDING,
-			"Jestem Terry. Wychowuje małe smoki. Bardzo interesuje się smokami i potrzebuje paru związanych z nimi #rzeczy do mojej kolekcji. Jeśli dostarczysz mi te przedmioty to dam ci specjalną nagrodę.",
-			null);
+		npc.add(ConversationStates.QUESTION_1,
+            ConversationPhrases.NO_MESSAGES,
+            new QuestNotStartedCondition(QUEST_SLOT),
+            ConversationStates.ATTENDING,
+            "Jestem Terry i opiekuję się małymi smokami. Zbieram też okazy po ich większych krewniakach, żeby lepiej poznać różnice między gatunkami. Gdy zechcesz pomóc, zapytaj o #przedmiotów do kolekcji.",
+            null);
 
-		npc.add(
-			ConversationStates.ATTENDING,
-			Arrays.asList("things", "rzeczy", "przedmiotów"),
-			new QuestNotStartedCondition(QUEST_SLOT),
-			ConversationStates.QUEST_OFFERED,
-			"Tak... potrzebuje paru przedmiotów. Możesz mi przynieść pare rzeczy?",
-			null);
+		npc.add(ConversationStates.ATTENDING,
+            Arrays.asList("things", "rzeczy", "przedmiotów"),
+            new AndCondition(new QuestNotStartedCondition(QUEST_SLOT), new LevelGreaterThanCondition(REQUIRED_LEVEL - 1)),
+            ConversationStates.QUEST_OFFERED,
+            "Zbieram skóry różnych smoków, kamienie, kły oraz cztery rodzaje smoczych płaszczy. Każdy okaz przyjmę osobno i odnotuję w kolekcji. Podejmiesz się zebrania całej listy?",
+            null);
 
-		npc.add(
-			ConversationStates.QUEST_OFFERED,
-			ConversationPhrases.YES_MESSAGES,
-			null,
-			ConversationStates.ATTENDING,
-			null,
-			new MultipleActions(new SetQuestAndModifyKarmaAction(QUEST_SLOT, NEEDED_ITEMS, 5.0),
+		npc.add(ConversationStates.QUEST_OFFERED,
+            ConversationPhrases.YES_MESSAGES,
+            new AndCondition(new QuestNotStartedCondition(QUEST_SLOT), new LevelGreaterThanCondition(REQUIRED_LEVEL - 1)),
+            ConversationStates.ATTENDING,
+            null,
+            new MultipleActions(new SetQuestAndModifyKarmaAction(QUEST_SLOT, NEEDED_ITEMS, 5.0),
 								new SayRequiredItemsFromCollectionAction(QUEST_SLOT, "Cudownie! Proszę przynieś mi te rzeczy: [items].")));
 
-		npc.add(
-			ConversationStates.QUEST_OFFERED,
-			ConversationPhrases.NO_MESSAGES,
-			null,
-			ConversationStates.ATTENDING,
-			"Ech... Cóż, niedobrze... Poszukam kogoś innego.",
-			new SetQuestAndModifyKarmaAction(QUEST_SLOT, "rejected", -5.0));
+		npc.add(ConversationStates.QUEST_OFFERED,
+            ConversationPhrases.NO_MESSAGES,
+            new games.stendhal.server.entity.npc.condition.QuestNotStartedCondition(QUEST_SLOT),
+            ConversationStates.ATTENDING,
+            "Ech... Cóż, niedobrze... Poszukam kogoś innego.",
+            new SetQuestAndModifyKarmaAction(QUEST_SLOT, "rejected", -5.0));
 
-		npc.add(
-			ConversationStates.ATTENDING,
-			"szmaragd",
-			null,
-			ConversationStates.ATTENDING,
-			"Szmaragdy to bardzo cenne kryształy, spróbuj ich poszukać przy zielonych smokach.",
-			null);
+		npc.add(ConversationStates.ATTENDING,
+            "szmaragd",
+            null,
+            ConversationStates.ATTENDING,
+            "Szmaragdy to bardzo cenne kryształy, spróbuj ich poszukać przy zielonych smokach.",
+            null);
 
-		npc.add(
-			ConversationStates.ATTENDING,
-			"szafir",
-			null,
-			ConversationStates.ATTENDING,
-			"Szafiry to przepiękne kryształy, spróbuj poszukać ich przy błękitnych smokach.",
-			null);
+		npc.add(ConversationStates.ATTENDING,
+            "szafir",
+            null,
+            ConversationStates.ATTENDING,
+            "Szafiry to przepiękne kryształy, spróbuj poszukać ich przy błękitnych smokach.",
+            null);
 
-		npc.add(
-			ConversationStates.ATTENDING,
-			Arrays.asList("skóra zielonego smoka", "skóra niebieskiego smoka"),
-			null,
-			ConversationStates.ATTENDING,
-			"Naturalnie skóre możesz zdjąć z martwego smoka.",
-			null);
+		npc.add(ConversationStates.ATTENDING,
+            Arrays.asList("skóra zielonego smoka", "skóra niebieskiego smoka"),
+            null,
+            ConversationStates.ATTENDING,
+            "Szukaj skór w łupach po odpowiednich smokach. Liczy się dokładny gatunek zapisany na liście, więc skóra jednego koloru nie zastąpi drugiej. Zdobyte okazy możesz przynosić stopniowo.",
+            null);
 
-		npc.add(
-			ConversationStates.ATTENDING,
-			"kościany płaszcz smoczy",
-			null,
-			ConversationStates.ATTENDING,
-			"Nie mam pojęcia skąd go wziąć. Jest bardzo rzadki więc chciałbym go mieć w swojej kolekcji.",
-			null);
+		npc.add(ConversationStates.ATTENDING,
+            "kościany płaszcz smoczy",
+            null,
+            ConversationStates.ATTENDING,
+            "Kościany płaszcz smoczy jest rzadkim okazem, którego nie mam jeszcze w zbiorze. Nie podam ci pewnego miejsca zdobycia, bo sam takiego nie znam. Zachowaj go dla mnie, jeśli trafisz na ten konkretny egzemplarz.",
+            null);
 
 	}
 
 	private void prepareBringingStep() {
 		final SpeakerNPC npc = npcs.get("Terry");
 	
-		npc.add(ConversationStates.INFORMATION_1, 
-			Arrays.asList("rzeczy", "przedmioty", "zadanie"),
-			new AndCondition(
+		npc.add(ConversationStates.ATTENDING,
+            Arrays.asList("rzeczy", "przedmioty", "przedmiotów", "things", "zadanie", "quest", "task"),
+            new AndCondition(
 					new QuestNotStartedCondition(QUEST_SLOT), 
 					new LevelLessThanCondition(REQUIRED_LEVEL)),
-			ConversationStates.ATTENDING, 
-			"Jesteś zbyt młodym wojownikiem, nie dasz rady ze smokami. Wróc gdy podrośniesz!",
-			null);
+            ConversationStates.ATTENDING,
+            "Smocze okazy wymagają wyprawy, do której trzeba się dobrze przygotować. Wróć po osiągnięciu 100 poziomu, a powierzę ci zebranie kolekcji.",
+            null);
 			
-		npc.add(ConversationStates.IDLE, ConversationPhrases.GREETING_MESSAGES,
-				new AndCondition(new GreetingMatchesNameCondition(npc.getName()),
+		npc.add(ConversationStates.IDLE,
+            ConversationPhrases.GREETING_MESSAGES,
+            new AndCondition(new GreetingMatchesNameCondition(npc.getName()),
 						new QuestActiveCondition(QUEST_SLOT)),
-				ConversationStates.ATTENDING,
-				"Witaj ponownie. Przyjdź do mnie jak będziesz miał wszystkie #rzeczy przy sobie.",
-				null);
+            ConversationStates.ATTENDING,
+            "Witaj ponownie. Przyjdź do mnie jak będziesz miał wszystkie #rzeczy przy sobie.",
+            null);
 
 				
 		/* player asks what exactly is missing (says ingredients) */
-		npc.add(ConversationStates.ATTENDING, "rzeczy", null,
-				ConversationStates.QUESTION_2, null,
-				new SayRequiredItemsFromCollectionAction(QUEST_SLOT, "Potrzebuję [items]. Czy masz coś ze sobą?"));
+		npc.add(ConversationStates.ATTENDING,
+            "rzeczy",
+            new QuestActiveCondition(QUEST_SLOT),
+            ConversationStates.QUESTION_2,
+            null,
+            new SayRequiredItemsFromCollectionAction(QUEST_SLOT, "Potrzebuję [items]. Czy masz coś ze sobą?"));
 
-		npc.add(ConversationStates.ATTENDING, 
-				ConversationPhrases.QUEST_MESSAGES,
-				new QuestActiveCondition(QUEST_SLOT),
-			ConversationStates.QUESTION_2, 
-			null, new SayRequiredItemsFromCollectionAction(QUEST_SLOT, "Potrzebuję [items]. Czy masz to?"));		
+		npc.add(ConversationStates.ATTENDING,
+            ConversationPhrases.QUEST_MESSAGES,
+            new QuestActiveCondition(QUEST_SLOT),
+            ConversationStates.QUESTION_2,
+            null,
+            new SayRequiredItemsFromCollectionAction(QUEST_SLOT, "Potrzebuję [items]. Czy masz to?"));		
 
 		/* player says he has a required item with him (says yes) */
 		npc.add(ConversationStates.QUESTION_2,
-				ConversationPhrases.YES_MESSAGES, null,
-				ConversationStates.QUESTION_2, "Dobrze, co masz ze sobą?",
-				null);
+            ConversationPhrases.YES_MESSAGES,
+            null,
+            ConversationStates.QUESTION_2,
+            "Dobrze, co masz ze sobą?",
+            null);
 
 		ChatAction completeAction = new  MultipleActions(
 				new SetQuestAction(QUEST_SLOT, "done"),
-				new SayTextAction("Wspaniale! Mam wszystko czego potrzebowałem! Moja kolekcja jest teraz przepiękna ! Ach tak... obiecałem ci nagrodę... weź ten smoczy zwój... gdy go użyjesz to przeniesie cię do krainy pełnej smoków, jest bardzo cenny."),
+				new SayTextAction("Wreszcie mam komplet i mogę porównać wszystkie smocze okazy. Przyjmij obiecany smoczy zwój; pozwoli ci dotrzeć do krainy pełnej smoków. Korzystaj z niego dopiero wtedy, gdy będziesz gotów na taką wyprawę."),
 				new IncreaseXPAction(200000),
 				new IncreaseAtkXPAction(10000),
 				new IncreaseDefXPAction(20000),
@@ -242,9 +227,12 @@ public class DragonCave extends AbstractQuest {
 				sl.add("borowik");
 			}
 
-			npc.add(ConversationStates.QUESTION_2, sl, null,
-					ConversationStates.QUESTION_2, null,
-					new CollectRequestedItemsAction(
+			npc.add(ConversationStates.QUESTION_2,
+            sl,
+            null,
+            ConversationStates.QUESTION_2,
+            null,
+            new CollectRequestedItemsAction(
 							itemName, QUEST_SLOT,
 							"Dobra, masz coś jeszcze?"," " +
 							Grammar.quantityplnoun(entry.getValue(), itemName) + " już przyniosłeś dla mnie, ale dziękuję i tak.",
@@ -252,26 +240,28 @@ public class DragonCave extends AbstractQuest {
 		}
 
 		/* player says he didn't bring any items (says no) */
-		npc.add(ConversationStates.ATTENDING, ConversationPhrases.NO_MESSAGES,
-				new QuestActiveCondition(QUEST_SLOT),
-				ConversationStates.ATTENDING,
-				"Dobrze i daj mi znać jeśli mogę ci kiedyś #pomóc..", 
-				null);
+		npc.add(ConversationStates.ATTENDING,
+            ConversationPhrases.NO_MESSAGES,
+            new QuestActiveCondition(QUEST_SLOT),
+            ConversationStates.ATTENDING,
+            "Dobrze i daj mi znać jeśli mogę ci kiedyś #pomóc..",
+            null);
 
 		/* player says he didn't bring any items to different question */
 		npc.add(ConversationStates.QUESTION_2,
-				ConversationPhrases.NO_MESSAGES,
-				new QuestActiveCondition(QUEST_SLOT),
-				ConversationStates.ATTENDING,
-				"Ok, i daj mi znać jeśli mogę #pomóc w czymkolwiek innym.", null);
+            ConversationPhrases.NO_MESSAGES,
+            new QuestActiveCondition(QUEST_SLOT),
+            ConversationStates.ATTENDING,
+            "Ok, i daj mi znać jeśli mogę #pomóc w czymkolwiek innym.",
+            null);
 
     /* says quest and quest can't be started nor is active*/
-		npc.add(ConversationStates.ATTENDING, 
-				ConversationPhrases.QUEST_MESSAGES,
-				null,
-			    ConversationStates.ATTENDING, 
-			    "Nic nie potrzebuję teraz, dziękuję.",
-			    null);
+		npc.add(ConversationStates.ATTENDING,
+            ConversationPhrases.QUEST_MESSAGES,
+            null,
+            ConversationStates.ATTENDING,
+            "Nic nie potrzebuję teraz, dziękuję.",
+            null);
 	}
 	
 	@Override
@@ -279,7 +269,7 @@ public class DragonCave extends AbstractQuest {
 		super.addToWorld();
 		fillQuestInfo(
 				"Przedmioty do kolekcji Terrego",
-				"Terry powiedział mi, że jeśli przyniose mu pare rzeczy to da mi specjalną nagrodę.",
+				"Terry z jaskiń Semos gromadzi smocze okazy do swojej kolekcji. Zapytaj o brakujące rzeczy i dostarcz je, aby pomóc mu w dalszych obserwacjach.",
 				true);
 		prepareRequestingStep();
 		prepareBringingStep();
@@ -314,4 +304,11 @@ public class DragonCave extends AbstractQuest {
 	public String getNPCName() {
 		return "Terry";
 	}
+
+
+
+    public String getCollectionKind(){return "collection";}
+    public java.util.Map<String,Integer> getCollectionItems(){games.stendhal.server.util.ItemCollection c=new games.stendhal.server.util.ItemCollection();c.addFromQuestStateString(NEEDED_ITEMS);return new java.util.LinkedHashMap<String,Integer>(c);}
+    public String getCollectionHint(){return "Terry zbiera smocze skóry, kamienie, kły i cztery rodzaje płaszczy. Przekazuj brakujące rzeczy osobno; Terry odłoży każdy okaz do kolekcji. Za pełną kolekcję otrzymasz smoczy zwój i rozwój umiejętności.";}
+    
 }

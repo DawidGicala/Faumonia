@@ -16,6 +16,9 @@ import games.stendhal.server.entity.npc.ChatAction;
 import games.stendhal.server.entity.npc.ConversationPhrases;
 import games.stendhal.server.entity.npc.ConversationStates;
 import games.stendhal.server.entity.npc.SpeakerNPC;
+import games.stendhal.server.entity.npc.action.DialogueHintContextAction;
+import games.stendhal.server.entity.npc.action.DialogueNarrationAction;
+import games.stendhal.server.entity.npc.action.DialogueRewardAction;
 import games.stendhal.server.entity.npc.action.DropItemAction;
 import games.stendhal.server.entity.npc.action.EquipItemAction;
 import games.stendhal.server.entity.npc.action.IncreaseXPAction;
@@ -83,8 +86,8 @@ public class BowsForOuchit extends AbstractQuest {
 				ConversationPhrases.QUEST_MESSAGES,
 				new QuestNotStartedCondition(QUEST_SLOT),
 				ConversationStates.QUESTION_1,
-				"Czy jesteś tu, aby mi pomóc?",
-				null);
+				"Przy łukach i strzałach zawsze znajdzie się coś do zrobienia. Chętnie dokończyłbym nową partię, ale muszę najpierw uzupełnić materiały. Znajdziesz chwilę, żeby mi pomóc?",
+				new DialogueNarrationAction("Ouchit na chwilę odkłada swoją pracę."));
 
 		/*
 		 * Player is interested in helping, so explain the quest.
@@ -93,8 +96,7 @@ public class BowsForOuchit extends AbstractQuest {
 				ConversationPhrases.YES_MESSAGES,
 				new QuestNotStartedCondition(QUEST_SLOT),
 				ConversationStates.QUEST_OFFERED,
-				"Dobrze! Sprzedaję łuki i strzały. Byłoby super gdybyś mógł " +
-				"przynieść 10 sztuk #polan. Możesz mi przynieść drewno?",
+				"Do nowych strzał potrzebuję dziesięciu polan. Zajmę się ich obróbką, ale ktoś musi przynieść mi drewno, żebym mógł zostać przy warsztacie. Podejmiesz się tego?",
 				null);
 
 		/*
@@ -104,7 +106,7 @@ public class BowsForOuchit extends AbstractQuest {
 				ConversationPhrases.NO_MESSAGES,
 				new QuestNotStartedCondition(QUEST_SLOT),
 				ConversationStates.IDLE,
-				"Ehhh... dowidzenia.",
+				"Rozumiem. Może innym razem. Do zobaczenia.",
 				null);
 
 		/*
@@ -114,7 +116,7 @@ public class BowsForOuchit extends AbstractQuest {
 				ConversationPhrases.YES_MESSAGES,
 				new QuestNotStartedCondition(QUEST_SLOT),
 				ConversationStates.ATTENDING,
-				"Wspaniale! Jak wrócisz z nim powiedz #polano.",
+				"Dziękuję, to pozwoli mi spokojnie zająć się robotą. Zbierz dziesięć polan i przynieś je wszystkie razem. Kiedy wrócisz, przypomnij mi o drewnie.",
 				new SetQuestAndModifyKarmaAction(QUEST_SLOT, "polano", 2.0));
 
 		/*
@@ -124,8 +126,7 @@ public class BowsForOuchit extends AbstractQuest {
 				"polano",
 				new QuestNotStartedCondition(QUEST_SLOT),
 				ConversationStates.QUEST_OFFERED,
-				"Drzewo jest potrzebne do różnych rzeczy, znajdziesz go...  " +
-				"między innymi w lesie. Przyniesiesz mi 10 sztuk?",
+				"Drewna szukaj w lesie. Potrzebuję dziesięciu polan na nowe strzały. Pomożesz mi je zebrać?",
 				null);
 
 		/*
@@ -153,7 +154,7 @@ public class BowsForOuchit extends AbstractQuest {
 				ConversationPhrases.QUEST_MESSAGES,
 				new QuestInStateCondition(QUEST_SLOT,"polano"),
 				ConversationStates.ATTENDING,
-				"Czekam na ciebie, aż mi przyniesiesz 10 sztuk drzewa.",
+				"Wciąż czekam na dziesięć polan, z których przygotuję nowe strzały. Przynieś je wszystkie razem, żebym mógł od razu zabrać się do obróbki. Jeśli szukasz drewna, rozejrzyj się w lesie.",
 				null);
 		
 		/*
@@ -164,9 +165,7 @@ public class BowsForOuchit extends AbstractQuest {
 				new AndCondition(new QuestInStateCondition(QUEST_SLOT,"polano"),
 								 new NotCondition (new PlayerHasItemWithHimCondition("polano",10))),
 				ConversationStates.ATTENDING,
-				"Drzewo jest surowcem potrzebnym do wielu rzeczy. Jestem pewien, " +
-				"że znajdziesz w lesie." +
-				"I nie zapomnij powiedzieć #'polano', gdy wrócisz z nim.",
+				"Widzę, że nie masz jeszcze przy sobie dziesięciu polan. Potrzebuję całej partii naraz, więc rozejrzyj się za drewnem w lesie i wróć, gdy zbierzesz resztę. Nie spiesz się kosztem własnego bezpieczeństwa.",
 				null);
 
 		/*
@@ -178,15 +177,19 @@ ask for horse hair.
 				new AndCondition(new QuestInStateCondition(QUEST_SLOT,"polano"),
 								new PlayerHasItemWithHimCondition("polano",10)),
 				ConversationStates.ATTENDING,
-				"Bardzo dobrze, teraz mogę zrobić nowe strzały. Ale do łuku, który robię potrzebuję " +
-				"cięciwę. Proszę idź do #Karl. Wiem, że posiada konie " +
-				"powiedz moje imię, a da ci końskiego włosa. Z niego zrobię cięciwę.",
-				new MultipleActions(new SetQuestAndModifyKarmaAction(QUEST_SLOT, "hair", 2.0), new DropItemAction("polano", 10)));
+				"Dziękuję, te polana wystarczą mi na zaplanowaną partię strzał. Do łuku potrzebuję jeszcze cięciwy z końskiego włosa. " +
+				"Pomoże nam #Karl, który prowadzi farmę na wschód od Semos - powiedz mu, że przysyła cię Ouchit.",
+				new MultipleActions(new SetQuestAndModifyKarmaAction(QUEST_SLOT, "hair", 2.0), new DropItemAction("polano", 10),
+						new DialogueNarrationAction("Ouchit ogląda przyniesione polana.")));
 
 		/*
 		 * For simplicity, respond to 'Karl' at any time.
 		 */
-		npc.addReply("Karl", "Karl jest rolnikiem mieszkającym na wschód od Semos. Posiada sporo zwierząt na swojej farmie.");
+		npc.add(ConversationStates.ATTENDING, "Karl", null, ConversationStates.ATTENDING,
+				"Karl prowadzi farmę na wschód od Semos. Hoduje także konie. Powiedz mu, że przysyła cię Ouchit, a pomoże nam zdobyć włos na cięciwę.",
+				new DialogueHintContextAction("ouchit_karl"));
+		npc.add(ConversationStates.ATTENDING, "farma", null, ConversationStates.ATTENDING,
+				"Farmę Karla znajdziesz na wschód od Semos. Powiedz mu, że przysyła cię Ouchit po koński włos na cięciwę.", null);
 	}
 
 	public void getHairStep() {
@@ -201,9 +204,10 @@ ask for horse hair.
 				new AndCondition(new QuestInStateCondition(QUEST_SLOT,"hair"),
 								new NotCondition (new PlayerHasItemWithHimCondition("koński włos",1))),
 				ConversationStates.ATTENDING,
-				"Witam, witam! Ouchit potrzebuje więcej włosia z moich koni? " +
-				"Nie ma problemu. Weź to i przekaż Ouchitowi serdeczne pozdrowienia ode mnie.",
-				new EquipItemAction("koński włos"));
+				"Ouchit znów potrzebuje włosia do łuku? Dobrze, mam koński włos, który możesz mu zanieść. " +
+				"Przekaż mu pozdrowienia i pilnuj tego drobiazgu, żeby nie zginął ci po drodze.",
+				new MultipleActions(new EquipItemAction("koński włos"),
+						new DialogueNarrationAction("Karl podaje ci koński włos.")));
 
 	}
 
@@ -221,7 +225,7 @@ ask for horse hair.
 				ConversationPhrases.QUEST_MESSAGES,
 				new QuestInStateCondition(QUEST_SLOT,"hair"),
 				ConversationStates.ATTENDING,
-				"Czekam tu na ciebie, abyś przyniósł mi #'włosie końskie'.",
+				"Drewno już mam, ale bez cięciwy łuk pozostanie niedokończony. Brakuje mi jeszcze materiału: #'włosie końskie'. Odwiedź Karla na farmie na wschód od Semos i powiedz, że cię przysyłam.",
 				null);
 		
 		/*
@@ -232,19 +236,20 @@ ask for horse hair.
 				new AndCondition(new QuestInStateCondition(QUEST_SLOT,"hair"),
 								new NotCondition (new PlayerHasItemWithHimCondition("koński włos"))),
 				ConversationStates.ATTENDING,
-				"Włos koński stosowany może być do produkcji cięciwy, a dostaniesz go od #Karl.",
+				"Nie masz jeszcze końskiego włosa. Potrzebuję go na cięciwę. Pomoże nam #Karl - odwiedź go na farmie i powiedz moje imię.",
 				null);
 
 		/*
 		 * These actions are part of the reward
 		 */
 		final List<ChatAction> reward = new LinkedList<ChatAction>();
-		reward.add(new EquipItemAction("łuk ouchita", 1, true));
-		reward.add(new EquipItemAction("strzała", 500, true));
-		reward.add(new EquipItemAction("strzała żelazna", 300, true));
-		reward.add(new IncreaseXPAction(1000));
+		reward.add(DialogueRewardAction.item("łuk ouchita", 1, true));
+		reward.add(DialogueRewardAction.item("strzała", 500, true));
+		reward.add(DialogueRewardAction.item("strzała żelazna", 300, true));
+		reward.add(DialogueRewardAction.xp(1000));
 		reward.add(new DropItemAction("koński włos"));
-		reward.add(new SetQuestAndModifyKarmaAction(QUEST_SLOT, "done", 10.0));
+		reward.add(DialogueRewardAction.karma(new SetQuestAndModifyKarmaAction(QUEST_SLOT, "done", 10.0)));
+		reward.add(new DialogueNarrationAction("Ouchit przygląda się włosiu i z zadowoleniem kiwa głową."));
 		
 		/*
 		 * Player asks about horse hair, and has collected some - take it
@@ -255,8 +260,8 @@ and ask for horse hair.
 				new AndCondition(new QuestInStateCondition(QUEST_SLOT,"hair"),
 								new PlayerHasItemWithHimCondition("koński włos")),
 				ConversationStates.ATTENDING,
-				"Wspaniale, masz włos koński. Dziękuję bardzo. Karl jest bardzo miły. Proszę, " +
-				"mam tutaj swój stary łuk... Mi nie jest już potrzebny, a tobie może się przydać... do tego weź trochę strzał..",
+				"Wspaniale, właśnie takiego włosia potrzebowałem na cięciwę. Dzięki tobie mogę dokończyć pracę przy łuku i strzałach. " +
+				"Przyjmij mój łuk i zapas strzał - wolę, żeby służyły komuś w drodze, niż leżały u mnie bez pożytku.",
 				new MultipleActions(reward));
 		
 		/*
@@ -266,7 +271,7 @@ and ask for horse hair.
 				ConversationPhrases.QUEST_MESSAGES,
 				new QuestCompletedCondition(QUEST_SLOT),
 				ConversationStates.ATTENDING,
-				"Dziękuję za twoją pomoc. Jeżeli mogę zaoferować coś po prostu zapytaj o ofertę.",
+				"Dzięki twojej pomocy mam już materiały, których potrzebowałem. Mam nadzieję, że łuk dobrze ci służy. Jeśli chcesz uzupełnić zapas strzał, zapytaj o moją #ofertę.",
 				null);
 		
 	}
@@ -280,7 +285,7 @@ and ask for horse hair.
 		bringHairStep();
 		fillQuestInfo(
 				"Łuki dla Ouchita",
-				"Ouchit zajmuje się robieniem łuków. Mieszkaniec tawerny Semos potrzebuje twojej pomocy!",
+				"Ouchit z tawerny w Semos potrzebuje materiałów do wyrobu łuków i strzał.",
 				false);
 	}
 
@@ -291,21 +296,20 @@ and ask for horse hair.
 			return res;
 		}
 		final String questState = player.getQuest(QUEST_SLOT);
-		res.add("Ouchit poprosił mnie o pomoc w celu uzupełnienia jego zapasów w łuki i strzały.");
-		if (player.isQuestInState(QUEST_SLOT, "polano", "hair", "done")) {
-			res.add("Musze przynieść Ouchitowi 10 sztuk drewna i powiedzieć polano.");
-		}
-		if(player.isEquipped("polano", 10) && "polano".equals(questState)) {
-			res.add("Przyniosłem drewno Ouchitowi");
+		res.add("Ouchit poprosił mnie o materiały do wyrobu łuków i strzał.");
+		if ("polano".equals(questState)) {
+			res.add(player.isEquipped("polano", 10)
+					? "Mam przy sobie 10 polan. Muszę je jeszcze oddać Ouchitowi, mówiąc polano."
+					: "Muszę zebrać 10 polan dla Ouchita. Gdy wrócę, mam powiedzieć polano.");
 		}
 		if(player.isQuestInState(QUEST_SLOT, "hair", "done")) {
-			res.add("Muszę zdobyć trochę włosów konia, które Ouchit potrzebuje do cięciwy. Powiedziano mi, że Karl mi pomoże. Podobno znajdę go na farmie na wschód od Semos.");
+			res.add("Ouchit przyjął drewno. Do cięciwy potrzebuje jeszcze końskiego włosa i polecił mi odwiedzić Karla na farmie na wschód od Semos.");
 		}
-		if((player.isEquipped("koński włos") && "hair".equals(questState)) || isCompleted(player)) {
-			res.add("Karl był miły i dał mi włos koński za darmo.");
+		if (player.isEquipped("koński włos") && "hair".equals(questState)) {
+			res.add("Mam koński włos. Muszę zanieść go Ouchitowi i powiedzieć włosie.");
 		}
 		if (isCompleted(player)) {
-			res.add("Pomogłem Ouchitowi a ten dał mi swój łuk, zapas strzał i podziękował za pomoc.	W nagrodę za ukończenie zadania otrzymałem: 1.000 pkt doświadzenia, łuk Ouchita, 500 strzał i 300 strzał żelaznych.");
+			res.add("Dostarczyłem Ouchitowi drewno i koński włos. W podzięce otrzymałem: 1000 pkt doświadczenia, łuk Ouchita, 500 strzał i 300 strzał żelaznych.");
 		}
 		return res;
 	}

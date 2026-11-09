@@ -46,15 +46,16 @@ public class LibrarianNPC implements ZoneConfigurator {
 
 			@Override
 			protected void createDialog() {
+                games.stendhal.server.entity.npc.dialogue.JourneyDialogueTopics.install(this);
 				addGreeting();
-				addJob("Jestem bibliotekarzem.");
-				addHelp("Hej. Czytaj książki i pomóż sobie! Nigdy nie jest się za starym na naukę.");
+				addJob("Opiekuję się biblioteką Semos. Każda księga ma tu swoje miejsce, choć czytelnicy nie zawsze pamiętają o terminie zwrotu. Jeśli szukasz konkretnego tomu, powiedz, dla kogo i do czego jest potrzebny.");
+				addHelp("Rozejrzyj się po księgach; nieraz oszczędzą ci błądzenia po całej krainie. Jeśli ktoś przysłał cię po konkretny tom, powiedz, o jaką sprawę chodzi. Przydałaby mi się też pomoc z jedną zaległą książką - zapytaj o #zadanie.");
 				addGoodbye();
 			}
 		};
 
 		npc.setEntityClass("investigatornpc");
-		npc.setDescription("Oto Ceryl wyglądający na lekko szalonego bibliotekarza.");
+		npc.setDescription("Widzisz Ceryla, bibliotekarza z Semos. Przegląda półki tak uważnie, jakby wciąż szukał brakującego tomu.");
 		npc.setPosition(28, 12);
 		npc.initHP(100);
 		zone.add(npc);

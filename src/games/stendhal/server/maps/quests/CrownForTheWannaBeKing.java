@@ -114,9 +114,10 @@ public class CrownForTheWannaBeKing extends AbstractQuest {
 	 */
 	private void step_1() {
 		final SpeakerNPC npc = npcs.get(NPC_NAME);
+        games.stendhal.server.entity.npc.dialogue.JourneyDialogueTopics.install(npc);
 		npc.addOffer("Niczego nie sprzedaję!");
 		npc.addGoodbye();
-		npc.addJob("Moja praca nie jest ważna, ponieważ będę królem Kalavan!");
+		npc.addJob("W Sedah można przygotować wielkie plany, nawet jeśli ich celem jest tron Kalavan. Wierzę, że pewnego dnia zastąpię obecnego króla. Władca powinien jednak wyglądać jak władca, a do tego potrzebna mi #korona.");
 
 		/* player says hi before starting the quest */
 		npc.add(ConversationStates.IDLE,
@@ -137,7 +138,7 @@ public class CrownForTheWannaBeKing extends AbstractQuest {
 				Arrays.asList("crown", "korony"),
 				new QuestNotStartedCondition(QUEST_SLOT),
 				ConversationStates.QUEST_OFFERED,
-				"Tak, potrzebuję klejnotów i złota na moją nową koronę. Pomożesz mi?",
+				"Korona musi robić wrażenie, a do tego potrzebuję metali i szlachetnych kamieni. Mam dokładną listę i zapamiętam każdą dostawę, nawet jeśli przyniesiesz tylko część. Pomożesz przygotować insygnia przyszłego króla?",
 				null);
 
 		/* player says yes */
@@ -233,8 +234,8 @@ public class CrownForTheWannaBeKing extends AbstractQuest {
 						new OrCondition(
 								new QuestCompletedCondition(QUEST_SLOT),
 								new QuestInStateCondition(QUEST_SLOT, "reward"))),
-				ConversationStates.IDLE,
-				"Moja nowa korona będzie wkrótce gotowa i zdetronizuję króla! Uhahaha!",
+				ConversationStates.ATTENDING,
+				"Materiały na koronę są już zebrane, nie musisz przynosić niczego więcej. Jeśli nie masz jeszcze obiecanej nagrody, udaj się do Kendry Mattori w magicznej świątyni i powiedz #nagroda. Moje plany mogą wreszcie nabrać blasku.",
 				null);
 	}
 
@@ -249,9 +250,10 @@ public class CrownForTheWannaBeKing extends AbstractQuest {
 				ConversationStates.ATTENDING, null,
 				new ChatAction() {
 					public void fire(final Player player, final Sentence sentence, final EventRaiser entity) {
-						entity.say("Och tak "
+						if (!games.stendhal.server.maps.quests.logic.QuestGoldFees.requirePaid(player, QUEST_SLOT, entity)) { return; }
+                        entity.say("Materiały na koronę zostały dostarczone, a opłata jest rozliczona. "
 									+ NPC_NAME
-									+ " powiedział mi, abym Cię dobrze wynagrodziła! Mam nadzieję, że ucieszysz się ze swoich podniesionych umiejętności walki!");
+									+ " prosił mnie o przekazanie nagrody. Otrzymujesz doświadczenie w walce za wykonaną pracę.");
 						rewardPlayer(player);
 						player.setQuest(QUEST_SLOT, "done");
 					}
@@ -276,7 +278,7 @@ public class CrownForTheWannaBeKing extends AbstractQuest {
 		if (!player.hasQuest(QUEST_SLOT)) {
 			return res;
 		}
-		res.add(NPC_NAME + " poprosił mnie, abym pomógł mu zdetronizować króla Cozarta. by być królem potrzebuje korony.");
+		res.add(NPC_NAME + " poprosił mnie, abym pomógł mu zdetronizować króla Cozarta. Chce przygotować koronę, która będzie pasować do jego planów.");
 		final String questState = player.getQuest(QUEST_SLOT);
 		if ("rejected".equals(questState)) {
 			res.add("Myślę, że angażowanie się w politykę to zły pomysł.");
@@ -300,7 +302,7 @@ public class CrownForTheWannaBeKing extends AbstractQuest {
 		step_3();
 		fillQuestInfo(
 				"Korona dla Niedoszłego Króla",
-				"Ivan Abe chce rządzić Kalavan ... i potrzebuje korony.",
+				"Ivan Abe marzy o władzy nad Kalavan i potrzebuje korony. Wysłuchaj jego planu, a następnie poznaj warunki Kendry Mattori dotyczące przygotowania królewskiego insygnium.",
 				false);
 	}
 
@@ -323,4 +325,13 @@ public class CrownForTheWannaBeKing extends AbstractQuest {
 	public String getRegion() {
 		return Region.FADO_CAVES;
 	}
+
+    public static java.util.Map<String,Integer> getRequiredItems(){
+        games.stendhal.server.util.ItemCollection original=new games.stendhal.server.util.ItemCollection();
+        original.addFromQuestStateString(NEEDED_ITEMS);
+        java.util.Map<String,Integer> items=new java.util.LinkedHashMap<String,Integer>();
+        for(java.util.Map.Entry<String,Integer> e:original.entrySet())items.put(e.getKey(),e.getValue());
+        return java.util.Collections.unmodifiableMap(items);
+    }
+
 }

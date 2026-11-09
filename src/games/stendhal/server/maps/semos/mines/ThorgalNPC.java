@@ -52,21 +52,22 @@ public class ThorgalNPC implements ZoneConfigurator {
 
 			@Override
 			protected void createDialog() {
+                games.stendhal.server.entity.npc.dialogue.HuntDialogueTopics.install(this);
 
 				final Map<String, Integer> items = new HashMap<String, Integer>();
 				items.put("zwój chaosu", BUYING_PRICE);
 
 				new SellerAdder().addSeller(this, new QuestCompletedSellerBehaviour(QUEST_SLOT, "Sprzedaje zwoje do tuneli chaosu tylko swoim dobrym znajomym, którzy udowodnili swoją wartość w tych niebezpiecznych podziemiach.", items));
 				// for quest see games.stendhal.server.maps.quest.HelpMrsYeti
-				addGreeting("Powitanie, podróżniku! Jestem Thorgal, wędrowiec, który od lat przemierza tunele chaosu. Jeśli masz odwagę zmierzyć się z niebezpieczeństwami tych mrocznych podziemi, mogę mieć dla Ciebie pewne zadanie. Przynieś mi: hełm chaosu, zbroję chaosu, spodnie chaosu, buty chaosu, płaszcz chaosu, tarczę chaosu oraz miecz chaosu. #Musisz #mieć #wszystkie #przedmioty #przy #sobie. ");
-				addJob("Jestem podróżnikiem, który odkrywa sekrety ogromnych tuneli chaosu, ukrytych głęboko w jaskiniach pod Semos. Te tunele skrywają wiele tajemnic i niebezpieczeństw, które tylko czekają na śmiałków gotowych je stawić czoła. Aktualnie nie potrzebuje pomocy.");
-				addHelp("Tunele chaosu są pełne niebezpieczeństw i potworów. Jeśli zdecydujesz się zejść głębiej w te mroczne korytarze, bądź przygotowany na wszystko. Znajdziesz tam zarówno cenne skarby, jak i śmiertelne zagrożenia.");				
+				addGreeting("Witaj w tunelach chaosu. Szukasz drogi, zwojów czy rozmowy o ekwipunku?");
+				addJob("Od lat przemierzam tunele chaosu pod Semos. Znam trud podróży przez te korytarze, dlatego dbam o sprzęt i zapasy zwojów; dobry ekwipunek pozwala zajść dalej i wrócić do domu.");
+				addHelp("W tunelach chaosu łatwo zużyć zapasy, zanim dotrzesz do celu. Sprawdź ekwipunek i sposób powrotu przed dalszą drogą. O moim zamówieniu na wyposażenie możemy porozmawiać osobno; za tę pomoc udostępniam handel zwojami.");				
 				addGoodbye("Powodzenia, wojowniku. Niech Twoja odwaga i siła prowadzą Cię przez mroki tuneli chaosu. Wracaj bezpiecznie.");
 			}
 		};
 
 		Thorgal.setEntityClass("minernpc");
-		Thorgal.setDescription("Oto Thorgal, podróżnik, który od lat zwiedza tunele chaosu pod Semos. Być może powinieneś z nim porozmawiać i zapytać o niebezpieczeństwa i sekrety tych mrocznych podziemi");
+		Thorgal.setDescription("Widzisz Thorgala, podróżnika badającego tunele chaosu. Nawet podczas odpoczynku myśli o kolejnej wyprawie.");
 		Thorgal.setPosition(117, 85);
 		Thorgal.initHP(100);
 		zone.add(Thorgal);

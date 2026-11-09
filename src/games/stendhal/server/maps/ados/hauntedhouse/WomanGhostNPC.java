@@ -65,14 +65,15 @@ public class WomanGhostNPC implements ZoneConfigurator {
 
 			@Override
 			protected void createDialog() {
+                games.stendhal.server.entity.npc.dialogue.JourneyDialogueTopics.install(this);
 				//addGreeting("Wooouhhhhhh!");
-				addJob("Nic pożytecznego nie mogłam zrobić na tym świecie. Teraz nawiedzam ten dom.");
-				addHelp("Tutaj jest ostrzeżenie: Jeżeli zginiesz to staniesz się duchem jak ja częściowo widocznym i niematerialnym. Jeżeli znajdziesz swoją drogę wyjścia z afterlife to narodzisz się na nowo.");
+				addJob("Za życia niewiele zdążyłam zrobić, a teraz nawiedzam ten dom. Mieszkańcy świata mijają mnie i zajmują się swoimi sprawami. Chciałabym choć wiedzieć, że są gdzieś inne duchy, które mogłyby mnie zrozumieć.");
+				addHelp("Śmierć nie musi być końcem twojej wędrówki. Jeśli trafisz do zaświatów, poszukaj drogi powrotnej do świata żywych. Ja zostałam tutaj z własnymi wspomnieniami i nie życzę ci takiej samotności.");
 				addGoodbye("Żegnaj");
 				// remaining behaviour defined in games.stendhal.server.maps.quests.FindGhosts
 			}
 		};
-		woman.setDescription("Widzisz ducha kobiety, która wygląda na zmartwionego.");
+		woman.setDescription("Widzisz Carenę, ducha kobiety w opuszczonym domu. W jej spojrzeniu widać samotność.");
 		woman.setResistance(0);
 
 		woman.setEntityClass("woman_011_npc");

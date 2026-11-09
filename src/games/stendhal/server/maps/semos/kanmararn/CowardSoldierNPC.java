@@ -51,8 +51,9 @@ public class CowardSoldierNPC implements ZoneConfigurator {
 
 			@Override
 			protected void createDialog() {
+                games.stendhal.server.entity.npc.dialogue.JourneyDialogueTopics.install(this);
 				addGreeting("Ciii! Cicho bo ściągniesz więcej #krasnali.");
-				addJob("Jestem żołnierzem.");
+				addJob("Jestem żołnierzem, choć w tej chwili trudno nazwać mnie odważnym. Oddzieliłem się od drużyny podczas wyprawy do Kanmararn. Najbardziej boję się dowiedzieć, że żaden z moich towarzyszy już nie wróci.");
 				addGoodbye("Dowidzenia i uważaj na wszystkie te krasnale!");
 				addHelp("Potrzebuję pomocy. Zostałem oddzielony od #grupy. Teraz jestem sam.");
 				addReply(Arrays.asList("dwarf", "dwarves", "krasnali", "krasnale"),
@@ -69,7 +70,7 @@ public class CowardSoldierNPC implements ZoneConfigurator {
 		};
 
 		npc.setEntityClass("youngsoldiernpc");
-		npc.setDescription("Oto Henry. Jest jednym z zaginionych żołnierzy Semos, ukrywa się w ciemnej jaskini ...");
+		npc.setDescription("Widzisz Henry'ego, jednego z zaginionych żołnierzy Semos. Ukrywa się w Kanmararn i nerwowo nasłuchuje odgłosów podziemi.");
 		npc.setPosition(57, 113);
 		npc.setBaseHP(100);
 		npc.initHP(20);

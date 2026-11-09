@@ -48,7 +48,7 @@ import java.util.List;
 
 import marauroa.common.Pair;
 
-public class KillElfes extends AbstractQuest {
+public class KillElfes extends AbstractQuest implements games.stendhal.server.core.rp.quest.NativeHuntDetails {
 
 	private static final String QUEST_SLOT = "kill_elfes";
 	protected HashMap<String, Pair<Integer, Integer>> creaturestokill = new HashMap<String, Pair<Integer,Integer>>();
@@ -88,19 +88,19 @@ public class KillElfes extends AbstractQuest {
 		final SpeakerNPC npc = npcs.get("Lorithien");
 
 		npc.add(ConversationStates.ATTENDING,
-				ConversationPhrases.QUEST_MESSAGES, 
-				new QuestNotStartedCondition(QUEST_SLOT),
-				ConversationStates.QUEST_OFFERED,
-				"Ci przeklęci rabusie ciągle okradają naszych listonoszy... musimy znaleźć kogoś kto da im nauczke. Może mi pomożesz?",
-				null);
+                ConversationPhrases.QUEST_MESSAGES,
+                new QuestNotStartedCondition(QUEST_SLOT),
+                ConversationStates.QUEST_OFFERED,
+                "Rabusie regularnie napadają na listonoszy, a przesyłki nie docierają do mieszkańców Nalwor. Poczta potrzebuje ochrony szlaków, nie kolejnych obietnic. Pomożesz rozprawić się z napastnikami?",
+                null);
 
 		npc.add(ConversationStates.ATTENDING,
-				ConversationPhrases.QUEST_MESSAGES, 
-				new AndCondition(new QuestStateStartsWithCondition(QUEST_SLOT,"done"),
+                ConversationPhrases.QUEST_MESSAGES,
+                new AndCondition(new QuestStateStartsWithCondition(QUEST_SLOT,"done"),
 						 new TimePassedCondition(QUEST_SLOT, 1, MathHelper.MINUTES_IN_ONE_WEEK*2)),
-				ConversationStates.QUEST_OFFERED,
-				"Poczta znowu ma problemy z rabusiami. Może znów mi pomożesz?",
-				null);
+                ConversationStates.QUEST_OFFERED,
+                "Znów otrzymuję wiadomości o napadach na listonoszy. Czy mogę liczyć na twoją pomoc przy zabezpieczeniu poczty?",
+                null);
 
 		npc.add(ConversationStates.ATTENDING,
 				ConversationPhrases.QUEST_MESSAGES,
@@ -116,18 +116,18 @@ public class KillElfes extends AbstractQuest {
 
 		
 		npc.add(ConversationStates.QUEST_OFFERED,
-				ConversationPhrases.YES_MESSAGES,
-				null,
-				ConversationStates.ATTENDING,
-				"Dziękuję! Idź i zabij 40 elfów żołnierzy, 40 elfów milicjantów, 20 pani elfów, 20 pann elfów, 20 elfów, 15 elfów łuczników i 10 elfów komandorów.",
-				new MultipleActions(actions));
+                ConversationPhrases.YES_MESSAGES,
+                null,
+                ConversationStates.ATTENDING,
+                "Wśród rabusiów są żołnierze, łucznicy i dowódcy, więc jedna zwycięska potyczka nie rozwiąże problemu. Sprawdź cały wykaz i wróć, gdy spełnisz każdy z celów." + "\nCele: " + games.stendhal.server.core.rp.quest.HuntQuestProgress.targetText(this,null) + ".",
+                new MultipleActions(actions));
 
-		npc.add(ConversationStates.QUEST_OFFERED, 
-				ConversationPhrases.NO_MESSAGES, 
-				null,
-				ConversationStates.ATTENDING,
-				"Co za szkoda... Może kiedyś zmienisz zdanie i nam pomożesz",
-				new SetQuestAction(QUEST_SLOT, 0, "rejected"));
+		npc.add(ConversationStates.QUEST_OFFERED,
+                ConversationPhrases.NO_MESSAGES,
+                null,
+                ConversationStates.ATTENDING,
+                "Rozumiem, nie jest to mała przysługa. Jeśli zmienisz zdanie, zapytaj mnie ponownie o sprawę poczty.",
+                new SetQuestAction(QUEST_SLOT, 0, "rejected"));
 	}
 
 	private void step_2() {
@@ -158,9 +158,9 @@ public class KillElfes extends AbstractQuest {
 		actions.add(new EquipItemAction("wielki eliksir", 20));
 		actions.add(new EquipItemAction("żelazo", 14));
 		actions.add(new EquipItemAction("sztabka złota", 11));
-		actions.add(new EquipItemAction("Skrzynia skarbów I", 1));
-		actions.add(new EquipItemAction("Skrzynia skarbów II", 1));
-		actions.add(new EquipItemAction("Skrzynia skarbów III", 1));
+		actions.add(new EquipItemAction("skrzynia skarbów I", 1));
+		actions.add(new EquipItemAction("skrzynia skarbów II", 1));
+		actions.add(new EquipItemAction("skrzynia skarbów III", 1));
 		actions.add(new SetQuestAction(QUEST_SLOT, 0, "done"));
 		actions.add(new SetQuestToTimeStampAction(QUEST_SLOT, 1));
 		actions.add(new IncrementQuestAction(QUEST_SLOT,2,1));
@@ -168,23 +168,23 @@ public class KillElfes extends AbstractQuest {
 		LinkedList<String> triggers = new LinkedList<String>();
 		triggers.addAll(ConversationPhrases.FINISH_MESSAGES);
 		triggers.addAll(ConversationPhrases.QUEST_MESSAGES);		
-		npc.add(ConversationStates.ATTENDING, 
-				triggers,
-				new AndCondition(
+		npc.add(ConversationStates.ATTENDING,
+                triggers,
+                new AndCondition(
 						new QuestInStateCondition(QUEST_SLOT, 0, "start"),
 						new KilledForQuestCondition(QUEST_SLOT, 1)),
-				ConversationStates.ATTENDING, 
-				"Bardzo dziękuję! Teraz poczta jest bezpieczna. Proszę przyjmij te sztabki i eliksiry.",
-				new MultipleActions(actions));
+                ConversationStates.ATTENDING,
+                "Dzięki tobie listonosze mają szansę bezpiecznie wrócić z drogi. Przyjmij przygotowane sztabki, eliksiry i skrzynie; Nalwor zapamięta tę pomoc.",
+                new MultipleActions(actions));
 
-		npc.add(ConversationStates.ATTENDING, 
-				triggers,
-				new AndCondition(
+		npc.add(ConversationStates.ATTENDING,
+                triggers,
+                new AndCondition(
 						new QuestInStateCondition(QUEST_SLOT, 0, "start"),
 						new NotCondition(new KilledForQuestCondition(QUEST_SLOT, 1))),
-				ConversationStates.ATTENDING, 
-				"Proszę pomóż mi i zabij tych rabusiów!",
-				null);
+                ConversationStates.ATTENDING,
+                null,
+                (p, sentence, raiser) -> raiser.say("Jeszcze nie wszystkie oddziały rabusiów zostały rozbite. Przejrzyj ze mną listę, żeby kolejna wyprawa dotyczyła tych, których naprawdę brakuje." + "\n" + games.stendhal.server.core.rp.quest.HuntQuestProgress.progressText(KillElfes.this,p)));
 	}
 
 	@Override
@@ -192,7 +192,7 @@ public class KillElfes extends AbstractQuest {
 		super.addToWorld();
 		fillQuestInfo(
 				"Zabij Rabusiów",
-				"Listonosze w Nalwor regularnie są napadani przez rabusiów. Może powinienem im pomóc.",
+				"Rabusie regularnie napadają na listonoszy z Nalwor. Lorithien potrzebuje wojownika, który osłabi wskazane grupy i pomoże przywrócić bezpieczeństwo przesyłkom.",
 				false);
 		step_1();
 		step_2();
@@ -201,24 +201,8 @@ public class KillElfes extends AbstractQuest {
 	
 	@Override
 	public List<String> getHistory(final Player player) {
-			final List<String> res = new ArrayList<String>();
-			if (!player.hasQuest(QUEST_SLOT)) {
-				return res;
-			}
-			if (!isCompleted(player)) {
-				res.add("Musze zabić 40 elfów milicjantów, 40 elfów żołnierzy, 20 pann elfów, 20 pani elfów, 20 elfów, 15 elfów łuczników i 10 elfów komandorów, aby wykonać polecenie Lorithiena.");
-			} else if(isRepeatable(player)){
-				res.add("Teraz po dwóch tygodniach powinienem odwiedzić poczte w Nalwor. Może znów potrzebuje mojej pomocy!");
-			} else {
-				res.add("Pokonałem rabusiów i poczta w Nalwor jest już bezpieczna.	W nagrodę za ukończenie zadania otrzymałem: 50.000 pkt doświadczenia, 40 eliksirów, 20 dużych eliksirów i trochę sztabek.");
-			}
-			int repetitions = player.getNumberOfRepetitions(getSlotName(), 2);
-			if (repetitions > 0) {
-				res.add("Pomogłem Lorithienowi "
-						+ Grammar.quantityplnoun(repetitions, "razy") + ".");
-			}
-			return res;
-	}
+        return games.stendhal.server.core.rp.quest.HuntQuestProgress.history(this,player);
+    }
 
 
 	@Override
@@ -247,4 +231,11 @@ public class KillElfes extends AbstractQuest {
 	public String getRegion() {
 		return Region.NALWOR_CITY;
 	}
+
+    @Override public java.util.Map<String, Pair<Integer,Integer>> getDialogueHuntTargets(Player player) {
+        return java.util.Collections.unmodifiableMap(new java.util.TreeMap<String,Pair<Integer,Integer>>(creaturestokill));
+    }
+    @Override public int getDialogueHuntTotal(Player player) { return 0; }
+    @Override public int getDialogueKillIndex() { return 1; }
+    @Override public String getDialogueHuntHint(Player player) { return "Lorithien potrzebuje ochrony poczty Nalwor przed siedmioma rodzajami elfich rabusiów. Sprawdź osobne cele dla żołnierzy, milicjantów, łuczników i dowódców, zanim wrócisz z meldunkiem."; }
 }

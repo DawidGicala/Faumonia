@@ -43,10 +43,11 @@ public class PodroznikNPC implements ZoneConfigurator {
 
 			@Override
 			protected void createDialog() {
+                games.stendhal.server.entity.npc.dialogue.JourneyDialogueTopics.install(this);
 				addGreeting("Witaj, jestem podróżnikiem z odległych krain.");
 				addGoodbye("Na razie");
-				addHelp("Potrzebuje paru rzeczy lecz nie mam możliwości zdobyc ich samemu. Jeżeli mi pomożesz to dam ci w zamian magiczny #naszyjnik.");
-				addJob("Pochodzę z dalekich krain. Wiem o rzeczach o których nie maja pojecia ludzie z waszej krainy.");
+				addHelp("Podróż wyczerpała moje zapasy, a nie wszystko zdobędę tutaj sam. Za pomoc mogę oddać magiczny #naszyjnik. Zanim się zdecydujesz, opowiem ci, czego potrzebuję.");
+				addJob("Przybyłem z odległych krain i nie zwykłem zostawać długo w jednym miejscu. Wędrówka pochłania jednak zapasy, których nie zawsze mogę szukać sam. Za odpowiednie rzeczy mogę oddać coś, co towarzyszyło mi w drodze.");
 				
 				add(
 				        ConversationStates.ATTENDING,
@@ -58,7 +59,7 @@ public class PodroznikNPC implements ZoneConfigurator {
 			}
 		};
 
-		Podroznik.setDescription("Oto Tajemniczy Podróżnik. Otacza go dziwna aura.");
+		Podroznik.setDescription("Widzisz Tajemniczego Wędrowca w jaskini pod Ados. Przy jego zapasach leżą trofea z dalekich wypraw.");
 		Podroznik.setEntityClass("koreknpc3");
 		Podroznik.setPosition(118, 70);
 		Podroznik.setDirection(Direction.DOWN);

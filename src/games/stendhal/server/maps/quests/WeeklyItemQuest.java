@@ -77,7 +77,7 @@ import java.util.Map;
  * REPETITIONS:
  * <ul><li> once a week</ul>
  */
-public class WeeklyItemQuest extends AbstractQuest {
+public class WeeklyItemQuest extends AbstractQuest implements games.stendhal.server.core.rp.quest.NativeCollectionDetails {
 
 	private static final String QUEST_SLOT = "weekly_item";
 	
@@ -160,8 +160,7 @@ public class WeeklyItemQuest extends AbstractQuest {
 		// common place to get the start quest actions as we can both starts it and abort and start again
 		
 		final List<ChatAction> actions = new LinkedList<ChatAction>();
-		actions.add(new StartRecordingRandomItemCollectionAction(QUEST_SLOT,0,items,"Chcę, aby muzeum w Kirdneh było największe w krainie! Dostarcz mi [item]"
-				+ " i powiedz #'załatwione', gdy przyniesiesz."));	
+		actions.add(new StartRecordingRandomItemCollectionAction(QUEST_SLOT, 0, items, "Chcę, aby zbiory muzeum w Kirdneh mówiły o całej naszej krainie. W tej chwili brakuje nam [item]. Dostarcz wskazany eksponat i powiedz #zakończone, a rozliczę twoją wyprawę."));	
 		actions.add(new SetQuestToTimeStampAction(QUEST_SLOT, 1));
 		
 		return new MultipleActions(actions);
@@ -169,60 +168,61 @@ public class WeeklyItemQuest extends AbstractQuest {
 	
 	private void getQuest() {
 		final SpeakerNPC npc = npcs.get("Hazel");
-		npc.add(ConversationStates.ATTENDING, ConversationPhrases.QUEST_MESSAGES,
-				new AndCondition(new QuestActiveCondition(QUEST_SLOT),
-								 new NotCondition(new TimePassedCondition(QUEST_SLOT,1,expireDelay))), 
-				ConversationStates.ATTENDING,
-				null,
-				new SayRequiredItemAction(QUEST_SLOT,0,"Już masz zadanie przyniesienia do muzeum [item]"
-						+ ". Powiedz #zakończone jeżeli będziesz miał  ze sobą."));
+		npc.add(ConversationStates.ATTENDING,
+            ConversationPhrases.QUEST_MESSAGES,
+            new AndCondition(new QuestActiveCondition(QUEST_SLOT),
+								 new NotCondition(new TimePassedCondition(QUEST_SLOT,1,expireDelay))),
+            ConversationStates.ATTENDING,
+            null,
+            new SayRequiredItemAction(QUEST_SLOT, 0, "Miejsce w muzeum nadal czeka na [item]. Gdy zbierzesz wskazany zestaw, przynieś go i powiedz #zakończone."));
 		
-		npc.add(ConversationStates.ATTENDING, ConversationPhrases.QUEST_MESSAGES,
-				new AndCondition(new QuestActiveCondition(QUEST_SLOT),
-								 new TimePassedCondition(QUEST_SLOT,1,expireDelay)), 
-				ConversationStates.ATTENDING,
-				null,
-				new SayRequiredItemAction(QUEST_SLOT,0,"Już masz zadanie przyniesienia do muzeum [item]"
-						+ ". Powiedz #zakończone jeżeli będziesz miał  ze sobą. Być może teraz ten przedmiot występuje rzadko. Mogę dać Tobie #inne zadanie lub możesz wrócić z tym, o które prosiłem Cię wcześniej."));
+		npc.add(ConversationStates.ATTENDING,
+            ConversationPhrases.QUEST_MESSAGES,
+            new AndCondition(new QuestActiveCondition(QUEST_SLOT),
+								 new TimePassedCondition(QUEST_SLOT,1,expireDelay)),
+            ConversationStates.ATTENDING,
+            null,
+            new SayRequiredItemAction(QUEST_SLOT, 0, "Nadal potrzebujemy [item]. Poszukiwania się przedłużają, więc możemy wybrać #inne zlecenie do zbiorów muzeum. Jeśli zostajesz przy obecnym, zgłoś komplet słowem #zakończone."));
 	
-		npc.add(ConversationStates.ATTENDING, ConversationPhrases.QUEST_MESSAGES,
-				new AndCondition(new QuestCompletedCondition(QUEST_SLOT),
-								 new NotCondition(new TimePassedCondition(QUEST_SLOT,1,delay))), 
-				ConversationStates.ATTENDING,
-				null,
-				new SayTimeRemainingAction(QUEST_SLOT,1, delay, "Muzeum może Cię prosić o przyniesienie przedmiotu tylko raz w tygodniu. Wróć za "));
+		npc.add(ConversationStates.ATTENDING,
+            ConversationPhrases.QUEST_MESSAGES,
+            new AndCondition(new QuestCompletedCondition(QUEST_SLOT),
+								 new NotCondition(new TimePassedCondition(QUEST_SLOT,1,delay))),
+            ConversationStates.ATTENDING,
+            null,
+            new SayTimeRemainingAction(QUEST_SLOT,1, delay, "Muzeum przyjmuje takie dostawy raz w tygodniu. Na razie zajmę się nowym eksponatem; wróć za "));
 		
 		
 		final List<ChatAction> actions = new LinkedList<ChatAction>();
-		actions.add(new StartRecordingRandomItemCollectionAction(QUEST_SLOT,0,items,"Chcę, aby muzeum w Kirdneh było największe w tej krainie! Proszę przynieś [item]"
-				+ " i powiedz #zakończone, gdy przyniesiesz."));
+		actions.add(new StartRecordingRandomItemCollectionAction(QUEST_SLOT, 0, items, "Chcę, aby zbiory muzeum w Kirdneh mówiły o całej naszej krainie. W tej chwili brakuje nam [item]. Dostarcz wskazany eksponat i powiedz #zakończone, a rozliczę twoją wyprawę."));
 		actions.add(new SetQuestToTimeStampAction(QUEST_SLOT, 1));
 		
-		npc.add(ConversationStates.ATTENDING, ConversationPhrases.QUEST_MESSAGES,
-				new OrCondition(new QuestNotStartedCondition(QUEST_SLOT),
+		npc.add(ConversationStates.ATTENDING,
+            ConversationPhrases.QUEST_MESSAGES,
+            new OrCondition(new QuestNotStartedCondition(QUEST_SLOT),
 								new AndCondition(new QuestCompletedCondition(QUEST_SLOT),
-												 new TimePassedCondition(QUEST_SLOT,1,delay))), 
-				ConversationStates.ATTENDING,
-				null,
-				startQuestAction());
+												 new TimePassedCondition(QUEST_SLOT,1,delay))),
+            ConversationStates.ATTENDING,
+            null,
+            startQuestAction());
 	}
 	
 	private void completeQuest() {
 		final SpeakerNPC npc = npcs.get("Hazel");
 		
 		npc.add(ConversationStates.ATTENDING,
-				ConversationPhrases.FINISH_MESSAGES,
-				new QuestNotStartedCondition(QUEST_SLOT),
-				ConversationStates.ATTENDING, 
-				"Nie pamiętam, abym dawał Tobie #zadanie.",
-				null);
+            ConversationPhrases.FINISH_MESSAGES,
+            new QuestNotStartedCondition(QUEST_SLOT),
+            ConversationStates.ATTENDING,
+            "Nie pamiętam, abym dawał Tobie #zadanie.",
+            null);
 		
 		npc.add(ConversationStates.ATTENDING,
-				ConversationPhrases.FINISH_MESSAGES,
-				new QuestCompletedCondition(QUEST_SLOT),
-				ConversationStates.ATTENDING, 
-				"Już ukończyłeś ostatnie zadanie, które Ci dałem.",
-				null);
+            ConversationPhrases.FINISH_MESSAGES,
+            new QuestCompletedCondition(QUEST_SLOT),
+            ConversationStates.ATTENDING,
+            "Już ukończyłeś ostatnie zadanie, które Ci dałem.",
+            null);
 		
 		final List<ChatAction> actions = new LinkedList<ChatAction>();
 		actions.add(new DropRecordedItemAction(QUEST_SLOT,0));
@@ -242,26 +242,25 @@ public class WeeklyItemQuest extends AbstractQuest {
 				goldamount = 100 * Rand.roll1D6();
 				money.setQuantity(goldamount);
 				player.equipOrPutOnGround(money);
-				raiser.say("Wspaniale! Oto " + Integer.toString(goldamount) + " money na pokrycie wydatków.");
+				raiser.say("Ten eksponat znajdzie swoje miejsce w muzeum. Dzięki takim wyprawom możemy pokazywać więcej niż opowieści z drugiej ręki. Dziękuję i przekazuję należną nagrodę. Otrzymujesz " + goldamount + " monet.");
 			}
 		});
 		
 		npc.add(ConversationStates.ATTENDING,
-				ConversationPhrases.FINISH_MESSAGES, 
-				new AndCondition(new QuestActiveCondition(QUEST_SLOT),
+            ConversationPhrases.FINISH_MESSAGES,
+            new AndCondition(new QuestActiveCondition(QUEST_SLOT),
 								 new PlayerHasRecordedItemWithHimCondition(QUEST_SLOT,0)),
-				ConversationStates.ATTENDING, 
-				null,
-				new MultipleActions(actions));
+            ConversationStates.ATTENDING,
+            null,
+            new MultipleActions(actions));
 		
 		npc.add(ConversationStates.ATTENDING,
-				ConversationPhrases.FINISH_MESSAGES,
-				new AndCondition(new QuestActiveCondition(QUEST_SLOT),
+            ConversationPhrases.FINISH_MESSAGES,
+            new AndCondition(new QuestActiveCondition(QUEST_SLOT),
 								 new NotCondition(new PlayerHasRecordedItemWithHimCondition(QUEST_SLOT,0))),
-				ConversationStates.ATTENDING, 
-				null,
-				new SayRequiredItemAction(QUEST_SLOT,0,"Nie masz ze sobą [item]"
-						+ " Zdobądź i powiedz wtedy #zakończone."));
+            ConversationStates.ATTENDING,
+            null,
+            new SayRequiredItemAction(QUEST_SLOT, 0, "Do zbiorów muzeum potrzebny jest cały uzgodniony zestaw: [item]. Na razie zachowaj swoje rzeczy; wróć z kompletem i powiedz #zakończone."));
 		
 	}
 	
@@ -269,27 +268,27 @@ public class WeeklyItemQuest extends AbstractQuest {
 		final SpeakerNPC npc = npcs.get("Hazel");
 		
 		npc.add(ConversationStates.ATTENDING,
-				ConversationPhrases.ABORT_MESSAGES,
-				new AndCondition(new QuestActiveCondition(QUEST_SLOT),
-						 		 new TimePassedCondition(QUEST_SLOT,1,expireDelay)), 
-				ConversationStates.ATTENDING, 
-				null, 
-				startQuestAction());
+            ConversationPhrases.ABORT_MESSAGES,
+            new AndCondition(new QuestActiveCondition(QUEST_SLOT),
+						 		 new TimePassedCondition(QUEST_SLOT,1,expireDelay)),
+            ConversationStates.ATTENDING,
+            null,
+            startQuestAction());
 		
 		npc.add(ConversationStates.ATTENDING,
-				ConversationPhrases.ABORT_MESSAGES,
-				new AndCondition(new QuestActiveCondition(QUEST_SLOT),
-						 		 new NotCondition(new TimePassedCondition(QUEST_SLOT,1,expireDelay))), 
-				ConversationStates.ATTENDING, 
-				"Nie minęło tak dużo czasu od rozpoczęcia zadania. Nie powinieneś się tak szybko poddawać.", 
-				null);
+            ConversationPhrases.ABORT_MESSAGES,
+            new AndCondition(new QuestActiveCondition(QUEST_SLOT),
+						 		 new NotCondition(new TimePassedCondition(QUEST_SLOT,1,expireDelay))),
+            ConversationStates.ATTENDING,
+            "Na razie nie zmieniam planu uzupełnienia wystawy. Spróbuj jeszcze poszukać wskazanego eksponatu.",
+            null);
 		
 		npc.add(ConversationStates.ATTENDING,
-				ConversationPhrases.ABORT_MESSAGES,
-				new QuestNotActiveCondition(QUEST_SLOT),
-				ConversationStates.ATTENDING, 
-				"Obawiam się, że jeszcze nie dałem Tobie #zadania.", 
-				null);
+            ConversationPhrases.ABORT_MESSAGES,
+            new QuestNotActiveCondition(QUEST_SLOT),
+            ConversationStates.ATTENDING,
+            "Obawiam się, że jeszcze nie dałem Tobie #zadania.",
+            null);
 		
 	}
 
@@ -300,47 +299,15 @@ public class WeeklyItemQuest extends AbstractQuest {
 	
 	@Override
 	public List<String> getHistory(final Player player) {
-		final List<String> res = new ArrayList<String>();
-		if (!player.hasQuest(QUEST_SLOT)) {
-			return res;
-		}
-		res.add("Spotkałem Hazela kuratora muzeum Kirdneh.");
-		final String questState = player.getQuest(QUEST_SLOT);
-		if ("rejected".equals(questState)) {
-			res.add("Nie chcę pomagać muzeum w Kirdneh i stać się największym w kraju.");
-			return res;
-		}
-		res.add("Chcę pomóc muzeum w Kirdneh i stać się największymw kraju.");
-		if (player.hasQuest(QUEST_SLOT) && !player.isQuestCompleted(QUEST_SLOT)) {
-			String questItem = player.getRequiredItemName(QUEST_SLOT,0);
-			int amount = player.getRequiredItemQuantity(QUEST_SLOT,0);
-			if (!player.isEquipped(questItem, amount)) {
-				res.add(String.format("Zostałem poproszony, aby przynieść " +Grammar.quantityplnoun(amount, questItem, "") + " do muzeum w Kirdneh."));
-			} else {
-				res.add(String.format("Mam " + Grammar.quantityplnoun(amount, questItem, "a") + " dla muzeum w Kirdneh. Muszę to im zanieść."));
-			}
-		}
-		if (isRepeatable(player)) {
-			res.add("Zaniosłem wartościowy przedmiot do Hazela i muzeum zleciło mi znalezienie następnego.");
-		} else if (isCompleted(player)) {
-			res.add("Pomogłem muzeum. Za 7 dni zajrze tam znów. Byś może potrzebować będą mojej pomocy.");
-		}
-		// add to history how often player helped Hazel so far
-		final int repetitions = player.getNumberOfRepetitions(getSlotName(), 2);
-		if (repetitions > 0) {
-			res.add("Przyniosłem już "
-					+ Grammar.quantityplnoun(repetitions, "") + " eksponatów do muzeum.");
-		}
-
-		return res;
-	}
+        return games.stendhal.server.core.rp.quest.CollectionQuestProgress.history(this, player);
+    }
 	
 	@Override
 	public void addToWorld() {
 		super.addToWorld();
 		fillQuestInfo(
 				"Muzeum Kirdneh potrzebuje pomocy!",
-				"Hazel, kurator Muzeum Kirdneh, chce aby było one największym w kraju i potrzebuje mojej pomocy raz na tydzień.",
+				"Hazel przygotowuje wystawy w muzeum Kirdneh i potrzebuje nowych eksponatów. Przyjmij jej zamówienie i przynieś wskazany okaz; o kolejne możesz zapytać po tygodniu.",
 				true);
 		buildItemsMap();
 		
@@ -375,4 +342,11 @@ public class WeeklyItemQuest extends AbstractQuest {
 	public String getNPCName() {
 		return "Hazel";
 	}
+
+
+    public String getCollectionKind(){return "random";}
+    public java.util.Map<String,Integer> getCollectionItems(){return new java.util.TreeMap<String,Integer>(items);}
+    public String getCollectionHint(){return "Liczy się tylko przedmiot i ilość zapisane w aktualnym zamówieniu. Przynieś całą dostawę i zgłoś jej zakończenie. Kolejne zlecenie oraz wymiana trudnego zamówienia są dostępne po upływie odpowiedniego czasu.";}
+    public int getCollectionWait(){return delay;} public int getCollectionExpiry(){return expireDelay;}
+
 }

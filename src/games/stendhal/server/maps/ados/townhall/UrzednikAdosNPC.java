@@ -52,6 +52,7 @@ public class UrzednikAdosNPC implements ZoneConfigurator {
 
 			@Override
 			protected void createDialog() {
+                games.stendhal.server.entity.npc.dialogue.CollectionDialogueTopics.install(this);
 
 				final Map<String, Integer> items = new HashMap<String, Integer>();
 				items.put("zwój ados", BUYING_PRICE);
@@ -59,14 +60,14 @@ public class UrzednikAdosNPC implements ZoneConfigurator {
 				new SellerAdder().addSeller(this, new QuestCompletedSellerBehaviour(QUEST_SLOT, "Sprzedaje zwoje do miasta tylko zasłużonym mieszkańcom stolicy.", items));
 				// for quest see games.stendhal.server.maps.quest.HelpMrsYeti
 				addGreeting("Dzień dobry. Witaj w urzędzie stołecznego miasta Ados.");
-				addJob("Aktualnie nie mamy żadnego zadania urzędowego. Mieszkańcy stolicy często potrzebują kogoś do pomocy, powinieneś zapytać ich o #zadanie.");
-				addHelp("Miasto Ados jest stolicą Faumonii, znajduje się na zachodzie krainy przy samym morzu. ");				
+				addJob("Sprawdzam, kto pomógł mieszkańcom Ados i zasługuje na oficjalne uznanie. Po zakończeniu wymaganych spraw pozostaje jeszcze jedna dostawa. Zasłużonym mieszkańcom sprzedaję zwoje do naszego miasta.");
+				addHelp("O uznanie zasług dla Ados możesz starać się po pomocy naszym mieszkańcom. Zapytaj o #zadanie, a sprawdzę, czego jeszcze brakuje. Przed zakończeniem omówimy również wymaganą dostawę i opłatę.");				
 				addGoodbye();
 			}
 		};
 
 		Urzednik.setEntityClass("urzednikadosnpc");
-		Urzednik.setDescription("Oto Urzędnik Ados. Powinieneś z nim porozmawiać i zapytać o zadanie.");
+		Urzednik.setDescription("Widzisz urzędnika Ados. Uważnie słucha spraw mieszkańców i sprawdza ich zasługi dla miasta.");
 		Urzednik.setPosition(14, 5);
 		Urzednik.initHP(100);
 		zone.add(Urzednik);

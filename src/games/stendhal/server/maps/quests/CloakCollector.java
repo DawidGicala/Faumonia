@@ -50,7 +50,7 @@ import java.util.List;
  * <p>
  * REPETITIONS: - None.
  */
-public class CloakCollector extends AbstractQuest implements BringListOfItemsQuest {
+public class CloakCollector extends AbstractQuest implements BringListOfItemsQuest, games.stendhal.server.core.rp.quest.NativeCollectionDetails {
 
 	private static final List<String> NEEDED_CLOAKS = Arrays.asList("peleryna",
 			"peleryna elficka", "płaszcz krasnoludzki", "lazurowy płaszcz elficki", "płaszcz kamienny",
@@ -63,12 +63,12 @@ public class CloakCollector extends AbstractQuest implements BringListOfItemsQue
 	
 	@Override
 	public List<String> getHistory(final Player player) {
-		return bringItems.getHistory(player);
-	}
+        return games.stendhal.server.core.rp.quest.CollectionQuestProgress.history(this, player);
+    }
 
 	private void setupAbstractQuest() {
 		final BringListOfItemsQuest concreteQuest = this;
-		bringItems = new BringListOfItemsQuestLogic(concreteQuest);
+		bringItems = new games.stendhal.server.maps.quests.logic.DialogueBringListOfItemsQuestLogic(concreteQuest);
 		bringItems.addToWorld();
 	}
 
@@ -79,7 +79,7 @@ public class CloakCollector extends AbstractQuest implements BringListOfItemsQue
 		setupAbstractQuest();
 		fillQuestInfo(
 				"Płaszcze dla Kolekcjonera",
-				"Josephine, szwaczka w mieście Fado szuka płaszczy w wielu kolorach.",
+				"Josephine z Fado porównuje kroje i kolory płaszczy przynoszonych przez podróżnych. Pomóż zebrać brakujące egzemplarze z jej pierwszej kolekcji.",
 				false);
 	}
 
@@ -107,7 +107,7 @@ public class CloakCollector extends AbstractQuest implements BringListOfItemsQue
 							}
 						
 							stringBuilder.append(". znajdziesz to?");
-							raiser.say(stringBuilder.toString());
+							raiser.say("Szukam właśnie tego egzemplarza: " + itemName + ". Inny płaszcz o podobnym kolorze nie zastąpi go w kolekcji. Przynieś go, kiedy trafisz na właściwy okaz.");
 						}
 					}
 
@@ -149,73 +149,67 @@ public class CloakCollector extends AbstractQuest implements BringListOfItemsQue
 	}
 
 	public String welcomeBeforeStartingQuest() {
-		return "Cześć przystojniaku! Widzę Ciebie jak moją piękną sukienkę. Kocham #ubrania...";
-	}
+        return "Witaj! Zawsze najpierw zauważam krój i kolor ubrania, dopiero potem całą resztę. Szczególnie lubię płaszcze - chciałabym zebrać różne, także te, których tutaj nie widuję.";
+    }
 
 	public String welcomeDuringActiveQuest() {
-		return "Cześć! Przyniosłeś ze sobą jakieś #płaszcze )?";
-	}
+        return "Witaj ponownie! Każdy przyniesiony płaszcz ma już swoje miejsce. Pokaż, co udało ci się znaleźć, a sprawdzę braki w kolekcji.";
+    }
 	
 	public String welcomeAfterQuestIsCompleted() {
 		return "Witaj znowu, kochany. Płaszcze wciąż wygladają wspaniale. Dziękuję!";
 	}
 
 	public String respondToQuest() {
-		return "Teraz mam obsesję na punkcie #płaszczy! Są kolorowe, a jakie wszystkie piękne!";
-	}
+        return "Zwykła peleryna i smoczy płaszcz mogą wyglądać jak rzeczy z dwóch różnych światów. Właśnie dlatego chcę mieć je obok siebie w jednej kolekcji. Pomożesz mi znaleźć po jednym egzemplarzu z listy?";
+    }
 
 	public String respondToQuestAcception() {
-		// player.addKarma(5.0);
-		return "Wspaniale! Jestem taka podekscytowana!";
-	}
+        return "Wspaniale, zaczynamy kompletowanie! Przynoś po jednym brakującym płaszczu, w dowolnej kolejności. Zapamiętam każdy otrzymany egzemplarz.";
+    }
 
 	public String respondToQuestAfterItHasAlreadyBeenCompleted() {
 		return "Witaj znowu, kochany. Płaszcze wciąż wyglądają wspaniale. Dziękuję!";
 	}
 
 	public String respondToQuestRefusal() {
-		// player.addKarma(-5.0);
-		return "Och ... nie jesteś zbyt miły. Dowidzenia.";
-	}
+        return "Szkoda, już wyobrażałam sobie te kolory obok siebie. Nie nalegam; wróć, jeśli nabierzesz ochoty na poszukiwania.";
+    }
 
 	public String askForItemsAfterPlayerSaidHeHasItems() {
-		return "Cudownie! Jakie #płaszcze przyniosłeś mi?";
-	}
+        return "Pokaż, który płaszcz udało ci się zdobyć. Przyjmę brakujący egzemplarz, a potem możemy obejrzeć następny.";
+    }
 
 	public String firstAskForMissingItems(final List<String> missingItems) {
-		return "Chcę " + Grammar.quantityplnoun(missingItems.size(), "cloak", "a")
-				+ ". To jest " + Grammar.enumerateCollection(missingItems)
-				+ ". Przyniosłeś mi jakiś?";
-	}
+        return "Na liście wciąż pozostają: " + Grammar.enumerateCollection(missingItems) + ". Przekaż po jednym brakującym egzemplarzu; resztę możesz donieść później.";
+    }
 
 	public String askForMissingItems(final List<String> missingItems) {
-		return "Chcę " + Grammar.quantityplnoun(missingItems.size(), "cloak", "a")
-				+ ". To jest " + Grammar.enumerateCollection(missingItems)
-				+ ". Przyniosłeś mi jakiś?";
-	}
+        return "Na liście wciąż pozostają: " + Grammar.enumerateCollection(missingItems) + ". Przekaż po jednym brakującym egzemplarzu; resztę możesz donieść później.";
+    }
 
 	public String respondToItemBrought() {
-		return "Łał, dziękuję! Co jeszcze mi przyniosłeś?";
-	}
+        return "Ten egzemplarz świetnie uzupełni zbiór! Powieszę go obok pozostałych. Masz jeszcze coś z brakującej listy?";
+    }
 
 	public String respondToLastItemBrought() {
-		return "Och, wszystkie wyglądają tak pięknie, dziękuję. Proszę weź ten czarny płaszcz w zamian, nie lubię tego koloru.";
-	}
+        return "Teraz kolekcja jest kompletna i wreszcie mogę porównać wszystkie te kolory. Przyjmij czarny płaszcz w podziękowaniu; tobie przyda się bardziej niż mnie. Dziękuję za cierpliwe poszukiwania.";
+    }
 
 	public String respondToOfferOfNotExistingItem(final String itemName) {
-		return "Och, jestem rozczarowana. Nie masz " + Grammar.a_noun(itemName) + " ze sobą.";
+		return "Nie widzę tego płaszcza w twoim ekwipunku: " + itemName + ". Przynieś go, a obejrzymy go razem.";
 	}
 
 	public String respondToOfferOfNotMissingItem() {
-		return "Już przyniosłeś mi ten płaszcz.";
-	}
+        return "Ten płaszcz już od ciebie dostałam. Poszukajmy miejsca dla czegoś, czego wciąż brakuje w kolekcji.";
+    }
 
 	public String respondToOfferOfNotNeededItem() {
-		return "To nie jest prawdziwy płaszcz...";
-	}
+        return "Tego egzemplarza nie ma na obecnej liście płaszczy. Sprawdź brakujące nazwy, żebym mogła przyjąć właściwą rzecz.";
+    }
 
 	public String respondToPlayerSayingHeHasNoItems(final List<String> missingItems) {
-		return "Dobrze wróć później.";
+		return "Dobrze, wróć, kiedy znajdziesz któryś z brakujących płaszczy.";
 	}
 
 	public void rewardPlayer(final Player player) {
@@ -248,4 +242,11 @@ public class CloakCollector extends AbstractQuest implements BringListOfItemsQue
 	public String getNPCName() {
 		return "Josephine";
 	}
+
+
+
+    public String getCollectionKind(){return "list";}
+    public java.util.Map<String,Integer> getCollectionItems(){java.util.Map<String,Integer> m=new java.util.LinkedHashMap<String,Integer>();for(String n:getNeededItems())m.put(n,1);return m;}
+    public String getCollectionHint(){return "Josephine zbiera po jednym płaszczu z pierwszej listy. Możesz dostarczać je w dowolnej kolejności, po kilka przy jednej wizycie. Pełna kolekcja otworzy następną prośbę.";}
+    
 }
